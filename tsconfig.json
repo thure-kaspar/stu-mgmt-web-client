@@ -17,10 +17,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "student-mgmt-api": [
+        "dist/student-mgmt-api/student-mgmt-api",
+        "dist/student-mgmt-api"
+      ]
+    }
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
+	"fullTemplateTypeCheck": true,
+	"strictTemplates": true,
     "strictInjectionParameters": true
   }
 }

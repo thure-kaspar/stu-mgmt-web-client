@@ -119,6 +119,46 @@
           }
         }
       }
+    },
+    "Student-mgmt-api": {
+      "projectType": "library",
+      "root": "projects/student-mgmt-api",
+      "sourceRoot": "projects/student-mgmt-api/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/student-mgmt-api/tsconfig.lib.json",
+            "project": "projects/student-mgmt-api/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/student-mgmt-api/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/student-mgmt-api/src/test.ts",
+            "tsConfig": "projects/student-mgmt-api/tsconfig.spec.json",
+            "karmaConfig": "projects/student-mgmt-api/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/student-mgmt-api/tsconfig.lib.json",
+              "projects/student-mgmt-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "student-mgmt-client"
 }

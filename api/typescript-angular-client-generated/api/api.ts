@@ -1,0 +1,13 @@
+export * from './assessments.service';
+import { AssessmentsService } from './assessments.service';
+export * from './assignments.service';
+import { AssignmentsService } from './assignments.service';
+export * from './courses.service';
+import { CoursesService } from './courses.service';
+export * from './default.service';
+import { DefaultService } from './default.service';
+export * from './groups.service';
+import { GroupsService } from './groups.service';
+export * from './users.service';
+import { UsersService } from './users.service';
+export const APIS = [AssessmentsService, AssignmentsService, CoursesService, DefaultService, GroupsService, UsersService];
