@@ -1,0 +1,36 @@
+@import "../../custom-theme.scss";
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 240px;
+  margin-top: 56px;
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  border: transparent;
+  background-color: #fafafa;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.sidenav mat-icon {
+	margin-right: 16px;
+}
+
+.router-link-active mat-icon {
+	color: red;
+}
+
+.titlebar {
+	height: 56px;
+	top: 0;
+	overflow: hidden;
+	position: fixed;
+	z-index: 2;
+}

@@ -1,0 +1,35 @@
+<!-- TOP BAR -->
+<mat-toolbar class="titlebar">
+	<button mat-icon-button type="button" (click)="drawer.toggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+	<span>
+		Student-Management
+	</span>
+</mat-toolbar>
+
+<!-- SIDE MENU -->
+<mat-sidenav-container class="sidenav-container">
+	<mat-sidenav #drawer class="sidenav" fixedInViewport [opened]=true mode="side">
+		<mat-nav-list>
+			<a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }">
+				<mat-icon>home</mat-icon>Home
+			</a>
+			<a mat-list-item [routerLink]="['/courses']" routerLinkActive="router-link-active">
+				<mat-icon>school</mat-icon>Courses
+			</a>
+			<a mat-list-item [routerLink]="['/todo']" routerLinkActive="router-link-active">
+				<mat-icon>group</mat-icon>Todo
+			</a>
+		</mat-nav-list>
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<!-- Add Content Here -->
+		<div class="background-container">
+			<div class="content-container">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>

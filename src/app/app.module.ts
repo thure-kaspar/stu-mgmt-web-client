@@ -8,10 +8,13 @@ import { ApiModule, BASE_PATH } from "../../api/typescript-angular-client-genera
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
+import { NavigationComponent } from "./navigation/navigation.component";
+import { LayoutModule } from "@angular/cdk/layout";
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		NavigationComponent
 	],
 	imports: [
 		BrowserModule,
@@ -19,7 +22,8 @@ import { MaterialModule } from "./material/material.module";
 		ApiModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
-		MaterialModule
+		MaterialModule,
+		LayoutModule
 	],
 	providers: [{ provide: BASE_PATH, useValue: environment.API_BASE_PATH }],
 	bootstrap: [AppComponent]
