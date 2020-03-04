@@ -12,6 +12,7 @@ import { MatSort } from "@angular/material/sort";
 export class CourseListComponent implements OnInit {
 
 	title = "";
+	shortname: string;
 	selectedSemester = "wise1920";
 
 	courseList: CourseDto[];
@@ -28,7 +29,7 @@ export class CourseListComponent implements OnInit {
 	}
 
 	searchCourses(): void {
-		this.courseService.getCourses(this.title, this.selectedSemester).subscribe(
+		this.courseService.getCourses(this.shortname, this.selectedSemester, this.title).subscribe(
 			result => {
 				console.log(result);
 				
