@@ -1,4 +1,5 @@
 .courseFilter-container {
+	display: flexbox;
 	margin-top: 1rem;
 }
 
@@ -9,4 +10,13 @@
 #btn-search:hover {
 	background-color: rgba(255, 0, 0, 0.5);
 	transition-duration: 400ms;
+}
+
+.column-title{
+	width: 20rem;
+}
+
+.link-course-title{
+	text-decoration: none;
+	color: black;
 }

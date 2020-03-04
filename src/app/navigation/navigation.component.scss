@@ -23,6 +23,11 @@
 	margin-right: 16px;
 }
 
+.sidenav a {
+	height: 40px;
+	font-weight: 500;
+}
+
 .router-link-active mat-icon {
 	color: red;
 }
@@ -30,7 +35,6 @@
 .titlebar {
 	height: 56px;
 	top: 0;
-	overflow: hidden;
 	position: fixed;
 	z-index: 2;
 }

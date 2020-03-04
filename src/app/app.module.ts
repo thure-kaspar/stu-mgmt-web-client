@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { LayoutModule } from "@angular/cdk/layout";
+import { SharedModule } from "./shared/components/page-not-found/shared.module";
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import { LayoutModule } from "@angular/cdk/layout";
 		ApiModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
+		SharedModule,
 		MaterialModule,
 		LayoutModule
 	],
