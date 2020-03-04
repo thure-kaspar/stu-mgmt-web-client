@@ -16,8 +16,9 @@ export class CourseComponent implements OnInit {
 				private courseService: CoursesService) { }
 
 	ngOnInit(): void {
-		const courseId = this.route.snapshot.paramMap.get("courseId");
-		this.courseService.getCourseById(courseId).subscribe(
+		const semester = this.route.snapshot.paramMap.get("semester");
+		const name = this.route.snapshot.paramMap.get("name");
+		this.courseService.getCourseByNameAndSemester(name, semester).subscribe(
 			result => this.course = result,
 			error => this.router.navigate(["/404"])
 		);

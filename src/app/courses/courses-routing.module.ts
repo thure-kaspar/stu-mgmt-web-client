@@ -4,7 +4,7 @@ import { CourseListComponent } from "./course-list/course-list.component";
 import { CourseComponent } from "./course/course/course.component";
 
 const routes: Routes = [
-	{ path: ":courseId", component: CourseComponent, pathMatch: "full" },
+	{ path: ":semester/:name", component: CourseComponent, pathMatch: "full" },
 	{ path: "", component: CourseListComponent, pathMatch: "full" }
 ];
 
