@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { AssignmentDto } from './assignmentDto';
 import { GroupDto } from './groupDto';
 import { UserDto } from './userDto';
 
@@ -24,4 +25,5 @@ export interface CourseDto {
     maxGroupSize: number;
     users?: Array<UserDto>;
     groups?: Array<GroupDto>;
+    assignments?: Array<AssignmentDto>;
 }
