@@ -1,0 +1,40 @@
+<div class="tab">
+	<button (click)="openAddDialog()" mat-flat-button id="btn-add" color="accent">
+		<mat-icon>add</mat-icon>
+		Add Assignment
+	</button>
+
+	<ng-container *ngFor="let assignment of assignments">
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					<mat-icon *ngIf="assignment.state == 'IN_PROGRESS'" color="accent">play_circle_filled</mat-icon>
+					<mat-icon *ngIf="assignment.state == 'CLOSED'" color="primary">lock</mat-icon>
+					<mat-icon *ngIf="assignment.state == 'IN_REVIEW'" color="primary">remove_red_eye</mat-icon>
+					<mat-icon *ngIf="assignment.state == 'EVALUATED'" color="primary">assignment_turned_in</mat-icon>
+					<mat-icon *ngIf="assignment.state == 'INVISIBLE'" color="primary">vpn_key</mat-icon>
+					{{ assignment.name }}
+				</mat-panel-title>
+
+				<mat-panel-description class="panel-description">
+					{{ assignment.type | translate }}
+				</mat-panel-description>
+
+			</mat-expansion-panel-header>
+	
+			<mat-list>
+				<mat-list-item>State: {{ assignment.state | translate }}</mat-list-item>
+				<mat-list-item>Type: {{ assignment.type | translate }}</mat-list-item>
+				<mat-list-item>Collaboration: {{assignment.collaborationType | translate}}</mat-list-item>
+				<mat-list-item>Max Points: {{assignment.maxPoints}} </mat-list-item>
+				<mat-list-item>Start date: {{assignment.startDate}}</mat-list-item>
+				<mat-list-item>end date: {{assignment.endDate}}</mat-list-item>
+				<mat-list-item>Link: <a [href]="assignment.link">{{assignment.link}}</a></mat-list-item>
+				<mat-list-item>comment:</mat-list-item>
+			</mat-list>
+
+		</mat-expansion-panel>
+	
+	</ng-container>
+</div>
+

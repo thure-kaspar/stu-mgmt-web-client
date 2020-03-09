@@ -1,0 +1,17 @@
+.dialog-content {
+	margin-top: 0.5rem;
+}
+
+mat-form-field {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+.radio-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.radio-group mat-radio-button {
+	margin-bottom: 0.25rem;
+}

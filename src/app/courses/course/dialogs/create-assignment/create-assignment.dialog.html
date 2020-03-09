@@ -1,0 +1,81 @@
+<div class="dialog-container">
+
+	<mat-card-title>
+		Create Assignment
+	</mat-card-title>
+
+	<div class="dialog-content">
+		<mat-form-field floatLabel="always">
+			<mat-label>Name</mat-label>
+			<input matInput placeholder="Enter name" [(ngModel)]="assignment.name" required>
+			<mat-error>Name is missing.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label floatLabel="always">State</mat-label>
+			<mat-select [(ngModel)]="assignment.state">
+				<mat-option value="IN_PROGRESS">In progress</mat-option>
+				<mat-option value="CLOSED">Closed</mat-option>
+				<mat-option value="INVISIBLE">Invisible</mat-option>
+				<mat-option value="IN_REVIEW">In review</mat-option>
+				<mat-option value="EVALUATED">Evaluated</mat-option>
+			</mat-select>
+			<mat-hint>TODO: Insert explanation for states.</mat-hint>
+		</mat-form-field>
+		<br>
+
+		Type:
+		<mat-radio-group class="radio-group" [(ngModel)]="assignment.type">
+			<mat-radio-button value="HOMEWORK">Homework</mat-radio-button>
+			<mat-radio-button value="TESTAT">Testat</mat-radio-button>
+			<mat-radio-button value="SEMINAR">Seminar</mat-radio-button>
+			<mat-radio-button value="PROJECT">Project</mat-radio-button>
+			<mat-radio-button value="OTHER">Other</mat-radio-button>
+		</mat-radio-group>
+		<br>
+
+		Collaboration:
+		<mat-radio-group class="radio-group" [(ngModel)]="assignment.collaborationType">
+			<mat-radio-button value="GROUP">Group only</mat-radio-button>
+			<mat-radio-button value="SINGLE">Single only</mat-radio-button>
+			<mat-radio-button value="GROUP_OR_SINGLE">Allow both</mat-radio-button>
+		</mat-radio-group>
+		<br>
+
+		<mat-form-field floatLabel="always">
+			<mat-label>Start Date</mat-label>
+			<input matInput [matDatepicker]="startPicker" [(ngModel)]="assignment.startDate">
+			<mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+			<mat-datepicker #startPicker></mat-datepicker>
+		</mat-form-field>
+
+		<mat-form-field floatLabel="always">
+			<mat-label>End Date</mat-label>
+			<input matInput [matDatepicker]="endPicker" [(ngModel)]="assignment.endDate">
+			<mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+			<mat-datepicker #endPicker></mat-datepicker>
+		</mat-form-field>
+		<br>
+
+		<mat-form-field floatLabel="always">
+			<input matInput placeholder="Enter max points" [(ngModel)]="assignment.maxPoints" required>
+			<mat-error>Max. Points is missing.</mat-error>
+		</mat-form-field>
+		<br>
+
+		<mat-form-field floatLabel="always">
+			<mat-label>Link</mat-label>
+			<input matInput placeholder="Enter link" [(ngModel)]="assignment.link">
+		</mat-form-field>
+		<br>
+
+		<mat-form-field floatLabel="always">
+			<mat-label>Comment</mat-label>
+			<textarea width matInput [(ngModel)]="assignment.comment"></textarea>
+		</mat-form-field>
+		<br>
+	</div>
+
+	<button mat-flat-button (click)="onSave()" color="accent" disabled="isValid()">Save</button>
+	<button mat-button (click)="onCancel()">Cancel</button>
+</div>

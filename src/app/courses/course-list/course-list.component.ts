@@ -19,8 +19,8 @@ export class CourseListComponent implements OnInit {
 	displayedColumns: string[] = ["title", "semester"];
 	dataSource: MatTableDataSource<CourseDto>;
 
-	@ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-	@ViewChild(MatSort, { static: false }) sort: MatSort;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
 
 	constructor(private courseService: CoursesService) { }
 
