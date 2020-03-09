@@ -18,6 +18,7 @@ export interface AssignmentDto {
     startDate?: Date;
     endDate?: Date;
     type: AssignmentDto.TypeEnum;
+    collaborationType: AssignmentDto.CollaborationTypeEnum;
     maxPoints: number;
     comment?: string;
     link?: string;
@@ -38,5 +39,11 @@ export namespace AssignmentDto {
         SEMINAR: 'SEMINAR' as TypeEnum,
         PROJECT: 'PROJECT' as TypeEnum,
         OTHER: 'OTHER' as TypeEnum
+    };
+    export type CollaborationTypeEnum = 'GROUP' | 'SINGLE' | 'GROUP_OR_SINGLE';
+    export const CollaborationTypeEnum = {
+        GROUP: 'GROUP' as CollaborationTypeEnum,
+        SINGLE: 'SINGLE' as CollaborationTypeEnum,
+        GROUPORSINGLE: 'GROUP_OR_SINGLE' as CollaborationTypeEnum
     };
 }

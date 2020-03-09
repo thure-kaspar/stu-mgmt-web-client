@@ -8,6 +8,7 @@ import { AssignmentsService } from './api/assignments.service';
 import { CoursesService } from './api/courses.service';
 import { DefaultService } from './api/default.service';
 import { GroupsService } from './api/groups.service';
+import { TestService } from './api/test.service';
 import { UsersService } from './api/users.service';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { UsersService } from './api/users.service';
     CoursesService,
     DefaultService,
     GroupsService,
+    TestService,
     UsersService ]
 })
 export class ApiModule {
