@@ -28,6 +28,15 @@ body::-webkit-scrollbar-thumb {
 	width: 100%;
 }
 
+.dialog-container {
+	display: flexbox;
+}
+
+.tab {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
 .full-width {
 	width: 100%;
 }
