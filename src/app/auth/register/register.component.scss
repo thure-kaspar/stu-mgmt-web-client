@@ -1,0 +1,20 @@
+#register-form-container {
+	display: flexbox;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+  
+.form-field {
+	width: 100%;
+}
+  
+.form-buttons {
+	display: flex;
+	justify-content: center;
+}
+
+#error-message {
+	text-align: center;
+	color: red;
+}

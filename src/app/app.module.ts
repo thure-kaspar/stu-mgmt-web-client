@@ -10,11 +10,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { LayoutModule } from "@angular/cdk/layout";
-import { SharedModule } from "./shared/components/page-not-found/shared.module";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { AuthModule } from "./auth/auth.module";
+import { SharedModule } from "./shared/shared.module";
 
-export function createTranslateLoader(http: HttpClient) {
+export function createTranslateLoader(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
@@ -39,7 +40,8 @@ export function createTranslateLoader(http: HttpClient) {
 		}),
 		SharedModule,
 		MaterialModule,
-		LayoutModule
+		LayoutModule,
+		AuthModule
 	],
 	providers: [{ provide: BASE_PATH, useValue: environment.API_BASE_PATH }],
 	bootstrap: [AppComponent]
