@@ -45,7 +45,7 @@ export class CreateAssignmentDialog {
 				this.dialogRef.close(result);
 				this.snackbar.open("Assignment created!", "OK", { duration: 3000 });
 			},
-			error => console.log(error)
+			error => console.log(error) // TODO: Display error
 		);
 	}
 

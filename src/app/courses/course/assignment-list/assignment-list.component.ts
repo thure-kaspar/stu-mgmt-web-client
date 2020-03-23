@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { AssignmentsService, AssignmentDto } from "../../../../../api";
+import { AssignmentDto } from "../../../../../api";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateAssignmentDialog } from "../dialogs/create-assignment/create-assignment.dialog";
-import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-assignment-list",
@@ -14,9 +13,7 @@ export class AssignmentListComponent implements OnInit {
 	@Input() courseId: string;
 	@Input() assignments: AssignmentDto[];
 
-	constructor(public dialog: MatDialog,
-				private assignmentService: AssignmentsService,
-				private router: Router) { }
+	constructor(public dialog: MatDialog) { }
 
 	ngOnInit(): void { }
 
@@ -30,7 +27,7 @@ export class AssignmentListComponent implements OnInit {
 		const dialogRef = this.dialog.open(CreateAssignmentDialog, {
 			data: creationTemplate
 		});
-
+		
 		dialogRef.afterClosed().subscribe(
 			result => {
 				// Ensure assignment has been created
