@@ -1,51 +1,61 @@
 import { Injectable } from "@angular/core";
+import { AuthenticationService, AuthCredentialsDto, AuthTokenDto } from "../../../../api";
+import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 
 @Injectable({
 	providedIn: "root"
 })
 export class AuthService {
 
-	// constructor(private authenticationService: AuthenticationService,
-	// 	private router: Router) { }
+	private readonly authTokenKey = "authToken";
 
-	// async login(authCredentials: AuthCredentialsDto): Promise<void> {
-	// 	const result = await this.authenticationService.login(authCredentials).toPromise()
-	// 		.catch(error => { 
-	// 			// Rethrow the error, so calling component is able to display the error
-	// 			throw new Error(error.error.message); 
-	// 		});
+	constructor(private authenticationService: AuthenticationService,
+				private router: Router) { }
 
-	// 	if (result) {
-	// 		localStorage.setItem("authToken", JSON.stringify(result));
-	// 		this.router.navigate(["/postings"]);
-	// 	}
-	// }
+	async login(authCredentials: AuthCredentialsDto): Promise<void> {
+		const result = await this.authenticationService.login(authCredentials).toPromise()
+			.catch(error => { 
+				// Rethrow the error, so calling component is able to display the error
+				throw new Error(error.error.message); 
+			});
 
-	// register(authCredentials: AuthCredentialsDto): Observable<any> {
-	// 	return this.authenticationService.register(authCredentials);
-	// }
+		// If login was successful, store the received authentication token
+		if (result) {
+			localStorage.setItem(this.authTokenKey, JSON.stringify(result));
+			this.router.navigate(["/courses"]);
+		}
+	}
 
-	// logout(): void {
-	// 	localStorage.removeItem("authToken");
-	// 	this.router.navigate(["/login"]);
-	// }
+	register(authCredentials: AuthCredentialsDto): Observable<any> {
+		return this.authenticationService.register(authCredentials);
+	}
 
-	// isLoggedIn(): boolean {
-	// 	return !!localStorage.getItem("authToken");
-	// }
+	logout(): void {
+		localStorage.removeItem(this.authTokenKey);
+		this.router.navigate(["/login"]);
+	}
 
-	// /**
-	//  * Returns the stored AccessToken (JWT), which can be appended to the Authorization-header
-	//  * ("Bearer <Token>") to authenticate the user for requests to the server.
-	//  */
-	// getAccessToken(): string {
-	// 	return (JSON.parse(localStorage.getItem("authToken")) as AuthTokenDto)?.accessToken;
-	// }
+	/**
+	 * Checks if user is in possession of an authentication token.
+	 * (Attention: Does not guarantee that the token is still valid (i.e could be expired).)
+	 */
+	isLoggedIn(): boolean {
+		return !!localStorage.getItem(this.authTokenKey);
+	}
 
-	// /**
-	//  * Returns the stored AuthToken, containing information about the user's id, email, role and rights.
-	//  */
-	// getAuthToken(): AuthTokenDto {
-	// 	return JSON.parse(localStorage.getItem("authToken"));
-	// }
+	/**
+	 * Returns the stored AccessToken (JWT), which can be appended to the Authorization-header
+	 * ("Bearer <Token>") to authenticate the user for requests to the server.
+	 */
+	getAccessToken(): string {
+		return (JSON.parse(localStorage.getItem(this.authTokenKey)) as AuthTokenDto)?.accessToken;
+	}
+
+	/**
+	 * Returns the stored AuthToken, containing information about the user's id, email, role and rights.
+	 */
+	getAuthToken(): AuthTokenDto {
+		return JSON.parse(localStorage.getItem(this.authTokenKey));
+	}
 }

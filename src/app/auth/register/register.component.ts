@@ -26,23 +26,23 @@ export class RegisterComponent {
 				private snackbar: MatSnackBar) { }
 
 	register(): void {
-		// if (this.registerForm.valid) {
-		// 	const authCredentials = {
-		// 		email: this.getEmail().value,
-		// 		password: this.getPassword().value
-		// 	};
+		if (this.registerForm.valid) {
+			const authCredentials = {
+				email: this.getEmail().value,
+				password: this.getPassword().value
+			};
 
-		// 	this.authService.register(authCredentials).subscribe(
-		// 		result => {
-		// 			this.snackbar.open("Account created!", "OK", { duration: 3000 });
-		// 			this.router.navigate(["/login"]);
-		// 		},
-		// 		error => {
-		// 			console.log(error);
-		// 			this.snackbar.open("Failed to create account.", "OK", { duration: 3000 });
-		// 		}
-		// 	);
-		// }
+			this.authService.register(authCredentials).subscribe(
+				result => {
+					this.snackbar.open("Account created!", "OK", { duration: 3000 });
+					this.router.navigate(["/login"]);
+				},
+				error => {
+					console.log(error);
+					this.snackbar.open("Failed to create account.", "OK", { duration: 3000 });
+				}
+			);
+		}
 	}
 
 	getEmailErrorMessage(): string {
