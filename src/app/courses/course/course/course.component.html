@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card *ngIf="course">
 	<mat-card-title>{{course.title}}</mat-card-title>
 
 	<mat-tab-group>
 
 		<mat-tab label="Assignments">
-			<app-assignment-list [assignments]="course.assignments"></app-assignment-list>
+			<app-assignment-list [courseId]="course.id" [assignments]="course.assignments"></app-assignment-list>
 		</mat-tab>
 
 		<mat-tab label="Groups">

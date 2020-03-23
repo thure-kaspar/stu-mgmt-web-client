@@ -1,6 +1,8 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AssignmentDto, AssignmentsService } from "../../../../../../api";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
 	selector: "app-create-assignment",
@@ -9,25 +11,26 @@ import { AssignmentDto, AssignmentsService } from "../../../../../../api";
 })
 export class CreateAssignmentDialog {
 
-	assignment: AssignmentDto;
+	form: FormGroup;
 
 	constructor(public dialogRef: MatDialogRef<CreateAssignmentDialog>,
 				@Inject(MAT_DIALOG_DATA) public assignmentTemplate: Partial<AssignmentDto>,
-				private assignmentService: AssignmentsService) { 
+				private assignmentService: AssignmentsService,
+				private fb: FormBuilder,
+				private snackbar: MatSnackBar) { 
 					
-		this.assignment = {
-			courseId: assignmentTemplate.courseId,
-			name: "",
-			state: AssignmentDto.StateEnum.INPROGRESS,
-			startDate: null,
-			endDate: null,
-			type: AssignmentDto.TypeEnum.HOMEWORK,
-			maxPoints: null,
-			comment: null,
-			link: null,
-			collaborationType: AssignmentDto.CollaborationTypeEnum.GROUP
-		};
-
+		this.form = this.fb.group({
+			courseId: [assignmentTemplate.courseId, Validators.required],
+			name: [assignmentTemplate.name, Validators.required],
+			state: [assignmentTemplate.state, Validators.required],
+			type: [assignmentTemplate.type, Validators.required],
+			collaborationType: [assignmentTemplate.collaborationType, Validators.required],
+			maxPoints: [assignmentTemplate.maxPoints, [Validators.required, Validators.min(0)]],
+			startDate: [null],
+			endDate: [null],
+			comment: [null],
+			link: [null],
+		});			
 	}
 
 	onCancel(): void {
@@ -35,14 +38,15 @@ export class CreateAssignmentDialog {
 	}
 
 	onSave(): void {
-		this.assignmentService.createAssignment(this.assignment, this.assignment.courseId).subscribe(
-			result => console.log(result),
+		const assignment: AssignmentDto = this.form.value; 
+
+		this.assignmentService.createAssignment(assignment, assignment.courseId).subscribe(
+			result => {
+				this.dialogRef.close(result);
+				this.snackbar.open("Assignment created!", "OK", { duration: 3000 });
+			},
 			error => console.log(error)
 		);
-	}
-
-	isValid(): boolean {
-		return false;
 	}
 
 }
