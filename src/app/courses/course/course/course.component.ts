@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { CourseDto, CoursesService } from "../../../../../api/typescript-angular-client-generated";
+import { CourseDto, CoursesService } from "../../../../../api";
 
 @Component({
 	selector: "app-course",

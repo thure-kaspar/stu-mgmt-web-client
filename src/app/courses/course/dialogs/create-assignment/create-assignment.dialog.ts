@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { AssignmentDto, AssignmentsService } from "../../../../../../api/typescript-angular-client-generated";
+import { AssignmentDto, AssignmentsService } from "../../../../../../api";
 
 @Component({
 	selector: "app-create-assignment",

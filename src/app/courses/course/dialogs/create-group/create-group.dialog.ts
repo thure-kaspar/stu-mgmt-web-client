@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupDto, GroupsService } from "../../../../../../api/typescript-angular-client-generated";
+import { GroupDto, GroupsService } from "../../../../../../api";
 
 @Component({
 	selector: "app-create-group",

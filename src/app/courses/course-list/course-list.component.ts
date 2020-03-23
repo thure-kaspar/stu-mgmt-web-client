@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { CoursesService, CourseDto } from "../../../../api/typescript-angular-client-generated";
+import { CoursesService, CourseDto } from "../../../../api";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";

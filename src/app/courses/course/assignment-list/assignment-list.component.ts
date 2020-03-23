@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { AssignmentsService, AssignmentDto } from "../../../../../api/typescript-angular-client-generated";
+import { AssignmentsService, AssignmentDto } from "../../../../../api";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateAssignmentDialog } from "../dialogs/create-assignment/create-assignment.dialog";
 

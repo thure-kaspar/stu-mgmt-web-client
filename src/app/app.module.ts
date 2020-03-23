@@ -4,7 +4,7 @@ import { environment } from "../environments/environment";
 
 import { AppComponent } from "./app.component";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { ApiModule, BASE_PATH } from "../../api/typescript-angular-client-generated";
+import { ApiModule, BASE_PATH } from "../../api";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
