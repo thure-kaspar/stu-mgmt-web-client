@@ -359,6 +359,47 @@ export class UsersService {
     /**
      * 
      * 
+     * @param email 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserbyEmail(email: string, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public getUserbyEmail(email: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public getUserbyEmail(email: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public getUserbyEmail(email: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling getUserbyEmail.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<UserDto>('get',`${this.basePath}/users/email/${encodeURIComponent(String(email))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param body 
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

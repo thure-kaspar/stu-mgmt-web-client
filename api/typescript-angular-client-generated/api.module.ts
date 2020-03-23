@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AssessmentsService } from './api/assessments.service';
 import { AssignmentsService } from './api/assignments.service';
+import { AuthenticationService } from './api/authentication.service';
 import { CoursesService } from './api/courses.service';
 import { DefaultService } from './api/default.service';
 import { GroupsService } from './api/groups.service';
@@ -18,6 +19,7 @@ import { UsersService } from './api/users.service';
   providers: [
     AssessmentsService,
     AssignmentsService,
+    AuthenticationService,
     CoursesService,
     DefaultService,
     GroupsService,

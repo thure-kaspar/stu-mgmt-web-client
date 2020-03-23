@@ -16,7 +16,7 @@ export interface UpdateMessage {
     courseId: string;
     entityId: string;
     entityIdRelation?: string;
-    url: string;
+    date?: Date;
 }
 export namespace UpdateMessage {
     export type TypeEnum = 'INSERT' | 'UPDATE' | 'REMOVE';

@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { GroupDto } from './groupDto';
+import { UserDto } from './userDto';
 
 export interface AssessmentDto { 
     id?: string;
@@ -19,4 +20,6 @@ export interface AssessmentDto {
     groupId?: string;
     group?: GroupDto;
     userId?: string;
+    creatorId: string;
+    creator?: UserDto;
 }
