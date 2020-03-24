@@ -1,10 +1,10 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatDialog } from "@angular/material/dialog";
-import { TranslateModule } from "@ngx-translate/core";
 import { of } from "rxjs";
 import { AssignmentDto } from "../../../../../api";
 import { AssignmentListComponent } from "./assignment-list.component";
+import { SharedModule } from "../../../shared/shared.module";
 
 const assignment: AssignmentDto = {
 	id: "assignment_id",
@@ -47,7 +47,7 @@ describe("AssignmentListComponent", () => {
 			providers: [
 				{ provide: MatDialog, useFactory: mock_MatDialog }
 			],
-			imports: [TranslateModule.forChild({ extend: true })],
+			imports: [SharedModule],
 			schemas: [NO_ERRORS_SCHEMA]
 		})
 			.compileComponents();

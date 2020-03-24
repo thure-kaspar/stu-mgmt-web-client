@@ -8,8 +8,8 @@ import { AuthService } from "../services/auth.service";
 })
 export class LoginComponent {
 
-	email: string;
-	password: string;
+	email = "max.mustermann@test.com";
+	password = "testpassword";
 	errorMessage: string;
 
 	constructor(private authService: AuthService) { }
