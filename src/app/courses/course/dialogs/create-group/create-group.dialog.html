@@ -5,19 +5,23 @@
 	</mat-card-title>
 
 	<div class="dialog-content">
-		<mat-form-field>
-			<mat-label floatLabel="always" always>Name</mat-label>
-			<input matInput placeholder="Enter name" [(ngModel)]="group.name" autocomplete="off">
-		</mat-form-field>
-		<br>
-		<mat-form-field>
-			<mat-label floatLabel="always">Password</mat-label>
-			<input matInput placeholder="Enter password" [(ngModel)]="group.password">
-			<mat-hint></mat-hint>
-		</mat-form-field>
-		<br>
+		<form [formGroup]="form">
+			<mat-form-field>
+				<mat-label floatLabel="always" always>Name</mat-label>
+				<input matInput formControlName="name">
+				<mat-error>Name is missing</mat-error>
+			</mat-form-field>
+			<br>
+			<mat-form-field>
+				<mat-label floatLabel="always">Password</mat-label>
+				<input matInput formControlName="password">
+				<mat-hint></mat-hint>
+				<mat-error></mat-error>
+			</mat-form-field>
+			<br>
+		</form>
 	</div>
 
-	<button mat-flat-button (click)="onSave()" color="accent" disabled="isValid()">Save</button>
+	<button mat-flat-button (click)="onSave()" color="accent" [disabled]="form.invalid">Save</button>
 	<button mat-button (click)="onCancel()">Cancel</button>
 </div>

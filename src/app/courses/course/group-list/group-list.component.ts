@@ -26,7 +26,6 @@ export class GroupListComponent implements OnInit {
 	openAddDialog(): void {
 		const creationTemplate: Partial<GroupDto> = {
 			courseId: this.courseId,
-			isClosed: false,
 			//name: this.course.groupNamePreset // TODO: Implement
 		};
 
@@ -35,7 +34,12 @@ export class GroupListComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(
-			result => console.log(result),
+			result => {
+				// Ensure group has been created
+				if ((result as GroupDto).id) {
+					this.groups.push(result);
+				}
+			},
 			error => console.log(error)
 		);
 	}
