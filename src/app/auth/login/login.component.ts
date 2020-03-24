@@ -14,10 +14,12 @@ export class LoginComponent {
 
 	constructor(private authService: AuthService) { }
 
-	login(): void {
+	async login(): Promise<void> {
 		const authCredentials = { email: this.email, password: this.password };
-		this.authService.login(authCredentials)
-			.catch(error => this.errorMessage = error);
+		await this.authService.login(authCredentials)
+			.catch(error => {
+				this.errorMessage = error;
+			});
 	}
 
 }

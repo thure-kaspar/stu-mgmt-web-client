@@ -49,13 +49,13 @@ export class AuthService {
 	 * ("Bearer <Token>") to authenticate the user for requests to the server.
 	 */
 	getAccessToken(): string {
-		return (JSON.parse(localStorage.getItem(this.authTokenKey)) as AuthTokenDto)?.accessToken;
+		return this.getAuthToken().accessToken;
 	}
 
 	/**
 	 * Returns the stored AuthToken, containing information about the user's id, email, role and rights.
 	 */
 	getAuthToken(): AuthTokenDto {
-		return JSON.parse(localStorage.getItem(this.authTokenKey));
+		return localStorage.getItem(this.authTokenKey) as unknown as AuthTokenDto;
 	}
 }

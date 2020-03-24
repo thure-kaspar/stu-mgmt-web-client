@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { CourseListComponent } from "./course-list.component";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { SharedModule } from "../../shared/shared.module";
 
 describe("CourseListComponent", () => {
 	let component: CourseListComponent;
@@ -8,7 +9,9 @@ describe("CourseListComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ CourseListComponent ]
+			declarations: [CourseListComponent],
+			imports: [SharedModule],
+			schemas: [NO_ERRORS_SCHEMA]
 		})
 			.compileComponents();
 	}));
