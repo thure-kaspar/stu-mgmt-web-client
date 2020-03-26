@@ -49,7 +49,7 @@ export class AuthService {
 	 * ("Bearer <Token>") to authenticate the user for requests to the server.
 	 */
 	getAccessToken(): string {
-		return this.getAuthToken().accessToken;
+		return this.getAuthToken()?.accessToken;
 	}
 
 	/**

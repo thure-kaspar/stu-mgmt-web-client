@@ -36,7 +36,7 @@ export class GroupListComponent implements OnInit {
 		dialogRef.afterClosed().subscribe(
 			result => {
 				// Ensure group has been created
-				if ((result as GroupDto).id) {
+				if ((result as GroupDto)?.id) {
 					this.groups.push(result);
 				}
 			},

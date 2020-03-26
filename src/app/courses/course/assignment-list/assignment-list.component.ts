@@ -31,7 +31,7 @@ export class AssignmentListComponent implements OnInit {
 		dialogRef.afterClosed().subscribe(
 			result => {
 				// Ensure assignment has been created
-				if ((result as AssignmentDto).id) {
+				if ((result as AssignmentDto)?.id) {
 					this.assignments.push(result);
 				}
 			},
