@@ -1,31 +1,34 @@
+@import "./custom-theme.scss";
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/* body::-webkit-scrollbar {
-	width: 6px;
+*::-webkit-scrollbar {
+	width: 8px;
 }
 
-body::-webkit-scrollbar-track {
-	background-color: rgba(0, 0, 0, 0.342);
+*::-webkit-scrollbar-track {
+	background-color: rgba(0, 0, 0, 0.233);
 }
 
-body::-webkit-scrollbar-thumb {
-	background-color: red;
-} */
+*::-webkit-scrollbar-thumb {
+	background-color: map-get($student-mgmt-client-primary, 600)
+}
 
 .content-container {
-	padding-top: 56px;
-	margin-top: 0.5rem;
+	padding-top: 64px;
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
+	padding-bottom: 0.5rem;
 }
 
 .background-container {
 	background-color:rgb(224, 224, 224);
-	height: 100%;
 	width: 100%;
+	min-height: 100%;
+	max-height: max-content;
 }
 
 .dialog-container {

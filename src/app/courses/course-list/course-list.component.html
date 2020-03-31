@@ -1,6 +1,11 @@
 <mat-card>
 	<mat-card-content>
-		<mat-card-title>Courses</mat-card-title>
+		<mat-card-title>Courses
+			<button mat-flat-button (click)="openAddDialog()" id="btn-add" color="accent">
+				<mat-icon>add</mat-icon>
+				Create Course
+			</button>
+		</mat-card-title>
 
 		<div class="courseFilter-container">
 			<mat-form-field class="courseFilter-field">

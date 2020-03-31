@@ -42,4 +42,8 @@ export class CourseListComponent implements OnInit {
 		);
 	}
 
+	openAddDialog(): void {
+		
+	}
+
 }
