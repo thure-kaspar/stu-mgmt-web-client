@@ -14,6 +14,7 @@ import { UserListComponent } from "./course/user-list/user-list.component";
 import { CreateAssignmentDialog } from "./course/dialogs/create-assignment/create-assignment.dialog";
 import { CreateGroupDialog } from "./course/dialogs/create-group/create-group.dialog";
 import { MatNativeDateModule } from "@angular/material/core";
+import { ChangeRoleDialog } from "./course/dialogs/change-role/change-role.dialog";
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,8 @@ import { MatNativeDateModule } from "@angular/material/core";
 		GroupListComponent, 
 		UserListComponent, 
 		CreateAssignmentDialog, 
-		CreateGroupDialog,
+		CreateGroupDialog, 
+		ChangeRoleDialog,
 	],
 	imports: [
 		TranslateModule.forChild({ extend: true }),

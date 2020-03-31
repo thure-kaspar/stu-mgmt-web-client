@@ -1,0 +1,16 @@
+<div class="dialog-container">
+	<mat-card-title>Change role</mat-card-title>
+
+	<label>Role</label>
+	<mat-radio-group id="roles-group" [(ngModel)]="selectedRole">
+		<mat-radio-button [value]="roles.STUDENT">Student</mat-radio-button>
+		<mat-radio-button [value]="roles.TUTOR">Tutor</mat-radio-button>
+		<mat-radio-button [value]="roles.LECTURER">Lecturer</mat-radio-button>
+	</mat-radio-group>
+
+	<div class="button-container">
+		<button mat-flat-button color="accent" (click)="onSave()">Save</button>
+		<button mat-flat-button (click)="onCancel()">Cancel</button>
+	</div>
+
+</div>

@@ -33,6 +33,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .dialog-container {
 	display: flexbox;
+	min-width: 300px;
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .tab {

@@ -4,4 +4,16 @@
 
 #table-users {
 	width: 100%;
+
+	table {
+		width: 100%;
+	}
+
+	mat-icon {
+		color: rgba(0, 0, 0, 0.5);
+	}
+}
+
+.action-column {
+	width: 64px; 
 }

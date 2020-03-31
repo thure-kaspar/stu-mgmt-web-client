@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { ChangeRoleDialog, ChangeRoleDialogData } from "../dialogs/change-role/change-role.dialog";
 
 @Component({
 	selector: "app-user-list",
@@ -17,7 +18,7 @@ export class UserListComponent implements OnInit {
 
 	@Input() courseId: string;
 	users: UserDto[];
-	displayedColumns: string[] = ["role", "name", "actions"];
+	displayedColumns: string[] = ["actions", "role", "username", "email"];
 	dataSource: MatTableDataSource<UserDto>;
 	userFilter: string;
 
@@ -50,7 +51,18 @@ export class UserListComponent implements OnInit {
 	}
 
 	openChangeRoleDialog(user: UserDto): void {
-		//this.dialog.open()
+		this.dialog.open<ChangeRoleDialog, ChangeRoleDialogData, UserDto.CourseRoleEnum>(ChangeRoleDialog, {
+			data: {
+				courseId: this.courseId,
+				user: user
+			}
+		}).afterClosed().subscribe(
+			result => {
+				// Update the user's role locally to avoid refetching data from server
+				if (result) user.courseRole = result;
+			},
+			error => console.log(error)
+		);
 	}
 
 	/**
