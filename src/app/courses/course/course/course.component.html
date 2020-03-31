@@ -1,7 +1,7 @@
 <mat-card *ngIf="course">
 	<mat-card-title>{{course.title}}</mat-card-title>
 
-	<mat-tab-group>
+	<mat-tab-group color="accent" animationDuration="0ms" [selectedIndex]="selectedTab" (selectedIndexChange)="handleTabChange($event)">
 
 		<mat-tab label="Assignments">
 			<app-assignment-list [courseId]="course.id" [assignments]="course.assignments"></app-assignment-list>
