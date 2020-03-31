@@ -4,9 +4,13 @@ import { TranslateModule } from "@ngx-translate/core";
 import { MaterialModule } from "../material/material.module";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { AuthModule } from "../auth/auth.module";
+import { ConfirmDialogComponent } from "./components/dialogs/confirm-dialog/confirm-dialog.dialog";
 
 @NgModule({
-	declarations: [PageNotFoundComponent],
+	declarations: [
+		PageNotFoundComponent, 
+		ConfirmDialogComponent
+	],
 	imports: [ 
 		CommonModule,
 		AuthModule,

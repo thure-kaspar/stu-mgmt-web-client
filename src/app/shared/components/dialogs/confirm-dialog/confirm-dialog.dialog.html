@@ -1,0 +1,24 @@
+<div class="dialog-container">
+	
+	<mat-card-title>
+		{{ getTitle() }}
+	</mat-card-title>
+
+	<p>
+		{{ getMessage() }}
+	</p>
+
+	<p id="param-container">
+		<ng-container *ngFor="let param of data.params">
+			{{ param }}<br>
+		</ng-container>
+	</p>
+
+	<div id="button-container">
+		<button mat-raised-button color="accent" (click)="onConfirm()">Confirm</button>
+		<button mat-flat-button (click)="onCancel()">Cancel</button>
+	</div>
+
+</div>
+
+
