@@ -9,7 +9,7 @@ const mock_AuthService = () => ({
 });
 
 const mock_Router = () => ({
-	navigate: jest.fn()
+	navigateByUrl: jest.fn()
 });
 
 describe("AuthGuard", () => {
@@ -56,7 +56,7 @@ describe("AuthGuard", () => {
 		it("User is logged out -> Navigates to login", () => {
 			authService.isLoggedIn = jest.fn().mockReturnValue(false);
 			const result = authGuard.canActivate();
-			expect(router.navigate).toBeCalledWith(["/login"]);
+			expect(router.navigateByUrl).toBeCalledWith("/login");
 		});
 	
 	});

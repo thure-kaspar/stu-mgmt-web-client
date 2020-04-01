@@ -9,6 +9,7 @@ import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { MaterialModule } from "../material/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { AdminGuard } from "./guards/admin.guard";
 
 @NgModule({
 	declarations: [LoginComponent, RegisterComponent],
@@ -22,6 +23,7 @@ import { RouterModule } from "@angular/router";
 	providers: [
 		AuthService, 
 		AuthGuard,
+		AdminGuard,
 		{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
 	]
 
