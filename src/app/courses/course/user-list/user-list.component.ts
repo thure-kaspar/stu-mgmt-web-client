@@ -6,7 +6,6 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../dialogs/change-role/change-role.dialog";
 
 @Component({
@@ -27,8 +26,7 @@ export class UserListComponent implements OnInit {
 
 	constructor(private courseService: CoursesService,
 				public dialog: MatDialog,
-				private snackbar: MatSnackBar,
-				private router: Router) { }
+				private snackbar: MatSnackBar) { }
 
 	ngOnInit(): void {
 		this.courseService.getUsersOfCourse(this.courseId).subscribe(

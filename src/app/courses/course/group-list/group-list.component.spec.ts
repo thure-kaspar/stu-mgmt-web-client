@@ -24,7 +24,7 @@ class MockMatDialogRefClass {
 	}
 }
 
-// Mock the implementation so it returns an observable of type AssignmentDto
+// Mock the implementation so it returns an observable of type GroupDto
 const mock_MatDialogRef = new MockMatDialogRefClass();
 mock_MatDialogRef.afterClosed = jest.fn().mockImplementation(() => of(group));
 

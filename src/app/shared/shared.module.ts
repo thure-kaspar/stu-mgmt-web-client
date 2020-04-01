@@ -5,6 +5,7 @@ import { MaterialModule } from "../material/material.module";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { AuthModule } from "../auth/auth.module";
 import { ConfirmDialogComponent } from "./components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
 	declarations: [
@@ -13,12 +14,16 @@ import { ConfirmDialogComponent } from "./components/dialogs/confirm-dialog/conf
 	],
 	imports: [ 
 		CommonModule,
+		BrowserAnimationsModule,
 		AuthModule,
-		MaterialModule
+		MaterialModule,
+		TranslateModule
 	],
 	exports: [
 		CommonModule,
+		BrowserAnimationsModule,
 		AuthModule,
+		MaterialModule,
 		TranslateModule
 	],
 	providers: [],
