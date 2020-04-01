@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { ChangeCourseRoleDto } from '../model/changeCourseRoleDto';
+import { CourseConfigDto } from '../model/courseConfigDto';
 import { CourseDto } from '../model/courseDto';
 import { UserDto } from '../model/userDto';
 
@@ -59,7 +60,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Adds a user to the course. If the course requires a password, the correct password needs to be included in the request body.
      * @param courseId 
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -104,7 +105,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Creates a new course.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -151,7 +152,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Deletes the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -192,7 +193,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Returns the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -233,7 +234,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Returns the course.
      * @param name 
      * @param semester 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -279,7 +280,48 @@ export class CoursesService {
 
     /**
      * 
+     * Returns a CourseConfigDto containing the course itself and all properties that describe a course&#x27;s configuration.
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCourseConfig(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<CourseConfigDto>;
+    public getCourseConfig(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CourseConfigDto>>;
+    public getCourseConfig(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CourseConfigDto>>;
+    public getCourseConfig(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getCourseConfig.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<CourseConfigDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * 
+     * Returns all courses that match the given filter.
      * @param shortname 
      * @param semester 
      * @param title 
@@ -333,7 +375,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Returns a collection of users that are signed up for this course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -420,7 +462,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Updates the course.
      * @param body 
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -472,7 +514,7 @@ export class CoursesService {
 
     /**
      * 
-     * 
+     * Assigns the given role to the user of this course.
      * @param body 
      * @param courseId 
      * @param userId 
