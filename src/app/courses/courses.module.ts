@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
-
 import { TranslateModule } from "@ngx-translate/core";
-
 import { CoursesRoutingModule } from "./courses-routing.module";
 import { CourseListComponent } from "./course-list/course-list.component";
 import { MaterialModule } from "../material/material.module";
@@ -15,6 +13,7 @@ import { CreateAssignmentDialog } from "./course/dialogs/create-assignment/creat
 import { CreateGroupDialog } from "./course/dialogs/create-group/create-group.dialog";
 import { MatNativeDateModule } from "@angular/material/core";
 import { ChangeRoleDialog } from "./course/dialogs/change-role/change-role.dialog";
+import { CreateCourseComponent } from "./create-course/create-course.component";
 
 @NgModule({
 	declarations: [
@@ -26,7 +25,8 @@ import { ChangeRoleDialog } from "./course/dialogs/change-role/change-role.dialo
 		UserListComponent, 
 		CreateAssignmentDialog, 
 		CreateGroupDialog, 
-		ChangeRoleDialog,
+		ChangeRoleDialog, 
+		CreateCourseComponent,
 	],
 	imports: [
 		TranslateModule.forChild({ extend: true }),

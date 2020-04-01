@@ -1,0 +1,77 @@
+<mat-card>
+	<mat-card-title>Create course</mat-card-title>
+
+	<div id="course-picker">
+		<button mat-raised-button color="accent" (click)="loadCourseTemplate('java-wise1920')">Load config</button>
+	</div>
+
+	<form class="form-container" [formGroup]="form">
+
+		<ng-container formGroupName="course">
+
+			<mat-form-field class="form-field">
+				<mat-label>Id</mat-label>
+				<input matInput formControlName="id" required>
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Shortname</mat-label>
+				<input matInput formControlName="shortname" required>
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Semester</mat-label>
+				<input matInput formControlName="semester" required>
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Title</mat-label>
+				<input matInput formControlName="title" required>
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Closed</mat-label>
+				<input matInput formControlName="isClosed" required>
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Password</mat-label>
+				<input matInput formControlName="password">
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Link</mat-label>
+				<input matInput formControlName="link">
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Allow groups</mat-label>
+				<input matInput formControlName="allowGroups" required>
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Max. group size</mat-label>
+				<input matInput formControlName="maxGroupSize" required>
+				<mat-error>Value is missing.</mat-error>
+			</mat-form-field>
+
+		</ng-container>
+
+		<mat-form-field formArrayName="lecturers" *ngFor="let lecturer of getLecturers().controls; let i = index" class="form-field">
+			<mat-label>Lecturer #{{i + 1}}</mat-label>
+			<input matInput [formControlName]="i">
+		</mat-form-field>
+
+		<button mat-icon-button (click)="addLecturer()"><mat-icon>add</mat-icon></button>
+
+	</form>
+
+</mat-card>
