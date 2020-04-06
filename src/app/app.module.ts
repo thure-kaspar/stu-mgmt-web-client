@@ -14,6 +14,7 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { AuthModule } from "./auth/auth.module";
 import { SharedModule } from "./shared/shared.module";
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 
 export function createTranslateLoader(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -43,7 +44,10 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		LayoutModule,
 		AuthModule
 	],
-	providers: [{ provide: BASE_PATH, useValue: environment.API_BASE_PATH }],
+	providers: [
+		{ provide: BASE_PATH, useValue: environment.API_BASE_PATH },
+		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "standard" }} // TODO: decide style
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
