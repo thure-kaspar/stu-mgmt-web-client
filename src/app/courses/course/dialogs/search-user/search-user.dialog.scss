@@ -1,0 +1,37 @@
+#search-user-dialog {
+	display: flex;
+	flex-direction: column;
+	height: 600px;
+	width: 900px;
+}
+
+.dialog-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+#userFilter-container {
+	width: 100%;
+}
+
+#userFilter-field {
+	width: 80%;
+	padding-right: 8px;
+}
+
+#btn-search {
+	width: 18%;
+}
+
+table {
+	width: 100%;
+}
+
+.column-select {
+	padding-right: 16px;
+}
+
+.column-title {
+	width: 50%;
+}
