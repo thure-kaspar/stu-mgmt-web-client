@@ -1,0 +1,32 @@
+#search-course-dialog {
+	display: flex;
+	flex-direction: column;
+	height: 600px;
+	width: 600px;
+}
+
+.dialog-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.courseFilter-container {
+	width: 100%;
+}
+
+.courseFilter-field {
+	padding-right: 8px;
+}
+
+table {
+	width: 100%;
+}
+
+.column-select {
+	padding-right: 16px;
+}
+
+.column-title {
+	width: 50%;
+}
