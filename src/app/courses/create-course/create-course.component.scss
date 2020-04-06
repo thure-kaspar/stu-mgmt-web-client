@@ -1,0 +1,32 @@
+mat-card-title {
+	display: flex;
+	justify-content: space-between;
+}
+
+#basic-data, #rules, #lecturers, #extended-options {
+	display: flex;
+	flex-direction: column;
+	
+	mat-form-field {
+		width: 300px;
+	}
+
+	@media (max-width: 500px) {
+		mat-form-field {
+			width: 100%;
+		}
+	}
+
+}
+
+#btn-add-lecturer {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	width: fit-content;
+}
+
+#icon-person-hint {
+	vertical-align: middle;
+}
+
+

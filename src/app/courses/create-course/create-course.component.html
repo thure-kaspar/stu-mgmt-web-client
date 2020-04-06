@@ -1,76 +1,119 @@
 <mat-card>
-	<mat-card-title>Create course</mat-card-title>
+	<mat-card-title>
+		<div>
+			Create course
+			<button mat-raised-button color="accent" (click)="createCourse()">Create</button>
+		</div>
+		<button mat-raised-button color="primary" matTooltip="Opens the Search-Course-Dialog" (click)="openSearchCourseDialog()"><mat-icon>search</mat-icon>Select course template</button>
+	</mat-card-title>
 
-	<div id="course-picker">
-		<button mat-raised-button color="accent" (click)="loadCourseTemplate('java-wise1920')">Load config</button>
-	</div>
+	<form id="course-creation-form" class="form-container" [formGroup]="form">
 
-	<form class="form-container" [formGroup]="form">
+		<mat-tab-group color="accent" animationDuration="0ms">
 
-		<ng-container formGroupName="course">
+			<ng-container formGroupName="course">
+				<mat-tab label="Basic Data">
+					<div id="basic-data">
+						<mat-form-field class="form-field">
+							<mat-label>Id</mat-label>
+							<input matInput formControlName="id">
+							<mat-hint>Id will default to shortname-semester, if not specified.</mat-hint>
+						</mat-form-field>
+			
+						<mat-form-field class="form-field">
+							<mat-label>Shortname</mat-label>
+							<input matInput formControlName="shortname" required>
+							<mat-hint>Shortname will be visible in the URL of the course.</mat-hint>
+							<mat-error>Value is missing.</mat-error>
+						</mat-form-field>
+			
+						<mat-form-field class="form-field">
+							<mat-label>Semester</mat-label>
+							<mat-select formControlName="semester">
+								<mat-option value="wise1920">WiSe 19/20</mat-option>
+								<mat-option value="sose2020">SoSe 2020</mat-option>
+								<mat-option value="wise2021">WiSe 2021</mat-option>
+								<mat-option value="sose2021">SoSe 2021</mat-option>
+							</mat-select>
+							<mat-error>Value is missing.</mat-error>
+						</mat-form-field>
+			
+						<mat-form-field class="form-field">
+							<mat-label>Title</mat-label>
+							<input matInput formControlName="title" required>
+							<mat-error>Value is missing.</mat-error>
+						</mat-form-field>
+			
+						<mat-form-field class="form-field">
+							<mat-label>Closed</mat-label>
+							<mat-select formControlName="isClosed">
+								<mat-option value=false>No</mat-option>
+								<mat-option value=true>Yes</mat-option>
+							</mat-select>
+							<mat-hint>Closing the course will prevent students from joining.</mat-hint>
+							<mat-error>Value is missing.</mat-error>
+						</mat-form-field>
+			
+						<mat-form-field class="form-field">
+							<mat-label>Password</mat-label>
+							<input matInput formControlName="password">
+							<mat-hint>Users have to enter the password to enter the course.</mat-hint>
+							<mat-error>Value is missing.</mat-error>
+						</mat-form-field>
+			
+						<mat-form-field class="form-field">
+							<mat-label>Link</mat-label>
+							<input matInput formControlName="link">
+						</mat-form-field>
+					</div>
+				</mat-tab>
+	
+				<mat-tab label="Rules">
+					<div id="rules">
+						<mat-form-field class="form-field">
+							<mat-label>Allow groups</mat-label>
+							<input matInput formControlName="allowGroups" required>
+							<mat-error>Value is missing.</mat-error>
+						</mat-form-field>
+			
+						<mat-form-field class="form-field">
+							<mat-label>Max. group size</mat-label>
+							<input matInput formControlName="maxGroupSize" required>
+							<mat-error>Value is missing.</mat-error>
+						</mat-form-field>
+					</div>
+				</mat-tab>
+			</ng-container>
 
-			<mat-form-field class="form-field">
-				<mat-label>Id</mat-label>
-				<input matInput formControlName="id" required>
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
+			<mat-tab class="tab" label="Lecturers">
+				<div id="lecturers">
+					<button id="btn-add-lecturer" mat-flat-button color="accent" (click)="addLecturer()">
+						<mat-icon>add</mat-icon>Add lecturer
+					</button>
 
-			<mat-form-field class="form-field">
-				<mat-label>Shortname</mat-label>
-				<input matInput formControlName="shortname" required>
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
+					<mat-hint>Use the <mat-icon id="icon-person-hint">search</mat-icon>-button in the input field to open the User-Search-Dialog. The username of the selected user will be inserted automatically.</mat-hint>
 
-			<mat-form-field class="form-field">
-				<mat-label>Semester</mat-label>
-				<input matInput formControlName="semester" required>
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
+					<mat-form-field formArrayName="lecturers" *ngFor="let lecturer of getLecturers().controls; let i = index" class="form-field">
+						<mat-label>Lecturer #{{i + 1}}</mat-label>
+						<input matInput [formControlName]="i">
+						<mat-hint>Username</mat-hint>
+						<button  matPrefix mat-icon-button matTooltip="Search user" (click)="openSearchUserDialog(i)"><mat-icon>search</mat-icon></button>
+						<button  matSuffix mat-icon-button matTooltip="Remove" (click)="removeLecturer(i)"><mat-icon>clear</mat-icon></button>
+					</mat-form-field>
+				</div>
+			</mat-tab>
 
-			<mat-form-field class="form-field">
-				<mat-label>Title</mat-label>
-				<input matInput formControlName="title" required>
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
+			<mat-tab label="Extended Options">
+				<div id="extended-options" formGroupName="configuration">			
+					<mat-form-field class="form-field">
+						<mat-label>Notification URL</mat-label>
+						<input matInput formControlName="notificationUrl">
+					</mat-form-field>
+					<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
+				</div>
+			</mat-tab>
 
-			<mat-form-field class="form-field">
-				<mat-label>Closed</mat-label>
-				<input matInput formControlName="isClosed" required>
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
-
-			<mat-form-field class="form-field">
-				<mat-label>Password</mat-label>
-				<input matInput formControlName="password">
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
-
-			<mat-form-field class="form-field">
-				<mat-label>Link</mat-label>
-				<input matInput formControlName="link">
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
-
-			<mat-form-field class="form-field">
-				<mat-label>Allow groups</mat-label>
-				<input matInput formControlName="allowGroups" required>
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
-
-			<mat-form-field class="form-field">
-				<mat-label>Max. group size</mat-label>
-				<input matInput formControlName="maxGroupSize" required>
-				<mat-error>Value is missing.</mat-error>
-			</mat-form-field>
-
-		</ng-container>
-
-		<mat-form-field formArrayName="lecturers" *ngFor="let lecturer of getLecturers().controls; let i = index" class="form-field">
-			<mat-label>Lecturer #{{i + 1}}</mat-label>
-			<input matInput [formControlName]="i">
-		</mat-form-field>
-
-		<button mat-icon-button (click)="addLecturer()"><mat-icon>add</mat-icon></button>
+		</mat-tab-group>
 
 	</form>
 

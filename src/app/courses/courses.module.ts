@@ -14,6 +14,8 @@ import { CreateGroupDialog } from "./course/dialogs/create-group/create-group.di
 import { MatNativeDateModule } from "@angular/material/core";
 import { ChangeRoleDialog } from "./course/dialogs/change-role/change-role.dialog";
 import { CreateCourseComponent } from "./create-course/create-course.component";
+import { SearchCourseDialog } from "./course/dialogs/search-course/search-course.dialog";
+import { SearchUserDialog } from "./course/dialogs/search-user/search-user.dialog";
 
 @NgModule({
 	declarations: [
@@ -26,7 +28,9 @@ import { CreateCourseComponent } from "./create-course/create-course.component";
 		CreateAssignmentDialog, 
 		CreateGroupDialog, 
 		ChangeRoleDialog, 
-		CreateCourseComponent,
+		CreateCourseComponent, 
+		SearchCourseDialog, 
+		SearchUserDialog,
 	],
 	imports: [
 		TranslateModule.forChild({ extend: true }),
