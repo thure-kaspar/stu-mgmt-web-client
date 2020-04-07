@@ -4,6 +4,7 @@ import { Observable, throwError, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
 	providedIn: "root"
@@ -14,11 +15,22 @@ export class TokenInterceptorService implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		const authService = this.injector.get(AuthService);
+
+		// Decide which access token should be used
+		let accessToken = "";
+		if (req.url.includes(environment.API_BASE_PATH)) {
+			accessToken = authService.getAccessToken();
+		} else if (req.url.includes(environment.AUTH_BASE_PATH)) {
+			accessToken = authService.getAccessTokenOfAuthSystem();
+		}
+
+		// Clone the request and assign authorization header
 		const tokenizedReq = req.clone({
 			setHeaders: {
-				Authorization: `Bearer ${authService.getAccessToken()}`
+				Authorization: accessToken
 			}
 		});
+		
 		return next.handle(tokenizedReq).pipe(catchError(x => this.handleAuthError(x)));
 	}
 

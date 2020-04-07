@@ -10,9 +10,10 @@ import { MaterialModule } from "../material/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { AdminGuard } from "./guards/admin.guard";
+import { LoginDialog } from "./dialogs/login/login.dialog";
 
 @NgModule({
-	declarations: [LoginComponent, RegisterComponent],
+	declarations: [LoginComponent, RegisterComponent, LoginDialog],
 	imports: [
 		CommonModule,
 		RouterModule,

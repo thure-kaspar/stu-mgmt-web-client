@@ -8,12 +8,12 @@
 		Student-Management
 	</div>
 	<div id="nav-right">
-		<a *ngIf="!isLoggedIn()" [routerLink]="['/login']">
-			<button class="btn-link" mat-flat-button>Login</button>
-		</a>
-		<a *ngIf="isLoggedIn()">
-			<button class="btn-link" mat-flat-button (click)="logout()">Logout</button>
-		</a>
+
+		<ng-container [ngSwitch]="isLoggedIn()">
+			<button *ngSwitchCase="false" class="btn-link" mat-flat-button (click)="openLoginDialog()">Login</button>
+			<button *ngSwitchCase="true" class="btn-link" mat-flat-button (click)="logout()">Logout</button>
+		</ng-container>
+		
 		<mat-menu #appMenu="matMenu">
 			<div id="appMenu-container">
 				<a [routerLink]="['/', getUserId()]"><button class="btn-link" mat-flat-button><mat-icon>account_circle</mat-icon> My account</button></a>		
