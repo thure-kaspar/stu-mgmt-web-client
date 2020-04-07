@@ -1,0 +1,26 @@
+<div class="dialog-container" id="login-dialog">
+	<h2 mat-dialog-title>Login</h2>
+
+	<div mat-dialog-content class="dialog-content">
+
+		<mat-form-field class="form-field" appearance="outline">
+			<mat-label>Username</mat-label>
+			<input [(ngModel)]="username" matInput type="text" name="username" id="username" (keydown.enter)="onLogin()">
+		</mat-form-field>
+
+		<mat-form-field class="form-field" appearance="outline">
+			<mat-label>Password</mat-label>
+			<input [(ngModel)]="password" matInput type="password" name="password" id="password" (keydown.enter)="onLogin()">
+		</mat-form-field><br>
+
+		<div id="error-container">
+			<mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+		</div>
+
+	</div>
+
+	<div mat-dialog-actions class="dialog-actions">
+		<button mat-raised-button color="accent" id="btn-login" (click)="onLogin()">Login</button>
+	</div>
+
+</div>
