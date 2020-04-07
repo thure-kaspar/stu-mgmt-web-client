@@ -5,6 +5,7 @@ import { environment } from "../environments/environment";
 import { AppComponent } from "./app.component";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { ApiModule, BASE_PATH } from "../../api";
+import { ApiModule as AuthApiModule, BASE_PATH as AUTH_BASE_PATH } from "../../api_auth";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
@@ -29,6 +30,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		BrowserModule,
 		HttpClientModule,
 		ApiModule,
+		AuthApiModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		TranslateModule.forRoot({
@@ -46,6 +48,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 	],
 	providers: [
 		{ provide: BASE_PATH, useValue: environment.API_BASE_PATH },
+		{ provide: AUTH_BASE_PATH, useValue: environment.AUTH_BASE_PATH },
 		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "standard" }} // TODO: decide style
 	],
 	bootstrap: [AppComponent]
