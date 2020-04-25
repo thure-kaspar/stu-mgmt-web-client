@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -56,8 +56,8 @@ export class AssessmentsService {
 
 
     /**
-     * 
-     * 
+     * Create assessment
+     * Creates a new assessment.
      * @param body 
      * @param courseId 
      * @param assignmentId 
@@ -113,8 +113,8 @@ export class AssessmentsService {
     }
 
     /**
-     * 
-     * 
+     * Delete assessment
+     * Deletes the assessment. Returns true, if removal was successful.
      * @param courseId 
      * @param assignmentId 
      * @param assessmentId 
@@ -164,8 +164,8 @@ export class AssessmentsService {
     }
 
     /**
-     * 
-     * 
+     * Get assessments of assignment
+     * Retrieves all assessments that have been created for the assignment.
      * @param courseId 
      * @param assignmentId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -210,8 +210,8 @@ export class AssessmentsService {
     }
 
     /**
-     * 
-     * 
+     * Get assessment
+     * Retrieves the assessment.
      * @param courseId 
      * @param assignmentId 
      * @param assessmentId 
@@ -261,8 +261,8 @@ export class AssessmentsService {
     }
 
     /**
-     * 
-     * 
+     * Update assessment
+     * Updates the assessment.
      * @param body 
      * @param courseId 
      * @param assignmentId 

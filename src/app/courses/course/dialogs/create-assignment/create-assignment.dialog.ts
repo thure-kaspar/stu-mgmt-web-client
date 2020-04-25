@@ -21,11 +21,11 @@ export class CreateAssignmentDialog {
 					
 		this.form = this.fb.group({
 			courseId: [assignmentTemplate.courseId, Validators.required],
-			name: [assignmentTemplate.name, Validators.required],
-			state: [assignmentTemplate.state, Validators.required],
-			type: [assignmentTemplate.type, Validators.required],
-			collaborationType: [assignmentTemplate.collaborationType, Validators.required],
-			maxPoints: [assignmentTemplate.maxPoints, [Validators.required, Validators.min(0)]],
+			name: [null, Validators.required],
+			state: [null, Validators.required],
+			type: [null, Validators.required],
+			collaborationType: [null, Validators.required],
+			points: [null, [Validators.required, Validators.min(0)]],
 			startDate: [null],
 			endDate: [null],
 			comment: [null],

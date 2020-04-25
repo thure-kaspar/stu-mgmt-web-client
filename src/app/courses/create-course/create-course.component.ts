@@ -48,10 +48,10 @@ export class CreateCourseComponent implements OnInit {
 	}
 
 	createCourse(): void {
-		const config: CourseConfigDto = this.form.value;
+		const config: CourseConfigDto = this.form.value; // TODO: Course as parent object of form, instead of config
 
 		const dialogData: ConfirmDialogData = {
-			params: [config.course.title]
+			params: [] 
 		};
 
 		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data: dialogData })
@@ -98,21 +98,22 @@ export class CreateCourseComponent implements OnInit {
 	 * Fills the form with the configuration of the selected course.
 	 */
 	loadCourseTemplate(courseId: string): void {
-		this.courseService.getCourseConfig(courseId).subscribe(
-			result => {
-				this.form.patchValue(result);
-				this.getLecturers().clear();
-				result.lecturers.forEach(lec => {
-					this.getLecturers().push(
-						this.fb.control(lec.username)
-					);
-				});
-			},
-			error => {
-				console.log(error);
-				this.snackbar.open("Failed to load course config.", "OK", { duration: 3000 });
-			}
-		);
+		// TODO: Reimplement with new api
+		// this.courseService.getCourseConfig(courseId).subscribe(
+		// 	result => {
+		// 		this.form.patchValue(result);
+		// 		this.getLecturers().clear();
+		// 		result.lecturers.forEach(lec => {
+		// 			this.getLecturers().push(
+		// 				this.fb.control(lec.username)
+		// 			);
+		// 		});
+		// 	},
+		// 	error => {
+		// 		console.log(error);
+		// 		this.snackbar.open("Failed to load course config.", "OK", { duration: 3000 });
+		// 	}
+		// );
 	}
 
 	/**

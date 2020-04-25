@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -57,18 +57,23 @@ export class GroupsService {
 
 
     /**
-     * 
-     * 
+     * Add user to group
+     * Adds the user to the group, if constraints are fulfilled.
+     * @param body 
      * @param courseId 
      * @param groupId 
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addUserToGroup(courseId: string, groupId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addUserToGroup(courseId: string, groupId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addUserToGroup(courseId: string, groupId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public addUserToGroup(courseId: string, groupId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling addUserToGroup.');
+        }
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling addUserToGroup.');
@@ -86,6 +91,7 @@ export class GroupsService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -94,10 +100,16 @@ export class GroupsService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
         return this.httpClient.request<any>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/users/${encodeURIComponent(String(userId))}`,
             {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -107,8 +119,8 @@ export class GroupsService {
     }
 
     /**
-     * 
-     * 
+     * Create group
+     * Creates a new group, if course allows group creation.
      * @param body 
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -159,8 +171,8 @@ export class GroupsService {
     }
 
     /**
-     * 
-     * 
+     * Delete group
+     * Deletes the group.
      * @param courseId 
      * @param groupId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -205,8 +217,8 @@ export class GroupsService {
     }
 
     /**
-     * 
-     * 
+     * Get groups of course
+     * Retrieves all groups that belong to the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -246,8 +258,8 @@ export class GroupsService {
     }
 
     /**
-     * 
-     * 
+     * Get users of group
+     * Retrieves all users that are members of the group.
      * @param courseId 
      * @param groupId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -292,8 +304,8 @@ export class GroupsService {
     }
 
     /**
-     * 
-     * 
+     * Update group
+     * Updates the group
      * @param body 
      * @param courseId 
      * @param groupId 

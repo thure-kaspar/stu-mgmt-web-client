@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -10,20 +10,37 @@
  * Do not edit the class manually.
  */
 import { AssignmentDto } from './assignmentDto';
+import { CourseConfigDto } from './courseConfigDto';
 import { GroupDto } from './groupDto';
 import { UserDto } from './userDto';
 
 export interface CourseDto { 
+    /**
+     * Unique identifier of this course.
+     */
     id?: string;
+    /**
+     * Shortname of this course, i.e \"java\". Should be reused every semester. Will be used in URLs.
+     */
     shortname: string;
+    /**
+     * Semester that the iteration of this course belong to.
+     */
     semester: string;
+    /**
+     * The full title of this course, i.e Programming I: Java
+     */
     title: string;
+    /**
+     * Determines, wether changes (i.e joining this course) can be made to this course.
+     */
     isClosed: boolean;
-    password?: string;
+    /**
+     * Additional link to another website.
+     */
     link?: string;
-    allowGroups: boolean;
-    maxGroupSize: number;
     users?: Array<UserDto>;
     groups?: Array<GroupDto>;
     assignments?: Array<AssignmentDto>;
+    config?: CourseConfigDto;
 }

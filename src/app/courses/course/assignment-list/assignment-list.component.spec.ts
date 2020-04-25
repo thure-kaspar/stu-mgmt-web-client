@@ -10,7 +10,7 @@ const assignment: AssignmentDto = {
 	id: "assignment_id",
 	courseId: "course_id",
 	collaborationType: "GROUP",
-	maxPoints: 100,
+	points: 100,
 	name: "Assignment 01",
 	type: "HOMEWORK",
 	state: "IN_PROGRESS",

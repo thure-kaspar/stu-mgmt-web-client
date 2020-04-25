@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -13,10 +13,25 @@ import { CourseDto } from './courseDto';
 import { UserDto } from './userDto';
 
 export interface GroupDto { 
+    /**
+     * Unique identifier of this group.
+     */
     id?: string;
+    /**
+     * Identifier of the course that this group belongs to.
+     */
     courseId: string;
+    /**
+     * Name of the group.
+     */
     name: string;
+    /**
+     * Password required to enter the group.
+     */
     password?: string;
+    /**
+     * Determines, wether course participant are able to join this group.
+     */
     isClosed?: boolean;
     course?: CourseDto;
     users?: Array<UserDto>;

@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -59,8 +59,8 @@ export class UsersService {
 
 
     /**
-     * 
-     * 
+     * Create user
+     * Creates a user.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -106,8 +106,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Delete user
+     * Deletes the user. Returns true, if removes was successful.
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -147,8 +147,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Get users
+     * Retrieves all users that match the specified filter.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -183,7 +183,7 @@ export class UsersService {
     }
 
     /**
-     * 
+     * TODO
      * 
      * @param userId 
      * @param courseId 
@@ -229,8 +229,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Get courses of user
+     * Retrieves all courses that the user is a member of.
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -270,8 +270,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Get groups of user for course
+     * Retrieves all groups that the user is a member of in a course.
      * @param userId 
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -316,8 +316,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Get user
+     * Retrieves the user.
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -357,8 +357,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Get user by email
+     * Retrieves a user by email.
      * @param email 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -398,8 +398,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Update user
+     * Updates the user
      * @param body 
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -11,11 +11,29 @@
  */
 
 export interface UpdateMessage { 
+    /**
+     * The type of event, i.e INSERT, UPDATE or REMOVE.
+     */
     type: UpdateMessage.TypeEnum;
+    /**
+     * The type of object that has been affected.
+     */
     affectedObject: UpdateMessage.AffectedObjectEnum;
+    /**
+     * Identifier of the course, in which the event happened.
+     */
     courseId: string;
+    /**
+     * Identifier of the entity that has changed. Type is always indicated by the first noun of affectedObject.
+     */
     entityId: string;
+    /**
+     * Identifier of the related entity that has changed. Type is always the second noun of affectedObject.
+     */
     entityIdRelation?: string;
+    /**
+     * Timestamp of the event.
+     */
     date?: Date;
 }
 export namespace UpdateMessage {

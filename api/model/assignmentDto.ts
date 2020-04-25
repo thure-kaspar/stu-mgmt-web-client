@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -11,16 +11,53 @@
  */
 
 export interface AssignmentDto { 
+    /**
+     * Unique identifier of this assignment.
+     */
     id?: string;
+    /**
+     * Identifier of the course that this assignment belongs to.
+     */
     courseId: string;
+    /**
+     * The title of this assignment.
+     */
     name: string;
+    /**
+     * Determines, wether students can submit, assessments should be published, etc.
+     */
     state: AssignmentDto.StateEnum;
+    /**
+     * Date at which this assignment should enter the IN_PROGRESS-state to allow submissions.
+     */
     startDate?: Date;
+    /**
+     * Date at which this assignment should enter the IN_REVIEW-state to disable submissions.
+     */
     endDate?: Date;
+    /**
+     * The type of assignment, i.e homework or project.
+     */
     type: AssignmentDto.TypeEnum;
+    /**
+     * Determines, wether students can submit their solutions in groups, alone or both.
+     */
     collaborationType: AssignmentDto.CollaborationTypeEnum;
-    maxPoints: number;
+    /**
+     * The amount of points that can be reached by a participant (exluding bonus points).
+     */
+    points: number;
+    /**
+     * The amount of additional bonus points, which should be exluded from the admission criteria.
+     */
+    bonusPoints?: number;
+    /**
+     * Additional information or description of this assignment.
+     */
     comment?: string;
+    /**
+     * Additional link to a .pdf or website.
+     */
     link?: string;
 }
 export namespace AssignmentDto {

@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { UpdateMessage } from '../model/updateMessage';
+import { UpdateMessageTestDto } from '../model/updateMessageTestDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -56,8 +57,8 @@ export class TestService {
 
 
     /**
-     * 
-     * Sends all possible UpdateMessages.
+     * Get UpdateMessage-Examples
+     * Returns all possible UpdateMessages.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -83,6 +84,98 @@ export class TestService {
 
         return this.httpClient.request<Array<UpdateMessage>>('get',`${this.basePath}/notifications`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * SHOULD NOT BE CALLED
+     * Logs the received UpdateMessage send from (POST) /notifications, if it was send to this route (/notifications/log).
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public logReceivedMessage(body: UpdateMessage, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public logReceivedMessage(body: UpdateMessage, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public logReceivedMessage(body: UpdateMessage, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public logReceivedMessage(body: UpdateMessage, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling logReceivedMessage.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('post',`${this.basePath}/notifications/log`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Send notication
+     * Sends the given UpdateMessage to the specified URL via HTTP-POST. Use (GET) /notifications for examples.
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public sendNotification(body: UpdateMessageTestDto, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public sendNotification(body: UpdateMessageTestDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public sendNotification(body: UpdateMessageTestDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public sendNotification(body: UpdateMessageTestDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling sendNotification.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('post',`${this.basePath}/notifications`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

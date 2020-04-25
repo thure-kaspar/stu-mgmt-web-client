@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -12,13 +12,22 @@
 import { CourseDto } from './courseDto';
 
 export interface UserDto { 
+    /**
+     * Unique identifier of this user.
+     */
     id?: string;
+    /**
+     * Role within the application.
+     */
+    role: UserDto.RoleEnum;
+    /**
+     * If loaded within the context of a course: The role of the user in this course, i.e student.
+     */
+    courseRole?: UserDto.CourseRoleEnum;
     email: string;
     username: string;
     rzName: string;
-    role: UserDto.RoleEnum;
     courses?: Array<CourseDto>;
-    courseRole?: UserDto.CourseRoleEnum;
 }
 export namespace UserDto {
     export type RoleEnum = 'SYSTEM_ADMIN' | 'ADMIN_TOOL' | 'MGTM_ADMIN' | 'USER';

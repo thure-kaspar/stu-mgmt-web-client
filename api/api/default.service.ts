@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -60,10 +60,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getHello(observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public getHello(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public getHello(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public getHello(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public appControllerGetHello(observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public appControllerGetHello(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public appControllerGetHello(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public appControllerGetHello(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 

@@ -9,11 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { UpdateMessage } from './updateMessage';
 
-export interface MailDto { 
-    from: string;
-    to: string;
-    subject: string;
-    text: string;
-    html: string;
+export interface UpdateMessageTestDto { 
+    /**
+     * URL of the Server that should receive the UpdateMessage.
+     */
+    url: string;
+    message: UpdateMessage;
 }

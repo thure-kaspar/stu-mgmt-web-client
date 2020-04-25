@@ -9,11 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Rule } from './rule';
 
-export interface MailDto { 
-    from: string;
-    to: string;
-    subject: string;
-    text: string;
-    html: string;
+export interface AdmissionCriteriaDto { 
+    /**
+     * Assignments that should be excluded from the rules.
+     */
+    exludedAssigmentIds?: Array<string>;
+    criteria: Array<Rule>;
 }

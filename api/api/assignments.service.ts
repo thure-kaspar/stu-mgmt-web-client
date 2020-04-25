@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API description.
+ * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -56,8 +56,8 @@ export class AssignmentsService {
 
 
     /**
-     * 
-     * 
+     * Create assignment
+     * Creates a new assignment.
      * @param body 
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -108,8 +108,8 @@ export class AssignmentsService {
     }
 
     /**
-     * 
-     * 
+     * Delete assignment
+     * Deletes the assignment. Returns true, if removal was successful.
      * @param courseId 
      * @param assignmentId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -154,8 +154,8 @@ export class AssignmentsService {
     }
 
     /**
-     * 
-     * 
+     * Get assignment
+     * Retrieves the assignment.
      * @param courseId 
      * @param assignmentId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -200,8 +200,8 @@ export class AssignmentsService {
     }
 
     /**
-     * 
-     * 
+     * Get assignments of course
+     * Retrieves all assignments of the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -241,8 +241,8 @@ export class AssignmentsService {
     }
 
     /**
-     * 
-     * 
+     * Update assignment
+     * Updates the assignment.
      * @param body 
      * @param courseId 
      * @param assignmentId 
