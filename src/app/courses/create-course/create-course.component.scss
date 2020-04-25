@@ -3,7 +3,7 @@ mat-card-title {
 	justify-content: space-between;
 }
 
-#basic-data, #rules, #lecturers, #extended-options {
+#basic-data, #group-settings, #lecturers, #extended-options, #admission-criteria, #assignment-templates {
 	display: flex;
 	flex-direction: column;
 	
@@ -16,10 +16,21 @@ mat-card-title {
 			width: 100%;
 		}
 	}
-
 }
 
-#btn-add-lecturer {
+#admission-criteria {
+	mat-form-field {
+		width: 128px;
+		margin-right: 8px;
+	}
+}
+
+.assignment-template {
+	display: flex;
+	flex-direction: column;
+}
+
+#btn-add-lecturer, #btn-add-criteria, #btn-add-assignment-template {
 	margin-top: 8px;
 	margin-bottom: 8px;
 	width: fit-content;
