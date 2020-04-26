@@ -2,6 +2,11 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+	--titlebar-height: 56px;
+	--background-color:rgb(224, 224, 224);
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -10,6 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 *::-webkit-scrollbar-track {
+	margin-top: var(--titlebar-height); // Start below Titlebar
 	background-color: rgba(0, 0, 0, 0.233);
 }
 
@@ -25,7 +31,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .background-container {
-	background-color:rgb(224, 224, 224);
+	background-color: var(--background-color);
 	width: 100%;
 	min-height: 100%;
 	max-height: max-content;
@@ -46,9 +52,35 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	justify-content: space-evenly;
 }
 
+.radio-group-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.radio-group {
+	display: flex;
+	flex-direction: column;
+	mat-radio-button {
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+}
+
+.radio-group-label {
+	font-weight: 500;
+}
+
 .tab {
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
+}
+
+.card-title {
+	margin-top: -16px!important;
+	margin-bottom: -8px!important;
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
 }
 
 .full-width {
@@ -75,3 +107,5 @@ mat-form-field.mat-form-field-should-float label {
 mat-form-field .mat-hint {
 	font-size: 12px;
 }
+
+.mat-button-focus-overlay { background-color: transparent!important; }
