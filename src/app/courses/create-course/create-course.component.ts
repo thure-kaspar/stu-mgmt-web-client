@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentTemplateDto, AssignmentDto } from "../../../../api";
+import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentTemplateDto, AssignmentDto, CourseCreateDto } from "../../../../api";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { SearchCourseDialog } from "../course/dialogs/search-course/search-course.dialog";
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { SearchUserDialog } from "../course/dialogs/search-user/search-user.dialog";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-create-course",
@@ -15,7 +16,7 @@ import { SearchUserDialog } from "../course/dialogs/search-user/search-user.dial
 export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split into components
 
 	/**
-	 * Form with the structure of a CourseConfigDto.
+	 * Form with the structure of a CourseCreateDto.
 	 */
 	form: FormGroup;
 
@@ -27,7 +28,8 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 				private courseConfigService: CourseConfigService,
 				private fb: FormBuilder,
 				private dialog: MatDialog,
-				private snackbar: MatSnackBar) {
+				private snackbar: MatSnackBar,
+				private router: Router) {
 
 		this.form = this.fb.group({
 			id: [null],
@@ -45,13 +47,13 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 					sizeMin: [0, [Validators.required, Validators.min(0)]],
 					sizeMax: [3, [Validators.required, Validators.min(0)]],
 					selfmanaged: [false, Validators.required]
-				})
+				}),
+				admissionCriteria: this.fb.group({
+					criteria: this.fb.array([])
+				}),
+				assignmentTemplates: this.fb.array([])
 			}),
 			lecturers: this.fb.array([]),
-			admissionCriteria: this.fb.group({
-				criteria: this.fb.array([])
-			}),
-			assignmentTemplates: this.fb.array([])
 		});
 	}
 
@@ -59,19 +61,27 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 	}
 
 	createCourse(): void {
-		const course: CourseDto = this.form.value;
-		const dialogData: ConfirmDialogData = {
+		const course: CourseCreateDto = this.form.value;
+		const data: ConfirmDialogData = {
 			params: [course.title, course.semester] 
 		};
 
-		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data: dialogData })
-			.afterClosed().subscribe(
-				isConfirmed => {
-					if (isConfirmed) {
-						// TODO: Course creation with config not implemented in backend
-					}
+		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data }).afterClosed().subscribe(
+			isConfirmed => {
+				if (isConfirmed) {
+					this.courseService.createCourse(course).subscribe(
+						result => {
+							this.snackbar.open("Course has been created!", "OK", { duration: 3000 });
+							this.router.navigateByUrl(`/courses/${result.semester}/${result.shortname}`);
+						},
+						error => {
+							console.log(error);
+							this.snackbar.open("Failed", "OK", { duration: 3000 });
+						}
+					);
 				}
-			);
+			}
+		);
 	}
 
 	/**
@@ -175,7 +185,7 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 
 	/** Helper methods to retrieve the assignmentCriteria-formArray of the form. */
 	getCriteria(): FormArray {
-		return this.form.get("admissionCriteria.criteria") as FormArray;
+		return this.form.get("config.admissionCriteria.criteria") as FormArray;
 	}
 
 	addAssignmentTemplate(template?: AssignmentTemplateDto): void {
@@ -194,7 +204,7 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 	}
 
 	getAssignmentTemplates(): FormArray {
-		return this.form.get("assignmentTemplates") as FormArray;
+		return this.form.get("config.assignmentTemplates") as FormArray;
 	}
 
 }
