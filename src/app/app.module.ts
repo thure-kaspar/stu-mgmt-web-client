@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, LOCALE_ID } from "@angular/core";
 import { environment } from "../environments/environment";
 
 import { AppComponent } from "./app.component";
@@ -49,6 +49,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 	providers: [
 		{ provide: BASE_PATH, useValue: environment.API_BASE_PATH },
 		{ provide: AUTH_BASE_PATH, useValue: environment.AUTH_BASE_PATH },
+		{ provide: LOCALE_ID, useValue: "de" },
 		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "standard" }} // TODO: decide style
 	],
 	bootstrap: [AppComponent]

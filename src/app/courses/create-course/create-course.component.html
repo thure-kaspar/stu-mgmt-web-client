@@ -192,7 +192,17 @@
 									<mat-label>Title schema</mat-label>
 									<input matInput formControlName="name">
 									<mat-hint>Example: " Exercise sheet Nr.# "</mat-hint>
-									<mat-error>Value is missing.</mat-error>
+								</mat-form-field>
+
+								<mat-form-field class="form-field">
+									<mat-label>Initial state</mat-label>
+									<mat-select formControlName="state">
+										<mat-option [value]="stateEnum.INPROGRESS">stateEnum.INPROGRESS</mat-option>
+										<mat-option [value]="stateEnum.CLOSED">stateEnum.CLOSED</mat-option>
+										<mat-option [value]="stateEnum.INVISIBLE">stateEnum.INVISIBLE</mat-option>
+										<mat-option [value]="stateEnum.INREVIEW">stateEnum.INREVIEW</mat-option>
+										<mat-option [value]="stateEnum.EVALUATED">stateEnum.EVALUATED</mat-option>
+									</mat-select>
 								</mat-form-field>
 	
 								<mat-form-field class="form-field">
@@ -204,7 +214,6 @@
 										<mat-option [value]="typeEnum.SEMINAR">{{typeEnum.SEMINAR}}</mat-option>
 										<mat-option [value]="typeEnum.OTHER">{{typeEnum.OTHER}}</mat-option>
 									</mat-select>
-									<mat-error>Value is missing.</mat-error>
 								</mat-form-field>
 	
 								<mat-form-field class="form-field">
@@ -214,7 +223,6 @@
 										<mat-option [value]="collaborationEnum.GROUP">collaborationEnum.GROUP</mat-option>
 										<mat-option [value]="collaborationEnum.GROUPORSINGLE">collaborationEnum.GROUPORSINGLE</mat-option>
 									</mat-select>
-									<mat-error>Value is missing.</mat-error>
 								</mat-form-field>
 	
 								<mat-form-field class="form-field">

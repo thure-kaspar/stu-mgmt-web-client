@@ -78,9 +78,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .card-title {
 	margin-top: -16px!important;
 	margin-bottom: -8px!important;
-	align-items: center;
-	display: flex;
-	justify-content: space-between;
+	align-items: center!important;
+	display: flex!important;
+	justify-content: space-between!important;
 }
 
 .full-width {

@@ -21,6 +21,7 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 	form: FormGroup;
 
 	scopeEnum = Rule.ScopeEnum;
+	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
@@ -192,6 +193,7 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 		this.getAssignmentTemplates().push(this.fb.group({
 			templateName: [template?.templateName || "Unnamed template", Validators.required],
 			name: [template?.name || null],
+			state: [template?.state || null],
 			type: [template?.type || null, Validators.required],
 			collaboration: [template?.collaboration || null, Validators.required],
 			points: [template?.points ||null],
