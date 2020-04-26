@@ -55,6 +55,16 @@ export class SearchCourseDialog implements OnInit {
 		);
 	}
 
+	/** Selects the given row. Removes selection, if already selected. */
+	select(row: CourseDto): void {
+		if (this.selection.isSelected(row)) {
+			this.selection.deselect(row);
+		} else {
+			this.selection.select(row);
+		}
+		
+	}
+
 	/** Whether the number of selected elements matches the total number of rows. */
 	isAllSelected(): boolean {
 		const numSelected = this.selection.selected.length;

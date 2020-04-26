@@ -41,7 +41,7 @@
 				<!-- Title Column -->
 				<ng-container matColumnDef="title">
 					<th class="column-title" mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
-					<td mat-cell *matCellDef="let row">{{row.title}}</td>
+					<td mat-cell *matCellDef="let row"><button mat-button disableRipple=true (click)="select(row)">{{row.title}}</button></td>
 				</ng-container>
 			
 				<!-- Semester Column -->
