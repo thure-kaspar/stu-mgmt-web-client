@@ -67,3 +67,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .icon-light {
 	color: rgba(0, 0, 0, 0.5);
 }
+
+mat-form-field.mat-form-field-should-float label {
+	font-size: 16px;
+}
+
+mat-form-field .mat-hint {
+	font-size: 12px;
+}
