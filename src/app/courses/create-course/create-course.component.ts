@@ -22,7 +22,7 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 
 	scopeEnum = Rule.ScopeEnum;
 	typeEnum = AssignmentDto.TypeEnum;
-	collaborationEnum = AssignmentDto.CollaborationTypeEnum;
+	collaborationEnum = AssignmentDto.CollaborationEnum;
 
 	constructor(private courseService: CoursesService,
 				private courseConfigService: CourseConfigService,
@@ -190,12 +190,13 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 
 	addAssignmentTemplate(template?: AssignmentTemplateDto): void {
 		this.getAssignmentTemplates().push(this.fb.group({
-			name: [template?.name || null, Validators.required],
-			titleSchema: [template?.titleSchema || null],
+			templateName: [template?.templateName || "Unnamed template", Validators.required],
+			name: [template?.name || null],
 			type: [template?.type || null, Validators.required],
 			collaboration: [template?.collaboration || null, Validators.required],
 			points: [template?.points ||null],
-			bonusPoints: [template?.bonusPoints || null]
+			bonusPoints: [template?.bonusPoints || null],
+			timespanDays: [template?.timespanDays || null]
 		}));
 	}
 
@@ -205,6 +206,10 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 
 	getAssignmentTemplates(): FormArray {
 		return this.form.get("config.assignmentTemplates") as FormArray;
+	}
+
+	getAssignmentTemplateName(index: number): string {
+		return this.form.get("config.assignmentTemplates." + index ).get("templateName").value as string;
 	}
 
 }

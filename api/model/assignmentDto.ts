@@ -42,7 +42,7 @@ export interface AssignmentDto {
     /**
      * Determines, wether students can submit their solutions in groups, alone or both.
      */
-    collaborationType: AssignmentDto.CollaborationTypeEnum;
+    collaboration: AssignmentDto.CollaborationEnum;
     /**
      * The amount of points that can be reached by a participant (exluding bonus points).
      */
@@ -77,10 +77,10 @@ export namespace AssignmentDto {
         PROJECT: 'PROJECT' as TypeEnum,
         OTHER: 'OTHER' as TypeEnum
     };
-    export type CollaborationTypeEnum = 'GROUP' | 'SINGLE' | 'GROUP_OR_SINGLE';
-    export const CollaborationTypeEnum = {
-        GROUP: 'GROUP' as CollaborationTypeEnum,
-        SINGLE: 'SINGLE' as CollaborationTypeEnum,
-        GROUPORSINGLE: 'GROUP_OR_SINGLE' as CollaborationTypeEnum
+    export type CollaborationEnum = 'GROUP' | 'SINGLE' | 'GROUP_OR_SINGLE';
+    export const CollaborationEnum = {
+        GROUP: 'GROUP' as CollaborationEnum,
+        SINGLE: 'SINGLE' as CollaborationEnum,
+        GROUPORSINGLE: 'GROUP_OR_SINGLE' as CollaborationEnum
     };
 }

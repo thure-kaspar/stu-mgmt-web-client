@@ -6,7 +6,8 @@ mat-card-title {
 #basic-data, #group-settings, #lecturers, #extended-options, #admission-criteria, #assignment-templates {
 	display: flex;
 	flex-direction: column;
-	
+	padding-bottom: 4px;
+
 	mat-form-field {
 		width: 300px;
 	}
@@ -15,6 +16,23 @@ mat-card-title {
 		mat-form-field {
 			width: 100%;
 		}
+	}
+}
+
+#assignment-template-grid {
+	padding: 4px;
+}
+
+.assignment-template {
+	background-color: rgba(211, 211, 211, 0.493);
+	width: fit-content;
+
+	.assignment-template-title {
+		margin-top: -16px;
+		margin-bottom: -8px;
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
 	}
 }
 

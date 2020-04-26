@@ -12,35 +12,67 @@
 
 export interface AssignmentTemplateDto { 
     /**
+     * The title of this assignment.
+     */
+    name?: string;
+    /**
+     * Determines, wether students can submit, assessments should be published, etc.
+     */
+    state?: AssignmentTemplateDto.StateEnum;
+    /**
+     * Date at which this assignment should enter the IN_PROGRESS-state to allow submissions.
+     */
+    startDate?: Date;
+    /**
+     * Date at which this assignment should enter the IN_REVIEW-state to disable submissions.
+     */
+    endDate?: Date;
+    /**
+     * The type of assignment, i.e homework or project.
+     */
+    type?: AssignmentTemplateDto.TypeEnum;
+    /**
+     * Determines, wether students can submit their solutions in groups, alone or both.
+     */
+    collaboration?: AssignmentTemplateDto.CollaborationEnum;
+    /**
+     * The amount of points that can be reached by a participant (exluding bonus points).
+     */
+    points?: number;
+    /**
+     * The amount of additional bonus points, which should be exluded from the admission criteria.
+     */
+    bonusPoints?: number;
+    /**
+     * Additional information or description of this assignment.
+     */
+    comment?: string;
+    /**
+     * Additional link to a .pdf or website.
+     */
+    link?: string;
+    /**
      * Unique identifier of this template.
      */
     id?: number;
     /**
      * The name of this template.
      */
-    name: string;
+    templateName: string;
     /**
-     * If utilized, titles will use the schema followed by the assignments's number.
+     * Time between start and end of the assignment (in days).
      */
-    titleSchema: string;
-    /**
-     * The preferred assignment type.
-     */
-    type: AssignmentTemplateDto.TypeEnum;
-    /**
-     * The preferred collaboration type.
-     */
-    collaboration: AssignmentTemplateDto.CollaborationEnum;
-    /**
-     * The amount of points that can be reached by a participant (exluding bonus points).
-     */
-    points: number;
-    /**
-     * The amount of additional bonus points, which should be exluded from the admission criteria.
-     */
-    bonusPoints?: number;
+    timespanDays?: number;
 }
 export namespace AssignmentTemplateDto {
+    export type StateEnum = 'INVISIBLE' | 'CLOSED' | 'IN_PROGRESS' | 'IN_REVIEW' | 'EVALUATED';
+    export const StateEnum = {
+        INVISIBLE: 'INVISIBLE' as StateEnum,
+        CLOSED: 'CLOSED' as StateEnum,
+        INPROGRESS: 'IN_PROGRESS' as StateEnum,
+        INREVIEW: 'IN_REVIEW' as StateEnum,
+        EVALUATED: 'EVALUATED' as StateEnum
+    };
     export type TypeEnum = 'HOMEWORK' | 'TESTAT' | 'SEMINAR' | 'PROJECT' | 'OTHER';
     export const TypeEnum = {
         HOMEWORK: 'HOMEWORK' as TypeEnum,
