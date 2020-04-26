@@ -18,24 +18,13 @@ export class AssignmentListComponent implements OnInit {
 	ngOnInit(): void { }
 
 	openAddDialog(): void {
-		const creationTemplate: Partial<AssignmentDto> = {
-			courseId: this.courseId,
-			state: AssignmentDto.StateEnum.INPROGRESS,
-			// TODO: Fill Template with configured default values for this course
-		};
-
-		const dialogRef = this.dialog.open(CreateAssignmentDialog, {
-			data: creationTemplate
-		});
-		
-		dialogRef.afterClosed().subscribe(
-			result => {
+		this.dialog.open(CreateAssignmentDialog, { data: this.courseId }).afterClosed().subscribe(
+			assignment => {
 				// Ensure assignment has been created
-				if ((result as AssignmentDto)?.id) {
-					this.assignments.push(result);
+				if ((assignment as AssignmentDto)?.id) {
+					this.assignments.push(assignment);
 				}
-			},
-			error => console.log(error)
+			}
 		); 
 	}
 

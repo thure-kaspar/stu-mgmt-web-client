@@ -1,17 +1,10 @@
-.dialog-content {
-	margin-top: 0.5rem;
+#create-assignment-grid {
+	width: 500px;
+	display: grid;
+	gap: 4px 8px;
+	grid-template-areas: "left right";
 }
 
-mat-form-field {
-	margin-top: 0.25rem;
-	margin-bottom: 0.25rem;
-}
-
-.radio-group {
-	display: flex;
-	flex-direction: column;
-}
-
-.radio-group mat-radio-button {
-	margin-bottom: 0.25rem;
+#comment-field, #link-field {
+	width: 100%;
 }
