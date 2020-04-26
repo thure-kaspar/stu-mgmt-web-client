@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { ChangeCourseRoleDto } from '../model/changeCourseRoleDto';
+import { CourseCreateDto } from '../model/courseCreateDto';
 import { CourseDto } from '../model/courseDto';
 import { UserDto } from '../model/userDto';
 
@@ -110,10 +111,10 @@ export class CoursesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createCourse(body: CourseDto, observe?: 'body', reportProgress?: boolean): Observable<CourseDto>;
-    public createCourse(body: CourseDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CourseDto>>;
-    public createCourse(body: CourseDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CourseDto>>;
-    public createCourse(body: CourseDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createCourse(body: CourseCreateDto, observe?: 'body', reportProgress?: boolean): Observable<CourseDto>;
+    public createCourse(body: CourseCreateDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CourseDto>>;
+    public createCourse(body: CourseCreateDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CourseDto>>;
+    public createCourse(body: CourseCreateDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createCourse.');

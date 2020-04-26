@@ -8,6 +8,7 @@ export * from './authTokenDto';
 export * from './changeCourseRoleDto';
 export * from './courseConfigDto';
 export * from './courseConfigUpdateDto';
+export * from './courseCreateDto';
 export * from './courseDto';
 export * from './groupDto';
 export * from './groupSettingsDto';
