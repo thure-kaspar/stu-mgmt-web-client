@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-import { TokenDto, AuthControllerService, CredentialsDto, AuthenticationInfoDto } from "../../../../../api_auth";
+import { AuthControllerService, AuthenticationInfoDto } from "../../../../../api_auth";
 
 @Component({
 	selector: "app-login",
@@ -9,8 +9,8 @@ import { TokenDto, AuthControllerService, CredentialsDto, AuthenticationInfoDto 
 })
 export class LoginDialog implements OnInit {
 
-	username: string;
-	password: string;
+	username = "user";
+	password = "abcdefgh"
 	errorMessage: string;
 
 	constructor(private dialog: MatDialogRef<LoginDialog, AuthenticationInfoDto>,
@@ -20,11 +20,10 @@ export class LoginDialog implements OnInit {
 	}
 
 	onLogin(): void {
-		this.auth.authenticate({ 
-			username: this.username,
-			password: this.password
-		}).subscribe(
-			result => this.dialog.close(result), // Return userinfo and token to calling component
+		this.auth.authenticate({ username: this.username, password: this.password }, "response").subscribe(
+			result => {
+				//this.dialog.close(result);
+			}, // Return userinfo and token to calling component
 			error => {
 				console.log(error);
 				this.errorMessage = "Login failed.";

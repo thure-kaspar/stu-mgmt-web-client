@@ -43,7 +43,6 @@ export class TokenInterceptorService implements HttpInterceptor {
 
 		if (err.status === 401) {
 			authService.logout();
-			router.navigateByUrl("/login");
 			return of(err.message);
 		}
 
