@@ -21,8 +21,6 @@ export class GroupListComponent implements OnInit {
 			result => this.groups = result,
 			error => console.log(error)
 		);
-
-		this.openAddDialog();
 	}
 
 	openAddDialog(): void {
