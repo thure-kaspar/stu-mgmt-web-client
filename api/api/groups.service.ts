@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { GroupCreateBulkDto } from '../model/groupCreateBulkDto';
 import { GroupDto } from '../model/groupDto';
 import { UserDto } from '../model/userDto';
 
@@ -160,6 +161,58 @@ export class GroupsService {
         }
 
         return this.httpClient.request<GroupDto>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Create multiple groups
+     * Creates multiple groups with the given names or naming schema and count.
+     * @param body 
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createMultipleGroups(body: GroupCreateBulkDto, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
+    public createMultipleGroups(body: GroupCreateBulkDto, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
+    public createMultipleGroups(body: GroupCreateBulkDto, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
+    public createMultipleGroups(body: GroupCreateBulkDto, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling createMultipleGroups.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling createMultipleGroups.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<Array<GroupDto>>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/bulk`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

@@ -10,6 +10,7 @@ export * from './courseConfigDto';
 export * from './courseConfigUpdateDto';
 export * from './courseCreateDto';
 export * from './courseDto';
+export * from './groupCreateBulkDto';
 export * from './groupDto';
 export * from './groupSettingsDto';
 export * from './groupSettingsUpdateDto';
