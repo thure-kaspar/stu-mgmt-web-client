@@ -1,0 +1,28 @@
+<div id="create-group-multiple-container">
+
+	<mat-slide-toggle [(ngModel)]="useNamingSchema" (ngModelChange)="onChange()">Use naming schema and count</mat-slide-toggle>
+
+	<form [formGroup]="form" class="form-container" autocomplete="off">
+
+		<ng-container *ngIf="!useNamingSchema">
+			<mat-form-field appearance="outline" floatLabel="always">
+				<mat-label>Group names</mat-label>
+				<textarea matInput formControlName="names" placeholder="Group-1&#10;Group-2&#10;Group-3" rows="5"></textarea>
+			</mat-form-field>
+		</ng-container>
+
+		<div id="schema-and-count" *ngIf="useNamingSchema">
+			<mat-form-field id="schema-field">
+				<mat-label>Name schema</mat-label>
+				<input matInput formControlName="nameSchema">
+			</mat-form-field>
+	
+			<mat-form-field id="count-field">
+				<mat-label>Count</mat-label>
+				<input type="number" matInput formControlName="count">
+			</mat-form-field>
+		</div>
+
+	</form>
+
+</div>

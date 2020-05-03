@@ -21,26 +21,24 @@ export class GroupListComponent implements OnInit {
 			result => this.groups = result,
 			error => console.log(error)
 		);
+
+		this.openAddDialog();
 	}
 
 	openAddDialog(): void {
-		const creationTemplate: Partial<GroupDto> = {
-			courseId: this.courseId,
-			//name: this.course.groupNamePreset // TODO: Implement
-		};
-
-		const dialogRef = this.dialog.open(CreateGroupDialog, {
-			data: creationTemplate
-		});
-
+		const dialogRef = this.dialog.open(CreateGroupDialog, { data: this.courseId });
 		dialogRef.afterClosed().subscribe(
 			result => {
-				// Ensure group has been created
-				if ((result as GroupDto)?.id) {
-					this.groups.push(result);
+				// If multiple groups were created
+				if (Array.isArray(result)) {
+					result.forEach(group => this.groups.push(group));
+				} else {
+					// Ensure group has been created
+					if ((result as GroupDto)?.id) {
+						this.groups.push(result);
+					}
 				}
-			},
-			error => console.log(error)
+			}
 		);
 	}
 

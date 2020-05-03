@@ -86,24 +86,24 @@ describe("", () => {
 	
 	});
 
-	describe("onSave", () => {
+	describe("onSaveSingle", () => {
 	
 		it("Calls the GroupService for creation", async () => {
 			const expected = copy(group);
 			expected.id = undefined;
 
-			component.onSave();
+			component.onSaveSingle();
 
 			expect(groupService.createGroup).toHaveBeenCalled();
 		});
 
 		it("Success -> Closes the dialog and returns created group", async () => {
-			component.onSave();
+			component.onSaveSingle();
 			expect(dialogRef.close).toHaveBeenCalledWith(group);
 		});
 
 		it("Success -> Shows snackbar to indicate success", async () => {
-			component.onSave();
+			component.onSaveSingle();
 			expect(snackbar.open).toHaveBeenCalled();
 		});
 	

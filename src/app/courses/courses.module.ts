@@ -16,6 +16,7 @@ import { ChangeRoleDialog } from "./course/dialogs/change-role/change-role.dialo
 import { CreateCourseComponent } from "./create-course/create-course.component";
 import { SearchCourseDialog } from "./course/dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "./course/dialogs/search-user/search-user.dialog";
+import { CreateGroupMultipleComponent } from "./course/dialogs/create-group/create-group-multiple/create-group-multiple.component";
 
 @NgModule({
 	declarations: [
@@ -30,7 +31,8 @@ import { SearchUserDialog } from "./course/dialogs/search-user/search-user.dialo
 		ChangeRoleDialog, 
 		CreateCourseComponent, 
 		SearchCourseDialog, 
-		SearchUserDialog,
+		SearchUserDialog, 
+		CreateGroupMultipleComponent,
 	],
 	imports: [
 		TranslateModule.forChild({ extend: true }),
