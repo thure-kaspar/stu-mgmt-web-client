@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { LoginComponent } from "./login.component";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../../services/auth.service";
 import { of } from "rxjs";
-import { AuthCredentialsDto } from "../../../../api";
+import { AuthCredentialsDto } from "../../../../../api";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 const authCredentials: AuthCredentialsDto = {

@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentTemplateDto, AssignmentDto, CourseCreateDto } from "../../../../api";
+import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentTemplateDto, AssignmentDto, CourseCreateDto } from "../../../../../api";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
-import { SearchCourseDialog } from "../dialogs/search-course/search-course.dialog";
-import { ConfirmDialogComponent, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { SearchUserDialog } from "../dialogs/search-user/search-user.dialog";
+import { SearchCourseDialog } from "../../dialogs/search-course/search-course.dialog";
+import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { SearchUserDialog } from "../../dialogs/search-user/search-user.dialog";
 import { Router } from "@angular/router";
 
 @Component({

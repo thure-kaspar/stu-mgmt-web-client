@@ -10,7 +10,7 @@ import { SearchCourseDialog } from "./dialogs/search-course/search-course.dialog
 import { SearchUserDialog } from "./dialogs/search-user/search-user.dialog";
 import { UserListComponent } from "./components/user-list/user-list.component";
 import { CourseRoutingModule } from "./course-routing.module";
-import { CreateCourseComponent } from "./create-course/create-course.component";
+import { CreateCourseComponent } from "./components/create-course/create-course.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
 
 @NgModule({
