@@ -1,9 +1,29 @@
-.assignment-panel {
-	.panel-title {
-		width: 25%;
+.assignment-cards {
+	display: grid;
+	grid-template-rows: repeat(1fr);
+	row-gap: 12px;
+
+	.assignment-card {
+		background-color: rgb(224, 224, 224);
+		.left {
+			display: flex;
+			align-items: center;
+			font-weight: 400;
+			mat-icon {
+				padding-right: 16px;
+			}
+		}
+
+		.right {
+			margin-right: 0px;
+			margin-left: auto;
+		}
+
+		font-size: 16px!important;
+		
 	}
 }
 
 #btn-add {
-	margin-bottom: 16px;
+	margin-bottom: 2px;
 }
