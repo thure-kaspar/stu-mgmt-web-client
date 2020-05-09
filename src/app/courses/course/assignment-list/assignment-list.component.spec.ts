@@ -9,7 +9,7 @@ import { SharedModule } from "../../../shared/shared.module";
 const assignment: AssignmentDto = {
 	id: "assignment_id",
 	courseId: "course_id",
-	collaborationType: "GROUP",
+	collaboration: "GROUP",
 	points: 100,
 	name: "Assignment 01",
 	type: "HOMEWORK",

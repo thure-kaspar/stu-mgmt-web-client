@@ -1,0 +1,13 @@
+<div class="dialog-container">
+
+	<mat-card-title class="dialog-title">
+		Edit Assignment
+	</mat-card-title>
+
+	<div class="dialog-content">
+		<app-assignment-form></app-assignment-form>
+	</div>
+	
+	<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form?.isInvalid()">Save</button>
+	<button mat-button (click)="onCancel()">Cancel</button>
+</div>

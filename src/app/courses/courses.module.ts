@@ -17,6 +17,8 @@ import { CreateCourseComponent } from "./create-course/create-course.component";
 import { SearchCourseDialog } from "./course/dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "./course/dialogs/search-user/search-user.dialog";
 import { CreateGroupMultipleComponent } from "./course/dialogs/create-group/create-group-multiple/create-group-multiple.component";
+import { AssignmentForm } from "./forms/assignment-form/assignment-form.component";
+import { EditAssignmentDialog } from "./course/dialogs/edit-assignment/edit-assignment.dialog";
 
 @NgModule({
 	declarations: [
@@ -32,7 +34,9 @@ import { CreateGroupMultipleComponent } from "./course/dialogs/create-group/crea
 		CreateCourseComponent, 
 		SearchCourseDialog, 
 		SearchUserDialog, 
-		CreateGroupMultipleComponent,
+		CreateGroupMultipleComponent, 
+		AssignmentForm, 
+		EditAssignmentDialog,
 	],
 	imports: [
 		TranslateModule.forChild({ extend: true }),
