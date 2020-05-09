@@ -1,12 +1,12 @@
 import { TestBed, ComponentFixture, async } from "@angular/core/testing";
 import { CreateAssignmentDialog } from "./create-assignment.dialog";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { AssignmentsService, AssignmentDto } from "../../../../../../api";
+import { AssignmentsService, AssignmentDto } from "../../../../../api";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { of } from "rxjs";
-import { copy } from "../../../../../../utils/object-helper";
+import { copy } from "../../../../../utils/object-helper";
 
 const assignment: AssignmentDto = {
 	id: "assignment_id",

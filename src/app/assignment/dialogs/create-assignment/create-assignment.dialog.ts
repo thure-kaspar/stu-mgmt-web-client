@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { AssignmentsService, CourseConfigService, AssignmentTemplateDto } from "../../../../../../api";
+import { AssignmentsService, CourseConfigService, AssignmentTemplateDto } from "../../../../../api";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { AssignmentForm } from "../../../forms/assignment-form/assignment-form.component";
+import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
 
 /**
  * Dialog that allows the creation of new assignments. Expects the courseId. Returns the created assignment.

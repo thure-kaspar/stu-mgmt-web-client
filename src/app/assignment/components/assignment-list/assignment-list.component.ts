@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { AssignmentDto } from "../../../../../api";
 import { MatDialog } from "@angular/material/dialog";
-import { CreateAssignmentDialog } from "../dialogs/create-assignment/create-assignment.dialog";
-import { EditAssignmentDialog, EditAssignmentDialogData } from "../dialogs/edit-assignment/edit-assignment.dialog";
+import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-assignment.dialog";
+import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/edit-assignment/edit-assignment.dialog";
 
 @Component({
 	selector: "app-assignment-list",

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Inject } from "@angular/core";
-import { AssignmentForm } from "../../../forms/assignment-form/assignment-form.component";
+import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { AssignmentsService } from "../../../../../../api";
+import { AssignmentsService } from "../../../../../api";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 export class EditAssignmentDialogData {
