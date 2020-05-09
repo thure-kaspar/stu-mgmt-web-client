@@ -15,86 +15,9 @@
 	</mat-card-title>
 
 	<div class="dialog-content">
-		<form [formGroup]="form" autocomplete="off">
-		
-			<div id="create-assignment-grid">
-				<mat-form-field>
-					<mat-label>Name</mat-label>
-					<input matInput formControlName="name" required>
-					<mat-error>Name is missing.</mat-error>
-				</mat-form-field>
-		
-				<mat-form-field>
-					<mat-label>State</mat-label>
-					<mat-select formControlName="state">
-						<mat-option value="IN_PROGRESS">In progress</mat-option>
-						<mat-option value="CLOSED">Closed</mat-option>
-						<mat-option value="INVISIBLE">Invisible</mat-option>
-						<mat-option value="IN_REVIEW">In review</mat-option>
-						<mat-option value="EVALUATED">Evaluated</mat-option>
-					</mat-select>
-				</mat-form-field>
-					
-				<div class="radio-group-container">
-					<label class="radio-group-label">Type</label>
-					<mat-radio-group class="radio-group" formControlName="type">
-						<mat-radio-button value="HOMEWORK">Homework</mat-radio-button>
-						<mat-radio-button value="TESTAT">Testat</mat-radio-button>
-						<mat-radio-button value="SEMINAR">Seminar</mat-radio-button>
-						<mat-radio-button value="PROJECT">Project</mat-radio-button>
-						<mat-radio-button value="OTHER">Other</mat-radio-button>
-					</mat-radio-group>
-				</div>
-					
-				<div class="radio-group-container">
-					<label class="radio-group-label">Collaboration</label>
-					<mat-radio-group class="radio-group" formControlName="collaboration">
-						<mat-radio-button value="GROUP">Group only</mat-radio-button>
-						<mat-radio-button value="SINGLE">Single only</mat-radio-button>
-						<mat-radio-button value="GROUP_OR_SINGLE">Allow both</mat-radio-button>
-					</mat-radio-group>
-				</div>
-				
-				<mat-form-field>
-					<mat-label>Start Date</mat-label>
-					<input matInput [matDatepicker]="startPicker" formControlName="startDate">
-					<mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-					<mat-datepicker #startPicker></mat-datepicker>
-				</mat-form-field>
-		
-				<mat-form-field>
-					<mat-label>End Date</mat-label>
-					<input matInput [matDatepicker]="endPicker" formControlName="endDate">
-					<mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-					<mat-datepicker #endPicker></mat-datepicker>
-				</mat-form-field>
-					
-				<mat-form-field>
-					<mat-label>Points</mat-label>
-					<input matInput type="number" formControlName="points" required>
-					<mat-error>Points are missing.</mat-error>
-				</mat-form-field>
-	
-				<mat-form-field>
-					<mat-label>Bonus points</mat-label>
-					<input matInput type="number" formControlName="bonusPoints">
-				</mat-form-field>
-				
-			</div>
-			
-			<mat-form-field id="link-field">
-				<mat-label>Link</mat-label>
-				<input matInput placeholder="Enter link" formControlName="link">
-			</mat-form-field>
-
-			<mat-form-field id="comment-field" appearance="outline">
-				<mat-label>Comment</mat-label>
-				<textarea width matInput formControlName="comment" rows=5></textarea>
-			</mat-form-field>
-			
-		</form>
+		<app-assignment-form></app-assignment-form>
 	</div>
 	
-	<button mat-flat-button (click)="onSave()" color="accent" [disabled]="form.invalid">Save</button>
+	<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form?.isInvalid()">Save</button>
 	<button mat-button (click)="onCancel()">Cancel</button>
 </div>

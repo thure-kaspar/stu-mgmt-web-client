@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { AssignmentDto, AssignmentsService, CourseConfigService, AssignmentTemplateDto } from "../../../../../../api";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AssignmentsService, CourseConfigService, AssignmentTemplateDto } from "../../../../../../api";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { AssignmentForm } from "../../../forms/assignment-form/assignment-form.component";
 
 /**
  * Dialog that allows the creation of new assignments. Expects the courseId. Returns the created assignment.
@@ -14,8 +14,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class CreateAssignmentDialog implements OnInit {
 
-	/** Form with the structure of an AssignmentDto. */
-	form: FormGroup;
+	@ViewChild(AssignmentForm, { static: true }) form: AssignmentForm;
 	/** Assignment templates of the course. */
 	templates: AssignmentTemplateDto[];
 	/** The selected template. */
@@ -25,23 +24,7 @@ export class CreateAssignmentDialog implements OnInit {
 				@Inject(MAT_DIALOG_DATA) private courseId: string,
 				private assignmentService: AssignmentsService,
 				private courseConfigService: CourseConfigService,
-				private fb: FormBuilder,
-				private snackbar: MatSnackBar) { 
-					
-		this.form = this.fb.group({
-			courseId: [courseId, Validators.required],
-			name: [null, Validators.required],
-			state: [null, Validators.required],
-			type: [null, Validators.required],
-			collaboration: [null, Validators.required],
-			points: [null, [Validators.required, Validators.min(0)]],
-			bonusPoints: [null],
-			startDate: [null],
-			endDate: [null],
-			comment: [null],
-			link: [null],
-		});			
-	}
+				private snackbar: MatSnackBar) { }
 
 	ngOnInit(): void {
 		// Load assignment templates
@@ -52,7 +35,7 @@ export class CreateAssignmentDialog implements OnInit {
 
 	fillInTemplate(template: AssignmentTemplateDto): void {
 		this.selectedTemplate = template;
-		this.form.patchValue(template);
+		this.form.patchModel(template);
 	}
 
 	onCancel(): void {
@@ -60,7 +43,8 @@ export class CreateAssignmentDialog implements OnInit {
 	}
 
 	onSave(): void {
-		const assignment: AssignmentDto = this.form.value; 
+		const assignment = this.form.getModel(); 
+		assignment.courseId = this.courseId;
 
 		this.assignmentService.createAssignment(assignment, assignment.courseId).subscribe(
 			result => {
