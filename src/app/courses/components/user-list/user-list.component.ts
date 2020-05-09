@@ -6,7 +6,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ChangeRoleDialog, ChangeRoleDialogData } from "../dialogs/change-role/change-role.dialog";
+import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-role/change-role.dialog";
 
 @Component({
 	selector: "app-user-list",
