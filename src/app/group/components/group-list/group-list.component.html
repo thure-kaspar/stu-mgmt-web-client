@@ -1,0 +1,26 @@
+<div class="tab">
+	<button (click)="openAddDialog()" mat-flat-button id="btn-add" color="accent">
+		<mat-icon>add</mat-icon>
+		Add Group
+	</button>
+	
+	<div class="group-cards">
+		<div class="group-card mat-elevation-z2" *ngFor="let group of groups">
+
+			<span class="top">
+				<a class="link-none" [routerLink]="[ 'groups', group.id ]">{{group.name}}</a>
+			</span>
+
+			<span class="bottom">
+				<div class="bottom-left">
+					<button mat-flat-button color="primary">Join</button>
+				</div>
+				<div class="bottom-right">
+					<p>2/3</p>
+				</div>
+			</span>
+
+		</div>
+	</div>
+	
+</div>

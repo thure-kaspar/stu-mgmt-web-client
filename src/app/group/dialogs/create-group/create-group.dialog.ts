@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupDto, GroupsService } from "../../../../../../api";
+import { GroupsService, GroupDto } from "../../../../../api";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CreateGroupMultipleComponent } from "./create-group-multiple/create-group-multiple.component";
