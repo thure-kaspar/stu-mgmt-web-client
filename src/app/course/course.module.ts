@@ -9,7 +9,7 @@ import { ChangeRoleDialog } from "./dialogs/change-role/change-role.dialog";
 import { SearchCourseDialog } from "./dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "./dialogs/search-user/search-user.dialog";
 import { UserListComponent } from "./components/user-list/user-list.component";
-import { CoursesRoutingModule } from "./courses-routing.module";
+import { CourseRoutingModule } from "./course-routing.module";
 import { CreateCourseComponent } from "./create-course/create-course.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
 
@@ -27,9 +27,9 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 	imports: [
 		SharedModule,
 		TranslateModule.forChild({ extend: true }),
-		CoursesRoutingModule,
+		CourseRoutingModule,
 		GroupModule,
 		AssignmentModule
 	]
 })
-export class CoursesModule { }
+export class CourseModule { }
