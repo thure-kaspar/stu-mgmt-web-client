@@ -12,6 +12,8 @@ import { UserListComponent } from "./components/user-list/user-list.component";
 import { CourseRoutingModule } from "./course-routing.module";
 import { CreateCourseComponent } from "./components/create-course/create-course.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
+import { JoinCourseDialog } from "./dialogs/join-course/join-course.dialog";
+import { CourseMemberGuard } from "./guards/course-member.guard";
 
 @NgModule({
 	declarations: [
@@ -23,6 +25,7 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		CreateCourseComponent, 
 		SearchCourseDialog, 
 		SearchUserDialog, 
+		JoinCourseDialog, 
 	],
 	imports: [
 		SharedModule,
@@ -30,6 +33,7 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		CourseRoutingModule,
 		GroupModule,
 		AssignmentModule
-	]
+	],
+	providers: [CourseMemberGuard]
 })
 export class CourseModule { }
