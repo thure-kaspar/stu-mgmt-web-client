@@ -93,3 +93,31 @@
 		display: none;
 	}
 }
+
+#course-membership-list {
+	mat-divider {
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+
+	#my-courses {
+		color: rgb(96, 96, 96);
+		font-size: 14px;
+		font-weight: 500;
+		padding-left: 26px;
+		margin-bottom: 16px;
+
+	}
+
+	a {
+		font-size: 12px;
+
+		mat-icon {
+			font-size: 10px;
+			padding-top: 14px;
+			padding-right: -14px;
+			padding-left: 14px;
+			margin-right: 18px;
+		}
+	}
+}

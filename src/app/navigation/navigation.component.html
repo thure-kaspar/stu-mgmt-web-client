@@ -43,15 +43,21 @@
 				<a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }">
 					<mat-icon>home</mat-icon>Home
 				</a>
-				<a mat-list-item [routerLink]="['/courses']" routerLinkActive="router-link-active">
+
+				<a mat-list-item [routerLink]="['/courses']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: true}">
 					<mat-icon>school</mat-icon>Courses
 				</a>
-				<a mat-list-item [routerLink]="['/login']" routerLinkActive="router-link-active">
-					<mat-icon>account_box</mat-icon>Login
-				</a>
-				<a mat-list-item [routerLink]="['/register']" routerLinkActive="router-link-active">
-					<mat-icon>perm_identity</mat-icon>Register
-				</a>
+
+				<div id="course-membership-list">
+					<mat-divider></mat-divider>
+					<span id="my-courses">MY COURSES</span>
+
+					<div *ngFor="let course of courseMemberships.courses$ | async">
+						<a mat-list-item [routerLink]="['/courses', course.semester, course.shortname]" routerLinkActive="router-link-active" (click)="navigateToCourse(course)">
+							<mat-icon>lens</mat-icon>{{course.id}}
+						</a>
+					</div>				
+				</div>
 			</div>
 
 			<div id="sidenav-footer">

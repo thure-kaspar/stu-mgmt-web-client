@@ -1,4 +1,4 @@
-import { Component, ViewChild, Output, EventEmitter } from "@angular/core";
+import { Component, ViewChild, Output, EventEmitter, OnInit } from "@angular/core";
 import { AuthService } from "../auth/services/auth.service";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { map, shareReplay, withLatestFrom, filter } from "rxjs/operators";
@@ -8,13 +8,15 @@ import { Observable } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { AuthenticationInfoDto } from "../../../api_auth";
+import { CourseMembershipsFacade } from "../course/services/course-memberships.facade";
+import { CourseDto } from "../../../api";
 
 @Component({
 	selector: "app-navigation",
 	templateUrl: "./navigation.component.html",
 	styleUrls: ["./navigation.component.scss"]
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
 
 	@Output() onLanguageChange = new EventEmitter<string>();
 
@@ -28,11 +30,19 @@ export class NavigationComponent {
 	constructor(private breakpointObserver: BreakpointObserver,
 				private router: Router,
 				private authService: AuthService,
+				public courseMemberships: CourseMembershipsFacade,
 				private dialog: MatDialog) {
+
 		router.events.pipe(
 			withLatestFrom(this.isHandset$),
 			filter(([a, b]) => b && a instanceof NavigationEnd)
 		).subscribe(x => this.drawer.close());
+	}
+
+	ngOnInit(): void {
+		if (this.isLoggedIn()) {
+			this.courseMemberships.loadCoursesOfUser();
+		}
 	}
 
 	setLanguage(lang: string): void {
@@ -60,6 +70,11 @@ export class NavigationComponent {
 
 	logout(): void {
 		return this.authService.logout();
+	}
+
+	// TODO: Function is used to allow reloading the course component, if params change -> Search for better solution
+	navigateToCourse(course: CourseDto): void {
+		this.router.navigateByUrl("/").then(x => this.router.navigateByUrl(`/courses/${course.semester}/${course.shortname}`));
 	}
 
 }
