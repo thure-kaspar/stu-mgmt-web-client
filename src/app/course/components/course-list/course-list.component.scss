@@ -1,15 +1,14 @@
 .courseFilter-container {
-	display: flexbox;
-	margin-top: 1rem;
-}
+	max-width: 500px;
+	display: grid;
+	grid-template-columns: 4fr 1fr 1fr;
+	column-gap: 8px;
+	align-items: center;
 
-.courseFilter-field {
-	margin-right: 1rem;
-}
-
-#btn-search:hover {
-	background-color: rgba(255, 0, 0, 0.5);
-	transition-duration: 400ms;
+	#btn-search {
+		width: fit-content;
+		height: fit-content;
+	}
 }
 
 .column-title{

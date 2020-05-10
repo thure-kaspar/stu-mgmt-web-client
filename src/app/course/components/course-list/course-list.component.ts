@@ -25,14 +25,11 @@ export class CourseListComponent implements OnInit {
 	constructor(private courseService: CoursesService) { }
 
 	ngOnInit(): void {
-
 	}
 
 	searchCourses(): void {
 		this.courseService.getCourses(this.shortname, this.selectedSemester, this.title).subscribe(
 			result => {
-				console.log(result);
-				
 				this.courseList = result;
 				this.dataSource = new MatTableDataSource(this.courseList);
 				this.dataSource.paginator = this.paginator;
