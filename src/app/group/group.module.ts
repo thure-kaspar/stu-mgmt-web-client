@@ -6,13 +6,14 @@ import { CreateGroupDialog } from "./dialogs/create-group/create-group.dialog";
 import { CreateGroupMultipleComponent } from "./dialogs/create-group/create-group-multiple/create-group-multiple.component";
 import { GroupListComponent } from "./components/group-list/group-list.component";
 import { TranslateModule } from "@ngx-translate/core";
-
+import { JoinGroupDialog } from "./dialogs/join-group/join-group.dialog";
 
 @NgModule({
 	declarations: [
 		CreateGroupDialog,
 		CreateGroupMultipleComponent,
-		GroupListComponent
+		GroupListComponent,
+		JoinGroupDialog
 	],
 	imports: [
 		SharedModule,

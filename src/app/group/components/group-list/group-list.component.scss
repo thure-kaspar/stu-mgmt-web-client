@@ -24,12 +24,22 @@
 			display: flex;
 			justify-content: space-between;
 			.bottom-left {
-
+				margin-bottom: -32px;
+				button {
+					
+				}
 			}
 			.bottom-right {
 				font-size: 18px;
 				font-weight: 500;
 				transform: translateY(25%);
+
+				mat-icon {
+					vertical-align: bottom;
+				}
+				.group-size {
+					color:rgba(0, 0, 0, 0.5);
+				}
 			}
 		}
 	}
