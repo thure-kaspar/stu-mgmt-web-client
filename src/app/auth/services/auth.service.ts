@@ -90,6 +90,6 @@ export class AuthService {
 	 * Returns the stored AuthToken, containing information about the user's id, email, role and rights.
 	 */
 	getAuthToken(): AuthTokenDto {
-		return localStorage.getItem(this.studentMgmtTokenKey) as unknown as AuthTokenDto;
+		return JSON.parse(localStorage.getItem(this.studentMgmtTokenKey)) as AuthTokenDto;
 	}
 }
