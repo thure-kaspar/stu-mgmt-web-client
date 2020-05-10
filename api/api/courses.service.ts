@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { ChangeCourseRoleDto } from '../model/changeCourseRoleDto';
 import { CourseCreateDto } from '../model/courseCreateDto';
 import { CourseDto } from '../model/courseDto';
+import { PasswordDto } from '../model/passwordDto';
 import { UserDto } from '../model/userDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -61,15 +62,20 @@ export class CoursesService {
     /**
      * Add user to course
      * Adds a user to the course. If the course requires a password, the correct password needs to be included in the request body.
+     * @param body 
      * @param courseId 
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addUser(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addUser(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addUser(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public addUser(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addUser(body: PasswordDto, courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addUser(body: PasswordDto, courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addUser(body: PasswordDto, courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addUser(body: PasswordDto, courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling addUser.');
+        }
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling addUser.');
@@ -92,10 +98,16 @@ export class CoursesService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
         return this.httpClient.request<any>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
             {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

@@ -9,13 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Rule } from './rule';
 
-export interface AdmissionCriteriaDto { 
-    /**
-     * Assignments that should be excluded from the rules.
-     */
-    exludedAssigmentIds?: Array<string>;
-    id?: number;
-    criteria: Array<Rule>;
+export interface PasswordDto { 
+    password: string;
 }

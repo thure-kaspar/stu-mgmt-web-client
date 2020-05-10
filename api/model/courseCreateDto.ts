@@ -36,6 +36,6 @@ export interface CourseCreateDto {
      * Additional link to another website.
      */
     link?: string;
-    lecturers: Array<string>;
+    lecturers?: Array<string>;
     config?: CourseConfigDto;
 }

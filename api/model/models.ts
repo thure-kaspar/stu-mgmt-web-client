@@ -1,4 +1,5 @@
 export * from './admissionCriteriaDto';
+export * from './assessmentCreateDto';
 export * from './assessmentDto';
 export * from './assignmentDto';
 export * from './assignmentTemplateDto';
@@ -15,6 +16,8 @@ export * from './groupDto';
 export * from './groupSettingsDto';
 export * from './groupSettingsUpdateDto';
 export * from './mailDto';
+export * from './partialAssessmentDto';
+export * from './passwordDto';
 export * from './rule';
 export * from './updateMessage';
 export * from './updateMessageTestDto';

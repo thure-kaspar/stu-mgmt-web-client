@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { GroupCreateBulkDto } from '../model/groupCreateBulkDto';
 import { GroupDto } from '../model/groupDto';
+import { PasswordDto } from '../model/passwordDto';
 import { UserDto } from '../model/userDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -67,10 +68,10 @@ export class GroupsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public addUserToGroup(body: string, courseId: string, groupId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addUserToGroup(body: PasswordDto, courseId: string, groupId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addUserToGroup(body: PasswordDto, courseId: string, groupId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addUserToGroup(body: PasswordDto, courseId: string, groupId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addUserToGroup(body: PasswordDto, courseId: string, groupId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling addUserToGroup.');
@@ -347,6 +348,56 @@ export class GroupsService {
         ];
 
         return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/users`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Remove user
+     * Removes the user from the group.
+     * @param courseId 
+     * @param groupId 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public removeUserFromGroup(courseId: string, groupId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public removeUserFromGroup(courseId: string, groupId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public removeUserFromGroup(courseId: string, groupId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public removeUserFromGroup(courseId: string, groupId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling removeUserFromGroup.');
+        }
+
+        if (groupId === null || groupId === undefined) {
+            throw new Error('Required parameter groupId was null or undefined when calling removeUserFromGroup.');
+        }
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling removeUserFromGroup.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/users/${encodeURIComponent(String(userId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -9,15 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { GroupDto } from './groupDto';
 import { PartialAssessmentDto } from './partialAssessmentDto';
-import { UserDto } from './userDto';
 
-export interface AssessmentDto { 
-    /**
-     * Unique identifier of this assessment.
-     */
-    id?: string;
+export interface AssessmentCreateDto { 
     /**
      * Identifier of the assignment that is being evaluated by this assessment.
      */
@@ -42,7 +36,5 @@ export interface AssessmentDto {
      * Identifier of the creator of this assessment.
      */
     creatorId?: string;
-    group?: GroupDto;
-    creator?: UserDto;
     partialAssessments?: Array<PartialAssessmentDto>;
 }
