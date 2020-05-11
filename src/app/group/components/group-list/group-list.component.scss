@@ -1,48 +1,68 @@
 .group-cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr) );
+	grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
 	column-gap: 16px;
 	row-gap: 16px;
 
-	.group-card {
-		height: 64px;
-		background-color: rgb(224, 224, 224);
-		padding: 8px 8px 0px 8px;
-
+	@media (max-width: 800px) {
 		display: flex;
 		flex-direction: column;
-
-		.top {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 16px;
-			font-weight: 500;
+		.group-card {
+			margin-bottom: 8px;
 		}
+	}
+}
 
-		.bottom {
-			display: flex;
-			justify-content: space-between;
-			.bottom-left {
-				margin-bottom: -32px;
-				button {
-					
-				}
+.group-card {
+	height: 64px;
+	background-color: rgb(224, 224, 224);
+	padding: 8px 8px 0px 8px;
+
+	display: flex;
+	flex-direction: column;
+
+	.top {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 500;
+	}
+
+	.bottom {
+		display: flex;
+		justify-content: space-between;
+		.bottom-left {
+			margin-bottom: -32px;
+			button {
+				
 			}
-			.bottom-right {
-				font-size: 18px;
-				font-weight: 500;
-				transform: translateY(25%);
+		}
+		.bottom-right {
+			font-size: 18px;
+			font-weight: 500;
+			transform: translateY(25%);
 
-				mat-icon {
-					vertical-align: bottom;
-				}
-				.group-size {
-					color:rgba(0, 0, 0, 0.5);
-				}
+			mat-icon {
+				vertical-align: bottom;
+			}
+			.group-size {
+				color:rgba(0, 0, 0, 0.5);
 			}
 		}
 	}
+}
+
+.groups-heading {
+	margin-bottom: 4px;
+}
+
+#users-group-container {
+	margin-bottom: 16px;
+}
+
+#users-group {
+	width: 256px;
 }
 
 #btn-add {
