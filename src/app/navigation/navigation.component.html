@@ -48,7 +48,7 @@
 					<mat-icon>school</mat-icon>Courses
 				</a>
 
-				<div id="course-membership-list">
+				<div id="course-membership-list" *ngIf="isLoggedIn()">
 					<mat-divider></mat-divider>
 					<span id="my-courses">MY COURSES</span>
 

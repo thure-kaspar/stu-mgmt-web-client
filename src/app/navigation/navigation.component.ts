@@ -40,9 +40,6 @@ export class NavigationComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		if (this.isLoggedIn()) {
-			this.courseMemberships.loadCoursesOfUser();
-		}
 	}
 
 	setLanguage(lang: string): void {
