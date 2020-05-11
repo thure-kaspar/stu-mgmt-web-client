@@ -1,0 +1,22 @@
+<mat-card *ngIf="group">
+	<mat-card-title>{{group.course.title}} - {{group.name}}</mat-card-title>
+
+	<div id="group-members">
+		<p *ngFor="let user of group.users">
+			<a class="font-bold">{{user.username}}</a>
+		</p>
+	</div>
+
+	<div id="assessments">
+		<div *ngFor="let assessment of group.assessments">
+			<p>{{assessment.id}}</p>
+		</div>
+	</div>
+
+	<div id="group-history">
+		<div *ngFor="let event of group.history">
+			<p>[{{event.timestamp | date }}]: <a class="font-bold">{{event.user.username}}</a> {{event.event}}</p>
+		</div>
+	</div>
+
+</mat-card>
