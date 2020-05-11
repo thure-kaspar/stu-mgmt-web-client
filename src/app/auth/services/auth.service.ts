@@ -1,34 +1,43 @@
 import { Injectable } from "@angular/core";
 import { AuthenticationService, AuthCredentialsDto, AuthTokenDto } from "../../../../api";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { AuthenticationInfoDto } from "../../../../api_auth";
 
-@Injectable({
-	providedIn: "root"
-})
+@Injectable({ providedIn: "root" })
 export class AuthService {
+
+	private userInfoSubject = new BehaviorSubject<AuthTokenDto>(null);
+	public userInfo$ = this.userInfoSubject.asObservable();
 
 	private readonly studentMgmtTokenKey = "studentMgmtToken";
 	private readonly extAuthTokenKey = "extAuthTokenKey";
 
 	constructor(private authenticationService: AuthenticationService,
-				private router: Router) { }
+				private router: Router) {
+
+		// Check if user still has a token from last login
+		const authToken = this.getAuthToken();
+		if (authToken) {
+			this.userInfoSubject.next(authToken);
+		}
+	}
 
 	/**
 	 * Login to the StudentMgmt-Backend via the token provided by the external authentication system.
 	 */
 	async loginWithToken(authInfo: AuthenticationInfoDto): Promise<void> {
-		const result = await this.authenticationService.loginWithToken({ token: authInfo.token.token}).toPromise()
+		const authToken = await this.authenticationService.loginWithToken({ token: authInfo.token.token}).toPromise()
 			.catch(error => {
 				// Rethrow the error, so calling component is able to display the error
 				throw new Error(error.error.message);
 			});
 
 		// If login was successful, store the received authentication token
-		if (result) {
+		if (authToken) {
 			localStorage.setItem(this.extAuthTokenKey, authInfo.token.token);
-			localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(result));
+			localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(authToken));
+			this.userInfoSubject.next(authToken);
 			this.router.navigate(["/courses"]);
 		}
 	}
@@ -37,15 +46,16 @@ export class AuthService {
 	 * Login to the StudentMgmt-Backend directly.
 	 */
 	async login(authCredentials: AuthCredentialsDto): Promise<void> {
-		const result = await this.authenticationService.login(authCredentials).toPromise()
+		const authToken = await this.authenticationService.login(authCredentials).toPromise()
 			.catch(error => { 
 				// Rethrow the error, so calling component is able to display the error
 				throw new Error(error.error.message); 
 			});
 
 		// If login was successful, store the received authentication token
-		if (result) {
-			localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(result));
+		if (authToken) {
+			localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(authToken));
+			this.userInfoSubject.next(authToken);
 			this.router.navigate(["/courses"]);
 		}
 	}
@@ -57,6 +67,7 @@ export class AuthService {
 	logout(): void {
 		localStorage.removeItem(this.studentMgmtTokenKey);
 		localStorage.removeItem(this.extAuthTokenKey);
+		this.userInfoSubject.next(null);
 		this.router.navigate(["/login"]);
 	}
 
