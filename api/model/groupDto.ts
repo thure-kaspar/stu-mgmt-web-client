@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CourseDto } from './courseDto';
+import { GroupEventDto } from './groupEventDto';
 import { UserDto } from './userDto';
 
 export interface GroupDto { 
@@ -35,4 +36,5 @@ export interface GroupDto {
     isClosed?: boolean;
     course?: CourseDto;
     users?: Array<UserDto>;
+    history?: Array<GroupEventDto>;
 }

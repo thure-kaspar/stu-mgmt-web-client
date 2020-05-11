@@ -271,6 +271,52 @@ export class GroupsService {
     }
 
     /**
+     * Get group
+     * Returns the group with its course, users, assessments and history.
+     * @param courseId 
+     * @param groupId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getGroup(courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
+    public getGroup(courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
+    public getGroup(courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
+    public getGroup(courseId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getGroup.');
+        }
+
+        if (groupId === null || groupId === undefined) {
+            throw new Error('Required parameter groupId was null or undefined when calling getGroup.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<GroupDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get groups of course
      * Retrieves all groups that belong to the course.
      * @param courseId 

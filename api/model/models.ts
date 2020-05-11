@@ -13,6 +13,7 @@ export * from './courseCreateDto';
 export * from './courseDto';
 export * from './groupCreateBulkDto';
 export * from './groupDto';
+export * from './groupEventDto';
 export * from './groupSettingsDto';
 export * from './groupSettingsUpdateDto';
 export * from './mailDto';
