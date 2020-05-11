@@ -15,7 +15,7 @@
 				<div class="bottom-left">
 				</div>
 				<div class="bottom-right">
-					<span><mat-icon class="icon-light">lock</mat-icon>
+					<span><mat-icon class="icon-light" *ngIf="groupOfUser.isClosed">lock</mat-icon>
 						<span class="group-size">{{groupOfUser.users.length}}/{{groupSettings?.sizeMax}}</span>
 					</span>
 				</div>
