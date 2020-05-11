@@ -17,6 +17,12 @@ import { AuthModule } from "./auth/auth.module";
 import { SharedModule } from "./shared/shared.module";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 
+import { registerLocaleData } from "@angular/common";
+import localeDe from "@angular/common/locales/de";
+import localeDeExtra from "@angular/common/locales/extra/de";
+
+registerLocaleData(localeDe, "de", localeDeExtra);
+
 export function createTranslateLoader(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
