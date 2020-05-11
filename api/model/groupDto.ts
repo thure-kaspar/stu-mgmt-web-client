@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { AssessmentDto } from './assessmentDto';
 import { CourseDto } from './courseDto';
 import { GroupEventDto } from './groupEventDto';
 import { UserDto } from './userDto';
@@ -37,4 +38,5 @@ export interface GroupDto {
     course?: CourseDto;
     users?: Array<UserDto>;
     history?: Array<GroupEventDto>;
+    assessments?: Array<AssessmentDto>;
 }
