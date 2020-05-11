@@ -8,6 +8,7 @@ import { AuthGuard } from "../auth/guards/auth.guard";
 
 const routes: Routes = [
 	{ path: ":semester/:name", component: CourseComponent, pathMatch: "full", canActivate: [AuthGuard, CourseMemberGuard] },
+	{ path: ":semester/:name/groups", loadChildren: () => import("../group/group.module").then(m => m.GroupModule) },
 	{ path: "create", component: CreateCourseComponent, pathMatch: "full" },
 	{ path: "", component: CourseListComponent, pathMatch: "full" }
 ];
