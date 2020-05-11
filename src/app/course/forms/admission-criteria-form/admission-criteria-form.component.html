@@ -1,0 +1,45 @@
+<ng-container [formGroup]="form">
+	<ng-container formGroupName="config">
+		<div id="admission-criteria" formGroupName="admissionCriteria">
+			<button id="btn-add-criteria" type="button" mat-flat-button color="accent" (click)="addCriteria()"><mat-icon>add</mat-icon>Add criteria</button>
+		
+			<mat-hint>
+				<p>Scope: Determines, wether the rule should be evaluated for every assignment (INDIVIDUAL) or the summarized points (OVERALL).</p>
+				<p>Type: The assignment type that the rule applies to.</p>
+				<p>Required: The required percentage to fulfill the criteria.</p>
+			</mat-hint>
+		
+			<div class="criteria" formArrayName="criteria" *ngFor="let crit of getCriteria()?.controls; let i=index">
+				<ng-container [formGroupName]="i">
+					<mat-form-field>
+						<mat-label>Scope</mat-label>
+						<mat-select formControlName="scope" required>
+							<mat-option [value]="scopeEnum.OVERALL">{{scopeEnum.OVERALL}}</mat-option>
+							<mat-option [value]="scopeEnum.INDIVIDUAL">{{scopeEnum.INDIVIDUAL}}</mat-option>
+						</mat-select>
+						<mat-error>Value is missing.</mat-error>
+					</mat-form-field>
+		
+					<mat-form-field>
+						<mat-label>Type</mat-label>
+						<mat-select formControlName="type" required>
+							<mat-option [value]="typeEnum.HOMEWORK">{{typeEnum.HOMEWORK}}</mat-option>
+							<mat-option [value]="typeEnum.TESTAT">{{typeEnum.TESTAT}}</mat-option>
+							<mat-option [value]="typeEnum.PROJECT">{{typeEnum.PROJECT}}</mat-option>
+							<mat-option [value]="typeEnum.SEMINAR">{{typeEnum.SEMINAR}}</mat-option>
+							<mat-option [value]="typeEnum.OTHER">{{typeEnum.OTHER}}</mat-option>
+						</mat-select>
+					</mat-form-field>
+		
+					<mat-form-field>
+						<mat-label>Required points (in %)</mat-label>
+						<input matInput type="number" formControlName="requiredPercent">
+					</mat-form-field>
+		
+					<button  matSuffix mat-icon-button matTooltip="Remove" (click)="removeCriteria(i)"><mat-icon>clear</mat-icon></button>
+				</ng-container>
+			</div>
+		</div>
+	</ng-container>
+</ng-container>
+

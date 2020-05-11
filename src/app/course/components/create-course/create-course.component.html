@@ -12,102 +12,12 @@
 		<mat-tab-group color="accent" animationDuration="0ms">
 
 			<mat-tab label="Basic Data">
-				<div id="basic-data">
-					<mat-form-field>
-						<mat-label>Id</mat-label>
-						<input matInput formControlName="id">
-						<mat-hint>Id will default to shortname-semester, if not specified.</mat-hint>
-					</mat-form-field>
-		
-					<mat-form-field>
-						<mat-label>Shortname</mat-label>
-						<input matInput formControlName="shortname" required>
-						<mat-hint>Shortname will be visible in the URL of the course.</mat-hint>
-						<mat-error>Value is missing.</mat-error>
-					</mat-form-field>
-		
-					<mat-form-field>
-						<mat-label>Semester</mat-label>
-						<mat-select formControlName="semester" required>
-							<mat-option value="wise1920">WiSe 19/20</mat-option>
-							<mat-option value="sose2020">SoSe 2020</mat-option>
-							<mat-option value="wise2021">WiSe 2021</mat-option>
-							<mat-option value="sose2021">SoSe 2021</mat-option>
-						</mat-select>
-						<mat-error>Value is missing.</mat-error>
-					</mat-form-field>
-		
-					<mat-form-field>
-						<mat-label>Title</mat-label>
-						<input matInput formControlName="title" required>
-						<mat-error>Value is missing.</mat-error>
-					</mat-form-field>
-		
-					<mat-form-field>
-						<mat-label>Closed</mat-label>
-						<mat-select formControlName="isClosed" required>
-							<mat-option [value]=false>No</mat-option>
-							<mat-option [value]=true>Yes</mat-option>
-						</mat-select>
-						<mat-hint>Closing the course will prevent students from joining.</mat-hint>
-						<mat-error>Value is missing.</mat-error>
-					</mat-form-field>
-		
-					<mat-form-field formGroupName="config">
-						<mat-label>Password</mat-label>
-						<input matInput formControlName="password">
-						<mat-hint>Users have to enter the password to enter the course.</mat-hint>
-						<mat-error>Value is missing.</mat-error>
-					</mat-form-field>
-		
-					<mat-form-field>
-						<mat-label>Link</mat-label>
-						<input matInput formControlName="link">
-					</mat-form-field>
-				</div>
+				<app-course-form [form]="form"></app-course-form>
 			</mat-tab>
 
 			<ng-container formGroupName="config">
 				<mat-tab label="Group settings">
-					<div id="group-settings" formGroupName="groupSettings">
-						<mat-form-field>
-							<mat-label>Allow groups</mat-label>
-							<mat-select formControlName="allowGroups" required>
-								<mat-option [value]=false>No</mat-option>
-								<mat-option [value]=true>Yes</mat-option>
-							</mat-select>
-							<mat-hint>Allows participants to create groups.</mat-hint>
-							<mat-error>Value is missing.</mat-error>
-						</mat-form-field>
-
-						<mat-form-field>
-							<mat-label>Selfmanaged</mat-label>
-							<mat-select formControlName="selfmanaged" required>
-								<mat-option [value]=false>No</mat-option>
-								<mat-option [value]=true>Yes</mat-option>
-							</mat-select>
-							<mat-hint>Allows participants to manage groups.</mat-hint>
-							<mat-error>Value is missing.</mat-error>
-						</mat-form-field>
-
-						<mat-form-field>
-							<mat-label>Name schema</mat-label>
-							<input matInput formControlName="nameSchema">
-						</mat-form-field>
-
-						<mat-form-field>
-							<mat-label>Min. group size</mat-label>
-							<input matInput type="number" formControlName="sizeMin" required>
-							<mat-error>Value is missing.</mat-error>
-						</mat-form-field>
-			
-						<mat-form-field>
-							<mat-label>Max. group size</mat-label>
-							<input matInput type="number" formControlName="sizeMax" required>
-							<mat-error>Value is missing.</mat-error>
-						</mat-form-field>
-
-					</div>
+					<app-group-settings-form [form]="form"></app-group-settings-form>
 				</mat-tab>
 	
 				<mat-tab label="Extended Options">
@@ -121,130 +31,11 @@
 				</mat-tab>
 
 				<mat-tab label="Admission criteria">
-					<div id="admission-criteria" formGroupName="admissionCriteria">
-						<button id="btn-add-criteria" type="button" mat-flat-button color="accent" (click)="addCriteria()"><mat-icon>add</mat-icon>Add criteria</button>
-	
-						<mat-hint>
-							<p>Scope: Determines, wether the rule should be evaluated for every assignment (INDIVIDUAL) or the summarized points (OVERALL).</p>
-							<p>Type: The assignment type that the rule applies to.</p>
-							<p>Required: The required percentage to fulfill the criteria.</p>
-						</mat-hint>
-	
-						<div class="criteria" formArrayName="criteria" *ngFor="let crit of getCriteria()?.controls; let i=index">
-							<ng-container [formGroupName]="i">
-								<mat-form-field>
-									<mat-label>Scope</mat-label>
-									<mat-select formControlName="scope" required>
-										<mat-option [value]="scopeEnum.OVERALL">{{scopeEnum.OVERALL}}</mat-option>
-										<mat-option [value]="scopeEnum.INDIVIDUAL">{{scopeEnum.INDIVIDUAL}}</mat-option>
-									</mat-select>
-									<mat-error>Value is missing.</mat-error>
-								</mat-form-field>
-		
-								<mat-form-field>
-									<mat-label>Type</mat-label>
-									<mat-select formControlName="type" required>
-										<mat-option [value]="typeEnum.HOMEWORK">{{typeEnum.HOMEWORK}}</mat-option>
-										<mat-option [value]="typeEnum.TESTAT">{{typeEnum.TESTAT}}</mat-option>
-										<mat-option [value]="typeEnum.PROJECT">{{typeEnum.PROJECT}}</mat-option>
-										<mat-option [value]="typeEnum.SEMINAR">{{typeEnum.SEMINAR}}</mat-option>
-										<mat-option [value]="typeEnum.OTHER">{{typeEnum.OTHER}}</mat-option>
-									</mat-select>
-								</mat-form-field>
-		
-								<mat-form-field>
-									<mat-label>Required points (in %)</mat-label>
-									<input matInput type="number" formControlName="requiredPercent">
-								</mat-form-field>
-	
-								<button  matSuffix mat-icon-button matTooltip="Remove" (click)="removeCriteria(i)"><mat-icon>clear</mat-icon></button>
-							</ng-container>
-						</div>
-						
-					</div>
+					<app-admission-criteria-form [form]="form"></app-admission-criteria-form>
 				</mat-tab>
 	
 				<mat-tab label="Assignment templates"> 
-					<div id="assignment-templates" formArrayName="assignmentTemplates">
-	
-						<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="addAssignmentTemplate()">
-							<mat-icon>add</mat-icon>Add assignment template
-						</button>
-	
-						<mat-hint>Assignment templates can be used to speed up the creation of assignments.</mat-hint>
-	
-						<div id="assignment-template-grid" *ngFor="let template of getAssignmentTemplates().controls; let i=index">
-	
-							<mat-card class="assignment-template mat-elevation-z8" [formGroupName]="i">
-								<h2 class="card-title">
-									{{getAssignmentTemplateName(i)}}
-									<button mat-icon-button matTooltip="Remove" (click)="removeAssignmentTemplate(i)"><mat-icon>clear</mat-icon></button>
-								</h2>
-
-								<mat-form-field>
-									<mat-label>Template name</mat-label>
-									<input matInput formControlName="templateName" required>
-									<mat-hint>The name of the template.</mat-hint>
-									<mat-error>Value is missing.</mat-error>
-								</mat-form-field>
-	
-								<mat-form-field>
-									<mat-label>Title schema</mat-label>
-									<input matInput formControlName="name">
-									<mat-hint>Example: " Exercise sheet Nr.# "</mat-hint>
-								</mat-form-field>
-
-								<mat-form-field>
-									<mat-label>Initial state</mat-label>
-									<mat-select formControlName="state">
-										<mat-option [value]="stateEnum.INPROGRESS">stateEnum.INPROGRESS</mat-option>
-										<mat-option [value]="stateEnum.CLOSED">stateEnum.CLOSED</mat-option>
-										<mat-option [value]="stateEnum.INVISIBLE">stateEnum.INVISIBLE</mat-option>
-										<mat-option [value]="stateEnum.INREVIEW">stateEnum.INREVIEW</mat-option>
-										<mat-option [value]="stateEnum.EVALUATED">stateEnum.EVALUATED</mat-option>
-									</mat-select>
-								</mat-form-field>
-	
-								<mat-form-field>
-									<mat-label>Type</mat-label>
-									<mat-select formControlName="type">
-										<mat-option [value]="typeEnum.HOMEWORK">{{typeEnum.HOMEWORK}}</mat-option>
-										<mat-option [value]="typeEnum.TESTAT">{{typeEnum.TESTAT}}</mat-option>
-										<mat-option [value]="typeEnum.PROJECT">{{typeEnum.PROJECT}}</mat-option>
-										<mat-option [value]="typeEnum.SEMINAR">{{typeEnum.SEMINAR}}</mat-option>
-										<mat-option [value]="typeEnum.OTHER">{{typeEnum.OTHER}}</mat-option>
-									</mat-select>
-								</mat-form-field>
-	
-								<mat-form-field>
-									<mat-label>Collaboration</mat-label>
-									<mat-select formControlName="collaboration">
-										<mat-option [value]="collaborationEnum.SINGLE">collaborationEnum.SINGLE</mat-option>
-										<mat-option [value]="collaborationEnum.GROUP">collaborationEnum.GROUP</mat-option>
-										<mat-option [value]="collaborationEnum.GROUPORSINGLE">collaborationEnum.GROUPORSINGLE</mat-option>
-									</mat-select>
-								</mat-form-field>
-	
-								<mat-form-field>
-									<mat-label>Points</mat-label>
-									<input matInput type="number" formControlName="points">
-								</mat-form-field>
-	
-								<mat-form-field>
-									<mat-label>Bonus points</mat-label>
-									<input matInput type="number" formControlName="bonusPoints">
-								</mat-form-field>
-
-								<mat-form-field>
-									<mat-label>Timespan</mat-label>
-									<input matInput type="number" formControlName="timespanDays">
-									<mat-hint>The time between start and end date in days.</mat-hint>
-								</mat-form-field>
-	
-							</mat-card>
-	
-						</div>
-					</div>
+					<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
 				</mat-tab>
 
 			</ng-container>
@@ -266,8 +57,6 @@
 					</mat-form-field>
 				</div>
 			</mat-tab>
-
-
 
 		</mat-tab-group>
 

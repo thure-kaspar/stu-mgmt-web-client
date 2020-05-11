@@ -1,0 +1,44 @@
+#assignment-template-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	column-gap: 16px;
+	row-gap: 32px;
+	margin-top: 8px;
+}
+
+.assignment-template {
+	display: flex;
+	flex-direction: column;
+	background-color: rgba(211, 211, 211, 0.493);
+	width: fit-content;
+
+	.assignment-template-title {
+		margin-top: -16px;
+		margin-bottom: -8px;
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+#assignment-templates {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 4px;
+
+	mat-form-field {
+		width: 300px;
+	}
+
+	@media (max-width: 500px) {
+		mat-form-field {
+			width: 100%;
+		}
+	}
+}
+
+#btn-add-assignment-template {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	width: fit-content;
+}

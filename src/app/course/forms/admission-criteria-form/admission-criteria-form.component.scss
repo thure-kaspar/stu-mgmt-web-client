@@ -1,15 +1,11 @@
-mat-card-title {
-	display: flex;
-	justify-content: space-between;
-}
-
-#basic-data, #lecturers, #extended-options {
+#admission-criteria {
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 4px;
 
 	mat-form-field {
-		width: 300px;
+		width: 128px;
+		margin-right: 8px;
 	}
 
 	@media (max-width: 500px) {
@@ -19,14 +15,8 @@ mat-card-title {
 	}
 }
 
-#btn-add-lecturer {
+#btn-add-criteria {
 	margin-top: 8px;
 	margin-bottom: 8px;
 	width: fit-content;
 }
-
-#icon-person-hint {
-	vertical-align: middle;
-}
-
-

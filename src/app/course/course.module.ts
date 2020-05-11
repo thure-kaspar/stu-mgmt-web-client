@@ -14,6 +14,10 @@ import { CreateCourseComponent } from "./components/create-course/create-course.
 import { SemesterPipe } from "./pipes/semester.pipe";
 import { JoinCourseDialog } from "./dialogs/join-course/join-course.dialog";
 import { CourseMemberGuard } from "./guards/course-member.guard";
+import { CourseForm } from "./forms/course-form/course-form.component";
+import { AdmissionCriteriaForm } from "./forms/admission-criteria-form/admission-criteria-form.component";
+import { GroupSettingsForm } from "./forms/group-settings-form/group-settings-form.component";
+import { AssignmentTemplatesForm } from "./forms/assignment-templates-form/assignment-templates-form.component";
 
 @NgModule({
 	declarations: [
@@ -26,6 +30,10 @@ import { CourseMemberGuard } from "./guards/course-member.guard";
 		SearchCourseDialog, 
 		SearchUserDialog, 
 		JoinCourseDialog, 
+		CourseForm,
+		AdmissionCriteriaForm, 
+		GroupSettingsForm, 
+		AssignmentTemplatesForm, 
 	],
 	imports: [
 		SharedModule,

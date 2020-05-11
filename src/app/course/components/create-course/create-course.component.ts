@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentTemplateDto, AssignmentDto, CourseCreateDto } from "../../../../../api";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentDto, CourseCreateDto } from "../../../../../api";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
@@ -7,23 +7,30 @@ import { SearchCourseDialog } from "../../dialogs/search-course/search-course.di
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { SearchUserDialog } from "../../dialogs/search-user/search-user.dialog";
 import { Router } from "@angular/router";
+import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
+import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admission-criteria-form.component";
+import { CourseForm } from "../../forms/course-form/course-form.component";
+import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 
 @Component({
 	selector: "app-create-course",
 	templateUrl: "./create-course.component.html",
 	styleUrls: ["./create-course.component.scss"]
 })
-export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split into components
+export class CreateCourseComponent implements OnInit {
 
-	/**
-	 * Form with the structure of a CourseCreateDto.
-	 */
+	/** Form with the structure of a CourseCreateDto. */
 	form: FormGroup;
 
 	scopeEnum = Rule.ScopeEnum;
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
+
+	@ViewChild(CourseForm, { static: true }) courseForm: CourseForm;
+	@ViewChild(GroupSettingsForm, { static: true }) groupSettingsForm: GroupSettingsForm;
+	@ViewChild(AdmissionCriteriaForm, { static: true }) admissionCriteriaForm: AdmissionCriteriaForm;
+	@ViewChild(AssignmentTemplatesForm, { static: true }) assignmentTemplatesForm: AssignmentTemplatesForm;
 
 	constructor(private courseService: CoursesService,
 				private courseConfigService: CourseConfigService,
@@ -60,6 +67,18 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 
 	ngOnInit(): void {
 	}
+
+	// getAdmissionCriteriaFormArray(): FormArray {
+	// 	return this.form.get("config.admissionCriteria") as FormArray;
+	// }
+
+	// getAssignmentTemplatesFormArray(): FormArray {
+	// 	return this.form.get("config.assignmentTemplates") as FormArray;
+	// }
+
+	// getGroupSettingsFormGroup(): FormGroup {
+	// 	return this.form.get("config.groupSettings") as FormGroup;
+	// }
 
 	createCourse(): void {
 		const course: CourseCreateDto = this.form.value;
@@ -130,10 +149,10 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 				this.form.get("config").patchValue(config);
 
 				// Insert admission criteria
-				config.admissionCriteria?.criteria.forEach(c=> this.addCriteria(c));
+				config.admissionCriteria?.criteria.forEach(c=> this.admissionCriteriaForm.addCriteria(c));
 
 				// Insert assignment templates
-				config.assignmentTemplates?.forEach(t => this.addAssignmentTemplate(t));
+				config.assignmentTemplates?.forEach(t => this.assignmentTemplatesForm.addAssignmentTemplate(t));
 			}
 		);
 
@@ -166,52 +185,6 @@ export class CreateCourseComponent implements OnInit { // TODO: Refactor: Split 
 	 */
 	getLecturers(): FormArray {
 		return this.form.get("lecturers") as FormArray;
-	}
-
-	/** Adds additional input fields to a admission criteria rule. */
-	addCriteria(criteria?: Rule): void {
-		this.getCriteria().push(this.fb.group({
-			scope: [criteria?.scope || null, Validators.required],
-			type: [criteria?.type || null, Validators.required],
-			requiredPercent: [criteria?.requiredPercent || 50, [Validators.required, Validators.min(0), Validators.max(100)]]
-		}));
-
-		//console.log(this.form.get("admissionCriteria"));
-	}
-
-	/** Removes the criteria at the given position. */
-	removeCriteria(index: number): void {
-		this.getCriteria().removeAt(index);
-	}
-
-	/** Helper methods to retrieve the assignmentCriteria-formArray of the form. */
-	getCriteria(): FormArray {
-		return this.form.get("config.admissionCriteria.criteria") as FormArray;
-	}
-
-	addAssignmentTemplate(template?: AssignmentTemplateDto): void {
-		this.getAssignmentTemplates().push(this.fb.group({
-			templateName: [template?.templateName || "Unnamed template", Validators.required],
-			name: [template?.name || null],
-			state: [template?.state || null],
-			type: [template?.type || null, Validators.required],
-			collaboration: [template?.collaboration || null, Validators.required],
-			points: [template?.points ||null],
-			bonusPoints: [template?.bonusPoints || null],
-			timespanDays: [template?.timespanDays || null]
-		}));
-	}
-
-	removeAssignmentTemplate(index: number): void {
-		this.getAssignmentTemplates().removeAt(index);
-	}
-
-	getAssignmentTemplates(): FormArray {
-		return this.form.get("config.assignmentTemplates") as FormArray;
-	}
-
-	getAssignmentTemplateName(index: number): string {
-		return this.form.get("config.assignmentTemplates." + index ).get("templateName").value as string;
 	}
 
 }

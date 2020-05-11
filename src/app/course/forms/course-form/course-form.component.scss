@@ -1,0 +1,15 @@
+#basic-data {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 4px;
+
+	mat-form-field {
+		width: 300px;
+	}
+
+	@media (max-width: 500px) {
+		mat-form-field {
+			width: 100%;
+		}
+	}
+}
