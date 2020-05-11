@@ -13,20 +13,20 @@
 
 			<mat-tab label="Basic Data">
 				<div id="basic-data">
-					<mat-form-field class="form-field">
+					<mat-form-field>
 						<mat-label>Id</mat-label>
 						<input matInput formControlName="id">
 						<mat-hint>Id will default to shortname-semester, if not specified.</mat-hint>
 					</mat-form-field>
 		
-					<mat-form-field class="form-field">
+					<mat-form-field>
 						<mat-label>Shortname</mat-label>
 						<input matInput formControlName="shortname" required>
 						<mat-hint>Shortname will be visible in the URL of the course.</mat-hint>
 						<mat-error>Value is missing.</mat-error>
 					</mat-form-field>
 		
-					<mat-form-field class="form-field">
+					<mat-form-field>
 						<mat-label>Semester</mat-label>
 						<mat-select formControlName="semester" required>
 							<mat-option value="wise1920">WiSe 19/20</mat-option>
@@ -37,13 +37,13 @@
 						<mat-error>Value is missing.</mat-error>
 					</mat-form-field>
 		
-					<mat-form-field class="form-field">
+					<mat-form-field>
 						<mat-label>Title</mat-label>
 						<input matInput formControlName="title" required>
 						<mat-error>Value is missing.</mat-error>
 					</mat-form-field>
 		
-					<mat-form-field class="form-field">
+					<mat-form-field>
 						<mat-label>Closed</mat-label>
 						<mat-select formControlName="isClosed" required>
 							<mat-option [value]=false>No</mat-option>
@@ -53,14 +53,14 @@
 						<mat-error>Value is missing.</mat-error>
 					</mat-form-field>
 		
-					<mat-form-field formGroupName="config" class="form-field">
+					<mat-form-field formGroupName="config">
 						<mat-label>Password</mat-label>
 						<input matInput formControlName="password">
 						<mat-hint>Users have to enter the password to enter the course.</mat-hint>
 						<mat-error>Value is missing.</mat-error>
 					</mat-form-field>
 		
-					<mat-form-field class="form-field">
+					<mat-form-field>
 						<mat-label>Link</mat-label>
 						<input matInput formControlName="link">
 					</mat-form-field>
@@ -70,7 +70,7 @@
 			<ng-container formGroupName="config">
 				<mat-tab label="Group settings">
 					<div id="group-settings" formGroupName="groupSettings">
-						<mat-form-field class="form-field">
+						<mat-form-field>
 							<mat-label>Allow groups</mat-label>
 							<mat-select formControlName="allowGroups" required>
 								<mat-option [value]=false>No</mat-option>
@@ -80,7 +80,7 @@
 							<mat-error>Value is missing.</mat-error>
 						</mat-form-field>
 
-						<mat-form-field class="form-field">
+						<mat-form-field>
 							<mat-label>Selfmanaged</mat-label>
 							<mat-select formControlName="selfmanaged" required>
 								<mat-option [value]=false>No</mat-option>
@@ -90,18 +90,18 @@
 							<mat-error>Value is missing.</mat-error>
 						</mat-form-field>
 
-						<mat-form-field class="form-field">
+						<mat-form-field>
 							<mat-label>Name schema</mat-label>
 							<input matInput formControlName="nameSchema">
 						</mat-form-field>
 
-						<mat-form-field class="form-field">
+						<mat-form-field>
 							<mat-label>Min. group size</mat-label>
 							<input matInput type="number" formControlName="sizeMin" required>
 							<mat-error>Value is missing.</mat-error>
 						</mat-form-field>
 			
-						<mat-form-field class="form-field">
+						<mat-form-field>
 							<mat-label>Max. group size</mat-label>
 							<input matInput type="number" formControlName="sizeMax" required>
 							<mat-error>Value is missing.</mat-error>
@@ -112,7 +112,7 @@
 	
 				<mat-tab label="Extended Options">
 					<div id="extended-options">			
-						<mat-form-field class="form-field">
+						<mat-form-field>
 							<mat-label>Subscription URL</mat-label>
 							<input matInput formControlName="subscriptionUrl">
 						</mat-form-field>
@@ -132,7 +132,7 @@
 	
 						<div class="criteria" formArrayName="criteria" *ngFor="let crit of getCriteria()?.controls; let i=index">
 							<ng-container [formGroupName]="i">
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Scope</mat-label>
 									<mat-select formControlName="scope" required>
 										<mat-option [value]="scopeEnum.OVERALL">{{scopeEnum.OVERALL}}</mat-option>
@@ -141,7 +141,7 @@
 									<mat-error>Value is missing.</mat-error>
 								</mat-form-field>
 		
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Type</mat-label>
 									<mat-select formControlName="type" required>
 										<mat-option [value]="typeEnum.HOMEWORK">{{typeEnum.HOMEWORK}}</mat-option>
@@ -152,7 +152,7 @@
 									</mat-select>
 								</mat-form-field>
 		
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Required points (in %)</mat-label>
 									<input matInput type="number" formControlName="requiredPercent">
 								</mat-form-field>
@@ -181,20 +181,20 @@
 									<button mat-icon-button matTooltip="Remove" (click)="removeAssignmentTemplate(i)"><mat-icon>clear</mat-icon></button>
 								</h2>
 
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Template name</mat-label>
 									<input matInput formControlName="templateName" required>
 									<mat-hint>The name of the template.</mat-hint>
 									<mat-error>Value is missing.</mat-error>
 								</mat-form-field>
 	
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Title schema</mat-label>
 									<input matInput formControlName="name">
 									<mat-hint>Example: " Exercise sheet Nr.# "</mat-hint>
 								</mat-form-field>
 
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Initial state</mat-label>
 									<mat-select formControlName="state">
 										<mat-option [value]="stateEnum.INPROGRESS">stateEnum.INPROGRESS</mat-option>
@@ -205,7 +205,7 @@
 									</mat-select>
 								</mat-form-field>
 	
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Type</mat-label>
 									<mat-select formControlName="type">
 										<mat-option [value]="typeEnum.HOMEWORK">{{typeEnum.HOMEWORK}}</mat-option>
@@ -216,7 +216,7 @@
 									</mat-select>
 								</mat-form-field>
 	
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Collaboration</mat-label>
 									<mat-select formControlName="collaboration">
 										<mat-option [value]="collaborationEnum.SINGLE">collaborationEnum.SINGLE</mat-option>
@@ -225,17 +225,17 @@
 									</mat-select>
 								</mat-form-field>
 	
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Points</mat-label>
 									<input matInput type="number" formControlName="points">
 								</mat-form-field>
 	
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Bonus points</mat-label>
 									<input matInput type="number" formControlName="bonusPoints">
 								</mat-form-field>
 
-								<mat-form-field class="form-field">
+								<mat-form-field>
 									<mat-label>Timespan</mat-label>
 									<input matInput type="number" formControlName="timespanDays">
 									<mat-hint>The time between start and end date in days.</mat-hint>
@@ -257,7 +257,7 @@
 
 					<mat-hint>Use the <mat-icon id="icon-person-hint">search</mat-icon>-button in the input field to open the User-Search-Dialog. The username of the selected user will be inserted automatically.</mat-hint>
 
-					<mat-form-field *ngFor="let lecturer of getLecturers()?.controls; let i = index" class="form-field">
+					<mat-form-field *ngFor="let lecturer of getLecturers()?.controls; let i = index">
 						<mat-label>Lecturer #{{i + 1}}</mat-label>
 						<input matInput [formControlName]="i" required>
 						<mat-hint>Username</mat-hint>
