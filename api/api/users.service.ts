@@ -183,24 +183,24 @@ export class UsersService {
     }
 
     /**
-     * TODO
-     * 
+     * Get assessments
+     * Returns all assessments of the user in the given course. Includes the group, if assessment specified a group.
      * @param userId 
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAssessmentsWithGroupsOfUserForCourse(userId: string, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentDto>>;
-    public getAssessmentsWithGroupsOfUserForCourse(userId: string, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentDto>>>;
-    public getAssessmentsWithGroupsOfUserForCourse(userId: string, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentDto>>>;
-    public getAssessmentsWithGroupsOfUserForCourse(userId: string, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAssessmentsOfUserForCourse(userId: string, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentDto>>;
+    public getAssessmentsOfUserForCourse(userId: string, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentDto>>>;
+    public getAssessmentsOfUserForCourse(userId: string, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentDto>>>;
+    public getAssessmentsOfUserForCourse(userId: string, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling getAssessmentsWithGroupsOfUserForCourse.');
+            throw new Error('Required parameter userId was null or undefined when calling getAssessmentsOfUserForCourse.');
         }
 
         if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getAssessmentsWithGroupsOfUserForCourse.');
+            throw new Error('Required parameter courseId was null or undefined when calling getAssessmentsOfUserForCourse.');
         }
 
         let headers = this.defaultHeaders;
@@ -218,7 +218,7 @@ export class UsersService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<AssessmentDto>>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/assessmentsWithGroups`,
+        return this.httpClient.request<Array<AssessmentDto>>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/assessments`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

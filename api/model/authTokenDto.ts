@@ -13,6 +13,7 @@
 export interface AuthTokenDto { 
     accessToken: string;
     userId: string;
+    username: string;
     email: string;
     role: AuthTokenDto.RoleEnum;
 }
