@@ -26,6 +26,16 @@ export class GroupListComponent implements OnInit {
 				private route: ActivatedRoute) { }
 
 	ngOnInit(): void {
+		this.loadGroups();
+
+		this.courseConfig.getGroupSettings(this.courseId).subscribe(
+			result => this.groupSettings = result,
+			error => console.log(error)
+		);
+	}
+
+	/** Loads the groups of the course. */
+	loadGroups(): void {
 		this.groupService.getGroupsOfCourse(this.courseId).subscribe(
 			result => {
 				this.groups = result;
@@ -40,25 +50,14 @@ export class GroupListComponent implements OnInit {
 			},
 			error => console.log(error)
 		);
-
-		this.courseConfig.getGroupSettings(this.courseId).subscribe(
-			result => this.groupSettings = result,
-			error => console.log(error)
-		);
 	}
 
 	openAddDialog(): void {
 		const dialogRef = this.dialog.open(CreateGroupDialog, { data: this.courseId });
 		dialogRef.afterClosed().subscribe(
 			result => {
-				// If multiple groups were created
-				if (Array.isArray(result)) {
-					result.forEach(group => this.groups.push(group));
-				} else {
-					// Ensure group has been created
-					if ((result as GroupDto)?.id) {
-						this.groups.push(result);
-					}
+				if (result) {
+					this.loadGroups();
 				}
 			}
 		);
