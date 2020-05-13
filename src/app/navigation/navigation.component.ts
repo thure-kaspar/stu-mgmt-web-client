@@ -50,6 +50,10 @@ export class NavigationComponent implements OnInit {
 		return this.authService.getAuthToken()?.userId ?? "";
 	}
 
+	getUsername(): string {
+		return this.authService.getAuthToken()?.username;
+	}
+
 	isLoggedIn(): boolean {
 		return this.authService.isLoggedIn();
 	}
