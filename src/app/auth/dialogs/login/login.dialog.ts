@@ -20,10 +20,10 @@ export class LoginDialog implements OnInit {
 	}
 
 	onLogin(): void {
-		this.auth.authenticate({ username: this.username, password: this.password }, "response").subscribe(
+		this.auth.authenticate({ username: this.username, password: this.password }).subscribe(
 			result => {
-				//this.dialog.close(result);
-			}, // Return userinfo and token to calling component
+				this.dialog.close(result); // Return userinfo and token to calling component
+			},
 			error => {
 				console.log(error);
 				this.errorMessage = "Login failed.";
