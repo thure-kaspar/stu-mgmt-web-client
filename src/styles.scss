@@ -104,6 +104,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	color: rgba(0, 0, 0, 0.5);
 }
 
+.text-red {
+	color: red;
+}
+
+.text-green {
+	color: green;
+}
+
 mat-form-field.mat-form-field-should-float label {
 	font-size: 16px;
 }

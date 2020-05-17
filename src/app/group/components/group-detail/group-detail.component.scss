@@ -1,0 +1,75 @@
+mat-card-title {
+	margin-bottom: 16px;
+}
+
+.heading {
+	margin-bottom: 8px;
+}
+
+#group-detail-container {
+	width: 50%;
+
+	@media (max-width: 1200px) {
+		width: 100%;
+	}
+}
+
+#group-members {
+	.member-list {
+		margin-top: -8px;
+		margin-bottom: 16px;
+	
+		.member-item {
+			display: grid;
+			width: 100%;
+			font-size: 14px;
+			background-color: rgb(240, 240, 240);
+	
+			.member-buttons {
+				display: flex;
+				margin-left: auto;
+
+				button {
+					mat-icon {
+						font-size: 16px;
+					}
+					margin-left: 8px;
+					height: 32px;
+					width: 32px;
+				}
+			}
+		}
+	}
+	
+	.btn-member-menu {
+		margin-right: 8px;
+		margin-left: -8px;
+	}
+}
+
+.history-item {
+	font-size: 14px!important;
+	background-color: rgb(240, 240, 240);
+
+	mat-icon, .timestamp {
+		margin-right: 8px;
+	}
+}
+
+.green { background-color: rgb(230, 255, 230); }
+.red { background-color: rgb(255, 220, 220); }
+
+#group-history {
+	margin-bottom: 16px;
+
+	.history-list {
+		margin-top: -8px;
+	}
+}
+
+#assessments {
+	.heading {
+		margin-bottom: -16px;
+	}
+}
+

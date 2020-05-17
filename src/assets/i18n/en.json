@@ -17,5 +17,10 @@
 
 	"LECTURER": "Lecturer",
 	"TUTOR": "Tutor",
-	"STUDENT": "Student"
+	"STUDENT": "Student",
+
+	"Event": {
+		"UserJoinedGroupEvent": "joined the group.",
+		"UserLeftGroupEvent": "left the group."
+	}
 }
