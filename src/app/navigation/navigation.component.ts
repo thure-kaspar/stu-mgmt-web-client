@@ -75,7 +75,7 @@ export class NavigationComponent implements OnInit {
 
 	// TODO: Function is used to allow reloading the course component, if params change -> Search for better solution
 	navigateToCourse(course: CourseDto): void {
-		this.router.navigateByUrl("/").then(x => this.router.navigateByUrl(`/courses/${course.semester}/${course.shortname}`));
+		this.router.navigateByUrl("/").then(x => this.router.navigateByUrl(`/courses/${course.id}`));
 	}
 
 }

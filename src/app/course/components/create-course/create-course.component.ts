@@ -92,7 +92,7 @@ export class CreateCourseComponent implements OnInit {
 					this.courseService.createCourse(course).subscribe(
 						result => {
 							this.snackbar.open("Course has been created!", "OK", { duration: 3000 });
-							this.router.navigateByUrl(`/courses/${result.semester}/${result.shortname}`);
+							this.router.navigateByUrl(`/courses/${result.id}`);
 						},
 						error => {
 							console.log(error);

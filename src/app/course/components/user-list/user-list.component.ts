@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-role/change-role.dialog";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
 	selector: "app-user-list",
@@ -15,7 +16,7 @@ import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-rol
 })
 export class UserListComponent implements OnInit {
 
-	@Input() courseId: string;
+	courseId: string;
 	users: UserDto[];
 	displayedColumns: string[] = ["actions", "role", "username", "email"];
 	dataSource: MatTableDataSource<UserDto>;
@@ -25,10 +26,13 @@ export class UserListComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 
 	constructor(private courseService: CoursesService,
+				private route: ActivatedRoute,
 				public dialog: MatDialog,
 				private snackbar: MatSnackBar) { }
 
 	ngOnInit(): void {
+		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
+
 		this.courseService.getUsersOfCourse(this.courseId).subscribe(
 			result => {
 				this.users = result,

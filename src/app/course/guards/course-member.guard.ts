@@ -11,11 +11,10 @@ export class CourseMemberGuard implements CanActivate {
 
 	canActivate(route: ActivatedRouteSnapshot): boolean {
 		let canActivate = false;
-		const semester = route.paramMap.get("semester");
-		const name = route.paramMap.get("name");
+		const courseId = route.paramMap.get("courseId");
 
 		this.courseMemberships.courses$.subscribe(courses => {
-			const course = courses.find(c => c.semester === semester && c.shortname === name);
+			const course = courses.find(c => c.id === courseId);
 				
 			// Check if user is a member of course
 			if (course) {
