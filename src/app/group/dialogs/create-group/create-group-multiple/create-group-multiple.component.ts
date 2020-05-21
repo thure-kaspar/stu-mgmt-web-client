@@ -40,6 +40,7 @@ export class CreateGroupMultipleComponent implements OnInit {
 		
 		if (!this.useNamingSchema) {
 			groupCreateBulk.names = (this.form.get("names").value as string)?.split("\n");
+			groupCreateBulk.names = groupCreateBulk.names.filter(name => name.length > 1); // Remove empty lines
 		}
 
 		this.groupService.createMultipleGroups(groupCreateBulk, this.courseId).subscribe(
