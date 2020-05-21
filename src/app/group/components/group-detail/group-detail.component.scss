@@ -1,5 +1,9 @@
 mat-card-title {
-	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0px;
+	mat-icon {
+	}
 }
 
 .heading {
