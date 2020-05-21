@@ -45,10 +45,6 @@ export class CourseMembershipsFacade {
 		}
 	}
 
-	getCourses(): CourseDto[] {
-		return this.coursesSubject.getValue();
-	}
-
 	joinCourse(courseId: string, password?: string): void {
 		const userId = this.authService.getAuthToken().userId;
 
