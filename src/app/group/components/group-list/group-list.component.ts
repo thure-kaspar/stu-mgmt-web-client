@@ -13,10 +13,15 @@ import { AuthService } from "../../../auth/services/auth.service";
 })
 export class GroupListComponent implements OnInit {
 
-	@Input() courseId: string;
+	courseId: string;
 	groups: GroupDto[];
 	groupOfUser: GroupDto;
 	groupSettings: GroupSettingsDto;
+
+	/** Filter for group names or username. */
+	filter: string;
+	/** this.groups-Array with applied filter. */
+	filteredGroups: GroupDto[];
 
 	constructor(public dialog: MatDialog,
 				private groupService: GroupsService,
@@ -26,6 +31,7 @@ export class GroupListComponent implements OnInit {
 				private route: ActivatedRoute) { }
 
 	ngOnInit(): void {
+		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
 		this.loadGroups();
 
 		this.courseConfig.getGroupSettings(this.courseId).subscribe(
@@ -39,7 +45,6 @@ export class GroupListComponent implements OnInit {
 		this.groupService.getGroupsOfCourse(this.courseId).subscribe(
 			result => {
 				this.groups = result;
-
 				// Search groups for group containing the current user
 				this.groupOfUser = this.groups.find(g => {
 					return !!g.users.find(u => u.id === this.authService.getAuthToken().userId);
@@ -47,9 +52,19 @@ export class GroupListComponent implements OnInit {
 
 				// Exclude user's group from the rest of groups
 				this.groups = this.groups.filter(g => g !== this.groupOfUser);
+				this.filteredGroups = [...this.groups];
 			},
 			error => console.log(error)
 		);
+	}
+
+	applyFilter(): void {
+		const filteredGroups = this.groups.filter(g => {
+			const filter = this.filter.toLowerCase();
+			return g.name.toLowerCase().includes(filter) 
+				|| g.users.find(u => u.username.toLowerCase().includes(filter));
+		});
+		this.filteredGroups = filteredGroups;
 	}
 
 	openAddDialog(): void {
@@ -68,7 +83,7 @@ export class GroupListComponent implements OnInit {
 		this.dialog.open<JoinGroupDialog, JoinGroupDialogData, boolean>(JoinGroupDialog, { data }).afterClosed().subscribe(
 			joined => {
 				if (joined) {
-					this.router.navigate([group.id], { relativeTo: this.route });	
+					this.router.navigate(["groups", group.id], { relativeTo: this.route });	
 				}
 			}
 		);

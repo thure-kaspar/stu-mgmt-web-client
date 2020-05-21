@@ -6,44 +6,49 @@
 
 	<div id="users-group-container" *ngIf="groupOfUser">
 		<h2 class="groups-heading">My group</h2>
-		<div class="group-card mat-elevation-z2" id="users-group">
-			<span class="top">
-				<a class="link-none" [routerLink]="[ 'groups', groupOfUser.id ]">{{groupOfUser.name}}</a>
-			</span>
-
-			<span class="bottom">
-				<div class="bottom-left">
+		<div class="group-list-item" id="users-group">
+			<div class="group-container">
+				<div class="left">
+					<button mat-button disabled=true>Join</button>
 				</div>
-				<div class="bottom-right">
-					<span><mat-icon class="icon-light" *ngIf="groupOfUser.isClosed">lock</mat-icon>
-						<span class="group-size">{{groupOfUser.users.length}}/{{groupSettings?.sizeMax}}</span>
-					</span>
+				<div class="middle">
+					<a class="link-none font-bold" [routerLink]="[groupOfUser.id]">{{groupOfUser.name}}</a>
 				</div>
-			</span>
+				<div class="right">
+					<span class="group-size font-bold">{{groupOfUser.users.length}}/{{groupSettings?.sizeMax}}</span>
+				</div>
+			</div>
 		</div>
 	</div>
 
-
 	<div *ngIf="groups && groupSettings">
 		<h2 class="groups-heading">Other groups</h2>
-		<div class="group-cards">
-			<div class="group-card mat-elevation-z2" *ngFor="let group of groups">
-				<span class="top">
-					<a class="link-none" [routerLink]="[ 'groups', group.id ]">{{group.name}}</a>
-				</span>
-	
-				<span class="bottom">
-					<div class="bottom-left">
-						<button mat-flat-button color="primary" *ngIf="isJoinable(group)" (click)="openJoinGroupDialog(group)">Join</button>
+
+		<div id="filter-container">
+			<mat-form-field id="filter-field">
+				<input [(ngModel)]="filter" (keyup)="applyFilter()" matInput placeholder="Group name or username" autocomplete="off">
+			</mat-form-field>
+			<!-- <mat-slide-toggle id="checkbox-only-joinable-groups" [(ngModel)]="onlyJoinableGroups" (toggleChange)="applyFilter()">Show only joinable groups</mat-slide-toggle> -->
+		</div>
+
+		<mat-list dense class="group-list">
+			<mat-list-item class="group-list-item" *ngFor="let group of filteredGroups">
+				<div class="group-container">
+					<div class="left">
+						<button mat-button class="btn-join" [disabled]="!isJoinable(group)" (click)="openJoinGroupDialog(group)">Join</button>
 					</div>
-					<div class="bottom-right">
-						<span><mat-icon class="icon-light" *ngIf="group.isClosed">lock</mat-icon>
-							<span class="group-size">{{group.users.length}}/{{groupSettings?.sizeMax}}</span>
+					<div class="middle">
+						<a class="link-none font-bold" [routerLink]="[group.id]">{{group.name}}</a>
+					</div>
+					<div class="right">
+						<span class="group-size font-bold">
+							<mat-icon class="icon-light" *ngIf="group.isClosed">lock</mat-icon>
+							{{group.users.length}}/{{groupSettings?.sizeMax}}
 						</span>
 					</div>
-				</span>
-			</div>
-		</div>
+				</div>
+			</mat-list-item>
+		</mat-list>
 	</div>
 	
 </div>
