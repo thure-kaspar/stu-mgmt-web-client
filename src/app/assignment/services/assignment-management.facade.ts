@@ -37,7 +37,8 @@ export class AssignmentManagementFacade {
 						if (created) {
 							this.assignmentsSubject.next([...this.assignmentsSubject.getValue(), created]);
 						}
-					}
+					},
+					error: (error) => console.log(error)
 				})
 			);
 	}
@@ -56,11 +57,12 @@ export class AssignmentManagementFacade {
 		return this.assigmentService.updateAssignment(changes, courseId, assignmentId)
 			.pipe(
 				tap({
-					next: updated => {
+					next: (updated) => {
 						if (updated) {
 							this.loadAssignmentsOfCourse(courseId);
 						}
-					} 
+					},
+					error: (error) => console.log(error)
 				})
 			);
 	}

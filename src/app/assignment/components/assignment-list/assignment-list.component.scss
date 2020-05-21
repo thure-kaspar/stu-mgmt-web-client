@@ -4,7 +4,9 @@
 	row-gap: 12px;
 
 	.assignment-card {
-		background-color: rgb(224, 224, 224);
+		background-color: rgb(240, 240, 240);
+		border: 1px solid lightgrey;
+
 		.left {
 			display: flex;
 			align-items: center;
@@ -26,4 +28,8 @@
 
 #btn-add {
 	margin-bottom: 2px;
+}
+
+.btn-delete {
+	color: red;
 }

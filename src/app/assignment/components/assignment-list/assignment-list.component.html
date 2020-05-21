@@ -5,7 +5,7 @@
 	</button>
 
 	<mat-list class="assignment-cards">
-		<mat-list-item class="assignment-card mat-elevation-z2" *ngFor="let assignment of assignments">
+		<mat-list-item class="assignment-card" *ngFor="let assignment of assignmentManagement.assignments$ | async">
 
 			<span class="left">
 				<mat-icon *ngIf="assignment.state == 'IN_PROGRESS'" color="accent">play_circle_filled</mat-icon>
@@ -14,11 +14,12 @@
 				<mat-icon *ngIf="assignment.state == 'EVALUATED'" color="primary">assignment_turned_in</mat-icon>
 				<mat-icon *ngIf="assignment.state == 'INVISIBLE'" color="primary">vpn_key</mat-icon>
 
-				<a class="link-none" [routerLink]="[ 'assignments', assignment.id ]">{{assignment.name}}</a>
+				<a class="link-none font-bold" [routerLink]="[assignment.id]">{{assignment.name}}</a>
 			</span>
 
 			<span class="right">
-				<button mat-button class="btn-with-icon" (click)="openEditDialog(assignment)">Edit</button>
+				<button mat-button (click)="openEditDialog(assignment)">Edit</button>
+				<button mat-button class="btn-delete" (click)="onDelete(assignment)">Delete</button>
 			</span>
 
 		</mat-list-item>

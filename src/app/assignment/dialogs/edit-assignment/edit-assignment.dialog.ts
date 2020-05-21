@@ -3,6 +3,7 @@ import { AssignmentForm } from "../../forms/assignment-form/assignment-form.comp
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AssignmentsService } from "../../../../../api";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 
 export class EditAssignmentDialogData {
 	courseId: string;
@@ -22,7 +23,7 @@ export class EditAssignmentDialog implements OnInit {
 
 	constructor(public dialogRef: MatDialogRef<EditAssignmentDialog>,
 		@Inject(MAT_DIALOG_DATA) { courseId, assignmentId }: EditAssignmentDialogData,
-		private assignmentService: AssignmentsService,
+		private assignmentManagement: AssignmentManagementFacade,
 		private snackbar: MatSnackBar) {
 
 		this.courseId = courseId;
@@ -30,7 +31,7 @@ export class EditAssignmentDialog implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.assignmentService.getAssignmentById(this.courseId, this.assignmentId).subscribe(
+		this.assignmentManagement.get(this.assignmentId, this.courseId).subscribe(
 			result => this.form.patchModel(result),
 			error => console.log(error)
 		);
@@ -45,14 +46,13 @@ export class EditAssignmentDialog implements OnInit {
 		assignment.courseId = this.courseId;
 		assignment.id = this.assignmentId;
 
-		this.assignmentService.updateAssignment(assignment, this.courseId, this.assignmentId).subscribe(
+		this.assignmentManagement.update(assignment, this.assignmentId, this.courseId).subscribe(
 			result => {
 				this.dialogRef.close(result);
 				this.snackbar.open("Success", "OK", { duration: 3000 });
 			},
 			error => {
 				this.snackbar.open("Failed", "OK", { duration: 3000 });
-				console.log(error);
 			}
 		);
 	}
