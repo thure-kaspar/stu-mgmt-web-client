@@ -121,3 +121,11 @@ mat-form-field .mat-hint {
 }
 
 .mat-button-focus-overlay { background-color: transparent!important; }
+
+// Used to display button in mat-tab-group
+app-edit-course .mat-tab-labels :last-child.mat-tab-label {
+	min-width: 0;
+	padding: 0 12px;
+	color: unset;
+	opacity: unset;
+}
