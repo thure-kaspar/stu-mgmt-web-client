@@ -22,6 +22,7 @@ export class AssignmentTemplatesForm implements OnInit {
 
 	addAssignmentTemplate(template?: AssignmentTemplateDto): void {
 		this.getAssignmentTemplates().push(this.fb.group({
+			id: [template?.id],
 			templateName: [template?.templateName || "Unnamed template", Validators.required],
 			name: [template?.name || null],
 			state: [template?.state || null],
