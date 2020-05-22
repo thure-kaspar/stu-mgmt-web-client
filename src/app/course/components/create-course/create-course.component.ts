@@ -68,18 +68,6 @@ export class CreateCourseComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	// getAdmissionCriteriaFormArray(): FormArray {
-	// 	return this.form.get("config.admissionCriteria") as FormArray;
-	// }
-
-	// getAssignmentTemplatesFormArray(): FormArray {
-	// 	return this.form.get("config.assignmentTemplates") as FormArray;
-	// }
-
-	// getGroupSettingsFormGroup(): FormGroup {
-	// 	return this.form.get("config.groupSettings") as FormGroup;
-	// }
-
 	createCourse(): void {
 		const course: CourseCreateDto = this.form.value;
 		const data: ConfirmDialogData = {
