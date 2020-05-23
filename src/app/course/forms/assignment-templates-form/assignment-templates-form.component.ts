@@ -26,8 +26,8 @@ export class AssignmentTemplatesForm implements OnInit {
 			templateName: [template?.templateName || "Unnamed template", Validators.required],
 			name: [template?.name || null],
 			state: [template?.state || null],
-			type: [template?.type || null, Validators.required],
-			collaboration: [template?.collaboration || null, Validators.required],
+			type: [template?.type || null],
+			collaboration: [template?.collaboration || null],
 			points: [template?.points ||null],
 			bonusPoints: [template?.bonusPoints || null],
 			timespanDays: [template?.timespanDays || null]

@@ -1,13 +1,7 @@
 <ng-container [formGroup]="form">
 	<ng-container formGroupName="config">
 		<div id="assignment-templates" formArrayName="assignmentTemplates">
-	
-			<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="addAssignmentTemplate()">
-				<mat-icon>add</mat-icon>Add assignment template
-			</button>
-		
-			<mat-hint>Assignment templates can be used to speed up the creation of assignments.</mat-hint>
-		
+			
 			<div id="assignment-template-grid">
 				<mat-card class="assignment-template mat-elevation-z8" *ngFor="let template of getAssignmentTemplates().controls; let i=index" [formGroupName]="i">
 					<h2 class="card-title">

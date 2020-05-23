@@ -35,6 +35,9 @@
 				</mat-tab>
 	
 				<mat-tab label="Assignment templates"> 
+					<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="assignmentTemplatesForm.addAssignmentTemplate()">
+						<mat-icon>add</mat-icon>Add assignment template
+					</button> 
 					<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
 				</mat-tab>
 
