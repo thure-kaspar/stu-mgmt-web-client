@@ -2,6 +2,7 @@ export * from './admissionCriteriaDto';
 export * from './assessmentCreateDto';
 export * from './assessmentDto';
 export * from './assignmentDto';
+export * from './assignmentGroupTuple';
 export * from './assignmentTemplateDto';
 export * from './authCredentialsDto';
 export * from './authSystemCredentials';

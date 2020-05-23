@@ -261,7 +261,7 @@ export class CourseConfigService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config/assignment-template`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config/assignment-template/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -557,6 +557,63 @@ export class CourseConfigService {
         }
 
         return this.httpClient.request<AdmissionCriteriaDto>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config/admission-criteria`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update assignment template
+     * Updates the assignment template.
+     * @param body 
+     * @param courseId 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateAssignmentTemplate(body: AssignmentTemplateDto, courseId: string, id: number, observe?: 'body', reportProgress?: boolean): Observable<AssignmentTemplateDto>;
+    public updateAssignmentTemplate(body: AssignmentTemplateDto, courseId: string, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AssignmentTemplateDto>>;
+    public updateAssignmentTemplate(body: AssignmentTemplateDto, courseId: string, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AssignmentTemplateDto>>;
+    public updateAssignmentTemplate(body: AssignmentTemplateDto, courseId: string, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling updateAssignmentTemplate.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling updateAssignmentTemplate.');
+        }
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling updateAssignmentTemplate.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<AssignmentTemplateDto>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config/assignment-template/${encodeURIComponent(String(id))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

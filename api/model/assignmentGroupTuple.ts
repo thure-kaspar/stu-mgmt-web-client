@@ -9,13 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UserDto } from './userDto';
+import { AssignmentDto } from './assignmentDto';
+import { GroupDto } from './groupDto';
 
-export interface GroupEventDto { 
-    event: string;
-    user?: UserDto;
-    userId: string;
-    groupId: string;
-    payload?: any;
-    timestamp: Date;
+export interface AssignmentGroupTuple { 
+    assignment: AssignmentDto;
+    group: GroupDto;
 }

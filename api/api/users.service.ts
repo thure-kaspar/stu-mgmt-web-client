@@ -18,8 +18,10 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { AssessmentDto } from '../model/assessmentDto';
+import { AssignmentGroupTuple } from '../model/assignmentGroupTuple';
 import { CourseDto } from '../model/courseDto';
 import { GroupDto } from '../model/groupDto';
+import { GroupEventDto } from '../model/groupEventDto';
 import { UserDto } from '../model/userDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -76,6 +78,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -123,6 +132,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -159,6 +175,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -205,6 +228,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -246,6 +276,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -270,28 +307,35 @@ export class UsersService {
     }
 
     /**
-     * Get groups of user for course
-     * Retrieves all groups that the user is a member of in a course.
+     * Get group history of user for course
+     * Retrieves the group history of a user in a course. Events are sorted by timestamp in descending order (new to old).
      * @param userId 
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getGroupsOfUserForCourse(userId: string, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
-    public getGroupsOfUserForCourse(userId: string, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
-    public getGroupsOfUserForCourse(userId: string, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
-    public getGroupsOfUserForCourse(userId: string, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getGroupHistoryOfUser(userId: string, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupEventDto>>;
+    public getGroupHistoryOfUser(userId: string, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupEventDto>>>;
+    public getGroupHistoryOfUser(userId: string, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupEventDto>>>;
+    public getGroupHistoryOfUser(userId: string, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling getGroupsOfUserForCourse.');
+            throw new Error('Required parameter userId was null or undefined when calling getGroupHistoryOfUser.');
         }
 
         if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getGroupsOfUserForCourse.');
+            throw new Error('Required parameter courseId was null or undefined when calling getGroupHistoryOfUser.');
         }
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -305,7 +349,171 @@ export class UsersService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<GroupDto>>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/groups`,
+        return this.httpClient.request<Array<GroupEventDto>>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/group-history`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get group of all assignments
+     * Maps all assignments of a course to the user&#x27;s group for the corresponding assignment.
+     * @param userId 
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getGroupOfAllAssignments(userId: string, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssignmentGroupTuple>>;
+    public getGroupOfAllAssignments(userId: string, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssignmentGroupTuple>>>;
+    public getGroupOfAllAssignments(userId: string, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssignmentGroupTuple>>>;
+    public getGroupOfAllAssignments(userId: string, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getGroupOfAllAssignments.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getGroupOfAllAssignments.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<AssignmentGroupTuple>>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/assignments/groups`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get group of assignment
+     * Retrieves the group that the user was a member of when the assignment closed or the current group, if it hasn&#x27;t closed yet. Returns null, if user was not in a group.
+     * @param userId 
+     * @param courseId 
+     * @param assignmentId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getGroupOfAssignment(userId: string, courseId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
+    public getGroupOfAssignment(userId: string, courseId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
+    public getGroupOfAssignment(userId: string, courseId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
+    public getGroupOfAssignment(userId: string, courseId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getGroupOfAssignment.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getGroupOfAssignment.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling getGroupOfAssignment.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<GroupDto>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/group`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get group of user for course
+     * Retrieves the user&#x27;s current group in a course.
+     * @param userId 
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getGroupOfUserForCourse(userId: string, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
+    public getGroupOfUserForCourse(userId: string, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
+    public getGroupOfUserForCourse(userId: string, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
+    public getGroupOfUserForCourse(userId: string, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getGroupOfUserForCourse.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getGroupOfUserForCourse.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<GroupDto>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/groups`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -333,6 +541,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -374,6 +589,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -420,6 +642,13 @@ export class UsersService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
