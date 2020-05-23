@@ -1,0 +1,11 @@
+<div class="dialog-container">
+	<div>
+		<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
+	</div>
+	
+	<div mat-dialog-actions>
+		<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form.invalid || this.assignmentTemplatesForm?.getAssignmentTemplates().length != 1">Save</button>
+		<button mat-button (click)="onCancel()">Cancel</button>
+	</div>
+
+</div>
