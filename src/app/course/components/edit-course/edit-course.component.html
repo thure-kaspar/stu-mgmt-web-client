@@ -1,0 +1,61 @@
+<form id="course-creation-form" class="form-container" [formGroup]="form" autocomplete="off">
+
+	<mat-tab-group color="accent" animationDuration="0ms">
+
+		<mat-tab label="Basic Data">
+			<app-course-form [form]="form"></app-course-form>
+		</mat-tab>
+
+		<ng-container formGroupName="config">
+			<mat-tab label="Group settings">
+				<app-group-settings-form [form]="form"></app-group-settings-form>
+			</mat-tab>
+
+			<mat-tab label="Extended Options">
+				<div id="extended-options">			
+					<mat-form-field>
+						<mat-label>Subscription URL</mat-label>
+						<input matInput formControlName="subscriptionUrl">
+					</mat-form-field>
+					<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
+				</div>
+			</mat-tab>
+
+			<mat-tab label="Admission criteria">
+				<app-admission-criteria-form [form]="form"></app-admission-criteria-form>
+			</mat-tab>
+
+			<mat-tab label="Assignment templates">
+				<div id="assignment-templates-tab">
+					<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="openCreateAssignmentTemplateDialog()">
+						<mat-icon>add</mat-icon>Add assignment template
+					</button> 
+					
+					<mat-list class="assignment-template-list">
+						<mat-list-item *ngFor="let template of courseConfig?.assignmentTemplates">
+							<div class="assignment-template">
+								<div class="left">
+									{{template.templateName}}
+								</div>
+								<span class="right">
+									<button mat-button (click)="openEditAssignmentTemplateDialog(template)">Edit</button>
+									<button mat-button color="warn" (click)="deleteAssignmentTemplate(template)">Delete</button>
+								</span>
+							</div>
+						</mat-list-item>
+					</mat-list>
+				</div>
+			</mat-tab>
+
+			<mat-tab disabled>
+				<ng-template mat-tab-label>
+					<button mat-flat-button color="accent" [disabled]="form.invalid" (click)="onSave()">Save</button>
+				</ng-template>
+			</mat-tab>
+			
+		</ng-container>
+
+	</mat-tab-group>
+
+</form>
+

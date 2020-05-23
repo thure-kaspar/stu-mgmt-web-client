@@ -1,0 +1,54 @@
+mat-card-title {
+	display: flex;
+	justify-content: space-between;
+}
+
+#basic-data, #lecturers, #extended-options {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 4px;
+
+	mat-form-field {
+		width: 300px;
+	}
+
+	@media (max-width: 500px) {
+		mat-form-field {
+			width: 100%;
+		}
+	}
+}
+
+#icon-person-hint {
+	vertical-align: middle;
+}
+
+#assignment-templates-tab {
+	#btn-add-assignment-template {
+		margin-top: 8px;
+	}
+	
+	.assignment-template-list {
+		display: grid;
+		width: 500px;
+		grid-template-rows: repeat(1fr);
+		row-gap: 12px;
+	
+		.mat-list-item {
+			background-color: rgb(240, 240, 240);
+			border: 1px solid lightgrey;
+		}
+	}
+	
+	.assignment-template {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	
+		.left {
+			font-weight: 500;
+		}
+	}
+}
+
