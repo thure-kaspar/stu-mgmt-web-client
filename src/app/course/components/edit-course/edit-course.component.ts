@@ -128,10 +128,14 @@ export class EditCourseComponent implements OnInit {
 			.afterClosed().subscribe(
 				update => {
 					if (update) {
-						// Update local list
-						const templates = this.courseConfig.assignmentTemplates;
-						const indexOfUpdated = templates.findIndex(t => t.id == template.id);
-						const updatedList = [...templates.splice(0, indexOfUpdated), update, ...templates.splice(indexOfUpdated)];
+						// Update local list by replacing the updated assignment
+						const updatedList = this.courseConfig.assignmentTemplates.map(t => {
+							if (t.id !== update.id) {
+								return t;
+							} else {
+								return update;
+							}
+						});
 						this.courseConfig.assignmentTemplates = updatedList;
 					}
 				}
