@@ -7,14 +7,10 @@
 			<input [(ngModel)]="email" matInput type="text" name="email" id="email">
 		</mat-form-field>
 
-		<mat-form-field class="form-field">
-			<mat-label for="password">Password</mat-label>
-			<input [(ngModel)]="password" matInput type="password" name="password" id="password">
-		</mat-form-field><br>
+		<mat-hint>Use the email of any test account to login.</mat-hint>
 
 		<div class="form-buttons">
-			<button mat-raised-button color="accent" type="submit" id="login-button" (click)="login()">Login</button>
-			<a mat-flat-button [routerLink]="['/register']">Create account</a>
+			<button mat-raised-button color="accent" type="submit" class="full-width" id="login-button" (click)="login()">Login</button>
 		</div>
 
 		<p *ngIf="errorMessage != null" id="error-message">{{errorMessage}}</p>

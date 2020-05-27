@@ -9,13 +9,12 @@ import { AuthService } from "../../services/auth.service";
 export class LoginComponent {
 
 	email = "max.mustermann@test.com";
-	password = "testpassword";
 	errorMessage: string;
 
 	constructor(private authService: AuthService) { }
 
 	async login(): Promise<void> {
-		const authCredentials = { email: this.email, password: this.password };
+		const authCredentials = { email: this.email, password: "no_pw_required" };
 		await this.authService.login(authCredentials)
 			.catch(error => {
 				this.errorMessage = error;
