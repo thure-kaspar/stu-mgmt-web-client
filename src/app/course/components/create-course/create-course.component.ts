@@ -11,6 +11,7 @@ import { GroupSettingsForm } from "../../forms/group-settings-form/group-setting
 import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admission-criteria-form.component";
 import { CourseForm } from "../../forms/course-form/course-form.component";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
+import { getSemester } from "../../../../../utils/helper";
 
 @Component({
 	selector: "app-create-course",
@@ -42,7 +43,7 @@ export class CreateCourseComponent implements OnInit {
 		this.form = this.fb.group({
 			id: [null],
 			shortname: [null, Validators.required],
-			semester: ["sose2020", Validators.required], // TODO: Insert current semester automatically
+			semester: [getSemester(), Validators.required],
 			title: [null, Validators.required],
 			isClosed: [false, Validators.required],
 			link: [null],

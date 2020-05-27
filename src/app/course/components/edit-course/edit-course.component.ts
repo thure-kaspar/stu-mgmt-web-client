@@ -11,6 +11,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { CreateAssignmentTemplateDialogData, CreateAssignmentTemplateDialog } from "../../dialogs/create-assignment-template/create-assignment-template.dialog";
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { EditAssignmentTemplateDialogData, EditAssignmentTemplateDialog } from "../../dialogs/edit-assignment-template/edit-assignment-template.dialog";
+import { getSemester } from "../../../../../utils/helper";
 
 @Component({
 	selector: "app-edit-course",
@@ -46,7 +47,7 @@ export class EditCourseComponent implements OnInit {
 		this.form = this.fb.group({
 			id: [null],
 			shortname: [null, Validators.required],
-			semester: ["sose2020", Validators.required], // TODO: Insert current semester automatically
+			semester: [getSemester(), Validators.required],
 			title: [null, Validators.required],
 			isClosed: [false, Validators.required],
 			link: [null],
