@@ -12,6 +12,7 @@ import { CreateAssignmentTemplateDialogData, CreateAssignmentTemplateDialog } fr
 import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { EditAssignmentTemplateDialogData, EditAssignmentTemplateDialog } from "../../dialogs/edit-assignment-template/edit-assignment-template.dialog";
 import { getSemester } from "../../../../../utils/helper";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
 	selector: "app-edit-course",
@@ -42,7 +43,7 @@ export class EditCourseComponent implements OnInit {
 				private courseConfigService: CourseConfigService,
 				private courseService: CoursesService,
 				private dialog: MatDialog,
-				private snackbar: MatSnackBar) {
+				private snackbar: SnackbarService) {
 					
 		this.form = this.fb.group({
 			id: [null],
@@ -154,12 +155,12 @@ export class EditCourseComponent implements OnInit {
 				if (confirmed) {
 					this.courseConfigService.deleteAssignmentTemplate(this.courseId, template.id).subscribe(
 						deleted => {
-							this.snackbar.open("Success", "OK", { duration: 3000 });
+							this.snackbar.openSuccessMessage();
 							this.courseConfig.assignmentTemplates = this.courseConfig.assignmentTemplates.filter(t => t.id !== template.id);
 						},
 						error => {
 							console.log(error);
-							this.snackbar.open("Failed", "OK", { duration: 3000 });
+							this.snackbar.openErrorMessage();
 						}
 					);
 				}

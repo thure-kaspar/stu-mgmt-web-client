@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CreateGroupMultipleComponent } from "./create-group-multiple/create-group-multiple.component";
 import { MatTabGroup } from "@angular/material/tabs";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
 	selector: "app-create-group",
@@ -21,7 +22,7 @@ export class CreateGroupDialog implements OnInit {
 				@Inject(MAT_DIALOG_DATA) public courseId: string,
 				private groupService: GroupsService,
 				private fb: FormBuilder,
-				private snackbar: MatSnackBar) { 
+				private snackbar: SnackbarService) { 
 
 		this.form = this.fb.group({
 			courseId: [this.courseId, Validators.required],
@@ -39,7 +40,7 @@ export class CreateGroupDialog implements OnInit {
 	}
 
 	onGroupsCreatedHandler(groups: GroupDto[]): void {
-		this.snackbar.open("Groups created!", "OK", { duration: 3000 });
+		this.snackbar.openSuccessMessage("Groups created!");
 		this.dialogRef.close(groups);
 	}
 
@@ -57,10 +58,13 @@ export class CreateGroupDialog implements OnInit {
 
 		this.groupService.createGroup(group, group.courseId).subscribe(
 			result => {
-				this.snackbar.open("Group created!", "OK", { duration: 3000 });
+				this.snackbar.openSuccessMessage("Group created!");
 				this.dialogRef.close(result);
 			},
-			error => console.log(error) // TODO: Display error
+			error => {
+				console.log(error);
+				this.snackbar.openErrorMessage();
+			}
 		);
 	}
 

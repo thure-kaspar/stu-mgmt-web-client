@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseConfigService, AssignmentTemplateDto } from "../../../../../api";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 export class CreateAssignmentTemplateDialogData {
 	courseId: string;
@@ -28,7 +29,7 @@ export class CreateAssignmentTemplateDialog implements OnInit {
 				@Inject(MAT_DIALOG_DATA) private data: CreateAssignmentTemplateDialogData,
 				private courseConfigService: CourseConfigService,
 				private fb: FormBuilder,
-				private snackbar: MatSnackBar) { 
+				private snackbar: SnackbarService) { 
 	
 		this.form = this.fb.group({
 			config: this.fb.group({
@@ -59,7 +60,7 @@ export class CreateAssignmentTemplateDialog implements OnInit {
 				},
 				error => {
 					console.log(error);
-					this.snackbar.open("Failed", "OK", { duration: 3000, panelClass: ["mat-toolbar", "mat-accent"] });
+					this.snackbar.openErrorMessage();
 				}
 			);
 		}

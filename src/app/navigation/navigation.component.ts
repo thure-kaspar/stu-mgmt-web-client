@@ -10,6 +10,7 @@ import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { AuthenticationInfoDto } from "../../../api_auth";
 import { CourseMembershipsFacade } from "../course/services/course-memberships.facade";
 import { CourseDto } from "../../../api";
+import { SnackbarService } from "../shared/services/snackbar.service";
 
 @Component({
 	selector: "app-navigation",
@@ -31,7 +32,8 @@ export class NavigationComponent implements OnInit {
 				private router: Router,
 				private authService: AuthService,
 				public courseMemberships: CourseMembershipsFacade,
-				private dialog: MatDialog) {
+				private dialog: MatDialog,
+				public snackbar: SnackbarService) {
 
 		router.events.pipe(
 			withLatestFrom(this.isHandset$),

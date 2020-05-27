@@ -4,6 +4,7 @@ import { AuthService } from "../../services/auth.service";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
 	selector: "app-register",
@@ -23,7 +24,7 @@ export class RegisterComponent {
 	constructor(private fb: FormBuilder, 
 				private authService: AuthService,
 				private router: Router,
-				private snackbar: MatSnackBar) { }
+				private snackbar: SnackbarService) { }
 
 	register(): void {
 		if (this.registerForm.valid) {
@@ -34,12 +35,12 @@ export class RegisterComponent {
 
 			this.authService.register(authCredentials).subscribe(
 				result => {
-					this.snackbar.open("Account created!", "OK", { duration: 3000 });
+					this.snackbar.openSuccessMessage("Account created!");
 					this.router.navigate(["/login"]);
 				},
 				error => {
 					console.log(error);
-					this.snackbar.open("Failed to create account.", "OK", { duration: 3000 });
+					this.snackbar.openErrorMessage("Failed to create account.");
 				}
 			);
 		}

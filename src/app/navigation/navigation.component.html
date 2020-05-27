@@ -12,7 +12,7 @@
 		<ng-container [ngSwitch]="isLoggedIn()">
 			<button *ngSwitchCase="false" class="btn-link" mat-flat-button (click)="openLoginDialog()">Login</button>
 			<ng-container *ngSwitchCase="true">
-				<button class="btn-link" mat-flat-button>{{getUsername()}}</button>
+				<button class="btn-link" mat-flat-button (click)="snackbar.openErrorMessage()">{{getUsername()}}</button>
 				<button class="btn-link" mat-flat-button (click)="logout()">Logout</button>
 			</ng-container>
 		</ng-container>

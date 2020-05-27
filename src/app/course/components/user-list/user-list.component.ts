@@ -8,6 +8,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/compo
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-role/change-role.dialog";
 import { ActivatedRoute } from "@angular/router";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
 	selector: "app-user-list",
@@ -28,7 +29,7 @@ export class UserListComponent implements OnInit {
 	constructor(private courseService: CoursesService,
 				private route: ActivatedRoute,
 				public dialog: MatDialog,
-				private snackbar: MatSnackBar) { }
+				private snackbar: SnackbarService) { }
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
@@ -86,12 +87,12 @@ export class UserListComponent implements OnInit {
 								// Remove removed user from user list
 								this.users = this.users.filter(u => u.username !== user.username);
 								this.refreshDataSource();
-								this.snackbar.open("User has been removed successfully.", "OK", { duration: 3000 });
+								this.snackbar.openSuccessMessage("User has been removed successfully!");
 							}
 						},
 						error => {
 							console.log(error),
-							this.snackbar.open("Failed to remove the user.", "OK", { duration: 3000 });
+							this.snackbar.openErrorMessage("Failed to remove the user.");
 						}
 					);
 				}

@@ -4,6 +4,7 @@ import { AssignmentTemplateDto, CourseConfigService } from "../../../../../api";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 export class EditAssignmentTemplateDialogData {
 	template: AssignmentTemplateDto;
@@ -28,7 +29,7 @@ export class EditAssignmentTemplateDialog implements OnInit {
 				@Inject(MAT_DIALOG_DATA) private data: EditAssignmentTemplateDialogData,
 				private courseConfigService: CourseConfigService,
 				private fb: FormBuilder,
-				private snackbar: MatSnackBar) {
+				private snackbar: SnackbarService) {
 
 		this.form = this.fb.group({
 			config: this.fb.group({
@@ -55,12 +56,12 @@ export class EditAssignmentTemplateDialog implements OnInit {
 			const template = this.assignmentTemplatesForm.getAssignmentTemplates().value[0] as AssignmentTemplateDto;
 			this.courseConfigService.updateAssignmentTemplate(template, this.data.courseId, this.data.template.id).subscribe(
 				result => {
-					this.snackbar.open("Success", "OK", { duration: 3000 });
+					this.snackbar.openSuccessMessage();
 					this.dialogRef.close(result);
 				},
 				error => {
 					console.log(error);
-					this.snackbar.open("Failed", "OK", { duration: 3000, panelClass: ["mat-toolbar", "mat-accent"] });
+					this.snackbar.openErrorMessage();
 				}
 			);
 		}

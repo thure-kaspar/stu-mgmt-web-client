@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { GroupDto, GroupsService, GroupCreateBulkDto } from "../../../../../../api";
+import { SnackbarService } from "../../../../shared/services/snackbar.service";
 
 @Component({
 	selector: "app-create-group-multiple",
@@ -20,7 +21,7 @@ export class CreateGroupMultipleComponent implements OnInit {
 
 	constructor(private fb: FormBuilder,
 				private groupService: GroupsService,
-				private snackbar: MatSnackBar) {
+				private snackbar: SnackbarService) {
 		this.form = this.fb.group({
 			names: [null],
 			nameSchema: [null],
@@ -47,7 +48,7 @@ export class CreateGroupMultipleComponent implements OnInit {
 			groups => this.onGroupsCreated.emit(groups),
 			error => {
 				console.log(error);
-				this.snackbar.open("Failed", "OK", { duration: 3000 });
+				this.snackbar.openErrorMessage();
 			}
 		);
 	}

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { UserDto, CoursesService } from "../../../../../api";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 export class ChangeRoleDialogData {
 	courseId: string;
@@ -26,7 +27,7 @@ export class ChangeRoleDialog implements OnInit {
 	constructor(public dialogRef: MatDialogRef<ChangeRoleDialog, UserDto.CourseRoleEnum>,
 				@Inject(MAT_DIALOG_DATA) public data: ChangeRoleDialogData,
 				private courseService: CoursesService,
-				private snackbar: MatSnackBar) { }
+				private snackbar: SnackbarService) { }
 
 	ngOnInit(): void {
 		this.selectedRole = this.data.user.courseRole; 
@@ -48,7 +49,7 @@ export class ChangeRoleDialog implements OnInit {
 			.subscribe(
 				result => {
 					if (result) {
-						this.snackbar.open("User's role has been updated.", "OK", { duration: 3000 });
+						this.snackbar.openSuccessMessage("User's role has been updated!");
 						this.dialogRef.close(this.selectedRole);
 					} else {
 						throw new Error("Update failed");
@@ -56,7 +57,7 @@ export class ChangeRoleDialog implements OnInit {
 				},
 				error => {
 					console.log(error);
-					this.snackbar.open("Failed to update the user's role.", "OK", { duration: 3000 });
+					this.snackbar.openErrorMessage("Failed to update the user's role.");
 				}
 			);
 	}

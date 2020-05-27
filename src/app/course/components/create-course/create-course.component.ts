@@ -12,6 +12,7 @@ import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admis
 import { CourseForm } from "../../forms/course-form/course-form.component";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { getSemester } from "../../../../../utils/helper";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
 	selector: "app-create-course",
@@ -37,7 +38,7 @@ export class CreateCourseComponent implements OnInit {
 				private courseConfigService: CourseConfigService,
 				private fb: FormBuilder,
 				private dialog: MatDialog,
-				private snackbar: MatSnackBar,
+				private snackbar: SnackbarService,
 				private router: Router) {
 
 		this.form = this.fb.group({
@@ -80,12 +81,12 @@ export class CreateCourseComponent implements OnInit {
 				if (isConfirmed) {
 					this.courseService.createCourse(course).subscribe(
 						result => {
-							this.snackbar.open("Course has been created!", "OK", { duration: 3000 });
+							this.snackbar.openSuccessMessage("Course has been created!");
 							this.router.navigateByUrl(`/courses/${result.id}`);
 						},
 						error => {
 							console.log(error);
-							this.snackbar.open("Failed", "OK", { duration: 3000 });
+							this.snackbar.openErrorMessage();
 						}
 					);
 				}

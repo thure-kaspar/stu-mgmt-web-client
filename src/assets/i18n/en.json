@@ -22,5 +22,10 @@
 	"Event": {
 		"UserJoinedGroupEvent": "joined the group.",
 		"UserLeftGroupEvent": "left the group."
+	},
+	"Common": {
+		"Success": "Success",
+		"Error": "Error"
 	}
+
 }

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AssignmentsService } from "../../../../../api";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 export class EditAssignmentDialogData {
 	courseId: string;
@@ -24,7 +25,7 @@ export class EditAssignmentDialog implements OnInit {
 	constructor(public dialogRef: MatDialogRef<EditAssignmentDialog>,
 		@Inject(MAT_DIALOG_DATA) { courseId, assignmentId }: EditAssignmentDialogData,
 		private assignmentManagement: AssignmentManagementFacade,
-		private snackbar: MatSnackBar) {
+		private snackbar: SnackbarService) {
 
 		this.courseId = courseId;
 		this.assignmentId = assignmentId;
@@ -49,10 +50,10 @@ export class EditAssignmentDialog implements OnInit {
 		this.assignmentManagement.update(assignment, this.assignmentId, this.courseId).subscribe(
 			result => {
 				this.dialogRef.close(result);
-				this.snackbar.open("Success", "OK", { duration: 3000 });
+				this.snackbar.openSuccessMessage();
 			},
 			error => {
-				this.snackbar.open("Failed", "OK", { duration: 3000 });
+				this.snackbar.openErrorMessage();
 			}
 		);
 	}

@@ -112,6 +112,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	color: green;
 }
 
+.snackbar-success {
+ 	background-color: rgb(211, 255, 200);
+
+	.mat-simple-snackbar {
+		color: rgb(0, 71, 24);
+	}
+	.mat-button-wrapper {
+		color: rgb(0, 71, 24);
+	}
+}
+
+.snackbar-error {
+	background-color: rgb(255, 0, 0);
+
+   .mat-simple-snackbar {
+	   color: rgb(255, 255, 255);
+   }
+   .mat-button-wrapper {
+	color: rgb(255, 255, 255);
+   }
+}
+
 mat-form-field.mat-form-field-should-float label {
 	font-size: 16px;
 }
