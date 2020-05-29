@@ -1,5 +1,15 @@
 <mat-card *ngIf="course">
-	<mat-card-title>{{course.title}}</mat-card-title>
+	<mat-card-title id="title-container">
+		<span>{{course.title}}</span>
+		<button mat-icon-button [matMenuTriggerFor]="menu">
+			<mat-icon class="icon-light">settings</mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<div id="menu-container">
+				<button mat-menu-item (click)="leaveCourse()"><span class="text-red">Leave</span></button>
+			</div>
+		</mat-menu>
+	</mat-card-title>
 
 	<nav mat-tab-nav-bar color="accent"> 
 		<a mat-tab-link routerLink="assignments" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">

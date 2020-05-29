@@ -1,0 +1,16 @@
+#title-container {
+	display: flex;
+	align-items: center;
+	margin-top: -8px;
+	margin-bottom: -4px;
+
+	span {
+		vertical-align: middle;
+	}
+
+	button {
+		vertical-align: top;
+		margin-left: auto;
+		margin-right: -8px;
+	}
+}
