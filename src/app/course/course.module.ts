@@ -13,7 +13,6 @@ import { CourseRoutingModule } from "./course-routing.module";
 import { CreateCourseComponent } from "./components/create-course/create-course.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
 import { JoinCourseDialog } from "./dialogs/join-course/join-course.dialog";
-import { CourseMemberGuard } from "./guards/course-member.guard";
 import { CourseForm } from "./forms/course-form/course-form.component";
 import { AdmissionCriteriaForm } from "./forms/admission-criteria-form/admission-criteria-form.component";
 import { GroupSettingsForm } from "./forms/group-settings-form/group-settings-form.component";
@@ -46,6 +45,6 @@ import { EditAssignmentTemplateDialog } from "./dialogs/edit-assignment-template
 		GroupModule,
 		AssignmentModule
 	],
-	providers: [CourseMemberGuard]
+	providers: []
 })
 export class CourseModule { }
