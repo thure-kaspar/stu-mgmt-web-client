@@ -4,7 +4,7 @@
 
 		<mat-form-field class="form-field">
 			<mat-label for="email">Email</mat-label>
-			<input [(ngModel)]="email" matInput type="text" name="email" id="email">
+			<input [(ngModel)]="email" matInput type="text" name="email" id="email" (keydown.enter)="login()">
 		</mat-form-field>
 
 		<mat-hint>Use the email of any test account to login.</mat-hint>
