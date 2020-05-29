@@ -5,10 +5,9 @@ import { catchError } from "rxjs/operators";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
+import { SnackbarService } from "../../shared/services/snackbar.service";
 
-@Injectable({
-	providedIn: "root"
-})
+@Injectable({ providedIn: "root" })
 export class TokenInterceptorService implements HttpInterceptor {
 
 	constructor(private injector: Injector) { }
@@ -40,6 +39,11 @@ export class TokenInterceptorService implements HttpInterceptor {
 	private handleAuthError(err: HttpErrorResponse): Observable<any> {
 		const authService = this.injector.get(AuthService);
 		const router = this.injector.get(Router);
+
+		if (err.status == 0) {
+			const snackbar = this.injector.get(SnackbarService);
+			snackbar.openErrorMessage("Error.ConnectionRefused");
+		}
 
 		if (err.status === 401) {
 			authService.logout();
