@@ -3,6 +3,7 @@ import { CoursesService, CourseDto } from "../../../../../api";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { getSemester } from "../../../../../utils/helper";
 
 @Component({
 	selector: "app-course-list",
@@ -13,7 +14,7 @@ export class CourseListComponent implements OnInit {
 
 	title = "";
 	shortname: string;
-	selectedSemester = "wise1920";
+	selectedSemester = getSemester();
 
 	courseList: CourseDto[];
 	displayedColumns: string[] = ["title", "semester"];
@@ -25,6 +26,7 @@ export class CourseListComponent implements OnInit {
 	constructor(private courseService: CoursesService) { }
 
 	ngOnInit(): void {
+		this.searchCourses();
 	}
 
 	searchCourses(): void {
