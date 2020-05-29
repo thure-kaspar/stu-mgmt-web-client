@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { CanJoinCourseDto } from '../model/canJoinCourseDto';
 import { ChangeCourseRoleDto } from '../model/changeCourseRoleDto';
 import { CourseCreateDto } from '../model/courseCreateDto';
 import { CourseDto } from '../model/courseDto';
@@ -108,6 +109,52 @@ export class CoursesService {
         return this.httpClient.request<any>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
             {
                 body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Check if joining is possible
+     * Checks, if the user is able to join the course. A user can join a course, if he&#x27;s not already a member and the course is not closed.
+     * @param courseId 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public canUserJoinCourse(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<CanJoinCourseDto>;
+    public canUserJoinCourse(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CanJoinCourseDto>>;
+    public canUserJoinCourse(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CanJoinCourseDto>>;
+    public canUserJoinCourse(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling canUserJoinCourse.');
+        }
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling canUserJoinCourse.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<CanJoinCourseDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/canJoin`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
