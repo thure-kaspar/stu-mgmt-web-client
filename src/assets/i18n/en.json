@@ -1,31 +1,195 @@
-{ 
-	"IN_PROGRESS": "In progress",
-	"CLOSED": "Closed",
-	"IN_REVIEW": "In review",
-	"EVALUATED": "Evaluated",
-	"INVISIBLE": "Invisible",
-	
-	"HOMEWORK": "Homework",
-	"TESTAT": "Testat",
-	"SEMINAR": "Seminar",
-	"PROJECT": "Project",
-	"OTHER": "Other",
-
-	"GROUP": "Group",
-	"SINGLE": "Single",
-	"GROUP_OR_SINGLE": "Allow both",
-
-	"LECTURER": "Lecturer",
-	"TUTOR": "Tutor",
-	"STUDENT": "Student",
-
-	"Event": {
-		"UserJoinedGroupEvent": "joined the group.",
-		"UserLeftGroupEvent": "left the group."
-	},
-	"Common": {
-		"Success": "Success",
-		"Error": "Error"
-	}
-
+{
+  "Button": {
+    "Add": "Add",
+    "Cancel": "Cancel",
+    "Close": "Close",
+    "Confirm": "Confirm",
+    "Create": "Create",
+    "Custom": {
+      "AddAssignment": "Add assignment",
+      "AddAssignmentTemplate": "Add assignment template",
+      "AddCriteria": "Add criteria",
+      "AddGroup": "Add group",
+      "AddLecturer": "Add lecturer",
+      "ChangeRole": "Change role",
+      "CreateCourse": "Create course",
+      "SelectCourseTemplate": "Select course template"
+    },
+    "Delete": "Delete",
+    "Edit": "Edit",
+    "Join": "Join",
+    "Leave": "Leave",
+    "No": "No",
+    "Ok": "Ok",
+    "Remove": "Remove",
+    "Save": "Save",
+    "Search": "Search",
+    "Send": "Send",
+    "Yes": "Yes"
+  },
+  "Common": {
+    "All": "All",
+    "Count": "Count",
+    "Date": "Date",
+    "Help": "Help",
+    "My": "My",
+    "Name": "Name",
+    "Names": "Names",
+    "No": "No",
+    "Other": "Other",
+    "Password": "Password",
+    "Title": "Title",
+    "Yes": "Yes"
+  },
+  "Domain": {
+    "AdmissionCriteria": "Admission criteria",
+    "Assessment": "Assessment",
+    "Assessments": "Assessments",
+    "Assignment": "Assignment",
+    "AssignmentTemplate": "Assignment template",
+    "AssignmentTemplates": "Assignment templates",
+    "Assignments": "Assignments",
+    "Course": "Course",
+    "CourseConfig": "Course config",
+    "Courses": "Courses",
+    "Group": "Group",
+    "GroupNames": "Group names",
+    "GroupSettings": "Group settings",
+    "Groups": "Groups",
+    "Lecturer": "Lecturer",
+    "Lecturers": "Lecturers",
+    "Member": "Member",
+    "Members": "Members",
+    "Participant": "Participant",
+    "Participants": "Participants",
+    "Semester": "Semester",
+    "User": "User",
+    "Users": "Users"
+  },
+  "Enum": {
+    "AssignmentState": {
+      "CLOSED": "Closed",
+      "EVALUATED": "Evaluated",
+      "INVISIBLE": "Invisible",
+      "IN_PROGRESS": "In progress",
+      "IN_REVIEW": "In review"
+    },
+    "AssignmentType": {
+      "HOMEWORK": "Homework",
+      "OTHER": "Other",
+      "PROJECT": "Project",
+      "SEMINAR": "Seminar",
+      "TESTAT": "Testat"
+    },
+    "CollaborationType": {
+      "GROUP": "Group",
+      "GROUP_OR_SINGLE": "Group or single",
+      "SINGLE": "Single"
+    },
+    "CourseRole": {
+      "LECTURER": "Lecturer",
+      "STUDENT": "Student",
+      "TUTOR": "Tutor"
+    },
+    "UserRole": {
+      "ADMIN_TOOL": "ADMIN_TOOL",
+      "MGTM_ADMIN": "MGTM_ADMIN",
+      "SYSTEM_ADMIN": "SYSTEM_ADMIN",
+      "USER": "USER"
+    }
+  },
+  "Error": {
+    "ValueMissing": "Value is missing."
+  },
+  "Event": {
+    "UserJoinedCourseEvent": "joined the course.",
+    "UserJoinedGroupEvent": "joined the group.",
+    "UserLeftCourseEvent": "left the course.",
+    "UserLeftGroupEvent": "left the group."
+  },
+  "Message": {
+    "Created": "Created",
+    "Deleted": "Deleted",
+    "Error": "Error",
+    "Removed": "Removed",
+    "Saved": "Saved",
+    "Success": "Success"
+  },
+  "Misc": {
+    "BasicData": "Basic Data",
+    "ExtendedOptions": "Extended options",
+    "Home": "Home",
+    "Imprint": "Imprint",
+    "Language": "Language",
+    "Link": "Link",
+    "Privacy": "Privacy",
+    "Settings": "Settings"
+  },
+  "Property": {
+    "Assessment": {
+      "AchievedPoints": "Achieved points",
+      "Creator": "Creator",
+      "PartialAssessments": "Partial assessments"
+    },
+    "Assignment": {
+      "BonusPoints": "Bonus points",
+      "Collaboration": "Collaboration",
+      "Comment": "Comment",
+      "EndDate": "End date",
+      "Name": "Name",
+      "Point": "Points",
+      "StartDate": "Start date",
+      "State": "State",
+      "Type": "Type"
+    },
+    "AssignmentTemplate": {
+      "State": "Initial state",
+      "TemplateName": "Template name",
+      "Timespan": "Timespan",
+      "TitleSchema": "Titel"
+    },
+    "Course": {
+      "IsClosed": "Closed",
+      "Link": "Link",
+      "Shortname": "Shortname",
+      "Title": "Title"
+    },
+    "CourseConfig": {
+      "SubscriptionUrl": "SubscriptionUrlTODO"
+    },
+    "Group": {
+      "History": "History",
+      "IsClosed": "Closed",
+      "Name": "Name"
+    },
+    "GroupSettings": {
+      "AllowGroups": "Allow groups",
+      "NameSchema": "Name prefix",
+      "Selfmanaged": "Selfmanaged",
+      "SizeMax": "Max. size",
+      "SizeMin": "Min. size"
+    },
+    "PartialAssessment": {
+      "Comment": "Comment",
+      "Points": "Points",
+      "Severity": "Severity",
+      "Type": "Type"
+    },
+    "User": {
+      "CourseRole": "Role in course",
+      "Email": "Email",
+      "Role": "Role",
+      "Username": "Username"
+    }
+  },
+  "Title": {
+    "AppName": "Student-Management",
+    "CreateAssignment": "Create assignment",
+    "CreateGroup": "Create group",
+    "EditAssignment": "Edit assignment",
+    "JoinCourse": "Join course",
+    "JoinGroup": "Join group",
+    "SearchCourse": "Search course",
+    "SearchUser": "Search user"
+  }
 }

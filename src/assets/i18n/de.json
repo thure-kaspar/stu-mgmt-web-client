@@ -1,6 +1,195 @@
 {
-	"Common": {
-		"Success": "Success",
-		"Error": "Error"
-	}
+  "Button": {
+    "Add": "Hinzufügen",
+    "Cancel": "Abbrechen",
+    "Close": "Schließen",
+    "Confirm": "Bestätigen",
+    "Create": "Erstellen",
+    "Custom": {
+      "AddAssignment": "Aufgabe hinzufügen",
+      "AddAssignmentTemplate": "Aufgaben-Vorlage hinzufügen",
+      "AddCriteria": "Kriterium hinzufügen",
+      "AddGroup": "Gruppe erstellen",
+      "AddLecturer": "Lehrenden hinzufügen",
+      "ChangeRole": "Rolle ändern",
+      "CreateCourse": "Veranstaltung erstellen",
+      "SelectCourseTemplate": "Veranstaltung als Vorlage wählen"
+    },
+    "Delete": "Löschen",
+    "Edit": "Ändern",
+    "Join": "Beitreten",
+    "Leave": "Verlassen",
+    "No": "Nein",
+    "Ok": "Ok",
+    "Remove": "Entfernen",
+    "Save": "Speichern",
+    "Search": "Suchen",
+    "Send": "Senden",
+    "Yes": "Ja"
+  },
+  "Common": {
+    "All": "Alle",
+    "Count": "Anzahl",
+    "Date": "Datum",
+    "Help": "Hilfe",
+    "My": "Meine",
+    "Name": "Name",
+    "Names": "Namen",
+    "No": "Nein",
+    "Other": "Andere",
+    "Password": "Passwort",
+    "Title": "Titel",
+    "Yes": "Ja"
+  },
+  "Domain": {
+    "AdmissionCriteria": "Zulassungskriterien",
+    "Assessment": "Bewertung",
+    "Assessments": "Bewertungen",
+    "Assignment": "Aufgabe",
+    "AssignmentTemplate": "Aufgaben-Vorlage",
+    "AssignmentTemplates": "Aufgaben-Vorlagen",
+    "Assignments": "Aufgaben",
+    "Course": "Veranstaltung",
+    "CourseConfig": "Kurs-Konfiguration",
+    "Courses": "Veranstaltungen",
+    "Group": "Gruppe",
+    "GroupNames": "Gruppennamen",
+    "GroupSettings": "Gruppen-Einstellungen",
+    "Groups": "Gruppen",
+    "Lecturer": "Lehrender",
+    "Lecturers": "Lehrende",
+    "Member": "Mitglied",
+    "Members": "Mitglieder",
+    "Participant": "Teilnehmer",
+    "Participants": "Teilnehmer",
+    "Semester": "Semester",
+    "User": "Nutzer",
+    "Users": "Nutzer"
+  },
+  "Enum": {
+    "AssignmentState": {
+      "CLOSED": "Geschlossen",
+      "EVALUATED": "Bewertet",
+      "INVISIBLE": "Unsichtbar",
+      "IN_PROGRESS": "Laufend",
+      "IN_REVIEW": "Wird bewertet"
+    },
+    "AssignmentType": {
+      "HOMEWORK": "Hausaufgabe",
+      "OTHER": "Sonstige",
+      "PROJECT": "Projekt",
+      "SEMINAR": "Seminar",
+      "TESTAT": "Testat"
+    },
+    "CollaborationType": {
+      "GROUP": "Gruppe",
+      "GROUP_OR_SINGLE": "Gruppe oder einzeln",
+      "SINGLE": "Einzeln"
+    },
+    "CourseRole": {
+      "LECTURER": "Lehrender",
+      "STUDENT": "Student",
+      "TUTOR": "Tutor"
+    },
+    "UserRole": {
+      "ADMIN_TOOL": "ADMIN_TOOL",
+      "MGTM_ADMIN": "MGTM_ADMIN",
+      "SYSTEM_ADMIN": "SYSTEM_ADMIN",
+      "USER": "USER"
+    }
+  },
+  "Error": {
+    "ValueMissing": "Fehlender Wert."
+  },
+  "Event": {
+    "UserJoinedCourseEvent": "ist dem Kurs beigreten.",
+    "UserJoinedGroupEvent": "ist der Gruppe beigreten.",
+    "UserLeftCourseEvent": "hat den Kurs verlassen.",
+    "UserLeftGroupEvent": "hat die Gruppe verlassen."
+  },
+  "Message": {
+    "Created": "Erstellt",
+    "Deleted": "Gelöscht",
+    "Error": "Fehler",
+    "Removed": "Entfernt",
+    "Saved": "Gespeichert",
+    "Success": "Erfolg"
+  },
+  "Misc": {
+    "BasicData": "Grunddaten",
+    "ExtendedOptions": "Erweiterte Optionen",
+    "Home": "Startseite",
+    "Imprint": "Impressum",
+    "Language": "Sprache",
+    "Link": "Link",
+    "Privacy": "Datenschutz",
+    "Settings": "Einstellungen"
+  },
+  "Property": {
+    "Assessment": {
+      "AchievedPoints": "Erreichte Punktzahl",
+      "Creator": "Ersteller",
+      "PartialAssessments": "Teilbewertungen"
+    },
+    "Assignment": {
+      "BonusPoints": "Bonuspunkte",
+      "Collaboration": "Zusammenarbeit",
+      "Comment": "Beschreibung",
+      "EndDate": "Enddatum",
+      "Name": "Name",
+      "Point": "Punktzahl",
+      "StartDate": "Startdatum",
+      "State": "Status",
+      "Type": "Typ"
+    },
+    "AssignmentTemplate": {
+      "State": "Initialer Zustand",
+      "TemplateName": "Namen der Vorlage",
+      "Timespan": "Zeitspanne",
+      "TitleSchema": "Titel"
+    },
+    "Course": {
+      "IsClosed": "Geschlossen",
+      "Link": "Link",
+      "Shortname": "Kürzel",
+      "Title": "Titel"
+    },
+    "CourseConfig": {
+      "SubscriptionUrl": "SubscriptionUrlTODO"
+    },
+    "Group": {
+      "History": "Verlauf",
+      "IsClosed": "Geschlossen",
+      "Name": "Name"
+    },
+    "GroupSettings": {
+      "AllowGroups": "Gruppen erlauben",
+      "NameSchema": "Prefix",
+      "Selfmanaged": "Selbstverwaltend",
+      "SizeMax": "Max. Größe",
+      "SizeMin": "Min. Größe"
+    },
+    "PartialAssessment": {
+      "Comment": "Kommentar",
+      "Points": "Punkte",
+      "Severity": "Schweregrad",
+      "Type": "Typ"
+    },
+    "User": {
+      "CourseRole": "Rolle im Kurs",
+      "Email": "Email",
+      "Role": "Rolle",
+      "Username": "Nutzername"
+    }
+  },
+  "Title": {
+    "AppName": "Studenten-Management",
+    "CreateAssignment": "Aufgabe erstellen",
+    "CreateGroup": "Gruppe erstellen",
+    "EditAssignment": "Aufgabe editieren",
+    "JoinCourse": "Veranstaltung beitreten",
+    "JoinGroup": "Gruppe beitreten",
+    "SearchCourse": "Suche nach Veranstaltung",
+    "SearchUser": "Suche nach Nutzer"
+  }
 }
