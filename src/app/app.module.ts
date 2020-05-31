@@ -40,7 +40,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		TranslateModule.forRoot({
-			defaultLanguage: "en",
+			defaultLanguage: localStorage.getItem("language") ?? "en",
 			loader: {
 				provide: TranslateLoader,
 				useFactory: (createTranslateLoader),
