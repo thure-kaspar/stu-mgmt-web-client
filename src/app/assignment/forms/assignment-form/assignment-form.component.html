@@ -2,76 +2,76 @@
 		
 	<div id="assignment-grid">
 		<mat-form-field>
-			<mat-label>Name</mat-label>
+			<mat-label>{{ 'Common.Name' | translate }}</mat-label>
 			<input matInput formControlName="name" required>
 			<mat-error>Name is missing.</mat-error>
 		</mat-form-field>
 
 		<mat-form-field>
-			<mat-label>State</mat-label>
+			<mat-label>{{ 'Property.Assignment.State' | translate }}</mat-label>
 			<mat-select formControlName="state">
-				<mat-option value="IN_PROGRESS">In progress</mat-option>
-				<mat-option value="CLOSED">Closed</mat-option>
-				<mat-option value="INVISIBLE">Invisible</mat-option>
-				<mat-option value="IN_REVIEW">In review</mat-option>
-				<mat-option value="EVALUATED">Evaluated</mat-option>
+				<mat-option [value]="stateEnum.INPROGRESS">{{ "Enum.AssignmentState." + stateEnum.INPROGRESS | translate }}</mat-option>
+				<mat-option [value]="stateEnum.CLOSED">{{ "Enum.AssignmentState." + stateEnum.CLOSED | translate }}</mat-option>
+				<mat-option [value]="stateEnum.INVISIBLE">{{ "Enum.AssignmentState." + stateEnum.INVISIBLE | translate }}</mat-option>
+				<mat-option [value]="stateEnum.INREVIEW">{{ "Enum.AssignmentState." + stateEnum.INREVIEW | translate }}</mat-option>
+				<mat-option [value]="stateEnum.EVALUATED">{{ "Enum.AssignmentState." + stateEnum.EVALUATED | translate }}</mat-option>
 			</mat-select>
 		</mat-form-field>
 			
 		<div class="radio-group-container">
-			<label class="radio-group-label">Type</label>
+			<label class="radio-group-label">{{ 'Property.Assignment.Type' | translate }}</label>
 			<mat-radio-group class="radio-group" formControlName="type">
-				<mat-radio-button value="HOMEWORK">Homework</mat-radio-button>
-				<mat-radio-button value="TESTAT">Testat</mat-radio-button>
-				<mat-radio-button value="SEMINAR">Seminar</mat-radio-button>
-				<mat-radio-button value="PROJECT">Project</mat-radio-button>
-				<mat-radio-button value="OTHER">Other</mat-radio-button>
+				<mat-radio-button [value]="typeEnum.HOMEWORK">{{ "Enum.AssignmentType." + typeEnum.HOMEWORK | translate }}</mat-radio-button>
+				<mat-radio-button [value]="typeEnum.TESTAT">{{ "Enum.AssignmentType." + typeEnum.TESTAT | translate }}</mat-radio-button>
+				<mat-radio-button [value]="typeEnum.SEMINAR">{{ "Enum.AssignmentType." + typeEnum.SEMINAR | translate }}</mat-radio-button>
+				<mat-radio-button [value]="typeEnum.PROJECT">{{ "Enum.AssignmentType." + typeEnum.PROJECT | translate }}</mat-radio-button>
+				<mat-radio-button [value]="typeEnum.OTHER">{{ "Enum.AssignmentType." + typeEnum.OTHER | translate }}</mat-radio-button>
 			</mat-radio-group>
 		</div>
 			
 		<div class="radio-group-container">
-			<label class="radio-group-label">Collaboration</label>
+			<label class="radio-group-label">{{ 'Property.Assignment.Collaboration' | translate }}</label>
 			<mat-radio-group class="radio-group" formControlName="collaboration">
-				<mat-radio-button value="GROUP">Group only</mat-radio-button>
-				<mat-radio-button value="SINGLE">Single only</mat-radio-button>
-				<mat-radio-button value="GROUP_OR_SINGLE">Allow both</mat-radio-button>
+				<mat-radio-button [value]="collaborationEnum.GROUP">{{ "Enum.CollaborationType." + collaborationEnum.GROUP | translate }}</mat-radio-button>
+				<mat-radio-button [value]="collaborationEnum.SINGLE">{{ "Enum.CollaborationType." + collaborationEnum.SINGLE | translate }}</mat-radio-button>
+				<mat-radio-button [value]="collaborationEnum.GROUPORSINGLE">{{ "Enum.CollaborationType." + collaborationEnum.GROUPORSINGLE | translate }}</mat-radio-button>
 			</mat-radio-group>
 		</div>
 		
 		<mat-form-field>
-			<mat-label>Start Date</mat-label>
+			<mat-label>{{ 'Property.Assignment.StartDate' | translate }}</mat-label>
 			<input matInput [matDatepicker]="startPicker" formControlName="startDate">
 			<mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
 			<mat-datepicker #startPicker></mat-datepicker>
 		</mat-form-field>
 
 		<mat-form-field>
-			<mat-label>End Date</mat-label>
+			<mat-label>{{ 'Property.Assignment.EndDate' | translate }}</mat-label>
 			<input matInput [matDatepicker]="endPicker" formControlName="endDate">
 			<mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
 			<mat-datepicker #endPicker></mat-datepicker>
 		</mat-form-field>
 			
 		<mat-form-field>
-			<mat-label>Points</mat-label>
+			<mat-label>{{ 'Property.Assignment.Points' | translate }}</mat-label>
 			<input matInput type="number" formControlName="points" required>
 			<mat-error>Points are missing.</mat-error>
 		</mat-form-field>
 
 		<mat-form-field>
-			<mat-label>Bonus points</mat-label>
+			<mat-label>{{ 'Property.Assignment.BonusPoints' | translate }}</mat-label>
 			<input matInput type="number" formControlName="bonusPoints">
 		</mat-form-field>
 		
 	</div>
 	
 	<mat-form-field id="link-field">
-		<mat-label>Link</mat-label>
+		<mat-label>{{ 'Misc.Link' | translate }}</mat-label>
 		<input matInput placeholder="Enter link" formControlName="link">
 	</mat-form-field>
 
 	<mat-form-field id="comment-field" appearance="outline">
-		<mat-label>Comment</mat-label>
+		<mat-label>{{ 'Property.Assignment.Comment' | translate }}</mat-label>
 		<textarea width matInput formControlName="comment" rows=5></textarea>
 	</mat-form-field>
 	

@@ -7,28 +7,28 @@
 		</mat-tab>
 
 		<ng-container formGroupName="config">
-			<mat-tab label="Group settings">
+			<mat-tab label="{{ 'Domain.GroupSettings' | translate }}">
 				<app-group-settings-form [form]="form"></app-group-settings-form>
 			</mat-tab>
 
 			<mat-tab label="Extended Options">
 				<div id="extended-options">			
 					<mat-form-field>
-						<mat-label>Subscription URL</mat-label>
+						<mat-label>{{ 'Property.CourseConfig.SubscriptionUrl' | translate }}</mat-label>
 						<input matInput formControlName="subscriptionUrl">
 					</mat-form-field>
 					<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
 				</div>
 			</mat-tab>
 
-			<mat-tab label="Admission criteria">
+			<mat-tab label="{{ 'Domain.AdmissionCriteria' | translate }}">
 				<app-admission-criteria-form [form]="form"></app-admission-criteria-form>
 			</mat-tab>
 
-			<mat-tab label="Assignment templates">
+			<mat-tab label="{{ 'Domain.AssignmentTemplates' | translate }}">
 				<div id="assignment-templates-tab">
 					<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="openCreateAssignmentTemplateDialog()">
-						<mat-icon>add</mat-icon>Add assignment template
+						<mat-icon>add</mat-icon>{{ 'Button.Custom.AddAssignmentTemplate' | translate }}
 					</button> 
 					
 					<mat-list class="assignment-template-list">
@@ -38,8 +38,8 @@
 									{{template.templateName}}
 								</div>
 								<span class="right">
-									<button mat-button (click)="openEditAssignmentTemplateDialog(template)">Edit</button>
-									<button mat-button color="warn" (click)="deleteAssignmentTemplate(template)">Delete</button>
+									<button mat-button (click)="openEditAssignmentTemplateDialog(template)">{{ 'Button.Edit' | translate }}</button>
+									<button mat-button color="warn" (click)="deleteAssignmentTemplate(template)">{{ 'Button.Delete' | translate }}</button>
 								</span>
 							</div>
 						</mat-list-item>
@@ -49,7 +49,7 @@
 
 			<mat-tab disabled>
 				<ng-template mat-tab-label>
-					<button mat-flat-button color="accent" [disabled]="form.invalid" (click)="onSave()">Save</button>
+					<button mat-flat-button color="accent" [disabled]="form.invalid" (click)="onSave()">{{ 'Button.Save' | translate }}</button>
 				</ng-template>
 			</mat-tab>
 			

@@ -5,7 +5,7 @@
 			<mat-icon>menu</mat-icon>
 		</button>
 		<img id="logo" src="./assets/img/uni-logo.png">
-		Student-Management
+		{{ 'Title.AppName' | translate }}
 	</div>
 	<div id="nav-right">
 
@@ -19,8 +19,8 @@
 		
 		<mat-menu #appMenu="matMenu">
 			<div id="appMenu-container">
-				<a [routerLink]="['/', getUserId()]"><button class="btn-link" mat-flat-button><mat-icon>account_circle</mat-icon> My account</button></a>		
-				<button mat-menu-item [matMenuTriggerFor]="langMenu">Language</button>
+				<a [routerLink]="['/', getUserId()]"><button class="btn-link" mat-flat-button><mat-icon>account_circle</mat-icon>My account</button></a>		
+				<button mat-menu-item [matMenuTriggerFor]="langMenu">{{ 'Misc.Language' | translate }}</button>
 				<mat-menu #langMenu="matMenu">
 					<button mat-menu-item (click)="setLanguage('en')">English</button>
 					<button mat-menu-item (click)="setLanguage('de')">Deutsch</button>
@@ -44,16 +44,16 @@
 		<mat-nav-list>
 			<div id="sidenav-links">
 				<a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }">
-					<mat-icon>home</mat-icon>Home
+					<mat-icon>home</mat-icon>{{ "Misc.Home" | translate }} 
 				</a>
 
 				<a mat-list-item [routerLink]="['/courses']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: true}">
-					<mat-icon>school</mat-icon>Courses
+					<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }} 
 				</a>
 
 				<div id="course-membership-list" *ngIf="isLoggedIn()">
 					<mat-divider></mat-divider>
-					<span id="my-courses">MY COURSES</span>
+					<span id="my-courses">{{ 'Common.My' | translate | uppercase }} {{ 'Domain.Courses' | translate | uppercase }}</span>
 
 					<div *ngFor="let course of courseMemberships.courses$ | async">
 						<a mat-list-item [routerLink]="['/courses', course.id]" routerLinkActive="router-link-active" (click)="navigateToCourse(course)">
@@ -70,11 +70,11 @@
 				</a>
 
 				<a mat-list-item [routerLink]="['/privacy']" routerLinkActive="router-link-active">
-					<mat-icon>security</mat-icon>Privacy
+					<mat-icon>security</mat-icon>{{ 'Misc.Privacy' | translate }} 
 				</a>
 	
 				<a mat-list-item [routerLink]="['/imprint']" routerLinkActive="router-link-active">
-					<mat-icon>info</mat-icon>Imprint
+					<mat-icon>info</mat-icon>{{ 'Misc.Imprint' | translate }} 
 				</a>
 			</div>
 		</mat-nav-list>

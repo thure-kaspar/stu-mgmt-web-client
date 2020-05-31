@@ -10,12 +10,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { AdminGuard } from "./guards/admin.guard";
 import { LoginDialog } from "./dialogs/login/login.dialog";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
 	declarations: [LoginComponent, RegisterComponent, LoginDialog],
 	imports: [
 		CommonModule,
 		RouterModule,
+		TranslateModule,
 		MaterialModule,
 		FormsModule,
 		ReactiveFormsModule

@@ -4,13 +4,13 @@
 	<div mat-dialog-content class="dialog-content">
 
 		<mat-form-field class="form-field" appearance="outline">
-			<mat-label>Username</mat-label>
+			<mat-label>{{ 'Property.User.Username' | translate }}</mat-label>
 			<input [(ngModel)]="username" matInput type="text" name="username" id="username" (keydown.enter)="onLogin()">
 			<mat-icon matSuffix class="icon-light">person</mat-icon>
 		</mat-form-field>
 
 		<mat-form-field class="form-field" appearance="outline">
-			<mat-label>Password</mat-label>
+			<mat-label>{{ 'Common.Password' | translate }}</mat-label>
 			<input [(ngModel)]="password" matInput type="password" name="password" id="password" (keydown.enter)="onLogin()">
 			<mat-icon matSuffix class="icon-light">lock</mat-icon>
 		</mat-form-field><br>

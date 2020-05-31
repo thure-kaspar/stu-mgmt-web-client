@@ -2,40 +2,40 @@
 	<ng-container formGroupName="config">
 		<div id="group-settings" formGroupName="groupSettings">
 			<mat-form-field>
-				<mat-label>Allow groups</mat-label>
+				<mat-label>{{ 'Property.GroupSettings.AllowGroups' | translate }}</mat-label>
 				<mat-select formControlName="allowGroups" required>
-					<mat-option [value]=false>No</mat-option>
-					<mat-option [value]=true>Yes</mat-option>
+					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
+					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
 				</mat-select>
 				<mat-hint>Allows participants to create groups.</mat-hint>
-				<mat-error>Value is missing.</mat-error>
+				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 			
 			<mat-form-field>
-				<mat-label>Selfmanaged</mat-label>
+				<mat-label>{{ 'Property.GroupSettings.Selfmanaged' | translate }}</mat-label>
 				<mat-select formControlName="selfmanaged" required>
-					<mat-option [value]=false>No</mat-option>
-					<mat-option [value]=true>Yes</mat-option>
+					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
+					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
 				</mat-select>
 				<mat-hint>Allows participants to manage groups.</mat-hint>
-				<mat-error>Value is missing.</mat-error>
+				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 			
 			<mat-form-field>
-				<mat-label>Name schema</mat-label>
+				<mat-label>{{ 'Property.GroupSettings.NameSchema' | translate }}</mat-label>
 				<input matInput formControlName="nameSchema">
 			</mat-form-field>
 			
 			<mat-form-field>
-				<mat-label>Min. group size</mat-label>
+				<mat-label>{{ 'Property.GroupSettings.SizeMin' | translate }}</mat-label>
 				<input matInput type="number" formControlName="sizeMin" required>
-				<mat-error>Value is missing.</mat-error>
+				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 			
 			<mat-form-field>
-				<mat-label>Max. group size</mat-label>
+				<mat-label>{{ 'Property.GroupSettings.SizeMax' | translate }}</mat-label>
 				<input matInput type="number" formControlName="sizeMax" required>
-				<mat-error>Value is missing.</mat-error>
+				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 		</div>
 	</ng-container>

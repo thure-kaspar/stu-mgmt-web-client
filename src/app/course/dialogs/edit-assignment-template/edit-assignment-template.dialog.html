@@ -4,8 +4,8 @@
 	</div>
 	
 	<div mat-dialog-actions>
-		<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form.invalid || this.assignmentTemplatesForm?.getAssignmentTemplates().length != 1">Save</button>
-		<button mat-button (click)="onCancel()">Cancel</button>
+		<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form.invalid || this.assignmentTemplatesForm?.getAssignmentTemplates().length != 1">{{ 'Button.Save' | translate }}</button>
+		<button mat-button (click)="onCancel()">{{ 'Button.Cancel' | translate }}</button>
 	</div>
 
 </div>

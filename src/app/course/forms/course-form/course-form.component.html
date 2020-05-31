@@ -6,14 +6,14 @@
 	</mat-form-field>
 	
 	<mat-form-field>
-		<mat-label>Shortname</mat-label>
+		<mat-label>{{ 'Property.Course.Shortname' | translate }}</mat-label>
 		<input matInput formControlName="shortname" required>
 		<mat-hint>Shortname will be visible in the URL of the course.</mat-hint>
 		<mat-error>Value is missing.</mat-error>
 	</mat-form-field>
 	
 	<mat-form-field>
-		<mat-label>Semester</mat-label>
+		<mat-label>{{ 'Domain.Semester' | translate }}</mat-label>
 		<mat-select formControlName="semester" required>
 			<mat-option value="wise1920">WiSe 19/20</mat-option>
 			<mat-option value="sose2020">SoSe 2020</mat-option>
@@ -24,30 +24,30 @@
 	</mat-form-field>
 	
 	<mat-form-field>
-		<mat-label>Title</mat-label>
+		<mat-label>{{ 'Property.Course.Title' | translate }}</mat-label>
 		<input matInput formControlName="title" required>
 		<mat-error>Value is missing.</mat-error>
 	</mat-form-field>
 	
 	<mat-form-field>
-		<mat-label>Closed</mat-label>
+		<mat-label>{{ 'Property.Course.IsClosed' | translate }}</mat-label>
 		<mat-select formControlName="isClosed" required>
-			<mat-option [value]=false>No</mat-option>
-			<mat-option [value]=true>Yes</mat-option>
+			<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
+			<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
 		</mat-select>
 		<mat-hint>Closing the course will prevent students from joining.</mat-hint>
 		<mat-error>Value is missing.</mat-error>
 	</mat-form-field>
 	
 	<mat-form-field formGroupName="config">
-		<mat-label>Password</mat-label>
+		<mat-label>{{ 'Common.Password' | translate }}</mat-label>
 		<input matInput formControlName="password">
 		<mat-hint>Users have to enter the password to enter the course.</mat-hint>
 		<mat-error>Value is missing.</mat-error>
 	</mat-form-field>
 	
 	<mat-form-field>
-		<mat-label>Link</mat-label>
+		<mat-label>{{ 'Misc.Link' | translate }}</mat-label>
 		<input matInput formControlName="link">
 	</mat-form-field>	
 </div>

@@ -10,6 +10,10 @@ import { AbstractForm } from "../../../shared/abstract-form";
 })
 export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnInit {
 
+	stateEnum = AssignmentDto.StateEnum;
+	typeEnum = AssignmentDto.TypeEnum;
+	collaborationEnum = AssignmentDto.CollaborationEnum;
+
 	constructor(private fb: FormBuilder) {
 		super(); 
 		this.form = this.fb.group({

@@ -1,6 +1,6 @@
 <div class="dialog-container" id="create-group-dialog">
 
-	<mat-card-title matDialogTitle>Create Group</mat-card-title>
+	<mat-card-title matDialogTitle>{{ 'Title.CreateGroup' | translate }}</mat-card-title>
 
 	<div matDialogContent class="dialog-content">
 
@@ -9,13 +9,13 @@
 			<mat-tab label="Single">
 				<form [formGroup]="form" autocomplete="off">
 					<mat-form-field>
-						<mat-label floatLabel="always" always>Name</mat-label>
+						<mat-label floatLabel="always" always>{{ 'Common.Name' | translate }}</mat-label>
 						<input matInput formControlName="name">
-						<mat-error>Name is missing</mat-error>
+						<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 					</mat-form-field>
 					<br>
 					<mat-form-field>
-						<mat-label floatLabel="always">Password</mat-label>
+						<mat-label floatLabel="always">{{ 'Common.Password' | translate }}</mat-label>
 						<input matInput formControlName="password">
 						<mat-hint></mat-hint>
 						<mat-error></mat-error>
@@ -35,8 +35,8 @@
 	</div>
 
 	<div matDialogActions>
-		<button mat-flat-button (click)="onSave()" color="accent">Save</button>
-		<button mat-button (click)="onCancel()">Cancel</button>
+		<button mat-flat-button (click)="onSave()" color="accent">{{ 'Button.Save' | translate }}</button>
+		<button mat-button (click)="onCancel()">{{ 'Button.Cancel' | translate }}</button>
 	</div>
 
 </div>

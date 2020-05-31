@@ -10,61 +10,61 @@
 					</h2>
 		
 					<mat-form-field>
-						<mat-label>Template name</mat-label>
+						<mat-label>{{ 'Property.AssignmentTemplate.TemplateName' | translate }}</mat-label>
 						<input matInput formControlName="templateName" required>
 						<mat-hint>The name of the template.</mat-hint>
 						<mat-error>Value is missing.</mat-error>
 					</mat-form-field>
 		
 					<mat-form-field>
-						<mat-label>Title schema</mat-label>
+						<mat-label>{{ 'Property.AssignmentTemplate.TitleSchema' | translate }}</mat-label>
 						<input matInput formControlName="name">
 						<mat-hint>Example: " Exercise sheet Nr.# "</mat-hint>
 					</mat-form-field>
 		
 					<mat-form-field>
-						<mat-label>Initial state</mat-label>
+						<mat-label>{{ 'Property.AssignmentTemplate.State' | translate }}</mat-label>
 						<mat-select formControlName="state">
-							<mat-option [value]="stateEnum.INPROGRESS">stateEnum.INPROGRESS</mat-option>
-							<mat-option [value]="stateEnum.CLOSED">stateEnum.CLOSED</mat-option>
-							<mat-option [value]="stateEnum.INVISIBLE">stateEnum.INVISIBLE</mat-option>
-							<mat-option [value]="stateEnum.INREVIEW">stateEnum.INREVIEW</mat-option>
-							<mat-option [value]="stateEnum.EVALUATED">stateEnum.EVALUATED</mat-option>
+							<mat-option [value]="stateEnum.INPROGRESS">{{ 'Enum.AssignmentState.' + stateEnum.INPROGRESS | translate }}</mat-option>
+							<mat-option [value]="stateEnum.CLOSED">{{ 'Enum.AssignmentState.' + stateEnum.CLOSED | translate }}</mat-option>
+							<mat-option [value]="stateEnum.INVISIBLE">{{ 'Enum.AssignmentState.' + stateEnum.INVISIBLE | translate }}</mat-option>
+							<mat-option [value]="stateEnum.INREVIEW">{{ 'Enum.AssignmentState.' + stateEnum.INREVIEW | translate }}</mat-option>
+							<mat-option [value]="stateEnum.EVALUATED">{{ 'Enum.AssignmentState.' + stateEnum.EVALUATED | translate }}</mat-option>
 						</mat-select>
 					</mat-form-field>
 		
 					<mat-form-field>
-						<mat-label>Type</mat-label>
+						<mat-label>{{ 'Property.Assignment.Type' | translate }}</mat-label>
 						<mat-select formControlName="type">
-							<mat-option [value]="typeEnum.HOMEWORK">{{typeEnum.HOMEWORK}}</mat-option>
-							<mat-option [value]="typeEnum.TESTAT">{{typeEnum.TESTAT}}</mat-option>
-							<mat-option [value]="typeEnum.PROJECT">{{typeEnum.PROJECT}}</mat-option>
-							<mat-option [value]="typeEnum.SEMINAR">{{typeEnum.SEMINAR}}</mat-option>
-							<mat-option [value]="typeEnum.OTHER">{{typeEnum.OTHER}}</mat-option>
+							<mat-option [value]="typeEnum.HOMEWORK">{{ 'Enum.AssignmentType.' + typeEnum.HOMEWORK | translate }}</mat-option>
+							<mat-option [value]="typeEnum.TESTAT">{{ 'Enum.AssignmentType.' + typeEnum.TESTAT | translate }}</mat-option>
+							<mat-option [value]="typeEnum.PROJECT">{{ 'Enum.AssignmentType.' + typeEnum.PROJECT | translate }}</mat-option>
+							<mat-option [value]="typeEnum.SEMINAR">{{ 'Enum.AssignmentType.' + typeEnum.SEMINAR | translate }}</mat-option>
+							<mat-option [value]="typeEnum.OTHER">{{ 'Enum.AssignmentType.' + typeEnum.OTHER | translate }}</mat-option>
 						</mat-select>
 					</mat-form-field>
 		
 					<mat-form-field>
-						<mat-label>Collaboration</mat-label>
+						<mat-label>{{ 'Property.Assignment.Collaboration' | translate }}</mat-label>
 						<mat-select formControlName="collaboration">
-							<mat-option [value]="collaborationEnum.SINGLE">collaborationEnum.SINGLE</mat-option>
-							<mat-option [value]="collaborationEnum.GROUP">collaborationEnum.GROUP</mat-option>
-							<mat-option [value]="collaborationEnum.GROUPORSINGLE">collaborationEnum.GROUPORSINGLE</mat-option>
+							<mat-option [value]="collaborationEnum.SINGLE">{{ 'Enum.Collaboration.' + collaborationEnum.SINGLE | translate }}</mat-option>
+							<mat-option [value]="collaborationEnum.GROUP">{{ 'Enum.Collaboration.' + collaborationEnum.GROUP | translate }}</mat-option>
+							<mat-option [value]="collaborationEnum.GROUPORSINGLE">{{ 'Enum.Collaboration.' + collaborationEnum.GROUPORSINGLE | translate }}</mat-option>
 						</mat-select>
 					</mat-form-field>
 		
 					<mat-form-field>
-						<mat-label>Points</mat-label>
+						<mat-label>{{ 'Property.Assignment.Points' | translate }}</mat-label>
 						<input matInput type="number" formControlName="points">
 					</mat-form-field>
 		
 					<mat-form-field>
-						<mat-label>Bonus points</mat-label>
+						<mat-label>{{ 'Property.Assignment.BonusPoints' | translate }}</mat-label>
 						<input matInput type="number" formControlName="bonusPoints">
 					</mat-form-field>
 		
 					<mat-form-field>
-						<mat-label>Timespan</mat-label>
+						<mat-label>{{ 'Property.AssignmentTemplate.Timespan' | translate }}</mat-label>
 						<input matInput type="number" formControlName="timespanDays">
 						<mat-hint>The time between start and end date in days.</mat-hint>
 					</mat-form-field>

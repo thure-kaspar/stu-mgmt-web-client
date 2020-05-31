@@ -1,15 +1,15 @@
 <div class="tab">
 	<button (click)="openAddDialog()" mat-flat-button id="btn-add" color="accent">
 		<mat-icon>add</mat-icon>
-		Add Group
+		{{ 'Button.Custom.AddGroup' | translate }}
 	</button>
 
 	<div id="users-group-container" *ngIf="groupOfUser">
-		<h2 class="groups-heading">My group</h2>
+		<h2 class="groups-heading">{{ 'Common.My' | translate }} {{ 'Domain.Group' | translate }}</h2>
 		<div class="group-list-item" id="users-group">
 			<div class="group-container">
 				<div class="left">
-					<button mat-button disabled=true>Join</button>
+					<button mat-button disabled=true>{{ 'Button.Join' | translate }}</button>
 				</div>
 				<div class="middle">
 					<a class="link-none font-bold" [routerLink]="[groupOfUser.id]">{{groupOfUser.name}}</a>
@@ -22,7 +22,7 @@
 	</div>
 
 	<div *ngIf="groups && groupSettings">
-		<h2 class="groups-heading">Other groups</h2>
+		<h2 class="groups-heading">{{ 'Common.Other' | translate }} {{ 'Domain.Groups' | translate }}</h2>
 
 		<div id="filter-container">
 			<mat-form-field id="filter-field">
@@ -35,7 +35,7 @@
 			<mat-list-item class="group-list-item" *ngFor="let group of filteredGroups">
 				<div class="group-container">
 					<div class="left">
-						<button mat-button class="btn-join" [disabled]="!isJoinable(group)" (click)="openJoinGroupDialog(group)">Join</button>
+						<button mat-button class="btn-join" [disabled]="!isJoinable(group)" (click)="openJoinGroupDialog(group)">{{ 'Button.Join' | translate }}</button>
 					</div>
 					<div class="middle">
 						<a class="link-none font-bold" [routerLink]="[group.id]">{{group.name}}</a>

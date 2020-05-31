@@ -1,5 +1,5 @@
 <div class="dialog-container" id="search-user-dialog">
-	<h2 mat-dialog-title>Search User</h2>
+	<h2 mat-dialog-title>{{ 'Title.SearchUser' | translate }}</h2>
 	<div mat-dialog-content class="dialog-content">
 
 		<div id="userFilter-container">
@@ -7,7 +7,7 @@
 				<mat-label>Filter</mat-label>
 				<input matInput [(ngModel)]="userFilter" (keydown.enter)="searchUsers()" placeholder="Filter..." autocomplete="off">
 			</mat-form-field>
-			<button mat-flat-button color="accent" (click)="searchUsers()" id="btn-search">Search</button>
+			<button mat-flat-button color="accent" (click)="searchUsers()" id="btn-search">{{ 'Button.Search' | translate }}</button>
 		</div>
 		
 		<div id="table-users">
@@ -30,25 +30,25 @@
 	
 				<!-- Role Column -->
 				<ng-container matColumnDef="role">
-					<th class="column-role" mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+					<th class="column-role" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.User.Role' | translate }}</th>
 					<td mat-cell *matCellDef="let row">{{ row.role | translate }}</td>
 				</ng-container>
 		
 				<!-- Username Column -->
 				<ng-container matColumnDef="username">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.User.Username' | translate }}</th>
 					<td mat-cell *matCellDef="let row">{{ row.username }}</td>
 				</ng-container>
 
 				<!-- Rzname Column -->
 				<ng-container matColumnDef="rzname">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header>RzName</th>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.User.RzName' | translate }}</th>
 					<td mat-cell *matCellDef="let row">{{ row.rzName }}</td>
 				</ng-container>
 	
 				<!-- Email Column -->
 				<ng-container matColumnDef="email">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.User.Email' | translate }}</th>
 					<td mat-cell *matCellDef="let row">{{ row.email }}</td>
 				</ng-container>
 	
@@ -57,16 +57,16 @@
 					<th class="action-column" mat-header-cell *matHeaderCellDef></th>
 					<td class="action-column" mat-cell *matCellDef="let row">
 						<button mat-icon-button [matMenuTriggerFor]="userOptionsMenu">
-							<mat-icon class="icon-light">settings</mat-icon>
+							<mat-icon class="icon-light">{{ 'Misc.Settings' | translate }}</mat-icon>
 						  </button>
 						  <mat-menu #userOptionsMenu="matMenu" yPosition="above">
 							<button mat-menu-item>
 								<mat-icon>import_export</mat-icon>
-								<span>Change role</span>
+								<span>{{ 'Button.Custom.ChangeRole' | translate }}</span>
 							</button>
 							<button mat-menu-item>
 							  <mat-icon>delete_forever</mat-icon>
-							  <span>Remove</span>
+							  <span>{{ 'Button.Remove' | translate }}</span>
 							</button>
 						  </mat-menu>
 					</td>
@@ -84,8 +84,8 @@
 	</div>
 
 	<div mat-dialog-actions class="dialog-actions">
-		<button mat-raised-button color="accent" (click)="onConfirm()">OK</button>
-		<button mat-button (click)="onCancel()">Cancel</button>
+		<button mat-raised-button color="accent" (click)="onConfirm()">{{ 'Button.Ok' | translate }}</button>
+		<button mat-button (click)="onCancel()">{{ 'Button.Cancel' | translate }}</button>
 	</div>
 
 </div>
