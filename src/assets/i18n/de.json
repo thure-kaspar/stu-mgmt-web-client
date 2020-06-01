@@ -13,7 +13,8 @@
       "AddLecturer": "Lehrenden hinzufügen",
       "ChangeRole": "Rolle ändern",
       "CreateCourse": "Veranstaltung erstellen",
-      "SelectCourseTemplate": "Veranstaltung als Vorlage wählen"
+      "SelectCourseTemplate": "Veranstaltung als Vorlage wählen",
+      "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden"
     },
     "Delete": "Löschen",
     "Edit": "Ändern",
@@ -32,12 +33,14 @@
     "Count": "Anzahl",
     "Date": "Datum",
     "Help": "Hilfe",
+    "Multiple": "Mehrere",
     "My": "Meine",
     "Name": "Name",
     "Names": "Namen",
     "No": "Nein",
     "Other": "Andere",
     "Password": "Passwort",
+    "Single": "Einzeln",
     "Title": "Titel",
     "Yes": "Ja"
   },
@@ -137,7 +140,7 @@
       "Comment": "Beschreibung",
       "EndDate": "Enddatum",
       "Name": "Name",
-      "Point": "Punktzahl",
+      "Points": "Punktzahl",
       "StartDate": "Startdatum",
       "State": "Status",
       "Type": "Typ"
@@ -164,7 +167,7 @@
     },
     "GroupSettings": {
       "AllowGroups": "Gruppen erlauben",
-      "NameSchema": "Prefix",
+      "NameSchema": "Präfix",
       "Selfmanaged": "Selbstverwaltend",
       "SizeMax": "Max. Größe",
       "SizeMin": "Min. Größe"

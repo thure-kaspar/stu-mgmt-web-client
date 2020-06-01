@@ -1,8 +1,10 @@
 #roles-group{
 	display: flex;
 	flex-direction: column;
+	padding-top: 8px;
+	padding-bottom: 4px;
 
 	mat-radio-button {
-		margin-bottom: 8px;
+		margin-bottom: 16px;
 	}
 }

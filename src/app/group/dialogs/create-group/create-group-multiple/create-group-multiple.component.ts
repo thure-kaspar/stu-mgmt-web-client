@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { GroupDto, GroupsService, GroupCreateBulkDto } from "../../../../../../api";
 import { SnackbarService } from "../../../../shared/services/snackbar.service";
 

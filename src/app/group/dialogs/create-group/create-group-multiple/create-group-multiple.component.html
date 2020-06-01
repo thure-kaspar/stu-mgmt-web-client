@@ -1,6 +1,8 @@
 <div id="create-group-multiple-container">
 
-	<mat-slide-toggle [(ngModel)]="useNamingSchema" (ngModelChange)="onChange()">Use naming schema and count</mat-slide-toggle>
+	<mat-slide-toggle [(ngModel)]="useNamingSchema" (ngModelChange)="onChange()">
+		{{ 'Button.Custom.UseNamingSchemaAndCount' | translate }}
+	</mat-slide-toggle>
 
 	<form [formGroup]="form" class="form-container" autocomplete="off">
 

@@ -13,7 +13,9 @@
       "AddLecturer": "Add lecturer",
       "ChangeRole": "Change role",
       "CreateCourse": "Create course",
-      "SelectCourseTemplate": "Select course template"
+      "SelectCourseTemplate": "Select course template",
+      "UseNamingSchemaAndCount": "Use prefix and count",
+      "UseNamingSchemeAndCount": "Use p"
     },
     "Delete": "Delete",
     "Edit": "Edit",
@@ -32,12 +34,14 @@
     "Count": "Count",
     "Date": "Date",
     "Help": "Help",
+    "Multiple": "Multiple",
     "My": "My",
     "Name": "Name",
     "Names": "Names",
     "No": "No",
     "Other": "Other",
     "Password": "Password",
+    "Single": "Single",
     "Title": "Title",
     "Yes": "Yes"
   },
@@ -137,7 +141,7 @@
       "Comment": "Comment",
       "EndDate": "End date",
       "Name": "Name",
-      "Point": "Points",
+      "Points": "Points",
       "StartDate": "Start date",
       "State": "State",
       "Type": "Type"
@@ -164,7 +168,7 @@
     },
     "GroupSettings": {
       "AllowGroups": "Allow groups",
-      "NameSchema": "Name prefix",
+      "NameSchema": "Prefix",
       "Selfmanaged": "Selfmanaged",
       "SizeMax": "Max. size",
       "SizeMin": "Min. size"

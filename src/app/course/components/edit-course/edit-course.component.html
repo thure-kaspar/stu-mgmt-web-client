@@ -2,7 +2,7 @@
 
 	<mat-tab-group color="accent" animationDuration="0ms">
 
-		<mat-tab label="Basic Data">
+		<mat-tab label="{{ 'Misc.BasicData' | translate }}">
 			<app-course-form [form]="form"></app-course-form>
 		</mat-tab>
 
@@ -11,7 +11,7 @@
 				<app-group-settings-form [form]="form"></app-group-settings-form>
 			</mat-tab>
 
-			<mat-tab label="Extended Options">
+			<mat-tab label="{{ 'Misc.ExtendedOptions' | translate }}">
 				<div id="extended-options">			
 					<mat-form-field>
 						<mat-label>{{ 'Property.CourseConfig.SubscriptionUrl' | translate }}</mat-label>

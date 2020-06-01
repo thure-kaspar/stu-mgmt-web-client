@@ -6,7 +6,7 @@
 
 		<mat-tab-group #tabs color="accent" mat-align-tabs="center" animationDuration="0ms">
 
-			<mat-tab label="Single">
+			<mat-tab label="{{ 'Common.Single' | translate }}">
 				<form [formGroup]="form" autocomplete="off">
 					<mat-form-field>
 						<mat-label floatLabel="always" always>{{ 'Common.Name' | translate }}</mat-label>
@@ -24,7 +24,7 @@
 				</form>
 			</mat-tab>
 
-			<mat-tab label="Multiple">
+			<mat-tab label="{{ 'Common.Multiple' | translate }}">
 				<ng-template matTabContent>
 					<app-create-group-multiple #createMultiple [courseId]="courseId" (onGroupsCreated)="onGroupsCreatedHandler($event)"></app-create-group-multiple>
 				</ng-template>
