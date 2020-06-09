@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { CourseDto, CoursesService, StudentMgmtException } from "../../../../../api";
 import { MatDialog } from "@angular/material/dialog";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
-import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 
@@ -59,7 +59,7 @@ export class CourseComponent implements OnInit {
 	/** Allows the user to leave the course, if he gives confirmation. */
 	leaveCourse(): void {
 		const data: ConfirmDialogData = { params: [this.course.title, this.course.semester] };
-		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data })
+		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
 			.afterClosed().subscribe(
 				confirmed => {
 					if (confirmed) {

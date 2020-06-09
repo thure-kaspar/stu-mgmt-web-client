@@ -21,9 +21,9 @@ export class ConfirmDialogData {
 	templateUrl: "./confirm-dialog.dialog.html",
 	styleUrls: ["./confirm-dialog.dialog.scss"]
 })
-export class ConfirmDialogComponent implements OnInit {
+export class ConfirmDialog implements OnInit {
 
-	constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent, boolean>,
+	constructor(public dialogRef: MatDialogRef<ConfirmDialog, boolean>,
 				@Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData) { }
 
 	ngOnInit(): void {

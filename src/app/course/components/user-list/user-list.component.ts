@@ -4,7 +4,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatDialog } from "@angular/material/dialog";
-import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-role/change-role.dialog";
 import { ActivatedRoute } from "@angular/router";
@@ -73,7 +73,7 @@ export class UserListComponent implements OnInit {
 	 */
 	openRemoveDialog(user: UserDto): void {
 		// Open ConfirmDialog
-		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, {
+		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, {
 			data: {
 				params: [user.username, user.courseRole]
 			}

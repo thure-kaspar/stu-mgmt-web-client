@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { SearchCourseDialog } from "../../dialogs/search-course/search-course.dialog";
-import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { SearchUserDialog } from "../../dialogs/search-user/search-user.dialog";
 import { Router } from "@angular/router";
 import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
@@ -76,7 +76,7 @@ export class CreateCourseComponent implements OnInit {
 			params: [course.title, course.semester] 
 		};
 
-		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data }).afterClosed().subscribe(
+		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed().subscribe(
 			isConfirmed => {
 				if (isConfirmed) {
 					this.courseService.createCourse(course).subscribe(

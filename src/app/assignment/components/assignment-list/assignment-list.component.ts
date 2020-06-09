@@ -5,7 +5,7 @@ import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-a
 import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/edit-assignment/edit-assignment.dialog";
 import { ActivatedRoute } from "@angular/router";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
-import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 
 @Component({
 	selector: "app-assignment-list",
@@ -37,7 +37,7 @@ export class AssignmentListComponent implements OnInit {
 
 	onDelete(assignment: AssignmentDto): void {
 		const data: ConfirmDialogData = { params: [assignment.name] };
-		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data }).afterClosed().subscribe(
+		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed().subscribe(
 			confirmed => {
 				if (confirmed) {
 					this.assignmentManagement.remove(assignment, this.courseId).subscribe(

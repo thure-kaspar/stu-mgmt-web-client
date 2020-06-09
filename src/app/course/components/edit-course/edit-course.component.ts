@@ -9,7 +9,7 @@ import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateAssignmentTemplateDialogData, CreateAssignmentTemplateDialog } from "../../dialogs/create-assignment-template/create-assignment-template.dialog";
-import { ConfirmDialogComponent, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { EditAssignmentTemplateDialogData, EditAssignmentTemplateDialog } from "../../dialogs/edit-assignment-template/edit-assignment-template.dialog";
 import { getSemester } from "../../../../../utils/helper";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
@@ -150,7 +150,7 @@ export class EditCourseComponent implements OnInit {
 	 */
 	deleteAssignmentTemplate(template: AssignmentTemplateDto): void {
 		const data: ConfirmDialogData = { params: [template.templateName] };
-		this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data }).afterClosed().subscribe(
+		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed().subscribe(
 			confirmed => {
 				if (confirmed) {
 					this.courseConfigService.deleteAssignmentTemplate(this.courseId, template.id).subscribe(
