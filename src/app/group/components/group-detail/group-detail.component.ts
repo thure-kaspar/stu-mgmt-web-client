@@ -4,6 +4,8 @@ import { ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../../auth/services/auth.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { DialogService } from "../../../shared/services/dialog.service";
 
 @Component({
 	selector: "app-group-detail",
@@ -14,6 +16,9 @@ export class GroupDetailComponent implements OnInit {
 
 	group: GroupDto;
 
+	courseId: string;
+	groupId: string;
+
 	assessments: AssessmentDto[];
 	displayedColumns: string[] = ["name", "type", "score", "action"];
 	dataSource: MatTableDataSource<AssessmentDto>;
@@ -22,11 +27,18 @@ export class GroupDetailComponent implements OnInit {
 	
 	constructor(private groupService: GroupsService,
 				private authService: AuthService,
-				private route: ActivatedRoute) { }
+				private route: ActivatedRoute,
+				private dialogService: DialogService,
+				private snackbar: SnackbarService) { }
 
 	ngOnInit(): void {
-		const groupId = this.route.snapshot.paramMap.get("groupId");
-		this.groupService.getGroup("java-wise1920", groupId).subscribe(
+		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
+		this.groupId = this.route.snapshot.paramMap.get("groupId");
+		this.loadGroup();
+	}
+
+	loadGroup(): void {
+		this.groupService.getGroup(this.courseId, this.groupId).subscribe(
 			result => { 
 				this.group = result;
 				this.assessments = this.group.assessments;
@@ -42,9 +54,27 @@ export class GroupDetailComponent implements OnInit {
 
 	}
 
-	/** TODO */
+	/** Removes the selected member from the group, if user confirms the action. */
 	onRemoveUser(user: UserDto): void {
-
+		this.dialogService.openConfirmDialog({ 
+			title: "Action.Custom.RemoveUserFromGroup",
+			params: [user.username], 
+		}).subscribe(
+			confirmed => {
+				if (confirmed) {
+					this.groupService.removeUserFromGroup(this.courseId, this.group.id, user.id).subscribe(
+						success => {
+							this.snackbar.openSuccessMessage();
+							this.loadGroup();
+						},
+						error => {
+							console.log(error);
+							this.snackbar.openErrorMessage();
+						}
+					);
+				}
+			}
+		);
 	}
 
 }
