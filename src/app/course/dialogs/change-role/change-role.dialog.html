@@ -1,5 +1,5 @@
 <div class="dialog-container" cdkFocusRegionstart>
-	<mat-card-title>{{ 'Button.Custom.ChangeRole' | translate }}: {{data.user.username}}</mat-card-title>
+	<mat-card-title>{{ 'Action.Custom.ChangeRole' | translate }}: {{data.user.username}}</mat-card-title>
 
 	<!-- <label>{{ 'Property.User.CourseRole' | translate }}</label> -->
 	<mat-radio-group id="roles-group" [(ngModel)]="selectedRole">
@@ -9,8 +9,8 @@
 	</mat-radio-group>
 
 	<div class="button-container">
-		<button mat-flat-button color="accent" (click)="onSave()">{{ 'Button.Save' | translate }}</button>
-		<button mat-flat-button (click)="onCancel()">{{ 'Button.Cancel' | translate }}</button>
+		<button mat-flat-button color="accent" (click)="onSave()">{{ 'Action.Save' | translate }}</button>
+		<button mat-flat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
 	</div>
 
 </div>

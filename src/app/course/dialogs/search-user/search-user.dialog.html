@@ -7,7 +7,7 @@
 				<mat-label>Filter</mat-label>
 				<input matInput [(ngModel)]="userFilter" (keydown.enter)="searchUsers()" placeholder="Filter..." autocomplete="off">
 			</mat-form-field>
-			<button mat-flat-button color="accent" (click)="searchUsers()" id="btn-search">{{ 'Button.Search' | translate }}</button>
+			<button mat-flat-button color="accent" (click)="searchUsers()" id="btn-search">{{ 'Action.Search' | translate }}</button>
 		</div>
 		
 		<div id="table-users">
@@ -62,11 +62,11 @@
 						  <mat-menu #userOptionsMenu="matMenu" yPosition="above">
 							<button mat-menu-item>
 								<mat-icon>import_export</mat-icon>
-								<span>{{ 'Button.Custom.ChangeRole' | translate }}</span>
+								<span>{{ 'Action.Custom.ChangeRole' | translate }}</span>
 							</button>
 							<button mat-menu-item>
 							  <mat-icon>delete_forever</mat-icon>
-							  <span>{{ 'Button.Remove' | translate }}</span>
+							  <span>{{ 'Action.Remove' | translate }}</span>
 							</button>
 						  </mat-menu>
 					</td>
@@ -84,8 +84,8 @@
 	</div>
 
 	<div mat-dialog-actions class="dialog-actions">
-		<button mat-raised-button color="accent" (click)="onConfirm()">{{ 'Button.Ok' | translate }}</button>
-		<button mat-button (click)="onCancel()">{{ 'Button.Cancel' | translate }}</button>
+		<button mat-raised-button color="accent" (click)="onConfirm()">{{ 'Action.Ok' | translate }}</button>
+		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
 	</div>
 
 </div>

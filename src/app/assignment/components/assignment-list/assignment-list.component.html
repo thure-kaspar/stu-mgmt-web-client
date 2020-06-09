@@ -1,7 +1,7 @@
 <div class="tab">
 	<button (click)="openAddDialog()" mat-flat-button id="btn-add" color="accent">
 		<mat-icon>add</mat-icon>
-		{{ 'Button.Custom.AddAssignment' | translate }}
+		{{ 'Action.Custom.AddAssignment' | translate }}
 	</button>
 
 	<mat-list class="assignment-cards">
@@ -18,8 +18,8 @@
 			</span>
 
 			<span class="right">
-				<button mat-button (click)="openEditDialog(assignment)">{{ 'Button.Edit' | translate }}</button>
-				<button mat-button class="btn-delete" (click)="onDelete(assignment)">{{ 'Button.Delete' | translate }}</button>
+				<button mat-button (click)="openEditDialog(assignment)">{{ 'Action.Edit' | translate }}</button>
+				<button mat-button class="btn-delete" (click)="onDelete(assignment)">{{ 'Action.Delete' | translate }}</button>
 			</span>
 
 		</mat-list-item>

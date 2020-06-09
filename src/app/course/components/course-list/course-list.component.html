@@ -4,7 +4,7 @@
 			<a [routerLink]="['/courses/create']">
 				<button mat-flat-button id="btn-add" color="accent">
 					<mat-icon>add</mat-icon>
-					{{ 'Button.Custom.CreateCourse' | translate }}
+					{{ 'Action.Custom.CreateCourse' | translate }}
 				</button>
 			</a>
 		</mat-card-title>
@@ -24,7 +24,7 @@
 				</mat-select>
 			</mat-form-field>
 
-			<button mat-flat-button (click)="searchCourses()" id="btn-search" color="accent">{{ 'Button.Search' | translate }}</button>
+			<button mat-flat-button (click)="searchCourses()" id="btn-search" color="accent">{{ 'Action.Search' | translate }}</button>
 		</div>
 
 		<div class="table-courses">

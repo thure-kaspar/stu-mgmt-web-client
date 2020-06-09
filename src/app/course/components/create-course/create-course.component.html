@@ -1,11 +1,11 @@
 <mat-card>
 	<mat-card-title>
 		<div>
-			{{ 'Button.Custom.CreateCourse' | translate }}
-			<button mat-raised-button color="accent" [disabled]="form.invalid" (click)="createCourse()">{{ 'Button.Create' | translate }}</button>
+			{{ 'Action.Custom.CreateCourse' | translate }}
+			<button mat-raised-button color="accent" [disabled]="form.invalid" (click)="createCourse()">{{ 'Action.Create' | translate }}</button>
 		</div>
 		<button mat-raised-button color="primary" matTooltip="Opens the Search-Course-Dialog" (click)="openSearchCourseDialog()">
-			<mat-icon>search</mat-icon>{{ 'Button.Custom.SelectCourseTemplate' | translate }}
+			<mat-icon>search</mat-icon>{{ 'Action.Custom.SelectCourseTemplate' | translate }}
 		</button>
 	</mat-card-title>
 
@@ -38,7 +38,7 @@
 	
 				<mat-tab label="{{ 'Domain.AssignmentTemplates' | translate }}"> 
 					<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="assignmentTemplatesForm.addAssignmentTemplate()">
-						<mat-icon>add</mat-icon>{{ 'Button.Custom.AddAssignmentTemplate' | translate }}
+						<mat-icon>add</mat-icon>{{ 'Action.Custom.AddAssignmentTemplate' | translate }}
 					</button> 
 					<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
 				</mat-tab>
@@ -48,7 +48,7 @@
 			<mat-tab class="tab" label="{{ 'Domain.Lecturers' | translate }}">
 				<div id="lecturers" formArrayName="lecturers">
 					<button type="button" id="btn-add-lecturer" mat-flat-button color="accent" (click)="addLecturer()">
-						<mat-icon>add</mat-icon>{{ 'Button.Custom.AddLecturer' | translate }}
+						<mat-icon>add</mat-icon>{{ 'Action.Custom.AddLecturer' | translate }}
 					</button>
 
 					<mat-hint>Use the <mat-icon id="icon-person-hint">search</mat-icon>-button in the input field to open the User-Search-Dialog. The username of the selected user will be inserted automatically.</mat-hint>
@@ -57,8 +57,8 @@
 						<mat-label>Lecturer #{{i + 1}}</mat-label>
 						<input matInput [formControlName]="i" required>
 						<mat-hint>{{ 'Property.User.Username' | translate }}</mat-hint>
-						<button  matPrefix mat-icon-button matTooltip="{{ 'Button.Search' | translate }}" (click)="openSearchUserDialog(i)"><mat-icon>search</mat-icon></button>
-						<button  matSuffix mat-icon-button matTooltip="{{ 'Button.Remove' | translate }}" (click)="removeLecturer(i)"><mat-icon>clear</mat-icon></button>
+						<button  matPrefix mat-icon-button matTooltip="{{ 'Action.Search' | translate }}" (click)="openSearchUserDialog(i)"><mat-icon>search</mat-icon></button>
+						<button  matSuffix mat-icon-button matTooltip="{{ 'Action.Remove' | translate }}" (click)="removeLecturer(i)"><mat-icon>clear</mat-icon></button>
 					</mat-form-field>
 				</div>
 			</mat-tab>
