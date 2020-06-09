@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { TranslateService } from "@ngx-translate/core";
 
 export class ConfirmDialogData {
 	/**
@@ -7,7 +8,7 @@ export class ConfirmDialogData {
 	 */
 	title?: string;
 	/**
-	 * ALlows overwriting the dialog's default message. 
+	 * Allows overwriting the dialog's default message. 
 	 */
 	message?: string;
 	/**
@@ -38,11 +39,11 @@ export class ConfirmDialog implements OnInit {
 	}
 
 	getTitle(): string {
-		return this.data?.title ?? "CONFIRM_DIALOG_TITLE";
+		return this.data?.title ?? "Action.Confirm";
 	}
 
 	getMessage(): string {
-		return this.data?.message ?? "CONFIRM_DIALOG_MESSAGE";
+		return this.data?.message ?? "Prompt.Question.RemoveUserFromGroup";
 	}
 
 }

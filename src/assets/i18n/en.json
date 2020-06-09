@@ -13,9 +13,10 @@
       "AddLecturer": "Add lecturer",
       "ChangeRole": "Change role",
       "CreateCourse": "Create course",
+      "RemoveUserFromGroup": "Remove user from group",
       "SelectCourseTemplate": "Select course template",
       "UseNamingSchemaAndCount": "Use prefix and count",
-      "UseNamingSchemeAndCount": "Use p"
+      "UseNamingSchemeAndCount": "Use prefix and count"
     },
     "Delete": "Delete",
     "Edit": "Edit",
@@ -128,6 +129,11 @@
     "Link": "Link",
     "Privacy": "Privacy",
     "Settings": "Settings"
+  },
+  "Prompt": {
+    "Question": {
+      "RemoveUserFromGroup": "Do you really want to remove this user from the group ?"
+    }
   },
   "Property": {
     "Assessment": {

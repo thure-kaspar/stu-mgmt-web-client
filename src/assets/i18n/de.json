@@ -13,8 +13,10 @@
       "AddLecturer": "Lehrenden hinzufügen",
       "ChangeRole": "Rolle ändern",
       "CreateCourse": "Veranstaltung erstellen",
+      "RemoveUserFromGroup": "Nutzer aus der Gruppe entfernen",
       "SelectCourseTemplate": "Veranstaltung als Vorlage wählen",
-      "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden"
+      "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden",
+      "UseNamingSchemeAndCount": "Prefix und Anzahl verwenden"
     },
     "Delete": "Löschen",
     "Edit": "Ändern",
@@ -127,6 +129,11 @@
     "Link": "Link",
     "Privacy": "Datenschutz",
     "Settings": "Einstellungen"
+  },
+  "Prompt": {
+    "Question": {
+      "RemoveUserFromGroup": "Soll dieser Nutzer wirklich aus der Gruppe entfernt werden ?"
+    }
   },
   "Property": {
     "Assessment": {
