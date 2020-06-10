@@ -24,16 +24,19 @@
     "Leave": "Verlassen",
     "No": "Nein",
     "Ok": "Ok",
+    "Open": "Öffnen",
     "Remove": "Entfernen",
     "Save": "Speichern",
     "Search": "Suchen",
     "Send": "Senden",
+    "View": "Ansehen",
     "Yes": "Ja"
   },
   "Common": {
     "All": "Alle",
     "Count": "Anzahl",
     "Date": "Datum",
+    "For": "Für",
     "Help": "Hilfe",
     "Multiple": "Mehrere",
     "My": "Meine",
@@ -138,7 +141,7 @@
   "Property": {
     "Assessment": {
       "AchievedPoints": "Erreichte Punktzahl",
-      "Creator": "Ersteller",
+      "Creator": "Bewertet von",
       "PartialAssessments": "Teilbewertungen"
     },
     "Assignment": {

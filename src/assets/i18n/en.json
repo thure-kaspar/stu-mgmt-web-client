@@ -24,16 +24,19 @@
     "Leave": "Leave",
     "No": "No",
     "Ok": "Ok",
+    "Open": "Open",
     "Remove": "Remove",
     "Save": "Save",
     "Search": "Search",
     "Send": "Send",
+    "View": "View",
     "Yes": "Yes"
   },
   "Common": {
     "All": "All",
     "Count": "Count",
     "Date": "Date",
+    "For": "For",
     "Help": "Help",
     "Multiple": "Multiple",
     "My": "My",
@@ -138,7 +141,7 @@
   "Property": {
     "Assessment": {
       "AchievedPoints": "Achieved points",
-      "Creator": "Creator",
+      "Creator": "Evaluated by",
       "PartialAssessments": "Partial assessments"
     },
     "Assignment": {
