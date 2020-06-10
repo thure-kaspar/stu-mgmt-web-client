@@ -22,7 +22,7 @@ export class AssignmentListComponent implements OnInit {
 				public dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
+		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
 		this.assignmentManagement.loadAssignmentsOfCourse(this.courseId);
 	}
 
