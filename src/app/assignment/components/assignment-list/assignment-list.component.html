@@ -14,7 +14,7 @@
 				<mat-icon *ngIf="assignment.state == 'EVALUATED'" color="primary">assignment_turned_in</mat-icon>
 				<mat-icon *ngIf="assignment.state == 'INVISIBLE'" color="primary">vpn_key</mat-icon>
 
-				<a class="link-none font-bold" [routerLink]="[assignment.id]">{{assignment.name}}</a>
+				<a class="link-none font-bold" [routerLink]="[assignment.id, 'assessments' ]">{{assignment.name}}</a>
 			</span>
 
 			<span class="right">

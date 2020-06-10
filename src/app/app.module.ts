@@ -20,6 +20,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/de";
 import localeDeExtra from "@angular/common/locales/extra/de";
+import { AssessmentModule } from "./assessment/assessment.module";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -50,7 +51,8 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		SharedModule,
 		MaterialModule,
 		LayoutModule,
-		AuthModule
+		AuthModule,
+		AssessmentModule
 	],
 	providers: [
 		{ provide: BASE_PATH, useValue: environment.API_BASE_PATH },
