@@ -30,7 +30,7 @@ export class SnackbarService {
 	 * @param [message] Custom string or translation key.
 	 */
 	openErrorMessage(message?: string, config?: MatSnackBarConfig): MatSnackBarRef<SimpleSnackBar> {
-		const translation = message ? this.translate.instant(message) : this.translate.instant("Common.Error");
+		const translation = message ? this.translate.instant(message) : this.translate.instant("Error.SomethingWentWrong");
 		return this.snackbar.open(translation, "OK", {
 			...{ duration: 2500, panelClass: ["snackbar-error"]}, // Default config
 			...config // Overwritten config

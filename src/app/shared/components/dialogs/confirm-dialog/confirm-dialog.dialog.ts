@@ -43,7 +43,7 @@ export class ConfirmDialog implements OnInit {
 	}
 
 	getMessage(): string {
-		return this.data?.message ?? "Prompt.Question.RemoveUserFromGroup";
+		return this.data?.message ?? "Prompt.Question.AreYouSure";
 	}
 
 }

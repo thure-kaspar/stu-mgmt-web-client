@@ -58,7 +58,10 @@ export class CourseComponent implements OnInit {
 
 	/** Allows the user to leave the course, if he gives confirmation. */
 	leaveCourse(): void {
-		const data: ConfirmDialogData = { params: [this.course.title, this.course.semester] };
+		const data: ConfirmDialogData = {
+			title: "Action.Custom.LeaveCourse",
+			params: [this.course.title, this.course.semester] 
+		};
 		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
 			.afterClosed().subscribe(
 				confirmed => {
