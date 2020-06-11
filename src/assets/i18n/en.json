@@ -11,8 +11,10 @@
       "AddCriteria": "Add criteria",
       "AddGroup": "Add group",
       "AddLecturer": "Add lecturer",
+      "AddPartialAssessment": "Add partial assessment",
       "ChangeRole": "Change role",
       "CreateCourse": "Create course",
+      "LeaveCourse": "Leave course",
       "RemoveUserFromGroup": "Remove user from group",
       "SelectCourseTemplate": "Select course template",
       "UseNamingSchemaAndCount": "Use prefix and count",
@@ -99,6 +101,12 @@
       "STUDENT": "Student",
       "TUTOR": "Tutor"
     },
+    "Severity": {
+      "CRITICAL": "Critical",
+      "ERROR": "Error",
+      "INFORMATIONAL": "Informational",
+      "WARNING": "Warning"
+    },
     "UserRole": {
       "ADMIN_TOOL": "ADMIN_TOOL",
       "MGTM_ADMIN": "MGTM_ADMIN",
@@ -107,6 +115,9 @@
     }
   },
   "Error": {
+    "AssignmentNotInReview": "Assignment creation requires the \"In Review\"-state.",
+    "FailedToLoadRequiredData": "Failed to load the required data.",
+    "SomethingWentWrong": "Oops, something went wrong!",
     "ValueMissing": "Value is missing."
   },
   "Event": {
@@ -135,12 +146,14 @@
   },
   "Prompt": {
     "Question": {
+      "AreYouSure": "Do you confirm this action ?",
       "RemoveUserFromGroup": "Do you really want to remove this user from the group ?"
     }
   },
   "Property": {
     "Assessment": {
       "AchievedPoints": "Achieved points",
+      "Comment": "Comment",
       "Creator": "Evaluated by",
       "PartialAssessments": "Partial assessments"
     },
@@ -186,6 +199,7 @@
       "Comment": "Comment",
       "Points": "Points",
       "Severity": "Severity",
+      "Title": "Title",
       "Type": "Type"
     },
     "User": {
@@ -197,8 +211,10 @@
   },
   "Title": {
     "AppName": "Student-Management",
+    "CreateAssessment": "Create assessment",
     "CreateAssignment": "Create assignment",
     "CreateGroup": "Create group",
+    "EditAssessment": "Edit assessment",
     "EditAssignment": "Edit assignment",
     "JoinCourse": "Join course",
     "JoinGroup": "Join group",

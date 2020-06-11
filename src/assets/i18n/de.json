@@ -11,8 +11,10 @@
       "AddCriteria": "Kriterium hinzufügen",
       "AddGroup": "Gruppe erstellen",
       "AddLecturer": "Lehrenden hinzufügen",
+      "AddPartialAssessment": "Teilbewertung hinzufügen",
       "ChangeRole": "Rolle ändern",
       "CreateCourse": "Veranstaltung erstellen",
+      "LeaveCourse": "Kurs verlassen",
       "RemoveUserFromGroup": "Nutzer aus der Gruppe entfernen",
       "SelectCourseTemplate": "Veranstaltung als Vorlage wählen",
       "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden",
@@ -80,7 +82,7 @@
       "EVALUATED": "Bewertet",
       "INVISIBLE": "Unsichtbar",
       "IN_PROGRESS": "Laufend",
-      "IN_REVIEW": "Wird bewertet"
+      "IN_REVIEW": "In Bewertung"
     },
     "AssignmentType": {
       "HOMEWORK": "Hausaufgabe",
@@ -99,6 +101,12 @@
       "STUDENT": "Student",
       "TUTOR": "Tutor"
     },
+    "Severity": {
+      "CRITICAL": "Kritisch",
+      "ERROR": "Error",
+      "INFORMATIONAL": "Informativ",
+      "WARNING": "Warnung"
+    },
     "UserRole": {
       "ADMIN_TOOL": "ADMIN_TOOL",
       "MGTM_ADMIN": "MGTM_ADMIN",
@@ -107,6 +115,9 @@
     }
   },
   "Error": {
+    "AssignmentNotInReview": "Erstellung von Bewertungen benötigt den \"In Bewertung\"-Status.",
+    "FailedToLoadRequiredData": "Benötigte Daten konnten nicht geladen werden.",
+    "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
     "ValueMissing": "Fehlender Wert."
   },
   "Event": {
@@ -135,12 +146,14 @@
   },
   "Prompt": {
     "Question": {
+      "AreYouSure": "Soll diese Aktion durchgeführt werden ?",
       "RemoveUserFromGroup": "Soll dieser Nutzer wirklich aus der Gruppe entfernt werden ?"
     }
   },
   "Property": {
     "Assessment": {
       "AchievedPoints": "Erreichte Punktzahl",
+      "Comment": "Kommentar",
       "Creator": "Bewertet von",
       "PartialAssessments": "Teilbewertungen"
     },
@@ -185,7 +198,8 @@
     "PartialAssessment": {
       "Comment": "Kommentar",
       "Points": "Punkte",
-      "Severity": "Schweregrad",
+      "Severity": "Schwere",
+      "Title": "Titel",
       "Type": "Typ"
     },
     "User": {
@@ -197,8 +211,10 @@
   },
   "Title": {
     "AppName": "Studenten-Management",
+    "CreateAssessment": "Bewertung erstellen",
     "CreateAssignment": "Aufgabe erstellen",
     "CreateGroup": "Gruppe erstellen",
+    "EditAssessment": "Bewertung editieren",
     "EditAssignment": "Aufgabe editieren",
     "JoinCourse": "Veranstaltung beitreten",
     "JoinGroup": "Gruppe beitreten",
