@@ -44,6 +44,7 @@ export interface AssessmentDto {
      */
     creatorId?: string;
     group?: GroupDto;
+    user?: UserDto;
     creator?: UserDto;
     assignment?: AssignmentDto;
     partialAssessments?: Array<PartialAssessmentDto>;

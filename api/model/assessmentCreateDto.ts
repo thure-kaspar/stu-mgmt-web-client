@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { PartialAssessmentDto } from './partialAssessmentDto';
+import { UserDto } from './userDto';
 
 export interface AssessmentCreateDto { 
     /**
@@ -36,5 +37,6 @@ export interface AssessmentCreateDto {
      * Identifier of the creator of this assessment.
      */
     creatorId?: string;
+    user?: UserDto;
     partialAssessments?: Array<PartialAssessmentDto>;
 }

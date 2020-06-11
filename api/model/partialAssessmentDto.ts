@@ -12,8 +12,18 @@
 
 export interface PartialAssessmentDto { 
     assessmentId: string;
+    title: string;
     type?: string;
-    severity?: string;
+    severity?: PartialAssessmentDto.SeverityEnum;
     points?: number;
     comment?: string;
+}
+export namespace PartialAssessmentDto {
+    export type SeverityEnum = 'INFORMATIONAL' | 'WARNING' | 'ERROR' | 'CRITICAL';
+    export const SeverityEnum = {
+        INFORMATIONAL: 'INFORMATIONAL' as SeverityEnum,
+        WARNING: 'WARNING' as SeverityEnum,
+        ERROR: 'ERROR' as SeverityEnum,
+        CRITICAL: 'CRITICAL' as SeverityEnum
+    };
 }
