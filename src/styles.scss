@@ -23,6 +23,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	background-color: map-get($student-mgmt-client-primary, 600)
 }
 
+// Remove arrows of number-input
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .content-container {
 	padding-top: 64px;
 	margin-left: 0.5rem;
@@ -71,8 +84,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .tab {
-	margin-top: 0.5rem;
-	margin-bottom: 0.5rem;
+	margin-top: 8px;
 }
 
 .card-title {
@@ -151,3 +163,8 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 	color: unset;
 	opacity: unset;
 }
+
+.INFORMATIONAL { font-weight: 500; color: rgb(0, 130, 173); }
+.WARNING { font-weight: 500; color:rgb(233, 185, 55); }
+.ERROR { font-weight: 500; color: rgb(206, 134, 0); }
+.CRITICAL { font-weight: 500; color: red; }
