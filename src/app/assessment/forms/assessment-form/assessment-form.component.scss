@@ -1,0 +1,52 @@
+#assessment-form {
+	display: flex;
+	flex-direction: column;
+
+	mat-form-field {
+		width: 100%;
+	}
+
+	width: 500px;
+}
+
+.btn-add-partial-assessment {
+	width: fit-content;
+}
+
+#points-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+
+	#achieved-points {
+		width: 32px;
+		margin-left: 4px;
+		margin-right: 4px;
+		input {
+			text-align: right;
+		}
+	}
+}
+
+.points-input {
+	text-align: center;
+}
+
+.title-points-severity-span {
+	display: grid;
+	column-gap: 8px;
+	grid-template-columns: auto 48px 106px 32px;
+
+	button {
+		align-self: center;
+		margin-top: 6px;
+	}
+}
+
+.no-break {
+	width: max-content;
+}
+
+.severity-select {
+	text-align: center;
+}
