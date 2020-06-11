@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AssessmentOverviewComponent } from "./assessment-overview/assessment-overview.component";
+import { CreateAssessmentComponent } from "./create-assessment/create-assessment.component";
 
 const routes: Routes = [
-	{ path: "", component: AssessmentOverviewComponent }
+	{ path: "", component: AssessmentOverviewComponent },
+	{ path: "create", component: CreateAssessmentComponent, pathMatch: "full" }
 ];
 
 @NgModule({

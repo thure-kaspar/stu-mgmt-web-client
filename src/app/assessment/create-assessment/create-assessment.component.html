@@ -1,0 +1,21 @@
+<div id="create-assessment-container" class="tab">
+
+	<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
+
+	<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
+		<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
+	</p>
+
+	<div>
+		<app-assessment-form [assignment]="assignment"></app-assessment-form>
+		<button mat-raised-button color="accent" id="btn-create" [disabled]="form.isInvalid() && assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
+			{{ 'Action.Create' | translate }}
+		</button>
+	</div>
+
+	<div>
+		
+	</div>
+
+</div>
+
