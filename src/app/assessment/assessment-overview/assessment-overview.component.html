@@ -2,6 +2,12 @@
 
 	<h2>{{ assignment?.name }}</h2>
 
+	<a [routerLink]="[ 'create']" [matTooltip]="'Error.AssignmentNotInReview' | translate">
+		<button mat-flat-button color="accent" id="btn-create-assessment" [disabled]="assignment?.state !== stateEnum.INREVIEW">
+			<mat-icon>add</mat-icon>{{ 'Title.CreateAssessment' | translate }}
+		</button>
+	</a>
+
 	<table class="full-width" mat-table [dataSource]="dataSource" matSort>
 		<!-- View Column -->
 		<ng-container matColumnDef="view">

@@ -23,6 +23,8 @@ export class AssessmentOverviewComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 
+	stateEnum = AssignmentDto.StateEnum;
+
 	constructor(private assignmentService: AssignmentsService,
 				private assessmentService: AssessmentsService,
 				private route: ActivatedRoute) { }
