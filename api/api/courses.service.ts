@@ -253,7 +253,7 @@ export class CoursesService {
 
     /**
      * Get course
-     * Returns the course.
+     * Retrieves the course, if the requesting user is a member of this course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

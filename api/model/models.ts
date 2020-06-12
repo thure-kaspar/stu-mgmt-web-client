@@ -1,4 +1,5 @@
 export * from './admissionCriteriaDto';
+export * from './assessmentAllocationDto';
 export * from './assessmentCreateDto';
 export * from './assessmentDto';
 export * from './assignmentDto';
