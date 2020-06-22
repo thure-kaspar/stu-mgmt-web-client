@@ -7,11 +7,13 @@ import { AuthModule } from "../auth/auth.module";
 import { ConfirmDialog } from "./components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatNativeDateModule } from "@angular/material/core";
+import { Paginator } from "./paginator/paginator.component";
 
 @NgModule({
 	declarations: [
 		PageNotFoundComponent, 
-		ConfirmDialog
+		ConfirmDialog,
+		Paginator
 	],
 	imports: [ 
 		CommonModule,
@@ -26,7 +28,8 @@ import { MatNativeDateModule } from "@angular/material/core";
 		TranslateModule,
 		FormsModule,
 		ReactiveFormsModule,
-		MatNativeDateModule
+		MatNativeDateModule,
+		Paginator
 	],
 	providers: [],
 })
