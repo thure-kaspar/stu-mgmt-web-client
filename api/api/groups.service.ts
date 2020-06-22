@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { GroupCreateBulkDto } from '../model/groupCreateBulkDto';
 import { GroupDto } from '../model/groupDto';
 import { GroupEventDto } from '../model/groupEventDto';
+import { GroupWithAssignedEvaluatorDto } from '../model/groupWithAssignedEvaluatorDto';
 import { PasswordDto } from '../model/passwordDto';
 import { UserDto } from '../model/userDto';
 
@@ -318,6 +319,57 @@ export class GroupsService {
     }
 
     /**
+     * Get snapshot of a group at assignment end
+     * Returns a snapshot of the group&#x27;s members at the time of the assignment&#x27;s end.
+     * @param courseId 
+     * @param groupId 
+     * @param assignmentId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
+    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
+    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
+    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getGroupFromAssignment.');
+        }
+
+        if (groupId === null || groupId === undefined) {
+            throw new Error('Required parameter groupId was null or undefined when calling getGroupFromAssignment.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling getGroupFromAssignment.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<GroupDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/assignments/${encodeURIComponent(String(assignmentId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get group history of course
      * Retrieves all group events of the course.
      * @param courseId 
@@ -437,6 +489,75 @@ export class GroupsService {
 
         return this.httpClient.request<Array<GroupDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get groups with assigned evaluator
+     * Retrieves groups with their assigned evaluator for an assignment
+     * @param courseId 
+     * @param assignmentId 
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param assignedEvaluatorId Filter by assigned evaluator.
+     * @param excludeAlreadyReviewed Excludes groups/users that have already been reviewed.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getGroupsWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupWithAssignedEvaluatorDto>>;
+    public getGroupsWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupWithAssignedEvaluatorDto>>>;
+    public getGroupsWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupWithAssignedEvaluatorDto>>>;
+    public getGroupsWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getGroupsWithAssignedEvaluator.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling getGroupsWithAssignedEvaluator.');
+        }
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (assignedEvaluatorId !== undefined && assignedEvaluatorId !== null) {
+            queryParameters = queryParameters.set('assignedEvaluatorId', <any>assignedEvaluatorId);
+        }
+        if (excludeAlreadyReviewed !== undefined && excludeAlreadyReviewed !== null) {
+            queryParameters = queryParameters.set('excludeAlreadyReviewed', <any>excludeAlreadyReviewed);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<GroupWithAssignedEvaluatorDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/assignments/${encodeURIComponent(String(assignmentId))}/with-assigned-evaluator`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

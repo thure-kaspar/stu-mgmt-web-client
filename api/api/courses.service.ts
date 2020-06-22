@@ -23,6 +23,7 @@ import { CourseCreateDto } from '../model/courseCreateDto';
 import { CourseDto } from '../model/courseDto';
 import { PasswordDto } from '../model/passwordDto';
 import { UserDto } from '../model/userDto';
+import { UserWithAssignedEvaluatorDto } from '../model/userWithAssignedEvaluatorDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -396,16 +397,40 @@ export class CoursesService {
      * Get users of course
      * Returns a collection of users that are signed up for this course.
      * @param courseId 
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param courseRole 
+     * @param username 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUsersOfCourse(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<UserDto>>;
-    public getUsersOfCourse(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserDto>>>;
-    public getUsersOfCourse(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserDto>>>;
-    public getUsersOfCourse(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<UserDto>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserDto>>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserDto>>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling getUsersOfCourse.');
+        }
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (courseRole) {
+            courseRole.forEach((element) => {
+                queryParameters = queryParameters.append('courseRole', <any>element);
+            })
+        }
+        if (username !== undefined && username !== null) {
+            queryParameters = queryParameters.set('username', <any>username);
         }
 
         let headers = this.defaultHeaders;
@@ -425,6 +450,76 @@ export class CoursesService {
 
         return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users`,
             {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get users with assigned evaluator
+     * Returns users with their assigned evaluator for a particular assignment.
+     * @param courseId 
+     * @param assignmentId 
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param assignedEvaluatorId Filter by assigned evaluator.
+     * @param excludeAlreadyReviewed Excludes groups/users that have already been reviewed.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'body', reportProgress?: boolean): Observable<Array<UserWithAssignedEvaluatorDto>>;
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserWithAssignedEvaluatorDto>>>;
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserWithAssignedEvaluatorDto>>>;
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getUsersWithAssignedEvaluator.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling getUsersWithAssignedEvaluator.');
+        }
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (assignedEvaluatorId !== undefined && assignedEvaluatorId !== null) {
+            queryParameters = queryParameters.set('assignedEvaluatorId', <any>assignedEvaluatorId);
+        }
+        if (excludeAlreadyReviewed !== undefined && excludeAlreadyReviewed !== null) {
+            queryParameters = queryParameters.set('excludeAlreadyReviewed', <any>excludeAlreadyReviewed);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<UserWithAssignedEvaluatorDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/assignments/${encodeURIComponent(String(assignmentId))}/with-assigned-evaluator`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
