@@ -18,7 +18,7 @@ export class SnackbarService {
 	 * @param [message] Custom string or translation key.
 	 */
 	openSuccessMessage(message?: string, config?: MatSnackBarConfig): MatSnackBarRef<SimpleSnackBar> {
-		const translation = message ? this.translate.instant(message) : this.translate.instant("Common.Success");
+		const translation = message ? this.translate.instant(message) : this.translate.instant("Message.Success");
 		return this.snackbar.open(translation, "OK", {
 			...{ duration: 2500, panelClass: ["snackbar-success"]}, // Default config
 			...config // Overwritten config
