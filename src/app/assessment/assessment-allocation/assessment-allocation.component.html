@@ -1,0 +1,13 @@
+<div class="assessment-allocation-container">
+	<mat-form-field>
+		<mat-select [value]="evaluator">
+			<mat-option [value]="undefined" (click)="handleEvaluatorChange(undefined)">-</mat-option>
+			<mat-option *ngFor="let evaluator of evaluators" 
+				[value]="evaluator" 
+				(click)="handleEvaluatorChange(evaluator)"
+			>
+				{{ evaluator.username }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+</div>
