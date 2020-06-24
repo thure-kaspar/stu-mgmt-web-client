@@ -468,13 +468,14 @@ export class CoursesService {
      * @param take [Pagination] The amount of elements that should be included in the response.
      * @param assignedEvaluatorId Filter by assigned evaluator.
      * @param excludeAlreadyReviewed Excludes groups/users that have already been reviewed.
+     * @param nameOfGroupOrUser Filter by group or username.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'body', reportProgress?: boolean): Observable<Array<UserWithAssignedEvaluatorDto>>;
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserWithAssignedEvaluatorDto>>>;
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserWithAssignedEvaluatorDto>>>;
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<UserWithAssignedEvaluatorDto>>;
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserWithAssignedEvaluatorDto>>>;
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserWithAssignedEvaluatorDto>>>;
+    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling getUsersWithAssignedEvaluator.');
@@ -483,6 +484,7 @@ export class CoursesService {
         if (assignmentId === null || assignmentId === undefined) {
             throw new Error('Required parameter assignmentId was null or undefined when calling getUsersWithAssignedEvaluator.');
         }
+
 
 
 
@@ -500,6 +502,9 @@ export class CoursesService {
         }
         if (excludeAlreadyReviewed !== undefined && excludeAlreadyReviewed !== null) {
             queryParameters = queryParameters.set('excludeAlreadyReviewed', <any>excludeAlreadyReviewed);
+        }
+        if (nameOfGroupOrUser !== undefined && nameOfGroupOrUser !== null) {
+            queryParameters = queryParameters.set('nameOfGroupOrUser', <any>nameOfGroupOrUser);
         }
 
         let headers = this.defaultHeaders;
