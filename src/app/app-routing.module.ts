@@ -9,6 +9,7 @@ const routes: Routes = [
 	{ path: "register", component: RegisterComponent, pathMatch: "full" },
 	{ path: "404", component: PageNotFoundComponent, pathMatch: "full" },
 	{ path: "courses", loadChildren: () => import("./course/course.module").then(m => m.CourseModule) },
+	{ path: "" , redirectTo: "/courses", pathMatch: "full" }
 ];
 
 @NgModule({
