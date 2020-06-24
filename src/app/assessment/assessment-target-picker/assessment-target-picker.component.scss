@@ -1,0 +1,24 @@
+.selected {
+	background-color: rgba(30, 255, 0, 0.116);
+}
+
+#filter {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	
+	mat-form-field {
+		margin-top: -4px;
+		box-sizing: content-box;
+		margin-right: 16px;
+	}
+
+	mat-checkbox {
+		align-self: center;
+	}
+
+	#group-filter {
+		margin-top: -24px;
+		margin-bottom: -4px;
+	}
+}

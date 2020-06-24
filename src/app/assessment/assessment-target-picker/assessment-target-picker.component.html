@@ -1,0 +1,37 @@
+<div id="filter">
+	<div>
+		<mat-form-field>
+			<mat-label>{{ 'Common.AssignedTo' | translate }}</mat-label>
+			<mat-select (selectionChange)="updateEvaluatorFilter($event.value)">
+				<mat-option value=undefined>-</mat-option>
+				<mat-option *ngFor="let evaluator of evaluators" [value]="evaluator">{{evaluator.username}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		
+		<mat-checkbox [checked]="filter.excludeAlreadyReviewed" (change)="updateExcludeAlreadyReviewedFilter($event.checked)">
+			{{ 'Misc.ExcludeAlreadyReviewed' | translate }}
+		</mat-checkbox>
+	</div>
+	
+	<mat-form-field id="group-filter">
+		<mat-label>Filter</mat-label>
+		<input matInput [(ngModel)]="filter.nameOfGroupOrUser" (keyup)="updateGroupnameFilter()">
+	</mat-form-field>
+</div>
+
+<mat-tab-group animationDuration="0ms">
+
+	<mat-tab [label]="'Domain.Groups' | translate">
+		<ng-template matTabContent>
+			<app-assessment-group-picker [filter$]="filter$" (onGroupSelected)="onGroupSelected.emit($event)"></app-assessment-group-picker>
+		</ng-template>
+		
+	</mat-tab>
+	
+	<mat-tab [label]="'Domain.Participants' | translate">
+		<ng-template matTabContent>
+			<app-assessment-user-picker [filter$]="filter$" (onUserSelected)="onUserSelected.emit($event)"></app-assessment-user-picker>
+		</ng-template>
+	</mat-tab>
+
+</mat-tab-group>

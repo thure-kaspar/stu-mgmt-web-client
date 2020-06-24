@@ -47,7 +47,6 @@ export class AssessmentOverviewComponent implements OnInit {
 		this.assessmentService.getAllAssessmentsForAssignment(this.courseId, this.assignmentId).subscribe(
 			result => {
 				this.assessments = result;
-				console.log(result);
 				this.dataSource = new MatTableDataSource(this.assessments);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;
