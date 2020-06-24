@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FormBuilder, Validators, FormArray, FormGroup } from "@angular/forms";
+import { FormBuilder, Validators, FormArray, FormGroup, ValidatorFn, AbstractControl } from "@angular/forms";
 import { AbstractForm } from "../../../shared/abstract-form";
 import { AssessmentCreateDto, PartialAssessmentDto, AssignmentDto } from "../../../../../api";
 
@@ -17,7 +17,7 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 	constructor(private fb: FormBuilder) {
 		super();
 		this.form = this.fb.group({
-			achievedPoints: [null, Validators.required],
+			achievedPoints: [0, [Validators.required, this.achievedPointsMaxValueValidator()]],
 			userId: [null],
 			groupId: [null],
 			comment: [null],
@@ -26,7 +26,30 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 	}
 
 	ngOnInit(): void {
-		this.addPartialAssessment();
+	}
+
+	/** Validates that the achieved points do not exceed the max. possible amount of points. */
+	private achievedPointsMaxValueValidator(): ValidatorFn {
+		return (control: AbstractControl): { [key: string]: unknown } | null => {
+			let isTooBig = false;
+			// Only validate, if assignment is loaded and has can awards points
+			if (this.assignment?.points) {
+				isTooBig = control.value > this.assignment.points + (this.assignment.bonusPoints ?? 0);
+			}
+			return isTooBig ? { "achievedPointsMaxValue": { value: control.value } } : null;
+		};
+	}
+
+	/** Returns translation strings of form errors, which can be used in the component. */
+	getErrors(): string[] {
+		const errors = [];
+		if (this.form.hasError("required", ["achievedPoints"])) {
+			errors.push("Error.ValueMissing");
+		}
+		if (this.form.hasError("achievedPointsMaxValue", ["achievedPoints"])) {
+			errors.push("Error.Assessment.AchievedPointsMaxValueExceeded");
+		}
+		return errors;
 	}
 
 	/** Adds a partial assessment to the form. */

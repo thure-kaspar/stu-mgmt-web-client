@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssessmentsService, AssignmentsService, AssessmentCreateDto, AssignmentDto } from "../../../../api";
+import { AssessmentsService, AssignmentsService, AssessmentCreateDto, AssignmentDto, GroupDto, UserDto } from "../../../../api";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/services/snackbar.service";
@@ -15,6 +15,8 @@ export class CreateAssessmentComponent implements OnInit {
 	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
 
 	assignment: AssignmentDto;
+	forUser: UserDto;
+	forGroup: GroupDto;
 
 	courseId: string;
 	assignmentId: string;
@@ -56,6 +58,18 @@ export class CreateAssessmentComponent implements OnInit {
 				this.snackbar.openErrorMessage();
 			}
 		);
+	}
+
+	groupSelectedHandler(group: GroupDto): void {
+		this.forUser = undefined;
+		this.form.patchModel({ groupId: group.id, userId: null });
+		this.forGroup = group;
+	}
+
+	userSelectedHandler(user: UserDto): void {
+		this.forGroup = undefined;
+		this.form.patchModel({ userId: user.id, groupId: null });
+		this.forUser = user;
 	}
 
 }

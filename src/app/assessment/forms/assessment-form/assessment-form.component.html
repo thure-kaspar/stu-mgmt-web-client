@@ -1,20 +1,22 @@
 <form id="assessment-form" [formGroup]="form" autocomplete="off"> 
 
-	<span class="font-bold">{{ 'Common.For' | translate }}: Hmmmm</span>
-
 	<span id="points-container">
 		<mat-label class="font-bold">{{ 'Property.Assessment.AchievedPoints' | translate }}*:</mat-label>
 		<div>
 			<mat-form-field id="achieved-points">
 				<input matInput mat-form type="number" formControlName="achievedPoints" required>
 			</mat-form-field>
-		
 			<span>
 				/ {{assignment?.points}}
 				<ng-container *ngIf="assignment?.bonusPoints">({{assignment.bonusPoints}} {{ 'Property.Assignment.BonusPoints' | translate }})</ng-container>
 			</span>	
 		</div>
 	</span>
+	<ng-container *ngIf="getErrors()">
+		<mat-error *ngFor="let error of getErrors()">
+			{{ error | translate }}
+		</mat-error>
+	</ng-container>
 
 	<mat-form-field appearance="outline">
 		<mat-label>{{ 'Property.Assessment.Comment' | translate }}</mat-label>

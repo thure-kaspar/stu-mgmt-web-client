@@ -1,20 +1,42 @@
 <div id="create-assessment-container" class="tab">
 
-	<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
+	<div id="grid">
+		<div id="left">
+			<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
 
-	<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
-		<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
-	</p>
+			<span class="font-bold">{{ 'Common.For' | translate }}:
+				<span *ngIf="forUser"><a class="link-none" [routerLink]="[ '/courses', courseId, 'users', forUser.id ]">{{forUser.username}}</a></span>
+				<span *ngIf="forGroup">{{forGroup.name}}
+					<mat-chip-list>
+						<a *ngFor="let member of forGroup.users" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.id ]">
+							<mat-chip>{{member.username}}</mat-chip>
+						</a>
+					</mat-chip-list>
+				</span>
+				<span *ngIf="!forUser && !forGroup" id="please-choose" class="text-light">
+					{{ 'Prompt.PleaseChoose' | translate }}
+					<mat-icon [matTooltip]="'Tooltip.SelectAssessmentTarget' | translate">help</mat-icon>
+				</span>
+			</span>
 
-	<div>
-		<app-assessment-form [assignment]="assignment"></app-assessment-form>
-		<button mat-raised-button color="accent" id="btn-create" [disabled]="form.isInvalid() && assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
-			{{ 'Action.Create' | translate }}
-		</button>
-	</div>
+			<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
+				<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
+			</p>
 
-	<div>
-		
+			<app-assessment-form [assignment]="assignment"></app-assessment-form>
+			<button mat-raised-button color="accent" id="btn-create" [disabled]="form.isInvalid() && assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
+				{{ 'Action.Create' | translate }}
+			</button>
+		</div>
+	
+		<div id="right">
+			<app-assessment-target-picker 
+				[courseId]="courseId"  
+				[assignmentId]="assignmentId" 
+				(onGroupSelected)="groupSelectedHandler($event)"
+				(onUserSelected)="userSelectedHandler($event)">
+			</app-assessment-target-picker>
+		</div>
 	</div>
 
 </div>

@@ -4,8 +4,8 @@ import { AssessmentOverviewComponent } from "./assessment-overview/assessment-ov
 import { CreateAssessmentComponent } from "./create-assessment/create-assessment.component";
 
 const routes: Routes = [
-	{ path: "", component: AssessmentOverviewComponent },
-	{ path: "create", component: CreateAssessmentComponent, pathMatch: "full" }
+	{ path: "create", component: CreateAssessmentComponent, pathMatch: "full" },
+	{ path: "", component: AssessmentOverviewComponent }
 ];
 
 @NgModule({
