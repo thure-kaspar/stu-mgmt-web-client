@@ -30,12 +30,14 @@
     "Remove": "Entfernen",
     "Save": "Speichern",
     "Search": "Suchen",
+    "Select": "Auswählen",
     "Send": "Senden",
     "View": "Ansehen",
     "Yes": "Ja"
   },
   "Common": {
     "All": "Alle",
+    "AssignedTo": "Zugewiesen an",
     "Count": "Anzahl",
     "Date": "Datum",
     "For": "Für",
@@ -115,6 +117,9 @@
     }
   },
   "Error": {
+    "Assessment": {
+      "AchievedPointsMaxValueExceeded": "Erreichte Punktzahl übersteigt die maximal mögliche Punktzahl."
+    },
     "AssignmentNotInReview": "Erstellung von Bewertungen benötigt den \"In Bewertung\"-Status.",
     "FailedToLoadRequiredData": "Benötigte Daten konnten nicht geladen werden.",
     "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
@@ -136,6 +141,7 @@
   },
   "Misc": {
     "BasicData": "Grunddaten",
+    "ExcludeAlreadyReviewed": "Bereits bewerte Gruppen/Teilnehmer ausblenden",
     "ExtendedOptions": "Erweiterte Optionen",
     "Home": "Startseite",
     "Imprint": "Impressum",
@@ -145,6 +151,7 @@
     "Settings": "Einstellungen"
   },
   "Prompt": {
+    "PleaseChoose": "Bitte auswählen",
     "Question": {
       "AreYouSure": "Soll diese Aktion durchgeführt werden ?",
       "RemoveUserFromGroup": "Soll dieser Nutzer wirklich aus der Gruppe entfernt werden ?"
@@ -220,5 +227,8 @@
     "JoinGroup": "Gruppe beitreten",
     "SearchCourse": "Suche nach Veranstaltung",
     "SearchUser": "Suche nach Nutzer"
+  },
+  "Tooltip": {
+    "SelectAssessmentTarget": "Wähle das Ziel für diese Bewertung aus, indem du auf den \"Auswählen\"-Button in der Gruppen/Teilnehmer-Tabelle drückst."
   }
 }

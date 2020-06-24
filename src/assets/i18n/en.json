@@ -30,12 +30,14 @@
     "Remove": "Remove",
     "Save": "Save",
     "Search": "Search",
+    "Select": "Select",
     "Send": "Send",
     "View": "View",
     "Yes": "Yes"
   },
   "Common": {
     "All": "All",
+    "AssignedTo": "Assigned to",
     "Count": "Count",
     "Date": "Date",
     "For": "For",
@@ -115,6 +117,9 @@
     }
   },
   "Error": {
+    "Assessment": {
+      "AchievedPointsMaxValueExceeded": "Achieved point exceeds the maximum amount of possible points."
+    },
     "AssignmentNotInReview": "Assignment creation requires the \"In Review\"-state.",
     "FailedToLoadRequiredData": "Failed to load the required data.",
     "SomethingWentWrong": "Oops, something went wrong!",
@@ -136,6 +141,7 @@
   },
   "Misc": {
     "BasicData": "Basic Data",
+    "ExcludeAlreadyReviewed": "Exclude already reviewed groups/users",
     "ExtendedOptions": "Extended options",
     "Home": "Home",
     "Imprint": "Imprint",
@@ -145,6 +151,7 @@
     "Settings": "Settings"
   },
   "Prompt": {
+    "PleaseChoose": "Please choose",
     "Question": {
       "AreYouSure": "Do you confirm this action ?",
       "RemoveUserFromGroup": "Do you really want to remove this user from the group ?"
@@ -220,5 +227,8 @@
     "JoinGroup": "Join group",
     "SearchCourse": "Search course",
     "SearchUser": "Search user"
+  },
+  "Tooltip": {
+    "SelectAssessmentTarget": "Select a target for this assessment by pressing the \"Select\"-button in the Group/User-Table."
   }
 }
