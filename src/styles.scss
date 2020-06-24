@@ -95,6 +95,11 @@ input[type=number] {
 	justify-content: space-between!important;
 }
 
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .full-width {
 	width: 100%;
 }
@@ -113,6 +118,10 @@ input[type=number] {
 }
 
 .icon-light {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.text-light {
 	color: rgba(0, 0, 0, 0.5);
 }
 
