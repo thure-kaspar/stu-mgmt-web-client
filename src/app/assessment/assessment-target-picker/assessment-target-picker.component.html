@@ -15,7 +15,7 @@
 	
 	<mat-form-field id="group-filter">
 		<mat-label>Filter</mat-label>
-		<input matInput [(ngModel)]="filter.nameOfGroupOrUser" (keyup)="updateGroupnameFilter()">
+		<input matInput [(ngModel)]="filter.nameOfGroupOrUser" (keyup)="updateNameFilter()">
 	</mat-form-field>
 </div>
 
@@ -23,14 +23,16 @@
 
 	<mat-tab [label]="'Domain.Groups' | translate">
 		<ng-template matTabContent>
-			<app-assessment-group-picker [filter$]="filter$" (onGroupSelected)="onGroupSelected.emit($event)"></app-assessment-group-picker>
+			<app-assessment-group-picker [filter$]="filter$" (onGroupSelected)="onGroupSelected.emit($event)" (onSwitchToEdit)="onSwitchToEdit.emit($event)">
+			</app-assessment-group-picker>
 		</ng-template>
 		
 	</mat-tab>
 	
 	<mat-tab [label]="'Domain.Participants' | translate">
 		<ng-template matTabContent>
-			<app-assessment-user-picker [filter$]="filter$" (onUserSelected)="onUserSelected.emit($event)"></app-assessment-user-picker>
+			<app-assessment-user-picker [filter$]="filter$" (onUserSelected)="onUserSelected.emit($event)" (onSwitchToEdit)="onSwitchToEdit.emit($event)">
+			</app-assessment-user-picker>
 		</ng-template>
 	</mat-tab>
 

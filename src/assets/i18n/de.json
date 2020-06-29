@@ -64,6 +64,9 @@
     "Course": "Veranstaltung",
     "CourseConfig": "Kurs-Konfiguration",
     "Courses": "Veranstaltungen",
+    "Expression": {
+      "EmptyGroup": "Diese Gruppe hat keine Mitglieder."
+    },
     "Group": "Gruppe",
     "GroupNames": "Gruppennamen",
     "GroupSettings": "Gruppen-Einstellungen",
@@ -148,9 +151,11 @@
     "Language": "Sprache",
     "Link": "Link",
     "Privacy": "Datenschutz",
-    "Settings": "Einstellungen"
+    "Settings": "Einstellungen",
+    "UnsavedChanges": "Ungespeicherte Änderungen"
   },
   "Prompt": {
+    "ContinueWithUnsavedChanges": "Wenn Sie fortfahren, werden ihre ungespeicherten Änderungen verworfen.",
     "PleaseChoose": "Bitte auswählen",
     "Question": {
       "AreYouSure": "Soll diese Aktion durchgeführt werden ?",

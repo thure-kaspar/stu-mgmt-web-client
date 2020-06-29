@@ -17,7 +17,10 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 
 	@Input() filter$: Observable<AssessmentTargetFilter>;
 	private filter: AssessmentTargetFilter;
+	/** Emits the selected user. */
 	@Output() onUserSelected = new EventEmitter<UserDto>();
+	/** Emits the ```assessmentId``` of the assessment that should be switched to for editing. */
+	@Output() onSwitchToEdit = new EventEmitter<string>();
 
 	assignedEvaluator$: Observable<UserDto>;
 	courseId: string;

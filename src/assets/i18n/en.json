@@ -64,6 +64,9 @@
     "Course": "Course",
     "CourseConfig": "Course config",
     "Courses": "Courses",
+    "Expression": {
+      "EmptyGroup": "This group has no members."
+    },
     "Group": "Group",
     "GroupNames": "Group names",
     "GroupSettings": "Group settings",
@@ -148,9 +151,11 @@
     "Language": "Language",
     "Link": "Link",
     "Privacy": "Privacy",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "UnsavedChanges": "Unsaved changes"
   },
   "Prompt": {
+    "ContinueWithUnsavedChanges": "If you continue, your unsaved changes will be discarded.",
     "PleaseChoose": "Please choose",
     "Question": {
       "AreYouSure": "Do you confirm this action ?",

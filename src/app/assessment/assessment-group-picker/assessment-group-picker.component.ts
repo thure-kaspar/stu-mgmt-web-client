@@ -18,7 +18,10 @@ export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 	@Input() filter$: Observable<AssessmentTargetFilter>;
 	private filter: AssessmentTargetFilter;
 
+	/** Emits the group that was selected by the user. */
 	@Output() onGroupSelected = new EventEmitter<GroupDto>();
+	/** Emits the ```assessmentId``` of the assessment that should be switched to for editing. */
+	@Output() onSwitchToEdit = new EventEmitter<string>();
 	
 	selectedId: string;
 	courseId: string;
