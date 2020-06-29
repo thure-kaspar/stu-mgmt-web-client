@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssessmentsService, AssignmentsService, AssessmentCreateDto, AssignmentDto, GroupDto, UserDto } from "../../../../api";
+import { AssessmentsService, AssignmentsService, AssessmentCreateDto, AssignmentDto, GroupDto, UserDto, GroupsService } from "../../../../api";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { AuthService } from "../../auth/services/auth.service";
+import { DialogService } from "../../shared/services/dialog.service";
 
 @Component({
 	selector: "app-create-assessment",
@@ -25,10 +26,12 @@ export class CreateAssessmentComponent implements OnInit {
 
 	constructor(private assessmentService: AssessmentsService,
 				private assignmentService: AssignmentsService,
+				private groupService: GroupsService,
 				private authService: AuthService,
 				private route: ActivatedRoute,
 				private router: Router,
-				private snackbar: SnackbarService) { }
+				private snackbar: SnackbarService,
+				private dialog: DialogService) { }
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
@@ -60,16 +63,51 @@ export class CreateAssessmentComponent implements OnInit {
 		);
 	}
 
+	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
 	groupSelectedHandler(group: GroupDto): void {
 		this.forUser = undefined;
 		this.form.patchModel({ groupId: group.id, userId: null });
 		this.forGroup = group;
+
+		// Load members of the group
+		this.groupService.getGroupFromAssignment(this.courseId, group.id, this.assignmentId).subscribe(
+			result => {
+				this.forGroup = result;
+			},
+			error => {
+				console.log(error);
+				this.snackbar.openErrorMessage("Failed to load information about the selected group.");
+			}
+		);
 	}
 
+	/** Sets the selected user and removes the selected group, it it exists. */
 	userSelectedHandler(user: UserDto): void {
 		this.forGroup = undefined;
 		this.form.patchModel({ userId: user.id, groupId: null });
 		this.forUser = user;
+	}
+
+	/**
+	 * Navigates to the edit component of the specified assessment.
+	 * If the user has unsaved changes in the form, the user will be asked to confirm this action.
+	 */
+	switchToEdit(assessmentId: string): void {
+		// Route to the assessment
+		const routeCmds = ["courses", this.courseId, "assignments", this.assignmentId, "assessments", assessmentId];
+		// If user has inserted data in the form
+		if (this.form.form.dirty) {
+			// Ask user, if he wants to discard his unsaved changes
+			this.dialog.openUnsavedChangesDialog().subscribe(
+				confirmed => {
+					if (confirmed) {
+						this.router.navigate(routeCmds);
+					}
+				}
+			);
+		} else {
+			this.router.navigate(routeCmds);
+		}
 	}
 
 }

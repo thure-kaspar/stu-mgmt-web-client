@@ -5,14 +5,26 @@
 			<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
 
 			<span class="font-bold">{{ 'Common.For' | translate }}:
-				<span *ngIf="forUser"><a class="link-none" [routerLink]="[ '/courses', courseId, 'users', forUser.id ]">{{forUser.username}}</a></span>
-				<span *ngIf="forGroup">{{forGroup.name}}
+				<mat-chip color="primary" selected *ngIf="forUser || forGroup">
+					<a *ngIf="forUser" class="link-none" [routerLink]="[ '/courses', courseId, 'users', forUser.id ]">
+						{{forUser.username}}
+					</a>
+					<a *ngIf="forGroup" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', forGroup.id ]">
+						{{forGroup.name}}
+					</a>
+				</mat-chip>
+
+				<div class="group-members-list" *ngIf="forGroup">
 					<mat-chip-list>
 						<a *ngFor="let member of forGroup.users" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.id ]">
 							<mat-chip>{{member.username}}</mat-chip>
 						</a>
 					</mat-chip-list>
-				</span>
+					<span *ngIf="forGroup.users?.length == 0">
+						<p class="text-red">{{ 'Domain.Expression.EmptyGroup' | translate }}</p>
+					</span>
+				</div>
+				
 				<span *ngIf="!forUser && !forGroup" id="please-choose" class="text-light">
 					{{ 'Prompt.PleaseChoose' | translate }}
 					<mat-icon [matTooltip]="'Tooltip.SelectAssessmentTarget' | translate">help</mat-icon>
@@ -34,7 +46,8 @@
 				[courseId]="courseId"  
 				[assignmentId]="assignmentId" 
 				(onGroupSelected)="groupSelectedHandler($event)"
-				(onUserSelected)="userSelectedHandler($event)">
+				(onUserSelected)="userSelectedHandler($event)"
+				(onSwitchToEdit)="switchToEdit($event)">
 			</app-assessment-target-picker>
 		</div>
 	</div>
