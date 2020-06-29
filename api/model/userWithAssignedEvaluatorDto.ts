@@ -16,5 +16,9 @@ export interface UserWithAssignedEvaluatorDto {
      * UserId of the assigned evaluator (for assignment).
      */
     assignedEvaluatorId?: string;
+    /**
+     * Id of the assessment for this user, if it exists.
+     */
+    assessmentId?: string;
     user: UserDto;
 }

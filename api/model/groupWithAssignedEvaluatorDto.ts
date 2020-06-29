@@ -16,5 +16,9 @@ export interface GroupWithAssignedEvaluatorDto {
      * UserId of the assigned evaluator (for assignment).
      */
     assignedEvaluatorId?: string;
+    /**
+     * Id of the assessment, if it exists.
+     */
+    assessmentId?: string;
     group: GroupDto;
 }
