@@ -20,5 +20,12 @@ export class DialogService {
 	openConfirmDialog(data?: ConfirmDialogData): Observable<boolean> {
 		return this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed();
 	}
+
+	/**
+	 * Opens a ```ConfirmDialog``` informing the user about unsaved changes.
+	 */
+	openUnsavedChangesDialog(): Observable<boolean> {
+		return this.openConfirmDialog({ title: "Misc.UnsavedChanges", message: "Prompt.ContinueWithUnsavedChanges" });
+	}
 	
 }
