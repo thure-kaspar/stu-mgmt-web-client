@@ -22,17 +22,22 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	@Input() courseId: string;
 	@Input() assignmentId: string;
 
+	/** Emits the selected group. */
 	@Output() onGroupSelected = new EventEmitter<GroupDto>();
+	/** Emits the selected user. */
 	@Output() onUserSelected = new EventEmitter<UserDto>();
+	/** Emits the ```assessmentId``` of the assessment that should be switched to for editing. */
+	@Output() onSwitchToEdit = new EventEmitter<string>();
 
 	evaluators: UserDto[];
 
-	filter: AssessmentTargetFilter = new AssessmentTargetFilter();
+	// Expose the filter as an observable, so other components can react to changes in the filter
+	filter = new AssessmentTargetFilter();
 	private filterSubject = new BehaviorSubject<AssessmentTargetFilter>(this.filter);
 	filter$ = this.filterSubject.asObservable();
 
-	private groupnameFilterChangedSubject = new Subject<void>();
-	private groupnameFilterSubscription: Subscription;
+	private nameFilterChangedSubject = new Subject<void>();
+	private nameFilterSubscription: Subscription;
 
 	constructor(private assigmentService: AssignmentsService,
 				private courseService: CoursesService,
@@ -40,26 +45,21 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 				private snackbar: SnackbarService) { }
 
 	ngOnInit(): void {
-		this.courseService.getUsersOfCourse(
-			this.courseId,
-			undefined,
-			undefined, 
-			[UserDto.CourseRoleEnum.LECTURER, UserDto.CourseRoleEnum.TUTOR]
-		).subscribe(
-			result => {
-				this.evaluatorsFacade.setEvaluators(result);
-				this.evaluators = result;
-			},
-			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
-			}
+		this.evaluatorsFacade.loadEvaluators(this.courseId).subscribe(
+			result => this.evaluators = result,
+			error => this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData")
 		);
+		this.subscribeToChangesOfNameFilter();
+	}
 
-
-		this.groupnameFilterSubscription = this.groupnameFilterChangedSubject
+	/**
+	 * Subscribes to changes in the name filter.
+	 * If the name changes and the user has stopped typing for 0.5s, inform other components about the change (prevents request for every keystroke).
+	 */
+	private subscribeToChangesOfNameFilter(): void {
+		this.nameFilterSubscription = this.nameFilterChangedSubject
 			.pipe(debounceTime(500)).subscribe(() => 
-				this._updateGroupnameFilter()
+				this._updateNameFilter()
 			);
 	}
 
@@ -72,17 +72,17 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 		this.filterSubject.next({...this.filter, excludeAlreadyReviewed: excludeAlreadyReviewed });
 	}
 
-	updateGroupnameFilter(): void {
-		this.groupnameFilterChangedSubject.next();
+	updateNameFilter(): void {
+		this.nameFilterChangedSubject.next();
 	}
 
-	private _updateGroupnameFilter(): void {
-		this.filterSubject.next({...this.filter }); // Groupname property is bound to input field
+	private _updateNameFilter(): void {
+		this.filterSubject.next({...this.filter }); // nameOfGroupOrUser property is bound to input field
 	}
 
 	ngOnDestroy(): void {
 		this.filterSubject.complete();
-		this.groupnameFilterChangedSubject.complete();
+		this.nameFilterChangedSubject.complete();
 		this.evaluatorsFacade.clear();
 	}
 
