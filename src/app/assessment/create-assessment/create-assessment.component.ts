@@ -94,7 +94,7 @@ export class CreateAssessmentComponent implements OnInit {
 	 */
 	switchToEdit(assessmentId: string): void {
 		// Route to the assessment
-		const routeCmds = ["courses", this.courseId, "assignments", this.assignmentId, "assessments", assessmentId];
+		const routeCmds = ["courses", this.courseId, "assignments", this.assignmentId, "assessments", assessmentId, "edit"];
 		// If user has inserted data in the form
 		if (this.form.form.dirty) {
 			// Ask user, if he wants to discard his unsaved changes

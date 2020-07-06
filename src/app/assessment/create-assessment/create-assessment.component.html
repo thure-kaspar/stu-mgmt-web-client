@@ -4,7 +4,7 @@
 		<div id="left">
 			<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
 
-			<span class="font-bold">{{ 'Common.For' | translate }}:
+			<div>{{ 'Common.For' | translate }}:
 				<mat-chip color="primary" selected *ngIf="forUser || forGroup">
 					<a *ngIf="forUser" class="link-none" [routerLink]="[ '/courses', courseId, 'users', forUser.id ]">
 						{{forUser.username}}
@@ -29,7 +29,7 @@
 					{{ 'Prompt.PleaseChoose' | translate }}
 					<mat-icon [matTooltip]="'Tooltip.SelectAssessmentTarget' | translate">help</mat-icon>
 				</span>
-			</span>
+			</div>
 
 			<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
 				<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
