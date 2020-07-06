@@ -9,6 +9,7 @@ import { AssessmentAllocationComponent } from "./assessment-allocation/assessmen
 import { AssessmentGroupPickerComponent } from "./assessment-group-picker/assessment-group-picker.component";
 import { AssessmentUserPickerComponent } from "./assessment-user-picker/assessment-user-picker.component";
 import { EvaluatorsFacade } from "./services/evaluators.facade";
+import { EditAssessmentComponent } from "./edit-assessment/edit-assessment.component";
 
 @NgModule({
 	declarations: [
@@ -18,7 +19,8 @@ import { EvaluatorsFacade } from "./services/evaluators.facade";
 		AssessmentTargetPickerComponent, 
 		AssessmentAllocationComponent,
 		AssessmentGroupPickerComponent, 
-		AssessmentUserPickerComponent
+		AssessmentUserPickerComponent, 
+		EditAssessmentComponent
 	],
 	imports: [
 		SharedModule,

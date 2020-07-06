@@ -39,6 +39,7 @@
     "All": "Alle",
     "AssignedTo": "Zugewiesen an",
     "Count": "Anzahl",
+    "CreatedBy": "Erstellt von",
     "Date": "Datum",
     "For": "Für",
     "Help": "Hilfe",
@@ -144,7 +145,7 @@
   },
   "Misc": {
     "BasicData": "Grunddaten",
-    "ExcludeAlreadyReviewed": "Bereits bewerte Gruppen/Teilnehmer ausblenden",
+    "ExcludeAlreadyReviewed": "Bereits bewertete Gruppen/Teilnehmer ausblenden",
     "ExtendedOptions": "Erweiterte Optionen",
     "Home": "Startseite",
     "Imprint": "Impressum",

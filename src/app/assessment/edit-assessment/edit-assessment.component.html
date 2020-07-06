@@ -1,0 +1,61 @@
+<div id="edit-assessment-container" class="tab">
+
+	<div id="grid">
+		<div id="left">
+			<h2 id="title">{{ 'Title.EditAssessment' | translate }}: {{assignment?.name}}</h2>
+
+			<div class="assessment-header">
+				<span class="created-by">
+					{{ 'Common.CreatedBy' | translate }}
+					<span class="font-bold">{{assessment?.creator.username}}</span>
+				</span>
+			
+				<div>
+					{{ 'Common.For' | translate }}:
+					<mat-chip color="primary" selected>
+						<a *ngIf="user" class="link-none" [routerLink]="[ '/courses', courseId, 'users', user.id ]">
+							{{user.username}}
+						</a>
+						<a *ngIf="group" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', group.id ]">
+							{{group.name}}
+						</a>
+					</mat-chip>
+	
+					<div class="group-members-list" *ngIf="group">
+						<mat-chip-list>
+							<a *ngFor="let member of group.users" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.id ]">
+								<mat-chip>{{member.username}}</mat-chip>
+							</a>
+						</mat-chip-list>
+						<span *ngIf="group.users?.length == 0">
+							<p class="text-red">{{ 'Domain.Expression.EmptyGroup' | translate }}</p>
+						</span>
+					</div>
+					
+				</div>
+	
+				<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
+					<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
+				</p>
+			</div>
+
+			<app-assessment-form [assignment]="assignment"></app-assessment-form>
+
+			<button mat-raised-button color="accent" id="btn-save" [disabled]="form.isInvalid() && assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
+				{{ 'Action.Save' | translate }}
+			</button>
+		</div>
+	
+		<div id="right">
+			<app-assessment-target-picker 
+				[courseId]="courseId"  
+				[assignmentId]="assignmentId" 
+				(onGroupSelected)="groupSelectedHandler($event)"
+				(onUserSelected)="userSelectedHandler($event)"
+				(onSwitchToEdit)="switchToEdit($event)">
+			</app-assessment-target-picker>
+		</div>
+	</div>
+
+</div>
+
