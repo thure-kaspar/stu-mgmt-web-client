@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssessmentsService, AssignmentsService, GroupsService, AssessmentDto, AssignmentDto, GroupDto, UserDto } from "../../../../api";
+import { AssessmentsService, AssignmentsService, GroupsService, AssessmentDto, AssignmentDto, GroupDto, UserDto, AssessmentUpdateDto, AssessmentEventDto } from "../../../../api";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
@@ -14,6 +14,9 @@ export class EditAssessmentComponent implements OnInit {
 
 	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
 	assessment: AssessmentDto;
+
+	events: AssessmentEventDto[];
+	showEvents = false;
 
 	assignment: AssignmentDto;
 	group: GroupDto;
@@ -42,19 +45,43 @@ export class EditAssessmentComponent implements OnInit {
 		this.loadAssessment();
 	}
 
+	private assignLoadAssessmentResult(result: AssessmentDto): void {
+		this.assessment = result;
+		this.assignment = this.assessment.assignment;
+		this.group = this.assessment.group;
+		this.user = this.assessment.user;
+		
+		// Empty the form
+		this.form.form.reset(); 
+		this.form.getPartialAssessments().clear();
+
+		// Apply update to form
+		this.form.patchModel(this.assessment);
+		this.assessment.partialAssessments?.forEach(partial => {
+			this.form.addPartialAssessment(partial);
+		});
+	}
+
 	loadAssessment(): void {
 		this.assessmentService.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId)
 			.subscribe(
 				result => {
-					this.assessment = result;
-					this.assignment = this.assessment.assignment;
-					this.group = this.assessment.group;
-					this.user = this.assessment.user;
+					this.assignLoadAssessmentResult(result);	
+				},
+				error => {
+					console.log(error);
+					this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData");
+				}
+			);
+	}
 
-					this.form.patchModel(this.assessment);
-					this.assessment.partialAssessments?.forEach(partial => {
-						this.form.addPartialAssessment(partial);
-					});
+	loadAssessmentEvents(): void {
+		this.assessmentService.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
+			.subscribe(
+				result => {
+					this.events = result;
+					this.showEvents = true;
+					console.log(result);
 				},
 				error => {
 					console.log(error);
@@ -64,7 +91,21 @@ export class EditAssessmentComponent implements OnInit {
 	}
 
 	onSave(): void {
+		const update: AssessmentUpdateDto = this.form.getModel();
 
+		// Ensure that assessmentId of partial assessments is set
+		update.partialAssessments.forEach(p => p.assessmentId = this.assessmentId);
+
+		this.assessmentService.updateAssessment(update, this.courseId, this.assignmentId, this.assessmentId).subscribe(
+			result => {
+				this.assignLoadAssessmentResult(result);
+				this.snackbar.openSuccessMessage();
+			},
+			error => {
+				console.log(error);
+				this.snackbar.openErrorMessage();
+			}
+		);
 	}
 
 	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */

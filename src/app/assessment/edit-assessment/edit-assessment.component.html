@@ -8,7 +8,17 @@
 				<span class="created-by">
 					{{ 'Common.CreatedBy' | translate }}
 					<span class="font-bold">{{assessment?.creator.username}}</span>
+					<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()">
+						<mat-icon class="icon-light">history</mat-icon>
+					</button>
 				</span>
+
+				<div *ngIf="showEvents" class="events">
+					<p *ngIf="events.length == 0">{{ 'Common.None' | translate }}.</p>
+					<span *ngFor="let event of events">
+						[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
+					</span>
+				</div>
 			
 				<div>
 					{{ 'Common.For' | translate }}:

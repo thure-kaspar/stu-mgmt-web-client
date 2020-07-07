@@ -56,6 +56,7 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 	addPartialAssessment(partialAssessment?: PartialAssessmentDto): void {
 		this.getPartialAssessments().push(
 			this.fb.group({
+				id: [partialAssessment?.id ?? null],
 				title: [partialAssessment?.title ?? null, Validators.required],
 				points: [partialAssessment?.points ?? null],
 				comment: [partialAssessment?.comment ?? null],
