@@ -11,12 +11,13 @@
  */
 
 export interface PartialAssessmentDto { 
-    assessmentId: string;
     title: string;
     type?: string;
     severity?: PartialAssessmentDto.SeverityEnum;
     points?: number;
     comment?: string;
+    id?: number;
+    assessmentId: string;
 }
 export namespace PartialAssessmentDto {
     export type SeverityEnum = 'INFORMATIONAL' | 'WARNING' | 'ERROR' | 'CRITICAL';

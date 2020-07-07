@@ -2,6 +2,8 @@ export * from './admissionCriteriaDto';
 export * from './assessmentAllocationDto';
 export * from './assessmentCreateDto';
 export * from './assessmentDto';
+export * from './assessmentEventDto';
+export * from './assessmentUpdateDto';
 export * from './assignmentDto';
 export * from './assignmentGroupTuple';
 export * from './assignmentTemplateDto';

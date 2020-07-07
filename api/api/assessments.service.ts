@@ -19,6 +19,8 @@ import { Observable }                                        from 'rxjs';
 
 import { AssessmentCreateDto } from '../model/assessmentCreateDto';
 import { AssessmentDto } from '../model/assessmentDto';
+import { AssessmentEventDto } from '../model/assessmentEventDto';
+import { AssessmentUpdateDto } from '../model/assessmentUpdateDto';
 import { PartialAssessmentDto } from '../model/partialAssessmentDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -325,6 +327,57 @@ export class AssessmentsService {
     }
 
     /**
+     * Get assessment events
+     * Retrieves events of the assessment.
+     * @param courseId 
+     * @param assignmentId 
+     * @param assessmentId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getEventsOfAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentEventDto>>;
+    public getEventsOfAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentEventDto>>>;
+    public getEventsOfAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentEventDto>>>;
+    public getEventsOfAssessment(courseId: string, assignmentId: string, assessmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getEventsOfAssessment.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling getEventsOfAssessment.');
+        }
+
+        if (assessmentId === null || assessmentId === undefined) {
+            throw new Error('Required parameter assessmentId was null or undefined when calling getEventsOfAssessment.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<AssessmentEventDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments/${encodeURIComponent(String(assessmentId))}/events`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Update assessment
      * Updates the assessment.
      * @param body 
@@ -334,10 +387,10 @@ export class AssessmentsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateAssessment(body: AssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'body', reportProgress?: boolean): Observable<AssessmentDto>;
-    public updateAssessment(body: AssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AssessmentDto>>;
-    public updateAssessment(body: AssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AssessmentDto>>;
-    public updateAssessment(body: AssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateAssessment(body: AssessmentUpdateDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'body', reportProgress?: boolean): Observable<AssessmentDto>;
+    public updateAssessment(body: AssessmentUpdateDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AssessmentDto>>;
+    public updateAssessment(body: AssessmentUpdateDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AssessmentDto>>;
+    public updateAssessment(body: AssessmentUpdateDto, courseId: string, assignmentId: string, assessmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateAssessment.');
