@@ -13,6 +13,7 @@
       "AddLecturer": "Add lecturer",
       "AddPartialAssessment": "Add partial assessment",
       "ChangeRole": "Change role",
+      "CopyFromPrevious": "Copy from a previous assignment",
       "CreateCourse": "Create course",
       "LeaveCourse": "Leave course",
       "RemoveUserFromGroup": "Remove user from group",
@@ -59,6 +60,7 @@
   "Domain": {
     "AdmissionCriteria": "Admission criteria",
     "Assessment": "Assessment",
+    "AssessmentAllocations": "Allocations",
     "Assessments": "Assessments",
     "Assignment": "Assignment",
     "AssignmentTemplate": "Assignment template",

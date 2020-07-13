@@ -45,9 +45,11 @@ export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 
 		this.filterSub = this.filter$.subscribe(
 			filter => {
-				// Reload groups, if filter changes
-				this.filter = filter;
-				this.loadGroups();
+				if (filter) {
+					// Reload groups, if filter changes
+					this.filter = filter;
+					this.loadGroups();
+				}
 			}
 		);
 	}

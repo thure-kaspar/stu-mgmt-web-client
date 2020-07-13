@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { AssessmentsService, AssignmentsService, AssignmentDto } from "../../../../api";
+import { AssignmentDto } from "../../../../api";
 import { ActivatedRoute } from "@angular/router";
+import { getRouteParam } from "../../../../utils/helper";
+import { SelectedAssignmentFacade } from "../services/selected-assignment.facade";
 
 @Component({
 	selector: "app-assessment-overview",
@@ -11,25 +13,14 @@ export class AssessmentOverviewComponent implements OnInit {
 
 	assignment: AssignmentDto;
 
-	courseId: string;
-	assignmentId: string;
-
-	stateEnum = AssignmentDto.StateEnum;
-
-	constructor(private assignmentService: AssignmentsService,
-				private assessmentService: AssessmentsService,
+	constructor(private selectedAssignment: SelectedAssignmentFacade,
 				private route: ActivatedRoute) { }
 
 	ngOnInit(): void {
-		this.courseId = this.route.snapshot.params.courseId;
-		this.assignmentId = this.route.snapshot.params.assignmentId;
-		this.loadAssignment();
-	}
-
-	loadAssignment(): void {
-		this.assignmentService.getAssignmentById(this.courseId, this.assignmentId).subscribe(
-			result => this.assignment = result,
-			error => console.log(error)
+		const courseId = getRouteParam("courseId", this.route);
+		const assignmentId = getRouteParam("assignmentId", this.route);
+		this.selectedAssignment.loadAssignment(courseId, assignmentId).subscribe(
+			assignment => this.assignment = assignment
 		);
 	}
 

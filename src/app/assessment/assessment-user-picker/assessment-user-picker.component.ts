@@ -45,9 +45,11 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 
 		this.filterSub = this.filter$.subscribe(
 			filter => {
-				// Reload users, if filter changes
-				this.filter = filter;
-				this.loadUsers();
+				if (filter) {
+					// Reload users, if filter changes
+					this.filter = filter;
+					this.loadUsers();
+				}
 			}
 		);
 	}

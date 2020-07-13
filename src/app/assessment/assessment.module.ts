@@ -12,6 +12,7 @@ import { EvaluatorsFacade } from "./services/evaluators.facade";
 import { EditAssessmentComponent } from "./edit-assessment/edit-assessment.component";
 import { AssessmentAllocationOverviewComponent } from "./assessment-allocation-overview/assessment-allocation-overview.component";
 import { CreatedAssessmentsComponent } from "./created-assessments/created-assessments.component";
+import { SelectedAssignmentFacade } from "./services/selected-assignment.facade";
 
 @NgModule({
 	declarations: [
@@ -30,6 +31,6 @@ import { CreatedAssessmentsComponent } from "./created-assessments/created-asses
 		SharedModule,
 		AssessmentRoutingModule
 	],
-	providers: [EvaluatorsFacade]
+	providers: [EvaluatorsFacade, SelectedAssignmentFacade]
 })
 export class AssessmentModule { }

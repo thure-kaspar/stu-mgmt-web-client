@@ -7,6 +7,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { CreateAssignmentDialog } from "./dialogs/create-assignment/create-assignment.dialog";
 import { EditAssignmentDialog } from "./dialogs/edit-assignment/edit-assignment.dialog";
 import { AssignmentForm } from "./forms/assignment-form/assignment-form.component";
+import { SearchAssignmentDialog } from "./dialogs/search-assignment/search-assignment.dialog";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AssignmentForm } from "./forms/assignment-form/assignment-form.componen
 		AssignmentListComponent,
 		CreateAssignmentDialog,
 		EditAssignmentDialog,
-		AssignmentForm
+		AssignmentForm,
+		SearchAssignmentDialog
 	],
 	imports: [
 		SharedModule,

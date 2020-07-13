@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { ActivatedRoute } from "@angular/router";
+import { SelectedAssignmentFacade } from "../services/selected-assignment.facade";
 
 @Component({
 	selector: "app-created-assessments",
@@ -13,6 +14,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class CreatedAssessmentsComponent implements OnInit {
 
+	assignment: AssignmentDto;
 	assessments: AssessmentDto[];
 
 	courseId: string;
@@ -25,7 +27,8 @@ export class CreatedAssessmentsComponent implements OnInit {
 
 	stateEnum = AssignmentDto.StateEnum;
 
-	constructor(private assignmentService: AssignmentsService,
+	constructor(public selectedAssignment: SelectedAssignmentFacade,
+				private assignmentService: AssignmentsService,
 				private assessmentService: AssessmentsService,
 				private route: ActivatedRoute) { }
 
@@ -33,6 +36,9 @@ export class CreatedAssessmentsComponent implements OnInit {
 		this.courseId = this.route.snapshot.params.courseId;
 		this.assignmentId = this.route.snapshot.params.assignmentId;
 		this.loadAssessments();
+		this.selectedAssignment.selectedAssignment$.subscribe(
+			assignment => this.assignment = assignment
+		);
 	}
 
 	loadAssessments(): void {

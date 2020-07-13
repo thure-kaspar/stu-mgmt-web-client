@@ -33,7 +33,7 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 
 	// Expose the filter as an observable, so other components can react to changes in the filter
 	filter = new AssessmentTargetFilter();
-	private filterSubject = new BehaviorSubject<AssessmentTargetFilter>(this.filter);
+	private filterSubject = new BehaviorSubject<AssessmentTargetFilter>(undefined);
 	filter$ = this.filterSubject.asObservable();
 
 	private nameFilterChangedSubject = new Subject<void>();
@@ -45,10 +45,19 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 				private snackbar: SnackbarService) { }
 
 	ngOnInit(): void {
-		this.evaluatorsFacade.loadEvaluators(this.courseId).subscribe(
-			result => this.evaluators = result,
-			error => this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData")
+		this.evaluatorsFacade.loadEvaluators(this.courseId).subscribe({
+			error: error => {
+				this.snackbar.openErrorMessage();
+			}
+		});
+
+		this.evaluatorsFacade.evaluators$.subscribe(
+			evaluators => {
+				this.evaluators = evaluators;
+				this.filterSubject.next({...this.filter});
+			}
 		);
+
 		this.subscribeToChangesOfNameFilter();
 	}
 

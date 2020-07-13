@@ -13,6 +13,7 @@
       "AddLecturer": "Lehrenden hinzufügen",
       "AddPartialAssessment": "Teilbewertung hinzufügen",
       "ChangeRole": "Rolle ändern",
+      "CopyFromPrevious": "Aus einer vorherigen Aufgabe kopieren",
       "CreateCourse": "Veranstaltung erstellen",
       "LeaveCourse": "Kurs verlassen",
       "RemoveUserFromGroup": "Nutzer aus der Gruppe entfernen",
@@ -59,6 +60,7 @@
   "Domain": {
     "AdmissionCriteria": "Zulassungskriterien",
     "Assessment": "Bewertung",
+    "AssessmentAllocations": "Zuweisungen",
     "Assessments": "Bewertungen",
     "Assignment": "Aufgabe",
     "AssignmentTemplate": "Aufgaben-Vorlage",

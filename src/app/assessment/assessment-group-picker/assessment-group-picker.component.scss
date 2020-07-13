@@ -1,3 +1,14 @@
 .selected {
 	background-color: rgba(30, 255, 0, 0.116);
 }
+
+table {
+	@media screen and (min-width: 800px) {
+		width: fit-content;
+
+		td, th {
+			padding-left: 32px;
+			padding-right: 32px;
+		}
+	}
+}
