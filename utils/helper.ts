@@ -1,3 +1,5 @@
+import { ActivatedRoute } from "@angular/router";
+
 /**
  * Returns the current semester.
  * Winter semesters will be represented as "wise" followed by the last two digits of the years that the semester will take place in.
@@ -23,4 +25,9 @@ export function getSemester(): string {
 	}
 
 	return semester;
+}
+
+/** Returns the specified route parameter. */
+export function getRouteParam(param: string, route: ActivatedRoute): string | null {
+	return route.snapshot.paramMap.get(param);
 }
