@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter
 import { UserDto, AssessmentAllocationService, AssessmentAllocationDto } from "../../../../api";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { EvaluatorsFacade } from "../services/evaluators.facade";
+import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 
 /**
  * Component that provides a selection of users (evaluators), which can be assigned to a group or user.
@@ -19,7 +20,7 @@ import { EvaluatorsFacade } from "../services/evaluators.facade";
 	styleUrls: ["./assessment-allocation.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AssessmentAllocationComponent implements OnInit {
+export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	/** Id of the group that should be assigned to the selected tutor/lecturer. */
 	@Input() groupId: string;
@@ -35,11 +36,17 @@ export class AssessmentAllocationComponent implements OnInit {
 
 	constructor(private allocationService: AssessmentAllocationService,
 				private evaluatorsFacade: EvaluatorsFacade,
-				private snackbar: SnackbarService) { }
+				private snackbar: SnackbarService) { super(); }
 
 	ngOnInit(): void {
-		this.evaluators = this.evaluatorsFacade.getEvaluators();
-		this.evaluator = this.evaluatorsFacade.getEvaluatorById(this.assignedTo);
+		this.subs.sink = this.evaluatorsFacade.evaluators$.subscribe(
+			evaluators => {
+				if (evaluators) {
+					this.evaluators = evaluators;
+					this.evaluator = this.evaluatorsFacade.getEvaluatorById(this.assignedTo);
+				}
+			}
+		);
 	}
 
 	/** Handles the (de)selection of an evaluator. */
