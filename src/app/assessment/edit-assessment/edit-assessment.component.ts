@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 import { DialogService } from "../../shared/services/dialog.service";
+import { Location } from "@angular/common";
 
 @Component({
 	selector: "app-edit-assessment",
@@ -34,6 +35,7 @@ export class EditAssessmentComponent implements OnInit {
 				private groupService: GroupsService,
 				private route: ActivatedRoute,
 				private router: Router,
+				private location: Location,
 				private snackbar: SnackbarService,
 				private dialog: DialogService) { }
 
@@ -62,11 +64,12 @@ export class EditAssessmentComponent implements OnInit {
 		});
 	}
 
+	/** Loads the assessment. Uses the current route params to determine courseId, assignmentId and assessmentId. */
 	loadAssessment(): void {
 		this.assessmentService.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId)
 			.subscribe(
 				result => {
-					this.assignLoadAssessmentResult(result);	
+					this.assignLoadAssessmentResult(result);
 				},
 				error => {
 					console.log(error);
@@ -146,11 +149,29 @@ export class EditAssessmentComponent implements OnInit {
 
 	/** Navigates to another assessment. */
 	private navigateToAssessment(assessmentId: string): void {
+		// Construct new url
 		const routeCmds = [...this.routeToAssessmentsCmds, assessmentId, "edit"];
-		this.router.navigateByUrl("/", { skipLocationChange: true }) // Navigate away from component, because we need to change the url
-			.then(() =>
-				this.router.navigate(routeCmds)
-			);
+		const url = this.router.createUrlTree(routeCmds).toString();
+
+		this.assessmentId = assessmentId;
+
+		// Change url (without reloading )
+		this.location.go(url);
+
+		// Reset form and relevant component data
+		this.resetComponentData();
+		this.loadAssessment();
+	}
+
+	/** Resets the form and component data. Should be used before loading a different assessment. */
+	private resetComponentData(): void {
+		this.form.form.reset();
+		this.assignment = undefined;
+		this.assessment = undefined;
+		this.group = undefined;
+		this.user = undefined;
+		this.events = undefined;
+		this.showEvents = false;
 	}
 
 }
