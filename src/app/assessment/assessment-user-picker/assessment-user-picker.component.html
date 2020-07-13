@@ -5,8 +5,8 @@
 		<ng-container matColumnDef="action">
 			<th id="column-view" mat-header-cell *matHeaderCellDef></th>
 			<td mat-cell *matCellDef="let row">
-				<button *ngIf="!row.assessmentId" mat-stroked-button color="primary" (click)="selectUser(row.user)">{{ 'Action.Select' | translate }}</button>
-				<button *ngIf="row.assessmentId" mat-stroked-button color="primary" (click)="onSwitchToEdit.emit(row.assessmentId)">{{ 'Action.Edit' | translate }}</button>
+				<button *ngIf="!row.assessmentId" mat-stroked-button (click)="selectUser(row.user)">{{ 'Action.Select' | translate }}</button>
+				<button *ngIf="row.assessmentId" mat-stroked-button (click)="onSwitchToEdit.emit(row.assessmentId)">{{ 'Action.Edit' | translate }}</button>
 			</td>
 		</ng-container>
 	
