@@ -17,13 +17,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { CanJoinCourseDto } from '../model/canJoinCourseDto';
-import { ChangeCourseRoleDto } from '../model/changeCourseRoleDto';
 import { CourseCreateDto } from '../model/courseCreateDto';
 import { CourseDto } from '../model/courseDto';
-import { PasswordDto } from '../model/passwordDto';
-import { UserDto } from '../model/userDto';
-import { UserWithAssignedEvaluatorDto } from '../model/userWithAssignedEvaluatorDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -62,109 +57,6 @@ export class CoursesService {
 
 
     /**
-     * Add user to course
-     * Adds a user to the course. If the course requires a password, the correct password needs to be included in the request body.
-     * @param body 
-     * @param courseId 
-     * @param userId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public addUser(body: PasswordDto, courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addUser(body: PasswordDto, courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addUser(body: PasswordDto, courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public addUser(body: PasswordDto, courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling addUser.');
-        }
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling addUser.');
-        }
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling addUser.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<any>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Check if joining is possible
-     * Checks, if the user is able to join the course. A user can join a course, if he&#x27;s not already a member and the course is not closed.
-     * @param courseId 
-     * @param userId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public canUserJoinCourse(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<CanJoinCourseDto>;
-    public canUserJoinCourse(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CanJoinCourseDto>>;
-    public canUserJoinCourse(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CanJoinCourseDto>>;
-    public canUserJoinCourse(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling canUserJoinCourse.');
-        }
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling canUserJoinCourse.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<CanJoinCourseDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/canJoin`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Create course
      * Creates a new course.
      * @param body 
@@ -182,6 +74,13 @@ export class CoursesService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -229,6 +128,13 @@ export class CoursesService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -270,6 +176,13 @@ export class CoursesService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -316,6 +229,13 @@ export class CoursesService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -369,6 +289,13 @@ export class CoursesService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -385,192 +312,6 @@ export class CoursesService {
         return this.httpClient.request<Array<CourseDto>>('get',`${this.basePath}/courses`,
             {
                 params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Get users of course
-     * Returns a collection of users that are signed up for this course.
-     * @param courseId 
-     * @param skip [Pagination] The amount of elements that should be skipped.
-     * @param take [Pagination] The amount of elements that should be included in the response.
-     * @param courseRole 
-     * @param username 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<UserDto>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserDto>>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserDto>>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getUsersOfCourse.');
-        }
-
-
-
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (skip !== undefined && skip !== null) {
-            queryParameters = queryParameters.set('skip', <any>skip);
-        }
-        if (take !== undefined && take !== null) {
-            queryParameters = queryParameters.set('take', <any>take);
-        }
-        if (courseRole) {
-            courseRole.forEach((element) => {
-                queryParameters = queryParameters.append('courseRole', <any>element);
-            })
-        }
-        if (username !== undefined && username !== null) {
-            queryParameters = queryParameters.set('username', <any>username);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Get users with assigned evaluator
-     * Returns users with their assigned evaluator for a particular assignment.
-     * @param courseId 
-     * @param assignmentId 
-     * @param skip [Pagination] The amount of elements that should be skipped.
-     * @param take [Pagination] The amount of elements that should be included in the response.
-     * @param assignedEvaluatorId Filter by assigned evaluator.
-     * @param excludeAlreadyReviewed Excludes groups/users that have already been reviewed.
-     * @param nameOfGroupOrUser Filter by group or username.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<UserWithAssignedEvaluatorDto>>;
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserWithAssignedEvaluatorDto>>>;
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserWithAssignedEvaluatorDto>>>;
-    public getUsersWithAssignedEvaluator(courseId: string, assignmentId: string, skip?: number, take?: number, assignedEvaluatorId?: string, excludeAlreadyReviewed?: boolean, nameOfGroupOrUser?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getUsersWithAssignedEvaluator.');
-        }
-
-        if (assignmentId === null || assignmentId === undefined) {
-            throw new Error('Required parameter assignmentId was null or undefined when calling getUsersWithAssignedEvaluator.');
-        }
-
-
-
-
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (skip !== undefined && skip !== null) {
-            queryParameters = queryParameters.set('skip', <any>skip);
-        }
-        if (take !== undefined && take !== null) {
-            queryParameters = queryParameters.set('take', <any>take);
-        }
-        if (assignedEvaluatorId !== undefined && assignedEvaluatorId !== null) {
-            queryParameters = queryParameters.set('assignedEvaluatorId', <any>assignedEvaluatorId);
-        }
-        if (excludeAlreadyReviewed !== undefined && excludeAlreadyReviewed !== null) {
-            queryParameters = queryParameters.set('excludeAlreadyReviewed', <any>excludeAlreadyReviewed);
-        }
-        if (nameOfGroupOrUser !== undefined && nameOfGroupOrUser !== null) {
-            queryParameters = queryParameters.set('nameOfGroupOrUser', <any>nameOfGroupOrUser);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<UserWithAssignedEvaluatorDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/assignments/${encodeURIComponent(String(assignmentId))}/with-assigned-evaluator`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Remove user from course
-     * Removes the user from the course. Returns true, if removal was successful.
-     * @param courseId 
-     * @param userId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public removeUser(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public removeUser(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public removeUser(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
-    public removeUser(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling removeUser.');
-        }
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling removeUser.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<boolean>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
-            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -602,6 +343,13 @@ export class CoursesService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -621,63 +369,6 @@ export class CoursesService {
         }
 
         return this.httpClient.request<CourseDto>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Update user&#x27;s role in course
-     * Assigns the given role to the user of this course.
-     * @param body 
-     * @param courseId 
-     * @param userId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
-    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling updateUserRole.');
-        }
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling updateUserRole.');
-        }
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling updateUserRole.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<boolean>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/role`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

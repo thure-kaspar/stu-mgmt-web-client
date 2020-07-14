@@ -12,10 +12,10 @@
 import { UserDto } from './userDto';
 
 export interface GroupEventDto { 
-    event: string;
     user?: UserDto;
     userId: string;
     groupId: string;
-    payload?: any;
+    event: string;
     timestamp: Date;
+    payload?: any;
 }

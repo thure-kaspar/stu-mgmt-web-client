@@ -8,6 +8,7 @@ import { AssessmentsService } from './api/assessments.service';
 import { AssignmentsService } from './api/assignments.service';
 import { AuthenticationService } from './api/authentication.service';
 import { CourseConfigService } from './api/courseConfig.service';
+import { CourseParticipantsService } from './api/courseParticipants.service';
 import { CoursesService } from './api/courses.service';
 import { DefaultService } from './api/default.service';
 import { GroupsService } from './api/groups.service';
@@ -25,6 +26,7 @@ import { UsersService } from './api/users.service';
     AssignmentsService,
     AuthenticationService,
     CourseConfigService,
+    CourseParticipantsService,
     CoursesService,
     DefaultService,
     GroupsService,

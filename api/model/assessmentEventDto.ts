@@ -16,6 +16,6 @@ export interface AssessmentEventDto {
     userId: string;
     user: UserDto;
     event: string;
-    payload: any;
     timestamp: Date;
+    payload?: any;
 }
