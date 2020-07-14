@@ -262,21 +262,31 @@ export class CoursesService {
     /**
      * Get courses
      * Returns all courses that match the given filter.
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
      * @param shortname 
      * @param semester 
      * @param title 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCourses(shortname?: string, semester?: string, title?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<CourseDto>>;
-    public getCourses(shortname?: string, semester?: string, title?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CourseDto>>>;
-    public getCourses(shortname?: string, semester?: string, title?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CourseDto>>>;
-    public getCourses(shortname?: string, semester?: string, title?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getCourses(skip?: number, take?: number, shortname?: string, semester?: string, title?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<CourseDto>>;
+    public getCourses(skip?: number, take?: number, shortname?: string, semester?: string, title?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CourseDto>>>;
+    public getCourses(skip?: number, take?: number, shortname?: string, semester?: string, title?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CourseDto>>>;
+    public getCourses(skip?: number, take?: number, shortname?: string, semester?: string, title?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
 
 
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
         if (shortname !== undefined && shortname !== null) {
             queryParameters = queryParameters.set('shortname', <any>shortname);
         }

@@ -112,7 +112,7 @@ export class CourseParticipantsService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<any>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -166,7 +166,7 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<CanJoinCourseDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/canJoin`,
+        return this.httpClient.request<CanJoinCourseDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/canJoin`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -238,7 +238,7 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(courseId))}/users`,
+        return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -319,7 +319,7 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<UserWithAssignedEvaluatorDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(courseId))}/users/assignments/${encodeURIComponent(String(assignmentId))}/with-assigned-evaluator`,
+        return this.httpClient.request<Array<UserWithAssignedEvaluatorDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/assignments/${encodeURIComponent(String(assignmentId))}/with-assigned-evaluator`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -373,7 +373,7 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<boolean>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<boolean>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -436,7 +436,7 @@ export class CourseParticipantsService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<boolean>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/role`,
+        return this.httpClient.request<boolean>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/role`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
