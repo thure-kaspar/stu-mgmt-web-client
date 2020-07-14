@@ -1,56 +1,84 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { CoursesService, UserDto } from "../../../../../api";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-role/change-role.dialog";
+import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
+import { CourseParticipantsService, CoursesService, UserDto } from "../../../../../api";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { Paginator } from "../../../shared/paginator/paginator.component";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-role/change-role.dialog";
+import { BehaviorSubject, Subject, Subscription } from "rxjs";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { debounceTime } from "rxjs/operators";
+
+class ParticipantsFilter {
+	includeStudents = false;
+	includeTutors = false;
+	includeLecturers = false;
+	username: string;
+}
 
 @Component({
 	selector: "app-user-list",
 	templateUrl: "./user-list.component.html",
 	styleUrls: ["./user-list.component.scss"]
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	courseId: string;
 	users: UserDto[];
 	displayedColumns: string[] = ["actions", "role", "username", "email"];
 	dataSource: MatTableDataSource<UserDto>;
-	userFilter: string;
+	filter = new ParticipantsFilter();
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort;
+	usernameFilterChangedSubject = new Subject();
+
+	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
 	constructor(private courseService: CoursesService,
+				private courseParticipantsService: CourseParticipantsService,
 				private route: ActivatedRoute,
 				public dialog: MatDialog,
-				private snackbar: SnackbarService) { }
+				private snackbar: SnackbarService) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
+		this.searchParticipants();
 
-		this.courseService.getUsersOfCourse(this.courseId).subscribe(
+		// Subscribe to changes of username filter: Trigger search 500ms after user stopped typing
+		this.subs.sink = this.usernameFilterChangedSubject
+			.pipe(debounceTime(500)).subscribe(() => 
+				this.searchParticipants()
+			);
+	}
+
+	/**
+	 * Requests course participants matching the filter from the API.
+	 * @param [triggeredByPaginator=false] Should be used by the paginator, to avoid jumping back to the first page. Default: `false`.
+	 */
+	searchParticipants(triggeredByPaginator = false): void {
+		const skip = triggeredByPaginator ? this.paginator.getSkip() : 0;
+		const take = this.paginator.pageSize;
+		
+		const roles = [];
+		if (this.filter.includeTutors) roles.push(UserDto.CourseRoleEnum.TUTOR);
+		if (this.filter.includeLecturers) roles.push(UserDto.CourseRoleEnum.LECTURER);
+		if (this.filter.includeStudents) roles.push(UserDto.CourseRoleEnum.STUDENT);
+
+		this.courseParticipantsService.getUsersOfCourse(
+			this.courseId,
+			skip,
+			take,
+			roles,
+			this.filter.username
+		).subscribe(
 			result => {
 				this.users = result,
-				this.dataSource = new MatTableDataSource(this.users);
-				this.dataSource.paginator = this.paginator;
-				this.dataSource.sort = this.sort;
+				this.refreshDataSource();
+				this.paginator.goToFirstPage();
 			},
 			error => console.log(error)
 		);
-	}
-
-	applyFilter(): void {
-		this.dataSource.filter = this.userFilter.trim().toLowerCase();
-	
-		if (this.dataSource.paginator) {
-			this.dataSource.paginator.firstPage();
-		}
 	}
 
 	openChangeRoleDialog(user: UserDto): void {
@@ -81,7 +109,7 @@ export class UserListComponent implements OnInit {
 			isConfirmed => {
 				// Check if user confirmed the action
 				if (isConfirmed) {
-					this.courseService.removeUser(this.courseId, user.id).subscribe(
+					this.courseParticipantsService.removeUser(this.courseId, user.id).subscribe(
 						result => {
 							if (result) {
 								// Remove removed user from user list

@@ -1,8 +1,18 @@
 <div class="tab">
-	<mat-form-field id="userFilter-field">
-		<mat-label>Filter</mat-label>
-		<input matInput [(ngModel)]="userFilter" (keyup)="applyFilter()" placeholder="Filter..." autocomplete="off">
-	</mat-form-field>
+	
+	<div class="filter">
+		<div class="roles">
+			<mat-label class="font-bold">{{ 'Property.User.CourseRole' | translate }}</mat-label>
+			<mat-checkbox [(ngModel)]="filter.includeStudents" (change)="searchParticipants()">{{ 'Enum.CourseRole.STUDENT' | translate }}</mat-checkbox>
+			<mat-checkbox [(ngModel)]="filter.includeTutors" (change)="searchParticipants()">{{ 'Enum.CourseRole.TUTOR' | translate }}</mat-checkbox>
+			<mat-checkbox [(ngModel)]="filter.includeLecturers" (change)="searchParticipants()">{{ 'Enum.CourseRole.LECTURER' | translate }}</mat-checkbox>
+		</div>
+
+		<mat-form-field id="userFilter-field">
+			<mat-label>{{ 'Property.User.Username' | translate }}</mat-label>
+			<input matInput [(ngModel)]="filter.username" (keyup)="usernameFilterChangedSubject.next()" autocomplete="off">
+		</mat-form-field>
+	</div>
 	
 	<div id="table-users">
 		<table mat-table [dataSource]="dataSource" matSort>
@@ -51,6 +61,6 @@
 			</tr>
 		</table>
 	
-		<mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+		<app-paginator (onPageChanged)="searchParticipants(true)"></app-paginator>
 	</div>
 </div>

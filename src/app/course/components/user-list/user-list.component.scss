@@ -1,5 +1,33 @@
+.filter {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	mat-form-field {
+		width: 100%;
+	}
+}
+
+.roles {
+	mat-label {
+		margin-bottom: 4px;
+	}
+
+	mat-checkbox {
+		padding-left: 4px;
+		padding-top: 2px;
+	}
+
+	display: flex;
+	flex-direction: column;
+}
+
+#userFilter-field {
+	margin-top: -4px;
+}
+
 .column-role {
-	width: 6rem;
+	width: 96px;
 }
 
 #table-users {
