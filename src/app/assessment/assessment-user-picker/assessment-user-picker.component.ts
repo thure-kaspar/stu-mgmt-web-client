@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectionStrategy } from "@angular/core";
-import { UserDto, UserWithAssignedEvaluatorDto, CoursesService } from "../../../../api";
+import { UserDto, UserWithAssignedEvaluatorDto, CoursesService, CourseParticipantsService } from "../../../../api";
 import { Observable, Subscription, BehaviorSubject } from "rxjs";
 import { MatTableDataSource } from "@angular/material/table";
 import { Paginator } from "../../shared/paginator/paginator.component";
@@ -35,7 +35,7 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 	private users: UserWithAssignedEvaluatorDto[] = [];
 	private filterSub: Subscription;
 
-	constructor(private courseService: CoursesService,
+	constructor(private courseParticipantsService: CourseParticipantsService,
 				private route: ActivatedRoute,
 				private snackbar: SnackbarService) { }
 
@@ -59,7 +59,7 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 		const take = this.paginator.pageSize;
 
 		this.isLoading$.next(true);
-		this.courseService.getUsersWithAssignedEvaluator(
+		this.courseParticipantsService.getUsersWithAssignedEvaluator(
 			this.courseId, 
 			this.assignmentId,
 			skip,

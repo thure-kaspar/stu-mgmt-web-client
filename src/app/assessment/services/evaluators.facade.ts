@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AssessmentAllocationService, UserDto, CoursesService } from "../../../../api";
+import { AssessmentAllocationService, UserDto, CoursesService, CourseParticipantsService } from "../../../../api";
 import { Observable, throwError, BehaviorSubject } from "rxjs";
 import { tap, catchError, take } from "rxjs/operators";
 
@@ -17,7 +17,7 @@ export class EvaluatorsFacade {
 	evaluators$ = this.evaluatorsSubject.asObservable();
 
 	constructor(private allocationService: AssessmentAllocationService,
-				private courseService: CoursesService) { }
+				private courseParticipantsService: CourseParticipantsService) { }
 
 	/**
 	 * Removes all data that is stored by this service. 
@@ -39,7 +39,7 @@ export class EvaluatorsFacade {
 	 * to access the evaluators.
 	 */
 	loadEvaluators(courseId: string): Observable<UserDto[]> {
-		return this.courseService.getUsersOfCourse(
+		return this.courseParticipantsService.getUsersOfCourse(
 			courseId,
 			undefined,
 			undefined, 

@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { JoinGroupDialog } from "../../../group/dialogs/join-group/join-group.dialog";
 import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
-import { CoursesService, CanJoinCourseDto } from "../../../../../api";
+import { CoursesService, CanJoinCourseDto, CourseParticipantsService } from "../../../../../api";
 import { AuthService } from "../../../auth/services/auth.service";
 
 /**
@@ -23,13 +23,13 @@ export class JoinCourseDialog implements OnInit {
 
 	constructor(private dialogRef: MatDialogRef<JoinGroupDialog, boolean>,
 				@Inject(MAT_DIALOG_DATA) public courseId: string,
-				private courseService: CoursesService,
+				private courseParticipantsService: CourseParticipantsService,
 				private auth: AuthService,
 				private courseMemberships: CourseMembershipsFacade) { }
 
 	ngOnInit(): void {
 		const userId = this.auth.getAuthToken().userId;
-		this.courseService.canUserJoinCourse(this.courseId, userId).subscribe(
+		this.courseParticipantsService.canUserJoinCourse(this.courseId, userId).subscribe(
 			result => {
 				this.canJoinDto = result;
 				this.error = this.canJoinDto.reason;

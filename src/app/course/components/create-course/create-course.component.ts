@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentDto, CourseCreateDto } from "../../../../../api";
+import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentDto, CourseCreateDto, CourseParticipantsService } from "../../../../../api";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
@@ -36,6 +36,7 @@ export class CreateCourseComponent implements OnInit {
 
 	constructor(private courseService: CoursesService,
 				private courseConfigService: CourseConfigService,
+				private courseParticipantsService: CourseParticipantsService,
 				private fb: FormBuilder,
 				private dialog: MatDialog,
 				private snackbar: SnackbarService,
@@ -148,9 +149,8 @@ export class CreateCourseComponent implements OnInit {
 
 		// Load lecturers 
 		this.getLecturers().clear();
-		this.courseService.getUsersOfCourse(courseId).subscribe(
-			users => {
-				const lecturers = users.filter(u => u.courseRole === "LECTURER");// TODO: Use filter once implemented to avoid loading all users
+		this.courseParticipantsService.getUsersOfCourse(courseId, undefined, undefined, [UserDto.CourseRoleEnum.LECTURER]).subscribe(
+			lecturers => {
 				lecturers.forEach(lecturer => this.getLecturers().push(this.fb.control(lecturer.username, Validators.required)));
 			}
 		);

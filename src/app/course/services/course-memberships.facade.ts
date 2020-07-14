@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, of, Observable, throwError } from "rxjs";
-import { CoursesService, UsersService, CourseDto } from "../../../../api";
+import { BehaviorSubject, Observable, of, throwError } from "rxjs";
+import { catchError, switchMap } from "rxjs/operators";
+import { CourseDto, CourseParticipantsService, UsersService } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
-import { switchMap, catchError } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class CourseMembershipsFacade {
@@ -10,7 +10,7 @@ export class CourseMembershipsFacade {
 	private coursesSubject = new BehaviorSubject<CourseDto[]>([]);
 	public courses$ = this.coursesSubject.asObservable();
 
-	constructor(private courseService: CoursesService,
+	constructor(private courseParticipantsService: CourseParticipantsService,
 				private userService: UsersService,
 				private authService: AuthService) {
 
@@ -52,7 +52,7 @@ export class CourseMembershipsFacade {
 	 */
 	joinCourse(courseId: string, password?: string): Observable<void> {
 		const userId = this.getUserId();
-		return this.courseService.addUser({ password }, courseId, userId)
+		return this.courseParticipantsService.addUser({ password }, courseId, userId)
 			.pipe(
 				switchMap(
 					success => {
@@ -74,7 +74,7 @@ export class CourseMembershipsFacade {
 	leaveCourse(courseId: string): Observable<void> {
 		const userId = this.getUserId();
 
-		return this.courseService.removeUser(courseId, userId)
+		return this.courseParticipantsService.removeUser(courseId, userId)
 			.pipe(
 				switchMap(
 					success => {

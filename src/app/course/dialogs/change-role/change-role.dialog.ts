@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject } from "@angular/core";
-import { UserDto, CoursesService } from "../../../../../api";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CourseParticipantsService, UserDto } from "../../../../../api";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 export class ChangeRoleDialogData {
@@ -26,7 +25,7 @@ export class ChangeRoleDialog implements OnInit {
 
 	constructor(public dialogRef: MatDialogRef<ChangeRoleDialog, UserDto.CourseRoleEnum>,
 				@Inject(MAT_DIALOG_DATA) public data: ChangeRoleDialogData,
-				private courseService: CoursesService,
+				private courseParticipantsService: CourseParticipantsService,
 				private snackbar: SnackbarService) { }
 
 	ngOnInit(): void {
@@ -45,7 +44,7 @@ export class ChangeRoleDialog implements OnInit {
 		}
 		
 		// Update the role (if it has changed)
-		this.courseService.updateUserRole({ role: this.selectedRole }, this.data.courseId, this.data.user.id)
+		this.courseParticipantsService.updateUserRole({ role: this.selectedRole }, this.data.courseId, this.data.user.id)
 			.subscribe(
 				result => {
 					if (result) {
