@@ -30,7 +30,7 @@ export class CourseListComponent implements OnInit {
 	}
 
 	searchCourses(): void {
-		this.courseService.getCourses(this.shortname, this.selectedSemester, this.title).subscribe(
+		this.courseService.getCourses(undefined, undefined, this.shortname, this.selectedSemester, this.title).subscribe(
 			result => {
 				this.courseList = result;
 				this.dataSource = new MatTableDataSource(this.courseList);

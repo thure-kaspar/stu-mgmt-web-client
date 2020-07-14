@@ -44,7 +44,7 @@ export class SearchCourseDialog implements OnInit {
 
 	/** Retrieves all courses that match the specified filters and inserts them into the table. */
 	searchCourses(): void {
-		this.courseService.getCourses(this.shortname, this.selectedSemester, this.title).subscribe(
+		this.courseService.getCourses(undefined, undefined, this.shortname, this.selectedSemester, this.title).subscribe(
 			result => {
 				this.courseList = result;
 				this.dataSource = new MatTableDataSource(this.courseList);
