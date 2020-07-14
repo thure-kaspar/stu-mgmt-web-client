@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AssignmentDto } from "../../../../api";
 import { ActivatedRoute } from "@angular/router";
 import { getRouteParam } from "../../../../utils/helper";
-import { SelectedAssignmentFacade } from "../services/selected-assignment.facade";
+import { SelectedAssignmentFacade } from "../../assessment/services/selected-assignment.facade";
 
 @Component({
 	selector: "app-assessment-overview",

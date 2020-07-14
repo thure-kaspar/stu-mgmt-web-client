@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { ActivatedRoute } from "@angular/router";
-import { SelectedAssignmentFacade } from "../services/selected-assignment.facade";
+import { SelectedAssignmentFacade } from "../../assessment/services/selected-assignment.facade";
 
 @Component({
 	selector: "app-created-assessments",

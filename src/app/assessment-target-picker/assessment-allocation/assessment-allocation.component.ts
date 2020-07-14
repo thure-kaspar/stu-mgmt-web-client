@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from "@angular/core";
-import { UserDto, AssessmentAllocationService, AssessmentAllocationDto } from "../../../../api";
-import { SnackbarService } from "../../shared/services/snackbar.service";
-import { EvaluatorsFacade } from "../services/evaluators.facade";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { AssessmentAllocationDto, AssessmentAllocationService, UserDto } from "../../../../api";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { SnackbarService } from "../../shared/services/snackbar.service";
+import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 
 /**
  * Component that provides a selection of users (evaluators), which can be assigned to a group or user.

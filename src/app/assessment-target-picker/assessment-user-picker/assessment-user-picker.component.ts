@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectionStrategy } from "@angular/core";
-import { UserDto, UserWithAssignedEvaluatorDto, CoursesService, CourseParticipantsService } from "../../../../api";
+import { UserDto, UserWithAssignedEvaluatorDto, CourseParticipantsService } from "../../../../api";
 import { Observable, Subscription, BehaviorSubject } from "rxjs";
 import { MatTableDataSource } from "@angular/material/table";
 import { Paginator } from "../../shared/paginator/paginator.component";

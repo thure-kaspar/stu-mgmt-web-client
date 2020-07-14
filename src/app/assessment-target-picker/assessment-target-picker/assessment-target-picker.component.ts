@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
 import { AssignmentsService, GroupDto, CoursesService, UserDto } from "../../../../api";
 import { SnackbarService } from "../../shared/services/snackbar.service";
-import { EvaluatorsFacade } from "../services/evaluators.facade";
+
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
+import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 
 export class AssessmentTargetFilter {
 	assignedEvaluatorId?: string;

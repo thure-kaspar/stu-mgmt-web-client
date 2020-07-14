@@ -114,7 +114,7 @@ export class EditAssessmentComponent implements OnInit {
 	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
 	groupSelectedHandler(group: GroupDto): void {
 		this.router.navigate(
-			[...this.routeToAssessmentsCmds, "create"],
+			[...this.routeToAssessmentsCmds, "editor", "create"],
 			{ fragment: "group" + group.id }
 		);
 	}
@@ -122,7 +122,7 @@ export class EditAssessmentComponent implements OnInit {
 	/** Sets the selected user and removes the selected group, it it exists. */
 	userSelectedHandler(user: UserDto): void {
 		this.router.navigate(
-			[...this.routeToAssessmentsCmds, "create"],
+			[...this.routeToAssessmentsCmds, "editor", "create"],
 			{ fragment: "user" + user.id }
 		);
 	}
@@ -150,9 +150,9 @@ export class EditAssessmentComponent implements OnInit {
 	/** Navigates to another assessment. */
 	private navigateToAssessment(assessmentId: string): void {
 		// Construct new url
-		const routeCmds = [...this.routeToAssessmentsCmds, assessmentId, "edit"];
+		const routeCmds = [...this.routeToAssessmentsCmds, "editor", assessmentId, "edit"];
 		const url = this.router.createUrlTree(routeCmds).toString();
-
+		console.log(url);
 		this.assessmentId = assessmentId;
 
 		// Change url (without reloading )

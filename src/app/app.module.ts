@@ -21,6 +21,8 @@ import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/de";
 import localeDeExtra from "@angular/common/locales/extra/de";
 import { AssessmentModule } from "./assessment/assessment.module";
+import { AssessmentEditorModule } from "./assessment-editor/assessment-editor.module";
+import { AssessmentOverviewModule } from "./assessment-overview/assessment-overview.module";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -52,7 +54,9 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		MaterialModule,
 		LayoutModule,
 		AuthModule,
-		AssessmentModule
+		AssessmentModule,
+		AssessmentEditorModule,
+		AssessmentOverviewModule
 	],
 	providers: [
 		{ provide: BASE_PATH, useValue: environment.API_BASE_PATH },

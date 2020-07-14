@@ -5,8 +5,8 @@ import { AssignmentsService, AssignmentDto, AssessmentAllocationService } from "
 import { getRouteParam } from "../../../../utils/helper";
 import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignment/search-assignment.dialog";
 import { SnackbarService } from "../../shared/services/snackbar.service";
-import { EvaluatorsFacade } from "../services/evaluators.facade";
-import { SelectedAssignmentFacade } from "../services/selected-assignment.facade";
+import { SelectedAssignmentFacade } from "../../assessment/services/selected-assignment.facade";
+import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 
 @Component({
 	selector: "app-assessment-allocation-overview",

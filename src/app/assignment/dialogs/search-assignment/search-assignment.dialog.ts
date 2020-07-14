@@ -31,7 +31,6 @@ export class SearchAssignmentDialog implements OnInit {
 	ngOnInit(): void {
 		this.assignmentService.getAssignmentsOfCourse(this.courseId).subscribe(
 			assignments => {
-				console.log(assignments);
 				this.dataSource = new MatTableDataSource(assignments);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;

@@ -1,6 +1,6 @@
 <div id="created-assessments-container">
 
-	<a [routerLink]="['create']" [matTooltip]="'Error.AssignmentNotInReview' | translate">
+	<a [routerLink]="['/courses', courseId, 'assignments', assignmentId, 'assessments', 'editor', 'create']" [matTooltip]="'Error.AssignmentNotInReview' | translate">
 		<button mat-flat-button color="accent" id="btn-create-assessment" [disabled]="assignment?.state !== stateEnum.INREVIEW">
 			<mat-icon>add</mat-icon>{{ 'Title.CreateAssessment' | translate }}
 		</button>
