@@ -10,7 +10,6 @@ import { SearchCourseDialog } from "./dialogs/search-course/search-course.dialog
 import { SearchUserDialog } from "./dialogs/search-user/search-user.dialog";
 import { CourseRoutingModule } from "./course-routing.module";
 import { CreateCourseComponent } from "./components/create-course/create-course.component";
-import { SemesterPipe } from "./pipes/semester.pipe";
 import { JoinCourseDialog } from "./dialogs/join-course/join-course.dialog";
 import { CourseForm } from "./forms/course-form/course-form.component";
 import { AdmissionCriteriaForm } from "./forms/admission-criteria-form/admission-criteria-form.component";
@@ -23,7 +22,6 @@ import { EditAssignmentTemplateDialog } from "./dialogs/edit-assignment-template
 @NgModule({
 	declarations: [
 		CourseListComponent, 
-		SemesterPipe, 
 		CourseComponent, 
 		ChangeRoleDialog, 
 		CreateCourseComponent, 

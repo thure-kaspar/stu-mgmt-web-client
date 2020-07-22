@@ -8,12 +8,14 @@ import { ConfirmDialog } from "./components/dialogs/confirm-dialog/confirm-dialo
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatNativeDateModule } from "@angular/material/core";
 import { Paginator } from "./paginator/paginator.component";
+import { SemesterPipe } from "./pipes/semester.pipe";
 
 @NgModule({
 	declarations: [
 		PageNotFoundComponent, 
 		ConfirmDialog,
-		Paginator
+		Paginator,
+		SemesterPipe
 	],
 	imports: [ 
 		CommonModule,
@@ -29,7 +31,8 @@ import { Paginator } from "./paginator/paginator.component";
 		FormsModule,
 		ReactiveFormsModule,
 		MatNativeDateModule,
-		Paginator
+		Paginator,
+		SemesterPipe
 	],
 	providers: [],
 })
