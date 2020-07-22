@@ -3,11 +3,13 @@
     "Add": "Add",
     "Cancel": "Cancel",
     "Close": "Close",
+    "Compare": "Compare",
     "Confirm": "Confirm",
     "Create": "Create",
     "Custom": {
       "AddAssignment": "Add assignment",
       "AddAssignmentTemplate": "Add assignment template",
+      "AddCourse": "Add course",
       "AddCriteria": "Add criteria",
       "AddGroup": "Add group",
       "AddLecturer": "Add lecturer",
@@ -228,6 +230,7 @@
   },
   "Title": {
     "AppName": "Student-Management",
+    "CompareParticipantsList": "Compare participants list",
     "CreateAssessment": "Create assessment",
     "CreateAssignment": "Create assignment",
     "CreateGroup": "Create group",
@@ -235,6 +238,7 @@
     "EditAssignment": "Edit assignment",
     "JoinCourse": "Join course",
     "JoinGroup": "Join group",
+    "ParticipantsList": "Participants list",
     "SearchCourse": "Search course",
     "SearchUser": "Search user"
   },

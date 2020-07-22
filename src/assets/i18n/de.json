@@ -3,11 +3,13 @@
     "Add": "Hinzufügen",
     "Cancel": "Abbrechen",
     "Close": "Schließen",
+    "Compare": "Vergleichen",
     "Confirm": "Bestätigen",
     "Create": "Erstellen",
     "Custom": {
       "AddAssignment": "Aufgabe hinzufügen",
       "AddAssignmentTemplate": "Aufgaben-Vorlage hinzufügen",
+      "AddCourse": "Veranstaltung hinzufügen",
       "AddCriteria": "Kriterium hinzufügen",
       "AddGroup": "Gruppe erstellen",
       "AddLecturer": "Lehrenden hinzufügen",
@@ -228,6 +230,7 @@
   },
   "Title": {
     "AppName": "Studenten-Management",
+    "CompareParticipantsList": "Teilnehmerliste vergleichen",
     "CreateAssessment": "Bewertung erstellen",
     "CreateAssignment": "Aufgabe erstellen",
     "CreateGroup": "Gruppe erstellen",
@@ -235,6 +238,7 @@
     "EditAssignment": "Aufgabe editieren",
     "JoinCourse": "Veranstaltung beitreten",
     "JoinGroup": "Gruppe beitreten",
+    "ParticipantsList": "Teilnehmerliste",
     "SearchCourse": "Suche nach Veranstaltung",
     "SearchUser": "Suche nach Nutzer"
   },

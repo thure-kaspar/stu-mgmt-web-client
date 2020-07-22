@@ -35,7 +35,7 @@
 						</button>
 					  </mat-menu>
 				</td>
-				</ng-container>
+			</ng-container>
 
 			<!-- Role Column -->
 			<ng-container matColumnDef="role">
@@ -57,8 +57,7 @@
 
 	
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns;">
-			</tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
 	
 		<app-paginator (onPageChanged)="searchParticipants(true)"></app-paginator>
