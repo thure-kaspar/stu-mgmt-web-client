@@ -55,8 +55,8 @@ export class CreateAssessmentComponent implements OnInit {
 	 */
 	private setPreselectedGroupOrUser(): void {
 		const fragment = this.route.snapshot.fragment;
-		const groupMatch = fragment.match(/^group(.+)/);
-		const userMatch = fragment.match(/^user(.+)/);
+		const groupMatch = fragment?.match(/^group(.+)/);
+		const userMatch = fragment?.match(/^user(.+)/);
 
 		if (groupMatch) {
 			// Only pass id to handler, because it will query for group data itself
