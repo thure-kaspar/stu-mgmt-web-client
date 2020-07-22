@@ -13,16 +13,12 @@ import { PartialAssessmentDto } from './partialAssessmentDto';
 
 export interface AssessmentUpdateDto { 
     /**
-     * The amount of points that the student or group achieved with their submission.
-     */
-    achievedPoints: number;
-    /**
-     * A comment providing additional feedback.
-     */
-    comment?: string;
-    /**
      * UserId of the person that updated the assessment. Automatically set by the server.
      */
     updatedBy?: string;
-    partialAssessments?: Array<PartialAssessmentDto>;
+    achievedPoints?: number;
+    addPartialAssessments?: Array<PartialAssessmentDto>;
+    updatePartialAssignments?: Array<PartialAssessmentDto>;
+    removePartialAssignments?: Array<PartialAssessmentDto>;
+    comment?: string;
 }

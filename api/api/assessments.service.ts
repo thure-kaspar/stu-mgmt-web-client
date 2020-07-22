@@ -61,7 +61,7 @@ export class AssessmentsService {
 
     /**
      * Add partial assessment.
-     * Adds a partial assessment for an exisiting assessment. Alternatively, partial assessments can be created together with the assessment.
+     * Adds a partial assessment for an existing assessment. Alternatively, partial assessments can be created together with the assessment.
      * @param body 
      * @param courseId 
      * @param assignmentId 
@@ -251,59 +251,6 @@ export class AssessmentsService {
     }
 
     /**
-     * Get assessments of assignment.
-     * Retrieves all assessments that have been created for the assignment.
-     * @param courseId 
-     * @param assignmentId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getAllAssessmentsForAssignment(courseId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentDto>>;
-    public getAllAssessmentsForAssignment(courseId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentDto>>>;
-    public getAllAssessmentsForAssignment(courseId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentDto>>>;
-    public getAllAssessmentsForAssignment(courseId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getAllAssessmentsForAssignment.');
-        }
-
-        if (assignmentId === null || assignmentId === undefined) {
-            throw new Error('Required parameter assignmentId was null or undefined when calling getAllAssessmentsForAssignment.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearer) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<AssessmentDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Get assessment.
      * Retrieves the assessment.
      * @param courseId 
@@ -353,6 +300,92 @@ export class AssessmentsService {
 
         return this.httpClient.request<AssessmentDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments/${encodeURIComponent(String(assessmentId))}`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get assessments of assignment.
+     * Retrieves assessments that have been created for the assignment.
+     * @param courseId 
+     * @param assignmentId 
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param groupId Retrieves assessment of specific group.
+     * @param userId Retrieves assessment of specific user.
+     * @param minScore Only includes assessments with achievedPoints &gt;&#x3D; minScore, if specified.
+     * @param creatorId Only includes assessments created by specified user.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentDto>>;
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentDto>>>;
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentDto>>>;
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getAssessmentsForAssignment.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling getAssessmentsForAssignment.');
+        }
+
+
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (groupId !== undefined && groupId !== null) {
+            queryParameters = queryParameters.set('groupId', <any>groupId);
+        }
+        if (userId !== undefined && userId !== null) {
+            queryParameters = queryParameters.set('userId', <any>userId);
+        }
+        if (minScore !== undefined && minScore !== null) {
+            queryParameters = queryParameters.set('minScore', <any>minScore);
+        }
+        if (creatorId !== undefined && creatorId !== null) {
+            queryParameters = queryParameters.set('creatorId', <any>creatorId);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<AssessmentDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
