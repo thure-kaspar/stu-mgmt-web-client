@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, Validators, FormArray, FormGroup, ValidatorFn, AbstractControl } from "@angular/forms";
 import { AbstractForm } from "../../../shared/abstract-form";
 import { AssessmentCreateDto, PartialAssessmentDto, AssignmentDto } from "../../../../../api";
@@ -11,6 +11,9 @@ import { AssessmentCreateDto, PartialAssessmentDto, AssignmentDto } from "../../
 export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements OnInit {
 
 	@Input() assignment: AssignmentDto;
+
+	/** Emits the id of the removed PartialAssessment, if it had an id (existed before). */
+	@Output() onPartialRemoved = new EventEmitter<number>();
 
 	severityEnum = PartialAssessmentDto.SeverityEnum;
 
@@ -68,7 +71,11 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 
 	/** Removes a partial assessment from the form. */
 	removePartialAssessment(index: number): void {
+		const id = this.getPartialAssessments().at(index).value.id;
 		this.getPartialAssessments().removeAt(index);
+		if (id) {
+			this.onPartialRemoved.emit(id);
+		}
 	}
 
 	getPartialAssessments(): FormArray {

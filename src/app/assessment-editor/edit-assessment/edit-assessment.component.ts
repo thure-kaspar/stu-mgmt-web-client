@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssessmentsService, AssignmentsService, GroupsService, AssessmentDto, AssignmentDto, GroupDto, UserDto, AssessmentUpdateDto, AssessmentEventDto } from "../../../../api";
+import { AssessmentsService, AssignmentsService, GroupsService, AssessmentDto, AssignmentDto, GroupDto, UserDto, AssessmentUpdateDto, AssessmentEventDto, PartialAssessmentDto } from "../../../../api";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
@@ -28,6 +28,9 @@ export class EditAssessmentComponent implements OnInit {
 	assessmentId: string;
 
 	stateEnum = AssignmentDto.StateEnum;
+
+	/** Stores PartialAssessment that will be removed when the user saves. */
+	private removedPartialAssessments: PartialAssessmentDto[] = [];
 	private routeToAssessmentsCmds: string[];
 
 	constructor(private assessmentService: AssessmentsService,
@@ -84,7 +87,6 @@ export class EditAssessmentComponent implements OnInit {
 				result => {
 					this.events = result;
 					this.showEvents = true;
-					console.log(result);
 				},
 				error => {
 					console.log(error);
@@ -94,10 +96,18 @@ export class EditAssessmentComponent implements OnInit {
 	}
 
 	onSave(): void {
-		const update: AssessmentUpdateDto = this.form.getModel();
+		const model = this.form.getModel();
+		const update: AssessmentUpdateDto = {
+			achievedPoints: model.achievedPoints,
+			comment: model.comment?.length > 0 ? model.comment : null,
+			addPartialAssessments: model.partialAssessments?.filter(p => !p.id), // To add = partials without id, because they haven't been created yet
+			updatePartialAssignments: model.partialAssessments?.filter(p => !!p.id),
+			removePartialAssignments: this.removedPartialAssessments
+		};
 
 		// Ensure that assessmentId of partial assessments is set
-		update.partialAssessments.forEach(p => p.assessmentId = this.assessmentId);
+		update.addPartialAssessments?.forEach(p => p.assessmentId = this.assessmentId);
+		update.updatePartialAssignments?.forEach(p => p.assessmentId = this.assessmentId);
 
 		this.assessmentService.updateAssessment(update, this.courseId, this.assignmentId, this.assessmentId).subscribe(
 			result => {
@@ -109,6 +119,13 @@ export class EditAssessmentComponent implements OnInit {
 				this.snackbar.openErrorMessage();
 			}
 		);
+	}
+
+	addToRemovedPartials(partialAssessmentId: number): void {
+		const partial = this.assessment.partialAssessments.find(p => p.id == partialAssessmentId);
+		if (partial) {
+			this.removedPartialAssessments = [...this.removedPartialAssessments, partial];
+		}
 	}
 
 	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
@@ -168,6 +185,7 @@ export class EditAssessmentComponent implements OnInit {
 		this.form.form.reset();
 		this.assignment = undefined;
 		this.assessment = undefined;
+		this.removedPartialAssessments = [];
 		this.group = undefined;
 		this.user = undefined;
 		this.events = undefined;

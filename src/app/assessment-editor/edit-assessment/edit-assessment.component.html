@@ -49,7 +49,7 @@
 				</p>
 			</div>
 
-			<app-assessment-form [assignment]="assignment"></app-assessment-form>
+			<app-assessment-form [assignment]="assignment" (onPartialRemoved)="addToRemovedPartials($event)"></app-assessment-form>
 
 			<button mat-raised-button color="accent" id="btn-save" [disabled]="form.isInvalid() && assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
 				{{ 'Action.Save' | translate }}

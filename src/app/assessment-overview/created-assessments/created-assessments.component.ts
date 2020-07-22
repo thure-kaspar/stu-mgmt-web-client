@@ -42,7 +42,7 @@ export class CreatedAssessmentsComponent implements OnInit {
 	}
 
 	loadAssessments(): void {
-		this.assessmentService.getAllAssessmentsForAssignment(this.courseId, this.assignmentId).subscribe(
+		this.assessmentService.getAssessmentsForAssignment(this.courseId, this.assignmentId).subscribe(
 			result => {
 				this.assessments = result;
 				this.dataSource = new MatTableDataSource(this.assessments);
