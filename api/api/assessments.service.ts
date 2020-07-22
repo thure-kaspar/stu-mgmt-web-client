@@ -60,7 +60,7 @@ export class AssessmentsService {
 
 
     /**
-     * Add partial assessment
+     * Add partial assessment.
      * Adds a partial assessment for an exisiting assessment. Alternatively, partial assessments can be created together with the assessment.
      * @param body 
      * @param courseId 
@@ -129,7 +129,7 @@ export class AssessmentsService {
     }
 
     /**
-     * Create assessment
+     * Create assessment.
      * Creates a new assessment.
      * @param body 
      * @param courseId 
@@ -193,7 +193,7 @@ export class AssessmentsService {
     }
 
     /**
-     * Delete assessment
+     * Delete assessment.
      * Deletes the assessment. Returns true, if removal was successful.
      * @param courseId 
      * @param assignmentId 
@@ -251,7 +251,7 @@ export class AssessmentsService {
     }
 
     /**
-     * Get assessments of assignment
+     * Get assessments of assignment.
      * Retrieves all assessments that have been created for the assignment.
      * @param courseId 
      * @param assignmentId 
@@ -304,7 +304,7 @@ export class AssessmentsService {
     }
 
     /**
-     * Get assessment
+     * Get assessment.
      * Retrieves the assessment.
      * @param courseId 
      * @param assignmentId 
@@ -362,7 +362,7 @@ export class AssessmentsService {
     }
 
     /**
-     * Get assessment events
+     * Get assessment events.
      * Retrieves events of the assessment.
      * @param courseId 
      * @param assignmentId 
@@ -420,7 +420,7 @@ export class AssessmentsService {
     }
 
     /**
-     * Update assessment
+     * Update assessment.
      * Updates the assessment.
      * @param body 
      * @param courseId 

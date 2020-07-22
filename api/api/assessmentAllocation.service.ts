@@ -56,7 +56,7 @@ export class AssessmentAllocationService {
 
 
     /**
-     * Copy assessment allocation from another assignment
+     * Copy assessment allocation from another assignment.
      * Applies the allocations from another assignment to the specified assignment.
      * @param courseId 
      * @param assignmentId 
@@ -166,7 +166,7 @@ export class AssessmentAllocationService {
     }
 
     /**
-     * Assign assessment to evaluator
+     * Assign assessment to evaluator.
      * Maps an evaluator to a group or user. If the group or user is already assigned to another evaluator, changes the evaluator.
      * @param body 
      * @param courseId 
@@ -230,7 +230,7 @@ export class AssessmentAllocationService {
     }
 
     /**
-     * Get assessment allocations
+     * Get assessment allocations.
      * Returns a list of allocations, which map an evaluator to a group or user.
      * @param courseId 
      * @param assignmentId 
@@ -283,7 +283,7 @@ export class AssessmentAllocationService {
     }
 
     /**
-     * Remove allocation
+     * Remove allocation.
      * Removes the assignment of the specified group or user. Throws error, if removal was unsuccessful.
      * @param courseId 
      * @param assignmentId 

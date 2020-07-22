@@ -57,7 +57,7 @@ export class CoursesService {
 
 
     /**
-     * Create course
+     * Create course.
      * Creates a new course.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -111,7 +111,7 @@ export class CoursesService {
     }
 
     /**
-     * Delete course
+     * Delete course.
      * Deletes the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -159,7 +159,7 @@ export class CoursesService {
     }
 
     /**
-     * Get course
+     * Get course.
      * Retrieves the course, if the requesting user is a member of this course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -207,7 +207,7 @@ export class CoursesService {
     }
 
     /**
-     * Get course by name and semester
+     * Get course by name and semester.
      * 
      * @param name 
      * @param semester 
@@ -260,7 +260,7 @@ export class CoursesService {
     }
 
     /**
-     * Get courses
+     * Get courses.
      * Returns all courses that match the given filter.
      * @param skip [Pagination] The amount of elements that should be skipped.
      * @param take [Pagination] The amount of elements that should be included in the response.
@@ -331,7 +331,7 @@ export class CoursesService {
     }
 
     /**
-     * Update course
+     * Update course.
      * Updates the course.
      * @param body 
      * @param courseId 

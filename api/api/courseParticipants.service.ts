@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { CanJoinCourseDto } from '../model/canJoinCourseDto';
 import { ChangeCourseRoleDto } from '../model/changeCourseRoleDto';
+import { ParticipantsComparisonDto } from '../model/participantsComparisonDto';
 import { PasswordDto } from '../model/passwordDto';
 import { UserDto } from '../model/userDto';
 import { UserWithAssignedEvaluatorDto } from '../model/userWithAssignedEvaluatorDto';
@@ -60,7 +61,7 @@ export class CourseParticipantsService {
 
 
     /**
-     * Add user to course
+     * Add user to course.
      * Adds a user to the course. If the course requires a password, the correct password needs to be included in the request body.
      * @param body 
      * @param courseId 
@@ -124,7 +125,7 @@ export class CourseParticipantsService {
     }
 
     /**
-     * Check if joining is possible
+     * Check if joining is possible.
      * Checks, if the user is able to join the course. A user can join a course, if he&#x27;s not already a member and the course is not closed.
      * @param courseId 
      * @param userId 
@@ -177,7 +178,68 @@ export class CourseParticipantsService {
     }
 
     /**
-     * Get users of course
+     * Compare participants list..
+     * Returns an Object, which divides the course participants in two groups (in/out).
+     * @param courseId 
+     * @param compareToCourseIds 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public compareParticipantsList(courseId: string, compareToCourseIds: Array<string>, observe?: 'body', reportProgress?: boolean): Observable<ParticipantsComparisonDto>;
+    public compareParticipantsList(courseId: string, compareToCourseIds: Array<string>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ParticipantsComparisonDto>>;
+    public compareParticipantsList(courseId: string, compareToCourseIds: Array<string>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ParticipantsComparisonDto>>;
+    public compareParticipantsList(courseId: string, compareToCourseIds: Array<string>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling compareParticipantsList.');
+        }
+
+        if (compareToCourseIds === null || compareToCourseIds === undefined) {
+            throw new Error('Required parameter compareToCourseIds was null or undefined when calling compareParticipantsList.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (compareToCourseIds) {
+            compareToCourseIds.forEach((element) => {
+                queryParameters = queryParameters.append('compareToCourseIds', <any>element);
+            })
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<ParticipantsComparisonDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/compare-participants-list`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get users of course.
      * Returns a collection of users that are signed up for this course.
      * @param courseId 
      * @param skip [Pagination] The amount of elements that should be skipped.
@@ -250,7 +312,7 @@ export class CourseParticipantsService {
     }
 
     /**
-     * Get users with assigned evaluator
+     * Get users with assigned evaluator.
      * Returns users with their assigned evaluator for a particular assignment.
      * @param courseId 
      * @param assignmentId 
@@ -331,7 +393,7 @@ export class CourseParticipantsService {
     }
 
     /**
-     * Remove user from course
+     * Remove user from course.
      * Removes the user from the course. Returns true, if removal was successful.
      * @param courseId 
      * @param userId 
@@ -384,7 +446,7 @@ export class CourseParticipantsService {
     }
 
     /**
-     * Update user&#x27;s role in course
+     * Update user&#x27;s role in course.
      * Assigns the given role to the user of this course.
      * @param body 
      * @param courseId 

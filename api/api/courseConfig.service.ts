@@ -61,7 +61,7 @@ export class CourseConfigService {
 
 
     /**
-     * Create admission criteria
+     * Create admission criteria.
      * Creates admission criteria for a course.
      * @param body 
      * @param courseId 
@@ -125,7 +125,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Create assignment template
+     * Create assignment template.
      * Creates an assignment template.
      * @param body 
      * @param courseId 
@@ -189,7 +189,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Create course config
+     * Create course config.
      * Saves a configuration for a course, if it does not have one already.
      * @param body 
      * @param courseId 
@@ -248,7 +248,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Delete assignment template
+     * Delete assignment template.
      * Deletes the assignment template.
      * @param courseId 
      * @param id 
@@ -300,7 +300,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Get admission criteria
+     * Get admission criteria.
      * Retrieves the admission criteria of a course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -348,7 +348,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Get assignment templates
+     * Get assignment templates.
      * Retrieves the assignment templates of a course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -396,7 +396,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Get course config
+     * Get course config.
      * Retrieves the configuration of a course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -444,7 +444,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Get group settings
+     * Get group settings.
      * Retrieves the group settings of a course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -492,7 +492,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Remove admssion criteria
+     * Remove admssion criteria.
      * Removes the admission criteria of a course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -539,7 +539,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Remove course config
+     * Remove course config.
      * Removes the complete configuration of a course. Includes group settings, admission criteria and templates.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -586,7 +586,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Update admission criteria
+     * Update admission criteria.
      * Updates the admission criteria of a course.
      * @param body 
      * @param courseId 
@@ -645,7 +645,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Update assignment template
+     * Update assignment template.
      * Updates the assignment template.
      * @param body 
      * @param courseId 
@@ -709,7 +709,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Update course config
+     * Update course config.
      * Updates the configuration of a course.
      * @param body 
      * @param courseId 
@@ -768,7 +768,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Update group settings
+     * Update group settings.
      * Updates the group settings of a course.
      * @param body 
      * @param courseId 

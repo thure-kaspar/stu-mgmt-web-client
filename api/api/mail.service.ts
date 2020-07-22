@@ -56,7 +56,7 @@ export class MailService {
 
 
     /**
-     * Send mail
+     * Send mail.
      * Sends the mail.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

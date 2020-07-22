@@ -57,7 +57,7 @@ export class TestService {
 
 
     /**
-     * Get UpdateMessage-Examples
+     * Get UpdateMessage-Examples.
      * Returns all possible UpdateMessages.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -93,7 +93,7 @@ export class TestService {
     }
 
     /**
-     * SHOULD NOT BE CALLED
+     * SHOULD NOT BE CALLED.
      * Logs the received UpdateMessage send from (POST) /notifications, if it was send to this route (/notifications/log).
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -139,7 +139,7 @@ export class TestService {
     }
 
     /**
-     * Send notication
+     * Send notication.
      * Sends the given UpdateMessage to the specified URL via HTTP-POST. Use (GET) /notifications for examples.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

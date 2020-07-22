@@ -58,7 +58,7 @@ export class AuthenticationService {
 
 
     /**
-     * Login
+     * Login.
      * Logs the user in to the StudentMgmt-Backend directly.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -105,7 +105,7 @@ export class AuthenticationService {
     }
 
     /**
-     * Login with token
+     * Login with token.
      * Logs the user in to the StudentMgmt-Backend via the credentials provided by the external authentication system.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -152,7 +152,7 @@ export class AuthenticationService {
     }
 
     /**
-     * Register user
+     * Register user.
      * Creates a new account.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

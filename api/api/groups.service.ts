@@ -61,7 +61,7 @@ export class GroupsService {
 
 
     /**
-     * Add user to group
+     * Add user to group.
      * Adds the user to the group, if constraints are fulfilled.
      * @param body 
      * @param courseId 
@@ -130,7 +130,7 @@ export class GroupsService {
     }
 
     /**
-     * Create group
+     * Create group.
      * Creates a new group, if course allows group creation.
      * @param body 
      * @param courseId 
@@ -189,7 +189,7 @@ export class GroupsService {
     }
 
     /**
-     * Create multiple groups
+     * Create multiple groups.
      * Creates multiple groups with the given names or naming schema and count.
      * @param body 
      * @param courseId 
@@ -248,7 +248,7 @@ export class GroupsService {
     }
 
     /**
-     * Delete group
+     * Delete group.
      * Deletes the group.
      * @param courseId 
      * @param groupId 
@@ -301,7 +301,7 @@ export class GroupsService {
     }
 
     /**
-     * Get group
+     * Get group.
      * Returns the group with its course, users, assessments and history.
      * @param courseId 
      * @param groupId 
@@ -354,7 +354,7 @@ export class GroupsService {
     }
 
     /**
-     * Get snapshot of a group at assignment end
+     * Get snapshot of a group at assignment end.
      * Returns a snapshot of the group&#x27;s members at the time of the assignment&#x27;s end.
      * @param courseId 
      * @param groupId 
@@ -412,7 +412,7 @@ export class GroupsService {
     }
 
     /**
-     * Get group history of course
+     * Get group history of course.
      * Retrieves all group events of the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -460,7 +460,7 @@ export class GroupsService {
     }
 
     /**
-     * Get snapshot of groups at assignment end
+     * Get snapshot of groups at assignment end.
      * Returns a snapshot of the group constellations at the time of the assignment&#x27;s end.
      * @param courseId 
      * @param assignmentId 
@@ -513,7 +513,7 @@ export class GroupsService {
     }
 
     /**
-     * Get groups of course
+     * Get groups of course.
      * Retrieves all groups that belong to the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -561,7 +561,7 @@ export class GroupsService {
     }
 
     /**
-     * Get groups with assigned evaluator
+     * Get groups with assigned evaluator.
      * Retrieves groups with their assigned evaluator for an assignment
      * @param courseId 
      * @param assignmentId 
@@ -642,7 +642,7 @@ export class GroupsService {
     }
 
     /**
-     * Get users of group
+     * Get users of group.
      * Retrieves all users that are members of the group.
      * @param courseId 
      * @param groupId 
@@ -695,7 +695,7 @@ export class GroupsService {
     }
 
     /**
-     * Remove user
+     * Remove user.
      * Removes the user from the group.
      * @param courseId 
      * @param groupId 
@@ -752,7 +752,7 @@ export class GroupsService {
     }
 
     /**
-     * Update group
+     * Update group.
      * Updates the group
      * @param body 
      * @param courseId 

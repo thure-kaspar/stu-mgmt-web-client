@@ -61,7 +61,7 @@ export class UsersService {
 
 
     /**
-     * Create user
+     * Create user.
      * Creates a user.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -115,7 +115,7 @@ export class UsersService {
     }
 
     /**
-     * Delete user
+     * Delete user.
      * Deletes the user. Returns true, if removes was successful.
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -163,7 +163,7 @@ export class UsersService {
     }
 
     /**
-     * Get users
+     * Get users.
      * Retrieves all users that match the specified filter.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -206,7 +206,7 @@ export class UsersService {
     }
 
     /**
-     * Get assessments
+     * Get assessments.
      * Returns all assessments of the user in the given course. Includes the group, if assessment specified a group.
      * @param userId 
      * @param courseId 
@@ -259,7 +259,7 @@ export class UsersService {
     }
 
     /**
-     * Get courses of user
+     * Get courses of user.
      * Retrieves all courses that the user is a member of.
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -307,7 +307,7 @@ export class UsersService {
     }
 
     /**
-     * Get group history of user for course
+     * Get group history of user for course.
      * Retrieves the group history of a user in a course. Events are sorted by timestamp in descending order (new to old).
      * @param userId 
      * @param courseId 
@@ -360,7 +360,7 @@ export class UsersService {
     }
 
     /**
-     * Get group of all assignments
+     * Get group of all assignments.
      * Maps all assignments of a course to the user&#x27;s group for the corresponding assignment.
      * @param userId 
      * @param courseId 
@@ -413,7 +413,7 @@ export class UsersService {
     }
 
     /**
-     * Get group of assignment
+     * Get group of assignment.
      * Retrieves the group that the user was a member of when the assignment closed or the current group, if it hasn&#x27;t closed yet. Returns null, if user was not in a group.
      * @param userId 
      * @param courseId 
@@ -471,7 +471,7 @@ export class UsersService {
     }
 
     /**
-     * Get group of user for course
+     * Get group of user for course.
      * Retrieves the user&#x27;s current group in a course.
      * @param userId 
      * @param courseId 
@@ -524,7 +524,7 @@ export class UsersService {
     }
 
     /**
-     * Get user
+     * Get user.
      * Retrieves the user.
      * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -572,7 +572,7 @@ export class UsersService {
     }
 
     /**
-     * Get user by email
+     * Get user by email.
      * Retrieves a user by email.
      * @param email 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -620,7 +620,7 @@ export class UsersService {
     }
 
     /**
-     * Update user
+     * Update user.
      * Updates the user
      * @param body 
      * @param userId 

@@ -56,7 +56,7 @@ export class AssignmentsService {
 
 
     /**
-     * Create assignment
+     * Create assignment.
      * Creates a new assignment.
      * @param body 
      * @param courseId 
@@ -115,7 +115,7 @@ export class AssignmentsService {
     }
 
     /**
-     * Delete assignment
+     * Delete assignment.
      * Deletes the assignment. Returns true, if removal was successful.
      * @param courseId 
      * @param assignmentId 
@@ -168,7 +168,7 @@ export class AssignmentsService {
     }
 
     /**
-     * Get assignment
+     * Get assignment.
      * Retrieves the assignment.
      * @param courseId 
      * @param assignmentId 
@@ -221,7 +221,7 @@ export class AssignmentsService {
     }
 
     /**
-     * Get assignments of course
+     * Get assignments of course.
      * Retrieves all assignments of the course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -269,7 +269,7 @@ export class AssignmentsService {
     }
 
     /**
-     * Update assignment
+     * Update assignment.
      * Updates the assignment.
      * @param body 
      * @param courseId 
