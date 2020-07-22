@@ -2,14 +2,15 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
-import { CourseParticipantsService, CoursesService, UserDto } from "../../../../../api";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { Paginator } from "../../../shared/paginator/paginator.component";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
-import { ChangeRoleDialog, ChangeRoleDialogData } from "../../dialogs/change-role/change-role.dialog";
-import { BehaviorSubject, Subject, Subscription } from "rxjs";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
+import { CourseParticipantsService, CoursesService, UserDto } from "../../../../api";
+import { ChangeRoleDialog, ChangeRoleDialogData } from "../../course/dialogs/change-role/change-role.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { Paginator } from "../../shared/paginator/paginator.component";
+import { SnackbarService } from "../../shared/services/snackbar.service";
+
 
 class ParticipantsFilter {
 	includeStudents = false;

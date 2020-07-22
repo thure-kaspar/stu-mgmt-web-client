@@ -5,7 +5,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatDialogRef } from "@angular/material/dialog";
 import { SelectionModel } from "@angular/cdk/collections";
+import { getSemester } from "../../../../../utils/helper";
 
+/**
+ * Dialog that allows searching for courses.
+ * @returns `CourseDto[]` - The selected courses.
+ */
 @Component({
 	selector: "app-search-course",
 	templateUrl: "./search-course.dialog.html",
@@ -15,7 +20,7 @@ export class SearchCourseDialog implements OnInit {
 
 	title = "";
 	shortname: string;
-	selectedSemester = "wise1920";
+	selectedSemester = getSemester();
 
 	courseList: CourseDto[];
 	displayedColumns: string[] = ["select", "title", "semester", "action"];

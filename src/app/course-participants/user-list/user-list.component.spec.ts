@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { UserListComponent } from "./user-list.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { SharedModule } from "../../../shared/shared.module";
-import { CoursesService, UserDto } from "../../../../../api";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { of, Observable, throwError } from "rxjs";
-import { copy } from "../../../../../utils/object-helper";
+import { UserDto, CoursesService } from "../../../../api";
+import { SharedModule } from "../../shared/shared.module";
+import { copy } from "../../../../utils/object-helper";
 
 const mockUsers: UserDto[] = [];
 const oldRole: UserDto.CourseRoleEnum = "STUDENT";

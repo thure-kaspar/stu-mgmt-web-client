@@ -4,7 +4,6 @@ import { CourseListComponent } from "./components/course-list/course-list.compon
 import { CourseComponent } from "./components/course/course.component";
 import { CreateCourseComponent } from "./components/create-course/create-course.component";
 import { AuthGuard } from "../auth/guards/auth.guard";
-import { UserListComponent } from "./components/user-list/user-list.component";
 import { EditCourseComponent } from "./components/edit-course/edit-course.component";
 
 const routes: Routes = [
@@ -12,7 +11,7 @@ const routes: Routes = [
 	{ path: ":courseId", component: CourseComponent, canActivate: [AuthGuard], children: [
 		{ path: "assignments", loadChildren: () => import("../assignment/assignment.module").then(m => m.AssignmentModule), },
 		{ path: "groups", loadChildren: () => import("../group/group.module").then(m => m.GroupModule) },
-		{ path: "users", component: UserListComponent, pathMatch: "full" },
+		{ path: "users", loadChildren: () => import("../course-participants/course-participants.module").then(m => m.CourseParticipantsModule) },
 		{ path: "settings", component: EditCourseComponent, pathMatch: "full" },
 		{ path: "**", pathMatch: "full", redirectTo: "assignments" }
 	] },
