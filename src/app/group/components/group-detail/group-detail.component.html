@@ -1,8 +1,5 @@
-<div id="group-detail-container" *ngIf="group">
+<div class="tab" id="group-detail-container" *ngIf="group">
 	<mat-card-title>
-		<a [routerLink]="['..']">
-			<button mat-icon-button><mat-icon class="icon-light">arrow_back</mat-icon></button>
-		</a>
 		{{group.name}}
 	</mat-card-title>
 
