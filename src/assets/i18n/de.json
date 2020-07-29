@@ -228,6 +228,12 @@
       "Username": "Nutzername"
     }
   },
+  "Text": {
+    "GroupCreation": {
+      "NameSchema": "Dieser Kurs verwendet vordefinierte Gruppennamen.\nDer Name der Gruppe wird automatisch generiert.",
+      "Password": "Wenn du ein Passwort verwendest, müssen andere Teilnehmer das Passwort eingeben, um deiner Gruppe beizutreten."
+    }
+  },
   "Title": {
     "AppName": "Studenten-Management",
     "CompareParticipantsList": "Teilnehmerliste vergleichen",

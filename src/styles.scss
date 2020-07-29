@@ -108,6 +108,11 @@ input[type=number] {
 	height: 100%;
 }
 
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
 .link-none {
 	text-decoration: none;
 	color: inherit;
@@ -115,6 +120,10 @@ input[type=number] {
 
 .font-bold {
 	font-weight: 500;
+}
+
+.text-justify {
+	text-align: justify;
 }
 
 .icon-light {

@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { GroupsService, GroupDto, CourseConfigService, GroupSettingsDto } from "../../../../../api";
+import { GroupsService, GroupDto, CourseConfigService, GroupSettingsDto, CoursesService, CourseParticipantsService, UsersService, UserDto } from "../../../../../api";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../../auth/services/auth.service";
+import { getRouteParam } from "../../../../../utils/helper";
+import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
 
 @Component({
 	selector: "app-group-list",
@@ -26,18 +28,22 @@ export class GroupListComponent implements OnInit {
 	constructor(public dialog: MatDialog,
 				private groupService: GroupsService,
 				private courseConfig: CourseConfigService,
+				private courseParticipantsService: CourseParticipantsService,
+				private userService: UsersService,
 				private authService: AuthService,
 				private router: Router,
 				private route: ActivatedRoute) { }
 
 	ngOnInit(): void {
-		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
+		this.courseId = getRouteParam("courseId", this.route);
 		this.loadGroups();
 
 		this.courseConfig.getGroupSettings(this.courseId).subscribe(
 			result => this.groupSettings = result,
 			error => console.log(error)
 		);
+
+		this.openCreateGroupDialog();
 	}
 
 	/** Loads the groups of the course. */
@@ -67,7 +73,32 @@ export class GroupListComponent implements OnInit {
 		this.filteredGroups = filteredGroups;
 	}
 
-	openAddDialog(): void {
+	/**
+	 * Opens up a group creation dialog depending on the user's course role.
+	 */
+	async openCreateGroupDialog(): Promise<void> {
+		const userId = this.authService.getAuthToken().userId;
+		const participant = await this.courseParticipantsService.getParticipant(this.courseId, userId).toPromise();
+
+		if (participant.courseRole === UserDto.CourseRoleEnum.STUDENT) {
+			this.openCreateGroupDialog_Student();
+		} else {
+			this.openCreateGroupDialog_LecturerOrTutor();
+		}
+	}
+
+	private openCreateGroupDialog_Student(): void {
+		const dialogRef = this.dialog.open(CreateGroupStudentDialog, { data: this.courseId });
+		dialogRef.afterClosed().subscribe(
+			result => {
+				if (result) {
+					this.router.navigate(["courses", this.courseId, "groups", result.id]);
+				}
+			}
+		);
+	}
+
+	private openCreateGroupDialog_LecturerOrTutor(): void {
 		const dialogRef = this.dialog.open(CreateGroupDialog, { data: this.courseId });
 		dialogRef.afterClosed().subscribe(
 			result => {
