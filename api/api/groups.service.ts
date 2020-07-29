@@ -131,7 +131,7 @@ export class GroupsService {
 
     /**
      * Create group.
-     * Creates a new group, if course allows group creation.
+     * Creates a new group, if course allows group creation. If request was triggered by student, student is automatically joining the group.
      * @param body 
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -255,9 +255,9 @@ export class GroupsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteGroup(courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public deleteGroup(courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public deleteGroup(courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public deleteGroup(courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteGroup(courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteGroup(courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public deleteGroup(courseId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
@@ -279,7 +279,6 @@ export class GroupsService {
         }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -290,7 +289,7 @@ export class GroupsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<boolean>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -516,16 +515,38 @@ export class GroupsService {
      * Get groups of course.
      * Retrieves all groups that belong to the course.
      * @param courseId 
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param name Name of the group. Compared with ILIKE %name%.
+     * @param isClosed If true, only includes
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getGroupsOfCourse(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
-    public getGroupsOfCourse(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
-    public getGroupsOfCourse(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
-    public getGroupsOfCourse(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling getGroupsOfCourse.');
+        }
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (name !== undefined && name !== null) {
+            queryParameters = queryParameters.set('name', <any>name);
+        }
+        if (isClosed !== undefined && isClosed !== null) {
+            queryParameters = queryParameters.set('isClosed', <any>isClosed);
         }
 
         let headers = this.defaultHeaders;
@@ -552,6 +573,7 @@ export class GroupsService {
 
         return this.httpClient.request<Array<GroupDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups`,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

@@ -121,9 +121,9 @@ export class UsersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteUser(userId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public deleteUser(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public deleteUser(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public deleteUser(userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteUser(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteUser(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public deleteUser(userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (userId === null || userId === undefined) {
@@ -141,7 +141,6 @@ export class UsersService {
         }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -152,7 +151,7 @@ export class UsersService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<boolean>('delete',`${this.basePath}/users/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/users/${encodeURIComponent(String(userId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

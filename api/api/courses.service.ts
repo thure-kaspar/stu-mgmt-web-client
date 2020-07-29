@@ -117,9 +117,9 @@ export class CoursesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteCourse(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public deleteCourse(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public deleteCourse(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public deleteCourse(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteCourse(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteCourse(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public deleteCourse(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
@@ -137,7 +137,6 @@ export class CoursesService {
         }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -148,7 +147,7 @@ export class CoursesService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<boolean>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

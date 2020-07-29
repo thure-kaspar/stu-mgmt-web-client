@@ -194,16 +194,16 @@ export class AssessmentsService {
 
     /**
      * Delete assessment.
-     * Deletes the assessment. Returns true, if removal was successful.
+     * Deletes the assessment.
      * @param courseId 
      * @param assignmentId 
      * @param assessmentId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public deleteAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public deleteAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public deleteAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteAssessment(courseId: string, assignmentId: string, assessmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public deleteAssessment(courseId: string, assignmentId: string, assessmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
@@ -229,7 +229,6 @@ export class AssessmentsService {
         }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -240,7 +239,7 @@ export class AssessmentsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<boolean>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments/${encodeURIComponent(String(assessmentId))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments/${encodeURIComponent(String(assessmentId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -315,6 +314,7 @@ export class AssessmentsService {
      * @param assignmentId 
      * @param skip [Pagination] The amount of elements that should be skipped.
      * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param name Name of group or user. Matched with ILIKE %name%.
      * @param groupId Retrieves assessment of specific group.
      * @param userId Retrieves assessment of specific user.
      * @param minScore Only includes assessments with achievedPoints &gt;&#x3D; minScore, if specified.
@@ -322,10 +322,10 @@ export class AssessmentsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentDto>>;
-    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentDto>>>;
-    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentDto>>>;
-    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, name?: string, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentDto>>;
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, name?: string, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentDto>>>;
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, name?: string, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentDto>>>;
+    public getAssessmentsForAssignment(courseId: string, assignmentId: string, skip?: number, take?: number, name?: string, groupId?: string, userId?: string, minScore?: number, creatorId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling getAssessmentsForAssignment.');
@@ -341,12 +341,16 @@ export class AssessmentsService {
 
 
 
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (skip !== undefined && skip !== null) {
             queryParameters = queryParameters.set('skip', <any>skip);
         }
         if (take !== undefined && take !== null) {
             queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (name !== undefined && name !== null) {
+            queryParameters = queryParameters.set('name', <any>name);
         }
         if (groupId !== undefined && groupId !== null) {
             queryParameters = queryParameters.set('groupId', <any>groupId);

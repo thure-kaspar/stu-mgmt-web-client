@@ -227,9 +227,62 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<ParticipantsComparisonDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/compare-participants-list`,
+        return this.httpClient.request<ParticipantsComparisonDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/query/compare-participants-list`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get participant.
+     * Retrieves a specific participant and course related information about the participant.
+     * @param courseId 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getParticipant(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public getParticipant(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public getParticipant(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public getParticipant(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getParticipant.');
+        }
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getParticipant.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<UserDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -400,9 +453,9 @@ export class CourseParticipantsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public removeUser(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public removeUser(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public removeUser(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public removeUser(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public removeUser(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public removeUser(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public removeUser(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
@@ -424,7 +477,6 @@ export class CourseParticipantsService {
         }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -435,7 +487,7 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<boolean>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -454,9 +506,9 @@ export class CourseParticipantsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public updateUserRole(body: ChangeCourseRoleDto, courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
@@ -482,7 +534,6 @@ export class CourseParticipantsService {
         }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -498,7 +549,7 @@ export class CourseParticipantsService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<boolean>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/role`,
+        return this.httpClient.request<any>('patch',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}/role`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

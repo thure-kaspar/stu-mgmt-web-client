@@ -12,13 +12,9 @@
 import { PartialAssessmentDto } from './partialAssessmentDto';
 
 export interface AssessmentUpdateDto { 
-    /**
-     * UserId of the person that updated the assessment. Automatically set by the server.
-     */
-    updatedBy?: string;
     achievedPoints?: number;
+    comment?: string;
     addPartialAssessments?: Array<PartialAssessmentDto>;
     updatePartialAssignments?: Array<PartialAssessmentDto>;
     removePartialAssignments?: Array<PartialAssessmentDto>;
-    comment?: string;
 }
