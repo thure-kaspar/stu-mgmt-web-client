@@ -6,6 +6,7 @@ import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { isNotACourseMember } from "../../../shared/api-exceptions";
 
 @Component({
 	selector: "app-course",
@@ -38,7 +39,7 @@ export class CourseComponent implements OnInit {
 			},
 			error => {
 				// If user is not a member of this course, open JoinCourseDialog
-				if (error.error?.message === StudentMgmtException.NameEnum.NotACourseMemberException) {
+				if (isNotACourseMember(error)) {
 					this.dialog.open<JoinCourseDialog, string, boolean>(JoinCourseDialog, { data: courseId }).afterClosed().subscribe(
 						joined => {
 							if (joined) {
