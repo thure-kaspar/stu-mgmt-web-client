@@ -22,14 +22,16 @@
 			
 				<div>
 					{{ 'Common.For' | translate }}:
-					<mat-chip color="primary" selected>
-						<a *ngIf="user" class="link-none" [routerLink]="[ '/courses', courseId, 'users', user.id ]">
-							{{user.username}}
-						</a>
-						<a *ngIf="group" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', group.id ]">
-							{{group.name}}
-						</a>
-					</mat-chip>
+					<mat-chip-list>
+						<mat-chip color="primary" selected>
+							<a *ngIf="user" class="link-none" [routerLink]="[ '/courses', courseId, 'users', user.id ]">
+								{{user.username}}
+							</a>
+							<a *ngIf="group" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', group.id ]">
+								{{group.name}}
+							</a>
+						</mat-chip>
+					</mat-chip-list>
 	
 					<div class="group-members-list" *ngIf="group">
 						<mat-chip-list>

@@ -5,14 +5,16 @@
 			<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
 
 			<div>{{ 'Common.For' | translate }}:
-				<mat-chip color="primary" selected *ngIf="forUser || forGroup">
-					<a *ngIf="forUser" class="link-none" [routerLink]="[ '/courses', courseId, 'users', forUser.id ]">
-						{{forUser.username}}
-					</a>
-					<a *ngIf="forGroup" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', forGroup.id ]">
-						{{forGroup.name}}
-					</a>
-				</mat-chip>
+				<mat-chip-list>
+					<mat-chip color="primary" selected *ngIf="forUser || forGroup">
+						<a *ngIf="forUser" class="link-none" [routerLink]="[ '/courses', courseId, 'users', forUser.id ]">
+							{{forUser.username}}
+						</a>
+						<a *ngIf="forGroup" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', forGroup.id ]">
+							{{forGroup.name}}
+						</a>
+					</mat-chip>
+				</mat-chip-list>
 
 				<div class="group-members-list" *ngIf="forGroup">
 					<mat-chip-list>
