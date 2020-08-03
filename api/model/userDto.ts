@@ -20,10 +20,6 @@ export interface UserDto {
      * Role within the application.
      */
     role: UserDto.RoleEnum;
-    /**
-     * If loaded within the context of a course: The role of the user in this course, i.e student.
-     */
-    courseRole?: UserDto.CourseRoleEnum;
     email: string;
     username: string;
     rzName: string;
@@ -36,11 +32,5 @@ export namespace UserDto {
         ADMINTOOL: 'ADMIN_TOOL' as RoleEnum,
         MGTMADMIN: 'MGTM_ADMIN' as RoleEnum,
         USER: 'USER' as RoleEnum
-    };
-    export type CourseRoleEnum = 'LECTURER' | 'TUTOR' | 'STUDENT';
-    export const CourseRoleEnum = {
-        LECTURER: 'LECTURER' as CourseRoleEnum,
-        TUTOR: 'TUTOR' as CourseRoleEnum,
-        STUDENT: 'STUDENT' as CourseRoleEnum
     };
 }

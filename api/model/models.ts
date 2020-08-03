@@ -24,6 +24,7 @@ export * from './groupSettingsUpdateDto';
 export * from './groupWithAssignedEvaluatorDto';
 export * from './mailDto';
 export * from './partialAssessmentDto';
+export * from './participantDto';
 export * from './participantsComparisonDto';
 export * from './passwordDto';
 export * from './rule';

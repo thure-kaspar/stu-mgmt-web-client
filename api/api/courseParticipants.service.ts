@@ -19,9 +19,9 @@ import { Observable }                                        from 'rxjs';
 
 import { CanJoinCourseDto } from '../model/canJoinCourseDto';
 import { ChangeCourseRoleDto } from '../model/changeCourseRoleDto';
+import { ParticipantDto } from '../model/participantDto';
 import { ParticipantsComparisonDto } from '../model/participantsComparisonDto';
 import { PasswordDto } from '../model/passwordDto';
-import { UserDto } from '../model/userDto';
 import { UserWithAssignedEvaluatorDto } from '../model/userWithAssignedEvaluatorDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -246,9 +246,9 @@ export class CourseParticipantsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getParticipant(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
-    public getParticipant(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
-    public getParticipant(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public getParticipant(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<ParticipantDto>;
+    public getParticipant(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ParticipantDto>>;
+    public getParticipant(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ParticipantDto>>;
     public getParticipant(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
@@ -281,7 +281,7 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<UserDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<ParticipantDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/${encodeURIComponent(String(userId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -302,9 +302,9 @@ export class CourseParticipantsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<UserDto>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserDto>>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserDto>>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<ParticipantDto>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ParticipantDto>>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ParticipantDto>>>;
     public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, username?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
@@ -353,7 +353,7 @@ export class CourseParticipantsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users`,
+        return this.httpClient.request<Array<ParticipantDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
