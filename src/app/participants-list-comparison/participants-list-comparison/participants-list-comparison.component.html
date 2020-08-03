@@ -6,7 +6,7 @@
 			{{ 'Action.Custom.AddCourse' | translate }}
 		</button>
 
-		<button mat-raised-button color="accent" (click)="loadComparison()">
+		<button mat-raised-button color="accent" (click)="loadComparison()" [disabled]="selectedCourses.length == 0">
 			<mat-icon>play_arrow</mat-icon>
 			{{ 'Action.Compare' | translate }}
 		</button>
