@@ -1,69 +1,3 @@
-#filter-container {
-	display: grid;
-	grid-auto-rows: auto;
-
-	#filter-field {
-		margin-top: -32px;
-		width: 100%;
-	}
-	
-	#checkbox-only-joinable-groups {
-		margin-top: -8px;
-		margin-bottom: 16px;
-	}
-}
-
-.group-list {
-	margin-top: -8px;
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	column-gap: 16px;
-	row-gap: 16px;
-}
-
-.group-list-item {
-	background-color: rgb(240, 240, 240);
-	border: 1px solid lightgrey;
-}
-
-.group-container {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	font-size: 14px;
-	justify-content: space-between;
-	align-items: center;
-
-	.left {
-	}
-
-	.middle {
-		white-space:nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.right {
-		padding-left: 16px;
-	}
-
-	.btn-join {
-		margin-left: -16px;
-		height: 40px;
-	}
-
-	.group-size {
-		display: inline-flex;
-		align-items: center;
-		vertical-align: middle;
-	}
-}
-
-.groups-heading {
-	margin-bottom: 4px;
-}
-
 #users-group-container {
 	margin-bottom: 16px;
 }
@@ -76,4 +10,9 @@
 
 #btn-add {
 	margin-bottom: 8px;
+}
+
+.group-filter {
+	display: flex;
+	flex-direction: column;
 }

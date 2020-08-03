@@ -39,6 +39,14 @@ export class Paginator implements OnInit {
 		return this.currentPage * this.pageSize;
 	}
 
+	/**
+	 * Returns a tuple containing the `skip` and `take` values corresponding to the current pagination settings.
+	 * @example const [skip, take] = this.paginator.getSkipAndTake();
+	 */
+	getSkipAndTake(): [number, number] {
+		return [this.currentPage * this.pageSize, this.pageSize];
+	}
+
 	/** Sets the totalCount-property by accessing the X-TOTAL-COUNT header of the given HttpResponse.  */
 	setTotalCountFromHttp<T>(response: HttpResponse<T>): void {
 		this.totalCount = parseInt(response.headers.get("x-total-count"));

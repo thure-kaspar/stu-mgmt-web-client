@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
-import { AssessmentAllocationDto, AssessmentAllocationService, UserDto } from "../../../../api";
+import { AssessmentAllocationDto, AssessmentAllocationService, ParticipantDto } from "../../../../api";
+import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { SnackbarService } from "../../shared/services/snackbar.service";
-import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 
 /**
  * Component that provides a selection of users (evaluators), which can be assigned to a group or user.
@@ -31,8 +31,8 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 	@Input() courseId: string;
 	@Input() assignmentId: string;
 
-	evaluators: UserDto[];
-	evaluator: UserDto;
+	evaluators: ParticipantDto[];
+	evaluator: ParticipantDto;
 
 	constructor(private allocationService: AssessmentAllocationService,
 				private evaluatorsFacade: EvaluatorsFacade,
@@ -50,7 +50,7 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 	}
 
 	/** Handles the (de)selection of an evaluator. */
-	handleEvaluatorChange(evaluator: UserDto | undefined): void {
+	handleEvaluatorChange(evaluator: ParticipantDto | undefined): void {
 		// If no evaluator was assigned previously and user selected nobody
 		if (!this.assignedTo && !evaluator) {
 			return;
@@ -59,17 +59,17 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 		if (!evaluator) {
 			// If evaluator was removed
 			this.removeAllocation();
-		} else if (this.assignedTo !== evaluator?.id) {
+		} else if (this.assignedTo !== evaluator?.userId) {
 			// If evaluator wasn't already assigned to this group/user, assign evaluator
 			this.assignEvaluator(evaluator);
 		}
 	}
 
 	/** Assigns an evaluator to a group or user. */
-	assignEvaluator(evaluator: UserDto): void {
+	assignEvaluator(evaluator: ParticipantDto): void {
 		const allocation: AssessmentAllocationDto = {
 			assignmentId: this.assignmentId,
-			assignedEvaluatorId: evaluator.id,
+			assignedEvaluatorId: evaluator.userId,
 		};
 
 		// Determine if we're assigning to a group or user
@@ -82,7 +82,7 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 		this.allocationService.createAllocation(allocation, this.courseId, this.assignmentId).subscribe(
 			result => {
 				this.evaluator = evaluator;
-				this.assignedTo = evaluator.id;
+				this.assignedTo = evaluator.userId;
 				this.snackbar.openSuccessMessage();
 			},
 			error => {

@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CourseParticipantsService, UserDto } from "../../../../../api";
+import { CourseParticipantsService, ParticipantDto } from "../../../../../api";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 export class ChangeRoleDialogData {
 	courseId: string;
-	user: UserDto
+	participant: ParticipantDto
 }
 
 /**
@@ -20,16 +20,16 @@ export class ChangeRoleDialogData {
 	styleUrls: ["./change-role.dialog.scss"]
 })
 export class ChangeRoleDialog implements OnInit {
-	roles = UserDto.CourseRoleEnum;
-	selectedRole: UserDto.CourseRoleEnum;
+	roles = ParticipantDto.RoleEnum;
+	selectedRole: ParticipantDto.RoleEnum;
 
-	constructor(public dialogRef: MatDialogRef<ChangeRoleDialog, UserDto.CourseRoleEnum>,
+	constructor(public dialogRef: MatDialogRef<ChangeRoleDialog, ParticipantDto.RoleEnum>,
 				@Inject(MAT_DIALOG_DATA) public data: ChangeRoleDialogData,
 				private courseParticipantsService: CourseParticipantsService,
 				private snackbar: SnackbarService) { }
 
 	ngOnInit(): void {
-		this.selectedRole = this.data.user.courseRole; 
+		this.selectedRole = this.data.participant.role; 
 	}
 
 	onCancel(): void {
@@ -38,13 +38,13 @@ export class ChangeRoleDialog implements OnInit {
 
 	onSave(): void {
 		// No action necessary, if role hasn't been changed 
-		if (this.data.user.courseRole === this.selectedRole) {
+		if (this.data.participant.role === this.selectedRole) {
 			this.dialogRef.close(this.selectedRole);
 			return;
 		}
 		
 		// Update the role (if it has changed)
-		this.courseParticipantsService.updateUserRole({ role: this.selectedRole }, this.data.courseId, this.data.user.id)
+		this.courseParticipantsService.updateUserRole({ role: this.selectedRole }, this.data.courseId, this.data.participant.userId)
 			.subscribe(
 				result => {
 					if (result) {

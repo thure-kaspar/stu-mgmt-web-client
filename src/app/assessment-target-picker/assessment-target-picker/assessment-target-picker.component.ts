@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
-import { AssignmentsService, GroupDto, CoursesService, UserDto } from "../../../../api";
+import { AssignmentsService, GroupDto, CoursesService, UserDto, ParticipantDto } from "../../../../api";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
@@ -30,7 +30,7 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	/** Emits the ```assessmentId``` of the assessment that should be switched to for editing. */
 	@Output() onSwitchToEdit = new EventEmitter<string>();
 
-	evaluators: UserDto[];
+	evaluators: ParticipantDto[];
 
 	// Expose the filter as an observable, so other components can react to changes in the filter
 	filter = new AssessmentTargetFilter();

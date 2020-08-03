@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { CourseParticipantsService, CoursesService, UserDto } from "../../../../api";
+import { CourseParticipantsService, CoursesService, UserDto, ParticipantDto } from "../../../../api";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../course/dialogs/change-role/change-role.dialog";
 import { ConfirmDialog, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
@@ -27,9 +27,9 @@ class ParticipantsFilter {
 export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	courseId: string;
-	users: UserDto[];
+	participant: ParticipantDto[];
 	displayedColumns: string[] = ["actions", "role", "username", "email"];
-	dataSource: MatTableDataSource<UserDto>;
+	dataSource: MatTableDataSource<ParticipantDto>;
 	filter = new ParticipantsFilter();
 
 	usernameFilterChangedSubject = new Subject();
@@ -62,9 +62,9 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 		const take = this.paginator.pageSize;
 		
 		const roles = [];
-		if (this.filter.includeTutors) roles.push(UserDto.CourseRoleEnum.TUTOR);
-		if (this.filter.includeLecturers) roles.push(UserDto.CourseRoleEnum.LECTURER);
-		if (this.filter.includeStudents) roles.push(UserDto.CourseRoleEnum.STUDENT);
+		if (this.filter.includeTutors) roles.push(ParticipantDto.RoleEnum.TUTOR);
+		if (this.filter.includeLecturers) roles.push(ParticipantDto.RoleEnum.LECTURER);
+		if (this.filter.includeStudents) roles.push(ParticipantDto.RoleEnum.STUDENT);
 
 		this.courseParticipantsService.getUsersOfCourse(
 			this.courseId,
@@ -74,7 +74,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 			this.filter.username
 		).subscribe(
 			result => {
-				this.users = result,
+				this.participant = result,
 				this.refreshDataSource();
 				this.paginator.goToFirstPage();
 			},
@@ -82,16 +82,16 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 		);
 	}
 
-	openChangeRoleDialog(user: UserDto): void {
-		this.dialog.open<ChangeRoleDialog, ChangeRoleDialogData, UserDto.CourseRoleEnum>(ChangeRoleDialog, {
+	openChangeRoleDialog(participant: ParticipantDto): void {
+		this.dialog.open<ChangeRoleDialog, ChangeRoleDialogData, ParticipantDto.RoleEnum>(ChangeRoleDialog, {
 			data: {
 				courseId: this.courseId,
-				user: user
+				participant: participant
 			}
 		}).afterClosed().subscribe(
 			result => {
 				// Update the user's role locally to avoid refetching data from server
-				if (result) user.courseRole = result;
+				if (result) participant.role = result;
 			},
 			error => console.log(error)
 		);
@@ -100,21 +100,21 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	/**
 	 * Opens the ConfirmDialog and proceeds with removal, if user confirms the action.
 	 */
-	openRemoveDialog(user: UserDto): void {
+	openRemoveDialog(user: ParticipantDto): void {
 		// Open ConfirmDialog
 		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, {
 			data: {
-				params: [user.username, user.courseRole]
+				params: [user.username, user.role]
 			}
 		}).afterClosed().subscribe(
 			isConfirmed => {
 				// Check if user confirmed the action
 				if (isConfirmed) {
-					this.courseParticipantsService.removeUser(this.courseId, user.id).subscribe(
+					this.courseParticipantsService.removeUser(this.courseId, user.userId).subscribe(
 						result => {
 							if (result) {
 								// Remove removed user from user list
-								this.users = this.users.filter(u => u.username !== user.username);
+								this.participant = this.participant.filter(u => u.username !== user.username);
 								this.refreshDataSource();
 								this.snackbar.openSuccessMessage("User has been removed successfully!");
 							}
@@ -131,7 +131,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	private refreshDataSource(): void {
-		this.dataSource = new MatTableDataSource(this.users);
+		this.dataSource = new MatTableDataSource(this.participant);
 	}
 
 }

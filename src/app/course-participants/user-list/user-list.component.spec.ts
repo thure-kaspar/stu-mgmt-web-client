@@ -4,13 +4,13 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { of, Observable, throwError } from "rxjs";
-import { UserDto, CoursesService } from "../../../../api";
+import { UserDto, CoursesService, ParticipantDto } from "../../../../api";
 import { SharedModule } from "../../shared/shared.module";
 import { copy } from "../../../../utils/object-helper";
 
 const mockUsers: UserDto[] = [];
-const oldRole: UserDto.CourseRoleEnum = "STUDENT";
-const newRole: UserDto.CourseRoleEnum = "TUTOR";
+const oldRole: ParticipantDto.RoleEnum = "STUDENT";
+const newRole: ParticipantDto.RoleEnum  = "TUTOR";
 
 // Mock the MatDialogRef-class returned by MatDialog.open
 class ConfirmDialog_Confirmed {
@@ -26,7 +26,7 @@ class ConfirmDialog_Denied {
 }
 
 class ChangeRoleDialog_NewRole {
-	afterClosed(): Observable<UserDto.CourseRoleEnum> {
+	afterClosed(): Observable<ParticipantDto.RoleEnum > {
 		return of(newRole); // The user canceled the action
 	}
 }
@@ -102,7 +102,7 @@ describe("UserListComponent", () => {
 
 		it("Calls CourseService to load users and assigns them", async () => {
 			expect(courseService.getUsersOfCourse).toHaveBeenCalledWith(component.courseId);
-			expect(component.users).toEqual(mockUsers);
+			expect(component.participant).toEqual(mockUsers);
 		});
 
 	});
@@ -139,7 +139,7 @@ describe("UserListComponent", () => {
 		it("User confirms -> Calls CourseService for removal", async () => {
 			courseService.removeUser = jest.fn().mockImplementation(() => of(true)); // Successful removal
 			dialog.open = jest.fn().mockReturnValueOnce(new ConfirmDialog_Confirmed);
-			component.users = [user]; // Course contains this user
+			component.participant = [user]; // Course contains this user
 
 			component.openRemoveDialog(user);
 
@@ -149,11 +149,11 @@ describe("UserListComponent", () => {
 		it("User confirms -> User gets removed from user list", async () => {
 			courseService.removeUser = jest.fn().mockImplementation(() => of(true)); // Successful removal
 			dialog.open = jest.fn().mockReturnValueOnce(new ConfirmDialog_Confirmed);
-			component.users = [user]; // Course contains this user
+			component.participant = [user]; // Course contains this user
 
 			component.openRemoveDialog(user);
 
-			expect(component.users.length).toEqual(0); // User should be removed
+			expect(component.participant.length).toEqual(0); // User should be removed
 		});
 
 		it("User confirms + Server throws error -> Shows error (no changes)", async () => {
@@ -161,21 +161,21 @@ describe("UserListComponent", () => {
 				return throwError(new Error()); // Server throws error
 			}); 
 			dialog.open = jest.fn().mockReturnValueOnce(new ConfirmDialog_Confirmed);
-			component.users = [user]; // Course contains this user
+			component.participant = [user]; // Course contains this user
 
 			component.openRemoveDialog(user);
 
-			expect(component.users.length).toEqual(1); // User should remain in the course
+			expect(component.participant.length).toEqual(1); // User should remain in the course
 			expect(snackbar.open).toHaveBeenCalled();
 		});
 
 		it("User cancels -> No changes", async () => {
 			dialog.open = jest.fn().mockReturnValueOnce(new ConfirmDialog_Denied);
-			component.users = [user]; // Course contains this user
+			component.participant = [user]; // Course contains this user
 
 			component.openRemoveDialog(user);
 
-			expect(component.users.length).toEqual(1); // User should remain in the course
+			expect(component.participant.length).toEqual(1); // User should remain in the course
 		});
 
 	});

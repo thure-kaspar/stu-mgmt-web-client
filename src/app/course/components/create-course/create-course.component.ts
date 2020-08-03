@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentDto, CourseCreateDto, CourseParticipantsService } from "../../../../../api";
+import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentDto, CourseCreateDto, CourseParticipantsService, ParticipantDto } from "../../../../../api";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
@@ -149,7 +149,7 @@ export class CreateCourseComponent implements OnInit {
 
 		// Load lecturers 
 		this.getLecturers().clear();
-		this.courseParticipantsService.getUsersOfCourse(courseId, undefined, undefined, [UserDto.CourseRoleEnum.LECTURER]).subscribe(
+		this.courseParticipantsService.getUsersOfCourse(courseId, undefined, undefined, [ParticipantDto.RoleEnum.LECTURER]).subscribe(
 			lecturers => {
 				lecturers.forEach(lecturer => this.getLecturers().push(this.fb.control(lecturer.username, Validators.required)));
 			}

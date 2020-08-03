@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
-import { AssessmentAllocationService, UserDto, CoursesService, CourseParticipantsService } from "../../../../api";
-import { Observable, throwError, BehaviorSubject } from "rxjs";
-import { tap, catchError, take } from "rxjs/operators";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { catchError, take, tap } from "rxjs/operators";
+import { AssessmentAllocationService, CourseParticipantsService, ParticipantDto, UserDto } from "../../../../api";
 
 @Injectable()
 export class EvaluatorsFacade {
 
-	private evaluatorsSubject = new BehaviorSubject<UserDto[]>(undefined);
-	private evaluatorMap = new Map<string, UserDto>();
+	private evaluatorsSubject = new BehaviorSubject<ParticipantDto[]>(undefined);
+	private evaluatorMap = new Map<string, ParticipantDto>();
 
 	
 	/**
@@ -29,7 +29,7 @@ export class EvaluatorsFacade {
 	}
 
 	/** Returns the evaluator with the specified id. Requires that `loadEvaluators` has been called and finished. */
-	getEvaluatorById(id: string): UserDto {
+	getEvaluatorById(id: string): ParticipantDto {
 		return this.evaluatorMap.get(id);
 	}
 
@@ -38,12 +38,12 @@ export class EvaluatorsFacade {
 	 * Results will be stored by the service and are available via ```evaluators$``` to allow other components
 	 * to access the evaluators.
 	 */
-	loadEvaluators(courseId: string): Observable<UserDto[]> {
+	loadEvaluators(courseId: string): Observable<ParticipantDto[]> {
 		return this.courseParticipantsService.getUsersOfCourse(
 			courseId,
 			undefined,
 			undefined, 
-			[UserDto.CourseRoleEnum.LECTURER, UserDto.CourseRoleEnum.TUTOR]
+			[ParticipantDto.RoleEnum.LECTURER, ParticipantDto.RoleEnum.TUTOR]
 		).pipe(
 			take(1),
 			tap((evaluators) => this.setEvaluators(evaluators)),
@@ -55,9 +55,9 @@ export class EvaluatorsFacade {
 	}
 
 	/** Sets the evaluators of an assignment */
-	private setEvaluators(users: UserDto[]): void {
-		this.evaluatorMap = new Map<string, UserDto>();
-		users.forEach(e => this.evaluatorMap.set(e.id, e));
+	private setEvaluators(users: ParticipantDto[]): void {
+		this.evaluatorMap = new Map<string, ParticipantDto>();
+		users.forEach(e => this.evaluatorMap.set(e.userId, e));
 		this.evaluatorsSubject.next(users);
 	}
 
