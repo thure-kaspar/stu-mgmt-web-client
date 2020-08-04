@@ -45,20 +45,16 @@ export class ChangeRoleDialog implements OnInit {
 		
 		// Update the role (if it has changed)
 		this.courseParticipantsService.updateUserRole({ role: this.selectedRole }, this.data.courseId, this.data.participant.userId)
-			.subscribe(
-				result => {
-					if (result) {
-						this.snackbar.openSuccessMessage("User's role has been updated!");
-						this.dialogRef.close(this.selectedRole);
-					} else {
-						throw new Error("Update failed");
-					}
+			.subscribe({
+				next: () => {
+					this.snackbar.openSuccessMessage();
+					this.dialogRef.close(this.selectedRole);
 				},
-				error => {
+				error: error => {
 					console.log(error);
-					this.snackbar.openErrorMessage("Failed to update the user's role.");
-				}
-			);
+					this.snackbar.openErrorMessage();
+				} 
+			});
 	}
 
 }
