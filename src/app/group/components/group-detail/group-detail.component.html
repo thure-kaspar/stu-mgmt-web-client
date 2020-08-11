@@ -5,9 +5,9 @@
 
 	<div id="group-members">
 		<h2 class="heading">{{ 'Domain.Members' | translate }}</h2>
-		<mat-list *ngIf="group.users.length > 0; else emptyGroupText" dense class="member-list">
+		<mat-list *ngIf="group.members.length > 0; else emptyGroupText" dense class="member-list">
 			<mat-divider inset=true></mat-divider>
-			<ng-container *ngFor="let user of group.users">
+			<ng-container *ngFor="let user of group.members">
 				<mat-list-item class="member-item">
 					<a class="font-bold">{{user.username}}</a>
 					<div class="member-buttons">
@@ -57,7 +57,7 @@
 			<ng-container matColumnDef="name">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Assignment' | translate }}</th>
 				<td mat-cell *matCellDef="let row"> 
-					<a class="link-none font-bold" [routerLink]="['/courses', group.course.semester, group.course.shortname , 'assignments', row.assignment.id]">
+					<a class="link-none font-bold" [routerLink]="['todo']">
 						{{row.assignment.name}}
 					</a> 
 				</td>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { GroupsService, GroupDto, AssessmentDto, UserDto } from "../../../../../api";
+import { GroupsService, GroupDto, AssessmentDto, UserDto, ParticipantDto } from "../../../../../api";
 import { ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../../auth/services/auth.service";
 import { MatTableDataSource } from "@angular/material/table";
@@ -41,7 +41,6 @@ export class GroupDetailComponent implements OnInit {
 		this.groupService.getGroup(this.courseId, this.groupId).subscribe(
 			result => { 
 				this.group = result;
-				this.assessments = this.group.assessments;
 				this.dataSource = new MatTableDataSource(this.assessments);
 				this.dataSource.sort = this.sort;
 			},
@@ -50,19 +49,19 @@ export class GroupDetailComponent implements OnInit {
 	}
 
 	/** TODO */
-	onPromoteToLeader(user: UserDto): void {
+	onPromoteToLeader(participant: ParticipantDto): void {
 
 	}
 
 	/** Removes the selected member from the group, if user confirms the action. */
-	onRemoveUser(user: UserDto): void {
+	onRemoveUser(participant: ParticipantDto): void {
 		this.dialogService.openConfirmDialog({ 
 			title: "Action.Custom.RemoveUserFromGroup",
-			params: [user.username], 
+			params: [participant.username], 
 		}).subscribe(
 			confirmed => {
 				if (confirmed) {
-					this.groupService.removeUserFromGroup(this.courseId, this.group.id, user.id).subscribe(
+					this.groupService.removeUserFromGroup(this.courseId, this.group.id, participant.userId).subscribe(
 						success => {
 							this.snackbar.openSuccessMessage();
 							this.loadGroup();

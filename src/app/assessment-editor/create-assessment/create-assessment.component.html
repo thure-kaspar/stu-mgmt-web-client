@@ -18,11 +18,11 @@
 
 				<div class="group-members-list" *ngIf="forGroup">
 					<mat-chip-list>
-						<a *ngFor="let member of forGroup.users" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.id ]">
+						<a *ngFor="let member of forGroup.members" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.userId ]">
 							<mat-chip>{{member.username}}</mat-chip>
 						</a>
 					</mat-chip-list>
-					<span *ngIf="forGroup.users?.length == 0">
+					<span *ngIf="forGroup.members?.length == 0">
 						<p class="text-red">{{ 'Domain.Expression.EmptyGroup' | translate }}</p>
 					</span>
 				</div>

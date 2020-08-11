@@ -56,7 +56,7 @@ export class CreateGroupDialog implements OnInit {
 	onSaveSingle(): void {
 		const group: GroupDto = this.form.value;
 
-		this.groupService.createGroup(group, group.courseId).subscribe(
+		this.groupService.createGroup(group, this.courseId).subscribe(
 			result => {
 				this.snackbar.openSuccessMessage("Group created!");
 				this.dialogRef.close(result);

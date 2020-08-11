@@ -9,14 +9,14 @@ export class AssignmentManagementFacade {
 	private assignmentsSubject = new BehaviorSubject<AssignmentDto[]>([]);
 	assignments$ = this.assignmentsSubject.asObservable();
 
-	constructor(private assigmentService: AssignmentsService) { }
+	constructor(private assignmentService: AssignmentsService) { }
 
 	/**
 	 * Calls the API to retrieve the assignments of the specified course.
 	 * The assignments will be published via the assignments-Observable.
 	 */
 	loadAssignmentsOfCourse(courseId: string): void {
-		this.assigmentService.getAssignmentsOfCourse(courseId).subscribe(
+		this.assignmentService.getAssignmentsOfCourse(courseId).subscribe(
 			result => {
 				this.assignmentsSubject.next(result);
 			}
@@ -29,8 +29,7 @@ export class AssignmentManagementFacade {
 	 * Returns an obvervable of the created assignment.
 	 */
 	create(assignment: AssignmentDto, courseId: string): Observable<AssignmentDto> {
-		assignment.courseId = courseId;
-		return this.assigmentService.createAssignment(assignment, courseId)
+		return this.assignmentService.createAssignment(assignment, courseId)
 			.pipe(
 				tap({
 					next: created => {
@@ -45,7 +44,7 @@ export class AssignmentManagementFacade {
 
 	/** Retrieves the requested assignment. */
 	get(assignmentId: string, courseId: string): Observable<AssignmentDto> {
-		return this.assigmentService.getAssignmentById(courseId, assignmentId);
+		return this.assignmentService.getAssignmentById(courseId, assignmentId);
 	}
 
 	/**
@@ -54,7 +53,7 @@ export class AssignmentManagementFacade {
 	 * Returns an obvervable of the updated assignment.
 	 */
 	update(changes: AssignmentDto, assignmentId: string, courseId: string): Observable<AssignmentDto> {
-		return this.assigmentService.updateAssignment(changes, courseId, assignmentId)
+		return this.assignmentService.updateAssignment(changes, courseId, assignmentId)
 			.pipe(
 				tap({
 					next: (updated) => {
@@ -73,7 +72,7 @@ export class AssignmentManagementFacade {
 	 * Returns an observable of the deleted assignment.
 	 */
 	remove(assignment: AssignmentDto, courseId: string): Observable<AssignmentDto> {
-		return this.assigmentService.deleteAssignment(courseId, assignment.id)
+		return this.assignmentService.deleteAssignment(courseId, assignment.id)
 			.pipe(
 				tap({
 					next: (isDeleted) => {

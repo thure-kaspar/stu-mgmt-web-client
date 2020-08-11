@@ -142,7 +142,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	isJoinable(group: GroupDto): boolean {
-		return !group.isClosed && group.users.length < this.groupSettings?.sizeMax;
+		return !group.isClosed && group.members.length < this.groupSettings?.sizeMax;
 	}
 
 }

@@ -72,7 +72,6 @@ export class CreateGroupStudentDialog implements OnInit {
 	 */
 	onSave(): void {
 		const group: GroupDto = {
-			courseId: this.courseId,
 			name: this.name
 		};
 

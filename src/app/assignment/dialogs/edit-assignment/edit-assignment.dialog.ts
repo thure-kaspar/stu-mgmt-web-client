@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild, Inject } from "@angular/core";
-import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { AssignmentsService } from "../../../../../api";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
+import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 
 export class EditAssignmentDialogData {
 	courseId: string;
@@ -44,7 +42,6 @@ export class EditAssignmentDialog implements OnInit {
 
 	onSave(): void {
 		const assignment = this.form.getModel();
-		assignment.courseId = this.courseId;
 		assignment.id = this.assignmentId;
 
 		this.assignmentManagement.update(assignment, this.assignmentId, this.courseId).subscribe(

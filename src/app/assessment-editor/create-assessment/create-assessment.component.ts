@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssessmentsService, AssignmentsService, AssessmentCreateDto, AssignmentDto, GroupDto, UserDto, GroupsService, UsersService } from "../../../../api";
+import { AssessmentsService, AssignmentsService, AssessmentCreateDto, AssignmentDto, GroupDto, UserDto, GroupsService, UsersService, AssignmentRegistrationService } from "../../../../api";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/services/snackbar.service";
@@ -26,6 +26,7 @@ export class CreateAssessmentComponent implements OnInit {
 
 	constructor(private assessmentService: AssessmentsService,
 				private assignmentService: AssignmentsService,
+				private registrationService: AssignmentRegistrationService,
 				private groupService: GroupsService,
 				private userService: UsersService,
 				private authService: AuthService,
@@ -98,7 +99,7 @@ export class CreateAssessmentComponent implements OnInit {
 		this.forGroup = group;
 
 		// Load members of the group
-		this.groupService.getGroupFromAssignment(this.courseId, group.id, this.assignmentId).subscribe(
+		this.registrationService.getRegisteredGroup(this.courseId,  this.assignmentId, group.id).subscribe(
 			result => {
 				this.forGroup = result;
 			},
