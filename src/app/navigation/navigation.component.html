@@ -1,3 +1,4 @@
+<div [class]="theme.theme$ | async">
 <!-- TOP BAR -->
 <mat-toolbar class="titlebar">
 	<div id="nav-left">
@@ -24,6 +25,12 @@
 				<mat-menu #langMenu="matMenu">
 					<button mat-menu-item (click)="setLanguage('en')">English</button>
 					<button mat-menu-item (click)="setLanguage('de')">Deutsch</button>
+				</mat-menu>
+				
+				<button mat-menu-item [matMenuTriggerFor]="themeMenu">Theme</button>
+				<mat-menu #themeMenu="matMenu">
+					<button mat-menu-item (click)="theme.setTheme('default')">Default</button>
+					<button mat-menu-item (click)="theme.setTheme('dark')">Dark</button>
 				</mat-menu>
 			</div>
 		</mat-menu>
@@ -89,3 +96,4 @@
 		</div>
 	</mat-sidenav-content>
 </mat-sidenav-container>
+</div>

@@ -11,6 +11,7 @@ import { AuthenticationInfoDto } from "../../../api_auth";
 import { CourseMembershipsFacade } from "../course/services/course-memberships.facade";
 import { CourseDto } from "../../../api";
 import { SnackbarService } from "../shared/services/snackbar.service";
+import { ThemeService } from "../shared/services/theme.service";
 
 @Component({
 	selector: "app-navigation",
@@ -32,6 +33,7 @@ export class NavigationComponent implements OnInit {
 				private router: Router,
 				private authService: AuthService,
 				public courseMemberships: CourseMembershipsFacade,
+				public theme: ThemeService,
 				private dialog: MatDialog,
 				public snackbar: SnackbarService) {
 

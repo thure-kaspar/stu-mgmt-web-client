@@ -4,13 +4,14 @@
   
 .sidenav {
 	width: 240px;
-	margin-top: 56px;
+	margin-top: var(--titlebar-height);
 	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
 	z-index: 3; /* Stay on top */
 	top: 0; /* Stay at the top */
 	left: 0;
 	border: transparent;
-	background-color: white;
+	background-color: var(--color-sidenav);
+	transition: background 500ms ease-in-out, color 1000ms ease-in-out;
 
 	mat-icon {
 		color: rgba(0, 0, 0, 0.6);
@@ -24,12 +25,17 @@
 .sidenav mat-icon {
 	margin-right: 24px;
 	padding-left: 8px;
+	color: var(--text-light);
 }
   
 .sidenav a {
 	height: 40px;
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: 400;
+}
+
+.sidenav a:hover {
+	background-color: var(--link-active-bg);
 }
 
 #sidenav-footer {
@@ -39,21 +45,23 @@
 }
   
 .router-link-active {
-	background-color: rgba(0, 0, 0, 0.10);
-	
+	background-color: var(--link-active-bg);
+	font-weight: 500!important;
+
 	mat-icon {
-		color: red;
+		color: var(--link-active);
 	}
 }
   
 .titlebar {
 	display: flex;
-	background-color: white;
+	background-color: var(--color-titlebar);
 	justify-content: space-between;
-	height: 56px;
+	height: var(--titlebar-height);
 	top: 0;
 	position: fixed;
 	z-index: 2;
+	transition: background 500ms ease-in-out, color 1000ms ease-in-out;
 }
 
 #logo {
