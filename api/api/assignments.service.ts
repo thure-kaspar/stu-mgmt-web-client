@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { AssignmentDto } from '../model/assignmentDto';
+import { AssignmentUpdateDto } from '../model/assignmentUpdateDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -276,10 +277,10 @@ export class AssignmentsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateAssignment(body: AssignmentDto, courseId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<AssignmentDto>;
-    public updateAssignment(body: AssignmentDto, courseId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AssignmentDto>>;
-    public updateAssignment(body: AssignmentDto, courseId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AssignmentDto>>;
-    public updateAssignment(body: AssignmentDto, courseId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateAssignment(body: AssignmentUpdateDto, courseId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<AssignmentDto>;
+    public updateAssignment(body: AssignmentUpdateDto, courseId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AssignmentDto>>;
+    public updateAssignment(body: AssignmentUpdateDto, courseId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AssignmentDto>>;
+    public updateAssignment(body: AssignmentUpdateDto, courseId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateAssignment.');

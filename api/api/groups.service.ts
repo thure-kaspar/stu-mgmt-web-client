@@ -20,9 +20,10 @@ import { Observable }                                        from 'rxjs';
 import { GroupCreateBulkDto } from '../model/groupCreateBulkDto';
 import { GroupDto } from '../model/groupDto';
 import { GroupEventDto } from '../model/groupEventDto';
+import { GroupUpdateDto } from '../model/groupUpdateDto';
 import { GroupWithAssignedEvaluatorDto } from '../model/groupWithAssignedEvaluatorDto';
+import { ParticipantDto } from '../model/participantDto';
 import { PasswordDto } from '../model/passwordDto';
-import { UserDto } from '../model/userDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -353,64 +354,6 @@ export class GroupsService {
     }
 
     /**
-     * Get snapshot of a group at assignment end.
-     * Returns a snapshot of the group&#x27;s members at the time of the assignment&#x27;s end.
-     * @param courseId 
-     * @param groupId 
-     * @param assignmentId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
-    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
-    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
-    public getGroupFromAssignment(courseId: string, groupId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getGroupFromAssignment.');
-        }
-
-        if (groupId === null || groupId === undefined) {
-            throw new Error('Required parameter groupId was null or undefined when calling getGroupFromAssignment.');
-        }
-
-        if (assignmentId === null || assignmentId === undefined) {
-            throw new Error('Required parameter assignmentId was null or undefined when calling getGroupFromAssignment.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearer) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<GroupDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/assignments/${encodeURIComponent(String(assignmentId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Get group history of course.
      * Retrieves all group events of the course.
      * @param courseId 
@@ -449,59 +392,6 @@ export class GroupsService {
         ];
 
         return this.httpClient.request<Array<GroupEventDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/history`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Get snapshot of groups at assignment end.
-     * Returns a snapshot of the group constellations at the time of the assignment&#x27;s end.
-     * @param courseId 
-     * @param assignmentId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getGroupsFromAssignment(courseId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
-    public getGroupsFromAssignment(courseId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
-    public getGroupsFromAssignment(courseId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
-    public getGroupsFromAssignment(courseId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getGroupsFromAssignment.');
-        }
-
-        if (assignmentId === null || assignmentId === undefined) {
-            throw new Error('Required parameter assignmentId was null or undefined when calling getGroupsFromAssignment.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearer) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<GroupDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/assignments/${encodeURIComponent(String(assignmentId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -681,9 +571,9 @@ export class GroupsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUsersOfGroup(courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<UserDto>>;
-    public getUsersOfGroup(courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserDto>>>;
-    public getUsersOfGroup(courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserDto>>>;
+    public getUsersOfGroup(courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<ParticipantDto>>;
+    public getUsersOfGroup(courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ParticipantDto>>>;
+    public getUsersOfGroup(courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ParticipantDto>>>;
     public getUsersOfGroup(courseId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
@@ -716,7 +606,7 @@ export class GroupsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/users`,
+        return this.httpClient.request<Array<ParticipantDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/users`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -785,17 +675,17 @@ export class GroupsService {
 
     /**
      * Update group.
-     * Updates the group
+     * Updates the group partially.
      * @param body 
      * @param courseId 
      * @param groupId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateGroup(body: GroupDto, courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
-    public updateGroup(body: GroupDto, courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
-    public updateGroup(body: GroupDto, courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
-    public updateGroup(body: GroupDto, courseId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateGroup(body: GroupUpdateDto, courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
+    public updateGroup(body: GroupUpdateDto, courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
+    public updateGroup(body: GroupUpdateDto, courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
+    public updateGroup(body: GroupUpdateDto, courseId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateGroup.');

@@ -10,19 +10,15 @@
  * Do not edit the class manually.
  */
 
-export interface AssignmentDto { 
-    /**
-     * Unique identifier of this assignment.
-     */
-    id?: string;
+export interface AssignmentUpdateDto { 
     /**
      * The title of this assignment.
      */
-    name: string;
+    name?: string;
     /**
      * Determines, wether students can submit, assessments should be published, etc.
      */
-    state: AssignmentDto.StateEnum;
+    state?: AssignmentUpdateDto.StateEnum;
     /**
      * Date at which this assignment should enter the IN_PROGRESS-state to allow submissions.
      */
@@ -34,15 +30,15 @@ export interface AssignmentDto {
     /**
      * The type of assignment, i.e homework or project.
      */
-    type: AssignmentDto.TypeEnum;
+    type?: AssignmentUpdateDto.TypeEnum;
     /**
      * Determines, wether students can submit their solutions in groups, alone or both.
      */
-    collaboration: AssignmentDto.CollaborationEnum;
+    collaboration?: AssignmentUpdateDto.CollaborationEnum;
     /**
      * The amount of points that can be reached by a participant (exluding bonus points).
      */
-    points: number;
+    points?: number;
     /**
      * The amount of additional bonus points, which should be exluded from the admission criteria.
      */
@@ -56,7 +52,7 @@ export interface AssignmentDto {
      */
     link?: string;
 }
-export namespace AssignmentDto {
+export namespace AssignmentUpdateDto {
     export type StateEnum = 'INVISIBLE' | 'CLOSED' | 'IN_PROGRESS' | 'IN_REVIEW' | 'EVALUATED';
     export const StateEnum = {
         INVISIBLE: 'INVISIBLE' as StateEnum,

@@ -9,20 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AssessmentDto } from './assessmentDto';
-import { CourseDto } from './courseDto';
 import { GroupEventDto } from './groupEventDto';
-import { UserDto } from './userDto';
+import { ParticipantDto } from './participantDto';
 
 export interface GroupDto { 
     /**
      * Unique identifier of this group.
      */
     id?: string;
-    /**
-     * Identifier of the course that this group belongs to.
-     */
-    courseId: string;
     /**
      * Name of the group.
      */
@@ -35,8 +29,6 @@ export interface GroupDto {
      * Determines, wether course participant are able to join this group.
      */
     isClosed?: boolean;
-    course?: CourseDto;
-    users?: Array<UserDto>;
+    members?: Array<ParticipantDto>;
     history?: Array<GroupEventDto>;
-    assessments?: Array<AssessmentDto>;
 }

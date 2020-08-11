@@ -9,10 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AssignmentDto } from './assignmentDto';
-import { CourseConfigDto } from './courseConfigDto';
-import { GroupDto } from './groupDto';
-import { UserDto } from './userDto';
 
 export interface CourseDto { 
     /**
@@ -39,8 +35,4 @@ export interface CourseDto {
      * Additional link to another website.
      */
     link?: string;
-    users?: Array<UserDto>;
-    groups?: Array<GroupDto>;
-    assignments?: Array<AssignmentDto>;
-    config?: CourseConfigDto;
 }

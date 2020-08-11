@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AssessmentAllocationService } from './api/assessmentAllocation.service';
 import { AssessmentsService } from './api/assessments.service';
+import { AssignmentRegistrationService } from './api/assignmentRegistration.service';
 import { AssignmentsService } from './api/assignments.service';
 import { AuthenticationService } from './api/authentication.service';
 import { CourseConfigService } from './api/courseConfig.service';
@@ -23,6 +24,7 @@ import { UsersService } from './api/users.service';
   providers: [
     AssessmentAllocationService,
     AssessmentsService,
+    AssignmentRegistrationService,
     AssignmentsService,
     AuthenticationService,
     CourseConfigService,

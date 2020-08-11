@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AssessmentDto } from './assessmentDto';
 import { GroupDto } from './groupDto';
 
 export interface ParticipantDto { 
@@ -19,7 +18,6 @@ export interface ParticipantDto {
     role: ParticipantDto.RoleEnum;
     groupId?: string;
     group?: GroupDto;
-    assessments?: Array<AssessmentDto>;
 }
 export namespace ParticipantDto {
     export type RoleEnum = 'LECTURER' | 'TUTOR' | 'STUDENT';
