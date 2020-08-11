@@ -52,7 +52,7 @@ export class EditAssessmentComponent implements OnInit {
 
 	private assignLoadAssessmentResult(result: AssessmentDto): void {
 		this.assessment = result;
-		//this.assignment = this.assessment.assignment; // TODO 
+		this.assignment = this.assessment.assignment;
 		this.group = this.assessment.group;
 		this.user = this.assessment.user;
 		
