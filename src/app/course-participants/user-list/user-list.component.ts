@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { CourseParticipantsService, CoursesService, UserDto, ParticipantDto } from "../../../../api";
+import { CourseParticipantsService, CoursesService, ParticipantDto } from "../../../../api";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../course/dialogs/change-role/change-role.dialog";
 import { ConfirmDialog, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
@@ -28,7 +28,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	courseId: string;
 	participant: ParticipantDto[];
-	displayedColumns: string[] = ["actions", "role", "username", "email"];
+	displayedColumns: string[] = ["actions", "role", "username"];
 	dataSource: MatTableDataSource<ParticipantDto>;
 	filter = new ParticipantsFilter();
 
@@ -110,20 +110,18 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 			isConfirmed => {
 				// Check if user confirmed the action
 				if (isConfirmed) {
-					this.courseParticipantsService.removeUser(this.courseId, user.userId).subscribe(
-						result => {
-							if (result) {
-								// Remove removed user from user list
-								this.participant = this.participant.filter(u => u.username !== user.username);
-								this.refreshDataSource();
-								this.snackbar.openSuccessMessage("User has been removed successfully!");
-							}
+					this.courseParticipantsService.removeUser(this.courseId, user.userId).subscribe({
+						next: () => {
+							// Remove removed user from user list
+							this.participant = this.participant.filter(u => u.username !== user.username);
+							this.refreshDataSource();
+							this.snackbar.openSuccessMessage();
 						},
-						error => {
+						error: (error) => {
 							console.log(error),
-							this.snackbar.openErrorMessage("Failed to remove the user.");
+							this.snackbar.openErrorMessage();
 						}
-					);
+					});
 				}
 			}, 
 			error => console.log(error)
