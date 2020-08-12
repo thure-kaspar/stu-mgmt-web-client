@@ -29,8 +29,8 @@
 				
 				<button mat-menu-item [matMenuTriggerFor]="themeMenu">Theme</button>
 				<mat-menu #themeMenu="matMenu">
-					<button mat-menu-item (click)="theme.setTheme('default')">Default</button>
-					<button mat-menu-item (click)="theme.setTheme('dark')">Dark</button>
+					<button mat-menu-item (click)="theme.setTheme('default-theme')">Default</button>
+					<button mat-menu-item (click)="theme.setTheme('dark-theme')">Dark</button>
 				</mat-menu>
 			</div>
 		</mat-menu>
@@ -90,7 +90,7 @@
 	<mat-sidenav-content>
 		<!-- Add Content Here -->
 		<div class="background-container">
-			<div class="content-container">
+			<div class="titlebar-padding">
 				<router-outlet></router-outlet>
 			</div>
 		</div>

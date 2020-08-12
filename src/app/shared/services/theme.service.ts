@@ -6,8 +6,8 @@ import { distinctUntilChanged } from "rxjs/operators";
 export class ThemeService {
 
 	availableThemes = [
-		"default",
-		"dark"
+		"default-theme",
+		"dark-theme"
 	]
 
 	private themeSubject: BehaviorSubject<string>;

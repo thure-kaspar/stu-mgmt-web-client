@@ -1,7 +1,7 @@
 import { Component, ViewChild, Output, EventEmitter, OnInit } from "@angular/core";
 import { AuthService } from "../auth/services/auth.service";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { map, shareReplay, withLatestFrom, filter } from "rxjs/operators";
+import { map, shareReplay, withLatestFrom, filter, tap } from "rxjs/operators";
 import { Router, NavigationEnd } from "@angular/router";
 import { MatSidenav } from "@angular/material/sidenav";
 import { Observable } from "rxjs";
@@ -12,6 +12,7 @@ import { CourseMembershipsFacade } from "../course/services/course-memberships.f
 import { CourseDto } from "../../../api";
 import { SnackbarService } from "../shared/services/snackbar.service";
 import { ThemeService } from "../shared/services/theme.service";
+import { OverlayContainer } from "@angular/cdk/overlay";
 
 @Component({
 	selector: "app-navigation",
@@ -28,12 +29,13 @@ export class NavigationComponent implements OnInit {
 			map(result => result.matches),
 			shareReplay()
 		);
-
+	
 	constructor(private breakpointObserver: BreakpointObserver,
 				private router: Router,
 				private authService: AuthService,
 				public courseMemberships: CourseMembershipsFacade,
 				public theme: ThemeService,
+				private overlayContainer: OverlayContainer,
 				private dialog: MatDialog,
 				public snackbar: SnackbarService) {
 
@@ -44,6 +46,18 @@ export class NavigationComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.theme.theme$.subscribe(
+			theme => this.onThemeChange(theme)
+		);
+	}
+
+	onThemeChange(theme: string): void {
+		const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
+		const themeClassesToRemove = Array.from(overlayContainerClasses).filter((item: string) => item.includes("-theme"));
+		if (themeClassesToRemove.length) {
+			overlayContainerClasses.remove(...themeClassesToRemove);
+		}
+		overlayContainerClasses.add(theme);
 	}
 
 	setLanguage(lang: string): void {
