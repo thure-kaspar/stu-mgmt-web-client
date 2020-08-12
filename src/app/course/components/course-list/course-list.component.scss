@@ -1,3 +1,18 @@
+.course-list-container {
+	padding-top: 16px;
+	padding-left: var(--margin-default);
+	padding-right: var(--margin-default);
+}
+
+.title {
+	display: flex;
+	align-items: center;
+}
+
+.btn-add {
+	margin-left: 16px;
+}
+
 .courseFilter-container {
 	max-width: 500px;
 	display: grid;
@@ -13,9 +28,4 @@
 
 .column-title{
 	width: 20rem;
-}
-
-.link-course-title{
-	text-decoration: none;
-	color: black;
 }
