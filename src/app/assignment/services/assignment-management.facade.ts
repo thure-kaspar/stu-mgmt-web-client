@@ -75,11 +75,9 @@ export class AssignmentManagementFacade {
 		return this.assignmentService.deleteAssignment(courseId, assignment.id)
 			.pipe(
 				tap({
-					next: (isDeleted) => {
-						if (isDeleted) {
-							const remaining = this.assignmentsSubject.getValue().filter(a => a.id !== assignment.id);
-							this.assignmentsSubject.next(remaining);
-						}
+					next: () => {
+						const remaining = this.assignmentsSubject.getValue().filter(a => a.id !== assignment.id);
+						this.assignmentsSubject.next(remaining);
 					},
 					error: (error) => console.log(error)
 				}),

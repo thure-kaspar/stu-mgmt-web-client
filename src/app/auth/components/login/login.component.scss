@@ -11,8 +11,13 @@
   
 .form-buttons {
 	display: flex;
+	flex-direction: column;
 	padding-top: 8px;
 	justify-content: center;
+	
+	button {
+		margin-bottom: 8px;
+	}
 }
 
 #error-message {

@@ -1,70 +1,73 @@
-<mat-card>
-	<mat-card-title>
-		<div>
-			{{ 'Action.Custom.CreateCourse' | translate }}
-			<button mat-raised-button color="accent" [disabled]="form.invalid" (click)="createCourse()">{{ 'Action.Create' | translate }}</button>
-		</div>
-		<button mat-raised-button color="primary" matTooltip="Opens the Search-Course-Dialog" (click)="openSearchCourseDialog()">
-			<mat-icon>search</mat-icon>{{ 'Action.Custom.SelectCourseTemplate' | translate }}
-		</button>
-	</mat-card-title>
-
-	<form id="course-creation-form" class="form-container" [formGroup]="form" autocomplete="off">
-
-		<mat-tab-group color="accent" animationDuration="0ms">
-
-			<mat-tab label="{{ 'Misc.BasicData' | translate }}">
-				<app-course-form [form]="form"></app-course-form>
-			</mat-tab>
-
-			<ng-container formGroupName="config">
-				<mat-tab label="{{ 'Domain.GroupSettings' | translate}}">
-					<app-group-settings-form [form]="form"></app-group-settings-form>
+<div class="container">
+	<mat-card>
+		<mat-card-title>
+			<div>
+				{{ 'Action.Custom.CreateCourse' | translate }}
+				<button mat-raised-button color="accent" [disabled]="form.invalid" (click)="createCourse()">{{ 'Action.Create' | translate }}</button>
+			</div>
+			<button mat-raised-button color="primary" matTooltip="Opens the Search-Course-Dialog" (click)="openSearchCourseDialog()">
+				<mat-icon>search</mat-icon>{{ 'Action.Custom.SelectCourseTemplate' | translate }}
+			</button>
+		</mat-card-title>
+	
+		<form id="course-creation-form" class="form-container" [formGroup]="form" autocomplete="off">
+	
+			<mat-tab-group color="accent" animationDuration="0ms">
+	
+				<mat-tab label="{{ 'Misc.BasicData' | translate }}">
+					<app-course-form [form]="form"></app-course-form>
 				</mat-tab>
 	
-				<mat-tab label="{{ 'Misc.ExtendedOptions' | translate }}">
-					<div id="extended-options">			
-						<mat-form-field>
-							<mat-label>{{ 'Property.CourseConfig.SubscriptionUrl' | translate }}</mat-label>
-							<input matInput formControlName="subscriptionUrl">
+				<ng-container formGroupName="config">
+					<mat-tab label="{{ 'Domain.GroupSettings' | translate}}">
+						<app-group-settings-form [form]="form"></app-group-settings-form>
+					</mat-tab>
+		
+					<mat-tab label="{{ 'Misc.ExtendedOptions' | translate }}">
+						<div id="extended-options">			
+							<mat-form-field>
+								<mat-label>{{ 'Property.CourseConfig.SubscriptionUrl' | translate }}</mat-label>
+								<input matInput formControlName="subscriptionUrl">
+							</mat-form-field>
+							<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
+						</div>
+					</mat-tab>
+	
+					<mat-tab label="{{ 'Domain.AdmissionCriteria' | translate }}">
+						<app-admission-criteria-form [form]="form"></app-admission-criteria-form>
+					</mat-tab>
+		
+					<mat-tab label="{{ 'Domain.AssignmentTemplates' | translate }}"> 
+						<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="assignmentTemplatesForm.addAssignmentTemplate()">
+							<mat-icon>add</mat-icon>{{ 'Action.Custom.AddAssignmentTemplate' | translate }}
+						</button> 
+						<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
+					</mat-tab>
+	
+				</ng-container>
+	
+				<mat-tab class="tab" label="{{ 'Domain.Lecturers' | translate }}">
+					<div id="lecturers" formArrayName="lecturers">
+						<button type="button" id="btn-add-lecturer" mat-flat-button color="accent" (click)="addLecturer()">
+							<mat-icon>add</mat-icon>{{ 'Action.Custom.AddLecturer' | translate }}
+						</button>
+	
+						<mat-hint>Use the <mat-icon id="icon-person-hint">search</mat-icon>-button in the input field to open the User-Search-Dialog. The username of the selected user will be inserted automatically.</mat-hint>
+	
+						<mat-form-field *ngFor="let lecturer of getLecturers()?.controls; let i = index">
+							<mat-label>Lecturer #{{i + 1}}</mat-label>
+							<input matInput [formControlName]="i" required>
+							<mat-hint>{{ 'Property.User.Username' | translate }}</mat-hint>
+							<button  matPrefix mat-icon-button matTooltip="{{ 'Action.Search' | translate }}" (click)="openSearchUserDialog(i)"><mat-icon>search</mat-icon></button>
+							<button  matSuffix mat-icon-button matTooltip="{{ 'Action.Remove' | translate }}" (click)="removeLecturer(i)"><mat-icon>clear</mat-icon></button>
 						</mat-form-field>
-						<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
 					</div>
 				</mat-tab>
-
-				<mat-tab label="{{ 'Domain.AdmissionCriteria' | translate }}">
-					<app-admission-criteria-form [form]="form"></app-admission-criteria-form>
-				</mat-tab>
 	
-				<mat-tab label="{{ 'Domain.AssignmentTemplates' | translate }}"> 
-					<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="assignmentTemplatesForm.addAssignmentTemplate()">
-						<mat-icon>add</mat-icon>{{ 'Action.Custom.AddAssignmentTemplate' | translate }}
-					</button> 
-					<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
-				</mat-tab>
-
-			</ng-container>
-
-			<mat-tab class="tab" label="{{ 'Domain.Lecturers' | translate }}">
-				<div id="lecturers" formArrayName="lecturers">
-					<button type="button" id="btn-add-lecturer" mat-flat-button color="accent" (click)="addLecturer()">
-						<mat-icon>add</mat-icon>{{ 'Action.Custom.AddLecturer' | translate }}
-					</button>
-
-					<mat-hint>Use the <mat-icon id="icon-person-hint">search</mat-icon>-button in the input field to open the User-Search-Dialog. The username of the selected user will be inserted automatically.</mat-hint>
-
-					<mat-form-field *ngFor="let lecturer of getLecturers()?.controls; let i = index">
-						<mat-label>Lecturer #{{i + 1}}</mat-label>
-						<input matInput [formControlName]="i" required>
-						<mat-hint>{{ 'Property.User.Username' | translate }}</mat-hint>
-						<button  matPrefix mat-icon-button matTooltip="{{ 'Action.Search' | translate }}" (click)="openSearchUserDialog(i)"><mat-icon>search</mat-icon></button>
-						<button  matSuffix mat-icon-button matTooltip="{{ 'Action.Remove' | translate }}" (click)="removeLecturer(i)"><mat-icon>clear</mat-icon></button>
-					</mat-form-field>
-				</div>
-			</mat-tab>
-
-		</mat-tab-group>
-
-	</form>
-
-</mat-card>
+			</mat-tab-group>
+	
+		</form>
+	
+	</mat-card>
+	
+</div>

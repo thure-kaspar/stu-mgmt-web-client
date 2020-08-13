@@ -18,6 +18,8 @@ import { AssignmentTemplatesForm } from "./forms/assignment-templates-form/assig
 import { EditCourseComponent } from "./components/edit-course/edit-course.component";
 import { CreateAssignmentTemplateDialog } from "./dialogs/create-assignment-template/create-assignment-template.dialog";
 import { EditAssignmentTemplateDialog } from "./dialogs/edit-assignment-template/edit-assignment-template.dialog";
+import { CourseFacade } from "./services/course.facade";
+import { ParticipantFacade } from "./services/participant.facade";
 
 @NgModule({
 	declarations: [
@@ -41,6 +43,6 @@ import { EditAssignmentTemplateDialog } from "./dialogs/edit-assignment-template
 		GroupModule,
 		AssignmentModule
 	],
-	providers: []
+	providers: [CourseFacade, ParticipantFacade]
 })
 export class CourseModule { }

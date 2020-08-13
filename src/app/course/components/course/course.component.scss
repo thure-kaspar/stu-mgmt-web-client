@@ -1,8 +1,19 @@
+.course-header {
+	background-color: var(--color-header);
+	padding-left: var(--margin-content);
+	padding-right: var(--margin-content);
+	padding-top: 8px;
+}
+
+.course-content {
+	padding-left: var(--margin-content);
+	padding-right: var(--margin-content);
+	padding-bottom: 4px;
+}
+
 #title-container {
 	display: flex;
 	align-items: center;
-	margin-top: -8px;
-	margin-bottom: -4px;
 
 	span {
 		vertical-align: middle;

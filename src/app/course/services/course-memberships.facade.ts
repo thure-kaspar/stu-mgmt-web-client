@@ -78,13 +78,9 @@ export class CourseMembershipsFacade {
 			.pipe(
 				switchMap(
 					success => {
-						if (success) {
-							const courses = this.coursesSubject.getValue().filter(c => c.id !== courseId);
-							this.coursesSubject.next(courses);
-							return of(null);
-						} else {
-							return throwError(new Error("Failed to leave the course.")); // TODO: Refactor, when removeUser returns void (or error)
-						}
+						const courses = this.coursesSubject.getValue().filter(c => c.id !== courseId);
+						this.coursesSubject.next(courses);
+						return of(null);
 					}
 				),
 				catchError(error => {

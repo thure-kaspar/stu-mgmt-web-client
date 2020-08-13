@@ -21,4 +21,20 @@ export class LoginComponent {
 			});
 	}
 
+	async loginAsTutor(): Promise<void> {
+		const authCredentials = { email: "john.doe@test.com", password: "no_pw_required" };
+		await this.authService.login(authCredentials)
+			.catch(error => {
+				this.errorMessage = error;
+			});
+	}
+
+	async loginAsLecturer(): Promise<void> {
+		const authCredentials = { email: "mgtm.admin@test.com", password: "no_pw_required" };
+		await this.authService.login(authCredentials)
+			.catch(error => {
+				this.errorMessage = error;
+			});
+	}
+
 }

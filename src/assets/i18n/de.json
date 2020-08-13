@@ -46,6 +46,7 @@
     "CreatedBy": "Erstellt von",
     "Date": "Datum",
     "Empty": "Leer",
+    "End": "Ende",
     "For": "Für",
     "Help": "Hilfe",
     "Joinable": "Offen",
@@ -59,6 +60,7 @@
     "Other": "Andere",
     "Password": "Passwort",
     "Single": "Einzeln",
+    "Start": "Start",
     "Title": "Titel",
     "Yes": "Ja"
   },
@@ -109,9 +111,9 @@
       "TESTAT": "Testat"
     },
     "CollaborationType": {
-      "GROUP": "Gruppe",
-      "GROUP_OR_SINGLE": "Gruppe oder einzeln",
-      "SINGLE": "Einzeln"
+      "GROUP": "Gruppenabgabe",
+      "GROUP_OR_SINGLE": "Gruppen- und Einzelabgabe",
+      "SINGLE": "Einzelabgabe"
     },
     "CourseRole": {
       "LECTURER": "Lehrender",

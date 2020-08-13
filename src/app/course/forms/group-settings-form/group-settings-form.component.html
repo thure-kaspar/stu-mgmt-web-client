@@ -22,11 +22,6 @@
 			</mat-form-field>
 			
 			<mat-form-field>
-				<mat-label>{{ 'Property.GroupSettings.NameSchema' | translate }}</mat-label>
-				<input matInput formControlName="nameSchema">
-			</mat-form-field>
-			
-			<mat-form-field>
 				<mat-label>{{ 'Property.GroupSettings.SizeMin' | translate }}</mat-label>
 				<input matInput type="number" formControlName="sizeMin" required>
 				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
@@ -36,6 +31,11 @@
 				<mat-label>{{ 'Property.GroupSettings.SizeMax' | translate }}</mat-label>
 				<input matInput type="number" formControlName="sizeMax" required>
 				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>{{ 'Property.GroupSettings.NameSchema' | translate }}</mat-label>
+				<input matInput formControlName="nameSchema">
 			</mat-form-field>
 		</div>
 	</ng-container>

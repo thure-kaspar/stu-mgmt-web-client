@@ -1,0 +1,49 @@
+.assignment {
+	background-color: var(--grey-normal);
+	width: 600px;
+	margin-bottom: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.description {
+	
+}
+
+.card-title {
+	display: flex;
+	//padding-top: 4px;
+	padding-bottom: 8px;
+
+	.name {
+		font-size: 16px;
+	}
+}
+
+.chips {
+	margin-bottom: 16px;
+
+	mat-chip {
+		justify-content: space-between;
+		
+		mat-icon {
+			margin-right: 8px;
+		}
+	}
+}
+
+.collaboration {
+	mat-icon {
+		vertical-align: text-bottom;
+	}
+
+	.collaboration-type {
+		vertical-align: text-top;
+	}
+}
+
+.dates {
+	margin-bottom: 8px;
+	display: flex;
+	flex-direction: column;
+}

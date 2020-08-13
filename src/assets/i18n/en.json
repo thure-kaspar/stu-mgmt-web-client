@@ -46,6 +46,7 @@
     "CreatedBy": "Created by",
     "Date": "Date",
     "Empty": "Empty",
+    "End": "End",
     "For": "For",
     "Help": "Help",
     "Joinable": "Joinable",
@@ -59,6 +60,7 @@
     "Other": "Other",
     "Password": "Password",
     "Single": "Single",
+    "Start": "Start",
     "Title": "Title",
     "Yes": "Yes"
   },

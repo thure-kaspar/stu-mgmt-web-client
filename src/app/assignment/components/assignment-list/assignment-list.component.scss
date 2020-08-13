@@ -1,35 +1,25 @@
-.assignment-cards {
-	display: grid;
-	grid-template-rows: repeat(1fr);
-	row-gap: 12px;
-
-	.assignment-card {
-		background-color: rgb(240, 240, 240);
-		border: 1px solid lightgrey;
-
-		.left {
-			display: flex;
-			align-items: center;
-			font-weight: 400;
-			mat-icon {
-				padding-right: 16px;
-			}
-		}
-
-		.right {
-			margin-right: 0px;
-			margin-left: auto;
-		}
-
-		font-size: 16px!important;
-		
-	}
+.btn-add {
+	margin-bottom: 8px;
 }
 
-#btn-add {
-	margin-bottom: 2px;
+.assignment-list {
 }
 
-.btn-delete {
-	color: red;
+.state {
+	margin-bottom: 16px;
+}
+
+.assignment-state {
+	margin-bottom: 4px;
+	font-weight: 500;
+}
+
+.assignment-states  {
+}
+
+mat-divider {
+	width: 100%;
+	margin-top: 24px;
+	margin-bottom: 24px;
+	margin-left: -0px!important;
 }

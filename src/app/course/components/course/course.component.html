@@ -1,31 +1,34 @@
-<mat-card *ngIf="course">
-	<mat-card-title id="title-container">
-		<span>{{course.title}}</span>
-		<button mat-icon-button [matMenuTriggerFor]="menu">
-			<mat-icon class="icon-light">settings</mat-icon>
-		</button>
-		<mat-menu #menu="matMenu">
-			<div id="menu-container">
-				<button mat-menu-item (click)="leaveCourse()"><span class="text-red">{{ 'Action.Custom.LeaveCourse' | translate }}</span></button>
-			</div>
-		</mat-menu>
-	</mat-card-title>
-
-	<nav mat-tab-nav-bar color="accent"> 
-		<a mat-tab-link routerLink="assignments" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
-			{{ 'Domain.Assignments' | translate }}
-		</a>
-		<a mat-tab-link routerLink="groups" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
-			{{ 'Domain.Groups' | translate }}
-		</a>
-		<a mat-tab-link routerLink="users" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
-			{{ 'Domain.Participants' | translate }}
-		</a>
-		<a mat-tab-link routerLink="settings" routerLinkActive #rla4="routerLinkActive" [active]="rla4.isActive">
-			{{ 'Misc.Settings' | translate }}
-		</a>
-	</nav>
+<div *ngIf="course">
+	<div class="course-header">
+		<mat-card-title id="title-container">
+			<span>{{course.title}}</span>
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<mat-icon class="icon-light">settings</mat-icon>
+			</button>
+			<mat-menu #menu="matMenu">
+				<div id="menu-container">
+					<button mat-menu-item (click)="leaveCourse()"><span class="text-red">{{ 'Action.Custom.LeaveCourse' | translate }}</span></button>
+				</div>
+			</mat-menu>
+		</mat-card-title>
+	
+		<nav mat-tab-nav-bar color="accent"> 
+			<a mat-tab-link routerLink="assignments" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
+				<span class="uppercase">{{ 'Domain.Assignments' | translate }}</span>
+			</a>
+			<a mat-tab-link routerLink="groups" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+				<span class="uppercase">{{ 'Domain.Groups' | translate }}</span>
+			</a>
+			<a mat-tab-link routerLink="users" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+				<span class="uppercase">{{ 'Domain.Participants' | translate }}</span>
+			</a>
+			<a mat-tab-link routerLink="settings" routerLinkActive #rla4="routerLinkActive" [active]="rla4.isActive">
+				<span class="uppercase">{{ 'Misc.Settings' | translate }}</span>
+			</a>
+		</nav>
+	</div>
 	  
-	<router-outlet></router-outlet>
-
-</mat-card>
+	<div class="course-content">
+		<router-outlet></router-outlet>
+	</div>
+</div>

@@ -5,25 +5,40 @@
 :root {
 	--titlebar-height: 56px;
 	--margin-default: 8px;
+	--margin-content: 128px;
 
 	--grey-light: rgb(90, 90, 90);
-	--grey-normal: rgb(49, 49, 49);
-	--grey-dark: hex(#181818);
+	--grey-normal: rgb(41, 41, 41);
+	--grey-dark: #181818;
 
-	--primary: map-get($kling-client-primary);
-	--accent: map-get($kling-client-accent);
-	--warn: map-get($kling-client-warn);
+	--primary: map-get($student-mgmt-client-primary, 600);
+	--accent: map-get($student-mgmt-client-accent, 900);
+	--warn: map-get($student-mgmt-client-warn);
+
+	@media (max-width: 799px) {
+		--margin-content: 8px;
+		--margin-default: 8px;
+	}
+	@media (min-width: 800px) {
+		--margin-content: 64px;
+		--margin-default: 16px;
+	}
+	@media (min-width: 1440px) {
+		--margin-content: 128px;
+		--margin-default: 32px;
+	}
 }
 
-.default {
+.default-theme {
 	height: 100%;
-	--grey-light: rgb(238, 238, 238);
-	--grey-normal: lightgrey;
-	--grey-dark: hex(#181818);
+	--grey-light: rgb(230, 230, 230);
+	--grey-normal: rgb(226, 226, 226);
+	--grey-dark: rgb(41, 41, 41);
 
-	--color-bg:rgb(235, 235, 235);
+	--color-bg: #F9F9F9;
 	--color-titlebar: white;
 	--color-sidenav: white;
+	--color-header: #ececec;
 	
 	--text: black;
 	--text-inverse: white;
@@ -33,11 +48,12 @@
 	--link-active-bg: rgba(0, 0, 0, 0.10);
 }
 
-.dark {
+.dark-theme {
 	height: 100%;
-	--color-bg: #181818;
+	--color-bg: rgb(15, 15, 15);
 	--color-titlebar: #202020;
 	--color-sidenav: #212121;
+	--color-header: rgb(24, 24, 24);
 
 	--text: white;
 	--text-inverse: black;
@@ -76,11 +92,19 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.titlebar-padding {
+	padding-top: calc(var(--titlebar-height));
+}
+
 .content-container {
-	padding-top: 64px;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
-	padding-bottom: 0.5rem;
+	padding-left: var(--margin-default);
+	padding-right: var(--margin-default);
+	padding-bottom: var(--margin-default);
+}
+
+.content-padding {
+	padding-left: var(--margin-content);
+	padding-right: var(--margin-content);
 }
 
 .background-container {
@@ -88,6 +112,7 @@ input[type=number] {
 	width: 100%;
 	min-height: 100%;
 	max-height: max-content;
+	transition: background 500ms ease-in-out, color 1000ms ease-in-out;
 }
 
 .dialog-container {
@@ -158,6 +183,12 @@ input[type=number] {
 	color: inherit;
 }
 
+.link-bold {
+	text-decoration: none;
+	color: inherit;
+	font-weight: 500;
+}
+
 .font-bold {
 	font-weight: 500;
 }
@@ -167,11 +198,11 @@ input[type=number] {
 }
 
 .icon-light {
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--text-light);
 }
 
 .text-light {
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--text-light);
 }
 
 .text-red {
@@ -180,6 +211,10 @@ input[type=number] {
 
 .text-green {
 	color: green;
+}
+
+.uppercase {
+	text-transform: uppercase;
 }
 
 .snackbar-success {
@@ -226,3 +261,7 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 .WARNING { font-weight: 500; color:rgb(233, 185, 55); }
 .ERROR { font-weight: 500; color: rgb(206, 134, 0); }
 .CRITICAL { font-weight: 500; color: red; }
+
+.bg-titlebar {
+	background-color: var(--color-titlebar);
+}

@@ -7,6 +7,8 @@ import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dia
 import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
+import { CourseFacade } from "../../services/course.facade";
+import { ParticipantFacade } from "../../services/participant.facade";
 
 @Component({
 	selector: "app-course",
@@ -21,6 +23,8 @@ export class CourseComponent implements OnInit {
 				private router: Router,
 				private courseService: CoursesService,
 				private courseMemberships: CourseMembershipsFacade,
+				public participant: ParticipantFacade,
+				private courseFacade: CourseFacade,
 				private dialog: MatDialog,
 				private snackbar: SnackbarService) { }
 
@@ -33,7 +37,7 @@ export class CourseComponent implements OnInit {
 	 */
 	loadCourse(): void {
 		const courseId = this.route.snapshot.paramMap.get("courseId");
-		this.courseService.getCourseById(courseId).subscribe(
+		this.courseFacade.loadCourse(courseId).subscribe(
 			result => {
 				this.course = result;
 			},

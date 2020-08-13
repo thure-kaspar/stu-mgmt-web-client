@@ -1,15 +1,12 @@
 #basic-data {
+	margin-top: 8px;
+	width: 600px;
 	display: flex;
 	flex-direction: column;
-	padding-bottom: 4px;
-
+	width: 100%;
+	
 	mat-form-field {
-		width: 300px;
-	}
-
-	@media (max-width: 500px) {
-		mat-form-field {
-			width: 100%;
-		}
+		width: 100%;
+		margin-bottom: 16px;
 	}
 }

@@ -9,6 +9,7 @@ import { FormGroup } from "@angular/forms";
 export class CourseForm implements OnInit {
 
 	@Input() form: FormGroup;
+	@Input() isEditMode = false;
 
 	constructor() { }
 

@@ -14,13 +14,12 @@
 			<button *ngSwitchCase="false" class="btn-link" mat-flat-button (click)="openLoginDialog()">Login</button>
 			<ng-container *ngSwitchCase="true">
 				<button class="btn-link" mat-flat-button (click)="snackbar.openErrorMessage()">{{getUsername()}}</button>
-				<button class="btn-link" mat-flat-button (click)="logout()">Logout</button>
+				<button class="btn-link btn-logout" mat-flat-button (click)="logout()">Logout</button>
 			</ng-container>
 		</ng-container>
 		
 		<mat-menu #appMenu="matMenu">
 			<div id="appMenu-container">
-				<a [routerLink]="['/', getUserId()]"><button class="btn-link" mat-flat-button><mat-icon>account_circle</mat-icon>My account</button></a>		
 				<button mat-menu-item [matMenuTriggerFor]="langMenu">{{ 'Misc.Language' | translate }}</button>
 				<mat-menu #langMenu="matMenu">
 					<button mat-menu-item (click)="setLanguage('en')">English</button>

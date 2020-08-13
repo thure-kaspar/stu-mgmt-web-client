@@ -48,7 +48,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 		// Subscribe to changes of username filter: Trigger search 500ms after user stopped typing
 		this.subs.sink = this.usernameFilterChangedSubject
-			.pipe(debounceTime(500)).subscribe(() => 
+			.pipe(debounceTime(300)).subscribe(() => 
 				this.searchParticipants()
 			);
 	}

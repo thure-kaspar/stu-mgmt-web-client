@@ -1,5 +1,5 @@
 <div id="basic-data" [formGroup]="form">
-	<mat-form-field>
+	<mat-form-field *ngIf="!isEditMode">
 		<mat-label>Id</mat-label>
 		<input matInput formControlName="id">
 		<mat-hint>Id will default to shortname-semester, if not specified.</mat-hint>

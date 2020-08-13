@@ -68,7 +68,7 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	 */
 	private subscribeToChangesOfNameFilter(): void {
 		this.nameFilterSubscription = this.nameFilterChangedSubject
-			.pipe(debounceTime(500)).subscribe(() => 
+			.pipe(debounceTime(300)).subscribe(() => 
 				this._updateNameFilter()
 			);
 	}

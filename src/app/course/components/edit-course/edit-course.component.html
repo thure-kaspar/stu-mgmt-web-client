@@ -3,7 +3,7 @@
 	<mat-tab-group color="accent" animationDuration="0ms">
 
 		<mat-tab label="{{ 'Misc.BasicData' | translate }}">
-			<app-course-form [form]="form"></app-course-form>
+			<app-course-form [form]="form" [isEditMode]="true"></app-course-form>
 		</mat-tab>
 
 		<ng-container formGroupName="config">
@@ -13,11 +13,13 @@
 
 			<mat-tab label="{{ 'Misc.ExtendedOptions' | translate }}">
 				<div id="extended-options">			
-					<mat-form-field>
-						<mat-label>{{ 'Property.CourseConfig.SubscriptionUrl' | translate }}</mat-label>
-						<input matInput formControlName="subscriptionUrl">
-					</mat-form-field>
-					<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
+					<div>
+						<mat-form-field>
+							<mat-label>{{ 'Property.CourseConfig.SubscriptionUrl' | translate }}</mat-label>
+							<input matInput formControlName="subscriptionUrl">
+							<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
+						</mat-form-field>
+					</div>
 				</div>
 			</mat-tab>
 

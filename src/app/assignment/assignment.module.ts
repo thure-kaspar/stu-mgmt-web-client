@@ -8,6 +8,7 @@ import { CreateAssignmentDialog } from "./dialogs/create-assignment/create-assig
 import { EditAssignmentDialog } from "./dialogs/edit-assignment/edit-assignment.dialog";
 import { AssignmentForm } from "./forms/assignment-form/assignment-form.component";
 import { SearchAssignmentDialog } from "./dialogs/search-assignment/search-assignment.dialog";
+import { AssignmentCardComponent } from "./components/assignment-card/assignment-card.component";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SearchAssignmentDialog } from "./dialogs/search-assignment/search-assig
 		CreateAssignmentDialog,
 		EditAssignmentDialog,
 		AssignmentForm,
-		SearchAssignmentDialog
+		SearchAssignmentDialog,
+		AssignmentCardComponent
 	],
 	imports: [
 		SharedModule,

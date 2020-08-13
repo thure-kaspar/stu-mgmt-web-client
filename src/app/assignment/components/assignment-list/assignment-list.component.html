@@ -1,30 +1,64 @@
 <div class="tab">
-	<button (click)="openAddDialog()" mat-flat-button id="btn-add" color="accent">
+	<button *ngIf="participant.p?.canCreateAssignments()" (click)="openAddDialog()" mat-flat-button class="btn-add" color="accent">
 		<mat-icon>add</mat-icon>
 		{{ 'Action.Custom.AddAssignment' | translate }}
 	</button>
 
-	<mat-list class="assignment-cards">
-		<mat-list-item class="assignment-card" *ngFor="let assignment of assignmentManagement.assignments$ | async">
+	<div class="assignment-states">
+		<div class="state in-progress">
+			<h3 class="assignment-state">{{ 'Enum.AssignmentState.IN_PROGRESS' | translate }}</h3>
+			<div class="assignment-list">
+				<ng-container *ngFor="let assignment of assignments.inProgress">
+					<app-assignment-card [assignment]="assignment"></app-assignment-card>
+				</ng-container>
+			</div>
+		</div>
 
-			<span class="left">
-				<mat-icon *ngIf="assignment.state == 'IN_PROGRESS'" color="accent">play_circle_filled</mat-icon>
-				<mat-icon *ngIf="assignment.state == 'CLOSED'" color="primary">lock</mat-icon>
-				<mat-icon *ngIf="assignment.state == 'IN_REVIEW'" color="primary">remove_red_eye</mat-icon>
-				<mat-icon *ngIf="assignment.state == 'EVALUATED'" color="primary">assignment_turned_in</mat-icon>
-				<mat-icon *ngIf="assignment.state == 'INVISIBLE'" color="primary">vpn_key</mat-icon>
+		<mat-divider inset></mat-divider>
+	
+		<div class="state in-review">
+			<h3 class="assignment-state">{{ 'Enum.AssignmentState.IN_REVIEW' | translate }}</h3>
+			<div class="assignment-list">
+				<ng-container *ngFor="let assignment of assignments.inReview">
+					<app-assignment-card [assignment]="assignment"></app-assignment-card>
+				</ng-container>
+			</div>
+		</div>
+	
+		<mat-divider inset></mat-divider>
 
-				<a class="link-none font-bold" [routerLink]="[assignment.id, 'assessments' ]">{{assignment.name}}</a>
-			</span>
+		<div class="state evaluated">
+			<h3 class="assignment-state">{{ 'Enum.AssignmentState.EVALUATED' | translate }}</h3>
+			<div class="assignment-list">
+				<ng-container *ngFor="let assignment of assignments.evaluated">
+					<app-assignment-card [assignment]="assignment"></app-assignment-card>
+				</ng-container>
+			</div>
+		</div>
 
-			<span class="right">
-				<button mat-button (click)="openEditDialog(assignment)">{{ 'Action.Edit' | translate }}</button>
-				<button mat-button class="btn-delete" (click)="onDelete(assignment)">{{ 'Action.Delete' | translate }}</button>
-			</span>
+		<mat-divider inset></mat-divider>
+	
+		<div class="state closed">
+			<h3 class="assignment-state">{{ 'Enum.AssignmentState.CLOSED' | translate }}</h3>
+			<div class="assignment-list">
+				<ng-container *ngFor="let assignment of assignments.closed">
+					<app-assignment-card [assignment]="assignment"></app-assignment-card>
+				</ng-container>
+			</div>
+		</div>
 
-		</mat-list-item>
-	</mat-list>
+		<mat-divider inset></mat-divider>
+	
+		<div class="state invisible">
+			<h3 class="assignment-state">{{ 'Enum.AssignmentState.INVISIBLE' | translate }}</h3>
+			<div class="assignment-list">
+				<ng-container *ngFor="let assignment of assignments.invisible">
+					<app-assignment-card [assignment]="assignment"></app-assignment-card>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+
 </div>
-
 
 

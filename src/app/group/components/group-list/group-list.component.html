@@ -23,17 +23,19 @@
 	</div>
 
 	<div class="group-filter">
-		<mat-form-field>
+		<div class="checkboxes">
+			<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
+				{{ 'Common.Open' | translate }}
+			</mat-checkbox>
+			<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
+				{{ 'Common.Closed' | translate }}
+			</mat-checkbox>
+		</div>
+
+		<mat-form-field class="groupname-filter">
 			<mat-label>{{ 'Property.Group.Name' | translate }}</mat-label>
 			<input matInput [(ngModel)]="filter.name" (keyup)="nameFilterChangedSubject.next()" autocomplete="off">
 		</mat-form-field>
-
-		<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
-			{{ 'Common.Open' | translate }}
-		</mat-checkbox>
-		<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
-			{{ 'Common.Closed' | translate }}
-		</mat-checkbox>
 	</div>
 
 	<table class="full-width" mat-table #table [dataSource]="dataSource">
@@ -50,7 +52,7 @@
 		<ng-container matColumnDef="memberCount">
 			<th class="member-count-column" mat-header-cell *matHeaderCellDef>{{ 'Domain.Members' | translate }}</th>
 			<td mat-cell *matCellDef="let row">
-				{{row.users.length}}
+				{{row.members.length}}
 				<ng-container *ngIf="groupSettings?.sizeMax">/ {{groupSettings.sizeMax}}</ng-container>
 			</td>
 		</ng-container>

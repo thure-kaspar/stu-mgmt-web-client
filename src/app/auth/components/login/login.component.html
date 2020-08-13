@@ -11,6 +11,8 @@
 
 		<div class="form-buttons">
 			<button mat-raised-button color="accent" type="submit" class="full-width" id="login-button" (click)="login()">Login</button>
+			<button mat-flat-button color="primary" (click)="loginAsTutor()">Login as: Tutor</button>
+			<button mat-flat-button color="primary" (click)="loginAsLecturer()">Login as: Lecturer</button>
 		</div>
 
 		<p *ngIf="errorMessage != null" id="error-message">{{errorMessage}}</p>
