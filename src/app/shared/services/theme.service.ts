@@ -14,7 +14,14 @@ export class ThemeService {
 	theme$: Observable<string>;
 
 	constructor() {
-		const theme = localStorage.getItem("theme") ?? "default";
+		const storedTheme = localStorage.getItem("theme");
+		let theme: string;
+
+		if (!storedTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			theme = "dark-theme";
+		} else if(storedTheme) {
+			theme = storedTheme;
+		}
 
 		this.themeSubject = new BehaviorSubject(theme);
 		this.theme$ = this.themeSubject.asObservable()
