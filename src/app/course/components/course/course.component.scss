@@ -3,6 +3,9 @@
 	padding-left: var(--margin-content);
 	padding-right: var(--margin-content);
 	padding-top: 8px;
+	position: sticky;
+	top: 0;
+	z-index: 2;
 }
 
 .course-content {
