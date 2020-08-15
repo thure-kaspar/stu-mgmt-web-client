@@ -9,19 +9,22 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatNativeDateModule } from "@angular/material/core";
 import { Paginator } from "./paginator/paginator.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
+import { SearchParticipantDialog } from "./components/dialogs/search-participant/search-participant.dialog";
 
 @NgModule({
 	declarations: [
 		PageNotFoundComponent, 
 		ConfirmDialog,
 		Paginator,
-		SemesterPipe
+		SemesterPipe,
+		SearchParticipantDialog
 	],
 	imports: [ 
 		CommonModule,
 		AuthModule,
 		MaterialModule,
-		TranslateModule
+		TranslateModule,
+		FormsModule
 	],
 	exports: [
 		CommonModule,

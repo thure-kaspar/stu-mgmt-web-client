@@ -11,6 +11,8 @@
 	--grey-normal: rgb(41, 41, 41);
 	--grey-dark: #181818;
 
+	--card-bg: white;
+
 	--primary: map-get($student-mgmt-client-primary, 600);
 	--accent: map-get($student-mgmt-client-accent, 900);
 	--warn: map-get($student-mgmt-client-warn);
@@ -23,7 +25,7 @@
 		--margin-content: 64px;
 		--margin-default: 16px;
 	}
-	@media (min-width: 1440px) {
+	@media (min-width: 1500px) {
 		--margin-content: 128px;
 		--margin-default: 32px;
 	}
@@ -32,13 +34,13 @@
 .default-theme {
 	height: 100%;
 	--grey-light: rgb(230, 230, 230);
-	--grey-normal: rgb(226, 226, 226);
+	--grey-normal: rgb(255, 255, 255);
 	--grey-dark: rgb(41, 41, 41);
 
-	--color-bg: #F9F9F9;
+	--color-bg: #F1F1F1;
 	--color-titlebar: white;
 	--color-sidenav: white;
-	--color-header: #ececec;
+	--color-header: #F9F9F9;
 	
 	--text: black;
 	--text-inverse: white;
@@ -54,6 +56,8 @@
 	--color-titlebar: #202020;
 	--color-sidenav: #212121;
 	--color-header: rgb(24, 24, 24);
+
+	--card-bg:rgb(41, 41, 41);
 
 	--text: white;
 	--text-inverse: black;
@@ -154,7 +158,7 @@ input[type=number] {
 
 .card-title {
 	margin-top: -16px!important;
-	margin-bottom: -8px!important;
+
 	align-items: center!important;
 	display: flex!important;
 	justify-content: space-between!important;
@@ -218,24 +222,24 @@ input[type=number] {
 }
 
 .snackbar-success {
- 	background-color: rgb(211, 255, 200);
+ 	background-color: rgb(211, 255, 200)!important;
 
 	.mat-simple-snackbar {
-		color: rgb(0, 71, 24);
+		color: rgb(0, 71, 24)!important;
 	}
 	.mat-button-wrapper {
-		color: rgb(0, 71, 24);
+		color: rgb(0, 71, 24)!important;
 	}
 }
 
 .snackbar-error {
-	background-color: rgb(255, 0, 0);
+	background-color: rgb(255, 0, 0)!important;
 
    .mat-simple-snackbar {
-	   color: rgb(255, 255, 255);
+	   color: rgb(255, 255, 255)!important;
    }
    .mat-button-wrapper {
-	color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255)!important;
    }
 }
 

@@ -14,10 +14,12 @@
       "AddGroup": "Add group",
       "AddLecturer": "Add lecturer",
       "AddPartialAssessment": "Add partial assessment",
+      "AddParticipant": "Add participant",
       "ChangeRole": "Change role",
       "CopyFromPrevious": "Copy from a previous assignment",
       "CreateCourse": "Create course",
       "LeaveCourse": "Leave course",
+      "RemoveGroup": "Remove group",
       "RemoveUserFromGroup": "Remove user from group",
       "SelectCourseTemplate": "Select course template",
       "UseNamingSchemaAndCount": "Use prefix and count",
@@ -253,6 +255,7 @@
     "JoinGroup": "Join group",
     "ParticipantsList": "Participants list",
     "SearchCourse": "Search course",
+    "SearchParticipant": "Search participant",
     "SearchUser": "Search user"
   },
   "Tooltip": {

@@ -1,4 +1,4 @@
-import { ParticipantDto, GroupDto } from "../../../api";
+import { GroupDto, ParticipantDto } from "../../../api";
 
 export class Participant implements ParticipantDto {
 	readonly userId: string;

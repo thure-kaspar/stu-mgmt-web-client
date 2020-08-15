@@ -1,0 +1,38 @@
+<mat-card class="group-card mat-elevation-z2">
+	<mat-card-title class="card-title">
+		<span>
+			<a [routerLink]="[group.id]" class="name link-none">
+				{{group.name}}
+			</a>
+			<mat-icon *ngIf="group.isClosed" class="icon-light" [matTooltip]="'Property.Group.IsClosed' | translate">lock</mat-icon>
+		</span>
+
+		<mat-menu #groupMenu>
+			<ng-container *ngIf="participant.role === 'LECTURER' || participant.role === 'TUTOR'">
+				<button mat-menu-item (click)="addParticipant()">
+					<mat-icon class="icon-light">person_add</mat-icon>{{ 'Action.Custom.AddParticipant' | translate }}
+				</button>
+				<button mat-menu-item (click)="removeGroup()">
+					<mat-icon class="icon-light">delete</mat-icon>
+					<span class="text-red font-bold">
+					{{ 'Action.Delete' | translate }}
+					</span>
+				</button>
+			</ng-container>
+		</mat-menu>
+
+		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn"><mat-icon class="icon-light">more_vert</mat-icon></button>
+	</mat-card-title>
+
+	<mat-chip-list class="member-list">
+		<mat-chip selected *ngFor="let member of group.members">
+			{{member.username}}
+		</mat-chip>
+	</mat-chip-list>
+
+	<div class="group-buttons">
+		<button mat-flat-button color="primary" [disabled]="group.isClosed || participant.groupId" (click)="openJoinGroupDialog()">{{ 'Action.Join' | translate }}</button>
+		
+	</div>
+
+</mat-card>

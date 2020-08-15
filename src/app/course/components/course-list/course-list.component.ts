@@ -59,7 +59,7 @@ export class CourseListComponent implements OnInit {
 					this.courseList = result;
 					this.dataSource = new MatTableDataSource(this.courseList);
 
-					if (triggeredByPaginator) this.paginator.goToFirstPage();
+					if (!triggeredByPaginator) this.paginator.goToFirstPage();
 				},
 				error => console.log(error)
 			);

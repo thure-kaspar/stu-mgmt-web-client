@@ -14,10 +14,12 @@
       "AddGroup": "Gruppe erstellen",
       "AddLecturer": "Lehrenden hinzufügen",
       "AddPartialAssessment": "Teilbewertung hinzufügen",
+      "AddParticipant": "Teilnehmer hinzufügen",
       "ChangeRole": "Rolle ändern",
       "CopyFromPrevious": "Aus einer vorherigen Aufgabe kopieren",
       "CreateCourse": "Veranstaltung erstellen",
       "LeaveCourse": "Kurs verlassen",
+      "RemoveGroup": "Gruupe entfernen",
       "RemoveUserFromGroup": "Nutzer aus der Gruppe entfernen",
       "SelectCourseTemplate": "Veranstaltung als Vorlage wählen",
       "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden",
@@ -253,6 +255,7 @@
     "JoinGroup": "Gruppe beitreten",
     "ParticipantsList": "Teilnehmerliste",
     "SearchCourse": "Suche nach Veranstaltung",
+    "SearchParticipant": "Suche nach Teilnehmer",
     "SearchUser": "Suche nach Nutzer"
   },
   "Tooltip": {

@@ -76,7 +76,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 			result => {
 				this.participant = result,
 				this.refreshDataSource();
-				this.paginator.goToFirstPage();
+				if (!triggeredByPaginator) this.paginator.goToFirstPage();
 			},
 			error => console.log(error)
 		);

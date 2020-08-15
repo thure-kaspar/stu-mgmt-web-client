@@ -1,20 +1,22 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from "@angular/core";
-import { GroupsService, GroupDto, CourseConfigService, GroupSettingsDto, CourseParticipantsService, UsersService, UserDto, ParticipantDto } from "../../../../../api";
+import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
-import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
-import { Router, ActivatedRoute } from "@angular/router";
-import { AuthService } from "../../../auth/services/auth.service";
-import { getRouteParam } from "../../../../../utils/helper";
-import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
-import { MatTableDataSource } from "@angular/material/table";
-import { Paginator } from "../../../shared/paginator/paginator.component";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subject } from "rxjs";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { debounceTime } from "rxjs/operators";
+import { CourseConfigService, CourseParticipantsService, GroupDto, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
+import { getRouteParam } from "../../../../../utils/helper";
+import { CourseFacade } from "../../../course/services/course.facade";
+import { ParticipantFacade } from "../../../course/services/participant.facade";
+import { Group } from "../../../domain/group.model";
+import { Participant } from "../../../domain/participant.model";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
+import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
 
 class GroupFilter {
 	name?: string;
+	username?: string;
 	onlyClosed?: boolean;
 	onlyOpen?: boolean;
 }
@@ -23,53 +25,80 @@ class GroupFilter {
 	selector: "app-group-list",
 	templateUrl: "./group-list.component.html",
 	styleUrls: ["./group-list.component.scss"],
+	//changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	courseId: string;
-	
-	groups: GroupDto[];
-	groupOfUser: GroupDto;
+	participant: Participant;
+	groups: Group[] = [];
 	groupSettings: GroupSettingsDto;
-	
-	dataSource: MatTableDataSource<GroupDto>;
-	@ViewChild(Paginator, { static: true }) paginator: Paginator;
-	displayedColumns = ["action", "hasPassword", "isClosed", "memberCount", "name", "options"]
-	
+
 	filter = new GroupFilter();
 	nameFilterChangedSubject = new Subject();
 	filterSubject = new Subject();
 
+	/** Amount of groups loaded per request. */
+	batchSize = 30;
+	/** True, if all groups were loaded. */
+	isFinished = false;
+	/** Count of groups matching the filter. */
+	totalCount = 0;
+
 	constructor(public dialog: MatDialog,
+				private participantFacade: ParticipantFacade,
+				private courseFacade: CourseFacade,
 				private groupService: GroupsService,
 				private courseConfig: CourseConfigService,
 				private courseParticipantsService: CourseParticipantsService,
-				private userService: UsersService,
-				private authService: AuthService,
+				private snackbar: SnackbarService,
 				private router: Router,
 				private route: ActivatedRoute) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-		this.searchGroups();
+		this.subs.sink = this.participantFacade.p$.subscribe(p => this.participant = p);
+		this.loadGroups();
 
 		this.nameFilterChangedSubject.pipe(debounceTime(300))
 			.subscribe(() => this.filterSubject.next());
 
 		this.filterSubject.subscribe(() => {
-			this.searchGroups();
+			this.loadInitialGroups();
 		});
 
-		this.courseConfig.getGroupSettings(this.courseId).subscribe(
-			result => this.groupSettings = result,
-			error => console.log(error)
-		);
+		this.courseFacade.loadGroupSettings(this.courseId);
+		this.courseFacade.groupSettings$.subscribe(settings => {
+			this.groupSettings = settings;
+		});
 	}
 
-	/** Loads the groups of the course. */
-	searchGroups(triggeredByPaginator = false): void {
-		const [skip, take] = this.paginator.getSkipAndTake();
-		
+	onScroll(): void {
+		//console.log("Scrolled");
+		if (this.isFinished) {
+			return;
+		} else {
+			//console.log("Loading groups");
+			this.loadGroups();
+		}
+	}
+
+	/**
+	 * Loads the first batch of groups according to the current filters.
+	 * Clears the total count and current groups.
+	 */
+	private loadInitialGroups(): void {
+		this.totalCount = 0;
+		this.groups = [];
+		this.isFinished = false;
+		this.loadGroups();
+	}
+
+	/**
+	 * Loads a batch of groups.
+	 * If all groups were loaded, `isFinished` will be set true.
+	 */
+	private loadGroups(): void {
 		let isClosed = undefined;
 		if (this.filter?.onlyOpen) {
 			isClosed = false;
@@ -79,33 +108,74 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 		this.groupService.getGroupsOfCourse(
 			this.courseId, 
-			skip, 
-			take, 
-			this.filter?.name, 
-			isClosed
-		).subscribe(
-			result => {
-				this.groups = result;
-				this.dataSource = new MatTableDataSource(this.groups);
-				if (triggeredByPaginator) {
-					this.paginator.goToFirstPage();
-				}
+			this.groups.length,
+			this.batchSize, 
+			this.filter.name,
+			isClosed,
+			undefined, undefined,
+			"response"
+		).subscribe(response => {
+			this.groups = [...this.groups, ...response.body.map(g => new Group(g))];
+			this.totalCount = parseInt(response.headers.get("x-total-count"));
+
+			if (this.totalCount === this.groups.length) {
+				this.isFinished = true;
 			}
-		);
+		});
 	}
 
 	/**
 	 * Opens up a group creation dialog depending on the user's course role.
 	 */
-	async openCreateGroupDialog(): Promise<void> {
-		const userId = this.authService.getAuthToken().userId;
-		const participant = await this.courseParticipantsService.getParticipant(this.courseId, userId).toPromise();
-
-		if (participant.role === ParticipantDto.RoleEnum.STUDENT) {
+	openCreateGroupDialog(): void {
+		if (this.participant.role === ParticipantDto.RoleEnum.STUDENT) {
 			this.openCreateGroupDialog_Student();
 		} else {
 			this.openCreateGroupDialog_LecturerOrTutor();
 		}
+	}
+
+	/**
+	 * Calls the API to remove the given group and updates the `groups` list.
+	 */
+	onRemoveGroup(group: GroupDto): void {
+		this.groupService.deleteGroup(this.courseId, group.id).subscribe({
+			next: () => {
+				this.groups = this.groups.filter(g => g.id !== group.id);
+				this.snackbar.openSuccessMessage();
+			},
+			error: error => {
+				console.log(error);
+				this.snackbar.openErrorMessage();
+			}
+		});
+	}
+
+	/**
+	 * Calls the API to add the given participant to the given group.
+	 */
+	onAddParticipant(event: { group: GroupDto; participant: ParticipantDto }): void {
+		console.log(`Adding ${event.participant.username} to ${event.group.name}.`);
+
+		this.groupService.addUserToGroup(
+			{ password: undefined }, // Password not required for lecturers/tutors
+			this.courseId, 
+			event.group.id, 
+			event.participant.userId).subscribe({
+			next: () => {
+				this.snackbar.openSuccessMessage();
+				const index = this.groups.findIndex(g => g.id === event.group.id);
+				this.groups[index] = new Group({
+					...this.groups[index],
+					members: [...this.groups[index].members, event.participant]
+				});
+				//this.groups = [...this.groups];
+			},
+			error: (error) => {
+				console.log(error);
+				this.snackbar.openErrorMessage();
+			}
+		});
 	}
 
 	private openCreateGroupDialog_Student(): void {
@@ -124,25 +194,10 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		dialogRef.afterClosed().subscribe(
 			result => {
 				if (result) {
-					this.searchGroups();
+					this.loadInitialGroups();
 				}
 			}
 		);
-	}
-
-	openJoinGroupDialog(group: GroupDto): void {
-		const data: JoinGroupDialogData = { courseId: this.courseId, groupId: group.id };
-		this.dialog.open<JoinGroupDialog, JoinGroupDialogData, boolean>(JoinGroupDialog, { data }).afterClosed().subscribe(
-			joined => {
-				if (joined) {
-					this.router.navigate(["groups", group.id], { relativeTo: this.route });	
-				}
-			}
-		);
-	}
-
-	isJoinable(group: GroupDto): boolean {
-		return !group.isClosed && group.members.length < this.groupSettings?.sizeMax;
 	}
 
 }

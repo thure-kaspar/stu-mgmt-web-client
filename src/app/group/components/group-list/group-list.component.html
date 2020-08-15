@@ -1,93 +1,72 @@
 <div class="tab">
 
-	<button (click)="openCreateGroupDialog()" mat-flat-button id="btn-add" color="accent">
+	<button (click)="openCreateGroupDialog()" mat-flat-button id="btn-add" color="accent" [disabled]="!participant?.canCreateGroup()">
 		<mat-icon>add</mat-icon>
 		{{ 'Action.Custom.AddGroup' | translate }}
 	</button>
 
-	<div id="users-group-container" *ngIf="groupOfUser">
-		<h2 class="groups-heading">{{ 'Common.My' | translate }} {{ 'Domain.Group' | translate }}</h2>
-		<div class="group-list-item" id="users-group">
-			<div class="group-container">
-				<div class="left">
-					<button mat-button disabled=true>{{ 'Action.Join' | translate }}</button>
-				</div>
-				<div class="middle">
-					<a class="link-none font-bold" [routerLink]="[groupOfUser.id]">{{groupOfUser.name}}</a>
-				</div>
-				<div class="right">
-					<span class="group-size font-bold">{{groupOfUser.members.length}}/{{groupSettings?.sizeMax}}</span>
-				</div>
+	<ng-container *ngIf="participant?.group">
+		<div id="users-group-container">
+			<h2>{{ 'Common.My' | translate }} {{ 'Domain.Group' | translate }}</h2>
+	
+			<mat-card class="group-card">
+				<mat-card-title class="card-title">
+					<span class="name">{{participant?.group.name}}</span>
+				</mat-card-title>
+	
+				<mat-chip-list>
+					<a class="link-none" [routerLink]="['todo']">
+						<mat-chip selected *ngFor="let member of participant?.group.members">
+							{{member.username}}
+						</mat-chip>
+					</a>
+				</mat-chip-list>
+			</mat-card>
+		</div>
+	
+		<mat-divider class="divider"></mat-divider>
+	</ng-container>
+
+	<div class="groups">
+
+		<h2 class="heading-groups">{{ 'Domain.Groups' | translate }}: ({{totalCount}})</h2>
+
+		<div class="group-filter">
+			<div class="checkboxes">
+				<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
+					{{ 'Common.Open' | translate }}
+				</mat-checkbox>
+				<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
+					{{ 'Common.Closed' | translate }}
+				</mat-checkbox>
 			</div>
-		</div>
-	</div>
-
-	<div class="group-filter">
-		<div class="checkboxes">
-			<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
-				{{ 'Common.Open' | translate }}
-			</mat-checkbox>
-			<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
-				{{ 'Common.Closed' | translate }}
-			</mat-checkbox>
+	
+			<mat-form-field class="groupname-filter">
+				<mat-label>{{ 'Property.Group.Name' | translate }}</mat-label>
+				<input matInput [(ngModel)]="filter.name" (keyup)="nameFilterChangedSubject.next()" autocomplete="off">
+			</mat-form-field>
 		</div>
 
-		<mat-form-field class="groupname-filter">
-			<mat-label>{{ 'Property.Group.Name' | translate }}</mat-label>
-			<input matInput [(ngModel)]="filter.name" (keyup)="nameFilterChangedSubject.next()" autocomplete="off">
-		</mat-form-field>
+		<div class="groups-grid">
+			<ng-container *ngFor="let group of groups">
+				<app-group-card
+					[group]="group" [participant]="participant" [courseId]="courseId" [groupSettings]="groupSettings"
+					(onRemoveGroup)="onRemoveGroup($event)"
+					(onAddParticipant)="onAddParticipant($event)"
+				>
+			</app-group-card>
+			</ng-container>
+		</div>
+
 	</div>
 
-	<table class="full-width" mat-table #table [dataSource]="dataSource">
-	
-		<ng-container matColumnDef="action">
-			<th class="action-column" mat-header-cell *matHeaderCellDef></th>
-			<td mat-cell *matCellDef="let row">
-				<button mat-stroked-button [disabled]="!isJoinable(row)">
-					{{ 'Action.Join' | translate }}
-				</button>
-			</td>
-		</ng-container>
-
-		<ng-container matColumnDef="memberCount">
-			<th class="member-count-column" mat-header-cell *matHeaderCellDef>{{ 'Domain.Members' | translate }}</th>
-			<td mat-cell *matCellDef="let row">
-				{{row.members.length}}
-				<ng-container *ngIf="groupSettings?.sizeMax">/ {{groupSettings.sizeMax}}</ng-container>
-			</td>
-		</ng-container>
-
-		<ng-container matColumnDef="hasPassword">
-			<th class="icon-column" mat-header-cell *matHeaderCellDef></th>
-			<td mat-cell *matCellDef="let row">
-				<mat-icon class="text-light">vpn_key</mat-icon>
-			</td>
-		</ng-container>
-
-		<ng-container matColumnDef="isClosed">
-			<th class="icon-column" mat-header-cell *matHeaderCellDef></th>
-			<td mat-cell *matCellDef="let row">
-				<mat-icon class="text-light">lock</mat-icon>
-			</td>
-		</ng-container>
-
-		<ng-container matColumnDef="name">
-			<th class="name-column" mat-header-cell *matHeaderCellDef>Name</th>
-			<td mat-cell *matCellDef="let row">
-				<a class="link-none font-bold" [routerLink]="[row.id]">{{row.name}}</a>
-			</td>
-		</ng-container>
-
-		<ng-container matColumnDef="options">
-			<th mat-header-cell *matHeaderCellDef></th>
-			<td mat-cell *matCellDef="let row"></td>
-		</ng-container>
-	
-		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-	
-	</table>
-
-	<app-paginator></app-paginator>
+	<div 
+		infiniteScroll 
+		[infiniteScrollDistance]="2" 
+		[infiniteScrollThrottle]="500" 
+		(scrolled)="onScroll()"
+		[infiniteScrollContainer]="'.mat-drawer-content'" 
+		[fromRoot]="true">
+	</div>
 	
 </div>
