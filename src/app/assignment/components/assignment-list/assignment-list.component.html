@@ -1,5 +1,5 @@
 <div class="tab">
-	<button *ngIf="participant.p?.canCreateAssignments()" (click)="openAddDialog()" mat-flat-button class="btn-add" color="accent">
+	<button *ngIf="participant?.canCreateAssignments()" (click)="openAddDialog()" mat-flat-button class="btn-add" color="accent">
 		<mat-icon>add</mat-icon>
 		{{ 'Action.Custom.AddAssignment' | translate }}
 	</button>
@@ -47,16 +47,18 @@
 			</div>
 		</div>
 
-		<mat-divider inset></mat-divider>
+		<ng-container *ngIf="participant.role === 'LECTURER' || participant.role === 'TUTOR'">
+			<mat-divider inset></mat-divider>
 	
-		<div class="state invisible">
-			<h3 class="assignment-state">{{ 'Enum.AssignmentState.INVISIBLE' | translate }}</h3>
-			<div class="assignment-list">
-				<ng-container *ngFor="let assignment of assignments.invisible">
-					<app-assignment-card [assignment]="assignment"></app-assignment-card>
-				</ng-container>
+			<div class="state invisible">
+				<h3 class="assignment-state">{{ 'Enum.AssignmentState.INVISIBLE' | translate }}</h3>
+				<div class="assignment-list">
+					<ng-container *ngFor="let assignment of assignments.invisible">
+						<app-assignment-card [assignment]="assignment"></app-assignment-card>
+					</ng-container>
+				</div>
 			</div>
-		</div>
+		</ng-container>
 	</div>
 
 </div>

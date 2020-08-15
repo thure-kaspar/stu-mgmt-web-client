@@ -1,6 +1,6 @@
 .assignment {
-	background-color: var(--grey-normal);
-	width: 600px;
+	background-color: var(--card-bg);
+	width: 500px;
 	margin-bottom: 16px;
 	display: flex;
 	flex-direction: column;
@@ -10,13 +10,21 @@
 	
 }
 
-.card-title {
+.assignment-card-title {
+	margin-top: -16px!important;
+	margin-bottom: -8px!important;
+	align-items: center!important;
+	justify-content: space-between;
 	display: flex;
 	//padding-top: 4px;
 	padding-bottom: 8px;
 
 	.name {
-		font-size: 16px;
+		font-size: 18px;
+	}
+
+	.menu-btn {
+		margin-right: -16px;
 	}
 }
 
@@ -46,4 +54,16 @@
 	margin-bottom: 8px;
 	display: flex;
 	flex-direction: column;
+}
+
+.type-chip {
+	color: white!important;
+}
+
+.HOMEWORK { 
+	background-color: rgb(0, 89, 255)!important;
+}
+
+.TESTAT {
+	background-color: rgb(194, 149, 0)!important;
 }

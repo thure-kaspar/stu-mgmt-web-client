@@ -1,5 +1,5 @@
-<mat-card class="assignment">
-	<mat-card-title class="card-title">
+<mat-card class="assignment mat-elevation-z2">
+	<mat-card-title class="assignment-card-title">
 		<span class="name font-bold">
 			<a class="link-none" [routerLink]="[ assignment.id, 'assessments' ]">{{assignment.name}}</a>
 		</span>
@@ -16,17 +16,11 @@
 				</span>
 			</button>
 		</mat-menu>
-		<button mat-icon-button [matMenuTriggerFor]="assignmentMenu"><mat-icon class="icon-light">more_vert</mat-icon></button>
+		<button mat-icon-button class="menu-btn" [matMenuTriggerFor]="assignmentMenu"><mat-icon class="icon-light">more_vert</mat-icon></button>
 	</mat-card-title>
 
 	<mat-chip-list class="chips">
-		<mat-chip color="primary" selected class="collaboration">
-			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.GROUP || assignment.collaboration === collaborationEnum.GROUPORSINGLE">groups</mat-icon>
-			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.SINGLE">person</mat-icon>
-			<span class="collaboration-type">{{ 'Enum.CollaborationType.' + assignment.collaboration | translate }}</span>
-		</mat-chip>
-
-		<mat-chip selected>
+		<mat-chip [class]="'type-chip ' + assignment.type">
 			<mat-icon *ngIf="assignment.type === typeEnum.HOMEWORK">assignment</mat-icon>
 			<mat-icon *ngIf="assignment.type === typeEnum.TESTAT">grade</mat-icon>
 			<mat-icon *ngIf="assignment.type === typeEnum.PROJECT">engineering</mat-icon>
@@ -34,9 +28,15 @@
 			<mat-icon *ngIf="assignment.type === typeEnum.OTHER">not_listed_location</mat-icon>
 			<span class="assignment-type">{{ 'Enum.AssignmentType.' + assignment.type | translate }}</span>
 		</mat-chip>
+
+		<mat-chip color="primary" selected class="collaboration">
+			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.GROUP || assignment.collaboration === collaborationEnum.GROUPORSINGLE">groups</mat-icon>
+			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.SINGLE">person</mat-icon>
+			<span class="collaboration-type">{{ 'Enum.CollaborationType.' + assignment.collaboration | translate }}</span>
+		</mat-chip>
 	</mat-chip-list>
 
-	<div class="dates">
+	<div class="dates" *ngIf="assignment.startDate || assignment.endDate">
 		<span class="startdate" *ngIf="assignment.startDate">
 			<span class="font-bold text-green uppercase">{{ 'Common.Start' | translate }}:</span> {{assignment.startDate | date:"medium" }}
 		</span>
@@ -44,4 +44,7 @@
 			<span class="font-bold text-red uppercase">{{ 'Common.End' | translate }}:</span> {{assignment.endDate | date:"medium" }}
 		</span>
 	</div>
+
+	<button mat-stroked-button *ngIf="stateEnum.EVALUATED === assignment.state">{{ 'Domain.Assessment' | translate }}</button>
+
 </mat-card>
