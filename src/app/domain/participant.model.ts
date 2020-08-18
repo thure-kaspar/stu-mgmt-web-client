@@ -4,6 +4,7 @@ export class Participant implements ParticipantDto {
 	readonly userId: string;
 	readonly username: string;
 	readonly rzName: string;
+	readonly email: string;
 	readonly role: ParticipantDto.RoleEnum;
 	readonly groupId?: string;
 	readonly group?: GroupDto;
@@ -12,6 +13,7 @@ export class Participant implements ParticipantDto {
 		this.userId = dto.userId;
 		this.username = dto.username;
 		this.rzName = dto.rzName;
+		this.email = dto.email;
 		this.role = dto.role;
 		this.groupId = dto.groupId;
 		this.group = dto.group;
