@@ -19,8 +19,10 @@ export class ThemeService {
 
 		if (!storedTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
 			theme = "dark-theme";
-		} else if(storedTheme) {
+		} else if(storedTheme && this.availableThemes.includes(storedTheme)) {
 			theme = storedTheme;
+		} else {
+			theme = "default-theme";
 		}
 
 		this.themeSubject = new BehaviorSubject(theme);
