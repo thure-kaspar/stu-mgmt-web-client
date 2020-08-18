@@ -32,10 +32,8 @@ export class CourseFacade {
 
 	/**
 	 * Loads the group settings of a course and emits them via `groupSettings$`.
-	 * @param courseId
-	 * @param [noCache=false] Will reload from API if `true`. Defaults to `false`.
 	 */
-	loadGroupSettings(courseId: string, noCache = false): Observable<GroupSettingsDto> {
+	loadGroupSettings(courseId: string): Observable<GroupSettingsDto> {
 		return this.courseConfigService.getGroupSettings(courseId).pipe(
 			tap(settings => {
 				this.groupSettingsSubject.next(settings);
