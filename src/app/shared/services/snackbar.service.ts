@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
 
 /**
  * Service that can be used by components to open a snackbar.
@@ -31,6 +32,21 @@ export class SnackbarService {
 	 */
 	openErrorMessage(message?: string, config?: MatSnackBarConfig): MatSnackBarRef<SimpleSnackBar> {
 		const translation = message ? this.translate.instant(message) : this.translate.instant("Error.SomethingWentWrong");
+		return this.snackbar.open(translation, "OK", {
+			...{ duration: 2500, panelClass: ["snackbar-error"]}, // Default config
+			...config // Overwritten config
+		});
+	}
+
+	/**
+	 * Opens a error-themed snackbar and returns its reference.
+	 * The error text will be determined by the error.
+	 * Also logs the error to the console.
+	 */
+	openApiExceptionMessage(error: HttpErrorResponse, config?: MatSnackBarConfig): MatSnackBarRef<SimpleSnackBar> {
+		console.log(error);
+		const exception = error?.error?.error;
+		const translation = exception ? this.translate.instant("Error." + exception) : "Error.Unknown";
 		return this.snackbar.open(translation, "OK", {
 			...{ duration: 2500, panelClass: ["snackbar-error"]}, // Default config
 			...config // Overwritten config

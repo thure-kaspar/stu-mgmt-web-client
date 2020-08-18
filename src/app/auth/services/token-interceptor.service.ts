@@ -50,6 +50,11 @@ export class TokenInterceptorService implements HttpInterceptor {
 			return of(err.message);
 		}
 
+		if (err.error.message) {
+			const snackbar = this.injector.get(SnackbarService);
+			snackbar.openApiExceptionMessage(err);
+		}
+
 		return throwError(err);
 	}
 }
