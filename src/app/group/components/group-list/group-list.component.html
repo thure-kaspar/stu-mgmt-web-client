@@ -9,18 +9,20 @@
 		<div id="users-group-container">
 			<h2>{{ 'Common.My' | translate }} {{ 'Domain.Group' | translate }}</h2>
 	
-			<mat-card class="group-card">
-				<mat-card-title class="card-title">
-					<span class="name">{{participant?.group.name}}</span>
+			<mat-card class="participant-group-card">
+				<mat-card-title class="title">
+					<a [routerLink]="[participant?.group.id]" class="name link-none">{{participant?.group.name}}</a>
 				</mat-card-title>
 	
-				<mat-chip-list>
-					<a class="link-none" [routerLink]="['todo']">
-						<mat-chip selected *ngFor="let member of participant?.group.members">
-							{{member.username}}
-						</mat-chip>
-					</a>
+				<mat-chip-list class="members">
+					<mat-chip selected *ngFor="let member of participant?.group.members">
+						{{member.username}}
+					</mat-chip>
 				</mat-chip-list>
+
+				<a [routerLink]="[participant?.group.id]" class="view-group-link">
+					<button mat-flat-button color="accent">{{ 'Action.View' | translate }}</button>
+				</a>
 			</mat-card>
 		</div>
 	

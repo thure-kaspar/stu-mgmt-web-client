@@ -1,10 +1,12 @@
-.title {
-	padding-top: 4px;
-	padding-bottom: 4px;
+.divider {
+	margin-top: 24px;
+	margin-bottom: 16px;
 }
 
-.heading {
-	margin-bottom: 8px;
+.title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 #group-detail-container {
@@ -15,42 +17,47 @@
 	}
 }
 
-#group-members {
-	.member-list {
+.members-heading {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.member-list {
+	display: grid;
+	grid-template-rows: repeat();
+	row-gap: 8px;
+	margin-bottom: 16px;
+}
+
+.member-card {
+	padding-bottom: 0!important;
+}
+
+.card-title {
+	font-size: 16px;
+	margin-bottom: -16px;
+
+	.member-menu-btn {
+		margin-right: -16px;	
+	}
+}
+
+#assessments {
+
+	table {
 		margin-top: -8px;
 		margin-bottom: 16px;
-	
-		.member-item {
-			display: grid;
-			width: 100%;
-			font-size: 14px;
-			background-color: rgb(240, 240, 240);
-	
-			.member-buttons {
-				display: flex;
-				margin-left: auto;
-
-				button {
-					mat-icon {
-						font-size: 16px;
-					}
-					margin-left: 8px;
-					height: 32px;
-					width: 32px;
-				}
-			}
-		}
-	}
-	
-	.btn-member-menu {
-		margin-right: 8px;
-		margin-left: -8px;
 	}
 }
 
 .history-item {
 	font-size: 14px!important;
 	background-color: rgb(240, 240, 240);
+
+	span {
+		color: black;
+	}
 
 	mat-icon, .timestamp {
 		margin-right: 8px;
@@ -65,12 +72,6 @@
 
 	.history-list {
 		margin-top: -8px;
-	}
-}
-
-#assessments {
-	.heading {
-		margin-bottom: -16px;
 	}
 }
 

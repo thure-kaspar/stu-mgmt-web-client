@@ -19,7 +19,9 @@
       "CopyFromPrevious": "Aus einer vorherigen Aufgabe kopieren",
       "CreateCourse": "Veranstaltung erstellen",
       "LeaveCourse": "Kurs verlassen",
+      "LeaveGroup": "Gruppe verlassen",
       "RemoveGroup": "Gruppe entfernen",
+      "RemoveParticipant": "Teilnehmer entfernen",
       "RemoveUserFromGroup": "Nutzer aus der Gruppe entfernen",
       "SelectCourseTemplate": "Veranstaltung als Vorlage wählen",
       "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden",
@@ -142,6 +144,7 @@
     "AssignmentNotInReview": "Erstellung von Bewertungen benötigt den \"In Bewertung\"-Status.",
     "FailedToLoadRequiredData": "Benötigte Daten konnten nicht geladen werden.",
     "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
+    "Unkown": "Unbekannter Fehler",
     "ValueMissing": "Fehlender Wert."
   },
   "Event": {
@@ -238,6 +241,9 @@
     }
   },
   "Text": {
+    "Group": {
+      "EmptyGroup": "Diese Gruppe hat keine Mitglieder."
+    },
     "GroupCreation": {
       "NameSchema": "Dieser Kurs verwendet vordefinierte Gruppennamen.\nDer Name der Gruppe wird automatisch generiert.",
       "Password": "Wenn du ein Passwort verwendest, müssen andere Teilnehmer das Passwort eingeben, um deiner Gruppe beizutreten."

@@ -2,6 +2,25 @@
 	margin-bottom: 8px;
 }
 
+.participant-group-card {	
+	margin-top: -8px;
+	width: fit-content;
+
+	.title {
+		margin-top: -8px;
+		font-size: 18px;
+	}
+
+	button {
+		margin-top: 12px;
+	}
+}
+
+.divider {
+	margin-top: 24px;
+	margin-bottom: 16px;
+}
+
 .group-filter {
 	display: flex;
 	flex-direction: column;

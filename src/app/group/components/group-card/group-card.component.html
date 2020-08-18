@@ -1,9 +1,15 @@
 <mat-card class="group-card mat-elevation-z2">
 	<mat-card-title class="card-title">
 		<span>
-			<a [routerLink]="[group.id]" class="name link-none">
+			<span class="name" *ngIf="participant.role === 'STUDENT'; else nameWithLink">
 				{{group.name}}
-			</a>
+			</span>
+			<ng-template #nameWithLink>
+				<a [routerLink]="[group.id]" class="name link-none">
+					{{group.name}}
+				</a>
+			</ng-template>
+
 			<mat-icon *ngIf="group.isClosed" class="icon-light" [matTooltip]="'Property.Group.IsClosed' | translate">lock</mat-icon>
 		</span>
 
@@ -31,8 +37,7 @@
 	</mat-chip-list>
 
 	<div class="group-buttons">
-		<button mat-flat-button color="primary" [disabled]="group.isClosed || participant.groupId" (click)="openJoinGroupDialog()">{{ 'Action.Join' | translate }}</button>
-		
+		<button mat-flat-button color="accent" [disabled]="group.isClosed || participant.groupId" (click)="openJoinGroupDialog()">{{ 'Action.Join' | translate }}</button>
 	</div>
 
 </mat-card>

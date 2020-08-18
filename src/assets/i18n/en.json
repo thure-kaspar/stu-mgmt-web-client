@@ -19,7 +19,9 @@
       "CopyFromPrevious": "Copy from a previous assignment",
       "CreateCourse": "Create course",
       "LeaveCourse": "Leave course",
+      "LeaveGroup": "Leave group",
       "RemoveGroup": "Remove group",
+      "RemoveParticipant": "Remove participant",
       "RemoveUserFromGroup": "Remove user from group",
       "SelectCourseTemplate": "Select course template",
       "UseNamingSchemaAndCount": "Use prefix and count",
@@ -142,6 +144,7 @@
     "AssignmentNotInReview": "Assignment creation requires the \"In Review\"-state.",
     "FailedToLoadRequiredData": "Failed to load the required data.",
     "SomethingWentWrong": "Oops, something went wrong!",
+    "Unkown": "Unknown error",
     "ValueMissing": "Value is missing."
   },
   "Event": {
@@ -238,6 +241,9 @@
     }
   },
   "Text": {
+    "Group": {
+      "EmptyGroup": "This group is empty."
+    },
     "GroupCreation": {
       "NameSchema": "This course is using a predefined prefix for group names.\nGroup name will be chosen automatically.",
       "Password": "When using a password, other participants are required enter the password to join your group."

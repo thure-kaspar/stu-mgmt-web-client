@@ -1,6 +1,6 @@
 <div class="dialog-container" id="search-participants-dialog">
-	<h2 mat-dialog-title>{{ 'Title.SearchParticipant' | translate }}</h2>
-	<div mat-dialog-content class="dialog-content">
+	<h2>{{ 'Title.SearchParticipant' | translate }}</h2>
+	<div class="dialog-content">
 
 		<div class="filter">
 			<mat-form-field id="userFilter-field">
@@ -57,7 +57,7 @@
 		</div>
 	</div>
 
-	<div mat-dialog-actions class="dialog-actions">
+	<div class="dialog-actions">
 		<button mat-raised-button color="accent" (click)="onConfirm()">{{ 'Action.Ok' | translate }}</button>
 		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
 	</div>
