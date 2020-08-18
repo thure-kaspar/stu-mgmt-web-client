@@ -42,7 +42,7 @@ export class GroupCardComponent implements OnInit {
 		this.dialog.open<JoinGroupDialog, JoinGroupDialogData, boolean>(JoinGroupDialog, { data }).afterClosed().subscribe(
 			joined => {
 				if (joined) {
-					this.router.navigate(["groups", this.group.id]);
+					this.router.navigate(["/courses", this.courseId, "groups", this.group.id]);
 				}
 			}
 		);
