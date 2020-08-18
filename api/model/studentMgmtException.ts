@@ -14,12 +14,13 @@ export interface StudentMgmtException {
     name: StudentMgmtException.NameEnum;
 }
 export namespace StudentMgmtException {
-    export type NameEnum = 'CourseClosedException' | 'NotACourseMemberException' | 'NotATeachingStaffMember' | 'GroupClosedException' | 'GroupsForbiddenException' | 'AlreadyInGroupException';
+    export type NameEnum = 'CourseClosedException' | 'NotACourseMemberException' | 'NotATeachingStaffMember' | 'GroupClosedException' | 'NotAGroupMemberException' | 'GroupsForbiddenException' | 'AlreadyInGroupException';
     export const NameEnum = {
         CourseClosedException: 'CourseClosedException' as NameEnum,
         NotACourseMemberException: 'NotACourseMemberException' as NameEnum,
         NotATeachingStaffMember: 'NotATeachingStaffMember' as NameEnum,
         GroupClosedException: 'GroupClosedException' as NameEnum,
+        NotAGroupMemberException: 'NotAGroupMemberException' as NameEnum,
         GroupsForbiddenException: 'GroupsForbiddenException' as NameEnum,
         AlreadyInGroupException: 'AlreadyInGroupException' as NameEnum
     };

@@ -176,13 +176,16 @@ export class AssignmentRegistrationService {
      * Retrieves all registered groups and their members for the specified assignment.
      * @param courseId 
      * @param assignmentId 
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param groupname 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getRegisteredGroups(courseId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
-    public getRegisteredGroups(courseId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
-    public getRegisteredGroups(courseId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
-    public getRegisteredGroups(courseId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getRegisteredGroups(courseId: string, assignmentId: string, skip?: number, take?: number, groupname?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
+    public getRegisteredGroups(courseId: string, assignmentId: string, skip?: number, take?: number, groupname?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
+    public getRegisteredGroups(courseId: string, assignmentId: string, skip?: number, take?: number, groupname?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
+    public getRegisteredGroups(courseId: string, assignmentId: string, skip?: number, take?: number, groupname?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling getRegisteredGroups.');
@@ -190,6 +193,20 @@ export class AssignmentRegistrationService {
 
         if (assignmentId === null || assignmentId === undefined) {
             throw new Error('Required parameter assignmentId was null or undefined when calling getRegisteredGroups.');
+        }
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (groupname !== undefined && groupname !== null) {
+            queryParameters = queryParameters.set('groupname', <any>groupname);
         }
 
         let headers = this.defaultHeaders;
@@ -216,6 +233,7 @@ export class AssignmentRegistrationService {
 
         return this.httpClient.request<Array<GroupDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/registrations/groups`,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

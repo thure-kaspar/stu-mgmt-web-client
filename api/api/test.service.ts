@@ -17,8 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { UpdateMessage } from '../model/updateMessage';
-import { UpdateMessageTestDto } from '../model/updateMessageTestDto';
+import { NotificationDto } from '../model/notificationDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -62,9 +61,9 @@ export class TestService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getNotification(observe?: 'body', reportProgress?: boolean): Observable<Array<UpdateMessage>>;
-    public getNotification(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UpdateMessage>>>;
-    public getNotification(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UpdateMessage>>>;
+    public getNotification(observe?: 'body', reportProgress?: boolean): Observable<Array<any>>;
+    public getNotification(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<any>>>;
+    public getNotification(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<any>>>;
     public getNotification(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -82,7 +81,7 @@ export class TestService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<UpdateMessage>>('get',`${this.basePath}/notifications`,
+        return this.httpClient.request<Array<any>>('get',`${this.basePath}/notifications`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -95,18 +94,13 @@ export class TestService {
     /**
      * SHOULD NOT BE CALLED.
      * Logs the received UpdateMessage send from (POST) /notifications, if it was send to this route (/notifications/log).
-     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public logReceivedMessage(body: UpdateMessage, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public logReceivedMessage(body: UpdateMessage, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public logReceivedMessage(body: UpdateMessage, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public logReceivedMessage(body: UpdateMessage, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling logReceivedMessage.');
-        }
+    public logReceivedMessage(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public logReceivedMessage(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public logReceivedMessage(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public logReceivedMessage(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -120,16 +114,10 @@ export class TestService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
 
         return this.httpClient.request<any>('post',`${this.basePath}/notifications/log`,
             {
-                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -145,10 +133,10 @@ export class TestService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sendNotification(body: UpdateMessageTestDto, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public sendNotification(body: UpdateMessageTestDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public sendNotification(body: UpdateMessageTestDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public sendNotification(body: UpdateMessageTestDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public sendNotification(body: NotificationDto, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public sendNotification(body: NotificationDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public sendNotification(body: NotificationDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public sendNotification(body: NotificationDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling sendNotification.');

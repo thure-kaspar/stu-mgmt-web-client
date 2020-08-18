@@ -413,7 +413,7 @@ export class UsersService {
 
     /**
      * Get group of assignment.
-     * Retrieves the group that the user was a member of when the assignment closed or the current group, if it hasn&#x27;t closed yet. Returns null, if user was not in a group.
+     * Retrieves the group that the user 
      * @param userId 
      * @param courseId 
      * @param assignmentId 

@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { AssessmentDto } from '../model/assessmentDto';
 import { GroupCreateBulkDto } from '../model/groupCreateBulkDto';
 import { GroupDto } from '../model/groupDto';
 import { GroupEventDto } from '../model/groupEventDto';
@@ -103,7 +104,6 @@ export class GroupsService {
         }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -291,6 +291,59 @@ export class GroupsService {
         ];
 
         return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get assessments of group.
+     * Retrieves all assessments of this group.
+     * @param courseId 
+     * @param groupId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAssessmentsOfGroup(courseId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AssessmentDto>>;
+    public getAssessmentsOfGroup(courseId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AssessmentDto>>>;
+    public getAssessmentsOfGroup(courseId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AssessmentDto>>>;
+    public getAssessmentsOfGroup(courseId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getAssessmentOfGroup.');
+        }
+
+        if (groupId === null || groupId === undefined) {
+            throw new Error('Required parameter groupId was null or undefined when calling getAssessmentOfGroup.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<AssessmentDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/${encodeURIComponent(String(groupId))}/assessments`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
