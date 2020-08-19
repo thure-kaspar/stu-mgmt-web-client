@@ -10,7 +10,10 @@
  * Do not edit the class manually.
  */
 
-export interface TokenDto { 
-    token?: string;
-    expiration?: string;
+export interface ErrorDto { 
+    timestamp?: string;
+    status?: number;
+    error?: string;
+    messge?: string;
+    path?: string;
 }

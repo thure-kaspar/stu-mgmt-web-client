@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { AuthControllerService } from './api/authController.service';
+import { RoutingControllerService } from './api/routingController.service';
 import { UserControllerService } from './api/userController.service';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { UserControllerService } from './api/userController.service';
   exports:      [],
   providers: [
     AuthControllerService,
+    RoutingControllerService,
     UserControllerService ]
 })
 export class ApiModule {
