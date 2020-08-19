@@ -1,4 +1,6 @@
 import { GroupDto, GroupEventDto, ParticipantDto } from "../../../api";
+import { Course } from "./course.model";
+import { Participant } from "./participant.model";
 
 export class Group implements GroupDto {
 	readonly id?: string;
@@ -22,6 +24,31 @@ export class Group implements GroupDto {
 	 */
 	hasMember(userId: string): boolean {
 		return !!this.members.find(m => m.userId === userId);
+	}
+
+	canBeClosed(participant: Participant, course: Course): boolean {
+		if (participant.isLecturerOrTutor()) {
+			return true;
+		}
+		if (!course.hasMinGroupSizeRequirement()) {
+			return true;
+		}
+		if (course.getMinGroupSizeRequirement() < this.members.length) {
+			return true;
+		}
+
+		return false;
+	}
+
+	canBeRenamed(participant: Participant, course: Course): boolean {
+		if (participant.isLecturerOrTutor()) {
+			return true;
+		}
+		if (!course.hasGroupNamingRule()) {
+			return true;
+		}
+
+		return false;
 	}
 	
 }
