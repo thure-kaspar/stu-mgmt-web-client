@@ -7,6 +7,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	.left {
+		mat-icon {
+			padding-bottom: 4px;
+			vertical-align: middle;
+		}
+	}
 }
 
 #group-detail-container {
@@ -47,8 +54,12 @@
 
 	table {
 		margin-top: -8px;
-		margin-bottom: 16px;
 	}
+
+	.score-column {
+		text-align: center;
+	}
+
 }
 
 .history-item {

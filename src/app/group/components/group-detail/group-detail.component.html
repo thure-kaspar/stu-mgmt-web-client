@@ -1,13 +1,16 @@
 <div class="tab" id="group-detail-container" *ngIf="group">
 	<mat-card-title class="title">
-		<span>{{group.name}}</span>
-		<span>
+		<span class="left">
+			{{group.name}}
+			<mat-icon *ngIf="group.isClosed" class="icon-light" [matTooltip]="'Property.Group.IsClosed' | translate">lock</mat-icon>
+		</span>
+		<span class="right">
 			<button mat-icon-button [matMenuTriggerFor]="menu">
 				<mat-icon class="icon-light">settings</mat-icon>
 			</button>
 			<mat-menu #menu="matMenu">
 				<div id="menu-container">
-					<button mat-menu-item>
+					<button mat-menu-item (click)="onEditGroup()">
 						<mat-icon>edit</mat-icon>
 						{{ 'Action.Edit' | translate }}
 					</button>
@@ -15,7 +18,7 @@
 						<span class="text-red"><mat-icon>meeting_room</mat-icon>{{ 'Action.Custom.LeaveGroup' | translate }}</span>
 					</button>
 					<button mat-menu-item (click)="onRemoveGroup()">
-						<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Custom.RemoveGroup' | translate }}</span>
+						<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Delete' | translate }}</span>
 					</button>
 				</div>
 			</mat-menu>
@@ -67,8 +70,8 @@
 		<table class="full-width" mat-table [dataSource]="dataSource" matSort>
 			<!-- Assignment name Column -->
 			<ng-container matColumnDef="name">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Assignment' | translate }}</th>
-				<td mat-cell *matCellDef="let row"> 
+				<th class="name-column" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Assignment' | translate }}</th>
+				<td class="name-column" mat-cell *matCellDef="let row"> 
 					<a class="link-none font-bold" [routerLink]="['todo']">
 						{{row.assignment.name}}
 					</a> 
@@ -78,19 +81,13 @@
 			<!-- Assignment Type Column -->
 			<ng-container matColumnDef="type">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Assignment.Type' | translate }}</th>
-				<td mat-cell *matCellDef="let row">{{ row.assignment.type }}</td>
+				<td mat-cell *matCellDef="let row">{{ 'Enum.AssignmentType.' + row.assignment.type | translate }}</td>
 			</ng-container>
 
 			<!-- Score Column -->
 			<ng-container matColumnDef="score">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Assessment.AchievedPoints' | translate }}</th>
-				<td mat-cell *matCellDef="let row">{{ row.achievedPoints }}</td>
-			</ng-container>
-
-			<!-- Score Column -->
-			<ng-container matColumnDef="action">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-				<td mat-cell *matCellDef="let row"></td>
+				<td class="score-column" mat-cell *matCellDef="let row">{{ row.achievedPoints }}</td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

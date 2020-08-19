@@ -242,6 +242,8 @@
   },
   "Text": {
     "Group": {
+      "CanNotBeClosed": "Diese Gruppe kann nicht von Studenten geschlossen werden.",
+      "CanNotBeRenamed": "Der Name der Gruppe kann von Studenten nicht verändert werden.",
       "EmptyGroup": "Diese Gruppe hat keine Mitglieder."
     },
     "GroupCreation": {
@@ -257,6 +259,7 @@
     "CreateGroup": "Gruppe erstellen",
     "EditAssessment": "Bewertung editieren",
     "EditAssignment": "Aufgabe editieren",
+    "EditGroup": "Gruppe editieren",
     "JoinCourse": "Veranstaltung beitreten",
     "JoinGroup": "Gruppe beitreten",
     "ParticipantsList": "Teilnehmerliste",

@@ -11,6 +11,7 @@ import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { CourseFacade } from "../../../course/services/course.facade";
+import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 
 @Component({
 	selector: "app-group-detail",
@@ -26,7 +27,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	courseId: string;
 	groupId: string;
 
-	displayedColumns: string[] = ["name", "type", "score", "action"];
+	displayedColumns: string[] = ["name", "type", "score"];
 	dataSource: MatTableDataSource<AssessmentDto>;
 	@ViewChild(MatSort) sort: MatSort;
 	
@@ -68,6 +69,20 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 			},
 			error: (error) => this.snackbar.openApiExceptionMessage(error)
 		});
+	}
+
+	/**
+	 * Opens the `EditGroupDialog`.
+	 * If the user edited the group successfully, reloads the group.
+	 */
+	onEditGroup(): void {
+		this.dialog.open(EditGroupDialog, { data: this.groupId }).afterClosed().subscribe(
+			updated => {
+				if (updated) {
+					this.loadGroup();
+				}
+			}
+		);
 	}
 
 	/**
