@@ -67,7 +67,6 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 			this.loadInitialGroups();
 		});
 
-		this.courseFacade.loadGroupSettings(this.courseId);
 		this.courseFacade.groupSettings$.subscribe(settings => {
 			this.groupSettings = settings;
 		});

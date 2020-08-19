@@ -10,9 +10,12 @@ import { CreateGroupDialog } from "./dialogs/create-group/create-group.dialog";
 import { JoinGroupDialog } from "./dialogs/join-group/join-group.dialog";
 import { GroupRoutingModule } from "./group-routing.module";
 import { GroupCardComponent } from "./components/group-card/group-card.component";
+import { EditGroupDialog } from "./dialogs/edit-group/edit-group.dialog";
+import { GroupComponent } from "./group.component";
 
 @NgModule({
 	declarations: [
+		GroupComponent,
 		CreateGroupDialog,
 		CreateGroupMultipleComponent,
 		CreateGroupStudentDialog,
@@ -20,6 +23,7 @@ import { GroupCardComponent } from "./components/group-card/group-card.component
 		JoinGroupDialog,
 		GroupDetailComponent,
 		GroupCardComponent,
+		EditGroupDialog,
 	],
 	imports: [
 		SharedModule,
