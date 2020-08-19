@@ -1,0 +1,12 @@
+#edit-group-dialog {
+	width: 500px;
+}
+
+.grid {
+	display: grid;
+	grid-template-rows: repeat(1fr);
+	row-gap: 16px;
+	
+	padding-top: 8px;
+	padding-bottom: 16px;
+}
