@@ -5,18 +5,23 @@
 		</span>
 		
 		<mat-menu #assignmentMenu>
-			<button mat-menu-item (click)="openEditDialog()">
-				<mat-icon class="icon-light">edit</mat-icon>
-				<span class="font-bold">{{ 'Action.Edit' | translate }}</span>
-			</button>
-			<button mat-menu-item (click)="onDelete()">
-				<mat-icon class="icon-light">delete</mat-icon>
-				<span class="text-red font-bold">
-				{{ 'Action.Delete' | translate }}
-				</span>
-			</button>
+			<ng-container *ngIf="participant?.isLecturerOrTutor()">
+				<button mat-menu-item (click)="openEditDialog()">
+					<mat-icon class="icon-light">edit</mat-icon>
+					<span class="font-bold">{{ 'Action.Edit' | translate }}</span>
+				</button>
+				<button mat-menu-item (click)="onDelete()">
+					<mat-icon class="icon-light">delete</mat-icon>
+					<span class="text-red font-bold">
+					{{ 'Action.Delete' | translate }}
+					</span>
+				</button>
+			</ng-container>
 		</mat-menu>
-		<button mat-icon-button class="menu-btn" [matMenuTriggerFor]="assignmentMenu"><mat-icon class="icon-light">more_vert</mat-icon></button>
+
+		<button mat-icon-button class="menu-btn" [matMenuTriggerFor]="assignmentMenu">
+			<mat-icon class="icon-light">more_vert</mat-icon>
+		</button>
 	</mat-card-title>
 
 	<mat-chip-list class="chips">

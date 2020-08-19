@@ -6,6 +6,9 @@ import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dia
 import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/edit-assignment/edit-assignment.dialog";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 import { getRouteParam } from "../../../../../utils/helper";
+import { ParticipantFacade } from "../../../course/services/participant.facade";
+import { Participant } from "../../../domain/participant.model";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 
 @Component({
 	selector: "app-assignment-card",
@@ -13,21 +16,25 @@ import { getRouteParam } from "../../../../../utils/helper";
 	styleUrls: ["./assignment-card.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AssignmentCardComponent implements OnInit {
+export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	@Input() assignment: AssignmentDto;
+
+	participant: Participant;
 
 	typeEnum = AssignmentDto.TypeEnum;
 	stateEnum = AssignmentDto.StateEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 	courseId: string;
 
-	constructor(private route: ActivatedRoute,
+	constructor(private participantFacade: ParticipantFacade,
+				private route: ActivatedRoute,
 				private dialog: MatDialog,
-				private assignmentManagement: AssignmentManagementFacade) { }
+				private assignmentManagement: AssignmentManagementFacade) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
+		this.subs.sink = this.participantFacade.p$.subscribe(p => this.participant = p);
 	}
 
 	openEditDialog(): void {
