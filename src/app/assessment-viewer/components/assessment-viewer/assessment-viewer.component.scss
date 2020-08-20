@@ -1,0 +1,52 @@
+#assessment-viewer {
+	display: flex;
+	flex-direction: column;
+	width: 600px;
+
+	@media (max-width: 600px) {
+		width: 100%;
+	}
+}
+
+.title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.assessment-header {
+	margin-top: -16px;
+}
+
+.assessment-target {
+	display: grid;
+	grid-template-rows: repeat(1fr);
+	row-gap: 8px;
+}
+
+.divider {
+	margin-top: 24px;
+	margin-bottom: 16px;
+}
+
+.achieved-points {
+	display: flex;
+	justify-content: space-between;
+
+	.achieved-points-number {
+		font-size: 32px;
+	}
+
+	.of-points {
+		font-size: initial;
+		vertical-align: middle;
+	}
+}
+
+.comment {
+	text-align: justify;
+}
+
+.partial-assessments {
+	display: grid;
+	row-gap: 16px;
+}

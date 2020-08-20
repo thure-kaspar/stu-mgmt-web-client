@@ -66,6 +66,7 @@
     "Single": "Single",
     "Start": "Start",
     "Title": "Title",
+    "Total": "Total",
     "Yes": "Yes"
   },
   "Domain": {
@@ -91,6 +92,8 @@
     "Lecturers": "Lecturers",
     "Member": "Member",
     "Members": "Members",
+    "PartialAssessment": "Partial assessment",
+    "PartialAssessments": "Partial assessments",
     "Participant": "Participant",
     "Participants": "Participants",
     "Problem": "Problem",
