@@ -74,8 +74,8 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	}
 
 	/** Updates the filter and informs subscribers about the change. */
-	updateEvaluatorFilter(evaluator: UserDto | undefined): void {
-		this.filter.assignedEvaluatorId = evaluator?.id;
+	updateEvaluatorFilter(evaluator: ParticipantDto | undefined): void {
+		this.filter.assignedEvaluatorId = evaluator?.userId;
 		this.filterSubject.next({...this.filter });
 	}
 
