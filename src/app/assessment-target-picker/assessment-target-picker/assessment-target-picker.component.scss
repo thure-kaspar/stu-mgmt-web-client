@@ -3,22 +3,16 @@
 }
 
 #filter {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	
-	mat-form-field {
-		margin-top: -4px;
-		box-sizing: content-box;
-		margin-right: 16px;
+	width: 500px;
+
+	.top {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 8px;
 	}
 
-	mat-checkbox {
-		align-self: center;
-	}
-
-	#group-filter {
-		margin-top: -24px;
-		margin-bottom: -4px;
+	.checkbox {
+		margin-top: -8px;
+		margin-bottom: 8px;
 	}
 }

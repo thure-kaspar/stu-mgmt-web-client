@@ -1,5 +1,10 @@
 <div id="filter">
-	<div>
+	<div class="top">
+		<mat-form-field id="group-filter">
+			<mat-label>Filter</mat-label>
+			<input matInput [(ngModel)]="filter.nameOfGroupOrUser" (keyup)="updateNameFilter()" autocomplete="false">
+		</mat-form-field>
+
 		<mat-form-field>
 			<mat-label>{{ 'Common.AssignedTo' | translate }}</mat-label>
 			<mat-select (selectionChange)="updateEvaluatorFilter($event.value)">
@@ -7,16 +12,14 @@
 				<mat-option *ngFor="let evaluator of evaluators" [value]="evaluator">{{evaluator.username}}</mat-option>
 			</mat-select>
 		</mat-form-field>
-		
+	</div>
+
+	<div class="checkbox">
 		<mat-checkbox [checked]="filter.excludeAlreadyReviewed" (change)="updateExcludeAlreadyReviewedFilter($event.checked)">
 			{{ 'Misc.ExcludeAlreadyReviewed' | translate }}
 		</mat-checkbox>
 	</div>
-	
-	<mat-form-field id="group-filter">
-		<mat-label>Filter</mat-label>
-		<input matInput [(ngModel)]="filter.nameOfGroupOrUser" (keyup)="updateNameFilter()" autocomplete="false">
-	</mat-form-field>
+
 </div>
 
 <mat-tab-group animationDuration="0ms">
