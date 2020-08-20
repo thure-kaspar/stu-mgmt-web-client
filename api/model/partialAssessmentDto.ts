@@ -18,6 +18,8 @@ export interface PartialAssessmentDto {
     severity?: PartialAssessmentDto.SeverityEnum;
     points?: number;
     comment?: string;
+    path?: string;
+    line?: number;
 }
 export namespace PartialAssessmentDto {
     export type SeverityEnum = 'INFORMATIONAL' | 'WARNING' | 'ERROR' | 'CRITICAL';

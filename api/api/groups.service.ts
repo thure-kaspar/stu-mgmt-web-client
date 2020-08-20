@@ -314,11 +314,11 @@ export class GroupsService {
     public getAssessmentsOfGroup(courseId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getAssessmentOfGroup.');
+            throw new Error('Required parameter courseId was null or undefined when calling getAssessmentsOfGroup.');
         }
 
         if (groupId === null || groupId === undefined) {
-            throw new Error('Required parameter groupId was null or undefined when calling getAssessmentOfGroup.');
+            throw new Error('Required parameter groupId was null or undefined when calling getAssessmentsOfGroup.');
         }
 
         let headers = this.defaultHeaders;
