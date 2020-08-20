@@ -4,7 +4,7 @@ import { AssessmentOverviewComponent } from "./assessment-overview/assessment-ov
 import { AssessmentAllocationOverviewComponent } from "./assessment-allocation-overview/assessment-allocation-overview.component";
 import { CreatedAssessmentsComponent } from "./created-assessments/created-assessments.component";
 
-
+// courses/:courseId/assignments/:assignmentId/assessments/overview/
 const routes: Routes = [
 	{ path: "", component: AssessmentOverviewComponent, children: [
 		{ path: "allocations", component: AssessmentAllocationOverviewComponent, pathMatch: "full" },

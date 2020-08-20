@@ -10,7 +10,6 @@ const routes: Routes = [
 	{ path: "404", component: PageNotFoundComponent, pathMatch: "full" },
 	{ path: "courses", loadChildren: () => import("./course/course.module").then(m => m.CourseModule) },
 	{ path: "" , redirectTo: "/courses", pathMatch: "full" },
-	{ path: "users", loadChildren: () => import("./course-participants/course-participants.module").then(m => m.CourseParticipantsModule) },
 ];
 
 @NgModule({
