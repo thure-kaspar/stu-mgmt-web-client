@@ -1,10 +1,13 @@
-import { OnDestroy } from "@angular/core";
+import { OnDestroy, Component } from "@angular/core";
 import { SubSink } from "subsink";
 
 /**
 * A class that automatically unsubscribes all observables when 
 * the object gets destroyed
 */
+@Component({
+	template: ""
+})
 export class UnsubscribeOnDestroy implements OnDestroy {
 
 	/**The subscription sink object that stores all subscriptions */
