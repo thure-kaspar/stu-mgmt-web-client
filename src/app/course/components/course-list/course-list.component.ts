@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject } from "rxjs";
 import { distinctUntilChanged, map } from "rxjs/operators";
@@ -19,14 +19,13 @@ class CourseFilter {
 @Component({
 	selector: "app-course-list",
 	templateUrl: "./course-list.component.html",
-	styleUrls: ["./course-list.component.scss"]
+	styleUrls: ["./course-list.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseListComponent implements OnInit {
 
-	
-	courseList: CourseDto[];
 	displayedColumns: string[] = ["title", "semester"];
-	dataSource: MatTableDataSource<CourseDto>;
+	dataSource$ = new BehaviorSubject(new MatTableDataSource<CourseDto>([]))
 
 	filter = new CourseFilter({});
 	filterSubject = new BehaviorSubject(this.filter);
@@ -56,10 +55,8 @@ export class CourseListComponent implements OnInit {
 		)
 			.subscribe(
 				result => {
-					this.courseList = result;
-					this.dataSource = new MatTableDataSource(this.courseList);
-
 					if (!triggeredByPaginator) this.paginator.goToFirstPage();
+					this.dataSource$.next(new MatTableDataSource(result));
 				},
 				error => console.log(error)
 			);

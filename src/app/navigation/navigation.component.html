@@ -10,13 +10,14 @@
 	</div>
 	<div id="nav-right">
 
-		<ng-container [ngSwitch]="isLoggedIn()">
-			<button *ngSwitchCase="false" class="btn-link" mat-flat-button (click)="openLoginDialog()">Login</button>
-			<ng-container *ngSwitchCase="true">
-				<button class="btn-link" mat-flat-button (click)="snackbar.openErrorMessage()">{{getUsername()}}</button>
-				<button class="btn-link btn-logout" mat-flat-button (click)="logout()">Logout</button>
-			</ng-container>
+		<ng-container *ngIf="(authService.userInfo$ | async) as userInfo; else loginBtn">
+			<button class="btn-link" mat-flat-button (click)="snackbar.openErrorMessage()">{{userInfo.username}}</button>
+			<button class="btn-link btn-logout" mat-flat-button (click)="logout()">Logout</button>
 		</ng-container>
+
+		<ng-template #loginBtn>
+			<button  class="btn-link" mat-flat-button (click)="openLoginDialog()">Login</button>
+		</ng-template>
 		
 		<mat-menu #appMenu="matMenu">
 			<div id="appMenu-container">
@@ -58,7 +59,7 @@
 					<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }} 
 				</a>
 
-				<div id="course-membership-list" *ngIf="isLoggedIn()">
+				<div id="course-membership-list" *ngIf="authService.userInfo$ | async">
 					<mat-divider></mat-divider>
 					<span id="my-courses">{{ 'Common.My' | translate | uppercase }} {{ 'Domain.Courses' | translate | uppercase }}</span>
 
