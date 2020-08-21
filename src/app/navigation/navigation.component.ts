@@ -91,6 +91,11 @@ export class NavigationComponent implements OnInit {
 		return this.authService.logout();
 	}
 
+	async copyJwtToClipboard(): Promise<void> {
+		await navigator.clipboard.writeText(this.authService.getAuthToken().accessToken);
+		this.snackbar.openSuccessMessage("Copied!");
+	}
+
 	// TODO: Function is used to allow reloading the course component, if params change -> Search for better solution
 	navigateToCourse(course: CourseDto): void {
 		this.router.navigateByUrl("/").then(x => this.router.navigateByUrl(`/courses/${course.id}`));
