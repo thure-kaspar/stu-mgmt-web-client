@@ -1,4 +1,4 @@
-<div class="tab">
+<div class="tab" *ngIf="participant$ | async as participant">
 
 	<button (click)="openCreateGroupDialog()" mat-flat-button id="btn-add" color="accent" [disabled]="!participant?.canCreateGroup()">
 		<mat-icon>add</mat-icon>
@@ -49,7 +49,7 @@
 			</mat-form-field>
 		</div>
 
-		<div class="groups-grid">
+		<div class="groups-grid" *ngIf="groups$ | async as groups">
 			<ng-container *ngFor="let group of groups">
 				<app-group-card
 					[group]="group" [participant]="participant" [courseId]="courseId" [groupSettings]="groupSettings"

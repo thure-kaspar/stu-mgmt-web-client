@@ -1,39 +1,48 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AssessmentDto, GroupDto, GroupsService, ParticipantDto, GroupSettingsDto, AssessmentsService } from "../../../../../api";
+import { Subject, Observable, BehaviorSubject } from "rxjs";
+import { AssessmentDto, AssessmentsService, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
+import { CourseFacade } from "../../../course/services/course.facade";
 import { ParticipantFacade } from "../../../course/services/participant.facade";
+import { Group } from "../../../domain/group.model";
+import { Participant } from "../../../domain/participant.model";
 import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
-import { Participant } from "../../../domain/participant.model";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
-import { CourseFacade } from "../../../course/services/course.facade";
 import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 
 @Component({
 	selector: "app-group-detail",
 	templateUrl: "./group-detail.component.html",
-	styleUrls: ["./group-detail.component.scss"]
+	styleUrls: ["./group-detail.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit {
 
-	group: GroupDto;
-	participant: Participant;
+	private groupSubject = new Subject<Group>();
+	group$ = this.groupSubject.asObservable();
+	private group: Group;
+	
+	participant$: Observable<Participant>;
+	private participant: Participant;
+
 	groupSettings: GroupSettingsDto;
 
 	courseId: string;
 	groupId: string;
 
 	displayedColumns: string[] = ["name", "type", "score"];
-	dataSource: MatTableDataSource<AssessmentDto>;
+	dataSource$ = new BehaviorSubject<MatTableDataSource<AssessmentDto>>(new MatTableDataSource([]));
+	private dataSource: MatTableDataSource<AssessmentDto>;
 	@ViewChild(MatSort) sort: MatSort;
 	
 	constructor(private groupService: GroupsService,
 				private assessmentService: AssessmentsService,
-				private participantFacade: ParticipantFacade,
+				public participantFacade: ParticipantFacade,
 				private courseFacade: CourseFacade,
 				private route: ActivatedRoute,
 				private router: Router,
@@ -48,14 +57,17 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		this.loadGroup();
 		this.loadAssessmentsOfGroup();
 
-		this.subs.sink = this.participantFacade.p$.subscribe(p => this.participant = p);
+		this.subs.sink = this.participantFacade.participant$.subscribe(p => {
+			this.participant = p;
+		});
 		this.subs.sink = this.courseFacade.groupSettings$.subscribe(settings => this.groupSettings = settings);
 	}
 
 	loadGroup(): void {
 		this.groupService.getGroup(this.courseId, this.groupId).subscribe(
 			result => { 
-				this.group = result;
+				this.group = new Group(result);
+				this.groupSubject.next(this.group);
 			},
 			error => console.log(error)
 		);
@@ -66,6 +78,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 			next: (assessments) => {
 				this.dataSource = new MatTableDataSource(assessments);
 				this.dataSource.sort = this.sort;
+				this.dataSource$.next(this.dataSource);
 			},
 			error: (error) => this.snackbar.openApiExceptionMessage(error)
 		});

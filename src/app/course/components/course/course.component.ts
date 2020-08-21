@@ -1,32 +1,34 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CourseDto, CoursesService, StudentMgmtException } from "../../../../../api";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CourseDto, CoursesService } from "../../../../../api";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
+import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
 import { CourseFacade } from "../../services/course.facade";
 import { ParticipantFacade } from "../../services/participant.facade";
 
 @Component({
 	selector: "app-course",
 	templateUrl: "./course.component.html",
-	styleUrls: ["./course.component.scss"]
+	styleUrls: ["./course.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 
-	course: CourseDto;
+	private course: CourseDto;
 
 	constructor(private route: ActivatedRoute,
 				private router: Router,
 				private courseService: CoursesService,
 				private courseMemberships: CourseMembershipsFacade,
-				public participant: ParticipantFacade,
-				private courseFacade: CourseFacade,
+				public participantFacade: ParticipantFacade,
+				public courseFacade: CourseFacade,
 				private dialog: MatDialog,
-				private snackbar: SnackbarService) { }
+				private snackbar: SnackbarService) { super(); }
 
 	ngOnInit(): void {
 		this.loadCourse();
@@ -37,18 +39,15 @@ export class CourseComponent implements OnInit {
 	 */
 	loadCourse(): void {
 		const courseId = this.route.snapshot.paramMap.get("courseId");
-		this.courseFacade.loadCourse(courseId).subscribe(
-			result => {
-				this.course = result;
-			},
-			error => {
+		this.courseFacade.loadCourse(courseId).subscribe({
+			next: (course) => this.course = course,
+			error: (error) => {
 				// If user is not a member of this course, open JoinCourseDialog
 				if (isNotACourseMember(error)) {
 					this.dialog.open<JoinCourseDialog, string, boolean>(JoinCourseDialog, { data: courseId }).afterClosed().subscribe(
 						joined => {
 							if (joined) {
 								// If user joined, try load the course again
-								this.courseService.getCourseById(courseId).subscribe(result => this.course = result);
 							} else {
 								this.router.navigateByUrl("courses");
 							}
@@ -58,7 +57,7 @@ export class CourseComponent implements OnInit {
 					this.router.navigateByUrl("404");
 				}
 			}
-		);
+		});
 	}
 
 	/** Allows the user to leave the course, if he gives confirmation. */

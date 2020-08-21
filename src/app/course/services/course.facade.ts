@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { tap, filter } from "rxjs/operators";
 import { CourseDto, CoursesService, CourseConfigService, GroupSettingsDto } from "../../../../api";
 import { Course } from "../../domain/course.model";
 
@@ -11,11 +11,11 @@ export class CourseFacade {
 
 	private courseSubject = new BehaviorSubject<Course>(undefined);
 	/** Emits the currently loaded course. */
-	course$ = this.courseSubject.asObservable();
+	course$ = this.courseSubject.asObservable().pipe(filter(x => !!x));;
 
 	private groupSettingsSubject = new BehaviorSubject<GroupSettingsDto>(undefined);
 	/** Emits the group settings of the currently loaded course. */
-	groupSettings$ = this.groupSettingsSubject.asObservable();
+	groupSettings$ = this.groupSettingsSubject.asObservable().pipe(filter(x => !!x));
 
 	constructor(private courseService: CoursesService,
 				private courseConfigService: CourseConfigService,
@@ -26,7 +26,7 @@ export class CourseFacade {
 		return this.courseService.getCourseById(courseId).pipe(
 			tap(course => {
 				this.courseSubject.next(new Course(course));
-				//console.log("Current course:", course);
+				console.log("Current course:", course);
 			})
 		);
 	}
@@ -43,8 +43,8 @@ export class CourseFacade {
 				this.courseSubject.next(course);
 				this.groupSettingsSubject.next(settings);
 
-				//console.log("Current course:", course);
-				//console.log("Group settings:", settings);
+				// console.log("Current course:", course);
+				// console.log("Group settings:", settings);
 			}
 		);
 	}

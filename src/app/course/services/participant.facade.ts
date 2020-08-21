@@ -7,12 +7,13 @@ import { BehaviorSubject } from "rxjs";
 import { DialogService } from "../../shared/services/dialog.service";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { Router } from "@angular/router";
+import { distinctUntilChanged, filter } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class ParticipantFacade {
 
 	private participantSubject = new BehaviorSubject<Participant>(undefined);
-	p$ = this.participantSubject.asObservable();
+	participant$ = this.participantSubject.asObservable().pipe(filter(x => !!x));
 
 	private userId: string;
 	private courseId: string;
@@ -40,7 +41,7 @@ export class ParticipantFacade {
 
 	/**
 	 * Changes the participants group to the given group and emits
-	 * the changed participant via `p$`.
+	 * the changed participant via `participant$`.
 	 */
 	changeGroup(group: GroupDto): void {
 		this.setGroup(group);
@@ -48,7 +49,7 @@ export class ParticipantFacade {
 
 	/**
 	 * Opens the `ConfirmDialog` and if confirmed
-	 * causes the participant to leave the group and emits the changed participant via `p$`.
+	 * causes the participant to leave the group and emits the changed participant via `participant$`.
 	 */
 	leaveGroup(group: GroupDto): void {
 		this.dialogService.openConfirmDialog({
@@ -84,7 +85,7 @@ export class ParticipantFacade {
 
 	/**
 	 * Sets the participants group to the given `group` or `undefined` and emits
-	 * the changed participant via `p$`.
+	 * the changed participant via `participant$`.
 	 */
 	private setGroup(group?: GroupDto): void {
 		const participant = this.participantSubject.getValue();
@@ -99,16 +100,14 @@ export class ParticipantFacade {
 	}
 
 	/**
-	 * Loads the `ParticipantDto` and stores it in `participant` to allow other component
-	 * to lookup information about the user's account in the context of a specific course
-	 * (i.e. role in course).
+	 * Loads the participant information of logged in user and emits it via `participant$`.
 	 * Should be invoked whenever a course is loaded.
 	 */
 	private loadParticipant(courseId: string, userId: string): void {
 		this.courseParticipants.getParticipant(courseId, userId).subscribe(
 			participant => {
 				this.participantSubject.next(new Participant(participant));
-				//console.log("Current participant:", participant);
+				console.log("Current participant:", participant);
 			},
 			error => {
 				console.log(error);
@@ -117,8 +116,15 @@ export class ParticipantFacade {
 		);
 	}
 
+	/**
+	 * Loads the 
+	 */
 	private loadParticipantWhenCourseLoaded(): void {
-		this.courseFacade.course$.subscribe(
+		this.courseFacade.course$.pipe(
+			// Load if participant has not been loaded
+			// Only reload participant, if course changed
+			distinctUntilChanged((a, b) => this.participantSubject.getValue() && (a.id === b.id))
+		).subscribe(
 			course => {
 				this.courseId = course?.id;
 				if (course && this.userId) {

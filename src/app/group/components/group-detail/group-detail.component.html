@@ -1,125 +1,130 @@
-<div class="tab" id="group-detail-container" *ngIf="group">
-	<mat-card-title class="title">
-		<span class="left">
-			{{group.name}}
-			<mat-icon *ngIf="group.isClosed" class="icon-light" [matTooltip]="'Property.Group.IsClosed' | translate">lock</mat-icon>
-		</span>
-		<span class="right">
-			<button mat-icon-button [matMenuTriggerFor]="menu">
-				<mat-icon class="icon-light">settings</mat-icon>
-			</button>
-			<mat-menu #menu="matMenu">
-				<div id="menu-container">
-					<button mat-menu-item (click)="onEditGroup()">
-						<mat-icon>edit</mat-icon>
-						{{ 'Action.Edit' | translate }}
-					</button>
-					<button mat-menu-item (click)="onLeaveGroup()" *ngIf="isGroupMember(participant)">
-						<span class="text-red"><mat-icon>meeting_room</mat-icon>{{ 'Action.Custom.LeaveGroup' | translate }}</span>
-					</button>
-					<button mat-menu-item (click)="onRemoveGroup()">
-						<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Delete' | translate }}</span>
-					</button>
-				</div>
-			</mat-menu>
-		</span>
-	</mat-card-title>
+<ng-container *ngIf="participantFacade.participant$ | async as participant">
 
-	<div id="group-members">
-		<h2 class="members-heading">
-			<span>{{ 'Domain.Members' | translate }}</span>
-
-			<button mat-flat-button color="primary" (click)="onAddParticipant()" *ngIf="participant.isLecturerOrTutor()">
-				<mat-icon>person_add</mat-icon>
-				{{ 'Action.Custom.AddParticipant' | translate }}
-			</button>
-		</h2>
-
-		<div *ngIf="group.members.length > 0; else emptyGroupText" dense class="member-list">
-			<ng-container *ngFor="let user of group.members">
-
-				<mat-card class="member-card">
-					<h2 class="card-title">
-						<a class="link-none" [routerLink]="[ '/courses', courseId, 'users', user.userId ]">{{user.username}}</a>
-
-						<mat-menu #memberMenu>
-							<button mat-menu-item (click)="onRemoveUser(user)">
-								<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Custom.RemoveParticipant' | translate }}</span>
-							</button>
-						</mat-menu>
-
-						<button [matMenuTriggerFor]="memberMenu" mat-icon-button class="member-menu-btn">
-							<mat-icon class="icon-light">more_vert</mat-icon>
+	<div class="tab" id="group-detail-container" *ngIf="group$ | async as group">
+		<mat-card-title class="title">
+			<span class="left">
+				{{group.name}}
+				<mat-icon *ngIf="group.isClosed" class="icon-light" [matTooltip]="'Property.Group.IsClosed' | translate">lock</mat-icon>
+			</span>
+			<span class="right">
+				<button mat-icon-button [matMenuTriggerFor]="menu">
+					<mat-icon class="icon-light">settings</mat-icon>
+				</button>
+				<mat-menu #menu="matMenu">
+					<div id="menu-container">
+						<button mat-menu-item (click)="onEditGroup()">
+							<mat-icon>edit</mat-icon>
+							{{ 'Action.Edit' | translate }}
 						</button>
-					</h2>
-				</mat-card>
-
-			</ng-container>
+						<button mat-menu-item (click)="onLeaveGroup()" *ngIf="isGroupMember(participant)">
+							<span class="text-red"><mat-icon>meeting_room</mat-icon>{{ 'Action.Custom.LeaveGroup' | translate }}</span>
+						</button>
+						<button mat-menu-item (click)="onRemoveGroup()">
+							<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Delete' | translate }}</span>
+						</button>
+					</div>
+				</mat-menu>
+			</span>
+		</mat-card-title>
+	
+		<div id="group-members">
+			<h2 class="members-heading">
+				<span>{{ 'Domain.Members' | translate }}</span>
+	
+				<button mat-flat-button color="primary" (click)="onAddParticipant()" *ngIf="participant.isLecturerOrTutor()">
+					<mat-icon>person_add</mat-icon>
+					{{ 'Action.Custom.AddParticipant' | translate }}
+				</button>
+			</h2>
+	
+			<div *ngIf="group.members.length > 0; else emptyGroupText" dense class="member-list">
+				<ng-container *ngFor="let user of group.members">
+	
+					<mat-card class="member-card">
+						<h2 class="card-title">
+							<a class="link-none" [routerLink]="[ '/courses', courseId, 'users', user.userId ]">{{user.username}}</a>
+	
+							<mat-menu #memberMenu>
+								<button mat-menu-item (click)="onRemoveUser(user)">
+									<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Custom.RemoveParticipant' | translate }}</span>
+								</button>
+							</mat-menu>
+	
+							<button [matMenuTriggerFor]="memberMenu" mat-icon-button class="member-menu-btn">
+								<mat-icon class="icon-light">more_vert</mat-icon>
+							</button>
+						</h2>
+					</mat-card>
+	
+				</ng-container>
+			</div>
+	
+			<ng-template #emptyGroupText>
+				<p>{{ 'Text.Group.EmptyGroup' | translate }}</p>
+			</ng-template>
 		</div>
-
-		<ng-template #emptyGroupText>
-			<p>{{ 'Text.Group.EmptyGroup' | translate }}</p>
-		</ng-template>
-	</div>
-
-	<mat-divider class="divider"></mat-divider>
-
-	<div id="assessments">
-		<h2>{{ 'Domain.Assessments' | translate }}</h2>
-
-		<table class="full-width" mat-table [dataSource]="dataSource" matSort>
-			<!-- Assignment name Column -->
-			<ng-container matColumnDef="name">
-				<th class="name-column" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Assignment' | translate }}</th>
-				<td class="name-column" mat-cell *matCellDef="let row"> 
-					<a class="link-none font-bold" [routerLink]="['todo']">
-						{{row.assignment.name}}
-					</a> 
-				</td>
-			</ng-container>
-
-			<!-- Assignment Type Column -->
-			<ng-container matColumnDef="type">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Assignment.Type' | translate }}</th>
-				<td mat-cell *matCellDef="let row">{{ 'Enum.AssignmentType.' + row.assignment.type | translate }}</td>
-			</ng-container>
-
-			<!-- Score Column -->
-			<ng-container matColumnDef="score">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Assessment.AchievedPoints' | translate }}</th>
-				<td class="score-column" mat-cell *matCellDef="let row">{{ row.achievedPoints }}</td>
-			</ng-container>
-
-			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-		</table>
-	</div>
-
-	<mat-divider class="divider"></mat-divider>
-
-	<div id="group-history">
-		<h2 class="heading">{{ 'Property.Group.History' | translate }}</h2>
-		<mat-list class="history-list" dense *ngIf="group.history.length > 0; else emptyHistoryText">
-			<mat-divider></mat-divider>
-			<ng-container *ngFor="let event of group.history">
-				<mat-list-item class="history-item" [class]="event.event === 'UserJoinedGroupEvent' ? 'green' : 'red'">
-					<mat-icon class="text-green" *ngIf="event.event === 'UserJoinedGroupEvent'; else leftGroupIcon">add_box</mat-icon>
-					<ng-template #leftGroupIcon>
-						<mat-icon class="text-red" *ngIf="event.event === 'UserLeftGroupEvent'">indeterminate_check_box</mat-icon>
-					</ng-template>
-				<span>
-					<span class="timestamp">[{{event.timestamp | date }}]:</span>
-					<a class="font-bold">{{event.user.username}}</a>
-					{{ "Event." + event.event | translate}}
-				</span>
-				</mat-list-item>
+	
+		<mat-divider class="divider"></mat-divider>
+	
+		<div id="assessments">
+			<h2>{{ 'Domain.Assessments' | translate }}</h2>
+	
+			<table class="full-width" mat-table [dataSource]="dataSource$ | async" matSort>
+				<!-- Assignment name Column -->
+				<ng-container matColumnDef="name">
+					<th class="name-column" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Assignment' | translate }}</th>
+					<td class="name-column" mat-cell *matCellDef="let row"> 
+						<a class="link-none font-bold" [routerLink]="['todo']">
+							{{row.assignment.name}}
+						</a> 
+					</td>
+				</ng-container>
+	
+				<!-- Assignment Type Column -->
+				<ng-container matColumnDef="type">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Assignment.Type' | translate }}</th>
+					<td mat-cell *matCellDef="let row">{{ 'Enum.AssignmentType.' + row.assignment.type | translate }}</td>
+				</ng-container>
+	
+				<!-- Score Column -->
+				<ng-container matColumnDef="score">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Assessment.AchievedPoints' | translate }}</th>
+					<td class="score-column" mat-cell *matCellDef="let row">{{ row.achievedPoints }}</td>
+				</ng-container>
+	
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+		</div>
+	
+		<mat-divider class="divider"></mat-divider>
+	
+		<div id="group-history">
+			<h2 class="heading">{{ 'Property.Group.History' | translate }}</h2>
+			<mat-list class="history-list" dense *ngIf="group.history.length > 0; else emptyHistoryText">
 				<mat-divider></mat-divider>
-			</ng-container>
-		</mat-list>
-
-		<ng-template #emptyHistoryText>
-			<p>This group has no history.</p>
-		</ng-template>
+				<ng-container *ngFor="let event of group.history">
+					<mat-list-item class="history-item" [class]="event.event === 'UserJoinedGroupEvent' ? 'green' : 'red'">
+						<mat-icon class="text-green" *ngIf="event.event === 'UserJoinedGroupEvent'; else leftGroupIcon">add_box</mat-icon>
+						<ng-template #leftGroupIcon>
+							<mat-icon class="text-red" *ngIf="event.event === 'UserLeftGroupEvent'">indeterminate_check_box</mat-icon>
+						</ng-template>
+					<span>
+						<span class="timestamp">[{{event.timestamp | date }}]:</span>
+						<a class="font-bold">{{event.user.username}}</a>
+						{{ "Event." + event.event | translate}}
+					</span>
+					</mat-list-item>
+					<mat-divider></mat-divider>
+				</ng-container>
+			</mat-list>
+	
+			<ng-template #emptyHistoryText>
+				<p>This group has no history.</p>
+			</ng-template>
+		</div>
+	
 	</div>
+	
 
-</div>
+</ng-container>

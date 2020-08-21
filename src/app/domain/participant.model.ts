@@ -8,7 +8,6 @@ export class Participant implements ParticipantDto {
 	readonly role: ParticipantDto.RoleEnum;
 	readonly groupId?: string;
 	readonly group?: GroupDto;
-
 	constructor(dto: ParticipantDto) {
 		this.userId = dto.userId;
 		this.username = dto.username;

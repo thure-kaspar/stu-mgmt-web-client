@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
-import { Subject } from "rxjs";
+import { Subject, BehaviorSubject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { CourseParticipantsService, CoursesService, ParticipantDto } from "../../../../api";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../course/dialogs/change-role/change-role.dialog";
@@ -10,7 +10,6 @@ import { ConfirmDialog, ConfirmDialogData } from "../../shared/components/dialog
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../shared/paginator/paginator.component";
 import { SnackbarService } from "../../shared/services/snackbar.service";
-
 
 class ParticipantsFilter {
 	includeStudents = false;
@@ -22,14 +21,15 @@ class ParticipantsFilter {
 @Component({
 	selector: "app-user-list",
 	templateUrl: "./user-list.component.html",
-	styleUrls: ["./user-list.component.scss"]
+	styleUrls: ["./user-list.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	courseId: string;
 	participant: ParticipantDto[];
 	displayedColumns: string[] = ["actions", "role", "username"];
-	dataSource: MatTableDataSource<ParticipantDto>;
+	dataSource$ = new BehaviorSubject(new MatTableDataSource<ParticipantDto>([]));
 	filter = new ParticipantsFilter();
 
 	usernameFilterChangedSubject = new Subject();
@@ -129,7 +129,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	private refreshDataSource(): void {
-		this.dataSource = new MatTableDataSource(this.participant);
+		this.dataSource$.next(new MatTableDataSource(this.participant));
 	}
 
 }

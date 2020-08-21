@@ -34,7 +34,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-		this.subs.sink = this.participantFacade.p$.subscribe(p => this.participant = p);
+		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
 	}
 
 	openEditDialog(): void {

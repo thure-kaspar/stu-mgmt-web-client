@@ -36,7 +36,7 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 		this.assessmentId = getRouteParam("assessmentId", this.route);
 
 		this.loadAssessment();
-		this.subs.sink = this.participantFacade.p$.subscribe(p => this.participant = p);
+		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
 	}
 
 	private loadAssessment(): void {

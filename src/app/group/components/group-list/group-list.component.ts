@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { Subject, Observable, BehaviorSubject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { CourseConfigService, CourseParticipantsService, GroupDto, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
@@ -25,15 +25,19 @@ class GroupFilter {
 	selector: "app-group-list",
 	templateUrl: "./group-list.component.html",
 	styleUrls: ["./group-list.component.scss"],
-	//changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 
-	courseId: string;
-	participant: Participant;
-	groups: Group[] = [];
-	groupSettings: GroupSettingsDto;
+	participant$: Observable<Participant>;
+	private participant: Participant;
 
+	private groupsSubject = new BehaviorSubject<Group[]>([]);
+	groups$ = this.groupsSubject.asObservable();
+
+	private groups: Group[] = [];
+	groupSettings: GroupSettingsDto;
+	
 	filter = new GroupFilter();
 	nameFilterChangedSubject = new Subject();
 	filterSubject = new Subject();
@@ -45,8 +49,10 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	/** Count of groups matching the filter. */
 	totalCount = 0;
 
-	constructor(public dialog: MatDialog,
-				private participantFacade: ParticipantFacade,
+	courseId: string;
+	
+	constructor(private dialog: MatDialog,
+				public participantFacade: ParticipantFacade,
 				private courseFacade: CourseFacade,
 				private groupService: GroupsService,
 				private courseConfig: CourseConfigService,
@@ -57,17 +63,19 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-		this.subs.sink = this.participantFacade.p$.subscribe(p => this.participant = p);
+		this.participant$ = this.participantFacade.participant$;
+		this.subs.sink = this.participant$.subscribe(p => this.participant = p);
+
 		this.loadGroups();
 
-		this.nameFilterChangedSubject.pipe(debounceTime(300))
+		this.subs.sink = this.nameFilterChangedSubject.pipe(debounceTime(300))
 			.subscribe(() => this.filterSubject.next());
 
-		this.filterSubject.subscribe(() => {
+		this.subs.sink = this.filterSubject.subscribe(() => {
 			this.loadInitialGroups();
 		});
 
-		this.courseFacade.groupSettings$.subscribe(settings => {
+		this.subs.sink = this.courseFacade.groupSettings$.subscribe(settings => {
 			this.groupSettings = settings;
 		});
 	}
@@ -116,6 +124,8 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		).subscribe(response => {
 			this.groups = [...this.groups, ...response.body.map(g => new Group(g))];
 			this.totalCount = parseInt(response.headers.get("x-total-count"));
+
+			this.groupsSubject.next(this.groups);
 
 			if (this.totalCount === this.groups.length) {
 				this.isFinished = true;

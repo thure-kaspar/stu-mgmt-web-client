@@ -38,7 +38,7 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	ngOnInit(): void {
 		this.subs.sink = this.courseFacade.course$.subscribe(c => this.course = c);
 		this.subs.sink = this.courseFacade.groupSettings$.subscribe(settings => this.groupSettings);
-		this.subs.sink = this.participantFacade.p$.subscribe(p => this.participant = p);
+		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
 
 		this.loadGroup();
 	}
