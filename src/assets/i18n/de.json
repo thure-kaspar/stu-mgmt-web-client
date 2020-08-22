@@ -20,10 +20,12 @@
       "CreateCourse": "Veranstaltung erstellen",
       "LeaveCourse": "Kurs verlassen",
       "LeaveGroup": "Gruppe verlassen",
+      "RegisterCurrentGroups": "Aktuelle Gruppen anmelden",
       "RemoveGroup": "Gruppe entfernen",
       "RemoveParticipant": "Teilnehmer entfernen",
       "RemoveUserFromGroup": "Nutzer aus der Gruppe entfernen",
       "SelectCourseTemplate": "Veranstaltung als Vorlage wählen",
+      "UnregisterAllGroups": "Alle Gruppen abmelden",
       "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden",
       "UseNamingSchemeAndCount": "Prefix und Anzahl verwenden"
     },
@@ -98,6 +100,7 @@
     "Participants": "Teilnehmer",
     "Problem": "Problem",
     "Problems": "Probleme",
+    "RegisteredGroups": "Angemeldete Gruppen",
     "Semester": "Semester",
     "User": "Nutzer",
     "Users": "Nutzer"

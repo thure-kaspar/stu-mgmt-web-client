@@ -20,10 +20,12 @@
       "CreateCourse": "Create course",
       "LeaveCourse": "Leave course",
       "LeaveGroup": "Leave group",
+      "RegisterCurrentGroups": "Register current groups",
       "RemoveGroup": "Remove group",
       "RemoveParticipant": "Remove participant",
       "RemoveUserFromGroup": "Remove user from group",
       "SelectCourseTemplate": "Select course template",
+      "UnregisterAllGroups": "Unregister all group",
       "UseNamingSchemaAndCount": "Use prefix and count",
       "UseNamingSchemeAndCount": "Use prefix and count"
     },
@@ -98,6 +100,7 @@
     "Participants": "Participants",
     "Problem": "Problem",
     "Problems": "Problems",
+    "RegisteredGroups": "Registered groups",
     "Semester": "Semester",
     "User": "User",
     "Users": "Users"

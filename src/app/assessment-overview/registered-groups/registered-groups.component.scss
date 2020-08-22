@@ -1,0 +1,19 @@
+.title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.title-buttons {
+	display: grid;
+	grid-template-columns: auto auto;
+	column-gap: 8px;
+}
+
+.action-column {
+	width: 64px;
+}
+
+.name-column {
+	width: 128px;
+}
+
