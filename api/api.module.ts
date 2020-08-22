@@ -11,6 +11,7 @@ import { AuthenticationService } from './api/authentication.service';
 import { CourseConfigService } from './api/courseConfig.service';
 import { CourseParticipantsService } from './api/courseParticipants.service';
 import { CoursesService } from './api/courses.service';
+import { CsvService } from './api/csv.service';
 import { DefaultService } from './api/default.service';
 import { GroupsService } from './api/groups.service';
 import { MailService } from './api/mail.service';
@@ -30,6 +31,7 @@ import { UsersService } from './api/users.service';
     CourseConfigService,
     CourseParticipantsService,
     CoursesService,
+    CsvService,
     DefaultService,
     GroupsService,
     MailService,
