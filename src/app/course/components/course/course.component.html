@@ -1,29 +1,30 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
-	<ng-container *ngIf="participantFacade.participant$ | async as participant">
 
-		<div class="course-header">
-			<mat-card-title id="title-container">
-				<span>{{course.title}}</span>
-				<button mat-icon-button [matMenuTriggerFor]="menu">
-					<mat-icon class="icon-light">settings</mat-icon>
-				</button>
-				<mat-menu #menu="matMenu">
-					<div id="menu-container">
-						<button mat-menu-item (click)="leaveCourse()"><span class="text-red">{{ 'Action.Custom.LeaveCourse' | translate }}</span></button>
-					</div>
-				</mat-menu>
-			</mat-card-title>
-		
-			<nav mat-tab-nav-bar color="accent"> 
-				<a mat-tab-link routerLink="assignments" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
-					<span class="uppercase">{{ 'Domain.Assignments' | translate }}</span>
-				</a>
-				<a mat-tab-link routerLink="groups" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
-					<span class="uppercase">{{ 'Domain.Groups' | translate }}</span>
-				</a>
-				
-				<ng-container *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+	<div class="course-header">
+		<mat-card-title id="title-container">
+			<span>{{course.title}}</span>
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<mat-icon class="icon-light">settings</mat-icon>
+			</button>
+			<mat-menu #menu="matMenu">
+				<div id="menu-container">
+					<button mat-menu-item (click)="leaveCourse()"><span class="text-red">{{ 'Action.Custom.LeaveCourse' | translate }}</span></button>
+				</div>
+			</mat-menu>
+		</mat-card-title>
 	
+		<nav mat-tab-nav-bar color="accent"> 
+			<a mat-tab-link routerLink="assignments" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
+				<span class="uppercase">{{ 'Domain.Assignments' | translate }}</span>
+			</a>
+			<a mat-tab-link routerLink="groups" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+				<span class="uppercase">{{ 'Domain.Groups' | translate }}</span>
+			</a>
+			
+
+			<ng-container *ngIf="participantFacade.participant$ | async as participant">
+				<ng-container *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+
 					<a mat-tab-link routerLink="users" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
 						<span class="uppercase">{{ 'Domain.Participants' | translate }}</span>
 					</a>
@@ -32,13 +33,13 @@
 					</a>
 	
 				</ng-container>
-	
-			</nav>
-		</div>
-		  
-		<div class="course-content">
-			<router-outlet></router-outlet>
-		</div>
+			</ng-container>
 
-	</ng-container>
+		</nav>
+	</div>
+	  
+	<div class="course-content">
+		<router-outlet></router-outlet>
+	</div>
+
 </ng-container>
