@@ -50,6 +50,19 @@
 		</span>
 	</div>
 
+	<div class="group" *ngIf="group$ | async as group">
+		<mat-card-title class="group-title">
+			<span class="text-light">{{ 'Domain.Group' | translate }}:</span>
+			{{group.name}}
+		</mat-card-title>
+
+		<mat-chip-list>
+			<mat-chip selected *ngFor="let member of group.members">
+				{{member.username}}
+			</mat-chip>
+		</mat-chip-list>
+	</div>
+
 	<button mat-stroked-button *ngIf="stateEnum.EVALUATED === assignment.state">{{ 'Domain.Assessment' | translate }}</button>
 
 </mat-card>
