@@ -1,13 +1,13 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, LOCALE_ID } from "@angular/core";
 import { environment } from "../environments/environment";
-
 import { AppComponent } from "./app.component";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { ApiModule, BASE_PATH } from "../../api";
 import { ApiModule as AuthApiModule, BASE_PATH as AUTH_BASE_PATH } from "../../api_auth";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 import { MaterialModule } from "./material/material.module";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { LayoutModule } from "@angular/cdk/layout";
@@ -16,7 +16,6 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { AuthModule } from "./auth/auth.module";
 import { SharedModule } from "./shared/shared.module";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
-
 import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/de";
 import localeDeExtra from "@angular/common/locales/extra/de";
@@ -43,6 +42,9 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		AuthApiModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
+		ToastrModule.forRoot({
+			positionClass: "toast-bottom-right"
+		}),
 		TranslateModule.forRoot({
 			defaultLanguage: localStorage.getItem("language") ?? "en",
 			loader: {

@@ -13,6 +13,7 @@ import { AuthService } from "../auth/services/auth.service";
 import { CourseMembershipsFacade } from "../course/services/course-memberships.facade";
 import { SnackbarService } from "../shared/services/snackbar.service";
 import { ThemeService } from "../shared/services/theme.service";
+import { ToastService } from "../shared/services/toast.service";
 
 @Component({
 	selector: "app-navigation",
@@ -38,7 +39,8 @@ export class NavigationComponent implements OnInit {
 				public theme: ThemeService,
 				private overlayContainer: OverlayContainer,
 				private dialog: MatDialog,
-				public snackbar: SnackbarService) {
+				public snackbar: SnackbarService,
+				private toast: ToastService) {
 
 		router.events.pipe(
 			withLatestFrom(this.isHandset$),
@@ -50,6 +52,12 @@ export class NavigationComponent implements OnInit {
 		this.theme.theme$.subscribe(
 			theme => this.onThemeChange(theme)
 		);
+
+		this.authService.userInfo$.pipe(
+			filter(info => !!info)
+		).subscribe(info => {
+			this.toast.success(`Welcome ${info.username}!`);
+		});
 	}
 
 	onThemeChange(theme: string): void {
