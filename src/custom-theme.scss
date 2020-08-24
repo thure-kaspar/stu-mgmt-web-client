@@ -38,3 +38,23 @@ $mat-dark-theme-background: map-merge($mat-dark-theme-background, (card:#292929)
 
 	@include angular-material-theme($dark-theme);
 }
+
+.blue-theme {
+	color: #92ABCF;
+	$blue-primary: mat-palette($mat-cyan, 900);
+	$blue-accent: mat-palette($mat-cyan, 300);
+	$blue-warn: mat-palette($mat-red);
+	$blue-theme: mat-dark-theme($blue-primary, $blue-accent, $blue-warn);
+
+	@include angular-material-theme($blue-theme);
+}
+
+.green-theme {
+	color: $light-primary-text;
+	$green-primary: mat-palette($mat-grey, 300);
+	$green-accent: mat-palette($mat-green, 800);
+	$green-warn: mat-palette($mat-red);
+	$green-theme: mat-light-theme($green-primary, $green-accent, $green-warn);
+
+	@include angular-material-theme($green-theme);
+}

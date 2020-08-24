@@ -7,7 +7,9 @@ export class ThemeService {
 
 	availableThemes = [
 		"default-theme",
-		"dark-theme"
+		"dark-theme",
+		"blue-theme",
+		"green-theme"
 	]
 
 	private themeSubject: BehaviorSubject<string>;
