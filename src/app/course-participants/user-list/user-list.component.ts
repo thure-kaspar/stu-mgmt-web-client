@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Inject } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { Subject, BehaviorSubject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { CourseParticipantsService, CoursesService, ParticipantDto } from "../../../../api";
+import { CourseParticipantsService, CoursesService, ParticipantDto, CsvService, BASE_PATH } from "../../../../api";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../course/dialogs/change-role/change-role.dialog";
 import { ConfirmDialog, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../shared/paginator/paginator.component";
 import { SnackbarService } from "../../shared/services/snackbar.service";
+import { HttpClient } from "@angular/common/http";
 
 class ParticipantsFilter {
 	includeStudents = false;
@@ -37,10 +38,13 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
 	constructor(private courseService: CoursesService,
-				private courseParticipantsService: CourseParticipantsService,
-				private route: ActivatedRoute,
-				public dialog: MatDialog,
-				private snackbar: SnackbarService) { super(); }
+		private courseParticipantsService: CourseParticipantsService,
+		private csvService: CsvService,
+		private http: HttpClient,
+		@Inject(BASE_PATH) private basePath: string,
+		private route: ActivatedRoute,
+		public dialog: MatDialog,
+		private snackbar: SnackbarService) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
@@ -48,7 +52,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 		// Subscribe to changes of username filter: Trigger search 500ms after user stopped typing
 		this.subs.sink = this.usernameFilterChangedSubject
-			.pipe(debounceTime(300)).subscribe(() => 
+			.pipe(debounceTime(300)).subscribe(() =>
 				this.searchParticipants()
 			);
 	}
@@ -123,8 +127,16 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 						}
 					});
 				}
-			}, 
+			},
 			error => console.log(error)
+		);
+	}
+
+	downloadCsv(): void {
+		this.csvService.getParticipants(this.courseId, "response").subscribe(
+			response => {
+				console.log(response);
+			}
 		);
 	}
 

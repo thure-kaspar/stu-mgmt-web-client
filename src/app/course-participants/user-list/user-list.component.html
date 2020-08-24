@@ -1,17 +1,25 @@
 <div class="tab">
 	
-	<div class="filter">
-		<div class="roles">
-			<mat-label class="font-bold">{{ 'Property.User.CourseRole' | translate }}</mat-label>
-			<mat-checkbox [(ngModel)]="filter.includeStudents" (change)="searchParticipants()">{{ 'Enum.CourseRole.STUDENT' | translate }}</mat-checkbox>
-			<mat-checkbox [(ngModel)]="filter.includeTutors" (change)="searchParticipants()">{{ 'Enum.CourseRole.TUTOR' | translate }}</mat-checkbox>
-			<mat-checkbox [(ngModel)]="filter.includeLecturers" (change)="searchParticipants()">{{ 'Enum.CourseRole.LECTURER' | translate }}</mat-checkbox>
+	<div>
+		<div class="filter">
+			<div class="top">
+				<div class="roles">
+					<mat-label class="font-bold">{{ 'Property.User.CourseRole' | translate }}</mat-label>
+					<mat-checkbox [(ngModel)]="filter.includeStudents" (change)="searchParticipants()">{{ 'Enum.CourseRole.STUDENT' | translate }}</mat-checkbox>
+					<mat-checkbox [(ngModel)]="filter.includeTutors" (change)="searchParticipants()">{{ 'Enum.CourseRole.TUTOR' | translate }}</mat-checkbox>
+					<mat-checkbox [(ngModel)]="filter.includeLecturers" (change)="searchParticipants()">{{ 'Enum.CourseRole.LECTURER' | translate }}</mat-checkbox>
+				</div>
+	
+				<div class="right">
+					<button mat-flat-button color="primary" download="participants.csv" (click)="downloadCsv()">Download CSV</button>
+				</div>
+			</div>
+	
+			<mat-form-field id="userFilter-field">
+				<mat-label>{{ 'Property.User.Username' | translate }}</mat-label>
+				<input matInput [(ngModel)]="filter.username" (keyup)="usernameFilterChangedSubject.next()" autocomplete="off">
+			</mat-form-field>
 		</div>
-
-		<mat-form-field id="userFilter-field">
-			<mat-label>{{ 'Property.User.Username' | translate }}</mat-label>
-			<input matInput [(ngModel)]="filter.username" (keyup)="usernameFilterChangedSubject.next()" autocomplete="off">
-		</mat-form-field>
 	</div>
 	
 	<div id="table-users">
