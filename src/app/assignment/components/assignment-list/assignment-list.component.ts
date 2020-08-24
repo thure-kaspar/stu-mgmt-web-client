@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
@@ -23,7 +23,7 @@ class AssignmentsStateMap {
 	selector: "app-assignment-list",
 	templateUrl: "./assignment-list.component.html",
 	styleUrls: ["./assignment-list.component.scss"],
-	//changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnInit {
 
