@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Rule, AssignmentDto, CoursesService, CourseConfigService, CourseDto, CourseConfigDto, AssignmentTemplateDto, AdmissionCriteriaDto, CourseConfigUpdateDto } from "../../../../../api";
+import { AssignmentDto, CoursesService, CourseConfigService, CourseDto, CourseConfigDto, AssignmentTemplateDto, AdmissionCriteriaDto, CourseConfigUpdateDto } from "../../../../../api";
 import { CourseForm } from "../../forms/course-form/course-form.component";
 import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
 import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admission-criteria-form.component";
@@ -24,7 +24,6 @@ export class EditCourseComponent implements OnInit {
 	/** Form with the structure of a CourseCreateDto. */
 	form: FormGroup;
 
-	scopeEnum = Rule.ScopeEnum;
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;

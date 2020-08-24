@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { CoursesService, CourseDto, UserDto, CourseConfigService, Rule, AssignmentDto, CourseCreateDto, CourseParticipantsService, ParticipantDto } from "../../../../../api";
+import { CoursesService, CourseDto, UserDto, CourseConfigService, AssignmentDto, CourseCreateDto, CourseParticipantsService, ParticipantDto } from "../../../../../api";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
@@ -24,7 +24,6 @@ export class CreateCourseComponent implements OnInit {
 	/** Form with the structure of a CourseCreateDto. */
 	form: FormGroup;
 
-	scopeEnum = Rule.ScopeEnum;
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;

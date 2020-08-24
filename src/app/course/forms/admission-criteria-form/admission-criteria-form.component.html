@@ -9,7 +9,7 @@
 				<p>Required: The required percentage to fulfill the criteria.</p>
 			</mat-hint>
 		
-			<div class="criteria" formArrayName="criteria" *ngFor="let crit of getCriteria()?.controls; let i=index">
+			<!-- <div class="criteria" formArrayName="criteria" *ngFor="let crit of getCriteria()?.controls; let i=index">
 				<ng-container [formGroupName]="i">
 					<mat-form-field>
 						<mat-label>Scope</mat-label>
@@ -38,7 +38,7 @@
 		
 					<button  matSuffix mat-icon-button matTooltip="Remove" (click)="removeCriteria(i)"><mat-icon>clear</mat-icon></button>
 				</ng-container>
-			</div>
+			</div> -->
 		</div>
 	</ng-container>
 </ng-container>
