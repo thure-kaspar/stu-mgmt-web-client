@@ -3,6 +3,7 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { AdmissionStatusService } from './api/admissionStatus.service';
 import { AssessmentAllocationService } from './api/assessmentAllocation.service';
 import { AssessmentsService } from './api/assessments.service';
 import { AssignmentRegistrationService } from './api/assignmentRegistration.service';
@@ -23,6 +24,7 @@ import { UsersService } from './api/users.service';
   declarations: [],
   exports:      [],
   providers: [
+    AdmissionStatusService,
     AssessmentAllocationService,
     AssessmentsService,
     AssignmentRegistrationService,

@@ -80,7 +80,7 @@ export class EditCourseComponent implements OnInit {
 					this.form.get("config").patchValue(this.courseConfig);
 					
 					// Insert admission criteria
-					result.admissionCriteria?.criteria?.forEach(c => this.admissionCriteriaForm.addCriteria(c));
+					//result.admissionCriteria?.criteria?.forEach(c => this.admissionCriteriaForm.addCriteria(c));
 				}
 			}
 		);
@@ -101,15 +101,15 @@ export class EditCourseComponent implements OnInit {
 			password: this.form.get("config.password").value,
 			subscriptionUrl: this.form.get("config.subscriptionUrl").value
 		};
-		const admissionCriteria: AdmissionCriteriaDto = {
-			criteria: this.admissionCriteriaForm.getCriteria().value
-		};
+		// const admissionCriteria: AdmissionCriteriaDto = {
+		// 	criteria: this.admissionCriteriaForm.getCriteria().value
+		// };
 
 		// TODO: Display feedback / errors, Maybe split into seperate components
 		this.courseService.updateCourse(courseData, this.courseId).subscribe();
 		this.courseConfigService.updateCourseConfig(config, this.courseId).subscribe();
 		this.courseConfigService.updateGroupSettings(groupSettings, this.courseId).subscribe();
-		this.courseConfigService.updateAdmissionCriteria(admissionCriteria, this.courseId).subscribe();
+		//this.courseConfigService.updateAdmissionCriteria(admissionCriteria, this.courseId).subscribe();
 	}
 
 	openCreateAssignmentTemplateDialog(): void {

@@ -9,8 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AdmissionRule } from './admissionRule';
+import { AssignmentDto } from './assignmentDto';
+import { StudentResults } from './studentResults';
 
-export interface AdmissionCriteriaDto { 
-    rules: Array<AdmissionRule>;
+export interface PointsOverviewDto { 
+    assignments: Array<AssignmentDto>;
+    results: Array<StudentResults>;
 }

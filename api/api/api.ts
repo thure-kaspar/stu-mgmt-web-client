@@ -1,3 +1,5 @@
+export * from './admissionStatus.service';
+import { AdmissionStatusService } from './admissionStatus.service';
 export * from './assessmentAllocation.service';
 import { AssessmentAllocationService } from './assessmentAllocation.service';
 export * from './assessments.service';
@@ -26,4 +28,4 @@ export * from './test.service';
 import { TestService } from './test.service';
 export * from './users.service';
 import { UsersService } from './users.service';
-export const APIS = [AssessmentAllocationService, AssessmentsService, AssignmentRegistrationService, AssignmentsService, AuthenticationService, CourseConfigService, CourseParticipantsService, CoursesService, CsvService, DefaultService, GroupsService, MailService, TestService, UsersService];
+export const APIS = [AdmissionStatusService, AssessmentAllocationService, AssessmentsService, AssignmentRegistrationService, AssignmentsService, AuthenticationService, CourseConfigService, CourseParticipantsService, CoursesService, CsvService, DefaultService, GroupsService, MailService, TestService, UsersService];

@@ -140,7 +140,7 @@ export class CreateCourseComponent implements OnInit {
 				this.form.get("config").patchValue(config);
 
 				// Insert admission criteria
-				config.admissionCriteria?.criteria.forEach(c=> this.admissionCriteriaForm.addCriteria(c));
+				//config.admissionCriteria?.criteria.forEach(c=> this.admissionCriteriaForm.addCriteria(c));
 
 				// Insert assignment templates
 				config.assignmentTemplates?.forEach(t => this.assignmentTemplatesForm.addAssignmentTemplate(t));

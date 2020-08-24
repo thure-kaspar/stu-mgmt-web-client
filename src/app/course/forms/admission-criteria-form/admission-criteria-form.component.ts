@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { AssignmentDto, Rule } from "../../../../../api";
-import { FormArray, Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { Component, Input, OnInit } from "@angular/core";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AssignmentDto } from "../../../../../api";
 
 @Component({
 	selector: "app-admission-criteria-form",
@@ -11,7 +11,6 @@ export class AdmissionCriteriaForm implements OnInit {
 
 	@Input() form: FormGroup;
 
-	scopeEnum = Rule.ScopeEnum;
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
@@ -22,12 +21,12 @@ export class AdmissionCriteriaForm implements OnInit {
 	}
 
 	/** Adds additional input fields to a admission criteria rule. */
-	addCriteria(criteria?: Rule): void {
-		this.getCriteria().push(this.fb.group({
-			scope: [criteria?.scope || null, Validators.required],
-			type: [criteria?.type || null, Validators.required],
-			requiredPercent: [criteria?.requiredPercent || 50, [Validators.required, Validators.min(0), Validators.max(100)]]
-		}));
+	addCriteria(criteria?: any): void {
+		// this.getCriteria().push(this.fb.group({
+		// 	scope: [criteria?.scope || null, Validators.required],
+		// 	type: [criteria?.type || null, Validators.required],
+		// 	requiredPercent: [criteria?.requiredPercent || 50, [Validators.required, Validators.min(0), Validators.max(100)]]
+		// }));
 
 		//console.log(this.form.get("admissionCriteria"));
 	}

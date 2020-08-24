@@ -413,7 +413,7 @@ export class UsersService {
 
     /**
      * Get group of assignment.
-     * Retrieves the group that the user 
+     * Retrieves the registered group of this user for a particular assignment.
      * @param userId 
      * @param courseId 
      * @param assignmentId 

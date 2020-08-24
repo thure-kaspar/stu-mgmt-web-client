@@ -1,4 +1,5 @@
 export * from './admissionCriteriaDto';
+export * from './admissionRule';
 export * from './assessmentAllocationDto';
 export * from './assessmentCreateDto';
 export * from './assessmentDto';
@@ -30,8 +31,9 @@ export * from './partialAssessmentDto';
 export * from './participantDto';
 export * from './participantsComparisonDto';
 export * from './passwordDto';
-export * from './rule';
+export * from './pointsOverviewDto';
 export * from './studentMgmtEvent';
 export * from './studentMgmtException';
+export * from './studentResults';
 export * from './userDto';
 export * from './userWithAssignedEvaluatorDto';
