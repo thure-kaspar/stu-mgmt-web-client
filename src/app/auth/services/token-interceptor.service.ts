@@ -30,13 +30,13 @@ export class TokenInterceptorService implements HttpInterceptor {
 			}
 		});
 		
-		return next.handle(tokenizedReq).pipe(catchError(x => this.handleAuthError(x)));
+		return next.handle(tokenizedReq).pipe(catchError(x => this.handleHttpError(x)));
 	}
 
 	/**
 	 * Invoked when user is not logged in or user's authentication token has expired.
 	 */
-	private handleAuthError(err: HttpErrorResponse): Observable<any> {
+	private handleHttpError(err: HttpErrorResponse): Observable<any> {
 		const authService = this.injector.get(AuthService);
 		const router = this.injector.get(Router);
 
