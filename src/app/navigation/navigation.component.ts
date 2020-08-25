@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { OverlayContainer } from "@angular/cdk/overlay";
-import { Component, EventEmitter, OnInit, Output, ViewChild, ChangeDetectionStrategy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSidenav } from "@angular/material/sidenav";
 import { NavigationEnd, Router } from "@angular/router";
@@ -8,6 +8,7 @@ import { Observable } from "rxjs";
 import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
 import { CourseDto } from "../../../api";
 import { AuthenticationInfoDto } from "../../../api_auth";
+import { environment } from "../../environments/environment";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { AuthService } from "../auth/services/auth.service";
 import { CourseMembershipsFacade } from "../course/services/course-memberships.facade";
@@ -31,7 +32,9 @@ export class NavigationComponent implements OnInit {
 			map(result => result.matches),
 			shareReplay()
 		);
-	
+
+	_isDevelopmentEnv = !environment.production;
+
 	constructor(private breakpointObserver: BreakpointObserver,
 				private router: Router,
 				public authService: AuthService,

@@ -31,6 +31,8 @@
 				<mat-menu #themeMenu="matMenu">
 					<button mat-menu-item (click)="theme.setTheme('default-theme')">Default</button>
 					<button mat-menu-item (click)="theme.setTheme('dark-theme')">Dark</button>
+					<button mat-menu-item (click)="theme.setTheme('blue-theme')">Blue</button>
+					<button mat-menu-item (click)="theme.setTheme('green-theme')">Green</button>
 				</mat-menu>
 				<button mat-menu-item (click)="copyJwtToClipboard()">Copy JWT to clipboard</button>
 			</div>
@@ -73,7 +75,7 @@
 
 			<div id="sidenav-footer">
 				<mat-divider></mat-divider>
-				<a mat-list-item [routerLink]="['/login']" routerLinkActive="router-link-active">
+				<a mat-list-item [routerLink]="['/login']" routerLinkActive="router-link-active" *ngIf="_isDevelopmentEnv">
 					<mat-icon>code</mat-icon>Developer-Login
 				</a>
 
