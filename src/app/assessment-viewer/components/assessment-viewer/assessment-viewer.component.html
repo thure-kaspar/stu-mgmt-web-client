@@ -1,7 +1,7 @@
-<div id="assessment-viewer" class="tab" *ngIf="assessment">
+<div id="assessment-viewer" class="tab" *ngIf="assessment$ | async as assessment">
 
 	<h2 class="title">
-		<span>{{ 'Domain.Assessment' | translate }}: Hausaufgabe 01</span>
+		<span>{{ 'Domain.Assessment' | translate }}: {{assignment.name}}</span>
 		<button mat-flat-button color="accent" *ngIf="participant.isLecturerOrTutor()" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
 			{{ 'Action.Edit' | translate }}
 		</button>
@@ -15,11 +15,17 @@
 					<mat-icon class="icon-light">history</mat-icon>
 				</button>
 			</span>
+
 			<div *ngIf="showEvents" class="events">
-				<p *ngIf="events.length == 0">{{ 'Common.None' | translate }}.</p>
-				<span *ngFor="let event of events">
-					[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
-				</span>
+				<ng-container *ngIf="assessmentEvents$ | async as events; else noEvents">
+					<span *ngFor="let event of events">
+						[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
+					</span>
+				</ng-container>
+				
+				<ng-template #noEvents>
+					<p *ngIf="(assessmentEvents$ | async)?.length == 0">{{ 'Common.None' | translate }}.</p>
+				</ng-template>
 			</div>
 		
 			<div class="assessment-target">
@@ -69,10 +75,6 @@
 	
 				<div class="comment">
 					{{assessment.comment}}
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores alias hic praesentium vel sint veritatis ipsam totam nobis dolore eos placeat, ipsa sapiente laboriosam animi culpa obcaecati, labore quaerat. Nemo?
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, praesentium rem magni, excepturi fugiat quibusdam sunt mollitia expedita vel quasi fuga quae iusto amet earum assumenda voluptates quas architecto quos.
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum iste ab, reiciendis iure suscipit, accusantium tempore aliquam sint illum tempora vitae incidunt quam! Quidem quasi excepturi placeat maiores ex dolorum?
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, autem mollitia. Obcaecati similique ut pariatur perferendis officia voluptas perspiciatis molestias vero voluptatibus ipsa odit voluptatem, laborum a rem maiores. Optio?
 				</div>
 			</mat-card>
 

@@ -1,21 +1,23 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AssessmentDto, AssignmentDto, AssessmentEventDto, AssessmentsService } from "../../../../../api";
 import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { BehaviorSubject, Subject } from "rxjs";
 
 @Component({
 	selector: "app-assessment-viewer",
 	templateUrl: "./assessment-viewer.component.html",
 	styleUrls: ["./assessment-viewer.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements OnInit {
 
-	assessment: AssessmentDto;
+	assessment$ = new Subject<AssessmentDto>();
 	assignment: AssignmentDto;
-	events: AssessmentEventDto[];
+	assessmentEvents$ = new BehaviorSubject<AssessmentEventDto[]>(undefined);
 
 	showEvents = false;
 
@@ -43,8 +45,8 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 		this.assessmentService.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId).subscribe(
 			assessment => {
 				console.log("Assessment:", assessment);
-				this.assessment = assessment;
 				this.assignment = assessment.assignment;
+				this.assessment$.next(assessment);
 			}
 		);
 	}
@@ -57,8 +59,8 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 			this.assessmentService.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
 				.subscribe(
 					result => {
-						this.events = result;
 						this.showEvents = true;
+						this.assessmentEvents.next(result);
 					},
 					error => {
 						console.log(error);
