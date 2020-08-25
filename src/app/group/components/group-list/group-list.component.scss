@@ -11,8 +11,13 @@
 		font-size: 18px;
 	}
 
-	button {
-		margin-top: 12px;
+	.member-list {
+		display: flex;
+		padding-bottom: 12px;
+	
+		.member:not(:first-child) {
+			margin-left: 4px;
+		}
 	}
 }
 

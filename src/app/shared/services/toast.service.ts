@@ -10,6 +10,8 @@ export class ToastService {
 	
 	/** Displays a success-themed toast message. */			
 	success(message?: string, title?: string, override?: Partial<IndividualConfig>): void {
+		console.log(this.tryGetTranslation(title));
+		console.log(this.tryGetTranslation(message));
 		this.toast.success(this.tryGetTranslation(message), this.tryGetTranslation(title), override);
 	}
 

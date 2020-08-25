@@ -69,6 +69,7 @@
     "Start": "Start",
     "Title": "Title",
     "Total": "Total",
+    "Welcome": "Welcome",
     "Yes": "Yes"
   },
   "Domain": {
@@ -269,6 +270,7 @@
     "JoinCourse": "Join course",
     "JoinGroup": "Join group",
     "ParticipantsList": "Participants list",
+    "PointsOverview": "Points overview",
     "SearchCourse": "Search course",
     "SearchParticipant": "Search participant",
     "SearchUser": "Search user"

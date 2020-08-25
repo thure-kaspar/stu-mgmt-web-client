@@ -11,14 +11,14 @@
 	
 			<mat-card class="participant-group-card">
 				<mat-card-title class="title">
-					<a [routerLink]="[participant?.group.id]" class="name link-none">{{participant?.group.name}}</a>
+					<a [routerLink]="[participant?.group.id]" class="name link-none">{{participant.group.name}}</a>
 				</mat-card-title>
 	
-				<mat-chip-list class="members">
-					<mat-chip selected *ngFor="let member of participant?.group.members">
-						{{member.username}}
-					</mat-chip>
-				</mat-chip-list>
+				<div class="member-list">
+					<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId, 'profile']" *ngFor="let member of participant.group.members">
+						<button mat-flat-button color="primary">{{member.username}}</button>
+					</a>
+				</div>
 
 				<a [routerLink]="[participant?.group.id]" class="view-group-link">
 					<button mat-flat-button color="accent">{{ 'Action.View' | translate }}</button>

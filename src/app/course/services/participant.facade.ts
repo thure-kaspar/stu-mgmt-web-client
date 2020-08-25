@@ -8,6 +8,7 @@ import { DialogService } from "../../shared/services/dialog.service";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { Router } from "@angular/router";
 import { distinctUntilChanged, filter } from "rxjs/operators";
+import { ToastService } from "../../shared/services/toast.service";
 
 @Injectable({ providedIn: "root" })
 export class ParticipantFacade {
@@ -24,7 +25,8 @@ export class ParticipantFacade {
 				private authService: AuthService,
 				private snackbar: SnackbarService,
 				private dialogService: DialogService,
-				private router: Router) {
+				private router: Router,
+				private toast: ToastService) {
 		
 		this.authService.userInfo$.subscribe(info => {
 			//console.log("new UserId:", info?.userId);
@@ -107,6 +109,7 @@ export class ParticipantFacade {
 		this.courseParticipants.getParticipant(courseId, userId).subscribe(
 			participant => {
 				this.participantSubject.next(new Participant(participant));
+				this.toast.info("Enum.CourseRole." + participant.role, courseId);
 				console.log("Current participant:", participant);
 			},
 			error => {

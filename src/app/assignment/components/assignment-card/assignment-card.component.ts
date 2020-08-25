@@ -10,6 +10,7 @@ import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { Subject } from "rxjs";
+import { ToastService } from "../../../shared/services/toast.service";
 
 @Component({
 	selector: "app-assignment-card",
@@ -33,7 +34,8 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 				private route: ActivatedRoute,
 				private dialog: MatDialog,
 				private assignmentManagement: AssignmentManagementFacade,
-				private userService: UsersService) { super(); }
+				private userService: UsersService,
+				private toast: ToastService) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
@@ -66,6 +68,9 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 			group => {
 				console.log(`Group of ${this.assignment.name}:`, group);
 				this.group$.next(group);
+			},
+			error => {
+				this.toast.warning("You have no group for this assignment.", this.assignment.name);
 			}
 		);
 	}

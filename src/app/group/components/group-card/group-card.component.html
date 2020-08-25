@@ -30,11 +30,11 @@
 		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn"><mat-icon class="icon-light">more_vert</mat-icon></button>
 	</mat-card-title>
 
-	<mat-chip-list class="member-list">
-		<mat-chip selected *ngFor="let member of group.members">
-			{{member.username}}
-		</mat-chip>
-	</mat-chip-list>
+	<div class="member-list" *ngIf="participant.role !== 'STUDENT'">
+		<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId, 'profile']" *ngFor="let member of group.members">
+			<button mat-flat-button color="primary">{{member.username}}</button>
+		</a>
+	</div>
 
 	<div class="group-buttons">
 		<button mat-flat-button color="accent" [disabled]="group.isClosed || participant.groupId" (click)="openJoinGroupDialog()">{{ 'Action.Join' | translate }}</button>

@@ -59,7 +59,7 @@ export class NavigationComponent implements OnInit {
 		this.authService.userInfo$.pipe(
 			filter(info => !!info)
 		).subscribe(info => {
-			this.toast.success(`Welcome ${info.username}!`);
+			this.toast.success(info.username, "Common.Welcome");
 		});
 	}
 
