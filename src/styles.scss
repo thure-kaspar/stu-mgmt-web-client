@@ -306,6 +306,10 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 	opacity: unset;
 }
 
+.toast-container .ngx-toastr {
+	box-shadow: 0 0 12px var(--text-light)!important;
+}
+
 .INFORMATIONAL { font-weight: 500; color: rgb(0, 130, 173); }
 .WARNING { font-weight: 500; color:rgb(233, 185, 55); }
 .ERROR { font-weight: 500; color: rgb(206, 134, 0); }
