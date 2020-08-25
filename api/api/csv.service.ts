@@ -61,10 +61,10 @@ export class CsvService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public csvControllerGetPointsOverview(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public csvControllerGetPointsOverview(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public csvControllerGetPointsOverview(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public csvControllerGetPointsOverview(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getPointsOverview(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getPointsOverview(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getPointsOverview(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getPointsOverview(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling csvControllerGetPointsOverview.');
