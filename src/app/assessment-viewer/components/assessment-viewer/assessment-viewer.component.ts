@@ -60,7 +60,7 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 				.subscribe(
 					result => {
 						this.showEvents = true;
-						this.assessmentEvents.next(result);
+						this.assessmentEvents$.next(result);
 					},
 					error => {
 						console.log(error);
