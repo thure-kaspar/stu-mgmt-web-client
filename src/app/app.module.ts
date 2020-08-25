@@ -23,6 +23,7 @@ import { AssessmentModule } from "./assessment/assessment.module";
 import { AssessmentEditorModule } from "./assessment-editor/assessment-editor.module";
 import { AssessmentOverviewModule } from "./assessment-overview/assessment-overview.module";
 import { AssessmentViewerModule } from "./assessment-viewer/assessment-viewer.module";
+import { AdmissionStatusModule } from "./admission-status/admission-status.module";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -60,11 +61,12 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		AssessmentModule,
 		AssessmentEditorModule,
 		AssessmentOverviewModule,
-		AssessmentViewerModule
+		AssessmentViewerModule,
+		AdmissionStatusModule
 	],
 	providers: [
 		{ provide: BASE_PATH, useValue: window["__env"]["API_BASE_PATH"] ?? environment.API_BASE_PATH },
-		{ provide: AUTH_BASE_PATH, useValue: window["__env"]["AUTH_BASE_PATH"] ?? environment.AUTH_BASE_PATH },
+		{ provide: AUTH_BASE_PATH, useValue: window["__env"]["API_BASE_PATH"] ?? environment.AUTH_BASE_PATH },
 		{ provide: LOCALE_ID, useValue: "de" },
 		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" }} // TODO: decide style
 	],

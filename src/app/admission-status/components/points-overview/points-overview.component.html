@@ -1,0 +1,56 @@
+<div class="tab">
+
+	<h2 class="title">
+		<span>{{ 'Title.PointsOverview' | translate }}</span>
+		<span>
+			<button mat-flat-button color="primary" (click)="downloadCsv()">Download CSV</button>
+		</span>
+	</h2>
+
+	<table class="full-width table-bg" mat-table [dataSource]="dataSource$ | async">
+
+		<ng-container matColumnDef="username">
+			<th class="name-column" mat-header-cell *matHeaderCellDef>Name</th>
+			<td mat-cell *matCellDef="let row">
+				<a class="link-none font-bold" [routerLink]="['/courses', courseId, 'users', row.student.userId]">
+					{{row.student.username}}
+				</a>
+			</td>
+		</ng-container>
+		
+		<ng-container matColumnDef="total">
+			<th class="total-column" mat-header-cell *matHeaderCellDef>{{ 'Common.Total' | translate }}</th>
+			<td mat-cell *matCellDef="let row">
+				<div class="total font-bold">{{row.total}}</div>
+			</td>
+		</ng-container>
+
+		<ng-container *ngFor="let assignment of (overview$ | async)?.assignments">
+			<ng-container [matColumnDef]="assignment.id">
+				<th class="assignment-column" mat-header-cell *matHeaderCellDef>
+					<div class="assignment-info">
+						<span>{{assignment.name}}</span>
+						<span>(Max: {{assignment.points}})</span>
+					</div>
+				</th>
+				<td class="points" mat-cell *matCellDef="let row">
+					<button mat-button class="points-btn" (click)="goToAssessment(assignment.id, row.student.userId)">
+						{{row[assignment.id]}}
+						<span class="text-light">({{(row[assignment.id]/assignment.points) * 100}}%)</span>
+					</button>
+				</td>
+			</ng-container>
+		</ng-container>
+
+		<!-- Prevents columns from using full table width -->
+		<ng-container matColumnDef="spacer">
+			<th mat-header-cell *matHeaderCellDef></th>
+			<td mat-cell *matCellDef="let row"></td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+	</table>
+
+</div>
