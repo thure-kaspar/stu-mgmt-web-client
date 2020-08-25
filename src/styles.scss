@@ -13,6 +13,7 @@
 	--color-header: #F9F9F9;
 
 	--card-bg: white;
+	--table-bg: transparent;
 
 	--grey-light: rgb(230, 230, 230);
 	--grey-normal: rgb(255, 255, 255);
@@ -53,6 +54,8 @@
 	--color-titlebar: white;
 	--color-sidenav: white;
 	--color-header: #F9F9F9;
+
+	--table-bg: white;
 	
 	--text: black;
 	--text-inverse: white;
@@ -70,6 +73,7 @@
 	--color-header: rgb(24, 24, 24);
 
 	--card-bg:rgb(41, 41, 41);
+	--table-bg: #292929;
 
 	--text: white;
 	--text-inverse: black;
@@ -87,6 +91,7 @@
 	--color-header: #1f293a;
 
 	--card-bg:#1D2636;
+	--table-bg: #1f293a;
 
 	--text: #92ABCF;
 	--text-inverse: black;
@@ -239,6 +244,14 @@ input[type=number] {
 
 .text-light {
 	color: var(--text-light);
+}
+
+.table-bg {
+	background-color: var(--table-bg)!important;
+}
+
+.bg-transparent {
+	background-color: transparent!important;
 }
 
 .text-red {
