@@ -77,7 +77,10 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 				this.participant = p;
 
 				if (this.participant?.group) {
-					this.warning = this.translate.instant("Text.Group.NotEnoughMembers", { minSize: this.course.getMinGroupSizeRequirement()});
+					const group = new Group(this.participant.group);
+					if (group.hasNotEnoughMembers(this.course)) {
+						this.warning = this.translate.instant("Text.Group.NotEnoughMembers", { minSize: this.course.getMinGroupSizeRequirement()});
+					}
 				}
 			});
 		});

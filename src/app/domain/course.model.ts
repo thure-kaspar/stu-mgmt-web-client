@@ -36,4 +36,8 @@ export class Course implements CourseDto {
 		return this.groupSettings.sizeMin;
 	}
 
+	getMaxAllowedGroupSize(): number {
+		return this.groupSettings.sizeMax;
+	}
+
 }

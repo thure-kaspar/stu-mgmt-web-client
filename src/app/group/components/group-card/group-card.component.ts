@@ -33,9 +33,9 @@ export class GroupCardComponent implements OnInit {
 				private dialogService: DialogService) { }
 
 	ngOnInit(): void {
-		if (this.group.members.length >= this.course.getMaxAllowedGroupSize()) {
-			this.cssClass = "text-red";
-		} else if (this.group.members.length < this.course.getMinGroupSizeRequirement()) {
+		if (this.group.isFull(this.course)) {
+			this.cssClass = "CRITICAL";
+		} else if (this.group.hasNotEnoughMembers(this.course)) {
 			this.cssClass = "WARNING";
 		}
 	}
