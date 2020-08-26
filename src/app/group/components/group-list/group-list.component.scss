@@ -2,6 +2,14 @@
 	margin-bottom: 8px;
 }
 
+.warning {
+	padding-top: 16px;
+	mat-icon {
+		margin-right: 8px;
+		vertical-align: sub;
+	}
+}
+
 .participant-group-card {	
 	margin-top: -8px;
 	width: fit-content;

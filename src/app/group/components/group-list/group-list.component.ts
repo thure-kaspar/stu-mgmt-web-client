@@ -13,6 +13,8 @@ import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
 import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
+import { TranslateService } from "@ngx-translate/core";
+import { Course } from "../../../domain/course.model";
 
 class GroupFilter {
 	name?: string;
@@ -35,9 +37,11 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	private groupsSubject = new BehaviorSubject<Group[]>([]);
 	groups$ = this.groupsSubject.asObservable();
 
+	private course: Course;
 	private groups: Group[] = [];
-	groupSettings: GroupSettingsDto;
 	
+	warning: string;
+
 	filter = new GroupFilter();
 	nameFilterChangedSubject = new Subject();
 	filterSubject = new Subject();
@@ -53,19 +57,31 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	
 	constructor(private dialog: MatDialog,
 				public participantFacade: ParticipantFacade,
-				private courseFacade: CourseFacade,
+				public courseFacade: CourseFacade,
 				private groupService: GroupsService,
 				private courseConfig: CourseConfigService,
 				private courseParticipantsService: CourseParticipantsService,
 				private snackbar: SnackbarService,
+				private translate: TranslateService,
 				private router: Router,
 				private route: ActivatedRoute) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-		this.participant$ = this.participantFacade.participant$;
-		this.subs.sink = this.participant$.subscribe(p => this.participant = p);
 
+		this.subs.sink = this.courseFacade.course$.subscribe(course => {
+			this.course = course;
+
+			this.participant$ = this.participantFacade.participant$;
+			this.subs.sink = this.participant$.subscribe(p => {
+				this.participant = p;
+
+				if (this.participant?.group) {
+					this.warning = this.translate.instant("Text.Group.NotEnoughMembers", { minSize: this.course.getMinGroupSizeRequirement()});
+				}
+			});
+		});
+		
 		this.loadGroups();
 
 		this.subs.sink = this.nameFilterChangedSubject.pipe(debounceTime(300))
@@ -73,10 +89,6 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 		this.subs.sink = this.filterSubject.subscribe(() => {
 			this.loadInitialGroups();
-		});
-
-		this.subs.sink = this.courseFacade.course$.subscribe(course => {
-			this.groupSettings = course?.groupSettings;
 		});
 	}
 
@@ -178,7 +190,6 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 					...this.groups[index],
 					members: [...this.groups[index].members, event.participant]
 				});
-				//this.groups = [...this.groups];
 			},
 			error: (error) => {
 				console.log(error);
