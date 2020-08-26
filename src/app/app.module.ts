@@ -47,7 +47,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 			positionClass: "toast-bottom-right"
 		}),
 		TranslateModule.forRoot({
-			defaultLanguage: localStorage.getItem("language") ?? "en",
+			defaultLanguage: localStorage.getItem("language") ?? "de",
 			loader: {
 				provide: TranslateLoader,
 				useFactory: (createTranslateLoader),
