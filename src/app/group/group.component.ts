@@ -15,7 +15,6 @@ export class GroupComponent implements OnInit {
 
 	ngOnInit(): void {
 		const courseId = getRouteParam("courseId", this.route);
-		this.courseFacade.loadGroupSettings(courseId);
 	}
 
 }

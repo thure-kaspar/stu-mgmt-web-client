@@ -60,7 +60,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		this.subs.sink = this.participantFacade.participant$.subscribe(p => {
 			this.participant = p;
 		});
-		this.subs.sink = this.courseFacade.groupSettings$.subscribe(settings => this.groupSettings = settings);
+		this.subs.sink = this.courseFacade.course$.subscribe(c => this.groupSettings = c?.groupSettings);
 	}
 
 	loadGroup(): void {

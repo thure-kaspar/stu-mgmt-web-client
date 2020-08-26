@@ -36,8 +36,10 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 				private snackbar: SnackbarService) { super(); }
 
 	ngOnInit(): void {
-		this.subs.sink = this.courseFacade.course$.subscribe(c => this.course = c);
-		this.subs.sink = this.courseFacade.groupSettings$.subscribe(settings => this.groupSettings);
+		this.subs.sink = this.courseFacade.course$.subscribe(c => {
+			this.course = c;
+			this.groupSettings = c.groupSettings;
+		});
 		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
 
 		this.loadGroup();

@@ -75,8 +75,8 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 			this.loadInitialGroups();
 		});
 
-		this.subs.sink = this.courseFacade.groupSettings$.subscribe(settings => {
-			this.groupSettings = settings;
+		this.subs.sink = this.courseFacade.course$.subscribe(course => {
+			this.groupSettings = course?.groupSettings;
 		});
 	}
 

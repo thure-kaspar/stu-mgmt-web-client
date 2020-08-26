@@ -1,54 +1,40 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
-import { tap, filter } from "rxjs/operators";
-import { CourseDto, CoursesService, CourseConfigService, GroupSettingsDto } from "../../../../api";
+import { BehaviorSubject, forkJoin, Observable } from "rxjs";
+import { map, tap } from "rxjs/operators";
+import { CourseConfigService, CoursesService } from "../../../../api";
 import { Course } from "../../domain/course.model";
 
 @Injectable()
 export class CourseFacade {
 
 	private courseSubject = new BehaviorSubject<Course>(undefined);
-	/** Emits the currently loaded course. */
+	/** Emits the currently loaded course (includes group settings). */
 	course$ = this.courseSubject.asObservable();
-
-	private groupSettingsSubject = new BehaviorSubject<GroupSettingsDto>(undefined);
-	/** Emits the group settings of the currently loaded course. */
-	groupSettings$ = this.groupSettingsSubject.asObservable();
 
 	constructor(private courseService: CoursesService,
 				private courseConfigService: CourseConfigService,
 				private router: Router,
 				private dialog: MatDialog) { }
 
-	loadCourse(courseId: string): Observable<CourseDto> {
-		return this.courseService.getCourseById(courseId).pipe(
-			tap(course => {
-				this.courseSubject.next(new Course(course));
-				console.log("Current course:", course);
-			})
-		);
-	}
-
-	/**
-	 * Loads the group settings of a course and emits them via `groupSettings$`.
-	 */
-	loadGroupSettings(courseId: string): void {
-		this.courseConfigService.getGroupSettings(courseId).subscribe(
-			settings => {
-				const course = new Course(this.courseSubject.getValue());
-				course.setGroupSettings(settings);
-
+	loadCourse(courseId: string): Observable<Course> {
+		return forkJoin([
+			this.courseService.getCourseById(courseId),
+			this.courseConfigService.getGroupSettings(courseId)
+		]).pipe(
+			map((value) => {
+				const course = new Course(value[0]);
+				course.setGroupSettings(value[1]);
+				return course;
+			}),
+			tap((course) => {
 				this.courseSubject.next(course);
-				this.groupSettingsSubject.next(settings);
-
-				// console.log("Current course:", course);
-				// console.log("Group settings:", settings);
-			}
+				console.log("Current course:", course);
+			}),
+		//	catchError(error => of)
 		);
 	}
-
 
 	/**
 	 * Clears the current course and group settings.
@@ -56,7 +42,6 @@ export class CourseFacade {
 	 */
 	clear(): void {
 		this.courseSubject.next(undefined);
-		this.groupSettingsSubject.next(undefined);
 	}
 
 }

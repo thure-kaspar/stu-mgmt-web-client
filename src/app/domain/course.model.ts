@@ -9,7 +9,7 @@ export class Course implements CourseDto {
 	isClosed: boolean;
 	link?: string;
 
-	groupSettings?: GroupSettingsDto;
+	groupSettings: GroupSettingsDto;
 
 	constructor(dto: CourseDto) {
 		this.id = dto.id;
