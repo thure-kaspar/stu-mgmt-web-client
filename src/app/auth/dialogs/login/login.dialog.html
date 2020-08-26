@@ -15,14 +15,18 @@
 			<mat-icon matSuffix class="icon-light">lock</mat-icon>
 		</mat-form-field><br>
 
-		<div id="error-container">
-			<mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+		<div id="error-container" *ngIf="!loading">
+			<mat-error *ngIf="errorMessage">{{errorMessage | translate}}</mat-error>
+		</div>
+
+		<div class="loading" *ngIf="loading">
+			<mat-spinner color="accent" [diameter]="32"></mat-spinner>
 		</div>
 
 	</div>
 
 	<div mat-dialog-actions class="dialog-actions">
-		<button mat-raised-button color="accent" id="btn-login" (click)="onLogin()">Login</button>
+		<button mat-raised-button color="accent" id="btn-login" (click)="onLogin()" [disabled]="loading">Login</button>
 	</div>
 
 </div>
