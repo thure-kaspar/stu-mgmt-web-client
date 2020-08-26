@@ -201,6 +201,14 @@ input[type=number] {
 	justify-content: space-between!important;
 }
 
+mat-card {
+	background-color: var(--card-bg)!important;
+}
+
+table {
+	background-color: var(--table-bg)!important;
+}
+
 .center {
 	margin-left: auto;
 	margin-right: auto;
