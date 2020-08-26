@@ -1,21 +1,23 @@
-<mat-card id="login-form-container">
-	<mat-card-title>Login</mat-card-title>
-	<mat-card-content>
-
-		<mat-form-field class="form-field">
-			<mat-label for="email">Email</mat-label>
-			<input [(ngModel)]="email" matInput type="text" name="email" id="email" (keydown.enter)="login()">
-		</mat-form-field>
-
-		<mat-hint>Use the email of any test account to login.</mat-hint>
-
-		<div class="form-buttons">
-			<button mat-raised-button color="accent" type="submit" class="full-width" id="login-button" (click)="login()">Login</button>
-			<button mat-flat-button color="primary" (click)="loginAsTutor()">Login as: Tutor</button>
-			<button mat-flat-button color="primary" (click)="loginAsLecturer()">Login as: Lecturer</button>
-		</div>
-
-		<p *ngIf="errorMessage != null" id="error-message">{{errorMessage}}</p>
-
-	</mat-card-content>
-</mat-card>
+<div class="tab">
+	<mat-card id="login-form-container">
+		<mat-card-title>Login</mat-card-title>
+		<mat-card-content>
+	
+			<mat-form-field class="form-field">
+				<mat-label for="email">Email</mat-label>
+				<input [(ngModel)]="email" matInput type="text" name="email" id="email" (keydown.enter)="login()">
+			</mat-form-field>
+	
+			<mat-hint>Use the email of any test account to login.</mat-hint>
+	
+			<div class="form-buttons">
+				<button mat-raised-button color="accent" type="submit" class="full-width" id="login-button" (click)="login()">Login</button>
+				<button mat-flat-button color="primary" (click)="loginAsTutor()">Login as: Tutor</button>
+				<button mat-flat-button color="primary" (click)="loginAsLecturer()">Login as: Lecturer</button>
+			</div>
+	
+			<p *ngIf="errorMessage != null" id="error-message">{{errorMessage}}</p>
+	
+		</mat-card-content>
+	</mat-card>
+</div>

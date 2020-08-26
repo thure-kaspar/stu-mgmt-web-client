@@ -10,14 +10,12 @@ export class ToastService {
 	
 	/** Displays a success-themed toast message. */			
 	success(message?: string, title?: string, override?: Partial<IndividualConfig>): void {
-		console.log(this.tryGetTranslation(title));
-		console.log(this.tryGetTranslation(message));
 		this.toast.success(this.tryGetTranslation(message), this.tryGetTranslation(title), override);
 	}
 
 	/** Displays an error-themed toast message. */
 	error(message?: string, title?: string, override?: Partial<IndividualConfig>): void {
-		this.toast.error(this.tryGetTranslation(message), this.tryGetTranslation(title), override);;
+		this.toast.error(this.tryGetTranslation(message), this.tryGetTranslation(title), override);
 	}
 
 	/** Displays a warning-themed toast message. */

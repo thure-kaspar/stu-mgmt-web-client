@@ -4,7 +4,7 @@
 	<ng-container *ngIf="(participantFacade.participant$ | async) as participant">
 		<div class="title-buttons">
 			<button mat-flat-button color="primary" (click)="registerCurrentGroups()" [disabled]="participant.role !== 'LECTURER'">
-				{{ 'Action.Custom.RegisterCurrentGroups' | translate }}
+				{{ 'Action.Custom.RegisterAllGroups' | translate }}
 			</button>
 			<button mat-flat-button color="primary" (click)="unregisterAllGroups()" [disabled]="participant.role !== 'LECTURER'">
 				{{ 'Action.Custom.UnregisterAllGroups' | translate }}

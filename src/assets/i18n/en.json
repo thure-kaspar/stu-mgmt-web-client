@@ -20,7 +20,7 @@
       "CreateCourse": "Create course",
       "LeaveCourse": "Leave course",
       "LeaveGroup": "Leave group",
-      "RegisterCurrentGroups": "Register current groups",
+      "RegisterAllGroups": "Register current groups",
       "RemoveGroup": "Remove group",
       "RemoveParticipant": "Remove participant",
       "RemoveUserFromGroup": "Remove user from group",
