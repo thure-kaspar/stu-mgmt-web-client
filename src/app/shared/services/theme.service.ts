@@ -6,11 +6,23 @@ import { distinctUntilChanged } from "rxjs/operators";
 export class ThemeService {
 
 	availableThemes = [
-		"default-theme",
-		"dark-theme",
-		"blue-theme",
-		"green-theme"
-	]
+		{
+			cssClass: "default-theme",
+			name: "Default"
+		},
+		{
+			cssClass: "dark-theme",
+			name: "Dark"
+		},
+		{
+			cssClass: "blue-theme",
+			name: "Blue"
+		},
+		{
+			cssClass: "green-theme",
+			name: "Green"
+		}
+	] as const;
 
 	private themeSubject: BehaviorSubject<string>;
 	theme$: Observable<string>;
@@ -21,7 +33,7 @@ export class ThemeService {
 
 		if (!storedTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
 			theme = "dark-theme";
-		} else if(storedTheme && this.availableThemes.includes(storedTheme)) {
+		} else if(storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
 			theme = storedTheme;
 		} else {
 			theme = "default-theme";
@@ -36,12 +48,12 @@ export class ThemeService {
 	 * Emits the new theme via `theme$` and stores it in the storage.
 	 * Theme must be included in `availableThemes`.
 	 */
-	setTheme(theme: string): void {
-		if (this.availableThemes.includes(theme)) {
-			localStorage.setItem("theme", theme);
-			this.themeSubject.next(theme);
+	setTheme(cssClass: string): void {
+		if (this.availableThemes.find(t => t.cssClass === cssClass)) {
+			localStorage.setItem("theme", cssClass);
+			this.themeSubject.next(cssClass);
 		} else {
-			console.error(`Theme '${theme}' is not a registered theme.`);
+			console.error(`Theme '${cssClass}' is not a registered theme.`);
 		}
 	}
 

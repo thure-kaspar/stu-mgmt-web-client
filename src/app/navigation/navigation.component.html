@@ -29,10 +29,7 @@
 				
 				<button mat-menu-item [matMenuTriggerFor]="themeMenu">Theme</button>
 				<mat-menu #themeMenu="matMenu">
-					<button mat-menu-item (click)="theme.setTheme('default-theme')">Default</button>
-					<button mat-menu-item (click)="theme.setTheme('dark-theme')">Dark</button>
-					<button mat-menu-item (click)="theme.setTheme('blue-theme')">Blue</button>
-					<button mat-menu-item (click)="theme.setTheme('green-theme')">Green</button>
+					<button mat-menu-item *ngFor="let t of theme.availableThemes" (click)="theme.setTheme(t.cssClass)">{{t.name}}</button>
 				</mat-menu>
 				<button mat-menu-item (click)="copyJwtToClipboard()">Copy JWT to clipboard</button>
 			</div>
