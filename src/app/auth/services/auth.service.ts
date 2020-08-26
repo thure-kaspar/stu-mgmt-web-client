@@ -68,7 +68,7 @@ export class AuthService {
 		localStorage.removeItem(this.studentMgmtTokenKey);
 		localStorage.removeItem(this.extAuthTokenKey);
 		this.userInfoSubject.next(null);
-		this.router.navigate(["/login"]);
+		this.router.navigate(["/courses"]);
 	}
 
 	/**
