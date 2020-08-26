@@ -11,6 +11,7 @@ import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { Subject } from "rxjs";
 import { ToastService } from "../../../shared/services/toast.service";
+import { filter } from "rxjs/operators";
 
 @Component({
 	selector: "app-assignment-card",
@@ -39,7 +40,9 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-		this.subs.sink = this.participantFacade.participant$.subscribe(p => {
+		this.subs.sink = this.participantFacade.participant$.pipe(
+			filter(p => !!p) // Only perform the following check once participant is loaded
+		).subscribe(p => {
 			this.participant = p;
 
 			if (this.shouldLoadGroup(this.assignment, this.participant)) {
