@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { CourseParticipantsService, GroupDto, GroupsService, ParticipantDto } from "../../../../api";
+import { CourseParticipantsService, GroupDto, GroupsService, ParticipantDto, AssignmentGroupTuple, UsersService } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
 import { Participant } from "../../domain/participant.model";
 import { DialogService } from "../../shared/services/dialog.service";
@@ -16,12 +16,16 @@ export class ParticipantFacade {
 	private participantSubject = new BehaviorSubject<Participant>(undefined);
 	participant$ = this.participantSubject.asObservable();
 
+	private assignmentGroupsSubject = new BehaviorSubject<AssignmentGroupTuple[]>(undefined);
+	assignmentGroups$ = this.assignmentGroupsSubject.asObservable();
+
 	private userId: string;
 	private courseId: string;
 
 	constructor(private courseParticipants: CourseParticipantsService,
 				private groupService: GroupsService,
 				private courseFacade: CourseFacade,
+				private userService: UsersService,
 				private authService: AuthService,
 				private snackbar: SnackbarService,
 				private dialogService: DialogService,
@@ -33,7 +37,7 @@ export class ParticipantFacade {
 			if (info) {
 				this.userId = info.userId;
 			} else {
-				this.participantSubject.next(undefined);
+				this.clear();
 				this.userId = undefined;
 			}
 		});
@@ -78,6 +82,18 @@ export class ParticipantFacade {
 		);
 	}
 
+	loadAssignmentGroups(): void {
+		this.userService.getGroupOfAllAssignments(this.userId, this.courseId).subscribe(
+			tuples => {
+				this.assignmentGroupsSubject.next(tuples);
+			}
+		);
+	}
+
+	clearAssignmentGroups(): void {
+		this.assignmentGroupsSubject.next(undefined);
+	}
+
 	/**
 	 * Reloads the current participant.
 	 */
@@ -114,7 +130,7 @@ export class ParticipantFacade {
 			},
 			error => {
 				console.log(error);
-				this.participantSubject.next(undefined);
+				this.clear();
 			}
 		);
 	}
@@ -131,10 +147,15 @@ export class ParticipantFacade {
 				if (course) {
 					this.loadParticipant(course.id, this.userId);	
 				} else {
-					this.participantSubject.next(undefined);
+					this.clear();
 				}
 			}
 		);
+	}
+
+	clear(): void {
+		this.participantSubject.next(undefined);
+		this.clearAssignmentGroups();
 	}
 
 }
