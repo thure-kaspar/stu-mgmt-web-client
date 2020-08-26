@@ -295,6 +295,63 @@ export class AssignmentRegistrationService {
     }
 
     /**
+     * Register group.
+     * Registers a group and its members for the assignment.
+     * @param courseId 
+     * @param assignmentId 
+     * @param groupId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public registerGroup(courseId: string, assignmentId: string, groupId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public registerGroup(courseId: string, assignmentId: string, groupId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public registerGroup(courseId: string, assignmentId: string, groupId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public registerGroup(courseId: string, assignmentId: string, groupId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling registerGroup.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling registerGroup.');
+        }
+
+        if (groupId === null || groupId === undefined) {
+            throw new Error('Required parameter groupId was null or undefined when calling registerGroup.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/registrations/groups/${encodeURIComponent(String(groupId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Register participant as group member.
      * Registers a participant as a member of the specified group for the assignment.
      * @param courseId 

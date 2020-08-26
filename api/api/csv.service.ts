@@ -55,53 +55,6 @@ export class CsvService {
 
 
     /**
-     * 
-     * 
-     * @param courseId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getPointsOverview(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public getPointsOverview(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public getPointsOverview(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public getPointsOverview(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling csvControllerGetPointsOverview.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearer) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<any>('get',`${this.basePath}/csv/courses/${encodeURIComponent(String(courseId))}/admission-status/overview`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Get participants.
      * Returns a .csv file containing the participants of the specified course. Requires LECTURER or TUTOR role.
      * @param courseId 
@@ -139,6 +92,53 @@ export class CsvService {
         ];
 
         return this.httpClient.request<any>('get',`${this.basePath}/csv/courses/${encodeURIComponent(String(courseId))}/users`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get points overview.
+     * Returns a .csv file containing the achieved points of every student for all assignments of the specified course. Requires LECTURER or TUTOR role.
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getPointsOverview(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getPointsOverview(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getPointsOverview(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getPointsOverview(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getPointsOverview.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/csv/courses/${encodeURIComponent(String(courseId))}/admission-status/overview`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
