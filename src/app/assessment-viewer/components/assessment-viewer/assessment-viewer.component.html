@@ -16,7 +16,7 @@
 				</button>
 			</span>
 
-			<div *ngIf="showEvents" class="events">
+			<div *ngIf="showEvents && participant?.isLecturerOrTutor()" class="events">
 				<ng-container *ngIf="assessmentEvents$ | async as events; else noEvents">
 					<span *ngFor="let event of events">
 						[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
