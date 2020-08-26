@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
-import { map, filter } from "rxjs/operators";
+import { filter, map } from "rxjs/operators";
 import { AssignmentDto } from "../../../../../api";
 import { CourseFacade } from "../../../course/services/course.facade";
 import { ParticipantFacade } from "../../../course/services/participant.facade";
@@ -32,7 +32,7 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	assignments$: Observable<AssignmentsStateMap>;
 	participant: Participant;
 
-	constructor(public course: CourseFacade,
+	constructor(public courseFacade: CourseFacade,
 				private participantFacade: ParticipantFacade,
 				private assignmentManagement: AssignmentManagementFacade,
 				private route: ActivatedRoute,

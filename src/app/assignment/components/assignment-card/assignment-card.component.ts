@@ -12,6 +12,8 @@ import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-
 import { ToastService } from "../../../shared/services/toast.service";
 import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/edit-assignment/edit-assignment.dialog";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
+import { Course } from "../../../domain/course.model";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
 	selector: "app-assignment-card",
@@ -22,6 +24,8 @@ import { AssignmentManagementFacade } from "../../services/assignment-management
 export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	@Input() assignment: AssignmentDto;
+	@Input() course: Course;
+
 	group$ = new Subject<GroupDto>();
 
 	participant: Participant;
@@ -44,6 +48,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 				private dialog: MatDialog,
 				private assignmentManagement: AssignmentManagementFacade,
 				private userService: UsersService,
+				private translate: TranslateService,
 				private toast: ToastService) { super(); }
 
 	ngOnInit(): void {
@@ -68,6 +73,9 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 			if (!group && this.assignment.state === "IN_PROGRESS") {
 				this.warning = "Text.Group.NoGroupForAssignment";
 				this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
+			} else if (group.members.length < this.course.getMinGroupSizeRequirement()) {
+				this.warning = this.translate.instant("Text.Group.NotEnoughMembers", { minSize: this.course.getMinGroupSizeRequirement()});
+				this.toast.warning("Text.Group.NotEnoughMembers", this.assignment.name, { minSize: this.course.getMinGroupSizeRequirement()});
 			}
 
 			this.group$.next(group);
