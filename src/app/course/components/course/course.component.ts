@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CourseDto, CoursesService } from "../../../../../api";
@@ -17,7 +17,7 @@ import { ParticipantFacade } from "../../services/participant.facade";
 	styleUrls: ["./course.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
+export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnDestroy {
 
 	private course: CourseDto;
 
@@ -39,7 +39,7 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 	 */
 	loadCourse(): void {
 		const courseId = this.route.snapshot.paramMap.get("courseId");
-		this.courseFacade.loadCourse(courseId).subscribe({
+		this.subs.sink = this.courseFacade.loadCourse(courseId).subscribe({
 			next: (course) => this.course = course,
 			error: (error) => {
 				// If user is not a member of this course, open JoinCourseDialog
@@ -48,6 +48,7 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 						joined => {
 							if (joined) {
 								// If user joined, try load the course again
+								this.loadCourse();
 							} else {
 								this.router.navigateByUrl("courses");
 							}
@@ -82,6 +83,11 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 					}
 				}
 			);
+	}
+
+	ngOnDestroy(): void {
+		super.ngOnDestroy();
+		this.courseFacade.clear();
 	}
 
 }

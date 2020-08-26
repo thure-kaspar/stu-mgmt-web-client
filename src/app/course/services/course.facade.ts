@@ -11,11 +11,11 @@ export class CourseFacade {
 
 	private courseSubject = new BehaviorSubject<Course>(undefined);
 	/** Emits the currently loaded course. */
-	course$ = this.courseSubject.asObservable().pipe(filter(x => !!x));;
+	course$ = this.courseSubject.asObservable();
 
 	private groupSettingsSubject = new BehaviorSubject<GroupSettingsDto>(undefined);
 	/** Emits the group settings of the currently loaded course. */
-	groupSettings$ = this.groupSettingsSubject.asObservable().pipe(filter(x => !!x));
+	groupSettings$ = this.groupSettingsSubject.asObservable();
 
 	constructor(private courseService: CoursesService,
 				private courseConfigService: CourseConfigService,
@@ -48,4 +48,15 @@ export class CourseFacade {
 			}
 		);
 	}
+
+
+	/**
+	 * Clears the current course and group settings.
+	 * Should be called when a user navigates away from a course.
+	 */
+	clear(): void {
+		this.courseSubject.next(undefined);
+		this.groupSettingsSubject.next(undefined);
+	}
+
 }
