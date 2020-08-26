@@ -1,0 +1,16 @@
+#search-group-dialog {
+	display: flex;
+	flex-direction: column;
+	height: 700px;
+	width: 600px;
+}
+
+.dialog-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.dialog-actions {
+	padding-bottom: 8px;
+}

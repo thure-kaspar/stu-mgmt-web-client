@@ -12,6 +12,7 @@ import { GroupRoutingModule } from "./group-routing.module";
 import { GroupCardComponent } from "./components/group-card/group-card.component";
 import { EditGroupDialog } from "./dialogs/edit-group/edit-group.dialog";
 import { GroupComponent } from "./group.component";
+import { SearchGroupDialog } from "./dialogs/search-group/search-group.dialog";
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { GroupComponent } from "./group.component";
 		GroupDetailComponent,
 		GroupCardComponent,
 		EditGroupDialog,
+		SearchGroupDialog,
 	],
 	imports: [
 		SharedModule,
