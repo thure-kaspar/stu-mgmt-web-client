@@ -17,7 +17,7 @@
 	justify-content: space-between;
 	display: flex;
 	//padding-top: 4px;
-	padding-bottom: 8px;
+	padding-bottom: 12px;
 
 	.name {
 		font-size: 18px;
@@ -51,7 +51,7 @@
 }
 
 .dates {
-	margin-bottom: 8px;
+	margin-bottom: 12px;
 	display: flex;
 	flex-direction: column;
 }
@@ -66,6 +66,13 @@
 
 .TESTAT {
 	background-color: rgb(194, 149, 0)!important;
+}
+
+.warning {
+	mat-icon {
+		margin-right: 8px;
+		vertical-align: sub;
+	}
 }
 
 .group-title {

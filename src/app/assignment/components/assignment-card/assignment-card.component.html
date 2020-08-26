@@ -1,11 +1,17 @@
 <mat-card class="assignment mat-elevation-z2">
 	<mat-card-title class="assignment-card-title">
 		<span class="name font-bold">
-			<a class="link-none" [routerLink]="[ assignment.id, 'assessments']">{{assignment.name}}</a>
+			<a class="link-none" [routerLink]="[ assignment.id, 'assessments']" *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'; else noLink">
+				{{assignment.name}}
+			</a>
+			<ng-template #noLink>
+				<span>{{assignment.name}}</span>
+			</ng-template>
+			
 		</span>
 		
 		<mat-menu #assignmentMenu>
-			<ng-container *ngIf="participant?.isLecturerOrTutor()">
+			<ng-container *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
 				<button mat-menu-item (click)="openEditDialog()">
 					<mat-icon class="icon-light">edit</mat-icon>
 					<span class="font-bold">{{ 'Action.Edit' | translate }}</span>
@@ -63,6 +69,13 @@
 				<button mat-flat-button color="primary">{{member.username}}</button>
 			</a>
 		</div>
+	</div>
+
+	<div class="warning" *ngIf="warning">
+		<span class="WARNING">
+			<mat-icon>warning</mat-icon>
+			{{ warning | translate }}
+		</span>
 	</div>
 
 	<button mat-stroked-button *ngIf="stateEnum.EVALUATED === assignment.state">{{ 'Domain.Assessment' | translate }}</button>

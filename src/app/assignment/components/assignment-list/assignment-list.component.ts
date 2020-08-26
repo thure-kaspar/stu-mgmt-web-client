@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, filter } from "rxjs/operators";
 import { AssignmentDto } from "../../../../../api";
 import { CourseFacade } from "../../../course/services/course.facade";
 import { ParticipantFacade } from "../../../course/services/participant.facade";
@@ -25,7 +25,7 @@ class AssignmentsStateMap {
 	styleUrls: ["./assignment-list.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnInit {
+export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnInit, OnDestroy {
 
 	courseId: string;
 
@@ -41,7 +41,15 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	ngOnInit(): void {
 		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
 		this.assignmentManagement.loadAssignmentsOfCourse(this.courseId);
-		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
+		this.subs.sink = this.participantFacade.participant$.pipe(
+			filter(p => !!p) // Only perform the following check once participant is loaded
+		).subscribe(p => {
+			this.participant = p;
+
+			if (this.participant.isStudent()) {
+				this.participantFacade.loadAssignmentGroups();
+			}
+		});
 		
 		this.subscribeToAssignments();
 	}
@@ -61,6 +69,11 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 
 	openAddDialog(): void {
 		this.dialog.open(CreateAssignmentDialog, { data: this.courseId });
+	}
+
+	ngOnDestroy(): void {
+		super.ngOnDestroy();
+		this.participantFacade.clearAssignmentGroups();
 	}
 
 }

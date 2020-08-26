@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute } from "@angular/router";
-import { AssignmentDto, UsersService, GroupDto } from "../../../../../api";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/edit-assignment/edit-assignment.dialog";
-import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subject } from "rxjs";
+import { filter } from "rxjs/operators";
+import { AssignmentDto, GroupDto, UsersService, AssessmentsService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { Participant } from "../../../domain/participant.model";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
-import { Subject } from "rxjs";
 import { ToastService } from "../../../shared/services/toast.service";
-import { filter } from "rxjs/operators";
+import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/edit-assignment/edit-assignment.dialog";
+import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 
 @Component({
 	selector: "app-assignment-card",
@@ -26,13 +26,21 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 	participant: Participant;
 
+	/**
+	 * Can be used to display a warning about this assignment, i.e. "You have no group for this assignment."
+	 * Will be translated in the template.
+	 */
+	warning?: string;
+
 	typeEnum = AssignmentDto.TypeEnum;
 	stateEnum = AssignmentDto.StateEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 	courseId: string;
 
 	constructor(private participantFacade: ParticipantFacade,
+				private assessmentService: AssessmentsService,
 				private route: ActivatedRoute,
+				private router: Router,
 				private dialog: MatDialog,
 				private assignmentManagement: AssignmentManagementFacade,
 				private userService: UsersService,
@@ -45,37 +53,29 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		).subscribe(p => {
 			this.participant = p;
 
-			if (this.shouldLoadGroup(this.assignment, this.participant)) {
-				this.loadGroupOfAssignment(this.participant);
+			if (this.studentShouldHaveAGroup(this.assignment, this.participant)) {
+				this.displayGroupOrWarning();
 			}
 		});
-
 	}
 
-	private shouldLoadGroup(assignment: AssignmentDto, participant: Participant): boolean {
-		return this.assignment.state === AssignmentDto.StateEnum.INPROGRESS 
-			&& this.allowsGroups(assignment)
-			&& participant.isStudent();
-	}
+	private displayGroupOrWarning(): void {
+		this.subs.sink = this.participantFacade.assignmentGroups$.pipe(
+			filter(p => !!p), // Only perform the following check once participant is loaded
+		).subscribe(tuples => {
+			const group = tuples.find(a => a.assignment.id === this.assignment.id)?.group;
 
-	private allowsGroups(assignment: AssignmentDto): boolean {
-		switch(assignment.collaboration) {
-		case AssignmentDto.CollaborationEnum.GROUP: return true;
-		case AssignmentDto.CollaborationEnum.GROUPORSINGLE: return true;
-		default: return false;
-		}
-	}
-
-	private loadGroupOfAssignment(participant: Participant): void {
-		this.subs.sink = this.userService.getGroupOfAssignment(participant.userId, this.courseId, this.assignment.id).subscribe(
-			group => {
-				console.log(`Group of ${this.assignment.name}:`, group);
-				this.group$.next(group);
-			},
-			error => {
-				this.toast.warning("You have no group for this assignment.", this.assignment.name);
+			if (!group && this.assignment.state === "IN_PROGRESS") {
+				this.warning = "Text.Group.NoGroupForAssignment";
+				this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
 			}
-		);
+
+			this.group$.next(group);
+		});
+	}
+
+	private studentShouldHaveAGroup(assignment: AssignmentDto, participant: Participant): boolean {
+		return assignment.collaboration === AssignmentDto.CollaborationEnum.GROUP && participant.isStudent();
 	}
 
 	openEditDialog(): void {
@@ -98,6 +98,20 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 				}
 			}
 		);
+	}
+
+	goToAssessment(assignmentId: string, userId: string): void {
+		this.subs.sink = this.assessmentService.getAssessmentsForAssignment(
+			this.courseId, assignmentId, 
+			undefined, undefined, undefined, undefined, 
+			userId
+		).subscribe(assessments => {
+			if (assessments.length == 1) {
+				this.router.navigate(["/courses", this.courseId, "assignments", assignmentId, "assessments", "view", assessments[0].id]);
+			} else {
+				this.toast.error("Failed to find the assessment.", "Not found");
+			}
+		});
 	}
 
 }
