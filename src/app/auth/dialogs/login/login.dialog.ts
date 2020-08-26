@@ -9,8 +9,8 @@ import { AuthControllerService, AuthenticationInfoDto } from "../../../../../api
 })
 export class LoginDialog implements OnInit {
 
-	username = "user";
-	password = "abcdefgh"
+	username: string;
+	password: string;
 	errorMessage: string;
 
 	constructor(private dialog: MatDialogRef<LoginDialog, AuthenticationInfoDto>,
