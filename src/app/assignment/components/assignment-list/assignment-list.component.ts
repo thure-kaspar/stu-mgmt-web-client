@@ -41,7 +41,7 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	ngOnInit(): void {
 		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
 		this.assignmentManagement.loadAssignmentsOfCourse(this.courseId);
-		this.participantFacade.participant$.subscribe(p => this.participant = p);
+		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
 		
 		this.subscribeToAssignments();
 	}
@@ -57,8 +57,6 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 				map.invisible = assignments.filter(a => a.state === "INVISIBLE");
 				return map;
 			}));
-
-		this.subs.sink = this.assignments$.subscribe();
 	}
 
 	openAddDialog(): void {
