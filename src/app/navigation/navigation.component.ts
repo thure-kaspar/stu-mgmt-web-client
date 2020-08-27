@@ -55,12 +55,6 @@ export class NavigationComponent implements OnInit {
 		this.theme.theme$.subscribe(
 			theme => this.onThemeChange(theme)
 		);
-
-		this.authService.userInfo$.pipe(
-			filter(info => !!info)
-		).subscribe(info => {
-			this.toast.success(info.username, "Common.Welcome");
-		});
 	}
 
 	onThemeChange(theme: string): void {

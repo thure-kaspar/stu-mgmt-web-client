@@ -103,6 +103,7 @@
 
 .green-theme {
 	height: 100%;
+	--link-active: green;
 }
 
 html, body { height: 100%; }
@@ -319,7 +320,7 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 }
 
 .INFORMATIONAL { font-weight: 500; color: rgb(0, 130, 173); }
-.WARNING { font-weight: 500; color:rgb(233, 185, 55); }
+.WARNING { font-weight: 500; color:rgb(211, 165, 38); }
 .ERROR { font-weight: 500; color: rgb(206, 134, 0); }
 .CRITICAL { font-weight: 500; color: red; }
 

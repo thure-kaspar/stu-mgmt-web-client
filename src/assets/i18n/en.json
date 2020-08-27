@@ -21,6 +21,7 @@
       "LeaveCourse": "Leave course",
       "LeaveGroup": "Leave group",
       "RegisterAllGroups": "Register current groups",
+      "RegisterGroup": "Register group",
       "RemoveGroup": "Remove group",
       "RemoveParticipant": "Remove participant",
       "RemoveUserFromGroup": "Remove user from group",
@@ -145,13 +146,18 @@
     }
   },
   "Error": {
+    "AlreadyInGroupException": "Participant is already in a group.",
     "Assessment": {
       "AchievedPointsMaxValueExceeded": "Achieved point exceeds the maximum amount of possible points."
     },
     "AssignmentNotInReview": "Assignment creation requires the \"In Review\"-state.",
+    "ConnectionRefused": "Failed to connect to the server.",
+    "EntityAlreadyExistsError": "Already exists.",
     "FailedToLoadRequiredData": "Failed to load the required data.",
+    "Forbidden": "You do not have the required permission to perform this action.",
+    "InvalidCredentials": "Invalid credentials.",
     "SomethingWentWrong": "Oops, something went wrong!",
-    "Unkown": "Unknown error",
+    "Unknown": "Unknown error",
     "ValueMissing": "Value is missing."
   },
   "Event": {
@@ -251,7 +257,9 @@
     "Group": {
       "CanNotBeClosed": "The group cannot be closed by students.",
       "CanNotBeRenamed": "This group cannot be renamed by students.",
-      "EmptyGroup": "This group is empty."
+      "EmptyGroup": "This group is empty.",
+      "NoGroupForAssignment": "You currently have no group for this assigmment.",
+      "NotEnoughMembers": "Group must have at least {{minSize}} members."
     },
     "GroupCreation": {
       "NameSchema": "This course is using a predefined prefix for group names.\nGroup name will be chosen automatically.",
@@ -272,6 +280,7 @@
     "ParticipantsList": "Participants list",
     "PointsOverview": "Points overview",
     "SearchCourse": "Search course",
+    "SearchGroup": "Search group",
     "SearchParticipant": "Search participant",
     "SearchUser": "Search user"
   },

@@ -21,6 +21,7 @@
       "LeaveCourse": "Kurs verlassen",
       "LeaveGroup": "Gruppe verlassen",
       "RegisterAllGroups": "Aktuelle Gruppen anmelden",
+      "RegisterGroup": "Gruppe anmelden",
       "RemoveGroup": "Gruppe entfernen",
       "RemoveParticipant": "Teilnehmer entfernen",
       "RemoveUserFromGroup": "Nutzer aus der Gruppe entfernen",
@@ -145,13 +146,18 @@
     }
   },
   "Error": {
+    "AlreadyInGroupException": "Teilnehmer gehört bereits zu einer Gruppe.",
     "Assessment": {
       "AchievedPointsMaxValueExceeded": "Erreichte Punktzahl übersteigt die maximal mögliche Punktzahl."
     },
     "AssignmentNotInReview": "Erstellung von Bewertungen benötigt den \"In Bewertung\"-Status.",
+    "ConnectionRefused": "Verbindung zum Server ist fehlgeschlagen.",
+    "EntityAlreadyExistsError": "Existiert bereits.",
     "FailedToLoadRequiredData": "Benötigte Daten konnten nicht geladen werden.",
+    "Forbidden": "Du hast nicht die benötigten Rechte für diese Aktion.",
+    "InvalidCredentials": "Ungültiger Nutzername oder Passwort.",
     "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
-    "Unkown": "Unbekannter Fehler",
+    "Unknown": "Unbekannter Fehler",
     "ValueMissing": "Fehlender Wert."
   },
   "Event": {
@@ -166,7 +172,7 @@
     "Error": "Fehler",
     "Removed": "Entfernt",
     "Saved": "Gespeichert",
-    "Success": "Erfolg"
+    "Success": "Aktion erfolgreich"
   },
   "Misc": {
     "BasicData": "Grunddaten",
@@ -251,7 +257,9 @@
     "Group": {
       "CanNotBeClosed": "Diese Gruppe kann nicht von Studenten geschlossen werden.",
       "CanNotBeRenamed": "Der Name der Gruppe kann von Studenten nicht verändert werden.",
-      "EmptyGroup": "Diese Gruppe hat keine Mitglieder."
+      "EmptyGroup": "Diese Gruppe hat keine Mitglieder.",
+      "NoGroupForAssignment": "Du hast noch keine Gruppe für diese Aufgabe.",
+      "NotEnoughMembers": "Gruppe muss mindestens {{minSize}} Mitglieder haben."
     },
     "GroupCreation": {
       "NameSchema": "Dieser Kurs verwendet vordefinierte Gruppennamen.\nDer Name der Gruppe wird automatisch generiert.",
@@ -272,6 +280,7 @@
     "ParticipantsList": "Teilnehmerliste",
     "PointsOverview": "Punkteübersicht",
     "SearchCourse": "Suche nach Veranstaltung",
+    "SearchGroup": "Suche nach Gruppe",
     "SearchParticipant": "Suche nach Teilnehmer",
     "SearchUser": "Suche nach Nutzer"
   },

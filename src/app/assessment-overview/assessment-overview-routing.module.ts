@@ -5,7 +5,7 @@ import { AssessmentAllocationOverviewComponent } from "./assessment-allocation-o
 import { CreatedAssessmentsComponent } from "./created-assessments/created-assessments.component";
 import { RegisteredGroupsComponent } from "./registered-groups/registered-groups.component";
 
-// courses/:courseId/assignments/:assignmentId/assessments/overview/
+// courses/:courseId/assignments/:assignmentId/assessments
 const routes: Routes = [
 	{ path: "", component: AssessmentOverviewComponent, children: [
 		{ path: "allocations", component: AssessmentAllocationOverviewComponent, pathMatch: "full" },

@@ -10,7 +10,7 @@ export class ToastService {
 				private translate: TranslateService) { }
 	
 	/** Displays a success-themed toast message. */			
-	success(message?: string, title?: string, interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
+	success(message?: string, title = "Message.Success", interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
 		this.toast.success(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), override);
 	}
 
@@ -23,11 +23,11 @@ export class ToastService {
 	 * Opens an error-themed toast and logs the error to the console
 	 * The error text will be determined by the error.
 	 */
-	apiError(error: HttpErrorResponse): void {
+	apiError(error: HttpErrorResponse, title?: string): void {
 		console.log(error);
 		const exception = error?.error?.error;
 		const translation = exception ? this.translate.instant("Error." + exception) : this.translate.instant("Error.Unknown");
-		this.error(translation);
+		this.error(translation, title);
 	}
 
 	/** Displays a warning-themed toast message. */
