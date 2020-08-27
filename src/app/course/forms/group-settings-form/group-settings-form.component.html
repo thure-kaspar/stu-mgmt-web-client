@@ -7,7 +7,6 @@
 					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
 					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
 				</mat-select>
-				<mat-hint>Allows participants to create groups.</mat-hint>
 				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 			
@@ -17,19 +16,39 @@
 					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
 					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
 				</mat-select>
-				<mat-hint>Allows participants to manage groups.</mat-hint>
 				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 			
+			<div class="group-size-settings">
+				<mat-form-field>
+					<mat-label>{{ 'Property.GroupSettings.SizeMin' | translate }}</mat-label>
+					<input matInput type="number" formControlName="sizeMin" required>
+					<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+				</mat-form-field>
+				
+				<mat-form-field>
+					<mat-label>{{ 'Property.GroupSettings.SizeMax' | translate }}</mat-label>
+					<input matInput type="number" formControlName="sizeMax" required>
+					<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+				</mat-form-field>
+			</div>
+
 			<mat-form-field>
-				<mat-label>{{ 'Property.GroupSettings.SizeMin' | translate }}</mat-label>
-				<input matInput type="number" formControlName="sizeMin" required>
+				<mat-label>{{ 'Property.GroupSettings.AutoJoinGroupOnCourseJoined' | translate }}</mat-label>
+				<mat-select formControlName="autoJoinGroupOnCourseJoined" required>
+					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
+					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
+				</mat-select>
+				<mat-hint>{{ 'Text.GroupSettings.AutoJoinGroupOnCourseJoined' | translate }}</mat-hint>
 				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
-			
+
 			<mat-form-field>
-				<mat-label>{{ 'Property.GroupSettings.SizeMax' | translate }}</mat-label>
-				<input matInput type="number" formControlName="sizeMax" required>
+				<mat-label>{{ 'Property.GroupSettings.MergeGroupsOnAssignmentStarted' | translate }}</mat-label>
+				<mat-select formControlName="mergeGroupsOnAssignmentStarted" required>
+					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
+					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
+				</mat-select>
 				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 

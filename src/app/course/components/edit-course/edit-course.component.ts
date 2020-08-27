@@ -59,7 +59,9 @@ export class EditCourseComponent implements OnInit {
 					nameSchema: [null],
 					sizeMin: [0, [Validators.required, Validators.min(0)]],
 					sizeMax: [3, [Validators.required, Validators.min(0)]],
-					selfmanaged: [false, Validators.required]
+					selfmanaged: [false, Validators.required],
+					autoJoinGroupOnCourseJoined: [false, Validators.required],
+					mergeGroupsOnAssignmentStarted: [false, Validators.required]
 				}),
 				admissionCriteria: this.fb.group({
 					criteria: this.fb.array([])
