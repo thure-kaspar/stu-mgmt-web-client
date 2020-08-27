@@ -2,7 +2,7 @@
 
 	<h2 class="title">
 		<span>{{ 'Domain.Assessment' | translate }}: {{assignment.name}}</span>
-		<button mat-flat-button color="accent" *ngIf="participant.isLecturerOrTutor()" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
+		<button mat-flat-button color="accent" *ngIf="participant?.isLecturerOrTutor()" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
 			{{ 'Action.Edit' | translate }}
 		</button>
 	</h2>
@@ -17,15 +17,13 @@
 			</span>
 
 			<div *ngIf="showEvents && participant?.isLecturerOrTutor()" class="events">
-				<ng-container *ngIf="assessmentEvents$ | async as events; else noEvents">
+				<ng-container *ngIf="assessmentEvents$ | async as events">
 					<span *ngFor="let event of events">
 						[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
 					</span>
+
+					<p *ngIf="events?.length == 0">{{ 'Common.None' | translate }}.</p>
 				</ng-container>
-				
-				<ng-template #noEvents>
-					<p *ngIf="(assessmentEvents$ | async)?.length == 0">{{ 'Common.None' | translate }}.</p>
-				</ng-template>
 			</div>
 		
 			<div class="assessment-target">
