@@ -31,7 +31,7 @@
 				<mat-menu #themeMenu="matMenu">
 					<button mat-menu-item *ngFor="let t of theme.availableThemes" (click)="theme.setTheme(t.cssClass)">{{t.name}}</button>
 				</mat-menu>
-				<button mat-menu-item (click)="copyJwtToClipboard()">Copy JWT to clipboard</button>
+				<button mat-menu-item (click)="copyJwtToClipboard()" *ngIf="_isDevelopmentEnv">Copy JWT to clipboard</button>
 			</div>
 		</mat-menu>
 		  
