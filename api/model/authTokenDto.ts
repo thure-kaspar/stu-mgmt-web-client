@@ -18,11 +18,11 @@ export interface AuthTokenDto {
     role: AuthTokenDto.RoleEnum;
 }
 export namespace AuthTokenDto {
-    export type RoleEnum = 'SYSTEM_ADMIN' | 'ADMIN_TOOL' | 'MGTM_ADMIN' | 'USER';
+    export type RoleEnum = 'SYSTEM_ADMIN' | 'ADMIN_TOOL' | 'MGMT_ADMIN' | 'USER';
     export const RoleEnum = {
         SYSTEMADMIN: 'SYSTEM_ADMIN' as RoleEnum,
         ADMINTOOL: 'ADMIN_TOOL' as RoleEnum,
-        MGTMADMIN: 'MGTM_ADMIN' as RoleEnum,
+        MGMTADMIN: 'MGMT_ADMIN' as RoleEnum,
         USER: 'USER' as RoleEnum
     };
 }
