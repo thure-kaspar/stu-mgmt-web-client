@@ -74,7 +74,7 @@
 				<ng-container matColumnDef="name">
 					<th class="name-column" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Assignment' | translate }}</th>
 					<td class="name-column" mat-cell *matCellDef="let row"> 
-						<a class="link-none font-bold" [routerLink]="['todo']">
+						<a class="link-none font-bold" [routerLink]="['/courses', courseId, 'assignments', row.assignmentId, 'assessments', 'view', row.id]">
 							{{row.assignment.name}}
 						</a> 
 					</td>
