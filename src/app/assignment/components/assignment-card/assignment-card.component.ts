@@ -71,7 +71,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 			const group = tuples.find(a => a.assignment.id === this.assignment.id)?.group;
 
 			if (!group && this.assignment.state === "IN_PROGRESS") {
-				this.warning = "Text.Group.NoGroupForAssignment";
+				this.warning = this.translate.instant("Text.Group.NoGroupForAssignment");
 				this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
 			} else if (group?.members.length < this.course.getMinGroupSizeRequirement()) {
 				this.warning = this.translate.instant("Text.Group.NotEnoughMembers", { minSize: this.course.getMinGroupSizeRequirement()});
