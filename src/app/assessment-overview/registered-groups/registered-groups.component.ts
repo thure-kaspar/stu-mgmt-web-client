@@ -11,6 +11,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { SearchParticipantDialog } from "../../shared/components/dialogs/search-participant/search-participant.dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { ParticipantFacade } from "../../course/services/participant.facade";
+import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
+import { ToastService } from "../../shared/services/toast.service";
 
 @Component({
 	selector: "app-registered-groups",
@@ -21,6 +23,8 @@ import { ParticipantFacade } from "../../course/services/participant.facade";
 export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<GroupDto>([]));
+
+	hasRegisteredGroups = false;
 	
 	courseId: string;
 	assignmentId: string;
@@ -33,6 +37,7 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 				private route: ActivatedRoute,
 				private dialogService: DialogService,
 				private dialog: MatDialog,
+				private toast: ToastService,
 				private snackbar: SnackbarService) { super(); }
 
 	ngOnInit(): void {
@@ -48,12 +53,37 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 	private loadRegistrations(): void {
 		this.subs.sink = this.registrations.getRegisteredGroups(this.courseId, this.assignmentId).subscribe({
 			next: (result) => {
+				this.hasRegisteredGroups = result.length > 0;
 				this.dataSource$.next(new MatTableDataSource(result));
 			},
 			error: (error) => {
-				this.snackbar.openApiExceptionMessage(error);
+				this.toast.apiError(error);
 			}
 		});
+	}
+
+	/**
+	 * Opens the `SearchGroupDialog` and registers the selected groups with their members.
+	 */
+	registerGroup(): void {
+		this.subs.sink = this.dialog.open<SearchGroupDialog, any, GroupDto[]>(SearchGroupDialog, { data: this.courseId }).afterClosed().subscribe(
+			groups => {
+				if (groups?.length > 0) {
+					groups.forEach(group => {
+						this.registrations.registerGroup(this.courseId, this.assignmentId, group.id).subscribe({
+							next: () => {
+								this.toast.success();
+								this.loadRegistrations();
+							},
+							error: (error) => {
+								console.log(error);
+								this.toast.apiError(error, group.name);
+							}
+						});
+					});
+				}
+			}
+		);
 	}
 
 	/**
@@ -68,11 +98,11 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 				if (confirmed) {
 					this.registrations.registerAllGroups(this.courseId, this.assignmentId).subscribe({
 						next: () => {
-							this.snackbar.openSuccessMessage();
+							this.toast.success();
 							this.loadRegistrations();
 						},
 						error: (error) => {
-							this.snackbar.openApiExceptionMessage(error);
+							this.toast.apiError(error);
 						}
 					});
 				}
@@ -92,11 +122,11 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 				if (confirmed) {
 					this.registrations.unregisterAll(this.courseId, this.assignmentId).subscribe({
 						next: () => {
-							this.snackbar.openSuccessMessage();
+							this.toast.success();
 							this.loadRegistrations();
 						},
 						error: (error) => {
-							this.snackbar.openApiExceptionMessage(error);
+							this.toast.apiError(error);
 						}
 					});
 				}
@@ -116,11 +146,11 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 						this.registrations.registerParticipantAsGroupMember(this.courseId, this.assignmentId, group.id, participants[0].userId)
 							.subscribe({
 								next: () => {
-									this.snackbar.openSuccessMessage();
+									this.toast.success();
 									this.loadRegistrations();
 								},
 								error: (error) => {
-									this.snackbar.openApiExceptionMessage(error);
+									this.toast.apiError(error);
 								}
 							});
 					}
@@ -140,11 +170,11 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 				if (confirmed) {
 					this.registrations.unregisterUser(this.courseId, this.assignmentId, participant.userId).subscribe({
 						next: () => {
-							this.snackbar.openSuccessMessage();
+							this.toast.success();
 							this.loadRegistrations();
 						},
 						error: (error) => {
-							this.snackbar.openApiExceptionMessage(error);
+							this.toast.apiError(error);
 						}
 					});
 				}
@@ -164,11 +194,11 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 				if (confirmed) {
 					this.registrations.unregisterGroup(this.courseId, this.assignmentId, group.id).subscribe({
 						next: () => {
-							this.snackbar.openSuccessMessage();
+							this.toast.success();
 							this.loadRegistrations();
 						},
 						error: (error) => {
-							this.snackbar.openApiExceptionMessage(error);
+							this.toast.apiError(error);
 						}
 					});
 				}

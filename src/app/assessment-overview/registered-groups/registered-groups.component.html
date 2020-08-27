@@ -3,10 +3,14 @@
 
 	<ng-container *ngIf="(participantFacade.participant$ | async) as participant">
 		<div class="title-buttons">
-			<button mat-flat-button color="primary" (click)="registerCurrentGroups()" [disabled]="participant.role !== 'LECTURER'">
+			<button mat-flat-button color="accent" (click)="registerGroup()">
+				<mat-icon>add</mat-icon>
+				{{ 'Action.Custom.RegisterGroup' | translate }}
+			</button>
+			<button mat-flat-button color="primary" (click)="registerCurrentGroups()" [disabled]="hasRegisteredGroups">
 				{{ 'Action.Custom.RegisterAllGroups' | translate }}
 			</button>
-			<button mat-flat-button color="primary" (click)="unregisterAllGroups()" [disabled]="participant.role !== 'LECTURER'">
+			<button mat-flat-button color="primary" (click)="unregisterAllGroups()">
 				{{ 'Action.Custom.UnregisterAllGroups' | translate }}
 			</button>
 		</div>
