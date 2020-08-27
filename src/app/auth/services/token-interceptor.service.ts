@@ -1,11 +1,11 @@
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable, Injector } from "@angular/core";
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError, of } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
+import { Observable, of, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { ToastService } from "../../shared/services/toast.service";
+import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptorService implements HttpInterceptor {
@@ -41,18 +41,13 @@ export class TokenInterceptorService implements HttpInterceptor {
 		const router = this.injector.get(Router);
 
 		if (err.status == 0) {
-			const snackbar = this.injector.get(SnackbarService);
-			snackbar.openErrorMessage("Error.ConnectionRefused");
+			const toast = this.injector.get(ToastService);
+			toast.error("Error.ConnectionRefused");
 		}
 
 		if (err.status === 401) {
 			authService.logout();
 			return of(err.message);
-		}
-
-		if (err.error.message) {
-			const snackbar = this.injector.get(SnackbarService);
-			snackbar.openApiExceptionMessage(err);
 		}
 
 		return throwError(err);
