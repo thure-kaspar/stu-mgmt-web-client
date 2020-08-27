@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ToastrService, IndividualConfig } from "ngx-toastr";
 import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
 export class ToastService {
@@ -16,6 +17,17 @@ export class ToastService {
 	/** Displays an error-themed toast message. */
 	error(message?: string, title?: string, interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
 		this.toast.error(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), override);
+	}
+
+	/**
+	 * Opens an error-themed toast and logs the error to the console
+	 * The error text will be determined by the error.
+	 */
+	apiError(error: HttpErrorResponse): void {
+		console.log(error);
+		const exception = error?.error?.error;
+		const translation = exception ? this.translate.instant("Error." + exception) : this.translate.instant("Error.Unknown");
+		this.error(translation);
 	}
 
 	/** Displays a warning-themed toast message. */
