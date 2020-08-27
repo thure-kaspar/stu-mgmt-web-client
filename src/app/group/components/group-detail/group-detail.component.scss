@@ -65,19 +65,11 @@
 
 .history-item {
 	font-size: 14px!important;
-	background-color: rgb(240, 240, 240);
-
-	span {
-		color: black;
-	}
 
 	mat-icon, .timestamp {
 		margin-right: 8px;
 	}
 }
-
-.green { background-color: rgb(230, 255, 230); }
-.red { background-color: rgb(255, 220, 220); }
 
 #group-history {
 	margin-bottom: 16px;

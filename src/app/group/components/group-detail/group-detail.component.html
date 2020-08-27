@@ -104,7 +104,7 @@
 			<mat-list class="history-list" dense *ngIf="group.history.length > 0; else emptyHistoryText">
 				<mat-divider></mat-divider>
 				<ng-container *ngFor="let event of group.history">
-					<mat-list-item class="history-item" [class]="event.event === 'UserJoinedGroupEvent' ? 'green' : 'red'">
+					<mat-list-item class="history-item">
 						<mat-icon class="text-green" *ngIf="event.event === 'UserJoinedGroupEvent'; else leftGroupIcon">add_box</mat-icon>
 						<ng-template #leftGroupIcon>
 							<mat-icon class="text-red" *ngIf="event.event === 'UserLeftGroupEvent'">indeterminate_check_box</mat-icon>

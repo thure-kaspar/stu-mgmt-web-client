@@ -76,7 +76,6 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 								this.loadRegistrations();
 							},
 							error: (error) => {
-								console.log(error);
 								this.toast.apiError(error, group.name);
 							}
 						});
