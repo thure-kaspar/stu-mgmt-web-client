@@ -26,6 +26,10 @@ export interface GroupDto {
      */
     password?: string;
     /**
+     * Indicates, wether group has a password. Set by the server.
+     */
+    hasPassword?: boolean;
+    /**
      * Determines, wether course participant are able to join this group.
      */
     isClosed?: boolean;

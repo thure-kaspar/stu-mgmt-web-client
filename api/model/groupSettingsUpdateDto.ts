@@ -31,4 +31,12 @@ export interface GroupSettingsUpdateDto {
      * Indicates, wether the group is managed by its members.
      */
     selfmanaged?: boolean;
+    /**
+     * If enabled, participants that join the course will automatically join a group.
+     */
+    autoJoinGroupOnCourseJoined?: boolean;
+    /**
+     * If enabled, groups that don't have enough members will be merged when an assignment starts.
+     */
+    mergeGroupsOnAssignmentStarted?: boolean;
 }
