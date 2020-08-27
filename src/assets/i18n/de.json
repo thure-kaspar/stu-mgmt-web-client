@@ -152,10 +152,16 @@
     },
     "AssignmentNotInReview": "Erstellung von Bewertungen benötigt den \"In Bewertung\"-Status.",
     "ConnectionRefused": "Verbindung zum Server ist fehlgeschlagen.",
+    "CourseClosedException": "Die Veranstaltung ist geschlossen und kann daher nicht verändert werden.",
     "EntityAlreadyExistsError": "Existiert bereits.",
     "FailedToLoadRequiredData": "Benötigte Daten konnten nicht geladen werden.",
     "Forbidden": "Du hast nicht die benötigten Rechte für diese Aktion.",
+    "GroupClosedException": "Gruppe ist geschlossen.",
+    "GroupsForbiddenException": "Diese Veranstaltung erlaubt keine Gruppen.",
     "InvalidCredentials": "Ungültiger Nutzername oder Passwort.",
+    "NotACourseMemberException": "Du bist kein Teilnehmer in diesem Kurs.",
+    "NotAGroupMemberException": "Du bist kein Mitglied dieser Gruppe.",
+    "NotATeachingStaffMember": "Du bist kein Lehrender dieser Veranstaltung.",
     "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
     "Unknown": "Unbekannter Fehler",
     "ValueMissing": "Fehlender Wert."
@@ -234,6 +240,8 @@
     },
     "GroupSettings": {
       "AllowGroups": "Gruppen erlauben",
+      "AutoJoinGroupOnCourseJoined": "Teilnehmer beim Kursbeitritt automatisch Gruppe zuweisen",
+      "MergeGroupsOnAssignmentStarted": "Zu kleine Gruppen zusammenlegen sobald Aufgabe startet",
       "NameSchema": "Präfix",
       "Selfmanaged": "Selbstverwaltend",
       "SizeMax": "Max. Größe",
@@ -264,6 +272,9 @@
     "GroupCreation": {
       "NameSchema": "Dieser Kurs verwendet vordefinierte Gruppennamen.\nDer Name der Gruppe wird automatisch generiert.",
       "Password": "Wenn du ein Passwort verwendest, müssen andere Teilnehmer das Passwort eingeben, um deiner Gruppe beizutreten."
+    },
+    "GroupSettings": {
+      "AutoJoinGroupOnCourseJoined": "Teilnehmer wird beim Betreten des Kurses einer offenen Gruppe zugewiesen.\nExistiert keine offene Gruppe, wird automatisch eine neue Gruppe für den Studenten erstellt.\nWenn kein Prefix für Gruppennamen definiert ist, wird ein zufälliger Name gewählt."
     }
   },
   "Title": {

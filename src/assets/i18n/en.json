@@ -152,10 +152,16 @@
     },
     "AssignmentNotInReview": "Assignment creation requires the \"In Review\"-state.",
     "ConnectionRefused": "Failed to connect to the server.",
+    "CourseClosedException": "Course is closed and therefore can't be changed.",
     "EntityAlreadyExistsError": "Already exists.",
     "FailedToLoadRequiredData": "Failed to load the required data.",
     "Forbidden": "You do not have the required permission to perform this action.",
+    "GroupClosedException": "Group is closed.",
+    "GroupsForbiddenException": "This course does not allow groups.",
     "InvalidCredentials": "Invalid credentials.",
+    "NotACourseMemberException": "You're not a member of this course.",
+    "NotAGroupMemberException": "You're not a member of this group.",
+    "NotATeachingStaffMember": "You're not part of the teaching staff for this course.",
     "SomethingWentWrong": "Oops, something went wrong!",
     "Unknown": "Unknown error",
     "ValueMissing": "Value is missing."
@@ -234,6 +240,8 @@
     },
     "GroupSettings": {
       "AllowGroups": "Allow groups",
+      "AutoJoinGroupOnCourseJoined": "Automatically assign group to participant after joining the course",
+      "MergeGroupsOnAssignmentStarted": "Merge insufficiently big groups when assignment starts",
       "NameSchema": "Prefix",
       "Selfmanaged": "Selfmanaged",
       "SizeMax": "Max. size",
@@ -264,6 +272,9 @@
     "GroupCreation": {
       "NameSchema": "This course is using a predefined prefix for group names.\nGroup name will be chosen automatically.",
       "Password": "When using a password, other participants are required enter the password to join your group."
+    },
+    "GroupSettings": {
+      "AutoJoinGroupOnCourseJoined": "Participant will be automatically assigned to an open group once he joins the course.\nIf no open group exists, a new group will be created.\nIf name schema is not defined, a random group name will be chosen."
     }
   },
   "Title": {
