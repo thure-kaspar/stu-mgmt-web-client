@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from "@angular/
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject } from "rxjs";
 import { distinctUntilChanged, map } from "rxjs/operators";
-import { CourseDto, CoursesService } from "../../../../../api";
+import { CourseDto, CoursesService, UserDto } from "../../../../../api";
 import { getSemester } from "../../../../../utils/helper";
 import { Paginator } from "../../../shared/paginator/paginator.component";
+import { AuthService } from "../../../auth/services/auth.service";
 
 class CourseFilter {
 	title = "";
@@ -30,9 +31,12 @@ export class CourseListComponent implements OnInit {
 	filter = new CourseFilter({});
 	filterSubject = new BehaviorSubject(this.filter);
 
+	roles = UserDto.RoleEnum;
+
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
-	constructor(private courseService: CoursesService) { }
+	constructor(private courseService: CoursesService,
+				public auth: AuthService) { }
 
 	ngOnInit(): void {
 		this.filterSubject.pipe(

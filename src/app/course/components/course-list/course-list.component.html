@@ -1,11 +1,13 @@
 <div class="course-list-container">
 	<mat-card-title class="title">{{ 'Domain.Courses' | translate }}
-		<a class="link-none" [routerLink]="['/courses/create']">
-			<button mat-flat-button class="btn-add" color="accent">
-				<mat-icon>add</mat-icon>
-				{{ 'Action.Custom.CreateCourse' | translate }}
-			</button>
-		</a>
+		<ng-container *ngIf="auth.userInfo$ | async as userInfo">
+			<a class="link-none" [routerLink]="['/courses/create']" *ngIf="userInfo?.role === roles.MGMTADMIN || userInfo?.role === roles.SYSTEMADMIN">
+				<button mat-flat-button class="btn-add" color="accent">
+					<mat-icon>add</mat-icon>
+					{{ 'Action.Custom.CreateCourse' | translate }}
+				</button>
+			</a>
+		</ng-container>
 	</mat-card-title>
 
 	<div class="courseFilter-container">
@@ -19,6 +21,7 @@
 			<mat-select [(value)]="filter.selectedSemester" (selectionChange)="filterSubject.next(filter)" id="semester" name="semester" placeholder="Enter semester...">
 				<mat-option value="wise1920">WiSe 19/20</mat-option>
 				<mat-option value="sose2020">SoSe 2020</mat-option>
+				<mat-option value="wise2021">WiSe 20/21</mat-option>
 				<mat-option value="">{{ 'Common.All' | translate }}</mat-option>
 			</mat-select>
 		</mat-form-field>
