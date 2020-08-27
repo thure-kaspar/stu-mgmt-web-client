@@ -82,17 +82,19 @@ export class EditAssessmentComponent implements OnInit {
 	}
 
 	loadAssessmentEvents(): void {
-		this.assessmentService.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
-			.subscribe(
-				result => {
-					this.events = result;
-					this.showEvents = true;
-				},
-				error => {
-					console.log(error);
-					this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData");
-				}
-			);
+		if (!this.showEvents) {
+			this.assessmentService.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
+				.subscribe(
+					result => {
+						this.events = result;
+						this.showEvents = true;
+					},
+					error => {
+						console.log(error);
+						this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData");
+					}
+				);
+		}
 	}
 
 	onSave(): void {
