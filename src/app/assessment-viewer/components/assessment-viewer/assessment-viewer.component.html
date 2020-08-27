@@ -11,7 +11,7 @@
 			<span class="created-by">
 				{{ 'Common.CreatedBy' | translate }}
 				<span class="font-bold">{{assessment.creator.username}}</span>
-				<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()">
+				<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant?.isLecturerOrTutor()">
 					<mat-icon class="icon-light">history</mat-icon>
 				</button>
 			</span>
