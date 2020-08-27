@@ -11,7 +11,7 @@
 	<div id="nav-right">
 
 		<ng-container *ngIf="(authService.userInfo$ | async) as userInfo; else loginBtn">
-			<button class="btn-link" mat-flat-button (click)="snackbar.openErrorMessage()">{{userInfo.username}}</button>
+			<button class="btn-link" mat-flat-button>{{userInfo.username}}</button>
 			<button class="btn-link btn-logout" mat-flat-button (click)="logout()">Logout</button>
 		</ng-container>
 
