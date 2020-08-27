@@ -8,6 +8,7 @@ import { Participant } from "../../../domain/participant.model";
 import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
+import { ParticipantFacade } from "../../../course/services/participant.facade";
 
 @Component({
 	selector: "app-group-card",
@@ -29,6 +30,7 @@ export class GroupCardComponent implements OnInit {
 	cssClass: string;
 
 	constructor(private dialog: MatDialog,
+				private participantFacade: ParticipantFacade,
 				private router: Router,
 				private dialogService: DialogService) { }
 
@@ -49,6 +51,7 @@ export class GroupCardComponent implements OnInit {
 		this.dialog.open<JoinGroupDialog, JoinGroupDialogData, boolean>(JoinGroupDialog, { data }).afterClosed().subscribe(
 			joined => {
 				if (joined) {
+					this.participantFacade.reload();
 					this.router.navigate(["/courses", this.course.id, "groups", this.group.id]);
 				}
 			}
