@@ -10,8 +10,8 @@ export class AuthService {
 	private userInfoSubject = new BehaviorSubject<AuthTokenDto>(null);
 	public userInfo$ = this.userInfoSubject.asObservable();
 
-	private readonly studentMgmtTokenKey = "studentMgmtToken";
-	private readonly extAuthTokenKey = "extAuthTokenKey";
+	static readonly studentMgmtTokenKey = "studentMgmtToken";
+	static readonly extAuthTokenKey = "extAuthTokenKey";
 
 	constructor(private authenticationService: AuthenticationService,
 				private router: Router) {
@@ -35,8 +35,8 @@ export class AuthService {
 
 		// If login was successful, store the received authentication token
 		if (authToken) {
-			localStorage.setItem(this.extAuthTokenKey, authInfo.token.token);
-			localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(authToken));
+			localStorage.setItem(AuthService.extAuthTokenKey, authInfo.token.token);
+			localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
 			this.userInfoSubject.next(authToken);
 			this.router.navigate(["/courses"]);
 		}
@@ -54,7 +54,7 @@ export class AuthService {
 
 		// If login was successful, store the received authentication token
 		if (authToken) {
-			localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(authToken));
+			localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
 			this.userInfoSubject.next(authToken);
 			this.router.navigate(["/courses"]);
 		}
@@ -65,8 +65,8 @@ export class AuthService {
 	}
 
 	logout(): void {
-		localStorage.removeItem(this.studentMgmtTokenKey);
-		localStorage.removeItem(this.extAuthTokenKey);
+		localStorage.removeItem(AuthService.studentMgmtTokenKey);
+		localStorage.removeItem(AuthService.extAuthTokenKey);
 		this.userInfoSubject.next(null);
 		this.router.navigate(["/courses"]);
 	}
@@ -76,7 +76,7 @@ export class AuthService {
 	 * (Attention: Does not guarantee that the token is still valid (i.e could be expired).)
 	 */
 	isLoggedIn(): boolean {
-		return !!localStorage.getItem(this.studentMgmtTokenKey);
+		return !!localStorage.getItem(AuthService.studentMgmtTokenKey);
 	}
 
 	/**
@@ -84,8 +84,7 @@ export class AuthService {
 	 * to authenticate the user for requests to the server.
 	 */
 	getAccessToken(): string {
-		const token = this.getAuthToken()?.accessToken;
-		return token ? `Bearer ${token}` : "";
+		return AuthService.getAccessToken();
 	}
 
 	/**
@@ -93,14 +92,31 @@ export class AuthService {
 	 * to authenticate the user for requests to the external authentication system.
 	 */
 	getAccessTokenOfAuthSystem(): string {
-		const token = localStorage.getItem(this.extAuthTokenKey);
-		return token ? token : "";
+		return AuthService.getAccessTokenOfAuthSystem();
 	}
 
 	/**
 	 * Returns the stored AuthToken, containing information about the user's id, email, role and rights.
 	 */
 	getAuthToken(): AuthTokenDto {
-		return JSON.parse(localStorage.getItem(this.studentMgmtTokenKey)) as AuthTokenDto;
+		return JSON.parse(localStorage.getItem(AuthService.studentMgmtTokenKey)) as AuthTokenDto;
 	}
+
+	/**
+	 * Returns the stored AccessToken (JWT), which can be assigned to the Authorization-header
+	 * to authenticate the user for requests to the server.
+	 */
+	static getAccessToken(): string {
+		const authToken = JSON.parse(localStorage.getItem(AuthService.studentMgmtTokenKey)) as AuthTokenDto;
+		return authToken?.accessToken;
+	}
+
+	/**
+	 * Returns the stored AccessToken (JWT), which can be assigned to the Authorization-header
+	 * to authenticate the user for requests to the external authentication system.
+	 */
+	static getAccessTokenOfAuthSystem(): string {
+		return localStorage.getItem(AuthService.extAuthTokenKey);
+	}
+
 }
