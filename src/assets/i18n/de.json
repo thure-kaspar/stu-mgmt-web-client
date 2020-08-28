@@ -163,6 +163,7 @@
     "NotAGroupMemberException": "Du bist kein Mitglied dieser Gruppe.",
     "NotATeachingStaffMember": "Du bist kein Lehrender dieser Veranstaltung.",
     "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
+    "Unauthorized": "Du bist nicht angemeldet.",
     "Unknown": "Unbekannter Fehler",
     "ValueMissing": "Fehlender Wert."
   },

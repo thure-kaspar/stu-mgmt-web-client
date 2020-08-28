@@ -163,6 +163,7 @@
     "NotAGroupMemberException": "You're not a member of this group.",
     "NotATeachingStaffMember": "You're not part of the teaching staff for this course.",
     "SomethingWentWrong": "Oops, something went wrong!",
+    "Unauthorized": "You're not logged in.",
     "Unknown": "Unknown error",
     "ValueMissing": "Value is missing."
   },

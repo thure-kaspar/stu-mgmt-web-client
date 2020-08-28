@@ -41,7 +41,6 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 		private courseParticipantsService: CourseParticipantsService,
 		private csvService: CsvService,
 		private http: HttpClient,
-		@Inject(BASE_PATH) private basePath: string,
 		private route: ActivatedRoute,
 		public dialog: MatDialog,
 		private snackbar: SnackbarService) { super(); }
