@@ -9,8 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AdmissionRuleDto } from './admissionRuleDto';
+import { ParticipantDto } from './participantDto';
+import { RuleCheckResult } from './ruleCheckResult';
 
-export interface AdmissionCriteriaDto { 
-    rules: Array<AdmissionRuleDto>;
+export interface AdmissionStatusDto { 
+    hasAdmission: boolean;
+    results: Array<RuleCheckResult>;
+    participant: ParticipantDto;
 }

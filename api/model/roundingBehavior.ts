@@ -9,8 +9,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AdmissionRuleDto } from './admissionRuleDto';
 
-export interface AdmissionCriteriaDto { 
-    rules: Array<AdmissionRuleDto>;
+export interface RoundingBehavior { 
+    type: string;
+    decimals?: number;
 }

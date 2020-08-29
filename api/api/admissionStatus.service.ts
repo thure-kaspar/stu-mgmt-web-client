@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { AdmissionStatusDto } from '../model/admissionStatusDto';
 import { PointsOverviewDto } from '../model/pointsOverviewDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -56,19 +57,19 @@ export class AdmissionStatusService {
 
 
     /**
-     * 
-     * 
+     * Get admission status.
+     * Returns the admission status of all participants.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public admissionStatusControllerGetAdmissionStatusOfParticipants(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<any>>;
-    public admissionStatusControllerGetAdmissionStatusOfParticipants(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<any>>>;
-    public admissionStatusControllerGetAdmissionStatusOfParticipants(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<any>>>;
-    public admissionStatusControllerGetAdmissionStatusOfParticipants(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAdmissionStatusOfParticipants(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AdmissionStatusDto>>;
+    public getAdmissionStatusOfParticipants(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AdmissionStatusDto>>>;
+    public getAdmissionStatusOfParticipants(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AdmissionStatusDto>>>;
+    public getAdmissionStatusOfParticipants(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling admissionStatusControllerGetAdmissionStatusOfParticipants.');
+            throw new Error('Required parameter courseId was null or undefined when calling getAdmissionStatusOfParticipants.');
         }
 
         let headers = this.defaultHeaders;
@@ -93,7 +94,7 @@ export class AdmissionStatusService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<any>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/admission-status`,
+        return this.httpClient.request<Array<AdmissionStatusDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/admission-status`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

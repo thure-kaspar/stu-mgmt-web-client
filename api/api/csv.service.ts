@@ -61,13 +61,13 @@ export class CsvService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getParticipants(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public getParticipants(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public getParticipants(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public getParticipants(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getParticipantsAsCsv(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getParticipantsAsCsv(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getParticipantsAsCsv(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getParticipantsAsCsv(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getParticipants.');
+            throw new Error('Required parameter courseId was null or undefined when calling getParticipantsAsCsv.');
         }
 
         let headers = this.defaultHeaders;
@@ -108,13 +108,13 @@ export class CsvService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getPointsOverview(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public getPointsOverview(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public getPointsOverview(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public getPointsOverview(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getPointsOverviewAsCsv(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getPointsOverviewAsCsv(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getPointsOverviewAsCsv(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getPointsOverviewAsCsv(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling getPointsOverview.');
+            throw new Error('Required parameter courseId was null or undefined when calling getPointsOverviewAsCsv.');
         }
 
         let headers = this.defaultHeaders;
