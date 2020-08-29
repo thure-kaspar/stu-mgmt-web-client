@@ -20,7 +20,7 @@ export class ToastService {
 	}
 
 	/**
-	 * Opens an error-themed toast and logs the error to the console
+	 * Opens an error-themed toast and logs the error to the console.
 	 * The error text will be determined by the error.
 	 */
 	apiError(error: HttpErrorResponse, title?: string): void {

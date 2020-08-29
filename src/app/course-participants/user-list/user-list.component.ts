@@ -132,7 +132,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	downloadCsv(): void {
-		this.csvService.getParticipants(this.courseId, "response").subscribe(
+		this.csvService.getParticipantsAsCsv(this.courseId, "response").subscribe(
 			response => {
 				console.log(response);
 			}

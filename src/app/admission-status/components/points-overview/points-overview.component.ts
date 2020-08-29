@@ -73,7 +73,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 
 	// TODO
 	downloadCsv(): void {
-		this.csvService.getPointsOverview(this.courseId, "response").subscribe(
+		this.csvService.getPointsOverviewAsCsv(this.courseId, "response").subscribe(
 			response => {
 				console.log(response);
 			}

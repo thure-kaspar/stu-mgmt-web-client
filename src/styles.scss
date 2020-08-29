@@ -228,6 +228,14 @@ table {
 	flex-direction: column;
 }
 
+.flex {
+	display: flex;
+}
+
+.space-between {
+	justify-content: space-between;
+}
+
 .link-none {
 	text-decoration: none;
 	color: inherit;
