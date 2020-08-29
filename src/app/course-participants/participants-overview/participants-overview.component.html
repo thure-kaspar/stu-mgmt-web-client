@@ -4,10 +4,13 @@
 		<a mat-tab-link [routerLink]="['/courses', courseId, 'users', 'list']" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
 			{{ 'Title.ParticipantsList' | translate }}
 		</a>
-		<a mat-tab-link routerLink="admission-status" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+		<a mat-tab-link routerLink="admission-status/points" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
 			{{ 'Title.PointsOverview' | translate }}
 		</a>
-		<a mat-tab-link routerLink="compare-participants" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+		<a mat-tab-link routerLink="admission-status" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+			{{ 'Title.AdmissionStatus' | translate }}
+		</a>
+		<a mat-tab-link routerLink="compare-participants" routerLinkActive #rla4="routerLinkActive" [active]="rla4.isActive">
 			{{ 'Title.CompareParticipantsList' | translate }}
 		</a>
 	</nav>

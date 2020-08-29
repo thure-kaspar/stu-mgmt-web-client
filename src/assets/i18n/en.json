@@ -51,6 +51,7 @@
     "Closed": "Closed",
     "Count": "Count",
     "CreatedBy": "Created by",
+    "Criteria": "Criteria",
     "Date": "Date",
     "Empty": "Empty",
     "End": "End",
@@ -66,6 +67,7 @@
     "Open": "Open",
     "Other": "Other",
     "Password": "Password",
+    "Required": "Required",
     "Single": "Single",
     "Start": "Start",
     "Title": "Title",
@@ -74,6 +76,7 @@
     "Yes": "Yes"
   },
   "Domain": {
+    "Admission": "Admission",
     "AdmissionCriteria": "Admission criteria",
     "Assessment": "Assessment",
     "AssessmentAllocations": "Allocations",
@@ -132,6 +135,16 @@
       "STUDENT": "Student",
       "TUTOR": "Tutor"
     },
+    "RoundingType": {
+      "DECIMALS": "Round to decimal place",
+      "DOWN_NEAREST_INTEGER": "Round down to nearest integer",
+      "NONE": "Not rounded",
+      "UP_NEAREST_INTEGER": "Round up to nearest integer"
+    },
+    "RuleType": {
+      "PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT": "Min. {{requiredPercent}}% of points in {{passedAssignmentsPercent}}% of assignments",
+      "REQUIRED_PERCENT_OVERALL": "Min. {{requiredPercent}}% of achievable points over all assignments"
+    },
     "Severity": {
       "CRITICAL": "Critical",
       "ERROR": "Error",
@@ -183,6 +196,7 @@
   },
   "Misc": {
     "BasicData": "Basic Data",
+    "Decimals": "Decimals",
     "ExcludeAlreadyReviewed": "Exclude already reviewed groups/users",
     "ExtendedOptions": "Extended options",
     "Home": "Home",
@@ -190,6 +204,7 @@
     "Language": "Language",
     "Link": "Link",
     "Privacy": "Privacy",
+    "Rounding": "Rounding",
     "Settings": "Settings",
     "UnsavedChanges": "Unsaved changes"
   },
@@ -279,6 +294,7 @@
     }
   },
   "Title": {
+    "AdmissionStatus": "Admission status",
     "AppName": "Student-Management",
     "CompareParticipantsList": "Compare participants list",
     "CreateAssessment": "Create assessment",

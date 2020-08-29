@@ -51,6 +51,7 @@
     "Closed": "Geschlossen",
     "Count": "Anzahl",
     "CreatedBy": "Erstellt von",
+    "Criteria": "Kriterium",
     "Date": "Datum",
     "Empty": "Leer",
     "End": "Ende",
@@ -66,6 +67,7 @@
     "Open": "Offen",
     "Other": "Andere",
     "Password": "Passwort",
+    "Required": "Benötigt",
     "Single": "Einzeln",
     "Start": "Start",
     "Title": "Titel",
@@ -74,6 +76,7 @@
     "Yes": "Ja"
   },
   "Domain": {
+    "Admission": "Zulassung",
     "AdmissionCriteria": "Zulassungskriterien",
     "Assessment": "Bewertung",
     "AssessmentAllocations": "Zuweisungen",
@@ -132,6 +135,16 @@
       "STUDENT": "Student",
       "TUTOR": "Tutor"
     },
+    "RoundingType": {
+      "DECIMALS": "Auf Nachkommastelle runden",
+      "DOWN_NEAREST_INTEGER": "Auf nächste Ganzzahl runter runden",
+      "NONE": "Nicht gerundet",
+      "UP_NEAREST_INTEGER": "Auf nächste Ganzzahl hochrunden"
+    },
+    "RuleType": {
+      "PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT": "Min. {{requiredPercent}}% der Punkte in {{passedAssignmentsPercent}}% der Aufgaben",
+      "REQUIRED_PERCENT_OVERALL": "Min. {{requiredPercent}}% der erreichbaren Punkte über alle Aufgaben"
+    },
     "Severity": {
       "CRITICAL": "Kritisch",
       "ERROR": "Error",
@@ -183,6 +196,7 @@
   },
   "Misc": {
     "BasicData": "Grunddaten",
+    "Decimals": "Nachkommastellen",
     "ExcludeAlreadyReviewed": "Bereits bewertete Gruppen/Teilnehmer ausblenden",
     "ExtendedOptions": "Erweiterte Optionen",
     "Home": "Startseite",
@@ -190,6 +204,7 @@
     "Language": "Sprache",
     "Link": "Link",
     "Privacy": "Datenschutz",
+    "Rounding": "Runden",
     "Settings": "Einstellungen",
     "UnsavedChanges": "Ungespeicherte Änderungen"
   },
@@ -279,6 +294,7 @@
     }
   },
   "Title": {
+    "AdmissionStatus": "Zulassungsstatus",
     "AppName": "Studenten-Management",
     "CompareParticipantsList": "Teilnehmerliste vergleichen",
     "CreateAssessment": "Bewertung erstellen",
