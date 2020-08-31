@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable, Injector } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { ToastService } from "../../shared/services/toast.service";
 import { AuthService } from "./auth.service";
@@ -33,7 +33,6 @@ export class TokenInterceptorService implements HttpInterceptor {
 			const toast = this.injector.get(ToastService);
 			toast.error("Error.Unauthorized");
 			authService.logout();
-			return of(err.message);
 		}
 
 		return throwError(err);
