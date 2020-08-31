@@ -73,9 +73,6 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 			if (!group && this.assignment.state === "IN_PROGRESS") {
 				this.warning = this.translate.instant("Text.Group.NoGroupForAssignment");
 				this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
-			} else if (group?.members.length < this.course.getMinGroupSizeRequirement()) {
-				this.warning = this.translate.instant("Text.Group.NotEnoughMembers", { minSize: this.course.getMinGroupSizeRequirement()});
-				this.toast.warning("Text.Group.NotEnoughMembers", this.assignment.name, { minSize: this.course.getMinGroupSizeRequirement()});
 			}
 
 			this.group$.next(group);
