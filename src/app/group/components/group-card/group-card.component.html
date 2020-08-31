@@ -35,7 +35,7 @@
 	</div>
 
 	<div class="member-list" *ngIf="participant.role !== 'STUDENT'">
-		<a class="member link-none font-bold" [routerLink]="['/courses', course.id, 'users', member.userId, 'profile']" *ngFor="let member of group.members">
+		<a class="member link-none font-bold" [routerLink]="['/courses', course.id, 'users', member.userId]" *ngFor="let member of group.members">
 			<button mat-flat-button color="primary">{{member.username}}</button>
 		</a>
 	</div>

@@ -16,7 +16,7 @@
 					</mat-card-title>
 		
 					<div class="member-list">
-						<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId, 'profile']" *ngFor="let member of participant.group.members">
+						<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId]" *ngFor="let member of participant.group.members">
 							<button mat-flat-button color="primary">{{member.username}}</button>
 						</a>
 					</div>

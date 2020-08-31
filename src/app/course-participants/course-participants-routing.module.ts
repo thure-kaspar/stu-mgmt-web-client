@@ -5,13 +5,14 @@ import { ParticipantsOverviewComponent } from "./participants-overview/participa
 import { ParticipantProfileComponent } from "./participant-profile/participant-profile.component";
 
 const routes: Routes = [
-	{ path: ":userId/profile", component: ParticipantProfileComponent },
 	{ path: "", component: ParticipantsOverviewComponent, children: [
 		{ path: "admission-status", loadChildren: () => import("../admission-status/admission-status.module").then(m => m.AdmissionStatusModule) },
 		{ path: "compare-participants", loadChildren: () => import("../participants-list-comparison/participants-list-comparison.module").then(m => m.ParticipantsListComparisonModule) },
 		{ path: "list", component: UserListComponent },
-		{ path: "**", redirectTo: "list" }
-	] }
+		{ path: "", pathMatch: "full", redirectTo: "list" }
+	] },
+	{ path: ":userId", component: ParticipantProfileComponent },
+	
 ];
 
 @NgModule({

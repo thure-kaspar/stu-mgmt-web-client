@@ -38,8 +38,10 @@
 							<span>{{ 'Action.Custom.ChangeRole' | translate }}</span>
 						</button>
 						<button mat-menu-item (click)="openRemoveDialog(row)">
-						  <mat-icon>delete_forever</mat-icon>
-						  <span>{{ 'Action.Remove' | translate }}</span>
+						 <span class="text-red">
+							<mat-icon>delete_forever</mat-icon>
+							<span>{{ 'Action.Remove' | translate }}</span>
+						 </span>
 						</button>
 					  </mat-menu>
 				</td>
@@ -55,7 +57,7 @@
 			<ng-container matColumnDef="username">
 				<th mat-header-cell *matHeaderCellDef>{{ 'Property.User.Username' | translate }}</th>
 				<td mat-cell *matCellDef="let row">
-					<a class="link-none font-bold" [routerLink]="['courses', courseId, 'users', row.userId]">{{ row.username }}</a>
+					<a class="link-none font-bold" [routerLink]="['/courses', courseId, 'users', row.userId]">{{ row.username }}</a>
 				</td>
 			</ng-container>
 
