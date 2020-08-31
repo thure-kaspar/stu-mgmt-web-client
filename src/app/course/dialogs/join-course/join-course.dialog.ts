@@ -28,7 +28,7 @@ export class JoinCourseDialog implements OnInit {
 				private courseMemberships: CourseMembershipsFacade) { }
 
 	ngOnInit(): void {
-		const userId = this.auth.getAuthToken().userId;
+		const userId = this.auth.getAuthToken().user.id;
 		this.courseParticipantsService.canUserJoinCourse(this.courseId, userId).subscribe(
 			result => {
 				this.canJoinDto = result;

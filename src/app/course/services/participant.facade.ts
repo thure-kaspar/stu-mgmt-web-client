@@ -32,10 +32,10 @@ export class ParticipantFacade {
 				private router: Router,
 				private toast: ToastService) {
 		
-		this.authService.userInfo$.subscribe(info => {
+		this.authService.user$.subscribe(user => {
 			//console.log("new UserId:", info?.userId);
-			if (info) {
-				this.userId = info.userId;
+			if (user) {
+				this.userId = user.id;
 			} else {
 				this.clear();
 				this.userId = undefined;

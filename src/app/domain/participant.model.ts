@@ -3,7 +3,7 @@ import { GroupDto, ParticipantDto } from "../../../api";
 export class Participant implements ParticipantDto {
 	readonly userId: string;
 	readonly username: string;
-	readonly rzName: string;
+	readonly displayName: string;
 	readonly email: string;
 	readonly role: ParticipantDto.RoleEnum;
 	readonly groupId?: string;
@@ -11,7 +11,7 @@ export class Participant implements ParticipantDto {
 	constructor(dto: ParticipantDto) {
 		this.userId = dto.userId;
 		this.username = dto.username;
-		this.rzName = dto.rzName;
+		this.displayName = dto.displayName;
 		this.email = dto.email;
 		this.role = dto.role;
 		this.groupId = dto.groupId;

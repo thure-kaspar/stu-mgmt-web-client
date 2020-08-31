@@ -15,11 +15,11 @@ export class CourseMembershipsFacade {
 				private authService: AuthService) {
 
 		// Subscribe to login/logout
-		this.authService.userInfo$.subscribe(
-			userInfo => {
+		this.authService.user$.subscribe(
+			user => {
 				// If user is logged in
-				if (userInfo) {
-					this.userService.getCoursesOfUser(userInfo.userId).subscribe(
+				if (user) {
+					this.userService.getCoursesOfUser(user.id).subscribe(
 						courses => { 
 							this.coursesSubject.next(courses);
 						},
@@ -91,7 +91,7 @@ export class CourseMembershipsFacade {
 	}
 
 	private getUserId(): string {
-		return this.authService.getAuthToken()?.userId;
+		return this.authService.getAuthToken()?.user.id;
 	}
 	
 }

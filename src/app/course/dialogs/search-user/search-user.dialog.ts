@@ -16,7 +16,7 @@ export class SearchUserDialog implements OnInit {
 	users:  UserDto[] = [];
 	userFilter: string;
 
-	displayedColumns: string[] = ["select", "role", "username", "rzname", "email", "actions"];
+	displayedColumns: string[] = ["select", "role", "username", "displayName", "email", "actions"];
 	dataSource: MatTableDataSource<UserDto>;
 	selection = new SelectionModel<UserDto>(true, []);
 	

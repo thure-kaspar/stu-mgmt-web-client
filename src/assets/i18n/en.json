@@ -106,6 +106,7 @@
     "Problem": "Problem",
     "Problems": "Problems",
     "RegisteredGroups": "Registered groups",
+    "Registrations": "Registrations",
     "Semester": "Semester",
     "User": "User",
     "Users": "Users"
@@ -272,6 +273,7 @@
     },
     "User": {
       "CourseRole": "Role in course",
+      "DisplayName": "Name",
       "Email": "Email",
       "Role": "Role",
       "Username": "Username"
@@ -282,7 +284,7 @@
       "CanNotBeClosed": "The group cannot be closed by students.",
       "CanNotBeRenamed": "This group cannot be renamed by students.",
       "EmptyGroup": "This group is empty.",
-      "NoGroupForAssignment": "You currently have no group for this assigmment.",
+      "NoGroupForAssignment": "You currently have no group for this assignment.",
       "NotEnoughMembers": "Group must have at least {{minSize}} members."
     },
     "GroupCreation": {

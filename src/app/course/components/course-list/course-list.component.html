@@ -1,7 +1,7 @@
 <div class="course-list-container">
 	<mat-card-title class="title">{{ 'Domain.Courses' | translate }}
-		<ng-container *ngIf="auth.userInfo$ | async as userInfo">
-			<a class="link-none" [routerLink]="['/courses/create']" *ngIf="userInfo?.role === roles.MGMTADMIN || userInfo?.role === roles.SYSTEMADMIN">
+		<ng-container *ngIf="auth.user$ | async as user">
+			<a class="link-none" [routerLink]="['/courses/create']" *ngIf="user?.role === roles.MGMTADMIN || user?.role === roles.SYSTEMADMIN">
 				<button mat-flat-button class="btn-add" color="accent">
 					<mat-icon>add</mat-icon>
 					{{ 'Action.Custom.CreateCourse' | translate }}

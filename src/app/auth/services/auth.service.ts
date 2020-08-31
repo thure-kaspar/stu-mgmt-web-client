@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AuthenticationService, AuthCredentialsDto, AuthTokenDto } from "../../../../api";
+import { AuthenticationService, AuthCredentialsDto, AuthTokenDto, UserDto } from "../../../../api";
 import { Router } from "@angular/router";
 import { Observable, BehaviorSubject } from "rxjs";
 import { AuthenticationInfoDto } from "../../../../api_auth";
@@ -7,8 +7,8 @@ import { AuthenticationInfoDto } from "../../../../api_auth";
 @Injectable({ providedIn: "root" })
 export class AuthService {
 
-	private userInfoSubject = new BehaviorSubject<AuthTokenDto>(null);
-	public userInfo$ = this.userInfoSubject.asObservable();
+	private userSubject = new BehaviorSubject<UserDto>(undefined);
+	public user$ = this.userSubject.asObservable();
 
 	static readonly studentMgmtTokenKey = "studentMgmtToken";
 	static readonly extAuthTokenKey = "extAuthTokenKey";
@@ -19,7 +19,7 @@ export class AuthService {
 		// Check if user still has a token from last login
 		const authToken = this.getAuthToken();
 		if (authToken) {
-			this.userInfoSubject.next(authToken);
+			this.userSubject.next(authToken.user);
 		}
 	}
 
@@ -37,7 +37,7 @@ export class AuthService {
 		if (authToken) {
 			localStorage.setItem(AuthService.extAuthTokenKey, authInfo.token.token);
 			localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
-			this.userInfoSubject.next(authToken);
+			this.userSubject.next(authToken.user);
 			this.router.navigate(["/courses"]);
 		}
 	}
@@ -55,7 +55,7 @@ export class AuthService {
 		// If login was successful, store the received authentication token
 		if (authToken) {
 			localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
-			this.userInfoSubject.next(authToken);
+			this.userSubject.next(authToken.user);
 			this.router.navigate(["/courses"]);
 		}
 	}
@@ -67,7 +67,7 @@ export class AuthService {
 	logout(): void {
 		localStorage.removeItem(AuthService.studentMgmtTokenKey);
 		localStorage.removeItem(AuthService.extAuthTokenKey);
-		this.userInfoSubject.next(null);
+		this.userSubject.next(null);
 		this.router.navigate(["/courses"]);
 	}
 

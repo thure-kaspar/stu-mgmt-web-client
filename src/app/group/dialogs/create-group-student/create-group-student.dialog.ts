@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { GroupsService, CourseConfigService, GroupSettingsDto, GroupDto } from "../../../../../api";
 import { AuthService } from "../../../auth/services/auth.service";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 
 /**
  * Dialog that allows students to create groups.
@@ -14,7 +15,7 @@ import { SnackbarService } from "../../../shared/services/snackbar.service";
 	templateUrl: "./create-group-student.dialog.html",
 	styleUrls: ["./create-group-student.dialog.scss"],
 })
-export class CreateGroupStudentDialog implements OnInit {
+export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	name: string;
 	password: string;
@@ -27,7 +28,7 @@ export class CreateGroupStudentDialog implements OnInit {
 				private courseConfig: CourseConfigService,
 				private groupService: GroupsService,
 				private authService: AuthService,
-				private snackbar: SnackbarService) { }
+				private snackbar: SnackbarService) { super(); }
 
 	ngOnInit(): void {
 		if (!this.courseId) {
@@ -39,7 +40,7 @@ export class CreateGroupStudentDialog implements OnInit {
 	}
 
 	private loadGroupSettings(): void {
-		this.courseConfig.getGroupSettings(this.courseId).subscribe(
+		this.subs.sink = this.courseConfig.getGroupSettings(this.courseId).subscribe(
 			result => {
 				this.groupSettings = result;
 
@@ -56,8 +57,8 @@ export class CreateGroupStudentDialog implements OnInit {
 	}
 
 	private loadUserId(): void {
-		this.authService.userInfo$.subscribe(
-			info => this.userId = info.userId
+		this.subs.sink = this.authService.user$.subscribe(
+			user => this.userId = user.id
 		);
 	}
 
@@ -75,7 +76,7 @@ export class CreateGroupStudentDialog implements OnInit {
 			name: this.name
 		};
 
-		this.groupService.createGroup(group, this.courseId).subscribe(
+		this.subs.sink = this.groupService.createGroup(group, this.courseId).subscribe(
 			created => {
 				this.snackbar.openSuccessMessage();
 				this.dialogRef.close(created);

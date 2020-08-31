@@ -106,6 +106,7 @@
     "Problem": "Problem",
     "Problems": "Probleme",
     "RegisteredGroups": "Angemeldete Gruppen",
+    "Registrations": "Anmeldungen",
     "Semester": "Semester",
     "User": "Nutzer",
     "Users": "Nutzer"
@@ -272,6 +273,7 @@
     },
     "User": {
       "CourseRole": "Rolle im Kurs",
+      "DisplayName": "Name",
       "Email": "Email",
       "Role": "Rolle",
       "Username": "Nutzername"

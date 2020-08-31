@@ -35,7 +35,7 @@ export class JoinGroupDialog implements OnInit {
 	}
 
 	onJoin(): void {
-		const userId =  this.authService.getAuthToken().userId;
+		const userId =  this.authService.getAuthToken().user.id;
 		this.groupService.addUserToGroup({ password: this.password }, this.data.courseId, this.data.groupId, userId).subscribe(
 			joined => {
 				this.dialogRef.close(true);

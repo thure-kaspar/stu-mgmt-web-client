@@ -6,7 +6,7 @@ import { map, tap } from "rxjs/operators";
 import { CourseConfigService, CoursesService } from "../../../../api";
 import { Course } from "../../domain/course.model";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class CourseFacade {
 
 	private courseSubject = new BehaviorSubject<Course>(undefined);

@@ -78,7 +78,7 @@ export class CreateAssessmentComponent implements OnInit {
 	onSave(): void {
 		const assessment: AssessmentCreateDto = this.form.getModel();
 		assessment.assignmentId = this.assignmentId;
-		assessment.creatorId = this.authService.getAuthToken().userId;
+		assessment.creatorId = this.authService.getAuthToken().user.id;
 
 		this.assessmentService.createAssessment(assessment, this.courseId, this.assignmentId).subscribe(
 			created => {

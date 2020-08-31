@@ -87,7 +87,7 @@ describe("UserListComponent", () => {
 			email: "user.one@test.email",
 			role: "USER",
 			courseRole: oldRole,
-			rzName: "mMustermann",
+			displayName: "mMustermann",
 			username: "mustermann"
 		};
 

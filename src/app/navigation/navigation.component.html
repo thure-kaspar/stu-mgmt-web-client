@@ -10,8 +10,8 @@
 	</div>
 	<div id="nav-right">
 
-		<ng-container *ngIf="(authService.userInfo$ | async) as userInfo; else loginBtn">
-			<button class="btn-link" mat-flat-button>{{userInfo.username}}</button>
+		<ng-container *ngIf="(authService.user$ | async) as user; else loginBtn">
+			<button class="btn-link" mat-flat-button>{{user.displayName}}</button>
 			<button class="btn-link btn-logout" mat-flat-button (click)="logout()">Logout</button>
 		</ng-container>
 
@@ -58,7 +58,7 @@
 					<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }} 
 				</a>
 
-				<div id="course-membership-list" *ngIf="authService.userInfo$ | async">
+				<div id="course-membership-list" *ngIf="authService.user$ | async">
 					<mat-divider></mat-divider>
 					<span id="my-courses">{{ 'Common.My' | translate | uppercase }} {{ 'Domain.Courses' | translate | uppercase }}</span>
 

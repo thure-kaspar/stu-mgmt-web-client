@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
 				private router: Router) { }
 
 	canActivate(): boolean {
-		const role = this.authService.getAuthToken()?.role;
+		const role = this.authService.getAuthToken()?.user.role;
 
 		if (role === UserDto.RoleEnum.MGMTADMIN || role === UserDto.RoleEnum.SYSTEMADMIN) {
 			return true;
