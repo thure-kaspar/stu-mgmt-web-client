@@ -22,7 +22,7 @@ export interface UserDto {
     role: UserDto.RoleEnum;
     email: string;
     username: string;
-    rzName: string;
+    displayName: string;
     courses?: Array<CourseDto>;
 }
 export namespace UserDto {

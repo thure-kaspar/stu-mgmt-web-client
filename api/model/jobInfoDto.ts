@@ -9,11 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UserDto } from './userDto';
 
-export interface AuthTokenDto { 
-    accessToken: string;
-    user: UserDto;
-    expiration?: Date;
-    expirationInLocale: string;
+export interface JobInfoDto { 
 }

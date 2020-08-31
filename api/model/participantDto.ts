@@ -14,7 +14,7 @@ import { GroupDto } from './groupDto';
 export interface ParticipantDto { 
     userId: string;
     username: string;
-    rzName: string;
+    displayName: string;
     email: string;
     role: ParticipantDto.RoleEnum;
     groupId?: string;

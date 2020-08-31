@@ -26,6 +26,7 @@ export * from './groupSettingsDto';
 export * from './groupSettingsUpdateDto';
 export * from './groupUpdateDto';
 export * from './groupWithAssignedEvaluatorDto';
+export * from './jobInfoDto';
 export * from './mailDto';
 export * from './notificationDto';
 export * from './overallPercentRuleDto';
