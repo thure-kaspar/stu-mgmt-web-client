@@ -78,6 +78,13 @@
 		</span>
 	</div>
 
-	<button mat-stroked-button *ngIf="stateEnum.EVALUATED === assignment.state">{{ 'Domain.Assessment' | translate }}</button>
+	<div class="links">
+		<a class="link-none" [routerLink]="[assignment.id, 'assessments']" *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+			<button mat-stroked-button >{{ 'Domain.Assessments' | translate }}</button>
+		</a>
+		<a class="link-none" [routerLink]="[assignment.id, 'assessments', 'registrations']" *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+			<button mat-stroked-button >{{ 'Domain.Registrations' | translate }}</button>
+		</a>
+	</div>
 
 </mat-card>
