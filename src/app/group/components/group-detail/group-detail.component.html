@@ -64,12 +64,13 @@
 			</ng-template>
 		</div>
 	
-		<mat-divider class="divider"></mat-divider>
-	
-		<div id="assessments">
+		<div id="assessments" *ngIf="assessmentsDataSource$ | async as dataSource">
+
+			<mat-divider class="divider"></mat-divider>
+
 			<h2>{{ 'Domain.Assessments' | translate }}</h2>
 	
-			<table class="full-width" mat-table [dataSource]="dataSource$ | async" matSort>
+			<table class="full-width" mat-table [dataSource]="dataSource" matSort>
 				<!-- Assignment name Column -->
 				<ng-container matColumnDef="name">
 					<th class="name-column" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Assignment' | translate }}</th>

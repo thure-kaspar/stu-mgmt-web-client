@@ -3,7 +3,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subject, Observable, BehaviorSubject } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { filter } from "rxjs/operators";
 import { AssessmentDto, AssessmentsService, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
 import { CourseFacade } from "../../../course/services/course.facade";
 import { ParticipantFacade } from "../../../course/services/participant.facade";
@@ -36,8 +37,8 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	groupId: string;
 
 	displayedColumns: string[] = ["name", "type", "score"];
-	dataSource$ = new BehaviorSubject<MatTableDataSource<AssessmentDto>>(new MatTableDataSource([]));
-	private dataSource: MatTableDataSource<AssessmentDto>;
+	assessmentsDataSource$ = new Subject<MatTableDataSource<AssessmentDto>>();
+	private assessmentsDataSource: MatTableDataSource<AssessmentDto>;
 	@ViewChild(MatSort) sort: MatSort;
 	
 	constructor(private groupService: GroupsService,
@@ -55,10 +56,15 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		this.groupId = this.route.snapshot.paramMap.get("groupId");
 
 		this.loadGroup();
-		this.loadAssessmentsOfGroup();
-
-		this.subs.sink = this.participantFacade.participant$.subscribe(p => {
+	
+		this.subs.sink = this.participantFacade.participant$.pipe(
+			filter(p => !!p)
+		).subscribe(p => {
 			this.participant = p;
+
+			if (this.participant.isLecturerOrTutor()) {
+				this.loadAssessmentsOfGroup();
+			}
 		});
 		this.subs.sink = this.courseFacade.course$.subscribe(c => this.groupSettings = c?.groupSettings);
 	}
@@ -76,9 +82,9 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	loadAssessmentsOfGroup(): void {
 		this.groupService.getAssessmentsOfGroup(this.courseId, this.groupId).subscribe({
 			next: (assessments) => {
-				this.dataSource = new MatTableDataSource(assessments);
-				this.dataSource.sort = this.sort;
-				this.dataSource$.next(this.dataSource);
+				this.assessmentsDataSource = new MatTableDataSource(assessments);
+				this.assessmentsDataSource.sort = this.sort;
+				this.assessmentsDataSource$.next(this.assessmentsDataSource);
 			},
 			error: (error) => this.snackbar.openApiExceptionMessage(error)
 		});
