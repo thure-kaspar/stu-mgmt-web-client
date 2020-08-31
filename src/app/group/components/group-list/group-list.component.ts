@@ -166,6 +166,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		this.groupService.deleteGroup(this.courseId, group.id).subscribe({
 			next: () => {
 				this.groups = this.groups.filter(g => g.id !== group.id);
+				this.groupsSubject.next(this.groups);
 				this.snackbar.openSuccessMessage();
 			},
 			error: error => {
@@ -187,12 +188,13 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 			event.group.id, 
 			event.participant.userId).subscribe({
 			next: () => {
-				this.snackbar.openSuccessMessage();
 				const index = this.groups.findIndex(g => g.id === event.group.id);
 				this.groups[index] = new Group({
 					...this.groups[index],
 					members: [...this.groups[index].members, event.participant]
 				});
+				this.groupsSubject.next(this.groups);
+				this.snackbar.openSuccessMessage();
 			},
 			error: (error) => {
 				console.log(error);
