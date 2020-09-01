@@ -6,38 +6,6 @@
 			{{ 'Action.Custom.AddGroup' | translate }}
 		</button>
 	
-		<ng-container *ngIf="participant?.group">
-			<div id="users-group-container">
-				<h2>{{ 'Common.My' | translate }} {{ 'Domain.Group' | translate }}</h2>
-
-				<mat-card class="participant-group-card">
-					<mat-card-title class="title">
-						<a [routerLink]="[participant?.group.id]" class="name link-none">{{participant.group.name}}</a>
-					</mat-card-title>
-		
-					<div class="member-list">
-						<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId]" *ngFor="let member of participant.group.members">
-							<button mat-flat-button color="primary">{{member.username}}</button>
-						</a>
-					</div>
-	
-					<a [routerLink]="[participant?.group.id]" class="view-group-link">
-						<button mat-flat-button color="accent">{{ 'Action.View' | translate }}</button>
-					</a>
-
-				</mat-card>
-
-				<div class="warning" *ngIf="warning">
-					<span class="WARNING">
-						<mat-icon>warning</mat-icon>
-						{{ warning }}
-					</span>
-				</div>
-			</div>
-		
-			<mat-divider class="divider"></mat-divider>
-		</ng-container>
-	
 		<div class="groups">
 	
 			<h2 class="heading-groups">{{ 'Domain.Groups' | translate }}: ({{totalCount}})</h2>

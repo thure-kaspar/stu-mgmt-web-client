@@ -1,0 +1,34 @@
+<div class="tab">
+
+	<table class="full-width table-bg" mat-table #table [dataSource]="assessmentsDataSource$ | async">
+		<ng-container matColumnDef="view">
+			<th mat-header-cell *matHeaderCellDef></th>
+			<td mat-cell *matCellDef="let row">
+				<a class="link-none" [routerLink]="[ '/courses', courseId, 'assignments', row.assignmentId, 'assessments', 'view', row.id]">
+					<button mat-stroked-button>{{ 'Action.View' | translate }}</button>
+				</a>
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="assignment">
+			<th mat-header-cell *matHeaderCellDef>{{ 'Domain.Assignment' | translate }}</th>
+			<td mat-cell *matCellDef="let row">{{row.assignment.name}}</td>
+		</ng-container>
+		<ng-container matColumnDef="achievedPoints">
+			<th mat-header-cell *matHeaderCellDef>{{ 'Property.Assessment.AchievedPoints' | translate }}</th>
+			<td mat-cell *matCellDef="let row">{{row.achievedPoints}}</td>
+		</ng-container>
+		<ng-container matColumnDef="maxPoints">
+			<th mat-header-cell *matHeaderCellDef>Max. {{ 'Property.Assignment.Points' | translate }}</th>
+			<td mat-cell *matCellDef="let row">{{row.assignment.points}}</td>
+		</ng-container>
+		<ng-container matColumnDef="percent">
+			<th mat-header-cell *matHeaderCellDef>%</th>
+			<td mat-cell *matCellDef="let row">{{ (row.achievedPoints / row.assignment.points) * 100}}</td>
+		</ng-container>
+	
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+
+<app-paginator></app-paginator>
+</div>

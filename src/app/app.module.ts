@@ -25,6 +25,7 @@ import { AssessmentOverviewModule } from "./assessment-overview/assessment-overv
 import { AssessmentViewerModule } from "./assessment-viewer/assessment-viewer.module";
 import { AdmissionStatusModule } from "./admission-status/admission-status.module";
 import { AuthService } from "./auth/services/auth.service";
+import { ParticipantProfileModule } from "./participant-profile/participant-profile.module";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -69,7 +70,8 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		AssessmentEditorModule,
 		AssessmentOverviewModule,
 		AssessmentViewerModule,
-		AdmissionStatusModule
+		AdmissionStatusModule,
+		ParticipantProfileModule
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "de" },
