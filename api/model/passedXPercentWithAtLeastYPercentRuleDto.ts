@@ -15,7 +15,7 @@ export interface PassedXPercentWithAtLeastYPercentRuleDto {
     type: PassedXPercentWithAtLeastYPercentRuleDto.TypeEnum;
     assignmentType: PassedXPercentWithAtLeastYPercentRuleDto.AssignmentTypeEnum;
     requiredPercent: number;
-    pointsRounding: RoundingBehavior;
+    achievedPercentRounding: RoundingBehavior;
     passedAssignmentsPercent: number;
     passedAssignmentsRounding: RoundingBehavior;
 }

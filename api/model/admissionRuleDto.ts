@@ -15,7 +15,7 @@ export interface AdmissionRuleDto {
     type: AdmissionRuleDto.TypeEnum;
     assignmentType: AdmissionRuleDto.AssignmentTypeEnum;
     requiredPercent: number;
-    pointsRounding: RoundingBehavior;
+    achievedPercentRounding: RoundingBehavior;
 }
 export namespace AdmissionRuleDto {
     export type TypeEnum = 'PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT' | 'REQUIRED_PERCENT_OVERALL';

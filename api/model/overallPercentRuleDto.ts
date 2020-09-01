@@ -15,7 +15,7 @@ export interface OverallPercentRuleDto {
     type: OverallPercentRuleDto.TypeEnum;
     assignmentType: OverallPercentRuleDto.AssignmentTypeEnum;
     requiredPercent: number;
-    pointsRounding: RoundingBehavior;
+    achievedPercentRounding: RoundingBehavior;
 }
 export namespace OverallPercentRuleDto {
     export type TypeEnum = 'PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT' | 'REQUIRED_PERCENT_OVERALL';

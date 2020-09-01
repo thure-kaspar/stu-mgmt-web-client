@@ -60,6 +60,59 @@ export class AdmissionStatusService {
      * Get admission status.
      * Returns the admission status of all participants.
      * @param courseId 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAdmissionStatusOfParticipant(courseId: string, userId: string, observe?: 'body', reportProgress?: boolean): Observable<AdmissionStatusDto>;
+    public getAdmissionStatusOfParticipant(courseId: string, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AdmissionStatusDto>>;
+    public getAdmissionStatusOfParticipant(courseId: string, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AdmissionStatusDto>>;
+    public getAdmissionStatusOfParticipant(courseId: string, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getAdmissionStatusOfParticipant.');
+        }
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getAdmissionStatusOfParticipant.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<AdmissionStatusDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/admission-status/${encodeURIComponent(String(userId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get admission status.
+     * Returns the admission status of all participants.
+     * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
