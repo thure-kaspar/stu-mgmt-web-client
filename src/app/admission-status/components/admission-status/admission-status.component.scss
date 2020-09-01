@@ -3,43 +3,11 @@
 	justify-content: space-between;
 }
 
-.admission-criteria {
-
-}
-
 .rules {
 	display: grid;
 	row-gap: 8px;
 }
 
-.rule {
-	.rule-title {
-		display: flex;
-		justify-content: space-between;
-		font-size: 18px;
-
-		.left > span {
-			margin-right: 16px;
-		}
-	}
-}
-
 .participants {
 	padding-top: 16px;
-}
-
-.type-chip {
-	color: white!important;
-	
-	mat-icon {
-		margin-right: 8px;
-	}
-}
-
-.HOMEWORK { 
-	background-color: rgb(0, 89, 255)!important;
-}
-
-.TESTAT {
-	background-color: rgb(194, 149, 0)!important;
 }

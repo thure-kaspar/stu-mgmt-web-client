@@ -1,11 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { BehaviorSubject, Subject } from "rxjs";
-import { AdmissionStatusDto, AdmissionStatusService, CourseConfigService, AdmissionCriteriaDto, AdmissionRuleDto, PassedXPercentWithAtLeastYPercentRuleDto, OverallPercentRuleDto } from "../../../../../api";
-import { ToastService } from "../../../shared/services/toast.service";
 import { ActivatedRoute } from "@angular/router";
+import { BehaviorSubject, Subject } from "rxjs";
+import { AdmissionCriteriaDto, AdmissionStatusDto, AdmissionStatusService, CourseConfigService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ToastService } from "../../../shared/services/toast.service";
 
 @Component({
 	selector: "app-admission-status",
@@ -21,7 +21,6 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 	displayedColumns = ["username", "hasAdmission"];
 
 	courseId: string;
-	ruleTypes = AdmissionRuleDto.TypeEnum;
 
 	constructor(
 		private admissionStatus: AdmissionStatusService,
@@ -58,14 +57,6 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 				this.toast.apiError(error);
 			}
 		});
-	}
-
-	getRuleAsXPercentOfY(rule: AdmissionRuleDto): PassedXPercentWithAtLeastYPercentRuleDto {
-		return rule as PassedXPercentWithAtLeastYPercentRuleDto;
-	}
-
-	getRuleAs(rule: AdmissionRuleDto): OverallPercentRuleDto {
-		return rule as OverallPercentRuleDto;
 	}
 
 	downloadCsv(): void {
