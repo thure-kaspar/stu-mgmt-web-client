@@ -11,7 +11,7 @@ const routes: Routes = [
 		{ path: "allocations", component: AssessmentAllocationOverviewComponent, pathMatch: "full" },
 		{ path: "created", component: CreatedAssessmentsComponent },
 		{ path: "registrations", component: RegisteredGroupsComponent, pathMatch: "full" },
-		{ path: "**", redirectTo: "created" } ] 
+		{ path: "", redirectTo: "created", pathMatch: "full" } ] 
 	}
 ];
 

@@ -12,8 +12,9 @@ const routes: Routes = [
 		{ path: "assignments", loadChildren: () => import("../assignment/assignment.module").then(m => m.AssignmentModule), },
 		{ path: "groups", loadChildren: () => import("../group/group.module").then(m => m.GroupModule) },
 		{ path: "users", loadChildren: () => import("../course-participants/course-participants.module").then(m => m.CourseParticipantsModule) },
+		{ path: "users/:userId", loadChildren: () => import("../participant-profile/participant-profile.module").then(m => m.ParticipantProfileModule) },
 		{ path: "settings", component: EditCourseComponent, pathMatch: "full" },
-		{ path: "**", pathMatch: "full", redirectTo: "assignments" }
+		{ path: "", pathMatch: "full", redirectTo: "assignments" }
 	] },
 	{ path: "", component: CourseListComponent, pathMatch: "full" }
 ];
