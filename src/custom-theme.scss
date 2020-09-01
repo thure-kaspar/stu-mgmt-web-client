@@ -51,7 +51,7 @@ $mat-dark-theme-background: map-merge($mat-dark-theme-background, (card:#292929)
 
 .green-theme {
 	color: $light-primary-text;
-	$green-primary: mat-palette($mat-grey, 300);
+	$green-primary: mat-palette($mat-grey, 600);
 	$green-accent: mat-palette($mat-green, 800);
 	$green-warn: mat-palette($mat-red);
 	$green-theme: mat-light-theme($green-primary, $green-accent, $green-warn);
