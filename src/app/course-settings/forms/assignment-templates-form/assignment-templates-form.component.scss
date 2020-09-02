@@ -9,8 +9,10 @@
 .assignment-template {
 	display: flex;
 	flex-direction: column;
-	
-	background-color: rgb(240, 240, 240);
+
+	.left {
+		font-size: 18px;
+	}
 
 	.assignment-template-title {
 		margin-top: -16px;

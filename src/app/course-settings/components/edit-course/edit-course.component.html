@@ -31,19 +31,19 @@
 						<mat-icon>add</mat-icon>{{ 'Action.Custom.AddAssignmentTemplate' | translate }}
 					</button> 
 					
-					<mat-list class="assignment-template-list">
-						<mat-list-item *ngFor="let template of courseConfig?.assignmentTemplates">
-							<div class="assignment-template">
-								<div class="left">
+					<div class="assignment-template-list">
+						<mat-card *ngFor="let template of assignmentTemplates$ | async">
+							<mat-card-title class="assignment-template">
+								<span class="left">
 									{{template.templateName}}
-								</div>
-								<span class="right">
-									<button mat-button (click)="openEditAssignmentTemplateDialog(template)">{{ 'Action.Edit' | translate }}</button>
-									<button mat-button color="warn" (click)="deleteAssignmentTemplate(template)">{{ 'Action.Delete' | translate }}</button>
 								</span>
-							</div>
-						</mat-list-item>
-					</mat-list>
+								<span class="right">
+									<button mat-stroked-button (click)="openEditAssignmentTemplateDialog(template)">{{ 'Action.Edit' | translate }}</button>
+									<button mat-stroked-button color="warn" (click)="deleteAssignmentTemplate(template)">{{ 'Action.Delete' | translate }}</button>
+								</span>
+							</mat-card-title>
+						</mat-card>
+					</div>
 				</div>
 			</mat-tab>
 

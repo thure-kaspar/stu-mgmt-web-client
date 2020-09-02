@@ -27,12 +27,11 @@ mat-card-title {
 	.assignment-template-list {
 		display: grid;
 		width: 500px;
-		grid-template-rows: repeat(1fr);
-		row-gap: 12px;
+		row-gap: 8px;
+		margin-top: 16px;
 	
 		.mat-list-item {
-			background-color: rgb(240, 240, 240);
-			border: 1px solid lightgrey;
+			background-color: var(--card-bg);
 		}
 	}
 	
@@ -44,6 +43,13 @@ mat-card-title {
 	
 		.left {
 			font-weight: 500;
+			font-size: 18px;
+		}
+
+		.right {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			column-gap: 8px;
 		}
 	}
 }

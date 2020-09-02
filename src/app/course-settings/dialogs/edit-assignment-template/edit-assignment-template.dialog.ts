@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { ToastService } from "../../../shared/services/toast.service";
 
 export class EditAssignmentTemplateDialogData {
 	template: AssignmentTemplateDto;
@@ -29,7 +30,7 @@ export class EditAssignmentTemplateDialog implements OnInit {
 				@Inject(MAT_DIALOG_DATA) private data: EditAssignmentTemplateDialogData,
 				private courseConfigService: CourseConfigService,
 				private fb: FormBuilder,
-				private snackbar: SnackbarService) {
+				private toast: ToastService) {
 
 		this.form = this.fb.group({
 			config: this.fb.group({
@@ -56,12 +57,11 @@ export class EditAssignmentTemplateDialog implements OnInit {
 			const template = this.assignmentTemplatesForm.getAssignmentTemplates().value[0] as AssignmentTemplateDto;
 			this.courseConfigService.updateAssignmentTemplate(template, this.data.courseId, this.data.template.id).subscribe(
 				result => {
-					this.snackbar.openSuccessMessage();
+					this.toast.success("Domain.AssignmentTemplate", "Message.Saved");
 					this.dialogRef.close(result);
 				},
 				error => {
-					console.log(error);
-					this.snackbar.openErrorMessage();
+					this.toast.apiError(error);
 				}
 			);
 		}

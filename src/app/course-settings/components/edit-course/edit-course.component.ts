@@ -13,6 +13,7 @@ import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admis
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseForm } from "../../forms/course-form/course-form.component";
 import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
+import { Subject } from "rxjs";
 
 @Component({
 	selector: "app-edit-course",
@@ -40,6 +41,8 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 	courseId: string;
 	course: CourseDto;
 	courseConfig: CourseConfigDto;
+
+	assignmentTemplates$ = new Subject<AssignmentTemplateDto[]>();
 
 	constructor(
 		private fb: FormBuilder,
@@ -88,6 +91,8 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 
 					// Insert admission criteria
 					result.admissionCriteria?.rules?.forEach(rule => this.admissionCriteriaForm.addRule(rule));
+
+					this.assignmentTemplates$.next(this.courseConfig.assignmentTemplates);
 				}
 			}
 		);
@@ -195,6 +200,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 				template => {
 					if (template) {
 						this.courseConfig.assignmentTemplates.push(template);
+						this.assignmentTemplates$.next(this.courseConfig.assignmentTemplates);
 					}
 				}
 			);
@@ -215,6 +221,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 							}
 						});
 						this.courseConfig.assignmentTemplates = updatedList;
+						this.assignmentTemplates$.next(this.courseConfig.assignmentTemplates);
 					}
 				}
 			);
@@ -232,6 +239,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 					this.courseConfigService.deleteAssignmentTemplate(this.courseId, template.id).subscribe(
 						deleted => {
 							this.courseConfig.assignmentTemplates = this.courseConfig.assignmentTemplates.filter(t => t.id !== template.id);
+							this.assignmentTemplates$.next(this.courseConfig.assignmentTemplates);
 							this.toast.success("Domain.AssignmentTemplate", "Message.Deleted");
 						},
 						error => {
