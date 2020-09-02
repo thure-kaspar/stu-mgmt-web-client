@@ -9,15 +9,7 @@ import { ChangeRoleDialog } from "./dialogs/change-role/change-role.dialog";
 import { SearchCourseDialog } from "./dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "./dialogs/search-user/search-user.dialog";
 import { CourseRoutingModule } from "./course-routing.module";
-import { CreateCourseComponent } from "./components/create-course/create-course.component";
 import { JoinCourseDialog } from "./dialogs/join-course/join-course.dialog";
-import { CourseForm } from "./forms/course-form/course-form.component";
-import { AdmissionCriteriaForm } from "./forms/admission-criteria-form/admission-criteria-form.component";
-import { GroupSettingsForm } from "./forms/group-settings-form/group-settings-form.component";
-import { AssignmentTemplatesForm } from "./forms/assignment-templates-form/assignment-templates-form.component";
-import { EditCourseComponent } from "./components/edit-course/edit-course.component";
-import { CreateAssignmentTemplateDialog } from "./dialogs/create-assignment-template/create-assignment-template.dialog";
-import { EditAssignmentTemplateDialog } from "./dialogs/edit-assignment-template/edit-assignment-template.dialog";
 import { CourseFacade } from "./services/course.facade";
 import { ParticipantFacade } from "./services/participant.facade";
 
@@ -26,15 +18,9 @@ import { ParticipantFacade } from "./services/participant.facade";
 		CourseListComponent, 
 		CourseComponent, 
 		ChangeRoleDialog, 
-		CreateCourseComponent, 
 		SearchCourseDialog, 
 		SearchUserDialog, 
 		JoinCourseDialog, 
-		CourseForm,
-		AdmissionCriteriaForm, 
-		GroupSettingsForm, 
-		AssignmentTemplatesForm, 
-		EditCourseComponent, CreateAssignmentTemplateDialog, EditAssignmentTemplateDialog
 	],
 	imports: [
 		SharedModule,

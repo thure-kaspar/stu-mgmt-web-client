@@ -1,18 +1,17 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssignmentDto, CoursesService, CourseConfigService, CourseDto, CourseConfigDto, AssignmentTemplateDto, AdmissionCriteriaDto, CourseConfigUpdateDto } from "../../../../../api";
-import { CourseForm } from "../../forms/course-form/course-form.component";
-import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { ActivatedRoute } from "@angular/router";
+import { AssignmentDto, AssignmentTemplateDto, CourseConfigDto, CourseConfigService, CourseConfigUpdateDto, CourseDto, CoursesService } from "../../../../../api";
+import { getSemester } from "../../../../../utils/helper";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { CreateAssignmentTemplateDialog, CreateAssignmentTemplateDialogData } from "../../dialogs/create-assignment-template/create-assignment-template.dialog";
+import { EditAssignmentTemplateDialog, EditAssignmentTemplateDialogData } from "../../dialogs/edit-assignment-template/edit-assignment-template.dialog";
 import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admission-criteria-form.component";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { MatDialog } from "@angular/material/dialog";
-import { CreateAssignmentTemplateDialogData, CreateAssignmentTemplateDialog } from "../../dialogs/create-assignment-template/create-assignment-template.dialog";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { EditAssignmentTemplateDialogData, EditAssignmentTemplateDialog } from "../../dialogs/edit-assignment-template/edit-assignment-template.dialog";
-import { getSemester } from "../../../../../utils/helper";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { CourseForm } from "../../forms/course-form/course-form.component";
+import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
 
 @Component({
 	selector: "app-edit-course",

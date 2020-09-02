@@ -1,17 +1,16 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { CoursesService, CourseDto, UserDto, CourseConfigService, AssignmentDto, CourseCreateDto, CourseParticipantsService, ParticipantDto } from "../../../../../api";
-import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { SearchCourseDialog } from "../../dialogs/search-course/search-course.dialog";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { SearchUserDialog } from "../../dialogs/search-user/search-user.dialog";
 import { Router } from "@angular/router";
-import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
-import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admission-criteria-form.component";
-import { CourseForm } from "../../forms/course-form/course-form.component";
-import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
+import { AssignmentDto, CourseConfigService, CourseCreateDto, CourseDto, CourseParticipantsService, CoursesService, ParticipantDto, UserDto } from "../../../../../api";
 import { getSemester } from "../../../../../utils/helper";
+import { AdmissionCriteriaForm } from "../../../course-settings/forms/admission-criteria-form/admission-criteria-form.component";
+import { AssignmentTemplatesForm } from "../../../course-settings/forms/assignment-templates-form/assignment-templates-form.component";
+import { CourseForm } from "../../../course-settings/forms/course-form/course-form.component";
+import { GroupSettingsForm } from "../../../course-settings/forms/group-settings-form/group-settings-form.component";
+import { SearchCourseDialog } from "../../../course/dialogs/search-course/search-course.dialog";
+import { SearchUserDialog } from "../../../course/dialogs/search-user/search-user.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
