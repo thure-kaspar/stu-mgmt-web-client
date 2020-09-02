@@ -1,6 +1,6 @@
 <form id="course-creation-form" class="form-container" [formGroup]="form" autocomplete="off">
 
-	<mat-tab-group color="accent" animationDuration="0ms">
+	<mat-tab-group color="accent" animationDuration="0ms" [selectedIndex]="selectedIndex" (selectedIndexChange)="tabChanged($event)">
 
 		<mat-tab label="{{ 'Misc.BasicData' | translate }}">
 			<app-course-form [form]="form" [isEditMode]="true"></app-course-form>

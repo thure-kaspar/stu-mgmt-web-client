@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AssignmentDto, AssignmentTemplateDto, CourseConfigDto, CourseConfigService, CourseConfigUpdateDto, CourseDto, CoursesService } from "../../../../../api";
 import { getSemester } from "../../../../../utils/helper";
 import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
@@ -12,16 +12,21 @@ import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admis
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseForm } from "../../forms/course-form/course-form.component";
 import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 
 @Component({
 	selector: "app-edit-course",
 	templateUrl: "./edit-course.component.html",
 	styleUrls: ["./edit-course.component.scss"]
 })
-export class EditCourseComponent implements OnInit {
+export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	/** Form with the structure of a CourseCreateDto. */
 	form: FormGroup;
+
+	/** Index of the selected tab. */
+	selectedIndex = 0;
+	private tabs = ["basic-data", "group-settings", "secrets", "admission-criteria", "assignment-templates"];
 
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
@@ -31,18 +36,22 @@ export class EditCourseComponent implements OnInit {
 	@ViewChild(GroupSettingsForm, { static: true }) groupSettingsForm: GroupSettingsForm;
 	@ViewChild(AdmissionCriteriaForm, { static: true }) admissionCriteriaForm: AdmissionCriteriaForm;
 	@ViewChild(AssignmentTemplatesForm, { static: true }) assignmentTemplatesForm: AssignmentTemplatesForm;
-	
+
 	courseId: string;
 	course: CourseDto;
 	courseConfig: CourseConfigDto;
 
-	constructor(private fb: FormBuilder,
-				private route: ActivatedRoute,
-				private courseConfigService: CourseConfigService,
-				private courseService: CoursesService,
-				private dialog: MatDialog,
-				private snackbar: SnackbarService) {
-					
+	constructor(
+		private fb: FormBuilder,
+		private route: ActivatedRoute,
+		private router: Router,
+		private courseConfigService: CourseConfigService,
+		private courseService: CoursesService,
+		private dialog: MatDialog,
+		private snackbar: SnackbarService
+	) {
+		super();
+
 		this.form = this.fb.group({
 			id: [null],
 			shortname: [null, Validators.required],
@@ -51,7 +60,7 @@ export class EditCourseComponent implements OnInit {
 			isClosed: [false, Validators.required],
 			link: [null],
 			config: this.fb.group({
-				password: [null] ,
+				password: [null],
 				subscriptionUrl: [null],
 				groupSettings: this.fb.group({
 					allowGroups: [false, Validators.required],
@@ -73,25 +82,35 @@ export class EditCourseComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
-		this.courseConfigService.getCourseConfig(this.courseId).subscribe(
+		this.subs.sink = this.courseConfigService.getCourseConfig(this.courseId).subscribe(
 			result => {
 				{
 					this.courseConfig = result;
 					this.form.get("config").patchValue(this.courseConfig);
-					
+
 					// Insert admission criteria
 					//result.admissionCriteria?.criteria?.forEach(c => this.admissionCriteriaForm.addCriteria(c));
 				}
 			}
 		);
 
-		this.courseService.getCourseById(this.courseId).subscribe(
+		this.subs.sink = this.courseService.getCourseById(this.courseId).subscribe(
 			result => {
 				this.course = result;
 				// Insert basic data
 				this.courseForm.form.patchValue(this.course);
 			}
 		);
+
+		this.subs.sink = this.route.fragment.subscribe(
+			fragment => {
+				this.selectedIndex = this.tabs.findIndex(tab => tab === fragment) ?? 0;
+			}
+		);
+	}
+
+	tabChanged(index: number): void {
+		this.router.navigate([], { fragment: this.tabs[index] });
 	}
 
 	onSave(): void {
@@ -114,7 +133,7 @@ export class EditCourseComponent implements OnInit {
 
 	openCreateAssignmentTemplateDialog(): void {
 		const data: CreateAssignmentTemplateDialogData = { courseId: this.courseId, configId: this.courseConfig.id };
-		this.dialog.open<CreateAssignmentTemplateDialog, CreateAssignmentTemplateDialogData, AssignmentTemplateDto>(CreateAssignmentTemplateDialog, { data })
+		this.subs.sink = this.dialog.open<CreateAssignmentTemplateDialog, CreateAssignmentTemplateDialogData, AssignmentTemplateDto>(CreateAssignmentTemplateDialog, { data })
 			.afterClosed().subscribe(
 				template => {
 					if (template) {
@@ -126,7 +145,7 @@ export class EditCourseComponent implements OnInit {
 
 	openEditAssignmentTemplateDialog(template: AssignmentTemplateDto): void {
 		const data: EditAssignmentTemplateDialogData = { template: template, courseId: this.courseId };
-		this.dialog.open<EditAssignmentTemplateDialog, EditAssignmentTemplateDialogData, AssignmentTemplateDto>(EditAssignmentTemplateDialog, { data })
+		this.subs.sink = this.dialog.open<EditAssignmentTemplateDialog, EditAssignmentTemplateDialogData, AssignmentTemplateDto>(EditAssignmentTemplateDialog, { data })
 			.afterClosed().subscribe(
 				update => {
 					if (update) {
@@ -150,7 +169,7 @@ export class EditCourseComponent implements OnInit {
 	 */
 	deleteAssignmentTemplate(template: AssignmentTemplateDto): void {
 		const data: ConfirmDialogData = { params: [template.templateName] };
-		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed().subscribe(
+		this.subs.sink = this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed().subscribe(
 			confirmed => {
 				if (confirmed) {
 					this.courseConfigService.deleteAssignmentTemplate(this.courseId, template.id).subscribe(
