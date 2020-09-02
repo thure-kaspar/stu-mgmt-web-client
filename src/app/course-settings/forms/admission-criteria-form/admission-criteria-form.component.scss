@@ -15,8 +15,49 @@
 	}
 }
 
-#btn-add-criteria {
-	margin-top: 8px;
-	margin-bottom: 8px;
-	width: fit-content;
+.add-rule-btns {
+	margin-bottom: 16px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 16px;
+
+	@media (max-width: 600px) {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		button {
+			margin-bottom: 8px;
+		}
+	}
+}
+
+.rules {
+	display: grid;
+	row-gap: 16px;
+}
+
+.rule-title {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: -16px;
+	
+	.name {
+		margin-top: -4px!important;
+		font-size: 18px;
+	}
+
+	button {
+		margin-top: -16px!important;
+		margin-right: -16px!important;
+	}
+}
+
+.rule-properties {
+	display: grid;
+
+	mat-form-field {
+		width: 100%!important;
+	}
 }

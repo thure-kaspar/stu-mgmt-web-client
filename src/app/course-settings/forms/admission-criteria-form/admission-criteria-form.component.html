@@ -1,44 +1,99 @@
 <ng-container [formGroup]="form">
 	<ng-container formGroupName="config">
-		<div id="admission-criteria" formGroupName="admissionCriteria">
-			<button id="btn-add-criteria" type="button" mat-flat-button color="accent" (click)="addCriteria()"><mat-icon>add</mat-icon>Add criteria</button>
+		<div class="tab" id="admission-criteria" formGroupName="admissionCriteria">
+			<div class="add-rule-btns">
+				<button type="button" class="add-rule-btn" mat-flat-button color="primary" (click)="_addRequiredPercentOverallRule()"><mat-icon>add</mat-icon>
+					{{ 'Enum.RuleType.' + ruleTypeEnum.REQUIREDPERCENTOVERALL | translate:{ requiredPercent: 'X' } }}
+				</button>
+	
+				<button type="button" class="add-rule-btn" mat-flat-button color="primary" (click)="_addPassedXPercentWithAtLeastYPercentRule()"><mat-icon>add</mat-icon>
+					{{ 'Enum.RuleType.' + ruleTypeEnum.PASSEDXPERCENTWITHATLEASTYPERCENT | translate:{ requiredPercent: 'X', passedAssignmentsPercent: 'Y' } }}
+				</button>
+			</div>
+	
+			<div class="rules" formArrayName="rules">
+				<mat-card class="rule" [formGroupName]="i" *ngFor="let rule of getRules()?.controls; let i=index">
+
+					<mat-card-title class="rule-title">
+						<ng-container [ngSwitch]="rule.value.type">
+							<span class="name" *ngSwitchCase="ruleTypeEnum.REQUIREDPERCENTOVERALL">{{ 'Enum.RuleType.' + rule.value.type | translate:{requiredPercent: rule.value.requiredPercent } }}</span>
+							<ng-container *ngSwitchCase="ruleTypeEnum.PASSEDXPERCENTWITHATLEASTYPERCENT">
+							<span class="name">
+								{{ 'Enum.RuleType.' + rule.value.type | translate:{
+									requiredPercent: _getRuleAsXPercentOfY(rule.value).requiredPercent, 
+									passedAssignmentsPercent: _getRuleAsXPercentOfY(rule.value).passedAssignmentsPercent 
+								} }}
+							</span>
+							</ng-container>
+							<p *ngSwitchDefault>
+								Unknown rule type
+							</p>
+						</ng-container>
+						<button mat-icon-button [matTooltip]="'Action.Remove' | translate" (click)="removeCriteria(i)"><mat-icon>clear</mat-icon></button>
+					</mat-card-title>
+
+					<div class="rule-properties">
+						<mat-form-field>
+							<mat-label>{{ 'Property.Assignment.Type' | translate }}</mat-label>
+							<mat-select formControlName="assignmentType" required>
+								<mat-option [value]="typeEnum.HOMEWORK">{{ 'Enum.AssignmentType.' + typeEnum.HOMEWORK | translate }}</mat-option>
+								<mat-option [value]="typeEnum.TESTAT">{{ 'Enum.AssignmentType.' + typeEnum.TESTAT | translate }}</mat-option>
+								<mat-option [value]="typeEnum.PROJECT">{{ 'Enum.AssignmentType.' + typeEnum.PROJECT | translate }}</mat-option>
+								<mat-option [value]="typeEnum.SEMINAR">{{ 'Enum.AssignmentType.' + typeEnum.SEMINAR | translate }}</mat-option>
+								<mat-option [value]="typeEnum.OTHER">{{ 'Enum.AssignmentType.' + typeEnum.OTHER | translate }}</mat-option>
+							</mat-select>
+						</mat-form-field>
+			
+						<mat-form-field>
+							<mat-label>{{ 'Property.AdmissionRule.RequiredPercent' | translate }}</mat-label>
+							<input matInput type="number" formControlName="requiredPercent" min=0 max=100>
+						</mat-form-field>
+	
+						<ng-container formGroupName="achievedPercentRounding">
+							<mat-form-field>
+								<mat-label>{{ 'Property.AdmissionRule.AchievedPercentRounding' | translate }}</mat-label>
+								<mat-select formControlName="type" required>
+									<mat-option [value]="roundingTypeEnum.NONE">{{ 'Enum.RoundingType.' + roundingTypeEnum.NONE | translate }}</mat-option>
+									<mat-option [value]="roundingTypeEnum.DOWNNEARESTINTEGER">{{ 'Enum.RoundingType.' + roundingTypeEnum.DOWNNEARESTINTEGER | translate }}</mat-option>
+									<mat-option [value]="roundingTypeEnum.UPNEARESTINTEGER">{{ 'Enum.RoundingType.' + roundingTypeEnum.UPNEARESTINTEGER | translate }}</mat-option>
+									<mat-option [value]="roundingTypeEnum.DECIMALS">{{ 'Enum.RoundingType.' + roundingTypeEnum.DECIMALS | translate }}</mat-option>
+								</mat-select>
+							</mat-form-field>
 		
-			<mat-hint>
-				<p>Scope: Determines, wether the rule should be evaluated for every assignment (INDIVIDUAL) or the summarized points (OVERALL).</p>
-				<p>Type: The assignment type that the rule applies to.</p>
-				<p>Required: The required percentage to fulfill the criteria.</p>
-			</mat-hint>
-		
-			<!-- <div class="criteria" formArrayName="criteria" *ngFor="let crit of getCriteria()?.controls; let i=index">
-				<ng-container [formGroupName]="i">
-					<mat-form-field>
-						<mat-label>Scope</mat-label>
-						<mat-select formControlName="scope" required>
-							<mat-option [value]="scopeEnum.OVERALL">{{scopeEnum.OVERALL}}</mat-option>
-							<mat-option [value]="scopeEnum.INDIVIDUAL">{{scopeEnum.INDIVIDUAL}}</mat-option>
-						</mat-select>
-						<mat-error>Value is missing.</mat-error>
-					</mat-form-field>
-		
-					<mat-form-field>
-						<mat-label>Type</mat-label>
-						<mat-select formControlName="type" required>
-							<mat-option [value]="typeEnum.HOMEWORK">{{typeEnum.HOMEWORK}}</mat-option>
-							<mat-option [value]="typeEnum.TESTAT">{{typeEnum.TESTAT}}</mat-option>
-							<mat-option [value]="typeEnum.PROJECT">{{typeEnum.PROJECT}}</mat-option>
-							<mat-option [value]="typeEnum.SEMINAR">{{typeEnum.SEMINAR}}</mat-option>
-							<mat-option [value]="typeEnum.OTHER">{{typeEnum.OTHER}}</mat-option>
-						</mat-select>
-					</mat-form-field>
-		
-					<mat-form-field>
-						<mat-label>Required points (in %)</mat-label>
-						<input matInput type="number" formControlName="requiredPercent">
-					</mat-form-field>
-		
-					<button  matSuffix mat-icon-button matTooltip="Remove" (click)="removeCriteria(i)"><mat-icon>clear</mat-icon></button>
-				</ng-container>
-			</div> -->
+							<mat-form-field *ngIf="rule.value.achievedPercentRounding.type === roundingTypeEnum.DECIMALS">
+								<mat-label>{{ 'Misc.Decimals' | translate }}</mat-label>
+								<input matInput type="number" formControlName="decimals">
+							</mat-form-field>
+						</ng-container>
+						
+	
+						<ng-container *ngIf="rule.value.type === ruleTypeEnum.PASSEDXPERCENTWITHATLEASTYPERCENT">
+							<mat-form-field>
+								<mat-label>{{ 'Property.AdmissionRule.PassedAssignmentsRounding' | translate }}</mat-label>
+								<input matInput type="number" formControlName="passedAssignmentsPercent" min=0 max=100>
+							</mat-form-field>
+
+							<ng-container formGroupName="passedAssignmentsRounding">
+								<mat-form-field>
+									<mat-label>{{ 'Property.AdmissionRule.AchievedPercentRounding' | translate }}</mat-label>
+									<mat-select formControlName="type" required>
+										<mat-option [value]="roundingTypeEnum.NONE">{{ 'Enum.RoundingType.' + roundingTypeEnum.NONE | translate }}</mat-option>
+										<mat-option [value]="roundingTypeEnum.DOWNNEARESTINTEGER">{{ 'Enum.RoundingType.' + roundingTypeEnum.DOWNNEARESTINTEGER | translate }}</mat-option>
+										<mat-option [value]="roundingTypeEnum.UPNEARESTINTEGER">{{ 'Enum.RoundingType.' + roundingTypeEnum.UPNEARESTINTEGER | translate }}</mat-option>
+										<mat-option [value]="roundingTypeEnum.DECIMALS">{{ 'Enum.RoundingType.' + roundingTypeEnum.DECIMALS | translate }}</mat-option>
+									</mat-select>
+								</mat-form-field>
+			
+								<mat-form-field *ngIf="rule.value.passedAssignmentsRounding.type === roundingTypeEnum.DECIMALS">
+									<mat-label>{{ 'Misc.Decimals' | translate }}</mat-label>
+									<input matInput type="number" formControlName="decimals">
+								</mat-form-field>
+							</ng-container>
+						</ng-container>
+					</div>
+	
+				</mat-card>
+			</div>
 		</div>
 	</ng-container>
 </ng-container>
