@@ -1,37 +1,49 @@
 <ng-container [formGroup]="form">
 	<ng-container formGroupName="config">
 		<div id="group-settings" formGroupName="groupSettings">
-			<mat-form-field>
-				<mat-label>{{ 'Property.GroupSettings.AllowGroups' | translate }}</mat-label>
-				<mat-select formControlName="allowGroups" required>
-					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
-					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
-				</mat-select>
-				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
-			</mat-form-field>
-			
-			<mat-form-field>
-				<mat-label>{{ 'Property.GroupSettings.Selfmanaged' | translate }}</mat-label>
-				<mat-select formControlName="selfmanaged" required>
-					<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
-					<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
-				</mat-select>
-				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
-			</mat-form-field>
+			<div class="grid-left-right">
+				<mat-form-field>
+					<mat-label>{{ 'Property.GroupSettings.AllowGroups' | translate }}</mat-label>
+					<mat-select formControlName="allowGroups" required>
+						<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
+						<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
+					</mat-select>
+					<mat-hint>{{ 'Text.GroupSettings.AllowGroups' | translate }}</mat-hint>
+					<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+				</mat-form-field>
+				
+				<mat-form-field>
+					<mat-label>{{ 'Property.GroupSettings.Selfmanaged' | translate }}</mat-label>
+					<mat-select formControlName="selfmanaged" required>
+						<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
+						<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
+					</mat-select>
+					<mat-hint>{{ 'Text.GroupSettings.Selfmanaged' | translate }}</mat-hint>
+					<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+				</mat-form-field>
+			</div>
 			
 			<div class="group-size-settings">
 				<mat-form-field>
 					<mat-label>{{ 'Property.GroupSettings.SizeMin' | translate }}</mat-label>
 					<input matInput type="number" formControlName="sizeMin" required>
+					<mat-hint>{{ 'Text.GroupSettings.SizeMin' | translate }}</mat-hint>
 					<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 				</mat-form-field>
 				
 				<mat-form-field>
 					<mat-label>{{ 'Property.GroupSettings.SizeMax' | translate }}</mat-label>
 					<input matInput type="number" formControlName="sizeMax" required>
+					<mat-hint>{{ 'Text.GroupSettings.SizeMax' | translate }}</mat-hint>
 					<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 				</mat-form-field>
 			</div>
+
+			<mat-form-field>
+				<mat-label>{{ 'Property.GroupSettings.NameSchema' | translate }}</mat-label>
+				<input matInput formControlName="nameSchema">
+				<mat-hint>{{ 'Text.GroupSettings.Prefix' | translate }}</mat-hint>
+			</mat-form-field>
 
 			<mat-form-field>
 				<mat-label>{{ 'Property.GroupSettings.AutoJoinGroupOnCourseJoined' | translate }}</mat-label>
@@ -52,10 +64,6 @@
 				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 			</mat-form-field>
 
-			<mat-form-field>
-				<mat-label>{{ 'Property.GroupSettings.NameSchema' | translate }}</mat-label>
-				<input matInput formControlName="nameSchema">
-			</mat-form-field>
 		</div>
 	</ng-container>
 </ng-container>

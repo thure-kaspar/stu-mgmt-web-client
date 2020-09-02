@@ -10,7 +10,7 @@ mat-card-title {
 	justify-content: space-between;
 }
 
-#basic-data, #lecturers, #extended-options {
+#basic-data, #lecturers, #secrets {
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 4px;
@@ -24,6 +24,10 @@ mat-card-title {
 			width: 100%;
 		}
 	}
+}
+
+#secrets {
+	margin-top: 8px;
 }
 
 #btn-add-lecturer {

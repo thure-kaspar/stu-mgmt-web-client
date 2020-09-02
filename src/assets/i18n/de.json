@@ -207,6 +207,7 @@
     "MyProfile": "Mein Profil",
     "Privacy": "Datenschutz",
     "Rounding": "Runden",
+    "Secrets": "Geheime Einstellungen",
     "Settings": "Einstellungen",
     "UnsavedChanges": "Ungespeicherte Änderungen"
   },
@@ -219,6 +220,13 @@
     }
   },
   "Property": {
+    "AdmissionRule": {
+      "AchievedPercentRounding": "Erreichte Punkztahl-%",
+      "AssignmentType": "Aufgaben-Typ",
+      "PassedAssignmentsRounding": "Benötigte bestandene Aufgaben in %",
+      "RequiredPercent": "Benötigte Punktzahl in %",
+      "Type": "Regel"
+    },
     "Assessment": {
       "AchievedPoints": "Erreichte Punktzahl",
       "Comment": "Kommentar",
@@ -281,6 +289,9 @@
     }
   },
   "Text": {
+    "CourseConfig": {
+      "Password": "Teilnehmer müssen das Passwort angeben, um dem Kurs beizutreten."
+    },
     "Group": {
       "CanNotBeClosed": "Diese Gruppe kann nicht von Studenten geschlossen werden.",
       "CanNotBeRenamed": "Der Name der Gruppe kann von Studenten nicht verändert werden.",
@@ -293,7 +304,12 @@
       "Password": "Wenn du ein Passwort verwendest, müssen andere Teilnehmer das Passwort eingeben, um deiner Gruppe beizutreten."
     },
     "GroupSettings": {
-      "AutoJoinGroupOnCourseJoined": "Teilnehmer wird beim Betreten des Kurses einer offenen Gruppe zugewiesen.\nExistiert keine offene Gruppe, wird automatisch eine neue Gruppe für den Studenten erstellt.\nWenn kein Prefix für Gruppennamen definiert ist, wird ein zufälliger Name gewählt."
+      "AllowGroups": "Erlaubt das Erstellen von Gruppen.",
+      "AutoJoinGroupOnCourseJoined": "Existiert keine offene Gruppe, wird automatisch eine neue Gruppe für den Studenten erstellt.\nWenn kein Prefix für Gruppennamen definiert ist, wird ein zufälliger Name gewählt.",
+      "Prefix": "Alle Gruppennamen werden durch den Präfix gefolgt von einer Zahl gebildet.",
+      "Selfmanaged": "TBD",
+      "SizeMax": "Max. erlaubte Anzahl an Gruppenmitgliedern.",
+      "SizeMin": "Min. Größe, um an Aufgaben teilzunehmen."
     }
   },
   "Title": {

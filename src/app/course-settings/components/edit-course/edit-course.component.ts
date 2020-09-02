@@ -2,17 +2,17 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AssignmentDto, AssignmentTemplateDto, CourseConfigDto, CourseConfigService, CourseConfigUpdateDto, CourseDto, CoursesService } from "../../../../../api";
+import { AdmissionCriteriaDto, AssignmentDto, AssignmentTemplateDto, CourseConfigDto, CourseConfigService, CourseConfigUpdateDto, CourseDto, CoursesService, GroupSettingsUpdateDto } from "../../../../../api";
 import { getSemester } from "../../../../../utils/helper";
 import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ToastService } from "../../../shared/services/toast.service";
 import { CreateAssignmentTemplateDialog, CreateAssignmentTemplateDialogData } from "../../dialogs/create-assignment-template/create-assignment-template.dialog";
 import { EditAssignmentTemplateDialog, EditAssignmentTemplateDialogData } from "../../dialogs/edit-assignment-template/edit-assignment-template.dialog";
 import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admission-criteria-form.component";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseForm } from "../../forms/course-form/course-form.component";
 import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 
 @Component({
 	selector: "app-edit-course",
@@ -48,7 +48,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 		private courseConfigService: CourseConfigService,
 		private courseService: CoursesService,
 		private dialog: MatDialog,
-		private snackbar: SnackbarService
+		private toast: ToastService
 	) {
 		super();
 
@@ -61,7 +61,6 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 			link: [null],
 			config: this.fb.group({
 				password: [null],
-				subscriptionUrl: [null],
 				groupSettings: this.fb.group({
 					allowGroups: [false, Validators.required],
 					nameSchema: [null],
@@ -72,11 +71,10 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 					mergeGroupsOnAssignmentStarted: [false, Validators.required]
 				}),
 				admissionCriteria: this.fb.group({
-					criteria: this.fb.array([])
+					rules: this.fb.array([])
 				}),
 				assignmentTemplates: this.fb.array([])
-			}),
-			lecturers: this.fb.array([]),
+			})
 		});
 	}
 
@@ -89,7 +87,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 					this.form.get("config").patchValue(this.courseConfig);
 
 					// Insert admission criteria
-					//result.admissionCriteria?.criteria?.forEach(c => this.admissionCriteriaForm.addCriteria(c));
+					result.admissionCriteria?.rules?.forEach(rule => this.admissionCriteriaForm.addRule(rule));
 				}
 			}
 		);
@@ -117,18 +115,77 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 		const courseData = this.form.value;
 		const groupSettings = this.form.get("config.groupSettings").value;
 		const config: CourseConfigUpdateDto = {
-			password: this.form.get("config.password").value,
-			subscriptionUrl: this.form.get("config.subscriptionUrl").value
+			password: this.form.get("config.password").value
+		}; 
+		const admissionCriteria: AdmissionCriteriaDto = {
+			rules: this.admissionCriteriaForm.getRules().value
 		};
-		// const admissionCriteria: AdmissionCriteriaDto = {
-		// 	criteria: this.admissionCriteriaForm.getCriteria().value
-		// };
 
-		// TODO: Display feedback / errors, Maybe split into seperate components
-		this.courseService.updateCourse(courseData, this.courseId).subscribe();
-		this.courseConfigService.updateCourseConfig(config, this.courseId).subscribe();
-		this.courseConfigService.updateGroupSettings(groupSettings, this.courseId).subscribe();
-		//this.courseConfigService.updateAdmissionCriteria(admissionCriteria, this.courseId).subscribe();
+		switch (this.selectedIndex) {
+		case 0:
+			this.saveBasicData(courseData);
+			break;
+		case 1:
+			this.saveGroupsSettings(groupSettings);
+			break;
+		case 2:
+			this.saveSecrets(config);
+			break;
+		case 3:
+			this.saveAdmissionCriteria(admissionCriteria);
+			break;
+		default:
+			this.toast.warning("No tab selected.");
+			break;
+		}
+	}
+
+	private saveBasicData(update: CourseDto): void {
+		this.subs.sink = this.courseService.updateCourse(update, this.courseId).subscribe({
+			next: (result) => {
+				this.form.patchValue(result);
+				this.toast.success("Misc.BasicDate", "Message.Saved");
+			},
+			error: (error) => {
+				this.toast.apiError(error);
+			}
+		});
+	}
+
+	private saveGroupsSettings(groupSettings: GroupSettingsUpdateDto): void {
+		this.subs.sink = this.courseConfigService.updateGroupSettings(groupSettings, this.courseId).subscribe({
+			next: (result) => {
+				this.form.get("config.groupSettings").patchValue(result);
+				this.toast.success("Domain.GroupSettings", "Message.Saved");
+			},
+			error: (error) => {
+				this.toast.apiError(error);
+			}
+		});
+	}
+
+	private saveSecrets(secrets: CourseConfigUpdateDto): void {
+		this.subs.sink = this.courseConfigService.updateCourseConfig(secrets, this.courseId).subscribe({
+			next: (result) => {
+				this.form.get("config").patchValue(result);
+				this.toast.success("Misc.Secrets", "Message.Saved");
+			},
+			error: (error) => {
+				this.toast.apiError(error);
+			}
+		});
+	}
+
+	private saveAdmissionCriteria(criteria: AdmissionCriteriaDto): void {
+		this.subs.sink = this.courseConfigService.updateAdmissionCriteria(criteria, this.courseId).subscribe({
+			next: (result) => {
+				this.form.get("config.admissionCriteria").patchValue(result);
+				this.toast.success("Domain.AdmissionCriteria", "Message.Saved");
+			},
+			error: (error) => {
+				this.toast.apiError(error);
+			}
+		});
 	}
 
 	openCreateAssignmentTemplateDialog(): void {
@@ -174,12 +231,11 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 				if (confirmed) {
 					this.courseConfigService.deleteAssignmentTemplate(this.courseId, template.id).subscribe(
 						deleted => {
-							this.snackbar.openSuccessMessage();
 							this.courseConfig.assignmentTemplates = this.courseConfig.assignmentTemplates.filter(t => t.id !== template.id);
+							this.toast.success("Domain.AssignmentTemplate", "Message.Deleted");
 						},
 						error => {
-							console.log(error);
-							this.snackbar.openErrorMessage();
+							this.toast.apiError(error);
 						}
 					);
 				}

@@ -31,6 +31,11 @@
 	</mat-form-field>
 	
 	<mat-form-field>
+		<mat-label>{{ 'Misc.Link' | translate }}</mat-label>
+		<input matInput formControlName="link">
+	</mat-form-field>
+
+	<mat-form-field>
 		<mat-label>{{ 'Property.Course.IsClosed' | translate }}</mat-label>
 		<mat-select formControlName="isClosed" required>
 			<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
@@ -39,16 +44,5 @@
 		<mat-hint>Closing the course will prevent students from joining.</mat-hint>
 		<mat-error>Value is missing.</mat-error>
 	</mat-form-field>
-	
-	<mat-form-field formGroupName="config">
-		<mat-label>{{ 'Common.Password' | translate }}</mat-label>
-		<input matInput formControlName="password">
-		<mat-hint>Users have to enter the password to enter the course.</mat-hint>
-		<mat-error>Value is missing.</mat-error>
-	</mat-form-field>
-	
-	<mat-form-field>
-		<mat-label>{{ 'Misc.Link' | translate }}</mat-label>
-		<input matInput formControlName="link">
-	</mat-form-field>	
+
 </div>

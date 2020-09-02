@@ -11,15 +11,13 @@
 				<app-group-settings-form [form]="form"></app-group-settings-form>
 			</mat-tab>
 
-			<mat-tab label="{{ 'Misc.ExtendedOptions' | translate }}">
-				<div id="extended-options">			
-					<div>
-						<mat-form-field>
-							<mat-label>{{ 'Property.CourseConfig.SubscriptionUrl' | translate }}</mat-label>
-							<input matInput formControlName="subscriptionUrl">
-							<mat-hint>Update messages about events (i.e assignment of this course gets closed for submissions) will be send to the specified URL via HTTP-POST.</mat-hint>
-						</mat-form-field>
-					</div>
+			<mat-tab label="{{ 'Misc.Secrets' | translate }}">
+				<div id="secrets">			
+					<mat-form-field>
+						<mat-label>{{ 'Common.Password' | translate }}</mat-label>
+						<input matInput formControlName="password">
+						<mat-hint>{{ 'Text.CourseConfig.Password' | translate }}</mat-hint>
+					</mat-form-field>
 				</div>
 			</mat-tab>
 
@@ -51,7 +49,7 @@
 
 			<mat-tab disabled>
 				<ng-template mat-tab-label>
-					<button mat-flat-button color="accent" [disabled]="form.invalid" (click)="onSave()">{{ 'Action.Save' | translate }}</button>
+					<button mat-flat-button color="accent" [disabled]="form.invalid || selectedIndex == 4" (click)="onSave()">{{ 'Action.Save' | translate }}</button>
 				</ng-template>
 			</mat-tab>
 			

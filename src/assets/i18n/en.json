@@ -207,6 +207,7 @@
     "MyProfile": "My profile",
     "Privacy": "Privacy",
     "Rounding": "Rounding",
+    "Secrets": "Secrets",
     "Settings": "Settings",
     "UnsavedChanges": "Unsaved changes"
   },
@@ -219,6 +220,13 @@
     }
   },
   "Property": {
+    "AdmissionRule": {
+      "AchievedPercentRounding": "Achieved points-%",
+      "AssignmentType": "Assignment type",
+      "PassedAssignmentsRounding": "Required passed Assignments in %",
+      "RequiredPercent": "Required points in %",
+      "Type": "Rule"
+    },
     "Assessment": {
       "AchievedPoints": "Achieved points",
       "Comment": "Comment",
@@ -281,6 +289,9 @@
     }
   },
   "Text": {
+    "CourseConfig": {
+      "Password": "Participants must enter the password to join the course."
+    },
     "Group": {
       "CanNotBeClosed": "The group cannot be closed by students.",
       "CanNotBeRenamed": "This group cannot be renamed by students.",
@@ -293,7 +304,12 @@
       "Password": "When using a password, other participants are required enter the password to join your group."
     },
     "GroupSettings": {
-      "AutoJoinGroupOnCourseJoined": "Participant will be automatically assigned to an open group once he joins the course.\nIf no open group exists, a new group will be created.\nIf name schema is not defined, a random group name will be chosen."
+      "AllowGroups": "Allows the creation of groups.",
+      "AutoJoinGroupOnCourseJoined": "If no open group exists, a new group will be created.\nIf name schema is not defined, a random group name will be chosen.",
+      "Prefix": "All group names will use the prefix followed by a number.",
+      "Selfmanaged": "TBD",
+      "SizeMax": "Max. amount of allowed group members.",
+      "SizeMin": "Group must have this size to participate in assignments."
     }
   },
   "Title": {

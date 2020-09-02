@@ -49,7 +49,6 @@ export class CreateCourseComponent implements OnInit {
 			link: [null],
 			config: this.fb.group({
 				password: [null] ,
-				subscriptionUrl: [null],
 				groupSettings: this.fb.group({
 					allowGroups: [false, Validators.required],
 					nameSchema: [null],
@@ -60,7 +59,7 @@ export class CreateCourseComponent implements OnInit {
 					mergeGroupsOnAssignmentStarted: [false, Validators.required]
 				}),
 				admissionCriteria: this.fb.group({
-					criteria: this.fb.array([])
+					rules: this.fb.array([])
 				}),
 				assignmentTemplates: this.fb.array([])
 			}),
