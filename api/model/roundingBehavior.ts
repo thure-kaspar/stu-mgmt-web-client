@@ -11,6 +11,15 @@
  */
 
 export interface RoundingBehavior { 
-    type: string;
+    type: RoundingBehavior.TypeEnum;
     decimals?: number;
+}
+export namespace RoundingBehavior {
+    export type TypeEnum = 'NONE' | 'DECIMALS' | 'DOWN_NEAREST_INTEGER' | 'UP_NEAREST_INTEGER';
+    export const TypeEnum = {
+        NONE: 'NONE' as TypeEnum,
+        DECIMALS: 'DECIMALS' as TypeEnum,
+        DOWNNEARESTINTEGER: 'DOWN_NEAREST_INTEGER' as TypeEnum,
+        UPNEARESTINTEGER: 'UP_NEAREST_INTEGER' as TypeEnum
+    };
 }
