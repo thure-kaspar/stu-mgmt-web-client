@@ -27,7 +27,6 @@ $student-mgmt-client-theme: mat-light-theme($student-mgmt-client-primary, $stude
 @include angular-material-theme($student-mgmt-client-theme);
 
 // https://stackoverflow.com/questions/43919927/angular-material2-theming-how-to-set-app-background
-$mat-dark-theme-background: map-merge($mat-dark-theme-background, (card:#292929)); // Merge custom card color
 
 .dark-theme {
 	color: $light-primary-text;
