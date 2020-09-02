@@ -67,15 +67,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		SharedModule,
 		MaterialModule,
 		LayoutModule,
-		AuthModule,
-		AssessmentModule,
-		AssessmentEditorModule,
-		AssessmentOverviewModule,
-		AssessmentViewerModule,
-		AdmissionStatusModule,
-		ParticipantProfileModule,
-		CourseSettingsModule,
-		CourseCreatorModule
+		AuthModule
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "de" },
