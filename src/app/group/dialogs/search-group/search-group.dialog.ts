@@ -23,7 +23,7 @@ export class SearchGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	dataSource: MatTableDataSource<GroupDto>; //new BehaviorSubject(new ([]));
 	displayedColumns = ["select", "name", "open"];
-	selection = new SelectionModel<GroupDto>(true, []);
+	selection = new SelectionModel<GroupDto>(false, []);
 
 	filter = new GroupFilter();
 	groupnameFilterChanged$ = new Subject();

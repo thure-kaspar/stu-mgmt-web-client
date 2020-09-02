@@ -55,8 +55,7 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 	}
 
 	loadUsers(): void {
-		const skip = this.paginator.currentPage;
-		const take = this.paginator.pageSize;
+		const [skip, take] = this.paginator.getSkipAndTake();
 
 		this.isLoading$.next(true);
 		this.courseParticipantsService.getUsersWithAssignedEvaluator(

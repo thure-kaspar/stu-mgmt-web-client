@@ -1,32 +1,34 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { UsersService, UserDto } from "../../../../../api";
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatDialogRef } from "@angular/material/dialog";
 import { SelectionModel } from "@angular/cdk/collections";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatDialogRef } from "@angular/material/dialog";
+import { MatTableDataSource } from "@angular/material/table";
+import { UserDto, UsersService } from "../../../../../api";
+import { Paginator } from "../../../shared/paginator/paginator.component";
+import { BehaviorSubject } from "rxjs";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 
 @Component({
 	selector: "app-search-user",
 	templateUrl: "./search-user.dialog.html",
 	styleUrls: ["./search-user.dialog.scss"]
 })
-export class SearchUserDialog implements OnInit {
+export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	users:  UserDto[] = [];
 	userFilter: string;
 
 	displayedColumns: string[] = ["select", "role", "username", "displayName", "email", "actions"];
-	dataSource: MatTableDataSource<UserDto>;
-	selection = new SelectionModel<UserDto>(true, []);
+	dataSource$ = new BehaviorSubject(new MatTableDataSource<UserDto>([]));
+	selection = new SelectionModel<UserDto>(false, []);
 	
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(Paginator, { static: true }) paginator: Paginator;
 
 	constructor(public dialogRef: MatDialogRef<SearchUserDialog, UserDto[]>,
-				private userService: UsersService) { }
+				private userService: UsersService) { super(); }
 
-	ngOnInit(): void { }
+	ngOnInit(): void {
+		this.searchUsers();
+	}
 
 	/** Closes the dialog without returning data. */
 	onCancel(): void {
@@ -39,32 +41,15 @@ export class SearchUserDialog implements OnInit {
 	}
 
 	/** Retrieves all users that match the specified filters and inserts them into the table. */
-	searchUsers(): void { 
-		this.userService.getAllUsers().subscribe( // TODO: Implement getUsersWithFilter in backend
-			result => {
-				this.users = result;
-				this.dataSource = new MatTableDataSource(this.users);
-				this.dataSource.paginator = this.paginator;
-				this.dataSource.sort = this.sort;
+	searchUsers(triggeredByPaginator = false): void { 
+		this.subs.sink = this.userService.getAllUsers("response").subscribe( // TODO: Implement filtering in backend
+			response => {
+				if (!triggeredByPaginator) this.paginator.goToFirstPage();
+				this.paginator.setTotalCountFromHttp(response);
+				this.dataSource$.next(new MatTableDataSource(response.body));
 			},
 			error => console.log(error)
 		);
-	}
-
-	/** Whether the number of selected elements matches the total number of rows. */
-	isAllSelected(): boolean {
-		const numSelected = this.selection.selected.length;
-		const numRows = this.dataSource.data.length;
-		return numSelected === numRows;
-	}
-	
-	/** Selects all rows if they are not all selected; otherwise clear selection. */
-	masterToggle(): void {
-		this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(row => this.selection.select(row));
-	}
-
-	private refreshDataSource(): void {
-		this.dataSource = new MatTableDataSource(this.users);
 	}
 
 }

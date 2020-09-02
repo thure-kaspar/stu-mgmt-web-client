@@ -55,15 +55,16 @@ export class CourseListComponent implements OnInit {
 			take, 
 			this.filter.shortname, 
 			this.filter.selectedSemester, 
-			this.filter.title
-		)
-			.subscribe(
-				result => {
-					if (!triggeredByPaginator) this.paginator.goToFirstPage();
-					this.dataSource$.next(new MatTableDataSource(result));
-				},
-				error => console.log(error)
-			);
+			this.filter.title,
+			"response"
+		).subscribe(
+			response => {
+				if (!triggeredByPaginator) this.paginator.goToFirstPage();
+				this.paginator.setTotalCountFromHttp(response);
+				this.dataSource$.next(new MatTableDataSource(response.body));
+			},
+			error => console.log(error)
+		);
 	}
 
 }

@@ -205,6 +205,14 @@
     "Language": "Language",
     "Link": "Link",
     "MyProfile": "My profile",
+    "Paginator": {
+      "FirstPageLabel": "First page",
+      "ItemsPerPageLabel": "Items per page:",
+      "LastPageLabel": "Last page",
+      "NextPageLabel": "Next",
+      "PreviousPageLabel": "Previous",
+      "RangeLabel": "Page {{currentPage}} of {{numberOfPages}}"
+    },
     "Privacy": "Privacy",
     "Rounding": "Rounding",
     "Secrets": "Secrets",
@@ -221,9 +229,10 @@
   },
   "Property": {
     "AdmissionRule": {
-      "AchievedPercentRounding": "Achieved points-%",
+      "AchievedPercentRounding": "Rounding of Achieved points-%",
       "AssignmentType": "Assignment type",
-      "PassedAssignmentsRounding": "Required passed Assignments in %",
+      "PassedAssignmentsPercent": "Required passed Assignments in %",
+      "PassedAssignmentsRounding": "Rounding of required passed assignments",
       "RequiredPercent": "Required points in %",
       "Type": "Rule"
     },
@@ -289,6 +298,11 @@
     }
   },
   "Text": {
+    "Course": {
+      "Closed": "If the course is closed, joining, creation of new assignments, groups, etc. is not possible.",
+      "Id": "Id will default to shortname-semeste, if not specified. Will be used in the URL.",
+      "Shortname": "Shortname of this course. Should be reused every semester (i.e \"java\")."
+    },
     "CourseConfig": {
       "Password": "Participants must enter the password to join the course."
     },

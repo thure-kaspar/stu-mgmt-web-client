@@ -160,6 +160,7 @@ export class CreateCourseComponent implements OnInit {
 	 */
 	addLecturer(): void {
 		this.getLecturers().push(this.fb.control(null, Validators.required));
+		this.openSearchUserDialog(this.getLecturers().length - 1);
 	}
 
 	/**

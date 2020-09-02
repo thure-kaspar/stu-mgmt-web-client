@@ -28,8 +28,8 @@ class ParticipantsFilter {
 export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	courseId: string;
-	participant: ParticipantDto[];
-	displayedColumns: string[] = ["actions", "role", "username"];
+	private participants: ParticipantDto[];
+	displayedColumns: string[] = ["actions", "role", "username", "displayName", "spacer"];
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<ParticipantDto>([]));
 	filter = new ParticipantsFilter();
 
@@ -74,12 +74,14 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 			skip,
 			take,
 			roles,
-			this.filter.username
+			this.filter.username,
+			"response"
 		).subscribe(
-			result => {
-				this.participant = result,
-				this.refreshDataSource();
+			response => {
 				if (!triggeredByPaginator) this.paginator.goToFirstPage();
+				this.paginator.setTotalCountFromHttp(response);
+				this.participants = response.body,
+				this.refreshDataSource();
 			},
 			error => console.log(error)
 		);
@@ -116,7 +118,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 					this.courseParticipantsService.removeUser(this.courseId, user.userId).subscribe({
 						next: () => {
 							// Remove removed user from user list
-							this.participant = this.participant.filter(u => u.username !== user.username);
+							this.participants = this.participants.filter(u => u.username !== user.username);
 							this.refreshDataSource();
 							this.snackbar.openSuccessMessage();
 						},
@@ -140,7 +142,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	private refreshDataSource(): void {
-		this.dataSource$.next(new MatTableDataSource(this.participant));
+		this.dataSource$.next(new MatTableDataSource(this.participants));
 	}
 
 }

@@ -71,7 +71,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "de" },
-		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" }} // TODO: decide style
+		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" }}
 	],
 	bootstrap: [AppComponent]
 })

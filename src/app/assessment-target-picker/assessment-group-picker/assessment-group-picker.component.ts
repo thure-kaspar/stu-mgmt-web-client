@@ -56,8 +56,7 @@ export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 
 	/** Loads the group for this assignment. Considers the current filter settings. */
 	loadGroups(): void {
-		const skip = this.paginator.currentPage;
-		const take = this.paginator.pageSize;
+		const [skip, take] = this.paginator.getSkipAndTake();
 
 		this.isLoading$.next(true);
 		this.groupService.getGroupsWithAssignedEvaluator(

@@ -1,7 +1,6 @@
 #search-participants-dialog {
 	display: flex;
 	flex-direction: column;
-	height: 700px;
 	width: 600px;
 }
 
@@ -35,14 +34,10 @@
 	margin-bottom: 8px;
 }
 
-.column-role {
-	width: 96px;
+.username-column {
+	width: 128px;
 }
 
-#table-participants {
-	width: 100%;
-
-	table {
-		width: 100%;
-	}
+.column-role {
+	width: 96px;
 }

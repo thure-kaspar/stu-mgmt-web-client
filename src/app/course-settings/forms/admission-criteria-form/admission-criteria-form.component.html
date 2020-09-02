@@ -69,13 +69,13 @@
 	
 						<ng-container *ngIf="rule.value.type === ruleTypeEnum.PASSEDXPERCENTWITHATLEASTYPERCENT">
 							<mat-form-field>
-								<mat-label>{{ 'Property.AdmissionRule.PassedAssignmentsRounding' | translate }}</mat-label>
+								<mat-label>{{ 'Property.AdmissionRule.PassedAssignmentsPercent' | translate }}</mat-label>
 								<input matInput type="number" formControlName="passedAssignmentsPercent" min=0 max=100>
 							</mat-form-field>
 
 							<ng-container formGroupName="passedAssignmentsRounding">
 								<mat-form-field>
-									<mat-label>{{ 'Property.AdmissionRule.AchievedPercentRounding' | translate }}</mat-label>
+									<mat-label>{{ 'Property.AdmissionRule.PassedAssignmentsRounding' | translate }}</mat-label>
 									<mat-select formControlName="type" required>
 										<mat-option [value]="roundingTypeEnum.NONE">{{ 'Enum.RoundingType.' + roundingTypeEnum.NONE | translate }}</mat-option>
 										<mat-option [value]="roundingTypeEnum.DOWNNEARESTINTEGER">{{ 'Enum.RoundingType.' + roundingTypeEnum.DOWNNEARESTINTEGER | translate }}</mat-option>

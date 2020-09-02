@@ -12,20 +12,14 @@
 }
 
 #userFilter-container {
-	width: 100%;
+	display: grid;
+	margin-bottom: 8px;
+	column-gap: 8px;
+	grid-template-columns: auto 20%;
 }
 
-#userFilter-field {
-	width: 80%;
-	padding-right: 8px;
-}
-
-#btn-search {
-	width: 18%;
-}
-
-table {
-	width: 100%;
+::ng-deep .mat-form-field-wrapper{
+	margin-bottom: -1.25em;
 }
 
 .column-select {

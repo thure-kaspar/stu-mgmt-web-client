@@ -2,7 +2,7 @@
 	<h2 mat-dialog-title>{{ 'Title.SearchCourse' | translate }}</h2>
 	<div mat-dialog-content class="dialog-content">
 
-		<div class="courseFilter-container">
+		<div class="course-filter">
 			<mat-form-field class="courseFilter-field">
 				<mat-label for="title">{{ 'Property.Course.Title' | translate }}</mat-label>
 				<input #titleRef [(ngModel)]="title" matInput type="text" name="title" id="title" placeholder="Enter course title..." (keydown.enter)="searchCourses()" autocomplete="off">
@@ -21,14 +21,10 @@
 		</div>
 		
 		<div class="table-courses">
-			<table mat-table [dataSource]="dataSource" matSort>
+			<table mat-table [dataSource]="dataSource$ | async" matSort>
   				<!-- Checkbox Column -->
   				<ng-container matColumnDef="select">
   				  <th class="column-select" mat-header-cell *matHeaderCellDef>
-  				    <mat-checkbox (change)="$event ? masterToggle() : null"
-  				                  [checked]="selection.hasValue() && isAllSelected()"
-  				                  [indeterminate]="selection.hasValue() && !isAllSelected()">
-  				    </mat-checkbox>
   				  </th>
   				  <td class="column-select" mat-cell *matCellDef="let row">
   				    <mat-checkbox (click)="$event.stopPropagation()"
@@ -40,13 +36,13 @@
 
 				<!-- Title Column -->
 				<ng-container matColumnDef="title">
-					<th class="column-title" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Course.Title' | translate }}</th>
+					<th class="column-title" mat-header-cell *matHeaderCellDef>{{ 'Property.Course.Title' | translate }}</th>
 					<td mat-cell *matCellDef="let row"><button mat-button disableRipple=true (click)="select(row)">{{row.title}}</button></td>
 				</ng-container>
 			
 				<!-- Semester Column -->
 				<ng-container matColumnDef="semester">
-					<th class="column-semester" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Domain.Semester' | translate }}</th>
+					<th class="column-semester" mat-header-cell *matHeaderCellDef>{{ 'Domain.Semester' | translate }}</th>
 					<td mat-cell *matCellDef="let row">{{row.semester | semester}}</td>
 				</ng-container>
 
@@ -65,7 +61,7 @@
 				</tr>
 			</table>
 		
-			<mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+			<app-paginator  (onPageChanged)="searchCourses(true)"></app-paginator>
 		</div>
 	</div>
 

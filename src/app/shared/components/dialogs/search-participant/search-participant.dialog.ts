@@ -29,9 +29,9 @@ export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnI
 
 	participants: ParticipantDto[];
 	filter = new ParticipantsFilter();
-	displayedColumns: string[] = ["select", "role", "username"];
+	displayedColumns: string[] = ["select", "username", "displayName", "role" ];
 	dataSource: MatTableDataSource<ParticipantDto>;
-	selection = new SelectionModel<ParticipantDto>(true, []);
+	selection = new SelectionModel<ParticipantDto>(false, []);
 
 	usernameFilterChangedSubject = new Subject();
 

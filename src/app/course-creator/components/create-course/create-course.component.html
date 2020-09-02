@@ -27,8 +27,7 @@
 						<mat-form-field>
 							<mat-label>{{ 'Common.Password' | translate }}</mat-label>
 							<input matInput formControlName="password">
-							<mat-hint>Users have to enter the password to enter the course.</mat-hint>
-							<mat-error>Value is missing.</mat-error>
+							<mat-hint>{{ 'Text.CourseConfig.Password' | translate }}</mat-hint>
 						</mat-form-field>
 					</div>
 				</mat-tab>
@@ -51,8 +50,6 @@
 					<button type="button" id="btn-add-lecturer" mat-flat-button color="accent" (click)="addLecturer()">
 						<mat-icon>add</mat-icon>{{ 'Action.Custom.AddLecturer' | translate }}
 					</button>
-
-					<mat-hint>Use the <mat-icon id="icon-person-hint">search</mat-icon>-button in the input field to open the User-Search-Dialog. The username of the selected user will be inserted automatically.</mat-hint>
 
 					<mat-form-field *ngFor="let lecturer of getLecturers()?.controls; let i = index">
 						<mat-label>Lecturer #{{i + 1}}</mat-label>

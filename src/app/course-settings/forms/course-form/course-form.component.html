@@ -2,14 +2,14 @@
 	<mat-form-field *ngIf="!isEditMode">
 		<mat-label>Id</mat-label>
 		<input matInput formControlName="id">
-		<mat-hint>Id will default to shortname-semester, if not specified.</mat-hint>
+		<mat-hint>{{ 'Text.Course.Id' | translate }}</mat-hint>
 	</mat-form-field>
 	
 	<mat-form-field>
 		<mat-label>{{ 'Property.Course.Shortname' | translate }}</mat-label>
 		<input matInput formControlName="shortname" required>
-		<mat-hint>Shortname will be visible in the URL of the course.</mat-hint>
-		<mat-error>Value is missing.</mat-error>
+		<mat-hint>{{ 'Text.Course.Shortname' | translate }}</mat-hint>
+		<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 	</mat-form-field>
 	
 	<mat-form-field>
@@ -21,13 +21,13 @@
 			<mat-option value="sose2021">SoSe 2021</mat-option>
 			<mat-option value="wise2021">WiSe 21/22</mat-option>
 		</mat-select>
-		<mat-error>Value is missing.</mat-error>
+		<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 	</mat-form-field>
 	
 	<mat-form-field>
 		<mat-label>{{ 'Property.Course.Title' | translate }}</mat-label>
 		<input matInput formControlName="title" required>
-		<mat-error>Value is missing.</mat-error>
+		<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 	</mat-form-field>
 	
 	<mat-form-field>
@@ -41,8 +41,8 @@
 			<mat-option [value]=false>{{ 'Common.No' | translate }}</mat-option>
 			<mat-option [value]=true>{{ 'Common.Yes' | translate }}</mat-option>
 		</mat-select>
-		<mat-hint>Closing the course will prevent students from joining.</mat-hint>
-		<mat-error>Value is missing.</mat-error>
+		<mat-hint>{{ 'Text.Course.Closed' | translate }}</mat-hint>
+		<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 	</mat-form-field>
 
 </div>

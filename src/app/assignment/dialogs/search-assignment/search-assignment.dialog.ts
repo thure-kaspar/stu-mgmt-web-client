@@ -19,7 +19,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 export class SearchAssignmentDialog implements OnInit {
 
 	dataSource: MatTableDataSource<AssignmentDto>;
-	selection = new SelectionModel<AssignmentDto>(true, null);
+	selection = new SelectionModel<AssignmentDto>(false, null);
 	@ViewChild(MatPaginator) paginator: MatPaginator
 	@ViewChild(MatSort) sort: MatSort;
 	displayedColumns = ["select", "name", "action"]

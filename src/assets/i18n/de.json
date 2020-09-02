@@ -205,6 +205,14 @@
     "Language": "Sprache",
     "Link": "Link",
     "MyProfile": "Mein Profil",
+    "Paginator": {
+      "FirstPageLabel": "Erste Seite",
+      "ItemsPerPageLabel": "Elemente pro Seite:",
+      "LastPageLabel": "Letzte Seite",
+      "NextPageLabel": "Nächste",
+      "PreviousPageLabel": "Zurück",
+      "RangeLabel": "Seite {{currentPage}} von {{numberOfPages}}"
+    },
     "Privacy": "Datenschutz",
     "Rounding": "Runden",
     "Secrets": "Geheime Einstellungen",
@@ -221,9 +229,10 @@
   },
   "Property": {
     "AdmissionRule": {
-      "AchievedPercentRounding": "Erreichte Punkztahl-%",
+      "AchievedPercentRounding": "Runden von erreichter Punkztahl-%",
       "AssignmentType": "Aufgaben-Typ",
-      "PassedAssignmentsRounding": "Benötigte bestandene Aufgaben in %",
+      "PassedAssignmentsPercent": "Benötigte bestandene Aufgaben in %",
+      "PassedAssignmentsRounding": "Runden von benötigten bestandenen Aufgaben",
       "RequiredPercent": "Benötigte Punktzahl in %",
       "Type": "Regel"
     },
@@ -289,6 +298,11 @@
     }
   },
   "Text": {
+    "Course": {
+      "Closed": "Wenn die Veranstaltung geschlossen ist kann niemand beitreten und es können keine Aufgaben oder Gruppen erstellt werden.",
+      "Id": "Id setzt sich aus Kürzel-Semester zusammen, wenn nicht angegeben. Wird in der URL verwendet.",
+      "Shortname": "Kürzel der Veranstaltung. Sollte jedes Semester gleich bleiben (z. B. \"java\")."
+    },
     "CourseConfig": {
       "Password": "Teilnehmer müssen das Passwort angeben, um dem Kurs beizutreten."
     },
