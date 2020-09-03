@@ -154,7 +154,7 @@
     },
     "UserRole": {
       "ADMIN_TOOL": "ADMIN_TOOL",
-      "MGTM_ADMIN": "MGTM_ADMIN",
+      "MGMT_ADMIN": "MGMT_ADMIN",
       "SYSTEM_ADMIN": "SYSTEM_ADMIN",
       "USER": "USER"
     }

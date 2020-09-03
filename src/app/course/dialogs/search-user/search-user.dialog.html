@@ -2,11 +2,23 @@
 	<h2 mat-dialog-title>{{ 'Title.SearchUser' | translate }}</h2>
 	<div mat-dialog-content class="dialog-content">
 
-		<div id="userFilter-container">
-			<mat-form-field id="userFilter-field">
-				<mat-label>Filter</mat-label>
-				<input matInput [(ngModel)]="userFilter" (keydown.enter)="searchUsers()" placeholder="Filter..." autocomplete="off">
+		<div class="filter-container">
+			<mat-form-field>
+				<mat-label>{{ 'Property.User.DisplayName' | translate }}</mat-label>
+				<input matInput [(ngModel)]="filter.displayName" (keyup)="nameFilterChanged.next()" autocomplete="off">
 			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>{{ 'Property.User.Username' | translate }}</mat-label>
+				<input matInput [(ngModel)]="filter.username" (keyup)="nameFilterChanged.next()" autocomplete="off">
+			</mat-form-field>
+
+			<div class="roles">
+				<mat-checkbox [(ngModel)]="filter.includeUsers" (change)="searchUsers()">{{ 'Enum.UserRole.USER' | translate }}</mat-checkbox>
+				<mat-checkbox [(ngModel)]="filter.includeMgmtAdmins" (change)="searchUsers()">{{ 'Enum.UserRole.MGMT_ADMIN' | translate }}</mat-checkbox>
+				<mat-checkbox [(ngModel)]="filter.includeSystemAdmins" (change)="searchUsers()">{{ 'Enum.UserRole.SYSTEM_ADMIN' | translate }}</mat-checkbox>
+				<mat-checkbox [(ngModel)]="filter.includeAdminTools" (change)="searchUsers()">{{ 'Enum.UserRole.ADMIN_TOOL' | translate }}</mat-checkbox>
+			</div>
 			<button mat-flat-button color="accent" (click)="searchUsers()" id="btn-search">{{ 'Action.Search' | translate }}</button>
 		</div>
 		

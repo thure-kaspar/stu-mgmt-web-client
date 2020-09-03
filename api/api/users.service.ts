@@ -162,49 +162,6 @@ export class UsersService {
     }
 
     /**
-     * Get users.
-     * Retrieves all users that match the specified filter.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getAllUsers(observe?: 'body', reportProgress?: boolean): Observable<Array<UserDto>>;
-    public getAllUsers(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserDto>>>;
-    public getAllUsers(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserDto>>>;
-    public getAllUsers(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearer) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/users`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Get assessments.
      * Returns all assessments of the user in the given course. Includes the group, if assessment specified a group.
      * @param userId 
@@ -610,6 +567,79 @@ export class UsersService {
 
         return this.httpClient.request<UserDto>('get',`${this.basePath}/users/email/${encodeURIComponent(String(email))}`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get users.
+     * Retrieves all users that match the specified filter.
+     * @param skip [Pagination] The amount of elements that should be skipped.
+     * @param take [Pagination] The amount of elements that should be included in the response.
+     * @param username 
+     * @param displayName 
+     * @param roles 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUsers(skip?: number, take?: number, username?: string, displayName?: string, roles?: Array<string>, observe?: 'body', reportProgress?: boolean): Observable<Array<UserDto>>;
+    public getUsers(skip?: number, take?: number, username?: string, displayName?: string, roles?: Array<string>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UserDto>>>;
+    public getUsers(skip?: number, take?: number, username?: string, displayName?: string, roles?: Array<string>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UserDto>>>;
+    public getUsers(skip?: number, take?: number, username?: string, displayName?: string, roles?: Array<string>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (skip !== undefined && skip !== null) {
+            queryParameters = queryParameters.set('skip', <any>skip);
+        }
+        if (take !== undefined && take !== null) {
+            queryParameters = queryParameters.set('take', <any>take);
+        }
+        if (username !== undefined && username !== null) {
+            queryParameters = queryParameters.set('username', <any>username);
+        }
+        if (displayName !== undefined && displayName !== null) {
+            queryParameters = queryParameters.set('displayName', <any>displayName);
+        }
+        if (roles) {
+            roles.forEach((element) => {
+                queryParameters = queryParameters.append('roles', <any>element);
+            })
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/users`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

@@ -4,8 +4,18 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { UserDto, UsersService } from "../../../../../api";
 import { Paginator } from "../../../shared/paginator/paginator.component";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { debounceTime } from "rxjs/operators";
+
+class UserFilter {
+	includeUsers = false;
+	includeMgmtAdmins = false;
+	includeSystemAdmins = false;
+	includeAdminTools = false;
+	username: string;
+	displayName: string;
+}
 
 @Component({
 	selector: "app-search-user",
@@ -14,13 +24,14 @@ import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-
 })
 export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 
-	users:  UserDto[] = [];
-	userFilter: string;
+	filter = new UserFilter();	
 
 	displayedColumns: string[] = ["select", "role", "username", "displayName", "email", "actions"];
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<UserDto>([]));
 	selection = new SelectionModel<UserDto>(false, []);
 	
+	nameFilterChanged = new Subject();
+
 	@ViewChild(Paginator, { static: true }) paginator: Paginator;
 
 	constructor(public dialogRef: MatDialogRef<SearchUserDialog, UserDto[]>,
@@ -28,6 +39,11 @@ export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	ngOnInit(): void {
 		this.searchUsers();
+
+		this.subs.sink = this.nameFilterChanged
+			.pipe(debounceTime(300)).subscribe(() => 
+				this.searchUsers()
+			);
 	}
 
 	/** Closes the dialog without returning data. */
@@ -42,7 +58,22 @@ export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	/** Retrieves all users that match the specified filters and inserts them into the table. */
 	searchUsers(triggeredByPaginator = false): void { 
-		this.subs.sink = this.userService.getAllUsers("response").subscribe( // TODO: Implement filtering in backend
+		const [skip, take] = this.paginator.getSkipAndTake();
+
+		const roles = [];
+		if (this.filter.includeUsers) roles.push(UserDto.RoleEnum.USER);
+		if (this.filter.includeMgmtAdmins) roles.push(UserDto.RoleEnum.MGMTADMIN);
+		if (this.filter.includeSystemAdmins) roles.push(UserDto.RoleEnum.SYSTEMADMIN);
+		if (this.filter.includeAdminTools) roles.push(UserDto.RoleEnum.ADMINTOOL);
+
+		this.subs.sink = this.userService.getUsers(
+			skip,
+			take,
+			this.filter.username,
+			this.filter.displayName,
+			roles,
+			"response"
+		).subscribe(
 			response => {
 				if (!triggeredByPaginator) this.paginator.goToFirstPage();
 				this.paginator.setTotalCountFromHttp(response);
