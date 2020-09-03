@@ -31,7 +31,7 @@
 			<h2 class="members-heading">
 				<span>{{ 'Domain.Members' | translate }}</span>
 	
-				<button mat-flat-button color="primary" (click)="onAddParticipant()" *ngIf="participant.isLecturerOrTutor()">
+				<button mat-flat-button color="primary" (click)="onAddParticipant()" *ngIf="participant.isTeachingStaffMember">
 					<mat-icon>person_add</mat-icon>
 					{{ 'Action.Custom.AddParticipant' | translate }}
 				</button>

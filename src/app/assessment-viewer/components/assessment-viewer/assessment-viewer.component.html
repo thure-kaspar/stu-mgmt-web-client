@@ -2,7 +2,7 @@
 
 	<h2 class="title">
 		<span>{{ 'Domain.Assessment' | translate }}: {{assignment.name}}</span>
-		<button mat-flat-button color="accent" *ngIf="participant?.isLecturerOrTutor()" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
+		<button mat-flat-button color="accent" *ngIf="participant?.isTeachingStaffMember" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
 			{{ 'Action.Edit' | translate }}
 		</button>
 	</h2>
@@ -11,12 +11,12 @@
 			<span class="created-by">
 				{{ 'Common.CreatedBy' | translate }}
 				<span class="font-bold">{{assessment.creator.username}}</span>
-				<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant?.isLecturerOrTutor()">
+				<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant?.isTeachingStaffMember">
 					<mat-icon class="icon-light">history</mat-icon>
 				</button>
 			</span>
 
-			<div *ngIf="showEvents && participant?.isLecturerOrTutor()" class="events">
+			<div *ngIf="showEvents && participant?.isTeachingStaffMember" class="events">
 				<ng-container *ngIf="assessmentEvents$ | async as events">
 					<span *ngFor="let event of events">
 						[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}

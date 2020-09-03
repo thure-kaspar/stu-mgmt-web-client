@@ -1,7 +1,7 @@
 <mat-card class="assignment mat-elevation-z2">
 	<mat-card-title class="assignment-card-title">
 		<span class="name font-bold">
-			<a class="link-none" [routerLink]="[ assignment.id, 'assessments']" *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'; else noLink">
+			<a class="link-none" [routerLink]="[ assignment.id, 'assessments']" *ngIf="participant?.isTeachingStaffMember; else noLink">
 				{{assignment.name}}
 			</a>
 			<ng-template #noLink>
@@ -11,7 +11,7 @@
 		</span>
 		
 		<mat-menu #assignmentMenu>
-			<ng-container *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+			<ng-container *ngIf="participant?.isTeachingStaffMember">
 				<button mat-menu-item (click)="openEditDialog()">
 					<mat-icon class="icon-light">edit</mat-icon>
 					<span class="font-bold">{{ 'Action.Edit' | translate }}</span>
@@ -79,10 +79,10 @@
 	</div>
 
 	<div class="links">
-		<a class="link-none" [routerLink]="[assignment.id, 'assessments']" *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+		<a class="link-none" [routerLink]="[assignment.id, 'assessments']" *ngIf="participant?.isTeachingStaffMember">
 			<button mat-stroked-button >{{ 'Domain.Assessments' | translate }}</button>
 		</a>
-		<a class="link-none" [routerLink]="[assignment.id, 'assessments', 'registrations']" *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+		<a class="link-none" [routerLink]="[assignment.id, 'assessments', 'registrations']" *ngIf="participant?.isTeachingStaffMember">
 			<button mat-stroked-button >{{ 'Domain.Registrations' | translate }}</button>
 		</a>
 	</div>

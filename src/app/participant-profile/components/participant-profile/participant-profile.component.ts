@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Subject, Observable, BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { filter, tap } from "rxjs/operators";
 import { CourseParticipantsService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
@@ -40,7 +40,7 @@ export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements
 		this.userParticipant$ = this.participantFacade.participant$.pipe(
 			filter(p => !!p),
 			tap(participant => {
-				if (participant.isLecturerOrTutor() || this.isViewingOwnProfile(participant)) {
+				if (participant.isTeachingStaffMember || this.isViewingOwnProfile(participant)) {
 					this.showFullProfile$.next(true);
 				}
 			})

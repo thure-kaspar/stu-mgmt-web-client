@@ -8,6 +8,10 @@ export class Participant implements ParticipantDto {
 	readonly role: ParticipantDto.RoleEnum;
 	readonly groupId?: string;
 	readonly group?: GroupDto;
+
+	readonly isStudent: boolean;
+	readonly isTeachingStaffMember: boolean;
+
 	constructor(dto: ParticipantDto) {
 		this.userId = dto.userId;
 		this.username = dto.username;
@@ -16,40 +20,27 @@ export class Participant implements ParticipantDto {
 		this.role = dto.role;
 		this.groupId = dto.groupId;
 		this.group = dto.group;
+
+		this.isStudent = this.role === "STUDENT";
+		this.isTeachingStaffMember = this.role === "LECTURER" || this.role === "TUTOR";
 	}
 
 	canCreateAssessment(): boolean {
-		return this.isLecturerOrTutor();
+		return this.isTeachingStaffMember;
 	}
 
 	canCreateAssignments(): boolean {
-		return this.isLecturerOrTutor();
+		return this.isTeachingStaffMember;
 	}
 	
 	canCreateGroup(): boolean {
-		if (this.isLecturerOrTutor()) return true;
+		if (this.isTeachingStaffMember) return true;
 
 		if (this.groupId) {
 			return false; // Student can only have one group
 		}
 
 		return true;
-	}
-
-	isStudent(): boolean {
-		return this.role === "STUDENT";
-	}
-
-	isTutor(): boolean {
-		return this.role === "TUTOR";
-	}
-
-	isLecturer(): boolean {
-		return this.role === "LECTURER";
-	}
-
-	isLecturerOrTutor(): boolean {
-		return this.role === "LECTURER" || this.role === "TUTOR";
 	}
 
 }

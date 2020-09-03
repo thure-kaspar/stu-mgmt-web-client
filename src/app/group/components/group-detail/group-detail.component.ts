@@ -62,7 +62,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		).subscribe(p => {
 			this.participant = p;
 
-			if (this.participant.isLecturerOrTutor()) {
+			if (this.participant.isTeachingStaffMember) {
 				this.loadAssessmentsOfGroup();
 			}
 		});

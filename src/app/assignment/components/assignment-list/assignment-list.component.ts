@@ -46,7 +46,7 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 		this.participant$ = this.participantFacade.participant$.pipe(
 			filter(p => !!p), // Only perform the following check once participant is loaded
 			tap((participant) => {
-				if (participant.isStudent()) {
+				if (participant.isStudent) {
 					this.participantFacade.loadAssignmentGroups();
 				}
 			})

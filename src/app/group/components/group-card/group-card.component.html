@@ -1,7 +1,7 @@
 <mat-card class="group-card mat-elevation-z2">
 	<mat-card-title class="card-title">
 		<span>
-			<span class="name" *ngIf="participant.role === 'STUDENT'; else nameWithLink">
+			<span class="name" *ngIf="participant.isStudent; else nameWithLink">
 				{{group.name}}
 			</span>
 			<ng-template #nameWithLink>
@@ -14,7 +14,7 @@
 		</span>
 
 		<mat-menu #groupMenu>
-			<ng-container *ngIf="participant.role === 'LECTURER' || participant.role === 'TUTOR'">
+			<ng-container *ngIf="participant.isTeachingStaffMember">
 				<button mat-menu-item (click)="addParticipant()">
 					<mat-icon class="icon-light">person_add</mat-icon>{{ 'Action.Custom.AddParticipant' | translate }}
 				</button>
@@ -34,7 +34,7 @@
 		<span [class]="'text-light font-bold ' + cssClass">{{ 'Domain.Members' | translate }}: {{group.members.length}}</span>
 	</div>
 
-	<div class="member-list" *ngIf="participant.role !== 'STUDENT'">
+	<div class="member-list" *ngIf="participant.isTeachingStaffMember">
 		<a class="member link-none font-bold" [routerLink]="['/courses', course.id, 'users', member.userId]" *ngFor="let member of group.members">
 			<button mat-flat-button color="primary">{{member.username}}</button>
 		</a>

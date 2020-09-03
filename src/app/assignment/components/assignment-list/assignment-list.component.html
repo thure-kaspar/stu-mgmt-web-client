@@ -2,7 +2,7 @@
 	<ng-container *ngIf="participant$ | async as participant">
 
 		<div class="tab" *ngIf="assignments$ | async as assignments">
-			<button *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'" (click)="openAddDialog()" mat-flat-button class="btn-add" color="accent">
+			<button *ngIf="participant?.isTeachingStaffMember" (click)="openAddDialog()" mat-flat-button class="btn-add" color="accent">
 				<mat-icon>add</mat-icon>
 				{{ 'Action.Custom.AddAssignment' | translate }}
 			</button>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 		
-				<ng-container *ngIf="participant?.role === 'LECTURER' || participant?.role === 'TUTOR'">
+				<ng-container *ngIf="participant?.isTeachingStaffMember">
 					<mat-divider inset></mat-divider>
 			
 					<div class="state invisible">

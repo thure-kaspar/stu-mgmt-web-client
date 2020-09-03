@@ -27,7 +27,7 @@ export class Group implements GroupDto {
 	}
 
 	canBeClosed(participant: Participant, course: Course): boolean {
-		if (participant.isLecturerOrTutor()) {
+		if (participant.isTeachingStaffMember) {
 			return true;
 		}
 		if (!course.hasMinGroupSizeRequirement()) {
@@ -41,7 +41,7 @@ export class Group implements GroupDto {
 	}
 
 	canBeRenamed(participant: Participant, course: Course): boolean {
-		if (participant.isLecturerOrTutor()) {
+		if (participant.isTeachingStaffMember) {
 			return true;
 		}
 		if (!course.hasGroupNamingRule()) {

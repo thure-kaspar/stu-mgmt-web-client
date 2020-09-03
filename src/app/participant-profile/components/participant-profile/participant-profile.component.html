@@ -22,7 +22,7 @@
 
 				<span *ngIf="participant.group">
 					<span class="font-bold">{{ 'Domain.Group' | translate }}: </span>
-					<a class="link-none" [routerLink]="['/courses', courseId, 'groups', participant.groupId]" *ngIf="userParticipant.isLecturerOrTutor() || isViewingOwnProfile(userParticipant); else groupWithoutLink">
+					<a class="link-none" [routerLink]="['/courses', courseId, 'groups', participant.groupId]" *ngIf="userParticipant.isTeachingStaffMember || isViewingOwnProfile(userParticipant); else groupWithoutLink">
 						{{participant.group.name}}
 					</a>
 					<ng-template #groupWithoutLink>

@@ -80,7 +80,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	}
 
 	private studentShouldHaveAGroup(assignment: AssignmentDto, participant: Participant): boolean {
-		return assignment.collaboration === AssignmentDto.CollaborationEnum.GROUP && participant.isStudent();
+		return assignment.collaboration === AssignmentDto.CollaborationEnum.GROUP && participant.isStudent;
 	}
 
 	openEditDialog(): void {
