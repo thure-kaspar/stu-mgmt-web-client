@@ -11,12 +11,12 @@
 	<div id="nav-right">
 
 		<ng-container *ngIf="(authService.user$ | async) as user; else loginBtn">
-			<button class="btn-link" mat-flat-button>{{user.displayName}}</button>
-			<button class="btn-link btn-logout" mat-flat-button (click)="logout()">Logout</button>
+			<button class="btn-link" mat-button>{{user.displayName}}</button>
+			<button class="btn-link btn-logout" mat-button (click)="logout()">Logout</button>
 		</ng-container>
 
 		<ng-template #loginBtn>
-			<button  class="btn-link" mat-flat-button (click)="openLoginDialog()">Login</button>
+			<button  class="btn-link" mat-button (click)="openLoginDialog()">Login</button>
 		</ng-template>
 		
 		<mat-menu #appMenu="matMenu">
