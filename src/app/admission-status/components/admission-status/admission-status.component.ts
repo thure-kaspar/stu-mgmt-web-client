@@ -6,6 +6,7 @@ import { AdmissionCriteriaDto, AdmissionStatusDto, AdmissionStatusService, Cours
 import { getRouteParam } from "../../../../../utils/helper";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ToastService } from "../../../shared/services/toast.service";
+import { DownloadService } from "../../../shared/services/download.service";
 
 @Component({
 	selector: "app-admission-status",
@@ -25,6 +26,7 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 	constructor(
 		private admissionStatus: AdmissionStatusService,
 		private courseConfig: CourseConfigService,
+		private downloadService: DownloadService,
 		private toast: ToastService,
 		private route: ActivatedRoute
 	) { super(); }
@@ -60,7 +62,7 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 	}
 
 	downloadCsv(): void {
-		// TODO
+		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/admission-status`, `${this.courseId}-admission-status.csv`);
 	}
 
 }

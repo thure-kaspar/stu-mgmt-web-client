@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
-import { Subject, BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { CourseParticipantsService, CoursesService, ParticipantDto, CsvService, BASE_PATH } from "../../../../api";
+import { CourseParticipantsService, CoursesService, CsvService, ParticipantDto } from "../../../../api";
 import { ChangeRoleDialog, ChangeRoleDialogData } from "../../course/dialogs/change-role/change-role.dialog";
 import { ConfirmDialog, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../shared/paginator/paginator.component";
 import { SnackbarService } from "../../shared/services/snackbar.service";
-import { HttpClient } from "@angular/common/http";
+import { ToastService } from "../../shared/services/toast.service";
+import { DownloadService } from "../../shared/services/download.service";
 
 class ParticipantsFilter {
 	includeStudents = false;
@@ -37,13 +38,14 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
-	constructor(private courseService: CoursesService,
+	constructor(
+		private courseService: CoursesService,
 		private courseParticipantsService: CourseParticipantsService,
-		private csvService: CsvService,
-		private http: HttpClient,
+		private downloadService: DownloadService,
 		private route: ActivatedRoute,
 		public dialog: MatDialog,
-		private snackbar: SnackbarService) { super(); }
+		private toast: ToastService,
+	) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
@@ -120,11 +122,10 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 							// Remove removed user from user list
 							this.participants = this.participants.filter(u => u.username !== user.username);
 							this.refreshDataSource();
-							this.snackbar.openSuccessMessage();
+							this.toast.success(user.displayName, "Message.Removed");
 						},
 						error: (error) => {
-							console.log(error),
-							this.snackbar.openErrorMessage();
+							this.toast.apiError(error);
 						}
 					});
 				}
@@ -134,11 +135,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	downloadCsv(): void {
-		this.csvService.getParticipantsAsCsv(this.courseId, "response").subscribe(
-			response => {
-				console.log(response);
-			}
-		);
+		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/users`, `${this.courseId}-participant.csv`);
 	}
 
 	private refreshDataSource(): void {

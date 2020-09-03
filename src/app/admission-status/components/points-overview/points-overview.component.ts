@@ -6,6 +6,7 @@ import { getRouteParam } from "../../../../../utils/helper";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { MatTableDataSource } from "@angular/material/table";
 import { ToastService } from "../../../shared/services/toast.service";
+import { DownloadService } from "../../../shared/services/download.service";
 
 @Component({
 	selector: "app-points-overview",
@@ -23,7 +24,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 
 	constructor(private admissionStatusService: AdmissionStatusService,
 				private assessmentService: AssessmentsService,
-				private csvService: CsvService,
+				private downloadService: DownloadService,
 				private route: ActivatedRoute,
 				private router: Router,
 				private toast: ToastService) { super(); }
@@ -71,13 +72,8 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 		});
 	}
 
-	// TODO
 	downloadCsv(): void {
-		this.csvService.getPointsOverviewAsCsv(this.courseId, "response").subscribe(
-			response => {
-				console.log(response);
-			}
-		);
+		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/admission-status/overview`, `${this.courseId}-assessments.csv`);
 	}
 
 }
