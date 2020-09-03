@@ -19,8 +19,16 @@ export class AuthService {
 		// Check if user still has a token from last login
 		const authToken = this.getAuthToken();
 		if (authToken) {
-			this.userSubject.next(authToken.user);
+			if (this.tokenHasExpired(authToken)) {
+				this.removeTokens();
+			} else {
+				this.userSubject.next(authToken.user);
+			}
 		}
+	}
+
+	private tokenHasExpired(authToken: AuthTokenDto): boolean {
+		return new Date(authToken.expiration) <= new Date();
 	}
 
 	/**
@@ -65,10 +73,14 @@ export class AuthService {
 	}
 
 	logout(): void {
-		localStorage.removeItem(AuthService.studentMgmtTokenKey);
-		localStorage.removeItem(AuthService.extAuthTokenKey);
+		this.removeTokens();
 		this.userSubject.next(null);
 		this.router.navigate(["/courses"]);
+	}
+
+	private removeTokens(): void {
+		localStorage.removeItem(AuthService.studentMgmtTokenKey);
+		localStorage.removeItem(AuthService.extAuthTokenKey);
 	}
 
 	/**
