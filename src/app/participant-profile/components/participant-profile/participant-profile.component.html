@@ -1,7 +1,7 @@
 <ng-container *ngIf="userParticipant$ | async as userParticipant">
 	<div class="tab" *ngIf="participant$ | async as participant">
 
-		<h2 class="title">{{participant.displayName}}</h2>
+		<mat-card-title class="title"><span>{{participant.displayName}}</span></mat-card-title>
 		
 		<div class="mini-profile">
 			<div class="info">
@@ -33,7 +33,7 @@
 
 		</div>
 
-		<ng-container *ngIf="(showFullProfile$ | async) && participant.role === 'STUDENT'">
+		<div class="full-profile" *ngIf="(showFullProfile$ | async) && participant.role === 'STUDENT'">
 			<nav class="nav" mat-tab-nav-bar color="accent"> 
 				<a mat-tab-link [routerLink]="['/courses', courseId, 'users', userId]" routerLinkActive [routerLinkActiveOptions]="{exact: true}" #rla1="routerLinkActive" [active]="rla1.isActive">
 					<span class="uppercase">{{ 'Domain.Assessments' | translate }}</span>
@@ -46,7 +46,7 @@
 			<div class="profile-content">
 				<router-outlet></router-outlet>
 			</div>
-		</ng-container>
+		</div>
 	
 	</div>
 </ng-container>

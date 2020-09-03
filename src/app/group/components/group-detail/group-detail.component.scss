@@ -4,16 +4,11 @@
 }
 
 .title {
+	padding-top: 8px;
+	padding-bottom: 8px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-
-	.left {
-		mat-icon {
-			padding-bottom: 4px;
-			vertical-align: middle;
-		}
-	}
 }
 
 #group-detail-container {
@@ -40,6 +35,7 @@
 .member-card {
 	padding-top: 0px!important;
 	padding-bottom: 0!important;
+	height: 40px;
 }
 
 .card-title {
@@ -47,8 +43,14 @@
 	margin-bottom: -16px;
 
 	.member-menu-btn {
-		margin-right: -16px;	
+		margin-top: 3px;
+		position: absolute;
+		right: 0;	
 	}
+}
+
+.member-name {
+	padding-top: 4px;
 }
 
 #assessments {
