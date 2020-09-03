@@ -55,7 +55,6 @@ export class ParticipantAdmissionStatusComponent extends UnsubscribeOnDestroy im
 		this.subs.sink = this.courseConfigService.getAdmissionCriteria(this.courseId).subscribe({
 			next: (result) => {
 				this.displayedColumns = [...this.displayedColumns, ...result.rules.map((rule, index) => "rule" + index), "spacer"];
-				console.log(result);
 				this.admissionCriteria$.next(result);
 			},
 			error: (error) => {

@@ -7,7 +7,7 @@
 				</button>
 	
 				<button type="button" class="add-rule-btn" mat-flat-button color="primary" (click)="_addPassedXPercentWithAtLeastYPercentRule()"><mat-icon>add</mat-icon>
-					{{ 'Enum.RuleType.' + ruleTypeEnum.PASSEDXPERCENTWITHATLEASTYPERCENT | translate:{ requiredPercent: 'X', passedAssignmentsPercent: 'Y' } }}
+					{{ 'Enum.RuleType.' + ruleTypeEnum.INDIVIDUALPERCENTWITHALLOWEDFAILURES | translate:{ requiredPercent: 'X', allowedFailures: 'Y' } }}
 				</button>
 			</div>
 	
@@ -17,11 +17,11 @@
 					<mat-card-title class="rule-title">
 						<ng-container [ngSwitch]="rule.value.type">
 							<span class="name" *ngSwitchCase="ruleTypeEnum.REQUIREDPERCENTOVERALL">{{ 'Enum.RuleType.' + rule.value.type | translate:{requiredPercent: rule.value.requiredPercent } }}</span>
-							<ng-container *ngSwitchCase="ruleTypeEnum.PASSEDXPERCENTWITHATLEASTYPERCENT">
+							<ng-container *ngSwitchCase="ruleTypeEnum.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
 							<span class="name">
 								{{ 'Enum.RuleType.' + rule.value.type | translate:{
-									requiredPercent: _getRuleAsXPercentOfY(rule.value).requiredPercent, 
-									passedAssignmentsPercent: _getRuleAsXPercentOfY(rule.value).passedAssignmentsPercent 
+									requiredPercent: _getRuleAsIndividualPercent(rule.value).requiredPercent, 
+									allowedFailures: _getRuleAsIndividualPercent(rule.value).allowedFailures 
 								} }}
 							</span>
 							</ng-container>
@@ -46,7 +46,7 @@
 			
 						<mat-form-field>
 							<mat-label>{{ 'Property.AdmissionRule.RequiredPercent' | translate }}</mat-label>
-							<input matInput type="number" formControlName="requiredPercent" min=0 max=100>
+							<input matInput type="number" formControlName="requiredPercent" min=0 max=100 required>
 						</mat-form-field>
 	
 						<ng-container formGroupName="achievedPercentRounding">
@@ -67,28 +67,11 @@
 						</ng-container>
 						
 	
-						<ng-container *ngIf="rule.value.type === ruleTypeEnum.PASSEDXPERCENTWITHATLEASTYPERCENT">
+						<ng-container *ngIf="rule.value.type === ruleTypeEnum.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
 							<mat-form-field>
-								<mat-label>{{ 'Property.AdmissionRule.PassedAssignmentsPercent' | translate }}</mat-label>
-								<input matInput type="number" formControlName="passedAssignmentsPercent" min=0 max=100>
+								<mat-label>{{ 'Property.AdmissionRule.AllowedFailures' | translate }}</mat-label>
+								<input matInput type="number" formControlName="allowedFailures" min=0 required>
 							</mat-form-field>
-
-							<ng-container formGroupName="passedAssignmentsRounding">
-								<mat-form-field>
-									<mat-label>{{ 'Property.AdmissionRule.PassedAssignmentsRounding' | translate }}</mat-label>
-									<mat-select formControlName="type" required>
-										<mat-option [value]="roundingTypeEnum.NONE">{{ 'Enum.RoundingType.' + roundingTypeEnum.NONE | translate }}</mat-option>
-										<mat-option [value]="roundingTypeEnum.DOWNNEARESTINTEGER">{{ 'Enum.RoundingType.' + roundingTypeEnum.DOWNNEARESTINTEGER | translate }}</mat-option>
-										<mat-option [value]="roundingTypeEnum.UPNEARESTINTEGER">{{ 'Enum.RoundingType.' + roundingTypeEnum.UPNEARESTINTEGER | translate }}</mat-option>
-										<mat-option [value]="roundingTypeEnum.DECIMALS">{{ 'Enum.RoundingType.' + roundingTypeEnum.DECIMALS | translate }}</mat-option>
-									</mat-select>
-								</mat-form-field>
-			
-								<mat-form-field *ngIf="rule.value.passedAssignmentsRounding.type === roundingTypeEnum.DECIMALS">
-									<mat-label>{{ 'Misc.Decimals' | translate }}</mat-label>
-									<input matInput type="number" formControlName="decimals">
-								</mat-form-field>
-							</ng-container>
 						</ng-container>
 					</div>
 	

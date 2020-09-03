@@ -5,11 +5,11 @@
 			
 			<ng-container [ngSwitch]="rule.type">
 				<span *ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL">{{ 'Enum.RuleType.' + rule.type | translate:{requiredPercent: rule.requiredPercent } }}</span>
-				<ng-container *ngSwitchCase="ruleTypes.PASSEDXPERCENTWITHATLEASTYPERCENT">
+				<ng-container *ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
 				<span>
 					{{ 'Enum.RuleType.' + rule.type | translate:{
 						requiredPercent: getRuleAsXPercentOfY(rule).requiredPercent, 
-						passedAssignmentsPercent: getRuleAsXPercentOfY(rule).passedAssignmentsPercent 
+						allowedFailures: getRuleAsXPercentOfY(rule).allowedFailures 
 					} }}
 				</span>
 				</ng-container>
@@ -37,14 +37,6 @@
 				{{ 'Enum.RoundingType.' + rule.achievedPercentRounding.type | translate }}
 			<span *ngIf="rule.achievedPercentRounding.decimals !== null && rule.achievedPercentRounding.decimals !== undefined">
 			({{rule.achievedPercentRounding.decimals}} {{ 'Misc.Decimals' | translate }})
-			</span>
-		</div>
-
-		<div *ngIf="rule.type === ruleTypes.PASSEDXPERCENTWITHATLEASTYPERCENT">
-			<span class="text-light">{{ 'Domain.Assignments' | translate }}-%:</span>
-			{{ 'Enum.RoundingType.' + getRuleAsXPercentOfY(rule).passedAssignmentsRounding.type | translate }}
-			<span *ngIf="getRuleAsXPercentOfY(rule).passedAssignmentsRounding.decimals !== null && getRuleAsXPercentOfY(rule).passedAssignmentsRounding.decimals !== undefined">
-				({{getRuleAsXPercentOfY(rule).passedAssignmentsRounding.decimals}} {{ 'Misc.Decimals' | translate }})
 			</span>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from "@angular/core";
-import { AdmissionRuleDto, PassedXPercentWithAtLeastYPercentRuleDto, OverallPercentRuleDto } from "../../../../../api";
+import { AdmissionRuleDto, OverallPercentRuleDto, IndividualPercentWithAllowedFailuresRuleDto } from "../../../../../api";
 
 @Component({
 	selector: "app-admission-rule",
@@ -19,8 +19,8 @@ export class AdmissionRuleComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	getRuleAsXPercentOfY(rule: AdmissionRuleDto): PassedXPercentWithAtLeastYPercentRuleDto {
-		return rule as PassedXPercentWithAtLeastYPercentRuleDto;
+	getRuleAsXPercentOfY(rule: AdmissionRuleDto): IndividualPercentWithAllowedFailuresRuleDto {
+		return rule as IndividualPercentWithAllowedFailuresRuleDto;
 	}
 
 	getRuleAs(rule: AdmissionRuleDto): OverallPercentRuleDto {
