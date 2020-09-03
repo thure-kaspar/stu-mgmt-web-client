@@ -124,8 +124,14 @@ export class ParticipantFacade {
 	private loadParticipant(courseId: string, userId: string): void {
 		this.courseParticipants.getParticipant(courseId, userId).subscribe(
 			participant => {
-				this.participantSubject.next(new Participant(participant));
+				const p = new Participant(participant);
+				this.participantSubject.next(p);
 				this.toast.info("Enum.CourseRole." + participant.role, courseId);
+
+				if (p.isStudent) {
+					this.displayGroupSettingsViolationWarnings(p);
+				}
+
 				console.log("Current participant:", participant);
 			},
 			error => {
@@ -133,6 +139,19 @@ export class ParticipantFacade {
 				this.clear();
 			}
 		);
+	}
+
+	/**
+	 * Displays warnings about missing or invalid group of participant.
+	 * // TODO: Should not be hardcoded
+	 */
+	private displayGroupSettingsViolationWarnings(p: Participant): void {
+		if (!p.groupId) {
+			this.toast.warning("Text.Group.ParticipantHasNoGroup");
+		}
+		else if (p.group.members.length < 2) {
+			this.toast.warning("Text.Group.NotEnoughMembers", p.group.name, { minSize: 2 });
+		}
 	}
 
 	/**
