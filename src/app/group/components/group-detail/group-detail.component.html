@@ -19,7 +19,7 @@
 						<button mat-menu-item (click)="onLeaveGroup()" *ngIf="isGroupMember(participant)">
 							<span class="text-red"><mat-icon>meeting_room</mat-icon>{{ 'Action.Custom.LeaveGroup' | translate }}</span>
 						</button>
-						<button mat-menu-item (click)="onRemoveGroup()">
+						<button mat-menu-item (click)="onRemoveGroup()" *ngIf="participant.isTeachingStaffMember">
 							<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Delete' | translate }}</span>
 						</button>
 					</div>
@@ -42,17 +42,19 @@
 	
 					<mat-card class="member-card">
 						<h2 class="card-title">
-							<a class="link-none" [routerLink]="[ '/courses', courseId, 'users', user.userId ]">{{user.username}}</a>
+							<a class="link-none member-name" [routerLink]="[ '/courses', courseId, 'users', user.userId ]">{{user.displayName}}</a>
 	
-							<mat-menu #memberMenu>
-								<button mat-menu-item (click)="onRemoveUser(user)">
-									<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Custom.RemoveParticipant' | translate }}</span>
+							<ng-container *ngIf="participant.isTeachingStaffMember">
+								<mat-menu #memberMenu>
+									<button mat-menu-item (click)="onRemoveUser(user)">
+										<span class="text-red"><mat-icon>delete</mat-icon>{{ 'Action.Custom.RemoveParticipant' | translate }}</span>
+									</button>
+								</mat-menu>
+		
+								<button [matMenuTriggerFor]="memberMenu" mat-icon-button class="member-menu-btn">
+									<mat-icon class="icon-light">more_vert</mat-icon>
 								</button>
-							</mat-menu>
-	
-							<button [matMenuTriggerFor]="memberMenu" mat-icon-button class="member-menu-btn">
-								<mat-icon class="icon-light">more_vert</mat-icon>
-							</button>
+							</ng-container>
 						</h2>
 					</mat-card>
 	
