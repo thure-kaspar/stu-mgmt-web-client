@@ -1,0 +1,31 @@
+<div class="dialog-container">
+	
+	<mat-card-title mat-dialog-title>{{ 'Action.Edit' | translate }}: {{user.username}}</mat-card-title>
+
+	<form [formGroup]="form" class="flex-column">
+		<mat-form-field>
+			<mat-label>{{ 'Property.User.DisplayName' | translate }}</mat-label>
+			<input matInput formControlName="displayName" required>
+			<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+		</mat-form-field>
+	
+		<mat-form-field>
+			<mat-label>{{ 'Property.User.Email' | translate }}</mat-label>
+			<input matInput formControlName="email">
+			<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+		</mat-form-field>
+	
+		<mat-radio-group class="roles" formControlName="role">
+			<mat-radio-button [value]="roles.USER">{{ 'Enum.UserRole.' + roles.USER | translate }}</mat-radio-button>
+			<mat-radio-button [value]="roles.MGMTADMIN">{{ 'Enum.UserRole.' + roles.MGMTADMIN | translate }}</mat-radio-button>
+			<mat-radio-button [value]="roles.SYSTEMADMIN">{{ 'Enum.UserRole.' + roles.SYSTEMADMIN | translate }}</mat-radio-button>
+			<mat-radio-button [value]="roles.ADMINTOOL">{{ 'Enum.UserRole.' + roles.ADMINTOOL | translate }}</mat-radio-button>
+		</mat-radio-group>
+	</form>
+
+	<div class="button-container">
+		<button mat-flat-button color="accent" (click)="onSave()">{{ 'Action.Save' | translate }}</button>
+		<button mat-flat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
+	</div>
+
+</div>

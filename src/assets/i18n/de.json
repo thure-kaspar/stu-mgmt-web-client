@@ -143,7 +143,7 @@
       "UP_NEAREST_INTEGER": "Auf nächste Ganzzahl hochrunden"
     },
     "RuleType": {
-      "PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT": "Min. {{requiredPercent}}% der Punkte in {{passedAssignmentsPercent}}% der Aufgaben",
+      "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES": "Min. {{requiredPercent}}% der erreichbaren Punkte pro Aufgabe mit {{allowedFailures}} erlaubten nicht-bestandenen Aufgaben",
       "REQUIRED_PERCENT_OVERALL": "Min. {{requiredPercent}}% der erreichbaren Punkte über alle Aufgaben"
     },
     "Severity": {
@@ -230,6 +230,7 @@
   "Property": {
     "AdmissionRule": {
       "AchievedPercentRounding": "Runden von erreichter Punkztahl-%",
+      "AllowedFailures": "Erlaubte nicht-bestandene Aufgaben",
       "AssignmentType": "Aufgaben-Typ",
       "PassedAssignmentsPercent": "Benötigte bestandene Aufgaben in %",
       "PassedAssignmentsRounding": "Runden von benötigten bestandenen Aufgaben",
@@ -311,7 +312,8 @@
       "CanNotBeRenamed": "Der Name der Gruppe kann von Studenten nicht verändert werden.",
       "EmptyGroup": "Diese Gruppe hat keine Mitglieder.",
       "NoGroupForAssignment": "Du hast noch keine Gruppe für diese Aufgabe.",
-      "NotEnoughMembers": "Gruppe muss mindestens {{minSize}} Mitglieder haben."
+      "NotEnoughMembers": "Gruppe muss mindestens {{minSize}} Mitglieder haben.",
+      "ParticipantHasNoGroup": "Student ist in keiner Gruppe angemeldet."
     },
     "GroupCreation": {
       "NameSchema": "Dieser Kurs verwendet vordefinierte Gruppennamen.\nDer Name der Gruppe wird automatisch generiert.",
@@ -343,7 +345,8 @@
     "SearchCourse": "Suche nach Veranstaltung",
     "SearchGroup": "Suche nach Gruppe",
     "SearchParticipant": "Suche nach Teilnehmer",
-    "SearchUser": "Suche nach Nutzer"
+    "SearchUser": "Suche nach Nutzer",
+    "UserManagement": "Nutzerverwaltung"
   },
   "Tooltip": {
     "SelectAssessmentTarget": "Wähle das Ziel für diese Bewertung aus, indem du auf den \"Auswählen\"-Button in der Gruppen/Teilnehmer-Tabelle drückst."

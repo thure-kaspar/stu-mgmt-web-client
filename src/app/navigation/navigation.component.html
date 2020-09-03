@@ -1,4 +1,4 @@
-<div [class]="theme.theme$ | async">
+<div [class]="theme.theme$ | async" *ngIf="{ user: authService.user$ | async } as obs">
 <!-- TOP BAR -->
 <mat-toolbar class="titlebar">
 	<div id="nav-left">
@@ -52,6 +52,10 @@
 			<div id="sidenav-links">
 				<a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }">
 					<mat-icon>home</mat-icon>{{ "Misc.Home" | translate }} 
+				</a>
+
+				<a mat-list-item [routerLink]="['/admin/user-management']" routerLinkActive="router-link-active" *ngIf="obs?.user?.role === 'MGMT_ADMIN' || obs?.user?.role === 'SYSTEM_ADMIN'">
+					<mat-icon>supervisor_account</mat-icon>{{ "Title.UserManagement" | translate }} 
 				</a>
 
 				<a mat-list-item [routerLink]="['/courses']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: true}">

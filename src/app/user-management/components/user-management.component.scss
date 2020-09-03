@@ -1,0 +1,27 @@
+.user-management-container {
+	padding-top: 16px;
+	padding-left: var(--margin-default);
+	padding-right: var(--margin-default);
+}
+
+.filter {
+	margin-top: 16px;
+	display: grid;
+	column-gap: 8px;
+	grid-template-columns: 1fr 1fr
+}
+
+.roles {
+	margin-bottom: 16px;
+	mat-checkbox {
+		margin-right: 32px;
+	}
+}
+
+.action-column {
+	width: 64px;
+}
+
+.role-column {
+	width: 256px;
+}

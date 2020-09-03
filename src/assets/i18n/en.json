@@ -143,7 +143,7 @@
       "UP_NEAREST_INTEGER": "Round up to nearest integer"
     },
     "RuleType": {
-      "PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT": "Min. {{requiredPercent}}% of points in {{passedAssignmentsPercent}}% of assignments",
+      "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES": "Min. {{requiredPercent}}% of achievable points for each assignment with {{allowedFailures}} allowed failures",
       "REQUIRED_PERCENT_OVERALL": "Min. {{requiredPercent}}% of achievable points over all assignments"
     },
     "Severity": {
@@ -230,6 +230,7 @@
   "Property": {
     "AdmissionRule": {
       "AchievedPercentRounding": "Rounding of Achieved points-%",
+      "AllowedFailures": "Allow failures",
       "AssignmentType": "Assignment type",
       "PassedAssignmentsPercent": "Required passed Assignments in %",
       "PassedAssignmentsRounding": "Rounding of required passed assignments",
@@ -311,7 +312,8 @@
       "CanNotBeRenamed": "This group cannot be renamed by students.",
       "EmptyGroup": "This group is empty.",
       "NoGroupForAssignment": "You currently have no group for this assignment.",
-      "NotEnoughMembers": "Group must have at least {{minSize}} members."
+      "NotEnoughMembers": "Group must have at least {{minSize}} members.",
+      "ParticipantHasNoGroup": "Participant currently has no group."
     },
     "GroupCreation": {
       "NameSchema": "This course is using a predefined prefix for group names.\nGroup name will be chosen automatically.",
@@ -343,7 +345,8 @@
     "SearchCourse": "Search course",
     "SearchGroup": "Search group",
     "SearchParticipant": "Search participant",
-    "SearchUser": "Search user"
+    "SearchUser": "Search user",
+    "UserManagement": "User-Management"
   },
   "Tooltip": {
     "SelectAssessmentTarget": "Select a target for this assessment by pressing the \"Select\"-button in the Group/User-Table."
