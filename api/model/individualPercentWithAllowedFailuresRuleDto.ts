@@ -11,13 +11,14 @@
  */
 import { RoundingBehavior } from './roundingBehavior';
 
-export interface AdmissionRuleDto { 
-    type: AdmissionRuleDto.TypeEnum;
-    assignmentType: AdmissionRuleDto.AssignmentTypeEnum;
+export interface IndividualPercentWithAllowedFailuresRuleDto { 
+    type: IndividualPercentWithAllowedFailuresRuleDto.TypeEnum;
+    assignmentType: IndividualPercentWithAllowedFailuresRuleDto.AssignmentTypeEnum;
     requiredPercent: number;
     achievedPercentRounding: RoundingBehavior;
+    allowedFailures: number;
 }
-export namespace AdmissionRuleDto {
+export namespace IndividualPercentWithAllowedFailuresRuleDto {
     export type TypeEnum = 'INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES' | 'REQUIRED_PERCENT_OVERALL';
     export const TypeEnum = {
         INDIVIDUALPERCENTWITHALLOWEDFAILURES: 'INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES' as TypeEnum,

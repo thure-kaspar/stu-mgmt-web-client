@@ -23,6 +23,7 @@ import { CourseDto } from '../model/courseDto';
 import { GroupDto } from '../model/groupDto';
 import { GroupEventDto } from '../model/groupEventDto';
 import { UserDto } from '../model/userDto';
+import { UserUpdateDto } from '../model/userUpdateDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -656,10 +657,10 @@ export class UsersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateUser(body: UserDto, userId: string, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
-    public updateUser(body: UserDto, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
-    public updateUser(body: UserDto, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
-    public updateUser(body: UserDto, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateUser(body: UserUpdateDto, userId: string, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public updateUser(body: UserUpdateDto, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public updateUser(body: UserUpdateDto, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public updateUser(body: UserUpdateDto, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateUser.');

@@ -19,9 +19,9 @@ export interface RuleCheckResult {
     assignmentType: RuleCheckResult.AssignmentTypeEnum;
 }
 export namespace RuleCheckResult {
-    export type RuleEnum = 'PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT' | 'REQUIRED_PERCENT_OVERALL';
+    export type RuleEnum = 'INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES' | 'REQUIRED_PERCENT_OVERALL';
     export const RuleEnum = {
-        PASSEDXPERCENTWITHATLEASTYPERCENT: 'PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT' as RuleEnum,
+        INDIVIDUALPERCENTWITHALLOWEDFAILURES: 'INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES' as RuleEnum,
         REQUIREDPERCENTOVERALL: 'REQUIRED_PERCENT_OVERALL' as RuleEnum
     };
     export type AssignmentTypeEnum = 'HOMEWORK' | 'TESTAT' | 'SEMINAR' | 'PROJECT' | 'OTHER';

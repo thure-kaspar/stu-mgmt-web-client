@@ -18,9 +18,9 @@ export interface OverallPercentRuleDto {
     achievedPercentRounding: RoundingBehavior;
 }
 export namespace OverallPercentRuleDto {
-    export type TypeEnum = 'PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT' | 'REQUIRED_PERCENT_OVERALL';
+    export type TypeEnum = 'INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES' | 'REQUIRED_PERCENT_OVERALL';
     export const TypeEnum = {
-        PASSEDXPERCENTWITHATLEASTYPERCENT: 'PASSED_X_PERCENT_WITH_AT_LEAST_Y_PERCENT' as TypeEnum,
+        INDIVIDUALPERCENTWITHALLOWEDFAILURES: 'INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES' as TypeEnum,
         REQUIREDPERCENTOVERALL: 'REQUIRED_PERCENT_OVERALL' as TypeEnum
     };
     export type AssignmentTypeEnum = 'HOMEWORK' | 'TESTAT' | 'SEMINAR' | 'PROJECT' | 'OTHER';
