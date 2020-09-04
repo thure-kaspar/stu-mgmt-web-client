@@ -20,7 +20,7 @@ export interface UserDto {
      * Role within the application.
      */
     role: UserDto.RoleEnum;
-    email: string;
+    email?: string;
     username: string;
     displayName: string;
     courses?: Array<CourseDto>;

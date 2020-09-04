@@ -15,7 +15,7 @@ export interface UserUpdateDto {
      * Role within the application.
      */
     role: UserUpdateDto.RoleEnum;
-    email: string;
+    email?: string;
     displayName: string;
 }
 export namespace UserUpdateDto {

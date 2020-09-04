@@ -9,6 +9,8 @@ export class Group implements GroupDto {
 	readonly isClosed?: boolean;
 	readonly members?: ParticipantDto[];
 	readonly history?: GroupEventDto[];
+	readonly hasPassword?: boolean;
+	readonly size?: number;
 
 	constructor(dto: GroupDto) {
 		this.id = dto.id;
@@ -17,6 +19,8 @@ export class Group implements GroupDto {
 		this.isClosed = dto.isClosed;
 		this.members = dto.members;
 		this.history = dto.history;
+		this.hasPassword = dto.hasPassword;
+		this.size = dto.size;
 	}
 
 	/**
@@ -33,7 +37,7 @@ export class Group implements GroupDto {
 		if (!course.hasMinGroupSizeRequirement()) {
 			return true;
 		}
-		if (course.getMinGroupSizeRequirement() < this.members.length) {
+		if (this.size >= course.getMinGroupSizeRequirement()) {
 			return true;
 		}
 
@@ -52,11 +56,11 @@ export class Group implements GroupDto {
 	}
 
 	isFull(course: Course): boolean {
-		return this.members.length >= course.getMaxAllowedGroupSize();
+		return this.size >= course.getMaxAllowedGroupSize();
 	}
 	
 	hasNotEnoughMembers(course: Course): boolean {
-		return this.members.length < course.getMinGroupSizeRequirement();
+		return this.size < course.getMinGroupSizeRequirement();
 	}
 	
 }

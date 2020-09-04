@@ -30,6 +30,10 @@ export interface GroupDto {
      */
     hasPassword?: boolean;
     /**
+     * Count of group members. Set by the server.
+     */
+    size?: number;
+    /**
      * Determines, wether course participant are able to join this group.
      */
     isClosed?: boolean;
