@@ -16,7 +16,7 @@ export class ToastService {
 
 	/** Displays an error-themed toast message. */
 	error(message?: string, title?: string, interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
-		this.toast.error(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), override);
+		this.toast.error(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), { disableTimeOut: true, ...override });
 	}
 
 	/**
@@ -32,7 +32,7 @@ export class ToastService {
 
 	/** Displays a warning-themed toast message. */
 	warning(message?: string, title?: string, interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
-		this.toast.warning(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), override);
+		this.toast.warning(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), { disableTimeOut: true, ...override });
 	}
 
 	/** Displays an info-themed toast message. */
