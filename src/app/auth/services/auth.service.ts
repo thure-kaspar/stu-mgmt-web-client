@@ -44,10 +44,14 @@ export class AuthService {
 		// If login was successful, store the received authentication token
 		if (authToken) {
 			localStorage.setItem(AuthService.extAuthTokenKey, authInfo.token.token);
-			localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
-			this.userSubject.next(authToken.user);
+			this.storeToken(authToken);
 			this.router.navigate(["/courses"]);
 		}
+	}
+
+	storeToken(authToken: AuthTokenDto): void {
+		localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
+		this.userSubject.next(authToken.user);
 	}
 
 	/**

@@ -11,7 +11,7 @@ import { AuthenticationInfoDto } from "../../../api_auth";
 import { environment } from "../../environments/environment";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { AuthService } from "../auth/services/auth.service";
-import { CourseMembershipsFacade } from "../course/services/course-memberships.facade";
+import { CourseMembershipsFacade } from "../shared/services/course-memberships.facade";
 import { SnackbarService } from "../shared/services/snackbar.service";
 import { ThemeService } from "../shared/services/theme.service";
 import { ToastService } from "../shared/services/toast.service";
@@ -71,14 +71,7 @@ export class NavigationComponent implements OnInit {
 	}
 
 	openLoginDialog(): void {
-		this.dialog.open<LoginDialog, undefined, AuthenticationInfoDto>(LoginDialog).afterClosed().subscribe(
-			async result => {
-				// If login to auth system was successful
-				if (result) {
-					await this.authService.loginWithToken(result); // Attempt to authenticate user in StudentMgtm-Backend
-				}
-			}
-		);
+		this.dialog.open<LoginDialog, undefined, AuthenticationInfoDto>(LoginDialog);
 	}
 
 	logout(): void {
