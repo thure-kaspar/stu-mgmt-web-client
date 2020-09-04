@@ -5,7 +5,7 @@
 		
 		<div class="mini-profile">
 			<div class="info">
-				<span>
+				<span *ngIf="participant.email">
 					<span class="font-bold">{{ 'Property.User.Email' | translate }}: </span>
 					<span>{{participant.email}}</span>
 				</span>
