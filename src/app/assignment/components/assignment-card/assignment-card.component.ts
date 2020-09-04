@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subject } from "rxjs";
-import { filter } from "rxjs/operators";
+import { filter, take } from "rxjs/operators";
 import { AssignmentDto, GroupDto, UsersService, AssessmentsService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { Participant } from "../../../domain/participant.model";
 import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
@@ -14,6 +13,7 @@ import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/ed
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 import { Course } from "../../../domain/course.model";
 import { TranslateService } from "@ngx-translate/core";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 @Component({
 	selector: "app-assignment-card",
@@ -66,10 +66,11 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 	private displayGroupOrWarning(): void {
 		this.subs.sink = this.participantFacade.assignmentGroups$.pipe(
-			filter(p => !!p), // Only perform the following check once participant is loaded
+			filter(tuples => !!tuples),
+			take(1)
 		).subscribe(tuples => {
 			const group = tuples.find(a => a.assignment.id === this.assignment.id)?.group;
-
+			
 			if (!group && this.assignment.state === "IN_PROGRESS") {
 				this.warning = this.translate.instant("Text.Group.NoGroupForAssignment");
 				this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);

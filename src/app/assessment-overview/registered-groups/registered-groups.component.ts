@@ -10,9 +10,9 @@ import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-des
 import { MatDialog } from "@angular/material/dialog";
 import { SearchParticipantDialog } from "../../shared/components/dialogs/search-participant/search-participant.dialog";
 import { MatTableDataSource } from "@angular/material/table";
-import { ParticipantFacade } from "../../course/services/participant.facade";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
 import { ToastService } from "../../shared/services/toast.service";
+import { ParticipantFacade } from "../../shared/services/participant.facade";
 
 @Component({
 	selector: "app-registered-groups",

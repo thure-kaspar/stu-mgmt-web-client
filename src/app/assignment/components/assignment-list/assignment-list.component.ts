@@ -4,12 +4,12 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
 import { AssignmentDto } from "../../../../../api";
-import { CourseFacade } from "../../../course/services/course.facade";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-assignment.dialog";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
+import { CourseFacade } from "../../../shared/services/course.facade";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 class AssignmentsStateMap {
 	inProgress: AssignmentDto[] = [];

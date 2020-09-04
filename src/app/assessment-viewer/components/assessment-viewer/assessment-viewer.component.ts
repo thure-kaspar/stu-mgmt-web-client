@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AssessmentDto, AssignmentDto, AssessmentEventDto, AssessmentsService } from "../../../../../api";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { BehaviorSubject, Subject } from "rxjs";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 @Component({
 	selector: "app-assessment-viewer",

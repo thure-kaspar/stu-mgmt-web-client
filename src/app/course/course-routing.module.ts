@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "../auth/guards/auth.guard";
 import { CourseListComponent } from "./components/course-list/course-list.component";
 import { CourseComponent } from "./components/course/course.component";
+import { TeachingStaffGuard } from "../shared/guards/teaching-staff.guard";
+import { AuthGuard } from "../shared/guards/auth.guard";
 
 const routes: Routes = [
 	{ path: "create", loadChildren: () => import("../course-creator/course-creator.module").then(m => m.CourseCreatorModule), pathMatch: "full" },
@@ -11,7 +12,7 @@ const routes: Routes = [
 		{ path: "groups", loadChildren: () => import("../group/group.module").then(m => m.GroupModule) },
 		{ path: "users", loadChildren: () => import("../course-participants/course-participants.module").then(m => m.CourseParticipantsModule) },
 		{ path: "users/:userId", loadChildren: () => import("../participant-profile/participant-profile.module").then(m => m.ParticipantProfileModule) },
-		{ path: "settings", loadChildren: () => import("../course-settings/course-settings.module").then(m => m.CourseSettingsModule), pathMatch: "full" },
+		{ path: "settings", loadChildren: () => import("../course-settings/course-settings.module").then(m => m.CourseSettingsModule), pathMatch: "full", canActivate: [TeachingStaffGuard] },
 		{ path: "", pathMatch: "full", redirectTo: "assignments" }
 	] },
 	{ path: "", component: CourseListComponent, pathMatch: "full" }

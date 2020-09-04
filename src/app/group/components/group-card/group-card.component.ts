@@ -8,7 +8,7 @@ import { Participant } from "../../../domain/participant.model";
 import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 @Component({
 	selector: "app-group-card",

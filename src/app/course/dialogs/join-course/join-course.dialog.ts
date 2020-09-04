@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { JoinGroupDialog } from "../../../group/dialogs/join-group/join-group.dialog";
-import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
-import { CoursesService, CanJoinCourseDto, CourseParticipantsService } from "../../../../../api";
+import { CanJoinCourseDto, CourseParticipantsService } from "../../../../../api";
 import { AuthService } from "../../../auth/services/auth.service";
+import { JoinGroupDialog } from "../../../group/dialogs/join-group/join-group.dialog";
+import { CourseMembershipsFacade } from "../../../shared/services/course-memberships.facade";
 
 /**
  * Dialog that allows a user to join a course. 

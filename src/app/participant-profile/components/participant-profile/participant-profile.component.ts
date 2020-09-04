@@ -4,9 +4,9 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { filter, tap } from "rxjs/operators";
 import { CourseParticipantsService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 @Component({
 	selector: "app-participant-profile",

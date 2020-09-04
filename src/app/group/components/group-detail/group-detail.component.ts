@@ -6,8 +6,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { filter } from "rxjs/operators";
 import { AssessmentDto, AssessmentsService, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
-import { CourseFacade } from "../../../course/services/course.facade";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
 import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
@@ -15,6 +13,8 @@ import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-
 import { DialogService } from "../../../shared/services/dialog.service";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { CourseFacade } from "../../../shared/services/course.facade";
 
 @Component({
 	selector: "app-group-detail",

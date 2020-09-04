@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { GroupDto, GroupsService, CourseDto, GroupSettingsDto, GroupUpdateDto } from "../../../../../api";
-import { CourseFacade } from "../../../course/services/course.facade";
 import { Participant } from "../../../domain/participant.model";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { Course } from "../../../domain/course.model";
 import { Group } from "../../../domain/group.model";
+import { CourseFacade } from "../../../shared/services/course.facade";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 /**
  * Dialogs that allows users to edit a group.

@@ -8,8 +8,6 @@ import { ChangeRoleDialog } from "./dialogs/change-role/change-role.dialog";
 import { JoinCourseDialog } from "./dialogs/join-course/join-course.dialog";
 import { SearchCourseDialog } from "./dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "./dialogs/search-user/search-user.dialog";
-import { CourseFacade } from "./services/course.facade";
-import { ParticipantFacade } from "./services/participant.facade";
 
 @NgModule({
 	declarations: [
@@ -25,6 +23,6 @@ import { ParticipantFacade } from "./services/participant.facade";
 		TranslateModule.forChild({ extend: true }),
 		CourseRoutingModule
 	],
-	providers: [CourseFacade, ParticipantFacade]
+	providers: []
 })
 export class CourseModule { }

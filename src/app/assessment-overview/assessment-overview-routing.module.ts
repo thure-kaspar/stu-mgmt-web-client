@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { AssessmentOverviewComponent } from "./assessment-overview/assessment-overview.component";
+import { RouterModule, Routes } from "@angular/router";
 import { AssessmentAllocationOverviewComponent } from "./assessment-allocation-overview/assessment-allocation-overview.component";
+import { AssessmentOverviewComponent } from "./assessment-overview/assessment-overview.component";
 import { CreatedAssessmentsComponent } from "./created-assessments/created-assessments.component";
 import { RegisteredGroupsComponent } from "./registered-groups/registered-groups.component";
 

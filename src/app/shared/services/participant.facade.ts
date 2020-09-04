@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { CourseParticipantsService, GroupDto, GroupsService, ParticipantDto, AssignmentGroupTuple, UsersService } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
 import { Participant } from "../../domain/participant.model";
@@ -43,6 +43,10 @@ export class ParticipantFacade {
 		});
 
 		this.loadParticipantWhenCourseLoaded();
+	}
+
+	getParticipant(): Observable<Participant> {
+		return this.participant$;
 	}
 
 	/**

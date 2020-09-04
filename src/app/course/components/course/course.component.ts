@@ -7,9 +7,9 @@ import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dia
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
-import { CourseMembershipsFacade } from "../../services/course-memberships.facade";
-import { CourseFacade } from "../../services/course.facade";
-import { ParticipantFacade } from "../../services/participant.facade";
+import { CourseMembershipsFacade } from "../../../shared/services/course-memberships.facade";
+import { CourseFacade } from "../../../shared/services/course.facade";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 @Component({
 	selector: "app-course",

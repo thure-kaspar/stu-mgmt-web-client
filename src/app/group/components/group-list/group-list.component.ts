@@ -5,8 +5,6 @@ import { Subject, Observable, BehaviorSubject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { CourseConfigService, CourseParticipantsService, GroupDto, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
-import { CourseFacade } from "../../../course/services/course.facade";
-import { ParticipantFacade } from "../../../course/services/participant.facade";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
@@ -15,6 +13,8 @@ import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/cre
 import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { Course } from "../../../domain/course.model";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { CourseFacade } from "../../../shared/services/course.facade";
 
 class GroupFilter {
 	name?: string;
