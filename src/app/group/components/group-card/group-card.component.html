@@ -11,6 +11,7 @@
 			</ng-template>
 
 			<mat-icon *ngIf="group.isClosed" class="icon-light" [matTooltip]="'Property.Group.IsClosed' | translate">lock</mat-icon>
+			<mat-icon *ngIf="group.hasPassword" class="icon-light" [matTooltip]="'Misc.PasswordProtected' | translate">vpn_key</mat-icon>
 		</span>
 
 		<mat-menu #groupMenu>
@@ -31,7 +32,7 @@
 	</mat-card-title>
 
 	<div class="member-info">
-		<span [class]="'text-light font-bold ' + cssClass">{{ 'Domain.Members' | translate }}: {{group.members.length}}</span>
+		<span [class]="'text-light font-bold ' + cssClass">{{ 'Domain.Members' | translate }}: {{group.size}}</span>
 	</div>
 
 	<div class="member-list" *ngIf="participant.isTeachingStaffMember">
@@ -40,8 +41,11 @@
 		</a>
 	</div>
 	
-	<div class="group-buttons">
-		<button mat-flat-button color="accent" [disabled]="group.isClosed || participant.groupId" (click)="openJoinGroupDialog()">{{ 'Action.Join' | translate }}</button>
+	<div class="group-buttons" *ngIf="participant.isStudent">
+		<button mat-flat-button color="accent" 
+			[disabled]="group.isClosed || group.id === participant.groupId || group.isFull(course)" (click)="onJoinGroup()">
+			{{ 'Action.Join' | translate }}
+		</button>
 	</div>
 
 </mat-card>

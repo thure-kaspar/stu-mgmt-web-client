@@ -9,6 +9,7 @@ import { SearchParticipantDialog } from "../../../shared/components/dialogs/sear
 import { DialogService } from "../../../shared/services/dialog.service";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { take } from "rxjs/operators";
 
 @Component({
 	selector: "app-group-card",
@@ -35,10 +36,27 @@ export class GroupCardComponent implements OnInit {
 				private dialogService: DialogService) { }
 
 	ngOnInit(): void {
-		if (this.group.isFull(this.course)) {
-			this.cssClass = "CRITICAL";
-		} else if (this.group.hasNotEnoughMembers(this.course)) {
+		if (this.group.hasNotEnoughMembers(this.course)) {
 			this.cssClass = "WARNING";
+		}
+	}
+
+	/**
+	 * Opens the `JoinGroupDialog`.
+	 * If the students is already in a group, the `ConfirmDialog` will be opened and
+	 * if confirmed, student will be removed from current group before the `JoinGroupDialog` is opened.
+	 */
+	onJoinGroup(): void {
+		if (this.participant.groupId) {
+			this.participantFacade.leaveGroup(this.participant.group, "Text.Group.LeaveToJoinOther").pipe(take(1)).subscribe(
+				leftGroup => {
+					if (leftGroup) {
+						this.openJoinGroupDialog();
+					}
+				}
+			);
+		} else {
+			this.openJoinGroupDialog();
 		}
 	}
 
@@ -47,7 +65,7 @@ export class GroupCardComponent implements OnInit {
 	 * this group.
 	 */
 	openJoinGroupDialog(): void {
-		const data: JoinGroupDialogData = { courseId: this.course.id, groupId: this.group.id };
+		const data: JoinGroupDialogData = { courseId: this.course.id, group: this.group, participant: this.participant };
 		this.dialog.open<JoinGroupDialog, JoinGroupDialogData, boolean>(JoinGroupDialog, { data }).afterClosed().subscribe(
 			joined => {
 				if (joined) {

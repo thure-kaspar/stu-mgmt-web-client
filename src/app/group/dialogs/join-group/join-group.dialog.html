@@ -3,7 +3,7 @@
 	<mat-card-title matDialogTitle>{{ 'Title.JoinGroup' | translate }}</mat-card-title>
 
 	<div matDialogContent class="dialog-content">
-		<mat-form-field>
+		<mat-form-field *ngIf="group.hasPassword">
 			<mat-label>{{ 'Common.Password' | translate }}</mat-label>
 			<input matInput type="password" [(ngModel)]="password">
 		</mat-form-field>

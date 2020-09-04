@@ -100,32 +100,34 @@
 			</table>
 		</div>
 	
-		<mat-divider class="divider"></mat-divider>
+		<ng-container *ngIf="group.history">
+			<mat-divider class="divider"></mat-divider>
 	
-		<div id="group-history">
-			<h2 class="heading">{{ 'Property.Group.History' | translate }}</h2>
-			<mat-list class="history-list" dense *ngIf="group.history.length > 0; else emptyHistoryText">
-				<mat-divider></mat-divider>
-				<ng-container *ngFor="let event of group.history">
-					<mat-list-item class="history-item">
-						<mat-icon class="text-green" *ngIf="event.event === 'UserJoinedGroupEvent'; else leftGroupIcon">add_box</mat-icon>
-						<ng-template #leftGroupIcon>
-							<mat-icon class="text-red" *ngIf="event.event === 'UserLeftGroupEvent'">indeterminate_check_box</mat-icon>
-						</ng-template>
-					<span>
-						<span class="timestamp">[{{event.timestamp | date }}]:</span>
-						<a class="font-bold">{{event.user.username}}</a>
-						{{ "Event." + event.event | translate}}
-					</span>
-					</mat-list-item>
+			<div id="group-history">
+				<h2 class="heading">{{ 'Property.Group.History' | translate }}</h2>
+				<mat-list class="history-list" dense *ngIf="group.history.length > 0; else emptyHistoryText">
 					<mat-divider></mat-divider>
-				</ng-container>
-			</mat-list>
-	
-			<ng-template #emptyHistoryText>
-				<p>This group has no history.</p>
-			</ng-template>
-		</div>
+					<ng-container *ngFor="let event of group.history">
+						<mat-list-item class="history-item">
+							<mat-icon class="text-green" *ngIf="event.event === 'UserJoinedGroupEvent'; else leftGroupIcon">add_box</mat-icon>
+							<ng-template #leftGroupIcon>
+								<mat-icon class="text-red" *ngIf="event.event === 'UserLeftGroupEvent'">indeterminate_check_box</mat-icon>
+							</ng-template>
+						<span>
+							<span class="timestamp">[{{event.timestamp | date }}]:</span>
+							<a class="font-bold">{{event.user.username}}</a>
+							{{ "Event." + event.event | translate}}
+						</span>
+						</mat-list-item>
+						<mat-divider></mat-divider>
+					</ng-container>
+				</mat-list>
+			
+				<ng-template #emptyHistoryText>
+					<p>This group has no history.</p>
+				</ng-template>
+			</div>
+		</ng-container>
 	
 	</div>
 	

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subject, Observable, BehaviorSubject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
+import { debounceTime, take } from "rxjs/operators";
 import { CourseConfigService, CourseParticipantsService, GroupDto, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Group } from "../../../domain/group.model";
@@ -152,8 +152,18 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	 * Opens up a group creation dialog depending on the user's course role.
 	 */
 	openCreateGroupDialog(): void {
-		if (this.participant.role === ParticipantDto.RoleEnum.STUDENT) {
-			this.openCreateGroupDialog_Student();
+		if (this.participant.isStudent) {
+			if (this.participant.groupId) {
+				this.participantFacade.leaveGroup(this.participant.group, "Text.Group.LeaveToJoinOther").pipe(take(1)).subscribe(
+					leftGroup => {
+						if (leftGroup) {
+							this.openCreateGroupDialog_Student();
+						}
+					}
+				);
+			} else {
+				this.openCreateGroupDialog_Student();
+			}
 		} else {
 			this.openCreateGroupDialog_LecturerOrTutor();
 		}
@@ -191,7 +201,8 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 				const index = this.groups.findIndex(g => g.id === event.group.id);
 				this.groups[index] = new Group({
 					...this.groups[index],
-					members: [...this.groups[index].members, event.participant]
+					members: [...this.groups[index].members, event.participant],
+					size: this.groups[index].size + 1
 				});
 				this.groupsSubject.next(this.groups);
 				this.snackbar.openSuccessMessage();

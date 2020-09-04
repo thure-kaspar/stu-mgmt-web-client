@@ -70,6 +70,7 @@
     "Required": "Benötigt",
     "Single": "Einzeln",
     "Start": "Start",
+    "Time": "Zeit",
     "Title": "Titel",
     "Total": "Gesamt",
     "Welcome": "Willkommen",
@@ -189,6 +190,9 @@
   },
   "Message": {
     "Created": "Erstellt",
+    "Custom": {
+      "JoinedGroup": "Gruppe beigetreten"
+    },
     "Deleted": "Gelöscht",
     "Error": "Fehler",
     "Removed": "Entfernt",
@@ -213,6 +217,7 @@
       "PreviousPageLabel": "Zurück",
       "RangeLabel": "Seite {{currentPage}} von {{numberOfPages}}"
     },
+    "PasswordProtected": "Passwortgeschützt",
     "Privacy": "Datenschutz",
     "Rounding": "Runden",
     "Secrets": "Geheime Einstellungen",
@@ -311,6 +316,7 @@
       "CanNotBeClosed": "Diese Gruppe kann nicht von Studenten geschlossen werden.",
       "CanNotBeRenamed": "Der Name der Gruppe kann von Studenten nicht verändert werden.",
       "EmptyGroup": "Diese Gruppe hat keine Mitglieder.",
+      "LeaveToJoinOther": "Aktuelle Gruppe muss verlassen werden, um einer anderen Gruppe beizutreten.",
       "NoGroupForAssignment": "Du hast noch keine Gruppe für diese Aufgabe.",
       "NotEnoughMembers": "Gruppe muss mindestens {{minSize}} Mitglieder haben.",
       "ParticipantHasNoGroup": "Student ist in keiner Gruppe angemeldet."

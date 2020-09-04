@@ -1,13 +1,13 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupDto, GroupsService, CourseDto, GroupSettingsDto, GroupUpdateDto } from "../../../../../api";
-import { Participant } from "../../../domain/participant.model";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { GroupDto, GroupSettingsDto, GroupsService, GroupUpdateDto } from "../../../../../api";
 import { Course } from "../../../domain/course.model";
 import { Group } from "../../../domain/group.model";
+import { Participant } from "../../../domain/participant.model";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { CourseFacade } from "../../../shared/services/course.facade";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { ToastService } from "../../../shared/services/toast.service";
 
 /**
  * Dialogs that allows users to edit a group.
@@ -28,12 +28,14 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	groupSettings: GroupSettingsDto;
 	participant: Participant;
 
-	constructor(private dialogRef: MatDialogRef<EditGroupDialog, GroupDto>,
-				@Inject(MAT_DIALOG_DATA) private groupId: string,
-				private groupService: GroupsService,
-				private courseFacade: CourseFacade,
-				private participantFacade: ParticipantFacade,
-				private snackbar: SnackbarService) { super(); }
+	constructor(
+		private dialogRef: MatDialogRef<EditGroupDialog, GroupDto>,
+		@Inject(MAT_DIALOG_DATA) private groupId: string,
+		private groupService: GroupsService,
+		private courseFacade: CourseFacade,
+		private participantFacade: ParticipantFacade,
+		private toast: ToastService
+	) { super(); }
 
 	ngOnInit(): void {
 		this.subs.sink = this.courseFacade.course$.subscribe(c => {
@@ -72,10 +74,10 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	onSave(): void {
 		this.groupService.updateGroup(this.update, this.course.id, this.groupId).subscribe({
 			next: (group) => {
-				this.snackbar.openSuccessMessage();
+				this.toast.success("Message.Saved");
 				this.dialogRef.close(group);
 			},
-			error: (error) => this.snackbar.openApiExceptionMessage(error)
+			error: (error) => this.toast.apiError(error)
 		});
 	}
 

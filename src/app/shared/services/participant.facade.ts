@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { CourseParticipantsService, GroupDto, GroupsService, ParticipantDto, AssignmentGroupTuple, UsersService } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
 import { Participant } from "../../domain/participant.model";
@@ -8,7 +8,7 @@ import { DialogService } from "../../shared/services/dialog.service";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { ToastService } from "../../shared/services/toast.service";
 import { CourseFacade } from "./course.facade";
-import { distinctUntilChanged } from "rxjs/operators";
+import { distinctUntilChanged, switchMap, take, catchError, mapTo, map } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class ParticipantFacade {
@@ -27,7 +27,6 @@ export class ParticipantFacade {
 				private courseFacade: CourseFacade,
 				private userService: UsersService,
 				private authService: AuthService,
-				private snackbar: SnackbarService,
 				private dialogService: DialogService,
 				private router: Router,
 				private toast: ToastService) {
@@ -61,28 +60,31 @@ export class ParticipantFacade {
 	 * Opens the `ConfirmDialog` and if confirmed
 	 * causes the participant to leave the group and emits the changed participant via `participant$`.
 	 */
-	leaveGroup(group: GroupDto): void {
-		this.dialogService.openConfirmDialog({
+	leaveGroup(group: GroupDto, message?: string): Observable<boolean> {
+		return this.dialogService.openConfirmDialog({
 			title: "Action.Custom.LeaveGroup",
+			message,
 			params: [group.name]
-		}).subscribe(
-			confirmed => {
+		}).pipe(
+			take(1),
+			switchMap(confirmed => {
 				if (confirmed) {
-					this.groupService.removeUserFromGroup(this.courseId, group.id, this.userId).subscribe({
-						next: () => {
-							// Update the participant and emit new value
+					return this.groupService.removeUserFromGroup(this.courseId, group.id, this.userId).pipe(
+						take(1),
+						map(() => {
 							this.setGroup(undefined);
-							
-							this.snackbar.openSuccessMessage();
-							this.router.navigate(["/courses", this.courseId, "groups"]);
-						},
-						error: (error) => {
-							console.log(error);
-							this.snackbar.openErrorMessage();
-						}
-					});
+							this.toast.success(group.name, "Action.Custom.LeaveGroup");
+							return true;
+						}),
+						catchError(error => {
+							this.toast.apiError(error);
+							return throwError(error);
+						})
+					);
+				} else {
+					return of(false);
 				}
-			}
+			})
 		);
 	}
 

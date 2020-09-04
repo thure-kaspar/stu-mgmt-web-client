@@ -1,11 +1,13 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupsService } from "../../../../../api";
-import { AuthService } from "../../../auth/services/auth.service";
+import { GroupDto, GroupsService } from "../../../../../api";
+import { Participant } from "../../../domain/participant.model";
+import { ToastService } from "../../../shared/services/toast.service";
 
 export class JoinGroupDialogData {
 	courseId: string;
-	groupId: string;
+	group: GroupDto;
+	participant: Participant;
 }
 
 /**
@@ -19,15 +21,22 @@ export class JoinGroupDialogData {
 })
 export class JoinGroupDialog implements OnInit {
 
+	participant: Participant;
+	group: GroupDto;
+
 	password: string;
 	error: string;
 
-	constructor(private dialogRef: MatDialogRef<JoinGroupDialog, boolean>,
-				@Inject(MAT_DIALOG_DATA) private data: JoinGroupDialogData,
-				private groupService: GroupsService,
-				private authService: AuthService) { }
+	constructor(
+		private dialogRef: MatDialogRef<JoinGroupDialog, boolean>,
+		@Inject(MAT_DIALOG_DATA) private data: JoinGroupDialogData,
+		private groupService: GroupsService,
+		private toast: ToastService
+	) { }
 
 	ngOnInit(): void {
+		this.participant = this.data.participant;
+		this.group = this.data.group;
 	}
 
 	onCancel(): void {
@@ -35,14 +44,18 @@ export class JoinGroupDialog implements OnInit {
 	}
 
 	onJoin(): void {
-		const userId =  this.authService.getAuthToken().user.id;
-		this.groupService.addUserToGroup({ password: this.password }, this.data.courseId, this.data.groupId, userId).subscribe(
+		this.groupService.addUserToGroup(
+			{ password: this.password }, 
+			this.data.courseId, 
+			this.group.id, 
+			this.participant.userId
+		).subscribe(
 			joined => {
+				this.toast.success(this.data.group.name, "Message.Custom.JoinedGroup");
 				this.dialogRef.close(true);
 			},
 			error => {
-				console.log(error);
-				this.error = error.error.message;
+				this.toast.apiError(error);
 			}
 		);
 	}

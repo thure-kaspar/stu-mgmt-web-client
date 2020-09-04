@@ -70,6 +70,7 @@
     "Required": "Required",
     "Single": "Single",
     "Start": "Start",
+    "Time": "Time",
     "Title": "Title",
     "Total": "Total",
     "Welcome": "Welcome",
@@ -189,6 +190,9 @@
   },
   "Message": {
     "Created": "Created",
+    "Custom": {
+      "JoinedGroup": "Joined group"
+    },
     "Deleted": "Deleted",
     "Error": "Error",
     "Removed": "Removed",
@@ -213,6 +217,7 @@
       "PreviousPageLabel": "Previous",
       "RangeLabel": "Page {{currentPage}} of {{numberOfPages}}"
     },
+    "PasswordProtected": "Password protected",
     "Privacy": "Privacy",
     "Rounding": "Rounding",
     "Secrets": "Secrets",
@@ -311,6 +316,7 @@
       "CanNotBeClosed": "The group cannot be closed by students.",
       "CanNotBeRenamed": "This group cannot be renamed by students.",
       "EmptyGroup": "This group is empty.",
+      "LeaveToJoinOther": "Current group must be left to join another group.",
       "NoGroupForAssignment": "You currently have no group for this assignment.",
       "NotEnoughMembers": "Group must have at least {{minSize}} members.",
       "ParticipantHasNoGroup": "Participant currently has no group."

@@ -4,7 +4,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
-import { filter } from "rxjs/operators";
+import { filter, take } from "rxjs/operators";
 import { AssessmentDto, AssessmentsService, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
@@ -165,7 +165,13 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	 * if successful. User will be asked to confirm this action.
 	 */
 	onLeaveGroup(): void {
-		this.participantFacade.leaveGroup(this.group);
+		this.participantFacade.leaveGroup(this.group).pipe(take(1)).subscribe(
+			leftGroup => {
+				if (leftGroup) {
+					this.router.navigate(["/courses", this.courseId, "groups"]);
+				}
+			}
+		);
 	}
 
 	/**

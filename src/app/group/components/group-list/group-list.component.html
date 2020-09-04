@@ -1,7 +1,7 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
 	<div class="tab" *ngIf="participant$ | async as participant">
 
-		<button (click)="openCreateGroupDialog()" mat-flat-button id="btn-add" color="accent" [disabled]="!participant?.canCreateGroup()">
+		<button mat-flat-button id="btn-add" color="accent" (click)="openCreateGroupDialog()" [disabled]="!course.groupSettings.allowGroups">
 			<mat-icon>add</mat-icon>
 			{{ 'Action.Custom.AddGroup' | translate }}
 		</button>
