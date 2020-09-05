@@ -7,8 +7,20 @@
 	}
 }
 
+mat-card {
+	padding-bottom: 0px!important;
+}
+
 .btn-add-partial-assessment {
 	width: fit-content;
+}
+
+.overall-card {
+	margin-bottom: 16px;
+}
+
+.partial-assessment-form {
+	margin-bottom: 16px;
 }
 
 #points-container {

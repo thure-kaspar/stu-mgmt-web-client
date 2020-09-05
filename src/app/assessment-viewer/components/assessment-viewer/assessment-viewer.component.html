@@ -1,96 +1,81 @@
-<div id="assessment-viewer" class="tab" *ngIf="assessment$ | async as assessment">
+<ng-container *ngIf="participantFacade.participant$ | async as participant">
+	<div id="assessment-viewer" class="tab" *ngIf="assessment$ | async as assessment">
 
-	<h2 class="title">
-		<span>{{ 'Domain.Assessment' | translate }}: {{assignment.name}}</span>
-		<button mat-flat-button color="accent" *ngIf="participant?.isTeachingStaffMember" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
-			{{ 'Action.Edit' | translate }}
-		</button>
-	</h2>
-
-		<div class="assessment-header">
-			<span class="created-by">
-				{{ 'Common.CreatedBy' | translate }}
-				<span class="font-bold">{{assessment.creator.username}}</span>
-				<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant?.isTeachingStaffMember">
-					<mat-icon class="icon-light">history</mat-icon>
-				</button>
-			</span>
-
-			<div *ngIf="showEvents && participant?.isTeachingStaffMember" class="events">
-				<ng-container *ngIf="assessmentEvents$ | async as events">
-					<span *ngFor="let event of events">
-						[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
-					</span>
-
-					<p *ngIf="events?.length == 0">{{ 'Common.None' | translate }}.</p>
-				</ng-container>
-			</div>
-		
-			<div class="assessment-target">
-				<span>{{ 'Common.For' | translate }}:</span>
-
-				<mat-chip-list class="selected-group-or-user">
-					<mat-chip color="primary" selected color="accent">
-						<a *ngIf="assessment.user" class="link-none" [routerLink]="[ '/courses', courseId, 'users', assessment.user.id ]">
-							{{assessment.user.username}}
-						</a>
-						<a *ngIf="assessment.group" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', assessment.group.id ]">
-							{{assessment.group.name}}
-						</a>
-					</mat-chip>
-				</mat-chip-list>
-
-				<div class="group-members-list" *ngIf="assessment.group">
-					<mat-chip-list>
-						<a *ngFor="let member of assessment.group.members" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.userId ]">
-							<mat-chip>{{member.username}}</mat-chip>
-						</a>
-					</mat-chip-list>
-					<span *ngIf="assessment.group.members?.length == 0">
-						<p class="text-red">{{ 'Domain.Expression.EmptyGroup' | translate }}</p>
-					</span>
-				</div>
-				
-			</div>
-		</div>
-
-		<mat-divider class="divider"></mat-divider>
-
-		<div class="assessment-content">
-
-			<h2>{{ 'Common.Total' | translate }}</h2>
-
-			<mat-card>
-				<h2 class="achieved-points">
-					<span>{{ 'Property.Assessment.AchievedPoints' | translate }}:</span>
-					<span class="achieved-points-number">{{assessment.achievedPoints}} 
-						<span class="of-points text-light">
-							/ {{assignment.points}}
-							<span *ngIf="assignment.bonusPoints">(+{{assignment.bonusPoints}})</span>
-						</span>
-					</span>
-				</h2>
+		<h2 class="title">
+			<span>{{ 'Domain.Assessment' | translate }}: {{assignment.name}}</span>
+			<button mat-flat-button color="accent" *ngIf="participant.isTeachingStaffMember" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
+				{{ 'Action.Edit' | translate }}
+			</button>
+		</h2>
 	
-				<div class="comment">
-					{{assessment.comment}}
+			<div class="assessment-header">
+				<span class="created-by">
+					{{ 'Common.CreatedBy' | translate }}
+					<span class="font-bold">{{assessment.creator.username}}</span>
+					<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant.isTeachingStaffMember">
+						<mat-icon class="icon-light">history</mat-icon>
+					</button>
+				</span>
+	
+				<div *ngIf="showEvents && participant.isTeachingStaffMember" class="events">
+					<ng-container *ngIf="assessmentEvents$ | async as events">
+						<span *ngFor="let event of events">
+							[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
+						</span>
+	
+						<p *ngIf="events?.length == 0">{{ 'Common.None' | translate }}.</p>
+					</ng-container>
 				</div>
-			</mat-card>
-
-		<ng-container *ngIf="assessment.partialAssessments.length > 0">
-			<mat-divider class="divider"></mat-divider>
-
-			<h2>{{ 'Domain.PartialAssessments' | translate }}</h2>
-
-			<div class="partial-assessments">
-				<ng-container *ngFor="let partial of assessment.partialAssessments">
-					
-					<app-partial-assessment class="partial-assessment" [partialAssessment]="partial"></app-partial-assessment>
-
-				</ng-container>
+			
+				<div class="assessment-target">
+					<app-assessment-target 
+						[group]="assessment.group" 
+						[targetedParticipant]="assessment.participant"
+						[participant]="participant"
+						[courseId]="courseId"
+					>
+					</app-assessment-target>
+				</div>
 			</div>
-		</ng-container>
+	
+			<mat-divider class="divider"></mat-divider>
+	
+			<div class="assessment-content">
+	
+				<h2>{{ 'Common.Total' | translate }}</h2>
+	
+				<mat-card>
+					<h2 class="achieved-points">
+						<span>{{ 'Property.Assessment.AchievedPoints' | translate }}:</span>
+						<span class="achieved-points-number">{{assessment.achievedPoints}} 
+							<span class="of-points text-light">
+								/ {{assignment.points}}
+								<span *ngIf="assignment.bonusPoints">(+{{assignment.bonusPoints}})</span>
+							</span>
+						</span>
+					</h2>
 		
-
-		</div>
-
-</div>
+					<div class="comment">
+						{{assessment.comment}}
+					</div>
+				</mat-card>
+	
+			<ng-container *ngIf="assessment.partialAssessments.length > 0">
+				<mat-divider class="divider"></mat-divider>
+	
+				<h2>{{ 'Domain.PartialAssessments' | translate }}</h2>
+	
+				<div class="partial-assessments">
+					<ng-container *ngFor="let partial of assessment.partialAssessments">
+						
+						<app-partial-assessment class="partial-assessment" [partialAssessment]="partial"></app-partial-assessment>
+	
+					</ng-container>
+				</div>
+			</ng-container>
+			
+	
+			</div>
+	
+	</div>
+</ng-container>

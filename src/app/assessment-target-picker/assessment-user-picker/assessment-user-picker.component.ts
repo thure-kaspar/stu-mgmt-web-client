@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectionStrategy } from "@angular/core";
-import { UserDto, UserWithAssignedEvaluatorDto, CourseParticipantsService } from "../../../../api";
-import { Observable, Subscription, BehaviorSubject } from "rxjs";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { Paginator } from "../../shared/paginator/paginator.component";
 import { ActivatedRoute } from "@angular/router";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { CourseParticipantsService, ParticipantDto, ParticipantsWithAssignedEvaluatorDto, UserDto } from "../../../../api";
+import { Paginator } from "../../shared/paginator/paginator.component";
+import { ToastService } from "../../shared/services/toast.service";
 import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-target-picker.component";
 
 @Component({
@@ -15,29 +15,31 @@ import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-t
 })
 export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 
+	@Input() selectedId: string;
+
 	@Input() filter$: Observable<AssessmentTargetFilter>;
 	private filter: AssessmentTargetFilter;
 	/** Emits the selected user. */
-	@Output() onUserSelected = new EventEmitter<UserDto>();
+	@Output() onUserSelected = new EventEmitter<ParticipantDto>();
 	/** Emits the ```assessmentId``` of the assessment that should be switched to for editing. */
 	@Output() onSwitchToEdit = new EventEmitter<string>();
 
 	assignedEvaluator$: Observable<UserDto>;
 	courseId: string;
 	assignmentId: string;
-	selectedId: string;
 	isLoading$ = new BehaviorSubject<boolean>(false);
 
 	displayedColumns: string[] = ["action", "name", "assignedTo"];
-	dataSource: MatTableDataSource<UserWithAssignedEvaluatorDto>;
+	dataSource$ = new BehaviorSubject(new MatTableDataSource<ParticipantsWithAssignedEvaluatorDto>([]));
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
-	private users: UserWithAssignedEvaluatorDto[] = [];
 	private filterSub: Subscription;
 
-	constructor(private courseParticipantsService: CourseParticipantsService,
-				private route: ActivatedRoute,
-				private snackbar: SnackbarService) { }
+	constructor(
+		private courseParticipantsService: CourseParticipantsService,
+		private route: ActivatedRoute,
+		private toast: ToastService
+	) { }
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
@@ -48,17 +50,17 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 				if (filter) {
 					// Reload users, if filter changes
 					this.filter = filter;
-					this.loadUsers();
+					this.loadParticipants();
 				}
 			}
 		);
 	}
 
-	loadUsers(): void {
+	loadParticipants(): void {
 		const [skip, take] = this.paginator.getSkipAndTake();
 
 		this.isLoading$.next(true);
-		this.courseParticipantsService.getUsersWithAssignedEvaluator(
+		this.courseParticipantsService.getParticipantsWithAssignedEvaluator(
 			this.courseId, 
 			this.assignmentId,
 			skip,
@@ -69,22 +71,20 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 			"response",
 		).subscribe(
 			response => {
-				this.users = response.body;
-				this.dataSource = new MatTableDataSource(this.users);
+				this.dataSource$.next(new MatTableDataSource(response.body));
 				this.paginator.setTotalCountFromHttp(response);
 				this.isLoading$.next(false);
 			},
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 				this.isLoading$.next(false);
 			}
 		);
 	}
 
-	selectUser(user: UserDto): void {
-		this.selectedId = user.id;
-		this.onUserSelected.emit(user);
+	selectedParticipant(participant: ParticipantDto): void {
+		this.selectedId = participant.userId;
+		this.onUserSelected.emit(participant);
 	}
 
 	ngOnDestroy(): void {

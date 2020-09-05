@@ -7,19 +7,14 @@
 	flex-direction: column;
 }
 
-.created-by {
-	margin-bottom: 16px;
-}
-
 .events {
-	margin-top: -26px;
 	display: flex;
 	flex-direction: column;
+	padding-bottom: 16px;
 }
 
-.group-members-list {
-	margin-top: 8px;
-	margin-bottom: -24px;
+.assessment-target {
+	margin-bottom: 16px;
 }
 
 #grid {
@@ -48,8 +43,9 @@
 }
 
 #review-state-error {
-	margin-top: -8px;
-	font-weight: 500;
+	padding-top: 8px;
+	margin-left: auto;
+	margin-right: auto;
 	mat-icon {
 		vertical-align: middle;
 		margin-right: 8px;

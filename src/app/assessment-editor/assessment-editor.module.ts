@@ -5,6 +5,7 @@ import { AssessmentForm } from "./forms/assessment-form/assessment-form.componen
 import { EditAssessmentComponent } from "./edit-assessment/edit-assessment.component";
 import { SharedModule } from "../shared/shared.module";
 import { AssessmentTargetPickerModule } from "../assessment-target-picker/assessment-target-picker.module";
+import { AssessmentModule } from "../assessment/assessment.module";
 
 @NgModule({
 	declarations: [
@@ -14,6 +15,7 @@ import { AssessmentTargetPickerModule } from "../assessment-target-picker/assess
 	],
 	imports: [
 		SharedModule,
+		AssessmentModule,
 		AssessmentEditorRoutingModule,
 		AssessmentTargetPickerModule
 	]

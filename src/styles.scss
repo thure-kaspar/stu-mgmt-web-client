@@ -115,11 +115,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 *::-webkit-scrollbar-track {
 	margin-top: var(--titlebar-height); // Start below Titlebar
-	background-color: rgba(0, 0, 0, 0.233);
+	background-color: var(--color-header);
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: map-get($student-mgmt-client-primary, 600)
+	background-color: var(--text-light);
 }
 
 // Remove arrows of number-input
@@ -216,7 +216,7 @@ table, mat-paginator {
 	background-color: var(--table-bg)!important;
 }
 
-.mat-menu-panel, .mat-dialog-container {
+.mat-menu-panel, .mat-dialog-container, .mat-select-panel {
 	background-color: var(--card-bg)!important;
 }
 

@@ -15,6 +15,8 @@ import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-t
 })
 export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 
+	@Input() selectedId: string;
+
 	@Input() filter$: Observable<AssessmentTargetFilter>;
 	private filter: AssessmentTargetFilter;
 
@@ -23,7 +25,6 @@ export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 	/** Emits the ```assessmentId``` of the assessment that should be switched to for editing. */
 	@Output() onSwitchToEdit = new EventEmitter<string>();
 	
-	selectedId: string;
 	courseId: string;
 	assignmentId: string;
 	isLoading$ = new BehaviorSubject<boolean>(false);

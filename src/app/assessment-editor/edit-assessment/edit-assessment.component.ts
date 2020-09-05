@@ -1,27 +1,32 @@
 import { Location } from "@angular/common";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AssessmentDto, AssessmentEventDto, AssessmentsService, AssessmentUpdateDto, AssignmentDto, AssignmentsService, GroupDto, GroupsService, PartialAssessmentDto, ParticipantDto, UserDto } from "../../../../api";
+import { Subject } from "rxjs";
+import { AssessmentDto, AssessmentEventDto, AssessmentsService, AssessmentUpdateDto, AssignmentDto, AssignmentsService, GroupDto, GroupsService, PartialAssessmentDto, ParticipantDto } from "../../../../api";
 import { DialogService } from "../../shared/services/dialog.service";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { ParticipantFacade } from "../../shared/services/participant.facade";
+import { ToastService } from "../../shared/services/toast.service";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 
 @Component({
 	selector: "app-edit-assessment",
 	templateUrl: "./edit-assessment.component.html",
-	styleUrls: ["./edit-assessment.component.scss"]
+	styleUrls: ["./edit-assessment.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAssessmentComponent implements OnInit {
 
 	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
-	assessment: AssessmentDto;
+
+	assessment$ = new Subject<AssessmentDto>();
+	private assessment: AssessmentDto;
 
 	events: AssessmentEventDto[];
 	showEvents = false;
 
 	assignment: AssignmentDto;
 	group: GroupDto;
-	participant: ParticipantDto;
+	targetedParticipant: ParticipantDto;
 
 	courseId: string;
 	assignmentId: string;
@@ -33,14 +38,17 @@ export class EditAssessmentComponent implements OnInit {
 	private removedPartialAssessments: PartialAssessmentDto[] = [];
 	private routeToAssessmentsCmds: string[];
 
-	constructor(private assessmentService: AssessmentsService,
-				private assignmentService: AssignmentsService,
-				private groupService: GroupsService,
-				private route: ActivatedRoute,
-				private router: Router,
-				private location: Location,
-				private snackbar: SnackbarService,
-				private dialog: DialogService) { }
+	constructor(
+		public participantFacade: ParticipantFacade,
+		private assessmentService: AssessmentsService,
+		private assignmentService: AssignmentsService,
+		private groupService: GroupsService,
+		private route: ActivatedRoute,
+		private router: Router,
+		private location: Location,
+		private dialog: DialogService,
+		private toast: ToastService
+	) { }
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
@@ -50,21 +58,23 @@ export class EditAssessmentComponent implements OnInit {
 		this.loadAssessment();
 	}
 
-	private assignLoadAssessmentResult(result: AssessmentDto): void {
-		this.assessment = result;
-		this.assignment = this.assessment.assignment;
-		this.group = this.assessment.group;
-		this.participant = this.assessment.participant;
+	private assignLoadAssessmentResult(assessment: AssessmentDto): void {
+		this.assessment = assessment;
+		this.assignment = assessment.assignment;
+		this.group = assessment.group;
+		this.targetedParticipant = assessment.participant;
 		
 		// Empty the form
 		this.form.form.reset(); 
 		this.form.getPartialAssessments().clear();
 
 		// Apply update to form
-		this.form.patchModel(this.assessment);
-		this.assessment.partialAssessments?.forEach(partial => {
+		this.form.patchModel(assessment);
+		assessment.partialAssessments?.forEach(partial => {
 			this.form.addPartialAssessment(partial);
 		});
+
+		this.assessment$.next(assessment);
 	}
 
 	/** Loads the assessment. Uses the current route params to determine courseId, assignmentId and assessmentId. */
@@ -75,8 +85,7 @@ export class EditAssessmentComponent implements OnInit {
 					this.assignLoadAssessmentResult(result);
 				},
 				error => {
-					console.log(error);
-					this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData");
+					this.toast.apiError(error);
 				}
 			);
 	}
@@ -90,8 +99,7 @@ export class EditAssessmentComponent implements OnInit {
 						this.showEvents = true;
 					},
 					error => {
-						console.log(error);
-						this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData");
+						this.toast.apiError(error);
 					}
 				);
 		}
@@ -114,11 +122,10 @@ export class EditAssessmentComponent implements OnInit {
 		this.assessmentService.updateAssessment(update, this.courseId, this.assignmentId, this.assessmentId).subscribe(
 			result => {
 				this.assignLoadAssessmentResult(result);
-				this.snackbar.openSuccessMessage();
+				this.toast.success("Message.Saved");
 			},
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		);
 	}
@@ -139,10 +146,10 @@ export class EditAssessmentComponent implements OnInit {
 	}
 
 	/** Sets the selected user and removes the selected group, it it exists. */
-	userSelectedHandler(user: UserDto): void {
+	userSelectedHandler(participant: ParticipantDto): void {
 		this.router.navigate(
 			[...this.routeToAssessmentsCmds, "editor", "create"],
-			{ fragment: "user" + user.id }
+			{ fragment: "user" + participant.userId }
 		);
 	}
 
@@ -169,7 +176,7 @@ export class EditAssessmentComponent implements OnInit {
 	/** Navigates to another assessment. */
 	private navigateToAssessment(assessmentId: string): void {
 		// Construct new url
-		const routeCmds = [...this.routeToAssessmentsCmds, "editor", assessmentId, "edit"];
+		const routeCmds = [...this.routeToAssessmentsCmds, "editor", "edit", assessmentId];
 		const url = this.router.createUrlTree(routeCmds).toString();
 		console.log(url);
 		this.assessmentId = assessmentId;
@@ -186,10 +193,9 @@ export class EditAssessmentComponent implements OnInit {
 	private resetComponentData(): void {
 		this.form.form.reset();
 		this.assignment = undefined;
-		this.assessment = undefined;
 		this.removedPartialAssessments = [];
 		this.group = undefined;
-		this.participant = undefined;
+		this.targetedParticipant = undefined;
 		this.events = undefined;
 		this.showEvents = false;
 	}

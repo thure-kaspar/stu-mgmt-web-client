@@ -20,13 +20,15 @@ export class AssessmentTargetFilter {
 })
 export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 
+	@Input() selectedId: string;
+
 	@Input() courseId: string;
 	@Input() assignmentId: string;
 
 	/** Emits the selected group. */
 	@Output() onGroupSelected = new EventEmitter<GroupDto>();
 	/** Emits the selected user. */
-	@Output() onUserSelected = new EventEmitter<UserDto>();
+	@Output() onUserSelected = new EventEmitter<ParticipantDto>();
 	/** Emits the ```assessmentId``` of the assessment that should be switched to for editing. */
 	@Output() onSwitchToEdit = new EventEmitter<string>();
 

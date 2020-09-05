@@ -11,6 +11,7 @@ const routes: Routes = [
 		{ path: "allocations", component: AssessmentAllocationOverviewComponent, pathMatch: "full" },
 		{ path: "created", component: CreatedAssessmentsComponent },
 		{ path: "registrations", component: RegisteredGroupsComponent, pathMatch: "full" },
+		{ path: "editor", loadChildren: () => import("../assessment-editor/assessment-editor.module").then(m => m.AssessmentEditorModule) },
 		{ path: "", redirectTo: "created", pathMatch: "full" } ] 
 	}
 ];

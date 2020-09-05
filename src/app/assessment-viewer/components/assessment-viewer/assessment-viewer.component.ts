@@ -1,10 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AssessmentDto, AssignmentDto, AssessmentEventDto, AssessmentsService } from "../../../../../api";
-import { getRouteParam } from "../../../../../utils/helper";
-import { Participant } from "../../../domain/participant.model";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { BehaviorSubject, Subject } from "rxjs";
+import { AssessmentDto, AssessmentEventDto, AssessmentsService, AssignmentDto } from "../../../../../api";
+import { getRouteParam } from "../../../../../utils/helper";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
 
 @Component({
@@ -17,20 +16,20 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 
 	assessment$ = new Subject<AssessmentDto>();
 	assignment: AssignmentDto;
+
 	assessmentEvents$ = new BehaviorSubject<AssessmentEventDto[]>(undefined);
-
 	showEvents = false;
-
-	participant: Participant;
 
 	courseId: string;
 	assignmentId: string;
 	assessmentId: string;
 
-	constructor(private assessmentService: AssessmentsService,
-				private participantFacade: ParticipantFacade,
-				private router: Router,
-				private route: ActivatedRoute) { super(); }
+	constructor(
+		public participantFacade: ParticipantFacade,
+		private assessmentService: AssessmentsService,
+		private router: Router,
+		private route: ActivatedRoute
+	) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
@@ -38,13 +37,11 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 		this.assessmentId = getRouteParam("assessmentId", this.route);
 
 		this.loadAssessment();
-		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
 	}
 
 	private loadAssessment(): void {
 		this.assessmentService.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId).subscribe(
 			assessment => {
-				console.log("Assessment:", assessment);
 				this.assignment = assessment.assignment;
 				this.assessment$.next(assessment);
 			}

@@ -2,12 +2,16 @@
 
 	<div id="grid">
 		<div id="left">
-			<h2 id="title">{{ 'Title.EditAssessment' | translate }}: {{assignment?.name}}</h2>
+			<h2 id="title">{{ 'Title.EditAssessment' | translate }}</h2>
+				
+			<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
+				<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
+			</p>
 
 			<div class="assessment-header">
 				<span class="created-by">
 					{{ 'Common.CreatedBy' | translate }}
-					<span class="font-bold">{{assessment?.creator.username}}</span>
+					<span class="font-bold">{{(assessment$ | async)?.creator.username}}</span>
 					<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()">
 						<mat-icon class="icon-light">history</mat-icon>
 					</button>
@@ -20,40 +24,20 @@
 					</span>
 				</div>
 			
-				<div>
-					{{ 'Common.For' | translate }}:
-					<mat-chip-list>
-						<mat-chip color="primary" selected>
-							<a *ngIf="participant" class="link-none" [routerLink]="[ '/courses', courseId, 'users', participant.userId ]">
-								{{participant.username}}
-							</a>
-							<a *ngIf="group" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', group.id ]">
-								{{group.name}}
-							</a>
-						</mat-chip>
-					</mat-chip-list>
-	
-					<div class="group-members-list" *ngIf="group">
-						<mat-chip-list>
-							<a *ngFor="let member of group.members" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.userId ]">
-								<mat-chip>{{member.username}}</mat-chip>
-							</a>
-						</mat-chip-list>
-						<span *ngIf="group.members?.length == 0">
-							<p class="text-red">{{ 'Domain.Expression.EmptyGroup' | translate }}</p>
-						</span>
-					</div>
-					
+				<div class="assessment-target">
+					<app-assessment-target
+						[group]="group"
+						[targetedParticipant]="targetedParticipant"
+						[participant]="participantFacade.participant$ | async"
+						[courseId]="courseId"
+					>
+					</app-assessment-target>
 				</div>
-	
-				<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
-					<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
-				</p>
 			</div>
 
 			<app-assessment-form [assignment]="assignment" (onPartialRemoved)="addToRemovedPartials($event)"></app-assessment-form>
 
-			<button mat-raised-button color="accent" id="btn-save" [disabled]="form.isInvalid() && assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
+			<button mat-raised-button color="accent" id="btn-save" [disabled]="form.isInvalid() || assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
 				{{ 'Action.Save' | translate }}
 			</button>
 		</div>

@@ -1,49 +1,61 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssessmentsService, AssignmentsService, AssessmentCreateDto, AssignmentDto, GroupDto, UserDto, GroupsService, UsersService, AssignmentRegistrationService } from "../../../../api";
-import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { Observable, Subject } from "rxjs";
+import { tap } from "rxjs/operators";
+import { AssessmentCreateDto, AssessmentsService, AssignmentDto, AssignmentRegistrationService, AssignmentsService, CourseParticipantsService, GroupDto, GroupsService, ParticipantDto } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
+import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { DialogService } from "../../shared/services/dialog.service";
+import { ParticipantFacade } from "../../shared/services/participant.facade";
+import { ToastService } from "../../shared/services/toast.service";
+import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
+import { AssessmentTargetPickerComponent } from "../../assessment-target-picker/assessment-target-picker/assessment-target-picker.component";
 
 @Component({
 	selector: "app-create-assessment",
 	templateUrl: "./create-assessment.component.html",
-	styleUrls: ["./create-assessment.component.scss"]
+	styleUrls: ["./create-assessment.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateAssessmentComponent implements OnInit {
+export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
+	@ViewChild(AssessmentTargetPickerComponent, { static: true}) targetPicker: AssessmentTargetPickerComponent;
+	
+	selectedId: string;
+	forParticipant$ = new Subject<ParticipantDto>();
+	forGroup$ = new Subject<GroupDto>();
 
 	assignment: AssignmentDto;
-	forUser: UserDto;
-	forGroup: GroupDto;
 
 	courseId: string;
 	assignmentId: string;
 
 	stateEnum = AssignmentDto.StateEnum;
 
-	constructor(private assessmentService: AssessmentsService,
-				private assignmentService: AssignmentsService,
-				private registrationService: AssignmentRegistrationService,
-				private groupService: GroupsService,
-				private userService: UsersService,
-				private authService: AuthService,
-				private route: ActivatedRoute,
-				private router: Router,
-				private snackbar: SnackbarService,
-				private dialog: DialogService) { }
+	constructor(
+		public participantFacade: ParticipantFacade,
+		public assignmentService: AssignmentsService,
+		private assessmentService: AssessmentsService,
+		private registrationService: AssignmentRegistrationService,
+		private groupService: GroupsService,
+		private participantService: CourseParticipantsService,
+		private authService: AuthService,
+		private route: ActivatedRoute,
+		private router: Router,
+		private toast: ToastService,
+		private dialog: DialogService,
+		private cdRef: ChangeDetectorRef
+	) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
 		this.assignmentId = this.route.snapshot.params.assignmentId;
 
-		this.assignmentService.getAssignmentById(this.courseId, this.assignmentId).subscribe(
-			result => this.assignment = result,
-			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage("Error.FailedToLoadRequiredData");
+		this.subs.sink = this.assignmentService.getAssignmentById(this.courseId, this.assignmentId).subscribe(
+			assignment => {
+				this.assignment = assignment;
+				this.cdRef.detectChanges();
 			}
 		);
 
@@ -52,7 +64,7 @@ export class CreateAssessmentComponent implements OnInit {
 
 	/**
 	 * If the URL-fragment contains `#group` or `#user` followed by the corresponding ID,
-	 * i.e. `#groupb4f24e81-dfa4-4641-af80-8e34e02d9c4a`, then this will select the specfied group or user.
+	 * i.e. `#groupb4f24e81-dfa4-4641-af80-8e34e02d9c4a`, then this will select the specified group or user.
 	 */
 	private setPreselectedGroupOrUser(): void {
 		const fragment = this.route.snapshot.fragment;
@@ -62,14 +74,11 @@ export class CreateAssessmentComponent implements OnInit {
 		if (groupMatch) {
 			// Only pass id to handler, because it will query for group data itself
 			this.groupSelectedHandler({ id: groupMatch[1] } as any);
-		}
-
-		if (userMatch) {
-			this.userService.getUserById(userMatch[1]).subscribe(
+		} else if (userMatch) {
+			this.participantService.getParticipant(this.courseId, userMatch[1]).subscribe(
 				user => this.userSelectedHandler(user),
 				error => {
-					console.log(error);
-					this.snackbar.openErrorMessage();
+					this.toast.apiError(error);
 				}
 			);
 		}
@@ -78,43 +87,51 @@ export class CreateAssessmentComponent implements OnInit {
 	onSave(): void {
 		const assessment: AssessmentCreateDto = this.form.getModel();
 		assessment.assignmentId = this.assignmentId;
-		assessment.creatorId = this.authService.getAuthToken().user.id;
 
 		this.assessmentService.createAssessment(assessment, this.courseId, this.assignmentId).subscribe(
 			created => {
-				// this.router.navigate(); TODO: Navigate to created assessment or go back to overview
-				this.snackbar.openSuccessMessage();
+				this.form.form.reset({ achievedPoints: 0 });
+				this.selectedId = undefined;
+				this.forGroup$.next(undefined);
+				this.forParticipant$.next(undefined);
+				this.targetPicker.updateNameFilter(); // Trigger reload of targets to remove current selection
+				this.toast.success("Message.Saved");
 			},
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		);
 	}
 
 	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
 	groupSelectedHandler(group: GroupDto): void {
-		this.forUser = undefined;
-		this.form.patchModel({ groupId: group.id, userId: null });
-		this.forGroup = group;
+		this.forParticipant$.next(undefined);
+		
+		// Set route fragment
+		this.router.navigate([], { fragment: "group" + group.id});
 
 		// Load members of the group
 		this.registrationService.getRegisteredGroup(this.courseId,  this.assignmentId, group.id).subscribe(
 			result => {
-				this.forGroup = result;
+				this.selectedId = group.id;
+				this.forGroup$.next(result);
+				this.form.patchModel({ groupId: group.id, userId: null });
 			},
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage("Failed to load information about the selected group.");
+				this.toast.apiError(error);
 			}
 		);
 	}
 
 	/** Sets the selected user and removes the selected group, it it exists. */
-	userSelectedHandler(user: UserDto): void {
-		this.forGroup = undefined;
-		this.form.patchModel({ userId: user.id, groupId: null });
-		this.forUser = user;
+	userSelectedHandler(participant: ParticipantDto): void {
+		this.forGroup$.next(undefined);
+		this.form.patchModel({ userId: participant.userId, groupId: null });
+		this.selectedId = participant.userId;
+		this.forParticipant$.next(participant);
+
+		// Set route fragment
+		this.router.navigate([], { fragment: "user" + participant.userId});
 	}
 
 	/**
@@ -123,7 +140,7 @@ export class CreateAssessmentComponent implements OnInit {
 	 */
 	switchToEdit(assessmentId: string): void {
 		// Route to the assessment
-		const routeCmds = ["courses", this.courseId, "assignments", this.assignmentId, "assessments", "editor", assessmentId, "edit"];
+		const routeCmds = ["courses", this.courseId, "assignments", this.assignmentId, "assessments", "editor", "edit", assessmentId];
 		// If user has inserted data in the form
 		if (this.form.form.dirty) {
 			// Ask user, if he wants to discard his unsaved changes

@@ -4,52 +4,36 @@
 		<div id="left">
 			<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
 
-			<div>{{ 'Common.For' | translate }}:
-				<mat-chip-list>
-					<mat-chip color="primary" selected *ngIf="forUser || forGroup">
-						<a *ngIf="forUser" class="link-none" [routerLink]="[ '/courses', courseId, 'users', forUser.id ]">
-							{{forUser.username}}
-						</a>
-						<a *ngIf="forGroup" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', forGroup.id ]">
-							{{forGroup.name}}
-						</a>
-					</mat-chip>
-				</mat-chip-list>
-
-				<div class="group-members-list" *ngIf="forGroup">
-					<mat-chip-list>
-						<a *ngFor="let member of forGroup.members" class="link-none" [routerLink]="[ '/courses', courseId, 'users', member.userId ]">
-							<mat-chip>{{member.username}}</mat-chip>
-						</a>
-					</mat-chip-list>
-					<span *ngIf="forGroup.members?.length == 0">
-						<p class="text-red">{{ 'Domain.Expression.EmptyGroup' | translate }}</p>
-					</span>
-				</div>
-				
-				<span *ngIf="!forUser && !forGroup" id="please-choose" class="text-light">
-					{{ 'Prompt.PleaseChoose' | translate }}
-					<mat-icon [matTooltip]="'Tooltip.SelectAssessmentTarget' | translate">help</mat-icon>
-				</span>
-			</div>
-
 			<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
 				<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
 			</p>
 
+			<div class="assessment-target">
+				<app-assessment-target
+					[group]="forGroup$ | async"
+					[targetedParticipant]="forParticipant$ | async"
+					[participant]="participantFacade.participant$ | async"
+					[courseId]="courseId"
+				>
+				</app-assessment-target>
+			</div>
+
 			<app-assessment-form [assignment]="assignment"></app-assessment-form>
-			<button mat-raised-button color="accent" id="btn-create" [disabled]="form.isInvalid() && assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
+
+			<button mat-raised-button color="accent" id="btn-create" [disabled]="form.form.invalid || assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
 				{{ 'Action.Create' | translate }}
 			</button>
 		</div>
 	
 		<div id="right tab">
-			<app-assessment-target-picker 
+			<app-assessment-target-picker
 				[courseId]="courseId"  
 				[assignmentId]="assignmentId" 
 				(onGroupSelected)="groupSelectedHandler($event)"
 				(onUserSelected)="userSelectedHandler($event)"
-				(onSwitchToEdit)="switchToEdit($event)">
+				(onSwitchToEdit)="switchToEdit($event)"
+				[selectedId]="selectedId"
+			>
 			</app-assessment-target-picker>
 		</div>
 	</div>

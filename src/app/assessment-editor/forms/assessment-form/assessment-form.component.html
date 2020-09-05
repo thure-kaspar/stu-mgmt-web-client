@@ -1,30 +1,32 @@
 <form id="assessment-form" [formGroup]="form" autocomplete="off"> 
 
-	<span id="points-container">
-		<mat-label class="font-bold">{{ 'Property.Assessment.AchievedPoints' | translate }}*:</mat-label>
-		<div>
-			<mat-form-field id="achieved-points">
-				<input matInput mat-form type="number" formControlName="achievedPoints" required>
-			</mat-form-field>
-			<span>
-				/ {{assignment?.points}}
-				<ng-container *ngIf="assignment?.bonusPoints">({{assignment.bonusPoints}} {{ 'Property.Assignment.BonusPoints' | translate }})</ng-container>
-			</span>	
-		</div>
-	</span>
-	<ng-container *ngIf="getErrors()">
-		<mat-error *ngFor="let error of getErrors()">
-			{{ error | translate }}
-		</mat-error>
-	</ng-container>
-
-	<mat-form-field appearance="outline">
-		<mat-label>{{ 'Property.Assessment.Comment' | translate }}</mat-label>
-		<textarea rows="5" matInput class="full-width" formControlName="comment"></textarea>
-	</mat-form-field>
+	<mat-card class="overall-card">
+		<span id="points-container">
+			<mat-label class="font-bold">{{ 'Property.Assessment.AchievedPoints' | translate }}*:</mat-label>
+			<div>
+				<mat-form-field id="achieved-points">
+					<input matInput mat-form type="number" formControlName="achievedPoints" required>
+				</mat-form-field>
+				<span>
+					/ {{assignment?.points}}
+					<ng-container *ngIf="assignment?.bonusPoints">({{assignment.bonusPoints}} {{ 'Property.Assignment.BonusPoints' | translate }})</ng-container>
+				</span>	
+			</div>
+		</span>
+		<ng-container *ngIf="getErrors()">
+			<mat-error *ngFor="let error of getErrors()">
+				{{ error | translate }}
+			</mat-error>
+		</ng-container>
+	
+		<mat-form-field appearance="outline">
+			<mat-label>{{ 'Property.Assessment.Comment' | translate }}</mat-label>
+			<textarea rows="5" matInput class="full-width" formControlName="comment"></textarea>
+		</mat-form-field>
+	</mat-card>
 
 	<div id="partial-assessments" formArrayName="partialAssessments" *ngFor="let partial of getPartialAssessments()?.controls; let i = index">
-		<div class="partial-assessment-form" [formGroup]="getPartialAssessment(i)">
+		<mat-card class="partial-assessment-form" [formGroup]="getPartialAssessment(i)">
 
 			<span class="title-points-severity-span">
 				<mat-form-field>
@@ -62,17 +64,17 @@
 					</mat-select>
 				</mat-form-field>
 
-				<button mat-icon-button [matTooltip]="'Action.Remove' | translate" (click)="removePartialAssessment(i)"><mat-icon class="text-red">clear</mat-icon></button>
+				<button type="button" mat-icon-button [matTooltip]="'Action.Remove' | translate" (click)="removePartialAssessment(i)"><mat-icon class="text-red">clear</mat-icon></button>
 			</span>
 			
 			<mat-form-field appearance="outline">
 				<mat-label>{{ 'Property.PartialAssessment.Comment' | translate }}</mat-label>
 				<textarea rows="5" matInput class="full-width" formControlName="comment"></textarea>
 			</mat-form-field>
-		</div>
+		</mat-card>
 	</div>
 
-	<button mat-flat-button class="btn-add-partial-assessment" color="primary" (click)="addPartialAssessment()">
+	<button type="button" mat-flat-button class="btn-add-partial-assessment" color="primary" (click)="addPartialAssessment()">
 		{{ 'Action.Custom.AddPartialAssessment' | translate }}
 	</button>
 

@@ -1,0 +1,47 @@
+.group-card {
+	display: flex;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 0.5fr 0.5fr 1fr;
+	row-gap: 4px;
+	box-sizing: border-box;
+}
+
+mat-card {
+	padding-bottom: 2px!important;
+}
+
+.card-title {
+	margin-top: -16px!important;
+	margin-bottom: -8px!important;
+	align-items: center!important;
+	justify-content: space-between;
+	display: flex;
+	//padding-top: 4px;
+	padding-bottom: 8px;
+
+	.name {
+		font-size: 18px;
+	}
+
+	.menu-btn {
+		margin-right: -16px;
+	}
+}
+
+.member-info {
+	padding-bottom: 8px;	
+}
+
+.member-list {
+	display: flex;
+	padding-bottom: 12px;
+
+	.member:not(:first-child) {
+		margin-left: 4px;
+	}
+}
+
+.targeted-participant-btn {
+	margin-left: 8px;
+}

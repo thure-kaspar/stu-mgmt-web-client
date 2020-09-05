@@ -26,7 +26,12 @@
 
 	<mat-tab [label]="'Domain.Groups' | translate">
 		<ng-template matTabContent>
-			<app-assessment-group-picker [filter$]="filter$" (onGroupSelected)="onGroupSelected.emit($event)" (onSwitchToEdit)="onSwitchToEdit.emit($event)">
+			<app-assessment-group-picker 
+				[filter$]="filter$" 
+				(onGroupSelected)="onGroupSelected.emit($event)" 
+				(onSwitchToEdit)="onSwitchToEdit.emit($event)"
+				[selectedId]="selectedId"
+			>
 			</app-assessment-group-picker>
 		</ng-template>
 		
@@ -34,7 +39,12 @@
 	
 	<mat-tab [label]="'Domain.Participants' | translate">
 		<ng-template matTabContent>
-			<app-assessment-user-picker [filter$]="filter$" (onUserSelected)="onUserSelected.emit($event)" (onSwitchToEdit)="onSwitchToEdit.emit($event)">
+			<app-assessment-user-picker 
+				[filter$]="filter$" 
+				(onUserSelected)="onUserSelected.emit($event)" 
+				(onSwitchToEdit)="onSwitchToEdit.emit($event)"
+				[selectedId]="selectedId"
+			>
 			</app-assessment-user-picker>
 		</ng-template>
 	</mat-tab>
