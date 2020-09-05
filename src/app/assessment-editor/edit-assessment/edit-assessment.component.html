@@ -24,8 +24,8 @@
 					{{ 'Common.For' | translate }}:
 					<mat-chip-list>
 						<mat-chip color="primary" selected>
-							<a *ngIf="user" class="link-none" [routerLink]="[ '/courses', courseId, 'users', user.id ]">
-								{{user.username}}
+							<a *ngIf="participant" class="link-none" [routerLink]="[ '/courses', courseId, 'users', participant.userId ]">
+								{{participant.username}}
 							</a>
 							<a *ngIf="group" class="link-none" [routerLink]="[ '/courses', courseId, 'groups', group.id ]">
 								{{group.name}}

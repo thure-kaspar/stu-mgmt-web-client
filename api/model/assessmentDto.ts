@@ -12,6 +12,7 @@
 import { AssignmentDto } from './assignmentDto';
 import { GroupDto } from './groupDto';
 import { PartialAssessmentDto } from './partialAssessmentDto';
+import { ParticipantDto } from './participantDto';
 import { UserDto } from './userDto';
 
 export interface AssessmentDto { 
@@ -45,7 +46,7 @@ export interface AssessmentDto {
     creatorId?: string;
     assignment?: AssignmentDto;
     group?: GroupDto;
-    user?: UserDto;
+    participant?: ParticipantDto;
     creator?: UserDto;
     partialAssessments?: Array<PartialAssessmentDto>;
 }

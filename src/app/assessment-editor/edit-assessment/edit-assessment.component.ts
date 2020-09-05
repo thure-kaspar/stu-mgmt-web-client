@@ -1,10 +1,10 @@
+import { Location } from "@angular/common";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssessmentsService, AssignmentsService, GroupsService, AssessmentDto, AssignmentDto, GroupDto, UserDto, AssessmentUpdateDto, AssessmentEventDto, PartialAssessmentDto } from "../../../../api";
 import { ActivatedRoute, Router } from "@angular/router";
+import { AssessmentDto, AssessmentEventDto, AssessmentsService, AssessmentUpdateDto, AssignmentDto, AssignmentsService, GroupDto, GroupsService, PartialAssessmentDto, ParticipantDto, UserDto } from "../../../../api";
+import { DialogService } from "../../shared/services/dialog.service";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
-import { DialogService } from "../../shared/services/dialog.service";
-import { Location } from "@angular/common";
 
 @Component({
 	selector: "app-edit-assessment",
@@ -21,7 +21,7 @@ export class EditAssessmentComponent implements OnInit {
 
 	assignment: AssignmentDto;
 	group: GroupDto;
-	user: UserDto;
+	participant: ParticipantDto;
 
 	courseId: string;
 	assignmentId: string;
@@ -54,7 +54,7 @@ export class EditAssessmentComponent implements OnInit {
 		this.assessment = result;
 		this.assignment = this.assessment.assignment;
 		this.group = this.assessment.group;
-		this.user = this.assessment.user;
+		this.participant = this.assessment.participant;
 		
 		// Empty the form
 		this.form.form.reset(); 
@@ -189,7 +189,7 @@ export class EditAssessmentComponent implements OnInit {
 		this.assessment = undefined;
 		this.removedPartialAssessments = [];
 		this.group = undefined;
-		this.user = undefined;
+		this.participant = undefined;
 		this.events = undefined;
 		this.showEvents = false;
 	}
