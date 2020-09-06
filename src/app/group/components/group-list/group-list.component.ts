@@ -1,20 +1,20 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subject, Observable, BehaviorSubject } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { debounceTime, take } from "rxjs/operators";
-import { CourseConfigService, CourseParticipantsService, GroupDto, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
+import { CourseConfigService, CourseParticipantsService, GroupDto, GroupsService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
+import { Course } from "../../../domain/course.model";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { CourseFacade } from "../../../shared/services/course.facade";
+import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { ToastService } from "../../../shared/services/toast.service";
 import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
 import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
-import { TranslateService } from "@ngx-translate/core";
-import { Course } from "../../../domain/course.model";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { CourseFacade } from "../../../shared/services/course.facade";
 
 class GroupFilter {
 	name?: string;
@@ -61,7 +61,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 				private groupService: GroupsService,
 				private courseConfig: CourseConfigService,
 				private courseParticipantsService: CourseParticipantsService,
-				private snackbar: SnackbarService,
+				private toast: ToastService,
 				private translate: TranslateService,
 				private router: Router,
 				private route: ActivatedRoute) { super(); }
@@ -177,11 +177,10 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 			next: () => {
 				this.groups = this.groups.filter(g => g.id !== group.id);
 				this.groupsSubject.next(this.groups);
-				this.snackbar.openSuccessMessage();
+				this.toast.success("Message.Deleted", group.name);
 			},
 			error: error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		});
 	}
@@ -205,11 +204,13 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 					size: this.groups[index].size + 1
 				});
 				this.groupsSubject.next(this.groups);
-				this.snackbar.openSuccessMessage();
+				this.toast.success("Message.Custom.ParticipantAddedToGroup", "", { 
+					name: event.participant.displayName, 
+					groupName: event.group.name 
+				});
 			},
 			error: (error) => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		});
 	}

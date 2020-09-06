@@ -193,7 +193,8 @@
     "Created": "Erstellt",
     "Custom": {
       "CreatedGroup": "Gruppe erstellt",
-      "JoinedGroup": "Gruppe beigetreten"
+      "JoinedGroup": "Gruppe beigetreten",
+      "ParticipantAddedToGroup": "{{name}} wurde der Gruppe \"{{groupName}}\" hinzugefügt."
     },
     "Deleted": "Gelöscht",
     "Error": "Fehler",
