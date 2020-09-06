@@ -5,6 +5,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { ActivatedRoute } from "@angular/router";
 import { SelectedAssignmentFacade } from "../../assessment/services/selected-assignment.facade";
+import { DownloadService } from "../../shared/services/download.service";
 
 @Component({
 	selector: "app-created-assessments",
@@ -27,10 +28,13 @@ export class CreatedAssessmentsComponent implements OnInit {
 
 	stateEnum = AssignmentDto.StateEnum;
 
-	constructor(public selectedAssignment: SelectedAssignmentFacade,
-				private assignmentService: AssignmentsService,
-				private assessmentService: AssessmentsService,
-				private route: ActivatedRoute) { }
+	constructor(
+		public selectedAssignment: SelectedAssignmentFacade,
+		private assignmentService: AssignmentsService,
+		private assessmentService: AssessmentsService,
+		private downloadService: DownloadService,
+		private route: ActivatedRoute
+	) { }
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
@@ -50,6 +54,13 @@ export class CreatedAssessmentsComponent implements OnInit {
 				this.dataSource.sort = this.sort;
 			},
 			error => console.log(error)
+		);
+	}
+
+	download(): void {
+		this.downloadService.downloadFromApi(
+			`csv/courses/${this.courseId}/assignments/${this.assignmentId}/assessments`, 
+			`${this.courseId}-${this.assignmentId}-assessments.tsv`
 		);
 	}
 

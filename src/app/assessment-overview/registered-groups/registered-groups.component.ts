@@ -13,6 +13,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
 import { ToastService } from "../../shared/services/toast.service";
 import { ParticipantFacade } from "../../shared/services/participant.facade";
+import { DownloadService } from "../../shared/services/download.service";
 
 @Component({
 	selector: "app-registered-groups",
@@ -31,14 +32,17 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 
 	displayedColumns = ["action", "name", "members"];
 
-	constructor(public participantFacade: ParticipantFacade,
-				private registrations: AssignmentRegistrationService,
-				private selectedAssignment: SelectedAssignmentFacade,
-				private route: ActivatedRoute,
-				private dialogService: DialogService,
-				private dialog: MatDialog,
-				private toast: ToastService,
-				private snackbar: SnackbarService) { super(); }
+	constructor(
+		public participantFacade: ParticipantFacade,
+		private registrations: AssignmentRegistrationService,
+		private selectedAssignment: SelectedAssignmentFacade,
+		private route: ActivatedRoute,
+		private dialogService: DialogService,
+		private downloadService: DownloadService,
+		private dialog: MatDialog,
+		private toast: ToastService,
+		private snackbar: SnackbarService
+	) { super(); }
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
@@ -202,6 +206,13 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 					});
 				}
 			}
+		);
+	}
+
+	download(): void {
+		this.downloadService.downloadFromApi(
+			`csv/courses/${this.courseId}/assignments/${this.assignmentId}/registrations`, 
+			`${this.courseId}-${this.assignmentId}-registered-groups.tsv`
 		);
 	}
 

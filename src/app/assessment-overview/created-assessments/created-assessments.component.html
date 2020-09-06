@@ -1,12 +1,16 @@
 <div id="created-assessments-container">
 
-	<a [routerLink]="['/courses', courseId, 'assignments', assignmentId, 'assessments', 'editor', 'create']" 
+	<div class="flex space-between">
+		<a [routerLink]="['/courses', courseId, 'assignments', assignmentId, 'assessments', 'editor', 'create']" 
 		[matTooltip]="createAssessmentButton.disabled ? ('Error.AssignmentNotInReview' | translate) : ''"
-	>
+		>
 		<button #createAssessmentButton mat-flat-button color="accent" id="btn-create-assessment" [disabled]="assignment?.state !== stateEnum.INREVIEW">
 			<mat-icon>add</mat-icon>{{ 'Title.CreateAssessment' | translate }}
 		</button>
-	</a>
+		</a>
+
+		<button mat-stroked-button (click)="download()">Export</button>
+	</div>
 
 	<table class="full-width" mat-table [dataSource]="dataSource" matSort>
 		<!-- View Column -->
