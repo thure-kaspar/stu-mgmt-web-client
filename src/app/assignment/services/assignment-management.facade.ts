@@ -34,7 +34,7 @@ export class AssignmentManagementFacade {
 				tap({
 					next: created => {
 						if (created) {
-							this.assignmentsSubject.next([...this.assignmentsSubject.getValue(), created]);
+							this.loadAssignmentsOfCourse(courseId);
 						}
 					},
 					error: (error) => console.log(error)

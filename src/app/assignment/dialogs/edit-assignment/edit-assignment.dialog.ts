@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
+import { ToastService } from "../../../shared/services/toast.service";
 
 export class EditAssignmentDialogData {
 	courseId: string;
@@ -20,10 +21,12 @@ export class EditAssignmentDialog implements OnInit {
 	private assignmentId: string;
 	private courseId: string;
 
-	constructor(public dialogRef: MatDialogRef<EditAssignmentDialog>,
+	constructor(
+		public dialogRef: MatDialogRef<EditAssignmentDialog>,
 		@Inject(MAT_DIALOG_DATA) { courseId, assignmentId }: EditAssignmentDialogData,
 		private assignmentManagement: AssignmentManagementFacade,
-		private snackbar: SnackbarService) {
+		private toast: ToastService
+	) {
 
 		this.courseId = courseId;
 		this.assignmentId = assignmentId;
@@ -54,10 +57,10 @@ export class EditAssignmentDialog implements OnInit {
 		this.assignmentManagement.update(assignment, this.assignmentId, this.courseId).subscribe(
 			result => {
 				this.dialogRef.close(result);
-				this.snackbar.openSuccessMessage();
+				this.toast.success(assignment.name, "Message.Saved");
 			},
 			error => {
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		);
 	}

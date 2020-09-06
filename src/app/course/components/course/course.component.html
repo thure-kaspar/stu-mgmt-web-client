@@ -2,7 +2,10 @@
 
 	<div class="course-header">
 		<mat-card-title id="title-container">
-			<span>{{course.title}}</span>
+			<div class="left">
+				<span>{{course.title}}</span>
+			</div>
+
 			<button mat-icon-button [matMenuTriggerFor]="menu">
 				<mat-icon class="icon-light">settings</mat-icon>
 			</button>

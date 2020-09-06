@@ -37,7 +37,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 	private loadPointsOverview(courseId: string): void {
 		this.subs.sink = this.admissionStatusService.getPointsOverview(courseId).subscribe({
 			next: (overview) => {
-				console.log("Overview:", overview);
+				//console.log("Overview:", overview);
 				this.displayedColumns = ["username", "total", ...overview.assignments.map(a => a.id), "spacer"];
 
 				const data = overview.results.map(result => {
@@ -53,7 +53,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 				this.overview$.next(overview);
 			},
 			error: (error) => {
-				console.log(error);
+				this.toast.apiError(error);
 			}
 		});
 	}

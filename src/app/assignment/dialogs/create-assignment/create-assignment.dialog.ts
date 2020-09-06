@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CourseConfigService, AssignmentTemplateDto } from "../../../../../api";
+import { CourseConfigService, AssignmentTemplateDto, AssignmentDto } from "../../../../../api";
 import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { ToastService } from "../../../shared/services/toast.service";
 
 /**
  * Dialog that allows the creation of new assignments. Expects the courseId. Returns the created assignment.
@@ -21,17 +22,24 @@ export class CreateAssignmentDialog implements OnInit {
 	/** The selected template. */
 	selectedTemplate: AssignmentTemplateDto;
 
-	constructor(public dialogRef: MatDialogRef<CreateAssignmentDialog>,
-				@Inject(MAT_DIALOG_DATA) private courseId: string,
-				private assignmentManagement: AssignmentManagementFacade,
-				private courseConfigService: CourseConfigService,
-				private snackbar: SnackbarService) { }
+	constructor(
+		public dialogRef: MatDialogRef<CreateAssignmentDialog>,
+		@Inject(MAT_DIALOG_DATA) private courseId: string,
+		private assignmentManagement: AssignmentManagementFacade,
+		private courseConfigService: CourseConfigService,
+		private toast: ToastService
+	) { }
 
 	ngOnInit(): void {
 		// Load assignment templates
 		this.courseConfigService.getAssignmentTemplates(this.courseId).subscribe(
 			templates => this.templates = templates
 		);
+
+		this.form.patchModel({
+			type: AssignmentDto.TypeEnum.HOMEWORK,
+			collaboration: AssignmentDto.CollaborationEnum.GROUP
+		});
 	}
 
 	fillInTemplate(template: AssignmentTemplateDto): void {
@@ -44,14 +52,14 @@ export class CreateAssignmentDialog implements OnInit {
 	}
 
 	onSave(): void {
-		const assignment = this.form.getModel(); 
+		const assignment = this.form.getModel();
 		this.assignmentManagement.create(assignment, this.courseId).subscribe(
 			created => {
 				this.dialogRef.close(created);
-				this.snackbar.openSuccessMessage("Assignment created!");
+				this.toast.success(assignment.name, "Message.Created");
 			},
 			error => {
-				// TODO: Display error
+				this.toast.apiError(error);
 			}
 		);
 	}
