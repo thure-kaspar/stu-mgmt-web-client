@@ -30,6 +30,14 @@
 		</button>
 	</mat-card-title>
 
+	<div class="comment" *ngIf="assignment.comment">
+		{{assignment.comment}}
+	</div>
+
+	<div class="links" *ngIf="assignment.links?.length > 0">
+		<a class="link-none text-light" *ngFor="let link of assignment.links" [href]="link.url">#{{link.name}}</a>
+	</div>
+
 	<mat-chip-list class="chips">
 		<mat-chip [class]="'type-chip ' + assignment.type">
 			<mat-icon *ngIf="assignment.type === typeEnum.HOMEWORK">assignment</mat-icon>
@@ -78,7 +86,7 @@
 		</span>
 	</div>
 
-	<div class="links">
+	<div class="actions">
 		<a class="link-none" [routerLink]="[assignment.id, 'assessments']" *ngIf="participant?.isTeachingStaffMember">
 			<button mat-stroked-button >{{ 'Domain.Assessments' | translate }}</button>
 		</a>

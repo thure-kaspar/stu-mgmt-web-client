@@ -7,8 +7,18 @@
 	padding-bottom: 8px!important;
 }
 
-.description {
-	
+.comment {
+	text-align: justify;
+}
+
+.links {
+	padding-top: 8px;
+	padding-bottom: 16px;
+	display: flex;
+
+	a {
+		margin-right: 8px;
+	}
 }
 
 .assignment-card-title {
@@ -89,6 +99,6 @@
 	}
 }
 
-.links a {
+.actions a {
 	margin-right: 8px;
 }	
