@@ -1,14 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
-import { CourseParticipantsService, GroupDto, GroupsService, ParticipantDto, AssignmentGroupTuple, UsersService } from "../../../../api";
+import { catchError, distinctUntilChanged, map, switchMap, take } from "rxjs/operators";
+import { AssignmentGroupTuple, CourseParticipantsService, GroupDto, GroupsService, ParticipantDto, UsersService } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
 import { Participant } from "../../domain/participant.model";
 import { DialogService } from "../../shared/services/dialog.service";
-import { SnackbarService } from "../../shared/services/snackbar.service";
 import { ToastService } from "../../shared/services/toast.service";
 import { CourseFacade } from "./course.facade";
-import { distinctUntilChanged, switchMap, take, catchError, mapTo, map } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class ParticipantFacade {

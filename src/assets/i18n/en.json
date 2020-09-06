@@ -192,6 +192,7 @@
   "Message": {
     "Created": "Created",
     "Custom": {
+      "AutoJoinedGroup": "You were automatically added to group \"{{groupName}}\".",
       "CreatedGroup": "Created group",
       "JoinedGroup": "Joined group",
       "ParticipantAddedToGroup": "{{name}} was added to group \"{{groupName}}\"."
