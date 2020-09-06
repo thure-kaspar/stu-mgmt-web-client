@@ -1,20 +1,17 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { BehaviorSubject } from "rxjs";
-import { distinctUntilChanged, map } from "rxjs/operators";
+import { BehaviorSubject, Subject } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 import { CourseDto, CoursesService, UserDto } from "../../../../../api";
 import { getSemester } from "../../../../../utils/helper";
-import { Paginator } from "../../../shared/paginator/paginator.component";
 import { AuthService } from "../../../auth/services/auth.service";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { Paginator } from "../../../shared/paginator/paginator.component";
 
 class CourseFilter {
-	title = "";
+	title: string;
 	shortname: string;
 	selectedSemester = getSemester();
-	
-	constructor(partial: Partial<CourseFilter>) {
-		Object.assign(this, partial);
-	}
 }
 
 @Component({
@@ -23,28 +20,27 @@ class CourseFilter {
 	styleUrls: ["./course-list.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseListComponent implements OnInit {
+export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	displayedColumns: string[] = ["title", "semester"];
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<CourseDto>([]))
 
-	filter = new CourseFilter({});
-	filterSubject = new BehaviorSubject(this.filter);
+	filter = new CourseFilter();
+	nameFilterChanged = new Subject();
 
 	roles = UserDto.RoleEnum;
 
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
 	constructor(private courseService: CoursesService,
-				public auth: AuthService) { }
+				public auth: AuthService) { super(); }
 
 	ngOnInit(): void {
-		this.filterSubject.pipe(
-			map(filter => new CourseFilter(filter)), // Create new reference (otherwise we would compare object to itself)
-			distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)) // Only reload, if filter changed
-		).subscribe(
-			filter => this.searchCourses()
-		);
+		this.subs.sink = this.nameFilterChanged.pipe(
+			debounceTime(300)
+		).subscribe(() => this.searchCourses());
+
+		this.searchCourses();
 	}
 
 	searchCourses(triggeredByPaginator = false): void {

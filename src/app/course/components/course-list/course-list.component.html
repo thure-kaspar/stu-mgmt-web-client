@@ -13,20 +13,18 @@
 	<div class="courseFilter-container">
 		<mat-form-field class="courseFilter-field">
 			<mat-label for="title">{{ 'Common.Title' | translate }}</mat-label>
-			<input #titleRef [(ngModel)]="filter.title" (keydown.enter)="filterSubject.next(filter)" matInput type="text" name="title" id="title" placeholder="Enter course title..." autocomplete="off">
+			<input #titleRef [(ngModel)]="filter.title" (keyup)="nameFilterChanged.next()" matInput type="text" name="title" id="title" autocomplete="off">
 		</mat-form-field>
 
 		<mat-form-field class="courseFilter-field">
 			<mat-label for="">{{ 'Domain.Semester' | translate }}</mat-label>
-			<mat-select [(value)]="filter.selectedSemester" (selectionChange)="filterSubject.next(filter)" id="semester" name="semester" placeholder="Enter semester...">
+			<mat-select [(value)]="filter.selectedSemester" (selectionChange)="searchCourses()" id="semester" name="semester">
 				<mat-option value="wise1920">WiSe 19/20</mat-option>
 				<mat-option value="sose2020">SoSe 2020</mat-option>
 				<mat-option value="wise2021">WiSe 20/21</mat-option>
 				<mat-option value="">{{ 'Common.All' | translate }}</mat-option>
 			</mat-select>
 		</mat-form-field>
-
-		<button mat-flat-button (click)="searchCourses()" id="btn-search" color="accent">{{ 'Action.Search' | translate }}</button>
 	</div>
 
 	<div>
