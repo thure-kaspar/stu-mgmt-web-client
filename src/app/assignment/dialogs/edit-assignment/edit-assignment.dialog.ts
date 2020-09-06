@@ -31,7 +31,14 @@ export class EditAssignmentDialog implements OnInit {
 
 	ngOnInit(): void {
 		this.assignmentManagement.get(this.assignmentId, this.courseId).subscribe(
-			result => this.form.patchModel(result),
+			result => {
+				this.form.patchModel(result);
+				if (result.links?.length > 0) {
+					result.links.forEach(link => {
+						this.form.addLink(link);
+					});
+				}
+			},
 			error => console.log(error)
 		);
 	}

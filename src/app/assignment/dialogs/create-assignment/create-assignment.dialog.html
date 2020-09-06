@@ -1,6 +1,6 @@
 <div class="dialog-container">
 
-	<mat-card-title class="dialog-title card-title">
+	<mat-card-title mat-dialog-title class="dialog-title card-title">
 		{{ 'Title.CreateAssignment' | translate }}
 		<mat-menu #templateMenu="matMenu">
 			<div id="template-menu-container">	
@@ -14,10 +14,12 @@
 		</button>
 	</mat-card-title>
 
-	<div class="dialog-content">
+	<div mat-dialog-content class="dialog-content">
 		<app-assignment-form></app-assignment-form>
 	</div>
 	
-	<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form?.isInvalid()">{{ 'Action.Save' | translate }}</button>
-	<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
+	<div mat-dialog-actions class="actions">
+		<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form?.isInvalid()">{{ 'Action.Save' | translate }}</button>
+		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
+	</div>
 </div>

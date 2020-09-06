@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import { AssignmentDto } from "../../../../../api";
 import { AbstractForm } from "../../../shared/abstract-form";
 
@@ -26,11 +26,26 @@ export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnIni
 			startDate: [null],
 			endDate: [null],
 			comment: [null],
-			link: [null],
+			links: this.fb.array([]),
 		});	
 	}
 
 	ngOnInit(): void {
+	}
+
+	addLink(link?: { name: string; url: string}): void {
+		this.getLinks().push(this.fb.group({
+			name: [link?.name ?? null, Validators.required],
+			url: [link?.url ?? null, Validators.required]
+		}));
+	}
+
+	removeLink(index: number): void {
+		this.getLinks().removeAt(index);
+	} 
+
+	getLinks(): FormArray {
+		return this.form.get("links") as FormArray;
 	}
 
 }

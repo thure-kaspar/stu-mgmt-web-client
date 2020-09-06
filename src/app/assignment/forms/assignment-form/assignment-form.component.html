@@ -61,10 +61,27 @@
 		
 	</div>
 	
-	<mat-form-field id="link-field">
-		<mat-label>{{ 'Misc.Link' | translate }}</mat-label>
-		<input matInput placeholder="Enter link" formControlName="link">
-	</mat-form-field>
+	<div class="links" formArrayName="links">
+		<h3>
+			<span>Links</span>
+			<button type="button" mat-flat-button color="accent" (click)="addLink()">{{ 'Action.Add' | translate }}</button>
+		</h3>
+		
+
+		<div class="link-form" *ngFor="let link of getLinks().controls, let i = index" [formGroupName]="i">
+			<mat-form-field>
+				<mat-label>Name</mat-label>
+				<input matInput formControlName="name">
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>URL</mat-label>
+				<input matInput formControlName="url">
+			</mat-form-field>
+
+			<button mat-icon-button class="remove-link-btn" (click)="removeLink(i)"><mat-icon>clear</mat-icon></button>
+		</div>
+	</div>
 
 	<mat-form-field id="comment-field" appearance="outline">
 		<mat-label>{{ 'Property.Assignment.Comment' | translate }}</mat-label>

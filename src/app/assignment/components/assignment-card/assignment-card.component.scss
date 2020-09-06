@@ -9,11 +9,12 @@
 
 .comment {
 	text-align: justify;
+	padding-bottom: 8px;
 }
 
 .links {
-	padding-top: 8px;
-	padding-bottom: 16px;
+	margin-top: -4px;
+	padding-bottom: 8px;
 	display: flex;
 
 	a {
@@ -27,10 +28,10 @@
 	align-items: center!important;
 	justify-content: space-between;
 	display: flex;
-	//padding-top: 4px;
 	padding-bottom: 12px;
 
 	.name {
+		padding-top: 2px;
 		font-size: 18px;
 	}
 
