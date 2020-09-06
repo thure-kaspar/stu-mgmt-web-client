@@ -289,7 +289,7 @@ export class CsvService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('get',`${this.basePath}/csv/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}`,
+        return this.httpClient.request<any>('get',`${this.basePath}/csv/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/registrations`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

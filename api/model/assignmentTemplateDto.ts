@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { LinkDto } from './linkDto';
 
 export interface AssignmentTemplateDto { 
     /**
@@ -48,10 +49,6 @@ export interface AssignmentTemplateDto {
      */
     comment?: string;
     /**
-     * Additional link to a .pdf or website.
-     */
-    link?: string;
-    /**
      * Unique identifier of this template.
      */
     id?: number;
@@ -63,6 +60,7 @@ export interface AssignmentTemplateDto {
      * Time between start and end of the assignment (in days).
      */
     timespanDays?: number;
+    links?: Array<LinkDto>;
 }
 export namespace AssignmentTemplateDto {
     export type StateEnum = 'INVISIBLE' | 'CLOSED' | 'IN_PROGRESS' | 'IN_REVIEW' | 'EVALUATED';

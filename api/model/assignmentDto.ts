@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { LinkDto } from './linkDto';
 
 export interface AssignmentDto { 
     /**
@@ -51,10 +52,7 @@ export interface AssignmentDto {
      * Additional information or description of this assignment.
      */
     comment?: string;
-    /**
-     * Additional link to a .pdf or website.
-     */
-    link?: string;
+    links?: Array<LinkDto>;
 }
 export namespace AssignmentDto {
     export type StateEnum = 'INVISIBLE' | 'CLOSED' | 'IN_PROGRESS' | 'IN_REVIEW' | 'EVALUATED';

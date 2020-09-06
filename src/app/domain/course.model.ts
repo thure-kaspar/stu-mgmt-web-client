@@ -1,4 +1,4 @@
-import { CourseDto, GroupSettingsDto } from "../../../api";
+import { CourseDto, GroupSettingsDto, LinkDto } from "../../../api";
 
 export class Course implements CourseDto {
 
@@ -7,7 +7,7 @@ export class Course implements CourseDto {
 	semester: string;
 	title: string;
 	isClosed: boolean;
-	link?: string;
+	links?: LinkDto[];
 
 	groupSettings: GroupSettingsDto;
 
@@ -17,7 +17,7 @@ export class Course implements CourseDto {
 		this.semester = dto.semester;
 		this.title = dto.title;
 		this.isClosed = dto.isClosed;
-		this.link = dto.link;
+		this.links = dto.links;
 	}
 
 	setGroupSettings(dto: GroupSettingsDto): void {

@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CourseConfigDto } from './courseConfigDto';
+import { LinkDto } from './linkDto';
 
 export interface CourseCreateDto { 
     /**
@@ -32,10 +33,7 @@ export interface CourseCreateDto {
      * Determines, wether changes (i.e joining this course) can be made to this course.
      */
     isClosed: boolean;
-    /**
-     * Additional link to another website.
-     */
-    link?: string;
+    links?: Array<LinkDto>;
     config: CourseConfigDto;
     lecturers?: Array<string>;
 }

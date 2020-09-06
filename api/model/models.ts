@@ -28,6 +28,7 @@ export * from './groupUpdateDto';
 export * from './groupWithAssignedEvaluatorDto';
 export * from './individualPercentWithAllowedFailuresRuleDto';
 export * from './jobInfoDto';
+export * from './linkDto';
 export * from './mailDto';
 export * from './notificationDto';
 export * from './overallPercentRuleDto';

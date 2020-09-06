@@ -14,8 +14,9 @@ export interface StudentMgmtException {
     name: StudentMgmtException.NameEnum;
 }
 export namespace StudentMgmtException {
-    export type NameEnum = 'EntityAlreadyExistsError' | 'CourseClosedException' | 'NotACourseMemberException' | 'NotATeachingStaffMember' | 'GroupClosedException' | 'NotAGroupMemberException' | 'GroupsForbiddenException' | 'AlreadyInGroupException';
+    export type NameEnum = 'AssignmentNotInReviewStateException' | 'EntityAlreadyExistsError' | 'CourseClosedException' | 'NotACourseMemberException' | 'NotATeachingStaffMember' | 'GroupClosedException' | 'NotAGroupMemberException' | 'GroupsForbiddenException' | 'AlreadyInGroupException';
     export const NameEnum = {
+        AssignmentNotInReviewStateException: 'AssignmentNotInReviewStateException' as NameEnum,
         EntityAlreadyExistsError: 'EntityAlreadyExistsError' as NameEnum,
         CourseClosedException: 'CourseClosedException' as NameEnum,
         NotACourseMemberException: 'NotACourseMemberException' as NameEnum,

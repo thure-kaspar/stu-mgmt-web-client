@@ -32,9 +32,5 @@ export interface AssessmentCreateDto {
      * If a single user is being evaluated, contains the identifier of the user.
      */
     userId?: string;
-    /**
-     * Identifier of the creator of this assessment.
-     */
-    creatorId?: string;
     partialAssessments?: Array<PartialAssessmentDto>;
 }

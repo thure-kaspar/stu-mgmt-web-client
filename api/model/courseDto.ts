@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { LinkDto } from './linkDto';
 
 export interface CourseDto { 
     /**
@@ -31,8 +32,5 @@ export interface CourseDto {
      * Determines, wether changes (i.e joining this course) can be made to this course.
      */
     isClosed: boolean;
-    /**
-     * Additional link to another website.
-     */
-    link?: string;
+    links?: Array<LinkDto>;
 }
