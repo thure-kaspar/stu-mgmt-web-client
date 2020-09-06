@@ -76,8 +76,7 @@ export class AssignmentManagementFacade {
 			.pipe(
 				tap({
 					next: () => {
-						const remaining = this.assignmentsSubject.getValue().filter(a => a.id !== assignment.id);
-						this.assignmentsSubject.next(remaining);
+						this.loadAssignmentsOfCourse(courseId);
 					},
 					error: (error) => console.log(error)
 				}),

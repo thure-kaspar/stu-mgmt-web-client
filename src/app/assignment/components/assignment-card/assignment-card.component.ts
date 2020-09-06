@@ -96,9 +96,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 				if (confirmed) {
 					this.subs.sink = this.assignmentManagement.remove(this.assignment, this.courseId).subscribe(
 						deleted => {
-							if (deleted) {
-								// TODO: Support undo ?
-							}
+							this.toast.success(this.assignment.name, "Message.Removed");
 						},
 					);
 				}
