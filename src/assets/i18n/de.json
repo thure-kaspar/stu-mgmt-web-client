@@ -177,6 +177,7 @@
     "NotACourseMemberException": "Du bist kein Teilnehmer in diesem Kurs.",
     "NotAGroupMemberException": "Du bist kein Mitglied dieser Gruppe.",
     "NotATeachingStaffMember": "Du bist kein Lehrender dieser Veranstaltung.",
+    "NotFound": "Die gesuchten Informationen wurden nicht gefunden.",
     "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
     "Unauthorized": "Du bist nicht angemeldet.",
     "Unknown": "Unbekannter Fehler",
@@ -191,6 +192,7 @@
   "Message": {
     "Created": "Erstellt",
     "Custom": {
+      "CreatedGroup": "Gruppe erstellt",
       "JoinedGroup": "Gruppe beigetreten"
     },
     "Deleted": "Gelöscht",

@@ -1,6 +1,6 @@
 <div class="dialog-container">
 
-	<mat-card-title matDialogTitle>{{ 'Title.JoinGroup' | translate }}</mat-card-title>
+	<mat-card-title matDialogTitle>{{ 'Title.JoinGroup' | translate }}: {{group.name}}</mat-card-title>
 
 	<div matDialogContent class="dialog-content">
 		<mat-form-field *ngIf="group.hasPassword">

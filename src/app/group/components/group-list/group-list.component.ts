@@ -219,6 +219,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		dialogRef.afterClosed().subscribe(
 			result => {
 				if (result) {
+					this.participantFacade.reload();
 					this.router.navigate(["courses", this.courseId, "groups", result.id]);
 				}
 			}

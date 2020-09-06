@@ -177,6 +177,7 @@
     "NotACourseMemberException": "You're not a member of this course.",
     "NotAGroupMemberException": "You're not a member of this group.",
     "NotATeachingStaffMember": "You're not part of the teaching staff for this course.",
+    "NotFound": "Failed to find the requested information.",
     "SomethingWentWrong": "Oops, something went wrong!",
     "Unauthorized": "You're not logged in.",
     "Unknown": "Unknown error",
@@ -191,6 +192,7 @@
   "Message": {
     "Created": "Created",
     "Custom": {
+      "CreatedGroup": "Created group",
       "JoinedGroup": "Joined group"
     },
     "Deleted": "Deleted",

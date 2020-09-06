@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupsService, CourseConfigService, GroupSettingsDto, GroupDto } from "../../../../../api";
+import { CourseConfigService, GroupDto, GroupSettingsDto, GroupsService } from "../../../../../api";
 import { AuthService } from "../../../auth/services/auth.service";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ToastService } from "../../../shared/services/toast.service";
 
 /**
  * Dialog that allows students to create groups.
@@ -28,7 +28,8 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 				private courseConfig: CourseConfigService,
 				private groupService: GroupsService,
 				private authService: AuthService,
-				private snackbar: SnackbarService) { super(); }
+				private toast: ToastService
+	) { super(); }
 
 	ngOnInit(): void {
 		if (!this.courseId) {
@@ -50,8 +51,7 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 				}
 			},
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		);
 	}
@@ -78,12 +78,11 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 
 		this.subs.sink = this.groupService.createGroup(group, this.courseId).subscribe(
 			created => {
-				this.snackbar.openSuccessMessage();
+				this.toast.success(created.name, "Message.Custom.CreatedGroup");
 				this.dialogRef.close(created);
 			},
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		);
 	}
