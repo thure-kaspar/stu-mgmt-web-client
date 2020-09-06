@@ -220,6 +220,10 @@ table, mat-paginator {
 	background-color: var(--card-bg)!important;
 }
 
+.mat-tab-label-active {
+	opacity: 1!important;
+}
+
 .center {
 	margin-left: auto;
 	margin-right: auto;
