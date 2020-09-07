@@ -67,16 +67,15 @@
 			<button type="button" mat-flat-button color="accent" (click)="addLink()">{{ 'Action.Add' | translate }}</button>
 		</h3>
 		
-
 		<div class="link-form" *ngFor="let link of getLinks().controls, let i = index" [formGroupName]="i">
 			<mat-form-field>
 				<mat-label>Name</mat-label>
-				<input matInput formControlName="name">
+				<input matInput formControlName="name" required>
 			</mat-form-field>
 
 			<mat-form-field>
 				<mat-label>URL</mat-label>
-				<input matInput formControlName="url">
+				<input matInput formControlName="url" required>
 			</mat-form-field>
 
 			<button mat-icon-button class="remove-link-btn" (click)="removeLink(i)"><mat-icon>clear</mat-icon></button>

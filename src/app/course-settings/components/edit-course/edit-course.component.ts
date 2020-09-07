@@ -61,7 +61,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 			semester: [getSemester(), Validators.required],
 			title: [null, Validators.required],
 			isClosed: [false, Validators.required],
-			link: [null],
+			links: this.fb.array([]),
 			config: this.fb.group({
 				password: [null],
 				groupSettings: this.fb.group({
@@ -102,11 +102,20 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 				this.course = result;
 				// Insert basic data
 				this.courseForm.form.patchValue(this.course);
+
+				if (this.course.links?.length > 0) {
+					this.course.links.forEach(link => {
+						this.courseForm.addLink(link);
+					});
+				}
 			}
 		);
 
 		this.subs.sink = this.route.fragment.subscribe(
 			fragment => {
+				if (!fragment) {
+					this.router.navigate([], { fragment: "basic-data" });
+				}
 				this.selectedIndex = this.tabs.findIndex(tab => tab === fragment) ?? 0;
 			}
 		);

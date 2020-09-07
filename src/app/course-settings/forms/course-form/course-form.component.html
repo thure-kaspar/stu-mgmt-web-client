@@ -29,11 +29,6 @@
 		<input matInput formControlName="title" required>
 		<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 	</mat-form-field>
-	
-	<mat-form-field>
-		<mat-label>{{ 'Misc.Link' | translate }}</mat-label>
-		<input matInput formControlName="link">
-	</mat-form-field>
 
 	<mat-form-field>
 		<mat-label>{{ 'Property.Course.IsClosed' | translate }}</mat-label>
@@ -44,5 +39,26 @@
 		<mat-hint>{{ 'Text.Course.Closed' | translate }}</mat-hint>
 		<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 	</mat-form-field>
+	
+	<div class="links" formArrayName="links">
+		<h3>
+			<span>Links</span>
+			<button type="button" mat-flat-button color="accent" (click)="addLink()">{{ 'Action.Add' | translate }}</button>
+		</h3>
+		
+		<div class="link-form" *ngFor="let link of getLinks().controls, let i = index" [formGroupName]="i">
+			<mat-form-field>
+				<mat-label>Name</mat-label>
+				<input matInput formControlName="name" required>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>URL</mat-label>
+				<input matInput formControlName="url" required>
+			</mat-form-field>
+
+			<button mat-icon-button class="remove-link-btn" (click)="removeLink(i)"><mat-icon>clear</mat-icon></button>
+		</div>
+	</div>
 
 </div>

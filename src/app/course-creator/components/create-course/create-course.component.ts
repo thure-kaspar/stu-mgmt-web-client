@@ -46,7 +46,7 @@ export class CreateCourseComponent implements OnInit {
 			semester: [getSemester(), Validators.required],
 			title: [null, Validators.required],
 			isClosed: [false, Validators.required],
-			link: [null],
+			links: this.fb.array([]),
 			config: this.fb.group({
 				password: [null] ,
 				groupSettings: this.fb.group({
