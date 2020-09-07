@@ -2,12 +2,16 @@
 
 	<mat-card class="result-card">
 		<mat-card-title class="result-card-title">
-			<span class="text-light">{{ 'Domain.Admission' | translate }}:</span>
+			<span class="text-light">{{ 'Domain.Admission' | translate }}*:</span>
 			<span *ngIf="status.hasAdmission; else no" class="text-green font-bold">{{ 'Common.Yes' | translate }}</span>
 			<ng-template #no>
 				<span class="text-red">{{ 'Common.No' | translate }}</span>
 			</ng-template>
 		</mat-card-title>
+
+		<span class="disclaimer text-light">
+			*{{ 'Misc.AdmissionStatusDisclaimer' | translate }}
+		</span>
 	</mat-card>
 
 	<div class="rules">
