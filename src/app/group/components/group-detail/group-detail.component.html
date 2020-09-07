@@ -41,7 +41,7 @@
 				<ng-container *ngFor="let user of group.members">
 	
 					<mat-card class="member-card">
-						<h2 class="card-title">
+						<mat-card-title class="card-title">
 							<a class="link-none member-name" [routerLink]="[ '/courses', courseId, 'users', user.userId ]">{{user.displayName}}</a>
 	
 							<ng-container *ngIf="participant.isTeachingStaffMember">
@@ -55,7 +55,11 @@
 									<mat-icon class="icon-light">more_vert</mat-icon>
 								</button>
 							</ng-container>
-						</h2>
+						</mat-card-title>
+
+						<span class="email" class="text-light">
+							Email: {{user.email}}
+						</span>
 					</mat-card>
 	
 				</ng-container>

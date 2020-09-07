@@ -33,24 +33,18 @@
 }
 
 .member-card {
-	padding-top: 0px!important;
-	padding-bottom: 0!important;
-	height: 40px;
+	padding-top: 8px!important;
+	padding-bottom: 8px!important;
 }
 
 .card-title {
 	font-size: 16px;
-	margin-bottom: -16px;
 
 	.member-menu-btn {
 		margin-top: 3px;
 		position: absolute;
 		right: 0;	
 	}
-}
-
-.member-name {
-	padding-top: 4px;
 }
 
 #assessments {
