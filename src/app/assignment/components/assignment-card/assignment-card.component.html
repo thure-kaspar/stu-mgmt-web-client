@@ -87,9 +87,12 @@
 	</div>
 
 	<div class="actions">
-		<a class="link-none" [routerLink]="['/courses', courseId, 'users', participant.userId]" *ngIf="participant?.isStudent && assignment.state === 'EVALUATED'">
-			<button mat-stroked-button >{{ 'Domain.Assessment' | translate }}</button>
-		</a>
+		<button mat-stroked-button 
+			*ngIf="participant?.isStudent && assignment.state === 'EVALUATED'"
+			(click)="goToAssessment()"
+		>
+			{{ 'Domain.Assessment' | translate }}
+		</button>
 		<a class="link-none" [routerLink]="[assignment.id, 'assessments']" *ngIf="participant?.isTeachingStaffMember">
 			<button mat-stroked-button >{{ 'Domain.Assessments' | translate }}</button>
 		</a>

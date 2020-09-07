@@ -163,6 +163,64 @@ export class UsersService {
     }
 
     /**
+     * Get assessment of user.
+     * Retrieves the assessment of a user for a specific assignment. If requested by PARTICIPANT, assessment must be EVALUATED.
+     * @param userId 
+     * @param courseId 
+     * @param assignmentId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAssessmentOfUser(userId: string, courseId: string, assignmentId: string, observe?: 'body', reportProgress?: boolean): Observable<AssessmentDto>;
+    public getAssessmentOfUser(userId: string, courseId: string, assignmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AssessmentDto>>;
+    public getAssessmentOfUser(userId: string, courseId: string, assignmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AssessmentDto>>;
+    public getAssessmentOfUser(userId: string, courseId: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getAssessmentOfUser.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getAssessmentOfUser.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling getAssessmentOfUser.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<AssessmentDto>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessment`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get assessments.
      * Returns all assessments of the user in the given course. Includes the group, if assessment specified a group.
      * @param userId 
