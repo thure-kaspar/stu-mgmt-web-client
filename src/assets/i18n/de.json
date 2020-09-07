@@ -64,6 +64,7 @@
     "Names": "Namen",
     "No": "Nein",
     "None": "Keine",
+    "Of": "von",
     "Open": "Offen",
     "Other": "Andere",
     "Password": "Passwort",
@@ -138,10 +139,10 @@
       "TUTOR": "Tutor"
     },
     "RoundingType": {
-      "DECIMALS": "Auf Nachkommastelle runden",
-      "DOWN_NEAREST_INTEGER": "Auf nächste Ganzzahl runter runden",
+      "DECIMALS": "Auf Nachkommastelle gerundet",
+      "DOWN_NEAREST_INTEGER": "Auf nächste Ganzzahl runter gerundet",
       "NONE": "Nicht gerundet",
-      "UP_NEAREST_INTEGER": "Auf nächste Ganzzahl hochrunden"
+      "UP_NEAREST_INTEGER": "Auf nächste Ganzzahl hochgerundet"
     },
     "RuleType": {
       "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES": "Min. {{requiredPercent}}% der erreichbaren Punkte pro Aufgabe mit {{allowedFailures}} erlaubten nicht-bestandenen Aufgaben",
@@ -241,6 +242,8 @@
       "AchievedPercentRounding": "Runden von erreichter Punkztahl-%",
       "AllowedFailures": "Erlaubte nicht-bestandene Aufgaben",
       "AssignmentType": "Aufgaben-Typ",
+      "FailedAssignments": "Nicht-bestandene Aufgaben",
+      "Passed": "Bestanden",
       "PassedAssignmentsPercent": "Benötigte bestandene Aufgaben in %",
       "PassedAssignmentsRounding": "Runden von benötigten bestandenen Aufgaben",
       "RequiredPercent": "Benötigte Punktzahl in %",

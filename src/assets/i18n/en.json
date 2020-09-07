@@ -64,6 +64,7 @@
     "Names": "Names",
     "No": "No",
     "None": "None",
+    "Of": "of",
     "Open": "Open",
     "Other": "Other",
     "Password": "Password",
@@ -138,10 +139,10 @@
       "TUTOR": "Tutor"
     },
     "RoundingType": {
-      "DECIMALS": "Round to decimal place",
-      "DOWN_NEAREST_INTEGER": "Round down to nearest integer",
+      "DECIMALS": "Rounded to decimal place",
+      "DOWN_NEAREST_INTEGER": "Rounded down to nearest integer",
       "NONE": "Not rounded",
-      "UP_NEAREST_INTEGER": "Round up to nearest integer"
+      "UP_NEAREST_INTEGER": "Rounded up to nearest integer"
     },
     "RuleType": {
       "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES": "Min. {{requiredPercent}}% of achievable points for each assignment with {{allowedFailures}} allowed failures",
@@ -241,6 +242,8 @@
       "AchievedPercentRounding": "Rounding of Achieved points-%",
       "AllowedFailures": "Allow failures",
       "AssignmentType": "Assignment type",
+      "FailedAssignments": "Failed assignments",
+      "Passed": "Passed",
       "PassedAssignmentsPercent": "Required passed Assignments in %",
       "PassedAssignmentsRounding": "Rounding of required passed assignments",
       "RequiredPercent": "Required points in %",

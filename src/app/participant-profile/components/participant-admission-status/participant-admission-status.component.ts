@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
-import { Subject, BehaviorSubject } from "rxjs";
-import { AdmissionCriteriaDto, AdmissionStatusDto, AdmissionStatusService, CourseConfigService } from "../../../../../api";
+import { BehaviorSubject } from "rxjs";
+import { AdmissionCriteriaDto, AdmissionStatusDto, AdmissionStatusService, CourseConfigService, RuleCheckResult } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ToastService } from "../../../shared/services/toast.service";
@@ -15,10 +15,10 @@ import { ToastService } from "../../../shared/services/toast.service";
 })
 export class ParticipantAdmissionStatusComponent extends UnsubscribeOnDestroy implements OnInit {
 
-	dataSource$ = new BehaviorSubject(new MatTableDataSource<AdmissionStatusDto>([]));
 	admissionCriteria$ = new BehaviorSubject<AdmissionCriteriaDto>(undefined);
 
-	displayedColumns = ["hasAdmission"];
+	status: AdmissionStatusDto;
+	results: RuleCheckResult[];
 
 	userId: string;
 	courseId: string;
@@ -42,7 +42,8 @@ export class ParticipantAdmissionStatusComponent extends UnsubscribeOnDestroy im
 	private loadAdmissionStatus(): void {
 		this.subs.sink = this.admissionStatusService.getAdmissionStatusOfParticipant(this.courseId, this.userId).subscribe({
 			next: (result) => {
-				this.dataSource$.next(new MatTableDataSource([result]));
+				this.status = result;
+				this.results = result.results;
 			},
 			error: (error) => {
 				this.toast.apiError(error);
@@ -54,7 +55,6 @@ export class ParticipantAdmissionStatusComponent extends UnsubscribeOnDestroy im
 	private loadAdmissionCriteria(): void {
 		this.subs.sink = this.courseConfigService.getAdmissionCriteria(this.courseId).subscribe({
 			next: (result) => {
-				this.displayedColumns = [...this.displayedColumns, ...result.rules.map((rule, index) => "rule" + index), "spacer"];
 				this.admissionCriteria$.next(result);
 			},
 			error: (error) => {

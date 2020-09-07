@@ -20,6 +20,18 @@
 	}
 }
 
+.result {
+	padding-top: 16px;
+	display: grid;
+	row-gap: 4px;
+
+	.passed {
+		padding-left: 8px;
+		vertical-align: bottom;
+		font-size: 24px;
+	}
+}
+
 .HOMEWORK { 
 	background-color: rgb(0, 89, 255)!important;
 }
