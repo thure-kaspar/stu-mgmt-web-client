@@ -19,7 +19,7 @@
 			<span class="text-light font-bold">{{ 'Domain.Members' | translate }}: {{group.size}}</span>
 		</div>
 	
-		<div class="member-list" *ngIf="participant.isTeachingStaffMember">
+		<div class="member-list">
 			<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId]" *ngFor="let member of group.members">
 				<button mat-flat-button color="primary">{{member.displayName}}</button>
 			</a>
