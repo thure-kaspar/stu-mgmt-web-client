@@ -104,16 +104,16 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		);
 	}
 
-	goToAssessment(assignmentId: string, userId: string): void {
+	goToAssessment(): void {
 		this.subs.sink = this.assessmentService.getAssessmentsForAssignment(
-			this.courseId, assignmentId, 
+			this.courseId, this.assignment.id, 
 			undefined, undefined, undefined, undefined, 
-			userId
+			this.participant.userId
 		).subscribe(assessments => {
 			if (assessments.length == 1) {
-				this.router.navigate(["/courses", this.courseId, "assignments", assignmentId, "assessments", "view", assessments[0].id]);
+				this.router.navigate(["/courses", this.courseId, "assignments", this.assignment.id, "assessments", "view", assessments[0].id]);
 			} else {
-				this.toast.error("Failed to find the assessment.", "Not found");
+				this.toast.error("Error.NotFound");
 			}
 		});
 	}
