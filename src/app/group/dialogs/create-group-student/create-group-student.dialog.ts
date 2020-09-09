@@ -73,7 +73,8 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 	 */
 	onSave(): void {
 		const group: GroupDto = {
-			name: this.name
+			name: this.name,
+			password: this.password?.length > 0 ? this.password : undefined
 		};
 
 		this.subs.sink = this.groupService.createGroup(group, this.courseId).subscribe(
