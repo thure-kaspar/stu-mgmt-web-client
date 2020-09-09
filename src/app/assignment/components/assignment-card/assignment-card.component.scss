@@ -92,12 +92,20 @@
 }
 
 .member-list {
-	display: flex;
+	display: grid;
+	row-gap: 8px;
 	margin-bottom: 8px;
+}
 
-	.member:not(:first-child) {
-		margin-left: 4px;
-	}
+.member-card {
+	padding-top: 8px!important;
+	padding-bottom: 8px!important;
+
+	background-color: var(--color-header)!important;
+}
+
+.member-card-title {
+	font-size: 16px;
 }
 
 .actions a {

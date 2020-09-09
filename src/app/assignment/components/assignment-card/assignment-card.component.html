@@ -73,9 +73,17 @@
 		</a>
 
 		<div class="member-list">
-			<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId]" *ngFor="let member of group.members">
-				<button mat-flat-button color="primary">{{member.displayName}}</button>
-			</a>
+			<mat-card class="member-card mat-elevation-z2" *ngFor="let member of group.members">
+				<mat-card-title class="member-card-title">
+					<a class="link-none member-name" [routerLink]="[ '/courses', courseId, 'users', member.userId ]">
+						{{member.displayName}}
+					</a>
+				</mat-card-title>
+	
+				<span class="email" class="text-light" *ngIf="member.email">
+					Email: {{member.email}}
+				</span>
+			</mat-card>
 		</div>
 	</div>
 
