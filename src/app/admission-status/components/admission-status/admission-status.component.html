@@ -26,11 +26,11 @@
 
 		<table class="full-width" mat-table [dataSource]="dataSource$ | async">
 
-			<ng-container matColumnDef="username">
+			<ng-container matColumnDef="displayName">
 				<th class="name-column" mat-header-cell *matHeaderCellDef>Name</th>
 				<td mat-cell *matCellDef="let row">
 					<a class="link-none font-bold" [routerLink]="['/courses', courseId, 'users', row.participant.userId]">
-						{{row.participant.username}}
+						{{row.participant.displayName}}
 					</a>
 				</td>
 			</ng-container>

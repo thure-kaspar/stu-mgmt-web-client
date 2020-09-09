@@ -74,7 +74,7 @@
 
 		<div class="member-list">
 			<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId]" *ngFor="let member of group.members">
-				<button mat-flat-button color="primary">{{member.username}}</button>
+				<button mat-flat-button color="primary">{{member.displayName}}</button>
 			</a>
 		</div>
 	</div>

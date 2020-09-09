@@ -18,7 +18,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 
 	overview$ = new Subject<PointsOverviewDto>();
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<any>([]));
-	displayedColumns = ["username"];
+	displayedColumns = ["displayName"];
 
 	courseId: string;
 

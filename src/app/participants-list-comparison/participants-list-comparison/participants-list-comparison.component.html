@@ -29,8 +29,8 @@
 			<table class="full-width" mat-table matSort [dataSource]="inCoursesDataSource">
 				<!-- Username Column -->
 				<ng-container matColumnDef="username">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.User.Username' | translate }}</th>
-					<td mat-cell *matCellDef="let row">{{ row.username }}</td>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.User.DisplayName' | translate }}</th>
+					<td mat-cell *matCellDef="let row">{{ row.displayName }}</td>
 				</ng-container>
 
 				<!-- Email Column -->

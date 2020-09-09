@@ -141,7 +141,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		} else {
 			this.dialogService.openConfirmDialog({ 
 				title: "Action.Custom.RemoveUserFromGroup",
-				params: [participant.username], 
+				params: [participant.displayName], 
 			}).subscribe(
 				confirmed => {
 					if (confirmed) {

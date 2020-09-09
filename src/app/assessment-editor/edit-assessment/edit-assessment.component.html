@@ -11,7 +11,7 @@
 			<div class="assessment-header">
 				<span class="created-by">
 					{{ 'Common.CreatedBy' | translate }}
-					<span class="font-bold">{{(assessment$ | async)?.creator.username}}</span>
+					<span class="font-bold">{{(assessment$ | async)?.creator.displayName}}</span>
 					<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()">
 						<mat-icon class="icon-light">history</mat-icon>
 					</button>

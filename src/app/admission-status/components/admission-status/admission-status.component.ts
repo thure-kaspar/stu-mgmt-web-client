@@ -19,7 +19,7 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 	criteria$ = new Subject<AdmissionCriteriaDto>();
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<AdmissionStatusDto>([]))
 	/** [name, hasAdmission, rule0, rule1, rule2, ...] */
-	displayedColumns = ["username", "hasAdmission"];
+	displayedColumns = ["displayName", "hasAdmission"];
 
 	courseId: string;
 

@@ -167,7 +167,7 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 	unregisterParticipant(participant: ParticipantDto): void {
 		this.dialogService.openConfirmDialog({
 			title: "Action.Custom.RemoveParticipant",
-			params: [participant.username]
+			params: [participant.displayName]
 		}).subscribe(
 			confirmed => {
 				if (confirmed) {
