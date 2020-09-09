@@ -62,7 +62,7 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 	}
 
 	downloadCsv(): void {
-		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/admission-status`, `${this.courseId}-admission-status.csv`);
+		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/admission-status`, `${this.courseId}-admission-status.tsv`);
 	}
 
 }

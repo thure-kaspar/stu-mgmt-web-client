@@ -135,7 +135,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	downloadCsv(): void {
-		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/users`, `${this.courseId}-participant.csv`);
+		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/users`, `${this.courseId}-participant.tsv`);
 	}
 
 	private refreshDataSource(): void {

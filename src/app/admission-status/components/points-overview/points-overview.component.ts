@@ -73,7 +73,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 	}
 
 	downloadCsv(): void {
-		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/admission-status/overview`, `${this.courseId}-assessments.csv`);
+		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/admission-status/overview`, `${this.courseId}-assessments.tsv`);
 	}
 
 }
