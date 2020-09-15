@@ -82,7 +82,8 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	}
 
 	updateExcludeAlreadyReviewedFilter(excludeAlreadyReviewed: boolean): void {
-		this.filterSubject.next({...this.filter, excludeAlreadyReviewed: excludeAlreadyReviewed });
+		this.filter.excludeAlreadyReviewed = excludeAlreadyReviewed;
+		this.filterSubject.next({...this.filter });
 	}
 
 	updateNameFilter(): void {
