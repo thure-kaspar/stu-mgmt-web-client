@@ -18,7 +18,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 
 	overview$ = new Subject<PointsOverviewDto>();
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<any>([]));
-	displayedColumns = ["displayName"];
+	displayedColumns = [];
 
 	courseId: string;
 
@@ -38,7 +38,7 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 		this.subs.sink = this.admissionStatusService.getPointsOverview(courseId).subscribe({
 			next: (overview) => {
 				//console.log("Overview:", overview);
-				this.displayedColumns = ["username", "total", ...overview.assignments.map(a => a.id), "spacer"];
+				this.displayedColumns = ["displayName", "total", ...overview.assignments.map(a => a.id), "spacer"];
 
 				const data = overview.results.map(result => {
 					const studentResult = { student: result.student, total: 0 };
