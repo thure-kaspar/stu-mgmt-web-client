@@ -137,7 +137,7 @@ export class ParticipantFacade {
 					this.displayGroupSettingsViolationWarnings(p);
 				}
 
-				console.log("Current participant:", participant);
+				//console.log("Current participant:", participant);
 			},
 			error => {
 				console.log(error);

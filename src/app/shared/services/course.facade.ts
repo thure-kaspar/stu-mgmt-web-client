@@ -30,7 +30,7 @@ export class CourseFacade {
 			}),
 			tap((course) => {
 				this.courseSubject.next(course);
-				console.log("Current course:", course);
+				//console.log("Current course:", course);
 			}),
 		//	catchError(error => of)
 		);
