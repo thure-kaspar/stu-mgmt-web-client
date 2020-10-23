@@ -205,7 +205,7 @@
     "Success": "Aktion erfolgreich"
   },
   "Misc": {
-    "AdmissionStatusDisclaimer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore totam molestiae vero dolorum suscipit ducimus veritatis, amet veniam itaque voluptatum adipisci quibusdam, aut porro. Provident aspernatur corporis recusandae rerum placeat.",
+    "AdmissionStatusDisclaimer": "Dies spiegelt nur den aktuellen Stand wieder und nicht die finale Zulassung. Zukünftige Hausaufgaben sind noch nicht mit eingerechnet.",
     "BasicData": "Grunddaten",
     "Decimals": "Nachkommastellen",
     "ExcludeAlreadyReviewed": "Bereits bewertete Gruppen/Teilnehmer ausblenden",
