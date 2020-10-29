@@ -39,7 +39,10 @@ export class LoginDialog extends UnsubscribeOnDestroy implements OnInit {
 	onLogin(): void {
 		this.loading = true;
 
-		this.authProvider.authenticate({ username: this.username, password: this.password }).pipe(
+		const username = this.username.trim();
+		const password = this.password.trim();
+
+		this.authProvider.authenticate({ username, password }).pipe(
 			take(1),
 			switchMap(authInfo => {
 				//console.log("authInfo:", authInfo);
