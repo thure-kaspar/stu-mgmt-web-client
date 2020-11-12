@@ -44,9 +44,16 @@ export interface AssessmentDto {
      * Identifier of the creator of this assessment.
      */
     creatorId?: string;
+    /**
+     * Identifier of the last user that updated this assessment.
+     */
+    lastUpdatedById?: string;
     assignment?: AssignmentDto;
     group?: GroupDto;
     participant?: ParticipantDto;
     creator?: UserDto;
+    lastUpdatedBy?: UserDto;
+    creationDate?: Date;
+    updateDate?: Date;
     partialAssessments?: Array<PartialAssessmentDto>;
 }
