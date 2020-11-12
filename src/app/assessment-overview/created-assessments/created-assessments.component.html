@@ -43,7 +43,25 @@
 		<!-- Creator Column -->
 		<ng-container matColumnDef="creator">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Property.Assessment.Creator' | translate }}</th>
-			<td mat-cell *matCellDef="let row">{{ row.creator.username }}</td>
+			<td mat-cell *matCellDef="let row">{{ row.creator.displayName }}</td>
+		</ng-container>
+
+		<!-- CreationDate Column -->
+		<ng-container matColumnDef="creationDate">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Common.CreationDate' | translate }}</th>
+			<td mat-cell *matCellDef="let row">{{ row.creationDate | date:'medium' }}</td>
+		</ng-container>
+
+		<!-- LastUpdatedBy Column -->
+		<ng-container matColumnDef="lastUpdatedBy">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Common.LastUpdatedBy' | translate }}</th>
+			<td mat-cell *matCellDef="let row">{{ row.lastUpdatedBy?.displayName }}</td>
+		</ng-container>
+
+		<!-- UpdateDate Column -->
+		<ng-container matColumnDef="updateDate">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Common.UpdateDate' | translate }}</th>
+			<td mat-cell *matCellDef="let row">{{ (row.lastUpdatedBy ? row.updateDate : null) | date:'medium' }}</td>
 		</ng-container>
 
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -51,6 +69,6 @@
 		</tr>
 	</table>
 
-	<mat-paginator [pageSizeOptions]="[100]"></mat-paginator>
+	<mat-paginator [pageSizeOptions]="[1000]"></mat-paginator>
 
 </div>

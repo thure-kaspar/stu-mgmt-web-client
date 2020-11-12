@@ -3,19 +3,29 @@
 
 		<h2 class="title">
 			<span>{{ 'Domain.Assessment' | translate }}: {{assignment.name}}</span>
-			<button mat-flat-button color="accent" *ngIf="participant.isTeachingStaffMember" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
+			<button mat-flat-button class="btn-edit" color="accent" *ngIf="participant.isTeachingStaffMember" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
 				{{ 'Action.Edit' | translate }}
 			</button>
 		</h2>
 	
 			<div class="assessment-header">
-				<span class="created-by">
-					{{ 'Common.CreatedBy' | translate }}
-					<span class="font-bold">{{assessment.creator.username}}</span>
-					<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant.isTeachingStaffMember">
-						<mat-icon class="icon-light">history</mat-icon>
-					</button>
-				</span>
+				<div>
+					<span class="created-by">
+						{{ 'Common.CreatedBy' | translate }}
+						<span class="font-bold">{{assessment.creator.displayName}}</span>
+						<span class="text-light"> ({{ assessment.creationDate | date:'medium' }})</span>
+					</span>
+	
+					<span class="last-updated-by" *ngIf="assessment.lastUpdatedBy">
+						{{ 'Common.LastUpdatedBy' | translate }}
+						<span class="font-bold">{{assessment.lastUpdatedBy.displayName}}</span>
+						<span class="text-light"> ({{ assessment.updateDate | date:'medium' }})</span>
+
+						<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant.isTeachingStaffMember">
+							<mat-icon class="icon-light">history</mat-icon>
+						</button>
+					</span>
+				</div>
 	
 				<div *ngIf="showEvents && participant.isTeachingStaffMember" class="events">
 					<ng-container *ngIf="assessmentEvents$ | async as events">

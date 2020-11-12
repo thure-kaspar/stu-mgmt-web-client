@@ -21,7 +21,7 @@ export class CreatedAssessmentsComponent implements OnInit {
 	courseId: string;
 	assignmentId: string;
 
-	displayedColumns: string[] = ["view", "for", "achievedPoints", "creator"];
+	displayedColumns: string[] = ["view", "for", "achievedPoints", "creator", "creationDate", "lastUpdatedBy", "updateDate"];
 	dataSource: MatTableDataSource<AssessmentDto>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;

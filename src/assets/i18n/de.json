@@ -51,6 +51,7 @@
     "Closed": "Geschlossen",
     "Count": "Anzahl",
     "CreatedBy": "Erstellt von",
+    "CreationDate": "Erstelldatum",
     "Criteria": "Kriterium",
     "Date": "Datum",
     "Empty": "Leer",
@@ -58,6 +59,7 @@
     "For": "Für",
     "Help": "Hilfe",
     "Joinable": "Offen",
+    "LastUpdatedBy": "Zuletzt geändert von",
     "Multiple": "Mehrere",
     "My": "Meine",
     "Name": "Name",
@@ -74,6 +76,7 @@
     "Time": "Zeit",
     "Title": "Titel",
     "Total": "Gesamt",
+    "UpdateDate": "Änderungsdatum",
     "Welcome": "Willkommen",
     "Yes": "Ja"
   },
@@ -253,7 +256,7 @@
     "Assessment": {
       "AchievedPoints": "Erreichte Punktzahl",
       "Comment": "Kommentar",
-      "Creator": "Bewertet von",
+      "Creator": "Erstellt von",
       "PartialAssessments": "Teilbewertungen"
     },
     "Assignment": {

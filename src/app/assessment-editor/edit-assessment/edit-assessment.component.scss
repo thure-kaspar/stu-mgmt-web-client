@@ -3,8 +3,15 @@
 }
 
 .assessment-header {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	> div {
+		display: grid;
+		margin-bottom: 8px;
+	}
+}
+
+.btn-load-history {
+	margin-bottom: 0px;
 }
 
 .events {
