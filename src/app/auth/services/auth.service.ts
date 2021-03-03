@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { AuthenticationService, AuthCredentialsDto, AuthTokenDto, UserDto } from "../../../../api";
 import { Router } from "@angular/router";
-import { Observable, BehaviorSubject } from "rxjs";
-import { AuthenticationInfoDto } from "../../../../api_auth";
+import { BehaviorSubject, Observable } from "rxjs";
+import { AuthCredentialsDto, AuthenticationService, AuthTokenDto, UserDto } from "../../../../api";
+import { AuthenticationInfoDto } from "../auth-info.dto";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {

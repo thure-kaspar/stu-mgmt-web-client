@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, Router } from "@angular/router";
-import { AuthService } from "../services/auth.service";
 import { MatDialog } from "@angular/material/dialog";
+import { CanActivate, Router } from "@angular/router";
+import { AuthenticationInfoDto } from "../auth-info.dto";
 import { LoginDialog } from "../dialogs/login/login.dialog";
-import { AuthenticationInfoDto } from "../../../../api_auth";
+import { AuthService } from "../services/auth.service";
 
 @Injectable({
 	providedIn: "root"

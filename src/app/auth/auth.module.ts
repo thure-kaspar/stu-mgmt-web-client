@@ -1,16 +1,17 @@
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { LoginComponent } from "./components/login/login.component";
-import { RegisterComponent } from "./components/register/register.component";
-import { AuthGuard } from "./guards/auth.guard";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { TokenInterceptorService } from "./services/token-interceptor.service";
-import { MaterialModule } from "../material/material.module";
+import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { AdminGuard } from "./guards/admin.guard";
-import { LoginDialog } from "./dialogs/login/login.dialog";
 import { TranslateModule } from "@ngx-translate/core";
+import { environment } from "../../environments/environment";
+import { MaterialModule } from "../material/material.module";
+import { LoginComponent } from "./components/login/login.component";
+import { RegisterComponent } from "./components/register/register.component";
+import { LoginDialog } from "./dialogs/login/login.dialog";
+import { AdminGuard } from "./guards/admin.guard";
+import { AuthGuard } from "./guards/auth.guard";
+import { TokenInterceptorService } from "./services/token-interceptor.service";
 
 @NgModule({
 	declarations: [LoginComponent, RegisterComponent, LoginDialog],
@@ -25,6 +26,12 @@ import { TranslateModule } from "@ngx-translate/core";
 	providers: [
 		AuthGuard,
 		AdminGuard,
+		{
+			provide: "SPARKY_AUTHENTICATE_URL",
+			useValue:
+				(window["__env"]["AUTH_BASE_PATH"] ?? environment.AUTH_BASE_PATH) +
+				"/api/v1/authenticate"
+		},
 		{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
 	]
 })

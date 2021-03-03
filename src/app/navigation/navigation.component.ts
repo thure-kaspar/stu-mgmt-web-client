@@ -14,7 +14,6 @@ import { NavigationEnd, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
 import { CourseDto } from "../../../api";
-import { AuthenticationInfoDto } from "../../../api_auth";
 import { environment } from "../../environments/environment";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { AuthService } from "../auth/services/auth.service";
@@ -81,7 +80,7 @@ export class NavigationComponent implements OnInit {
 	}
 
 	openLoginDialog(): void {
-		this.dialog.open<LoginDialog, undefined, AuthenticationInfoDto>(LoginDialog);
+		this.dialog.open<LoginDialog, undefined, unknown>(LoginDialog);
 	}
 
 	logout(): void {

@@ -3,7 +3,7 @@ import { registerLocaleData } from "@angular/common";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import localeDe from "@angular/common/locales/de";
 import localeDeExtra from "@angular/common/locales/extra/de";
-import { LOCALE_ID, NgModule } from "@angular/core";
+import { InjectionToken, LOCALE_ID, NgModule } from "@angular/core";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -11,7 +11,6 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToastrModule } from "ngx-toastr";
 import { ApiModule, Configuration } from "../../api";
-import { ApiModule as AuthApiModule } from "../../api_auth";
 import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -37,13 +36,6 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 				new Configuration({
 					basePath: window["__env"]["API_BASE_PATH"] ?? environment.API_BASE_PATH,
 					accessToken: (): string => AuthService.getAccessToken()
-				})
-		),
-		AuthApiModule.forRoot(
-			() =>
-				new Configuration({
-					basePath: window["__env"]["AUTH_BASE_PATH"] ?? environment.AUTH_BASE_PATH,
-					accessToken: (): string => AuthService.getAccessTokenOfAuthSystem()
 				})
 		),
 		AppRoutingModule,
