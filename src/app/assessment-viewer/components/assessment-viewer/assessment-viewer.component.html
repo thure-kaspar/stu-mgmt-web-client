@@ -1,91 +1,106 @@
 <ng-container *ngIf="participantFacade.participant$ | async as participant">
 	<div id="assessment-viewer" class="tab" *ngIf="assessment$ | async as assessment">
-
 		<h2 class="title">
-			<span>{{ 'Domain.Assessment' | translate }}: {{assignment.name}}</span>
-			<button mat-flat-button class="btn-edit" color="accent" *ngIf="participant.isTeachingStaffMember" [disabled]="assignment.state !== 'IN_REVIEW'" (click)="navigateToEdit()">
-				{{ 'Action.Edit' | translate }}
+			<span>{{ "Domain.Assessment" | translate }}: {{ assignment.name }}</span>
+			<button
+				mat-flat-button
+				class="btn-edit"
+				color="accent"
+				*ngIf="participant.isTeachingStaffMember"
+				[disabled]="assignment.state !== 'IN_REVIEW'"
+				(click)="navigateToEdit()"
+			>
+				{{ "Action.Edit" | translate }}
 			</button>
 		</h2>
-	
-			<div class="assessment-header">
-				<div>
-					<span class="created-by">
-						{{ 'Common.CreatedBy' | translate }}
-						<span class="font-bold">{{assessment.creator.displayName}}</span>
-						<span class="text-light"> ({{ assessment.creationDate | date:'medium' }})</span>
-					</span>
-	
-					<span class="last-updated-by" *ngIf="assessment.lastUpdatedBy">
-						{{ 'Common.LastUpdatedBy' | translate }}
-						<span class="font-bold">{{assessment.lastUpdatedBy.displayName}}</span>
-						<span class="text-light"> ({{ assessment.updateDate | date:'medium' }})</span>
 
-						<button mat-icon-button matTooltip="Load edit history" (click)="loadAssessmentEvents()" *ngIf="participant.isTeachingStaffMember">
-							<mat-icon class="icon-light">history</mat-icon>
-						</button>
-					</span>
-				</div>
-	
-				<div *ngIf="showEvents && participant.isTeachingStaffMember" class="events">
-					<ng-container *ngIf="assessmentEvents$ | async as events">
-						<span *ngFor="let event of events">
-							[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
-						</span>
-	
-						<p *ngIf="events?.length == 0">{{ 'Common.None' | translate }}.</p>
-					</ng-container>
-				</div>
-			
-				<div class="assessment-target">
-					<app-assessment-target 
-						[group]="assessment.group" 
-						[targetedParticipant]="assessment.participant"
-						[participant]="participant"
-						[courseId]="courseId"
+		<div class="assessment-header">
+			<div>
+				<span class="created-by">
+					{{ "Common.CreatedBy" | translate }}
+					<span class="font-bold">{{ assessment.creator.displayName }}</span>
+					<span class="text-light">
+						({{ assessment.creationDate | date: "medium" }})</span
 					>
-					</app-assessment-target>
-				</div>
+				</span>
+
+				<span class="last-updated-by" *ngIf="assessment.lastUpdatedBy">
+					{{ "Common.LastUpdatedBy" | translate }}
+					<span class="font-bold">{{ assessment.lastUpdatedBy.displayName }}</span>
+					<span class="text-light"> ({{ assessment.updateDate | date: "medium" }})</span>
+
+					<button
+						mat-icon-button
+						matTooltip="Load edit history"
+						(click)="loadAssessmentEvents()"
+						*ngIf="participant.isTeachingStaffMember"
+					>
+						<mat-icon class="icon-light">history</mat-icon>
+					</button>
+				</span>
 			</div>
-	
-			<mat-divider class="divider"></mat-divider>
-	
-			<div class="assessment-content">
-	
-				<h2>{{ 'Common.Total' | translate }}</h2>
-	
-				<mat-card>
-					<h2 class="achieved-points">
-						<span>{{ 'Property.Assessment.AchievedPoints' | translate }}:</span>
-						<span class="achieved-points-number">{{assessment.achievedPoints}} 
-							<span class="of-points text-light">
-								/ {{assignment.points}}
-								<span *ngIf="assignment.bonusPoints">(+{{assignment.bonusPoints}})</span>
-							</span>
+
+			<div *ngIf="showEvents && participant.isTeachingStaffMember" class="events">
+				<ng-container *ngIf="assessmentEvents$ | async as events">
+					<span *ngFor="let event of events">
+						[{{ event.timestamp | date }}] -
+						{{ "Property.Assessment.AchievedPoints" | translate }}:
+						{{ event.payload.oldScore }} -> {{ event.payload.newScore }}
+					</span>
+
+					<p *ngIf="events?.length == 0">{{ "Common.None" | translate }}.</p>
+				</ng-container>
+			</div>
+
+			<div class="assessment-target">
+				<app-assessment-target
+					[group]="assessment.group"
+					[targetedParticipant]="assessment.participant"
+					[participant]="participant"
+					[courseId]="courseId"
+				>
+				</app-assessment-target>
+			</div>
+		</div>
+
+		<mat-divider class="divider"></mat-divider>
+
+		<div class="assessment-content">
+			<h2>{{ "Common.Total" | translate }}</h2>
+
+			<mat-card>
+				<h2 class="achieved-points">
+					<span>{{ "Property.Assessment.AchievedPoints" | translate }}:</span>
+					<span class="achieved-points-number"
+						>{{ assessment.achievedPoints }}
+						<span class="of-points text-light">
+							/ {{ assignment.points }}
+							<span *ngIf="assignment.bonusPoints"
+								>(+{{ assignment.bonusPoints }})</span
+							>
 						</span>
-					</h2>
-		
-					<div class="comment">
-						<pre class="preformatted">{{assessment.comment}}</pre>
-					</div>
-				</mat-card>
-	
+					</span>
+				</h2>
+
+				<div class="comment">
+					<pre class="preformatted">{{ assessment.comment }}</pre>
+				</div>
+			</mat-card>
+
 			<ng-container *ngIf="assessment.partialAssessments.length > 0">
 				<mat-divider class="divider"></mat-divider>
-	
-				<h2>{{ 'Domain.PartialAssessments' | translate }}</h2>
-	
+
+				<h2>{{ "Domain.PartialAssessments" | translate }}</h2>
+
 				<div class="partial-assessments">
 					<ng-container *ngFor="let partial of assessment.partialAssessments">
-						
-						<app-partial-assessment class="partial-assessment" [partialAssessment]="partial"></app-partial-assessment>
-	
+						<app-partial-assessment
+							class="partial-assessment"
+							[partialAssessment]="partial"
+						></app-partial-assessment>
 					</ng-container>
 				</div>
 			</ng-container>
-			
-	
-			</div>
-	
+		</div>
 	</div>
 </ng-container>

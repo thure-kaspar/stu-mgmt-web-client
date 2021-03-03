@@ -4,7 +4,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { debounceTime, take } from "rxjs/operators";
-import { CourseConfigService, CourseParticipantsService, GroupDto, GroupsService, ParticipantDto } from "../../../../../api";
+import {
+	CourseConfigService,
+	CourseParticipantsService,
+	GroupDto,
+	GroupsService,
+	ParticipantDto
+} from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Course } from "../../../domain/course.model";
 import { Group } from "../../../domain/group.model";
@@ -30,7 +36,6 @@ class GroupFilter {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	participant$: Observable<Participant>;
 	private participant: Participant;
 
@@ -39,7 +44,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 	private course: Course;
 	private groups: Group[] = [];
-	
+
 	warning: string;
 
 	filter = new GroupFilter();
@@ -54,17 +59,21 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	totalCount = 0;
 
 	courseId: string;
-	
-	constructor(private dialog: MatDialog,
-				public participantFacade: ParticipantFacade,
-				public courseFacade: CourseFacade,
-				private groupService: GroupsService,
-				private courseConfig: CourseConfigService,
-				private courseParticipantsService: CourseParticipantsService,
-				private toast: ToastService,
-				private translate: TranslateService,
-				private router: Router,
-				private route: ActivatedRoute) { super(); }
+
+	constructor(
+		private dialog: MatDialog,
+		public participantFacade: ParticipantFacade,
+		public courseFacade: CourseFacade,
+		private groupService: GroupsService,
+		private courseConfig: CourseConfigService,
+		private courseParticipantsService: CourseParticipantsService,
+		private toast: ToastService,
+		private translate: TranslateService,
+		private router: Router,
+		private route: ActivatedRoute
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
@@ -79,15 +88,18 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 				if (this.participant?.group) {
 					const group = new Group(this.participant.group);
 					if (group.hasNotEnoughMembers(this.course)) {
-						this.warning = this.translate.instant("Text.Group.NotEnoughMembers", { minSize: this.course.getMinGroupSizeRequirement()});
+						this.warning = this.translate.instant("Text.Group.NotEnoughMembers", {
+							minSize: this.course.getMinGroupSizeRequirement()
+						});
 					}
 				}
 			});
 		});
-		
+
 		this.loadGroups();
 
-		this.subs.sink = this.nameFilterChangedSubject.pipe(debounceTime(300))
+		this.subs.sink = this.nameFilterChangedSubject
+			.pipe(debounceTime(300))
 			.subscribe(() => this.filterSubject.next());
 
 		this.subs.sink = this.filterSubject.subscribe(() => {
@@ -128,24 +140,27 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 			isClosed = true;
 		}
 
-		this.groupService.getGroupsOfCourse(
-			this.courseId, 
-			this.groups.length,
-			this.batchSize, 
-			this.filter.name,
-			isClosed,
-			undefined, undefined,
-			"response"
-		).subscribe(response => {
-			this.groups = [...this.groups, ...response.body.map(g => new Group(g))];
-			this.totalCount = parseInt(response.headers.get("x-total-count"));
+		this.groupService
+			.getGroupsOfCourse(
+				this.courseId,
+				this.groups.length,
+				this.batchSize,
+				this.filter.name,
+				isClosed,
+				undefined,
+				undefined,
+				"response"
+			)
+			.subscribe(response => {
+				this.groups = [...this.groups, ...response.body.map(g => new Group(g))];
+				this.totalCount = parseInt(response.headers.get("x-total-count"));
 
-			this.groupsSubject.next(this.groups);
+				this.groupsSubject.next(this.groups);
 
-			if (this.totalCount === this.groups.length) {
-				this.isFinished = true;
-			}
-		});
+				if (this.totalCount === this.groups.length) {
+					this.isFinished = true;
+				}
+			});
 	}
 
 	/**
@@ -154,13 +169,14 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	openCreateGroupDialog(): void {
 		if (this.participant.isStudent) {
 			if (this.participant.groupId) {
-				this.participantFacade.leaveGroup(this.participant.group, "Text.Group.LeaveToJoinOther").pipe(take(1)).subscribe(
-					leftGroup => {
+				this.participantFacade
+					.leaveGroup(this.participant.group, "Text.Group.LeaveToJoinOther")
+					.pipe(take(1))
+					.subscribe(leftGroup => {
 						if (leftGroup) {
 							this.openCreateGroupDialog_Student();
 						}
-					}
-				);
+					});
 			} else {
 				this.openCreateGroupDialog_Student();
 			}
@@ -191,51 +207,49 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	onAddParticipant(event: { group: GroupDto; participant: ParticipantDto }): void {
 		console.log(`Adding ${event.participant.username} to ${event.group.name}.`);
 
-		this.groupService.addUserToGroup(
-			{ password: undefined }, // Password not required for lecturers/tutors
-			this.courseId, 
-			event.group.id, 
-			event.participant.userId).subscribe({
-			next: () => {
-				const index = this.groups.findIndex(g => g.id === event.group.id);
-				this.groups[index] = new Group({
-					...this.groups[index],
-					members: [...this.groups[index].members, event.participant],
-					size: this.groups[index].size + 1
-				});
-				this.groupsSubject.next(this.groups);
-				this.toast.success("Message.Custom.ParticipantAddedToGroup", "", { 
-					name: event.participant.displayName, 
-					groupName: event.group.name 
-				});
-			},
-			error: (error) => {
-				this.toast.apiError(error);
-			}
-		});
+		this.groupService
+			.addUserToGroup(
+				{ password: undefined }, // Password not required for lecturers/tutors
+				this.courseId,
+				event.group.id,
+				event.participant.userId
+			)
+			.subscribe({
+				next: () => {
+					const index = this.groups.findIndex(g => g.id === event.group.id);
+					this.groups[index] = new Group({
+						...this.groups[index],
+						members: [...this.groups[index].members, event.participant],
+						size: this.groups[index].size + 1
+					});
+					this.groupsSubject.next(this.groups);
+					this.toast.success("Message.Custom.ParticipantAddedToGroup", "", {
+						name: event.participant.displayName,
+						groupName: event.group.name
+					});
+				},
+				error: error => {
+					this.toast.apiError(error);
+				}
+			});
 	}
 
 	private openCreateGroupDialog_Student(): void {
 		const dialogRef = this.dialog.open(CreateGroupStudentDialog, { data: this.courseId });
-		dialogRef.afterClosed().subscribe(
-			result => {
-				if (result) {
-					this.participantFacade.reload();
-					this.router.navigate(["courses", this.courseId, "groups", result.id]);
-				}
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				this.participantFacade.reload();
+				this.router.navigate(["courses", this.courseId, "groups", result.id]);
 			}
-		);
+		});
 	}
 
 	private openCreateGroupDialog_LecturerOrTutor(): void {
 		const dialogRef = this.dialog.open(CreateGroupDialog, { data: this.courseId });
-		dialogRef.afterClosed().subscribe(
-			result => {
-				if (result) {
-					this.loadInitialGroups();
-				}
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				this.loadInitialGroups();
 			}
-		);
+		});
 	}
-
 }

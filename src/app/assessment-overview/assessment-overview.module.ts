@@ -7,19 +7,14 @@ import { AssessmentOverviewComponent } from "./assessment-overview/assessment-ov
 import { CreatedAssessmentsComponent } from "./created-assessments/created-assessments.component";
 import { RegisteredGroupsComponent } from "./registered-groups/registered-groups.component";
 
-
 @NgModule({
 	declarations: [
-		AssessmentOverviewComponent, 
-		AssessmentAllocationOverviewComponent, 
-		CreatedAssessmentsComponent, 
+		AssessmentOverviewComponent,
+		AssessmentAllocationOverviewComponent,
+		CreatedAssessmentsComponent,
 		RegisteredGroupsComponent
 	],
-	imports: [
-		SharedModule,
-		AssessmentOverviewRoutingModule,
-		AssessmentTargetPickerModule
-	],
+	imports: [SharedModule, AssessmentOverviewRoutingModule, AssessmentTargetPickerModule],
 	exports: []
 })
-export class AssessmentOverviewModule { }
+export class AssessmentOverviewModule {}

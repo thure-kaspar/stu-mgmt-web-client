@@ -15,7 +15,6 @@ import { ToastService } from "../../../shared/services/toast.service";
 	styleUrls: ["./create-assignment.dialog.scss"]
 })
 export class CreateAssignmentDialog implements OnInit {
-
 	@ViewChild(AssignmentForm, { static: true }) form: AssignmentForm;
 	/** Assignment templates of the course. */
 	templates: AssignmentTemplateDto[];
@@ -28,13 +27,13 @@ export class CreateAssignmentDialog implements OnInit {
 		private assignmentManagement: AssignmentManagementFacade,
 		private courseConfigService: CourseConfigService,
 		private toast: ToastService
-	) { }
+	) {}
 
 	ngOnInit(): void {
 		// Load assignment templates
-		this.courseConfigService.getAssignmentTemplates(this.courseId).subscribe(
-			templates => this.templates = templates
-		);
+		this.courseConfigService
+			.getAssignmentTemplates(this.courseId)
+			.subscribe(templates => (this.templates = templates));
 
 		this.form.patchModel({
 			type: AssignmentDto.TypeEnum.HOMEWORK,
@@ -63,5 +62,4 @@ export class CreateAssignmentDialog implements OnInit {
 			}
 		);
 	}
-
 }

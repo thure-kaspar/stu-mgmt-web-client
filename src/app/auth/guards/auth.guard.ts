@@ -9,14 +9,18 @@ import { AuthenticationInfoDto } from "../../../../api_auth";
 	providedIn: "root"
 })
 export class AuthGuard implements CanActivate {
-
-	constructor(private authService: AuthService,
-				private dialog: MatDialog,
-				private router: Router) { }
+	constructor(
+		private authService: AuthService,
+		private dialog: MatDialog,
+		private router: Router
+	) {}
 
 	async canActivate(): Promise<boolean> {
 		if (!this.authService.isLoggedIn()) {
-			const result = await this.dialog.open<LoginDialog, undefined, AuthenticationInfoDto>(LoginDialog).afterClosed().toPromise();
+			const result = await this.dialog
+				.open<LoginDialog, undefined, AuthenticationInfoDto>(LoginDialog)
+				.afterClosed()
+				.toPromise();
 			if (result) {
 				await this.authService.loginWithToken(result); // Attempt to authenticate user in StudentMgtm-Backend
 				return true;
@@ -24,8 +28,7 @@ export class AuthGuard implements CanActivate {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-
 }

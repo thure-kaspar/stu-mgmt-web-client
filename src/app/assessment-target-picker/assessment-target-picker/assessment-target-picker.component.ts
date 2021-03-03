@@ -1,5 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
-import { AssignmentsService, GroupDto, CoursesService, UserDto, ParticipantDto } from "../../../../api";
+import {
+	Component,
+	OnInit,
+	Input,
+	Output,
+	EventEmitter,
+	ChangeDetectionStrategy,
+	OnDestroy
+} from "@angular/core";
+import {
+	AssignmentsService,
+	GroupDto,
+	CoursesService,
+	UserDto,
+	ParticipantDto
+} from "../../../../api";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
@@ -19,7 +33,6 @@ export class AssessmentTargetFilter {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
-
 	@Input() selectedId: string;
 
 	@Input() courseId: string;
@@ -42,10 +55,12 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	private nameFilterChangedSubject = new Subject<void>();
 	private nameFilterSubscription: Subscription;
 
-	constructor(private assigmentService: AssignmentsService,
-				private courseService: CoursesService,
-				private evaluatorsFacade: EvaluatorsFacade,
-				private snackbar: SnackbarService) { }
+	constructor(
+		private assigmentService: AssignmentsService,
+		private courseService: CoursesService,
+		private evaluatorsFacade: EvaluatorsFacade,
+		private snackbar: SnackbarService
+	) {}
 
 	ngOnInit(): void {
 		this.evaluatorsFacade.loadEvaluators(this.courseId).subscribe({
@@ -54,12 +69,10 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 			}
 		});
 
-		this.evaluatorsFacade.evaluators$.subscribe(
-			evaluators => {
-				this.evaluators = evaluators;
-				this.filterSubject.next({...this.filter});
-			}
-		);
+		this.evaluatorsFacade.evaluators$.subscribe(evaluators => {
+			this.evaluators = evaluators;
+			this.filterSubject.next({ ...this.filter });
+		});
 
 		this.subscribeToChangesOfNameFilter();
 	}
@@ -70,20 +83,19 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	 */
 	private subscribeToChangesOfNameFilter(): void {
 		this.nameFilterSubscription = this.nameFilterChangedSubject
-			.pipe(debounceTime(300)).subscribe(() => 
-				this._updateNameFilter()
-			);
+			.pipe(debounceTime(300))
+			.subscribe(() => this._updateNameFilter());
 	}
 
 	/** Updates the filter and informs subscribers about the change. */
 	updateEvaluatorFilter(evaluator: ParticipantDto | undefined): void {
 		this.filter.assignedEvaluatorId = evaluator?.userId;
-		this.filterSubject.next({...this.filter });
+		this.filterSubject.next({ ...this.filter });
 	}
 
 	updateExcludeAlreadyReviewedFilter(excludeAlreadyReviewed: boolean): void {
 		this.filter.excludeAlreadyReviewed = excludeAlreadyReviewed;
-		this.filterSubject.next({...this.filter });
+		this.filterSubject.next({ ...this.filter });
 	}
 
 	updateNameFilter(): void {
@@ -91,7 +103,7 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	}
 
 	private _updateNameFilter(): void {
-		this.filterSubject.next({...this.filter }); // nameOfGroupOrUser property is bound to input field
+		this.filterSubject.next({ ...this.filter }); // nameOfGroupOrUser property is bound to input field
 	}
 
 	ngOnDestroy(): void {
@@ -99,6 +111,4 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 		this.nameFilterChangedSubject.complete();
 		this.evaluatorsFacade.clear();
 	}
-
-
 }

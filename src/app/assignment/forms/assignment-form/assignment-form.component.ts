@@ -9,13 +9,12 @@ import { AbstractForm } from "../../../shared/abstract-form";
 	styleUrls: ["./assignment-form.component.scss"]
 })
 export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnInit {
-
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
 	constructor(private fb: FormBuilder) {
-		super(); 
+		super();
 		this.form = this.fb.group({
 			name: [null, Validators.required],
 			state: [null, Validators.required],
@@ -26,26 +25,26 @@ export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnIni
 			startDate: [null],
 			endDate: [null],
 			comment: [null],
-			links: this.fb.array([]),
-		});	
+			links: this.fb.array([])
+		});
 	}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
-	addLink(link?: { name: string; url: string}): void {
-		this.getLinks().push(this.fb.group({
-			name: [link?.name ?? null, Validators.required],
-			url: [link?.url ?? null, Validators.required]
-		}));
+	addLink(link?: { name: string; url: string }): void {
+		this.getLinks().push(
+			this.fb.group({
+				name: [link?.name ?? null, Validators.required],
+				url: [link?.url ?? null, Validators.required]
+			})
+		);
 	}
 
 	removeLink(index: number): void {
 		this.getLinks().removeAt(index);
-	} 
+	}
 
 	getLinks(): FormArray {
 		return this.form.get("links") as FormArray;
 	}
-
 }

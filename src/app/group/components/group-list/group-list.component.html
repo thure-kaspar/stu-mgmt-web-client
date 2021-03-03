@@ -1,53 +1,61 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
 	<div class="tab" *ngIf="participant$ | async as participant">
-
-		<button mat-flat-button id="btn-add" color="accent" (click)="openCreateGroupDialog()" [disabled]="!course.groupSettings.allowGroups">
+		<button
+			mat-flat-button
+			id="btn-add"
+			color="accent"
+			(click)="openCreateGroupDialog()"
+			[disabled]="!course.groupSettings.allowGroups"
+		>
 			<mat-icon>add</mat-icon>
-			{{ 'Action.Custom.AddGroup' | translate }}
+			{{ "Action.Custom.AddGroup" | translate }}
 		</button>
-	
+
 		<div class="groups">
-	
-			<h2 class="heading-groups">{{ 'Domain.Groups' | translate }}: ({{totalCount}})</h2>
-	
+			<h2 class="heading-groups">{{ "Domain.Groups" | translate }}: ({{ totalCount }})</h2>
+
 			<div class="group-filter">
 				<div class="checkboxes">
 					<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
-						{{ 'Common.Open' | translate }}
+						{{ "Common.Open" | translate }}
 					</mat-checkbox>
 					<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
-						{{ 'Common.Closed' | translate }}
+						{{ "Common.Closed" | translate }}
 					</mat-checkbox>
 				</div>
-		
+
 				<mat-form-field class="groupname-filter">
-					<mat-label>{{ 'Property.Group.Name' | translate }}</mat-label>
-					<input matInput [(ngModel)]="filter.name" (keyup)="nameFilterChangedSubject.next()" autocomplete="off">
+					<mat-label>{{ "Property.Group.Name" | translate }}</mat-label>
+					<input
+						matInput
+						[(ngModel)]="filter.name"
+						(keyup)="nameFilterChangedSubject.next()"
+						autocomplete="off"
+					/>
 				</mat-form-field>
 			</div>
-	
+
 			<div class="groups-grid" *ngIf="groups$ | async as groups">
 				<ng-container *ngFor="let group of groups">
 					<app-group-card
-						[group]="group" [participant]="participant" [course]="course"
+						[group]="group"
+						[participant]="participant"
+						[course]="course"
 						(onRemoveGroup)="onRemoveGroup($event)"
 						(onAddParticipant)="onAddParticipant($event)"
 					>
-				</app-group-card>
+					</app-group-card>
 				</ng-container>
 			</div>
-	
 		</div>
-	
-		<div 
-			infiniteScroll 
-			[infiniteScrollDistance]="2" 
-			[infiniteScrollThrottle]="500" 
+
+		<div
+			infiniteScroll
+			[infiniteScrollDistance]="2"
+			[infiniteScrollThrottle]="500"
 			(scrolled)="onScroll()"
-			[infiniteScrollContainer]="'.mat-drawer-content'" 
-			[fromRoot]="true">
-		</div>
-		
+			[infiniteScrollContainer]="'.mat-drawer-content'"
+			[fromRoot]="true"
+		></div>
 	</div>
-	
 </ng-container>

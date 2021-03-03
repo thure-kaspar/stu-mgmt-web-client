@@ -4,9 +4,20 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { CourseParticipantsService, CoursesService, CsvService, ParticipantDto } from "../../../../api";
-import { ChangeRoleDialog, ChangeRoleDialogData } from "../../course/dialogs/change-role/change-role.dialog";
-import { ConfirmDialog, ConfirmDialogData } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import {
+	CourseParticipantsService,
+	CoursesService,
+	CsvService,
+	ParticipantDto
+} from "../../../../api";
+import {
+	ChangeRoleDialog,
+	ChangeRoleDialogData
+} from "../../course/dialogs/change-role/change-role.dialog";
+import {
+	ConfirmDialog,
+	ConfirmDialogData
+} from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../shared/paginator/paginator.component";
 import { SnackbarService } from "../../shared/services/snackbar.service";
@@ -27,7 +38,6 @@ class ParticipantsFilter {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	courseId: string;
 	private participants: ParticipantDto[];
 	displayedColumns: string[] = ["actions", "role", "username", "displayName", "spacer"];
@@ -44,8 +54,10 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 		private downloadService: DownloadService,
 		private route: ActivatedRoute,
 		public dialog: MatDialog,
-		private toast: ToastService,
-	) { super(); }
+		private toast: ToastService
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.snapshot.paramMap.get("courseId");
@@ -53,9 +65,8 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 
 		// Subscribe to changes of username filter: Trigger search 500ms after user stopped typing
 		this.subs.sink = this.usernameFilterChangedSubject
-			.pipe(debounceTime(300)).subscribe(() =>
-				this.searchParticipants()
-			);
+			.pipe(debounceTime(300))
+			.subscribe(() => this.searchParticipants());
 	}
 
 	/**
@@ -65,43 +76,43 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	searchParticipants(triggeredByPaginator = false): void {
 		const skip = triggeredByPaginator ? this.paginator.getSkip() : 0;
 		const take = this.paginator.pageSize;
-		
+
 		const roles = [];
 		if (this.filter.includeTutors) roles.push(ParticipantDto.RoleEnum.TUTOR);
 		if (this.filter.includeLecturers) roles.push(ParticipantDto.RoleEnum.LECTURER);
 		if (this.filter.includeStudents) roles.push(ParticipantDto.RoleEnum.STUDENT);
 
-		this.courseParticipantsService.getUsersOfCourse(
-			this.courseId,
-			skip,
-			take,
-			roles,
-			this.filter.username,
-			"response"
-		).subscribe(
-			response => {
-				if (!triggeredByPaginator) this.paginator.goToFirstPage();
-				this.paginator.setTotalCountFromHttp(response);
-				this.participants = response.body,
-				this.refreshDataSource();
-			},
-			error => console.log(error)
-		);
+		this.courseParticipantsService
+			.getUsersOfCourse(this.courseId, skip, take, roles, this.filter.username, "response")
+			.subscribe(
+				response => {
+					if (!triggeredByPaginator) this.paginator.goToFirstPage();
+					this.paginator.setTotalCountFromHttp(response);
+					(this.participants = response.body), this.refreshDataSource();
+				},
+				error => console.log(error)
+			);
 	}
 
 	openChangeRoleDialog(participant: ParticipantDto): void {
-		this.dialog.open<ChangeRoleDialog, ChangeRoleDialogData, ParticipantDto.RoleEnum>(ChangeRoleDialog, {
-			data: {
-				courseId: this.courseId,
-				participant: participant
-			}
-		}).afterClosed().subscribe(
-			result => {
-				// Update the user's role locally to avoid refetching data from server
-				if (result) participant.role = result;
-			},
-			error => console.log(error)
-		);
+		this.dialog
+			.open<ChangeRoleDialog, ChangeRoleDialogData, ParticipantDto.RoleEnum>(
+				ChangeRoleDialog,
+				{
+					data: {
+						courseId: this.courseId,
+						participant: participant
+					}
+				}
+			)
+			.afterClosed()
+			.subscribe(
+				result => {
+					// Update the user's role locally to avoid refetching data from server
+					if (result) participant.role = result;
+				},
+				error => console.log(error)
+			);
 	}
 
 	/**
@@ -109,37 +120,46 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	 */
 	openRemoveDialog(user: ParticipantDto): void {
 		// Open ConfirmDialog
-		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, {
-			data: {
-				params: [user.username, user.role]
-			}
-		}).afterClosed().subscribe(
-			isConfirmed => {
-				// Check if user confirmed the action
-				if (isConfirmed) {
-					this.courseParticipantsService.removeUser(this.courseId, user.userId).subscribe({
-						next: () => {
-							// Remove removed user from user list
-							this.participants = this.participants.filter(u => u.username !== user.username);
-							this.refreshDataSource();
-							this.toast.success(user.displayName, "Message.Removed");
-						},
-						error: (error) => {
-							this.toast.apiError(error);
-						}
-					});
+		this.dialog
+			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, {
+				data: {
+					params: [user.username, user.role]
 				}
-			},
-			error => console.log(error)
-		);
+			})
+			.afterClosed()
+			.subscribe(
+				isConfirmed => {
+					// Check if user confirmed the action
+					if (isConfirmed) {
+						this.courseParticipantsService
+							.removeUser(this.courseId, user.userId)
+							.subscribe({
+								next: () => {
+									// Remove removed user from user list
+									this.participants = this.participants.filter(
+										u => u.username !== user.username
+									);
+									this.refreshDataSource();
+									this.toast.success(user.displayName, "Message.Removed");
+								},
+								error: error => {
+									this.toast.apiError(error);
+								}
+							});
+					}
+				},
+				error => console.log(error)
+			);
 	}
 
 	downloadCsv(): void {
-		this.downloadService.downloadFromApi(`csv/courses/${this.courseId}/users`, `${this.courseId}-participant.tsv`);
+		this.downloadService.downloadFromApi(
+			`csv/courses/${this.courseId}/users`,
+			`${this.courseId}-participant.tsv`
+		);
 	}
 
 	private refreshDataSource(): void {
 		this.dataSource$.next(new MatTableDataSource(this.participants));
 	}
-
 }

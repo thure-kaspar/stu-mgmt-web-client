@@ -10,8 +10,7 @@ describe("RegisterComponent", () => {
 		TestBed.configureTestingModule({
 			declarations: [RegisterComponent],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

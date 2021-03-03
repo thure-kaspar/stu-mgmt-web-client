@@ -1,7 +1,6 @@
 import { CourseDto, GroupSettingsDto, LinkDto } from "../../../api";
 
 export class Course implements CourseDto {
-
 	id?: string;
 	shortname: string;
 	semester: string;
@@ -39,5 +38,4 @@ export class Course implements CourseDto {
 	getMaxAllowedGroupSize(): number {
 		return this.groupSettings.sizeMax;
 	}
-
 }

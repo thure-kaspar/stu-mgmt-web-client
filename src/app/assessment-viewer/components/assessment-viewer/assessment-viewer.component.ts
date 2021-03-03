@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
-import { AssessmentDto, AssessmentEventDto, AssessmentsService, AssignmentDto } from "../../../../../api";
+import {
+	AssessmentDto,
+	AssessmentEventDto,
+	AssessmentsService,
+	AssignmentDto
+} from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
@@ -13,7 +18,6 @@ import { ParticipantFacade } from "../../../shared/services/participant.facade";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	assessment$ = new Subject<AssessmentDto>();
 	assignment: AssignmentDto;
 
@@ -29,7 +33,9 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 		private assessmentService: AssessmentsService,
 		private router: Router,
 		private route: ActivatedRoute
-	) { super(); }
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
@@ -40,12 +46,12 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 	}
 
 	private loadAssessment(): void {
-		this.assessmentService.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId).subscribe(
-			assessment => {
+		this.assessmentService
+			.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId)
+			.subscribe(assessment => {
 				this.assignment = assessment.assignment;
 				this.assessment$.next(assessment);
-			}
-		);
+			});
 	}
 
 	/**
@@ -53,7 +59,8 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 	 */
 	loadAssessmentEvents(): void {
 		if (!this.showEvents) {
-			this.assessmentService.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
+			this.assessmentService
+				.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
 				.subscribe(
 					result => {
 						this.showEvents = true;
@@ -71,11 +78,11 @@ export class AssessmentViewerComponent extends UnsubscribeOnDestroy implements O
 	 */
 	navigateToEdit(): void {
 		this.router.navigate([
-			"/courses", 
-			this.courseId, 
-			"assignments", 
-			this.assignmentId, 
-			"assessments", 
+			"/courses",
+			this.courseId,
+			"assignments",
+			this.assignmentId,
+			"assessments",
 			"editor",
 			"edit",
 			this.assessmentId

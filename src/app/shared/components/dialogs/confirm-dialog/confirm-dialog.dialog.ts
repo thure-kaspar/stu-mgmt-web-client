@@ -4,15 +4,15 @@ import { TranslateService } from "@ngx-translate/core";
 
 export class ConfirmDialogData {
 	/**
-	 * ALlows overwriting the dialog's default title. 
+	 * ALlows overwriting the dialog's default title.
 	 */
 	title?: string;
 	/**
-	 * Allows overwriting the dialog's default message. 
+	 * Allows overwriting the dialog's default message.
 	 */
 	message?: string;
 	/**
-	 * Information that can be displayed after the message (i.e name of the entity that will be changed if user confirms). 
+	 * Information that can be displayed after the message (i.e name of the entity that will be changed if user confirms).
 	 */
 	params?: string[];
 }
@@ -23,12 +23,12 @@ export class ConfirmDialogData {
 	styleUrls: ["./confirm-dialog.dialog.scss"]
 })
 export class ConfirmDialog implements OnInit {
+	constructor(
+		public dialogRef: MatDialogRef<ConfirmDialog, boolean>,
+		@Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData
+	) {}
 
-	constructor(public dialogRef: MatDialogRef<ConfirmDialog, boolean>,
-				@Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData) { }
-
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	onCancel(): void {
 		this.dialogRef.close(false);
@@ -45,5 +45,4 @@ export class ConfirmDialog implements OnInit {
 	getMessage(): string {
 		return this.data?.message ?? "Prompt.Question.AreYouSure";
 	}
-
 }

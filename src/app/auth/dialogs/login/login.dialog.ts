@@ -18,7 +18,6 @@ import { ToastService } from "../../../shared/services/toast.service";
 	styleUrls: ["./login.dialog.scss"]
 })
 export class LoginDialog extends UnsubscribeOnDestroy implements OnInit {
-
 	username: string;
 	password: string;
 	errorMessage: string;
@@ -31,10 +30,11 @@ export class LoginDialog extends UnsubscribeOnDestroy implements OnInit {
 		private mgmtAuthApi: AuthenticationService,
 		private auth: AuthService,
 		private toast: ToastService
-	) { super(); }
-
-	ngOnInit(): void {
+	) {
+		super();
 	}
+
+	ngOnInit(): void {}
 
 	onLogin(): void {
 		this.loading = true;
@@ -42,37 +42,39 @@ export class LoginDialog extends UnsubscribeOnDestroy implements OnInit {
 		const username = this.username.trim();
 		const password = this.password.trim();
 
-		this.authProvider.authenticate({ username, password }).pipe(
-			take(1),
-			switchMap(authInfo => {
-				//console.log("authInfo:", authInfo);
-				return this.mgmtAuthApi.loginWithToken({ token: authInfo.token.token });
-			}),
-			map(authToken => {
-				//console.log("authToken:", authToken);
-				this.auth.storeToken(authToken);
-				this.loading = false;
-				this.toast.success(authToken.user.displayName, "Common.Welcome");
-				this.dialogRef.close(true);
-			}),
-			catchError(error => {
-				console.log(error);
-				this.loading = false;
-				
-				switch(error.status) {
-				case 0:
-					this.errorMessage = "Error.ConnectionRefused";
-					break;
-				case 401:
-					this.errorMessage = "Error.InvalidCredentials";
-					break;
-				default:
-					this.errorMessage = "Login failed (Reason: Unknown).";
-					break;
-				}
-				return throwError(error);
-			})
-		).subscribe();
-	}
+		this.authProvider
+			.authenticate({ username, password })
+			.pipe(
+				take(1),
+				switchMap(authInfo => {
+					//console.log("authInfo:", authInfo);
+					return this.mgmtAuthApi.loginWithToken({ token: authInfo.token.token });
+				}),
+				map(authToken => {
+					//console.log("authToken:", authToken);
+					this.auth.storeToken(authToken);
+					this.loading = false;
+					this.toast.success(authToken.user.displayName, "Common.Welcome");
+					this.dialogRef.close(true);
+				}),
+				catchError(error => {
+					console.log(error);
+					this.loading = false;
 
+					switch (error.status) {
+						case 0:
+							this.errorMessage = "Error.ConnectionRefused";
+							break;
+						case 401:
+							this.errorMessage = "Error.InvalidCredentials";
+							break;
+						default:
+							this.errorMessage = "Login failed (Reason: Unknown).";
+							break;
+					}
+					return throwError(error);
+				})
+			)
+			.subscribe();
+	}
 }

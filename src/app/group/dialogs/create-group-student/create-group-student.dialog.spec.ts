@@ -8,9 +8,8 @@ describe("CreateGroupStudentDialog", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ CreateGroupStudentDialog ]
-		})
-			.compileComponents();
+			declarations: [CreateGroupStudentDialog]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

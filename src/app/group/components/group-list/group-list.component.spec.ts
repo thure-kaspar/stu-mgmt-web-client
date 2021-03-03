@@ -33,7 +33,6 @@ const mock_MatDialog = () => ({
 });
 
 describe("GroupListComponent", () => {
-	
 	let component: GroupListComponent;
 	let fixture: ComponentFixture<GroupListComponent>;
 	let groupService: GroupsService;
@@ -48,8 +47,7 @@ describe("GroupListComponent", () => {
 			],
 			imports: [SharedModule],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -68,15 +66,12 @@ describe("GroupListComponent", () => {
 	});
 
 	describe("ngOnInit", () => {
-	
 		it("Calls GroupService to load groups of course", async () => {
 			expect(groupService.getGroupsOfCourse).toHaveBeenCalledWith(component.courseId);
 		});
-	
 	});
 
 	describe("openAddDialog", () => {
-	
 		it("Opens the CreateGroupDialog", () => {
 			component.openAddDialog();
 			expect(dialog.open).toHaveBeenCalled();
@@ -87,7 +82,5 @@ describe("GroupListComponent", () => {
 			expect(mock_MatDialogRef.afterClosed).toHaveBeenCalled();
 			expect(component.groups).toContain(group);
 		});
-	
 	});
-
 });

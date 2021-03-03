@@ -26,17 +26,20 @@ class AssignmentsStateMap {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnInit, OnDestroy {
-
 	courseId: string;
 
 	assignments$: Observable<AssignmentsStateMap>;
 	participant$: Observable<Participant>;
 
-	constructor(public courseFacade: CourseFacade,
-				private participantFacade: ParticipantFacade,
-				private assignmentManagement: AssignmentManagementFacade,
-				private route: ActivatedRoute,
-				public dialog: MatDialog) { super(); }
+	constructor(
+		public courseFacade: CourseFacade,
+		private participantFacade: ParticipantFacade,
+		private assignmentManagement: AssignmentManagementFacade,
+		private route: ActivatedRoute,
+		public dialog: MatDialog
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
@@ -45,19 +48,19 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 
 		this.participant$ = this.participantFacade.participant$.pipe(
 			filter(p => !!p), // Only perform the following check once participant is loaded
-			tap((participant) => {
+			tap(participant => {
 				if (participant.isStudent) {
 					this.participantFacade.loadAssignmentGroups();
 				}
 			})
 		);
-		
+
 		this.subs.sink = this.participant$.subscribe();
 	}
 
 	private subscribeToAssignments(): void {
 		this.assignments$ = this.assignmentManagement.assignments$.pipe(
-			map((assignments) => {
+			map(assignments => {
 				const map = new AssignmentsStateMap();
 				map.inProgress = assignments.filter(a => a.state === "IN_PROGRESS");
 				map.inReview = assignments.filter(a => a.state === "IN_REVIEW");
@@ -65,7 +68,8 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 				map.closed = assignments.filter(a => a.state === "CLOSED");
 				map.invisible = assignments.filter(a => a.state === "INVISIBLE");
 				return map;
-			}));
+			})
+		);
 	}
 
 	openAddDialog(): void {
@@ -76,5 +80,4 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 		super.ngOnDestroy();
 		this.participantFacade.clearAssignmentGroups();
 	}
-
 }

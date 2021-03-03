@@ -7,10 +7,10 @@
 	--margin-default: 8px;
 	--margin-content: 128px;
 
-	--color-bg: #F1F1F1;
+	--color-bg: #f1f1f1;
 	--color-titlebar: white;
 	--color-sidenav: white;
-	--color-header: #F9F9F9;
+	--color-header: #f9f9f9;
 
 	--card-bg: white;
 	--table-bg: transparent;
@@ -24,7 +24,7 @@
 	--text-light: rgba(0, 0, 0, 0.6);
 
 	--link-active: red;
-	--link-active-bg: rgba(0, 0, 0, 0.10);
+	--link-active-bg: rgba(0, 0, 0, 0.1);
 
 	--primary: map-get($student-mgmt-client-primary, 600);
 	--accent: map-get($student-mgmt-client-accent, 900);
@@ -50,19 +50,19 @@
 	--grey-normal: rgb(255, 255, 255);
 	--grey-dark: rgb(41, 41, 41);
 
-	--color-bg: #F1F1F1;
+	--color-bg: #f1f1f1;
 	--color-titlebar: white;
 	--color-sidenav: white;
-	--color-header: #F9F9F9;
+	--color-header: #f9f9f9;
 
 	--table-bg: white;
-	
+
 	--text: black;
 	--text-inverse: white;
 	--text-light: rgba(0, 0, 0, 0.6);
 
 	--link-active: red;
-	--link-active-bg: rgba(0, 0, 0, 0.10);
+	--link-active-bg: rgba(0, 0, 0, 0.1);
 }
 
 .dark-theme {
@@ -72,7 +72,7 @@
 	--color-sidenav: #212121;
 	--color-header: rgb(24, 24, 24);
 
-	--card-bg:rgb(41, 41, 41);
+	--card-bg: rgb(41, 41, 41);
 	--table-bg: #292929;
 
 	--text: white;
@@ -85,15 +85,15 @@
 
 .blue-theme {
 	height: 100%;
-	--color-bg: #0F1724;
-	--color-titlebar: #212C3D;
-	--color-sidenav: #1D2636;
+	--color-bg: #0f1724;
+	--color-titlebar: #212c3d;
+	--color-sidenav: #1d2636;
 	--color-header: #1f293a;
 
-	--card-bg:#1D2636;
+	--card-bg: #1d2636;
 	--table-bg: #1f293a;
 
-	--text: #92ABCF;
+	--text: #92abcf;
 	--text-inverse: black;
 	--text-light: #92abcfe7;
 
@@ -112,49 +112,51 @@
 
 /* roboto-300 - latin */
 @font-face {
-	font-family: 'Roboto';
+	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 300;
-	src: local('Roboto Light'), local('Roboto-Light'),
-		url('assets/fonts/roboto-v20-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-		url('assets/fonts/roboto-v20-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	src: local("Roboto Light"), local("Roboto-Light"),
+		url("assets/fonts/roboto-v20-latin-300.woff2") format("woff2"),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */ url("assets/fonts/roboto-v20-latin-300.woff")
+			format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-regular - latin */
 @font-face {
-	font-family: 'Roboto';
+	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 400;
-	src: local('Roboto'), local('Roboto-Regular'),
-		url('assets/fonts/roboto-v20-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-		url('assets/fonts/roboto-v20-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	src: local("Roboto"), local("Roboto-Regular"),
+		url("assets/fonts/roboto-v20-latin-regular.woff2") format("woff2"),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */ url("assets/fonts/roboto-v20-latin-regular.woff")
+			format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-500 - latin */
 @font-face {
-	font-family: 'Roboto';
+	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 500;
-	src: local('Roboto Medium'), local('Roboto-Medium'),
-		url('assets/fonts/roboto-v20-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-		url('assets/fonts/roboto-v20-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	src: local("Roboto Medium"), local("Roboto-Medium"),
+		url("assets/fonts/roboto-v20-latin-500.woff2") format("woff2"),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */ url("assets/fonts/roboto-v20-latin-500.woff")
+			format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 // Material Icons
 @font-face {
-	font-family: 'Material Icons';
+	font-family: "Material Icons";
 	font-style: normal;
 	font-weight: 400;
-	src: local('Material Icons'),
-		local('MaterialIcons-Regular'),
-		url("assets/fonts/MaterialIcons-Regular.woff2") format('woff2'),
-		url("assets/fonts/MaterialIcons-Regular.woff") format('woff'),
-		url("assets/fonts/MaterialIcons-Regular.ttf") format('truetype');
+	src: local("Material Icons"), local("MaterialIcons-Regular"),
+		url("assets/fonts/MaterialIcons-Regular.woff2") format("woff2"),
+		url("assets/fonts/MaterialIcons-Regular.woff") format("woff"),
+		url("assets/fonts/MaterialIcons-Regular.ttf") format("truetype");
 }
-  
+
 .material-icons {
-	font-family: 'Material Icons';
+	font-family: "Material Icons";
 	font-weight: normal;
 	font-style: normal;
-	font-size: 24px;  /* Preferred icon size */
+	font-size: 24px; /* Preferred icon size */
 	display: inline-block;
 	line-height: 1;
 	text-transform: none;
@@ -162,21 +164,27 @@
 	word-wrap: normal;
 	white-space: nowrap;
 	direction: ltr;
-  
+
 	/* Support for all WebKit browsers. */
 	-webkit-font-smoothing: antialiased;
 	/* Support for Safari and Chrome. */
 	text-rendering: optimizeLegibility;
-  
+
 	/* Support for Firefox. */
 	-moz-osx-font-smoothing: grayscale;
-  
+
 	/* Support for IE. */
-	font-feature-settings: 'liga';
+	font-feature-settings: "liga";
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 *::-webkit-scrollbar {
 	width: 8px;
@@ -195,13 +203,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 /* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+input[type="number"] {
+	-moz-appearance: textfield;
 }
 
 .titlebar-padding {
@@ -232,7 +240,7 @@ input[type=number] {
 	min-width: 300px;
 }
 
-.form-container{
+.form-container {
 	display: flex;
 	flex-direction: column;
 }
@@ -272,25 +280,28 @@ input[type=number] {
 }
 
 .card-title {
-	align-items: center!important;
-	display: flex!important;
-	justify-content: space-between!important;
+	align-items: center !important;
+	display: flex !important;
+	justify-content: space-between !important;
 }
 
 mat-card {
-	background-color: var(--card-bg)!important;
+	background-color: var(--card-bg) !important;
 }
 
-table, mat-paginator {
-	background-color: var(--table-bg)!important;
+table,
+mat-paginator {
+	background-color: var(--table-bg) !important;
 }
 
-.mat-menu-panel, .mat-dialog-container, .mat-select-panel {
-	background-color: var(--card-bg)!important;
+.mat-menu-panel,
+.mat-dialog-container,
+.mat-select-panel {
+	background-color: var(--card-bg) !important;
 }
 
 .mat-tab-label-active {
-	opacity: 1!important;
+	opacity: 1 !important;
 }
 
 .center {
@@ -353,11 +364,11 @@ table, mat-paginator {
 }
 
 .table-bg {
-	background-color: var(--table-bg)!important;
+	background-color: var(--table-bg) !important;
 }
 
 .bg-transparent {
-	background-color: transparent!important;
+	background-color: transparent !important;
 }
 
 .text-red {
@@ -373,25 +384,25 @@ table, mat-paginator {
 }
 
 .snackbar-success {
- 	background-color: rgb(211, 255, 200)!important;
+	background-color: rgb(211, 255, 200) !important;
 
 	.mat-simple-snackbar {
-		color: rgb(0, 71, 24)!important;
+		color: rgb(0, 71, 24) !important;
 	}
 	.mat-button-wrapper {
-		color: rgb(0, 71, 24)!important;
+		color: rgb(0, 71, 24) !important;
 	}
 }
 
 .snackbar-error {
-	background-color: rgb(255, 0, 0)!important;
+	background-color: rgb(255, 0, 0) !important;
 
-   .mat-simple-snackbar {
-	   color: rgb(255, 255, 255)!important;
-   }
-   .mat-button-wrapper {
-	color: rgb(255, 255, 255)!important;
-   }
+	.mat-simple-snackbar {
+		color: rgb(255, 255, 255) !important;
+	}
+	.mat-button-wrapper {
+		color: rgb(255, 255, 255) !important;
+	}
 }
 
 mat-form-field.mat-form-field-should-float label {
@@ -402,7 +413,9 @@ mat-form-field .mat-hint {
 	font-size: 12px;
 }
 
-.mat-button-focus-overlay { background-color: transparent!important; }
+.mat-button-focus-overlay {
+	background-color: transparent !important;
+}
 
 // Used to display button in mat-tab-group
 app-edit-course .mat-tab-labels :last-child.mat-tab-label {
@@ -413,13 +426,25 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 }
 
 .toast-container .ngx-toastr {
-	box-shadow: 0 0 12px var(--text-light)!important;
+	box-shadow: 0 0 12px var(--text-light) !important;
 }
 
-.INFORMATIONAL { font-weight: 500; color: rgb(0, 130, 173); }
-.WARNING { font-weight: 500; color:rgb(211, 165, 38); }
-.ERROR { font-weight: 500; color: rgb(206, 134, 0); }
-.CRITICAL { font-weight: 500; color: red; }
+.INFORMATIONAL {
+	font-weight: 500;
+	color: rgb(0, 130, 173);
+}
+.WARNING {
+	font-weight: 500;
+	color: rgb(211, 165, 38);
+}
+.ERROR {
+	font-weight: 500;
+	color: rgb(206, 134, 0);
+}
+.CRITICAL {
+	font-weight: 500;
+	color: red;
+}
 
 .bg-titlebar {
 	background-color: var(--color-titlebar);

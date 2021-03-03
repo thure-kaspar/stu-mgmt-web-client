@@ -58,9 +58,8 @@ export class Group implements GroupDto {
 	isFull(course: Course): boolean {
 		return this.size >= course.getMaxAllowedGroupSize();
 	}
-	
+
 	hasNotEnoughMembers(course: Course): boolean {
 		return this.size < course.getMinGroupSizeRequirement();
 	}
-	
 }

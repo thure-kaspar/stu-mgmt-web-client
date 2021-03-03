@@ -11,7 +11,7 @@ export class JoinGroupDialogData {
 }
 
 /**
- * Dialog that allows the user to join a group. 
+ * Dialog that allows the user to join a group.
  * Returns a boolean, indicating, wether the user has joined the group.
  */
 @Component({
@@ -20,7 +20,6 @@ export class JoinGroupDialogData {
 	styleUrls: ["./join-group.dialog.scss"]
 })
 export class JoinGroupDialog implements OnInit {
-
 	participant: Participant;
 	group: GroupDto;
 
@@ -32,7 +31,7 @@ export class JoinGroupDialog implements OnInit {
 		@Inject(MAT_DIALOG_DATA) private data: JoinGroupDialogData,
 		private groupService: GroupsService,
 		private toast: ToastService
-	) { }
+	) {}
 
 	ngOnInit(): void {
 		this.participant = this.data.participant;
@@ -44,20 +43,21 @@ export class JoinGroupDialog implements OnInit {
 	}
 
 	onJoin(): void {
-		this.groupService.addUserToGroup(
-			{ password: this.password }, 
-			this.data.courseId, 
-			this.group.id, 
-			this.participant.userId
-		).subscribe(
-			joined => {
-				this.toast.success(this.data.group.name, "Message.Custom.JoinedGroup");
-				this.dialogRef.close(true);
-			},
-			error => {
-				this.toast.apiError(error);
-			}
-		);
+		this.groupService
+			.addUserToGroup(
+				{ password: this.password },
+				this.data.courseId,
+				this.group.id,
+				this.participant.userId
+			)
+			.subscribe(
+				joined => {
+					this.toast.success(this.data.group.name, "Message.Custom.JoinedGroup");
+					this.dialogRef.close(true);
+				},
+				error => {
+					this.toast.apiError(error);
+				}
+			);
 	}
-
 }

@@ -6,17 +6,12 @@ import { AdmissionStatusModule } from "../admission-status/admission-status.modu
 import { ParticipantAssessmentsComponent } from "./components/participant-assessments/participant-assessments.component";
 import { ParticipantAdmissionStatusComponent } from "./components/participant-admission-status/participant-admission-status.component";
 
-
 @NgModule({
 	declarations: [
-		ParticipantProfileComponent, 
-		ParticipantAssessmentsComponent, 
+		ParticipantProfileComponent,
+		ParticipantAssessmentsComponent,
 		ParticipantAdmissionStatusComponent
 	],
-	imports: [
-		SharedModule,
-		ParticipantProfileRoutingModule,
-		AdmissionStatusModule
-	]
+	imports: [SharedModule, ParticipantProfileRoutingModule, AdmissionStatusModule]
 })
-export class ParticipantProfileModule { }
+export class ParticipantProfileModule {}

@@ -20,7 +20,6 @@ import { ToastService } from "../../../shared/services/toast.service";
 	styleUrls: ["./edit-group.dialog.scss"]
 })
 export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
-
 	update: GroupUpdateDto;
 
 	group: Group;
@@ -35,29 +34,29 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 		private courseFacade: CourseFacade,
 		private participantFacade: ParticipantFacade,
 		private toast: ToastService
-	) { super(); }
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.subs.sink = this.courseFacade.course$.subscribe(c => {
 			this.course = c;
 			this.groupSettings = c.groupSettings;
 		});
-		this.subs.sink = this.participantFacade.participant$.subscribe(p => this.participant = p);
+		this.subs.sink = this.participantFacade.participant$.subscribe(p => (this.participant = p));
 
 		this.loadGroup();
 	}
 
 	private loadGroup(): void {
-		this.groupService.getGroup(this.course.id, this.groupId).subscribe(
-			group => {
-				this.group = new Group(group);
-				this.update = {
-					name: group.name,
-					password: group.password,
-					isClosed: group.isClosed	
-				};
-			}
-		);
+		this.groupService.getGroup(this.course.id, this.groupId).subscribe(group => {
+			this.group = new Group(group);
+			this.update = {
+				name: group.name,
+				password: group.password,
+				isClosed: group.isClosed
+			};
+		});
 	}
 
 	/**
@@ -73,11 +72,11 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	 */
 	onSave(): void {
 		this.groupService.updateGroup(this.update, this.course.id, this.groupId).subscribe({
-			next: (group) => {
+			next: group => {
 				this.toast.success("Message.Saved");
 				this.dialogRef.close(group);
 			},
-			error: (error) => this.toast.apiError(error)
+			error: error => this.toast.apiError(error)
 		});
 	}
 
@@ -88,5 +87,4 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	isClosingLocked(): boolean {
 		return !this.group.canBeClosed(this.participant, this.course);
 	}
-
 }

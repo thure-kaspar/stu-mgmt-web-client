@@ -4,16 +4,15 @@ import { AuthService } from "../../auth/services/auth.service";
 import { environment } from "../../../environments/environment";
 import { ToastService } from "./toast.service";
 
-@Injectable({ providedIn: "root"})
+@Injectable({ providedIn: "root" })
 export class DownloadService {
-
 	private basePath = window["__env"]["API_BASE_PATH"] ?? environment.API_BASE_PATH;
 
 	constructor(
 		private http: HttpClient,
 		private authService: AuthService,
 		private toast: ToastService
-	) { }
+	) {}
 
 	/**
 	 * Downloads a file from the API and opens a SaveFile-Dialog.
@@ -22,24 +21,25 @@ export class DownloadService {
 	 * @param filename Suggested filename when user open SaveFile-Dialog.
 	 */
 	downloadFromApi(endpoint: string, filename: string): void {
-		this.http.get(`${this.basePath}/${endpoint}`, {
-			responseType: "blob",
-			headers: {
-				["Authorization"]: `Bearer ${this.authService.getAccessToken()}`
-			}
-		}).subscribe({
-			next: (blob) => {
-				const a = document.createElement("a");
-				const objectUrl = URL.createObjectURL(blob);
-				a.href = objectUrl;
-				a.download = filename;
-				a.click();
-				URL.revokeObjectURL(objectUrl);
-			},
-			error: (error) => {
-				this.toast.apiError(error);
-			}
-		});
+		this.http
+			.get(`${this.basePath}/${endpoint}`, {
+				responseType: "blob",
+				headers: {
+					["Authorization"]: `Bearer ${this.authService.getAccessToken()}`
+				}
+			})
+			.subscribe({
+				next: blob => {
+					const a = document.createElement("a");
+					const objectUrl = URL.createObjectURL(blob);
+					a.href = objectUrl;
+					a.download = filename;
+					a.click();
+					URL.revokeObjectURL(objectUrl);
+				},
+				error: error => {
+					this.toast.apiError(error);
+				}
+			});
 	}
-
 }

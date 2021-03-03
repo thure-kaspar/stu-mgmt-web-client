@@ -13,17 +13,17 @@ import { SnackbarService } from "../../../shared/services/snackbar.service";
 	styleUrls: ["./create-group.dialog.scss"]
 })
 export class CreateGroupDialog implements OnInit {
-
 	@ViewChild("createMultiple") createMultiple: CreateGroupMultipleComponent;
 	@ViewChild("tabs") tabGroup: MatTabGroup;
 	form: FormGroup;
 
-	constructor(public dialogRef: MatDialogRef<CreateGroupDialog>,
-				@Inject(MAT_DIALOG_DATA) public courseId: string,
-				private groupService: GroupsService,
-				private fb: FormBuilder,
-				private snackbar: SnackbarService) { 
-
+	constructor(
+		public dialogRef: MatDialogRef<CreateGroupDialog>,
+		@Inject(MAT_DIALOG_DATA) public courseId: string,
+		private groupService: GroupsService,
+		private fb: FormBuilder,
+		private snackbar: SnackbarService
+	) {
 		this.form = this.fb.group({
 			courseId: [this.courseId, Validators.required],
 			name: [null, Validators.required],
@@ -32,8 +32,7 @@ export class CreateGroupDialog implements OnInit {
 		});
 	}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	onCancel(): void {
 		this.dialogRef.close();
@@ -46,9 +45,11 @@ export class CreateGroupDialog implements OnInit {
 
 	/** Calls the onSave-Method of the selected tab. */
 	onSave(): void {
-		if (this.tabGroup.selectedIndex == 0) { // Single-Tab
+		if (this.tabGroup.selectedIndex == 0) {
+			// Single-Tab
 			this.onSaveSingle();
-		} else if (this.tabGroup.selectedIndex == 1) { // Multiple-Tab
+		} else if (this.tabGroup.selectedIndex == 1) {
+			// Multiple-Tab
 			this.createMultiple.onSave();
 		}
 	}
@@ -67,5 +68,4 @@ export class CreateGroupDialog implements OnInit {
 			}
 		);
 	}
-
 }

@@ -32,7 +32,7 @@ export class Participant implements ParticipantDto {
 	canCreateAssignments(): boolean {
 		return this.isTeachingStaffMember;
 	}
-	
+
 	canCreateGroup(): boolean {
 		if (this.isTeachingStaffMember) return true;
 
@@ -42,5 +42,4 @@ export class Participant implements ParticipantDto {
 
 		return true;
 	}
-
 }

@@ -2,7 +2,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { AdmissionCriteriaDto, AdmissionStatusDto, AdmissionStatusService, CourseConfigService, RuleCheckResult } from "../../../../../api";
+import {
+	AdmissionCriteriaDto,
+	AdmissionStatusDto,
+	AdmissionStatusService,
+	CourseConfigService,
+	RuleCheckResult
+} from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ToastService } from "../../../shared/services/toast.service";
@@ -14,7 +20,6 @@ import { ToastService } from "../../../shared/services/toast.service";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantAdmissionStatusComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	admissionCriteria$ = new BehaviorSubject<AdmissionCriteriaDto>(undefined);
 
 	status: AdmissionStatusDto;
@@ -27,8 +32,10 @@ export class ParticipantAdmissionStatusComponent extends UnsubscribeOnDestroy im
 		private admissionStatusService: AdmissionStatusService,
 		private courseConfigService: CourseConfigService,
 		private route: ActivatedRoute,
-		private toast: ToastService,
-	) { super(); }
+		private toast: ToastService
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.userId = getRouteParam("userId", this.route);
@@ -38,29 +45,29 @@ export class ParticipantAdmissionStatusComponent extends UnsubscribeOnDestroy im
 		this.loadAdmissionStatus();
 	}
 
-	
 	private loadAdmissionStatus(): void {
-		this.subs.sink = this.admissionStatusService.getAdmissionStatusOfParticipant(this.courseId, this.userId).subscribe({
-			next: (result) => {
-				this.status = result;
-				this.results = result.results;
-			},
-			error: (error) => {
-				this.toast.apiError(error);
-			}
-		});
+		this.subs.sink = this.admissionStatusService
+			.getAdmissionStatusOfParticipant(this.courseId, this.userId)
+			.subscribe({
+				next: result => {
+					this.status = result;
+					this.results = result.results;
+				},
+				error: error => {
+					this.toast.apiError(error);
+				}
+			});
 	}
-	
+
 	// TODO: Handle courses with no defined criteria ... for now we assume it exists
 	private loadAdmissionCriteria(): void {
 		this.subs.sink = this.courseConfigService.getAdmissionCriteria(this.courseId).subscribe({
-			next: (result) => {
+			next: result => {
 				this.admissionCriteria$.next(result);
 			},
-			error: (error) => {
+			error: error => {
 				this.toast.apiError(error);
 			}
 		});
 	}
-
 }

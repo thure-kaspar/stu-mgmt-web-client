@@ -13,17 +13,15 @@ import { ActivatedRoute } from "@angular/router";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	assessmentsDataSource$ = new BehaviorSubject(new MatTableDataSource<AssessmentDto>([]));
 	displayedColumns = ["view", "assignment", "achievedPoints", "maxPoints", "percent"];
 
 	userId: string;
 	courseId: string;
 
-	constructor(
-		private userService: UsersService,
-		private route: ActivatedRoute,
-	) { super(); }
+	constructor(private userService: UsersService, private route: ActivatedRoute) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.userId = getRouteParam("userId", this.route);
@@ -36,11 +34,10 @@ export class ParticipantAssessmentsComponent extends UnsubscribeOnDestroy implem
 	 * Loads the assessments of this participant and emits them via `assessments$`.
 	 */
 	private loadAssessmentsOfUser(): void {
-		this.subs.sink = this.userService.getAssessmentsOfUserForCourse(this.userId, this.courseId).subscribe(
-			assessments => {
+		this.subs.sink = this.userService
+			.getAssessmentsOfUserForCourse(this.userId, this.courseId)
+			.subscribe(assessments => {
 				this.assessmentsDataSource$.next(new MatTableDataSource(assessments));
-			}
-		);
+			});
 	}
-
 }

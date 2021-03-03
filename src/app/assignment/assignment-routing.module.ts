@@ -4,7 +4,10 @@ import { AssignmentListComponent } from "./components/assignment-list/assignment
 
 // courses/:courseId/assignments/
 const routes: Routes = [
-	{ path: ":assignmentId/assessments", loadChildren: () => import("../assessment/assessment.module").then(m => m.AssessmentModule) },
+	{
+		path: ":assignmentId/assessments",
+		loadChildren: () => import("../assessment/assessment.module").then(m => m.AssessmentModule)
+	},
 	{ path: "", component: AssignmentListComponent, pathMatch: "full" }
 ];
 
@@ -12,4 +15,4 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class AssignmentRoutingModule { }
+export class AssignmentRoutingModule {}

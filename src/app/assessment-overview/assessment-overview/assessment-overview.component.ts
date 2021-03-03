@@ -10,14 +10,14 @@ import { SelectedAssignmentFacade } from "../../assessment/services/selected-ass
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentOverviewComponent implements OnInit {
-
-	constructor(public selectedAssignment: SelectedAssignmentFacade,
-				private route: ActivatedRoute) { }
+	constructor(
+		public selectedAssignment: SelectedAssignmentFacade,
+		private route: ActivatedRoute
+	) {}
 
 	ngOnInit(): void {
 		const courseId = getRouteParam("courseId", this.route);
 		const assignmentId = getRouteParam("assignmentId", this.route);
 		this.selectedAssignment.loadAssignment(courseId, assignmentId);
 	}
-
 }

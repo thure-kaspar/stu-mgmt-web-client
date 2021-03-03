@@ -8,9 +8,8 @@ describe("PointsOverviewComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ PointsOverviewComponent ]
-		})
-			.compileComponents();
+			declarations: [PointsOverviewComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

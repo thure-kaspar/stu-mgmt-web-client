@@ -4,7 +4,6 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { SharedModule } from "../../../shared/shared.module";
 
 describe("CourseComponent", () => {
-
 	let component: CourseComponent;
 	let fixture: ComponentFixture<CourseComponent>;
 
@@ -13,8 +12,7 @@ describe("CourseComponent", () => {
 			declarations: [CourseComponent],
 			imports: [SharedModule],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

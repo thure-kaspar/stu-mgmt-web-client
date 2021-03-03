@@ -12,8 +12,7 @@ describe("CourseListComponent", () => {
 			declarations: [CourseListComponent],
 			imports: [SharedModule],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

@@ -14,15 +14,14 @@ const authToken: AuthTokenDto = {
 
 const mock_AuthenticationService = () => ({
 	login: jest.fn().mockImplementation(() => of(authToken)),
-	register: jest.fn(),
+	register: jest.fn()
 });
 
 const mock_Router = () => ({
-	navigate: jest.fn(),
+	navigate: jest.fn()
 });
 
 describe("AuthService", () => {
-
 	let service: AuthService;
 	let authenticationService: AuthenticationService;
 	let router: Router;
@@ -36,12 +35,11 @@ describe("AuthService", () => {
 				{ provide: Router, useFactory: mock_Router }
 			],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 
 		// Mock window.localStorage
-		Storage.prototype.setItem = jest.fn(),
-		Storage.prototype.getItem = jest.fn().mockReturnValue(authToken);
+		(Storage.prototype.setItem = jest.fn()),
+			(Storage.prototype.getItem = jest.fn().mockReturnValue(authToken));
 		Storage.prototype.removeItem = jest.fn();
 	}));
 
@@ -60,12 +58,11 @@ describe("AuthService", () => {
 	});
 
 	describe("login", () => {
-
 		it("Calls the AuthenticationService for login", async () => {
 			await service.login(authCredentials);
 			expect(authenticationService.login).toHaveBeenCalledWith(authCredentials);
 		});
-	
+
 		it("Valid credentials -> Stores the received AuthToken", async () => {
 			await service.login(authCredentials);
 			expect(window.localStorage.setItem).toHaveBeenCalled();
@@ -84,26 +81,22 @@ describe("AuthService", () => {
 			try {
 				await service.login(authCredentials);
 				expect(true).toEqual(false);
-			} catch(error) {
+			} catch (error) {
 				expect(error).toBeTruthy();
 			}
 		});
-	
 	});
 
 	describe("register", () => {
-	
 		it("Calls AuthenticationService for registration and returns the observable", () => {
 			authenticationService.register = jest.fn().mockImplementation(() => of({})); // Mock register to return an (empty) observable
 			const result = service.register(authCredentials);
 			expect(authenticationService.register).toHaveBeenCalledWith(authCredentials);
 			expect(result).toBeTruthy();
 		});
-	
 	});
 
 	describe("logout", () => {
-	
 		it("Removes the stored AuthToken", () => {
 			service.logout();
 			expect(window.localStorage.removeItem).toHaveBeenCalled();
@@ -113,11 +106,9 @@ describe("AuthService", () => {
 			service.logout();
 			expect(router.navigate).toHaveBeenCalledWith(["/login"]);
 		});
-	
 	});
 
 	describe("isLoggedIn", () => {
-	
 		it("AuthToken in storage -> Returns true", () => {
 			const result = service.isLoggedIn();
 			expect(result).toEqual(true);
@@ -128,25 +119,19 @@ describe("AuthService", () => {
 			const result = service.isLoggedIn();
 			expect(result).toEqual(false);
 		});
-	
 	});
 
 	describe("getAccessToken", () => {
-	
 		it("Retrieves the authToken from storage and returns accessToken", () => {
 			const result = service.getAccessToken();
 			expect(result).toEqual(authToken.accessToken);
 		});
-	
 	});
 
 	describe("getAuthToken", () => {
-	
 		it("Retrieves the authToken from storage", () => {
-			const result = service.getAuthToken(); 
+			const result = service.getAuthToken();
 			expect(result).toEqual(authToken);
 		});
-	
 	});
-
 });

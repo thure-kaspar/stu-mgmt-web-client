@@ -7,12 +7,26 @@ import { RegisteredGroupsComponent } from "./registered-groups/registered-groups
 
 // courses/:courseId/assignments/:assignmentId/assessments
 const routes: Routes = [
-	{ path: "", component: AssessmentOverviewComponent, children: [
-		{ path: "allocations", component: AssessmentAllocationOverviewComponent, pathMatch: "full" },
-		{ path: "created", component: CreatedAssessmentsComponent },
-		{ path: "registrations", component: RegisteredGroupsComponent, pathMatch: "full" },
-		{ path: "editor", loadChildren: () => import("../assessment-editor/assessment-editor.module").then(m => m.AssessmentEditorModule) },
-		{ path: "", redirectTo: "created", pathMatch: "full" } ] 
+	{
+		path: "",
+		component: AssessmentOverviewComponent,
+		children: [
+			{
+				path: "allocations",
+				component: AssessmentAllocationOverviewComponent,
+				pathMatch: "full"
+			},
+			{ path: "created", component: CreatedAssessmentsComponent },
+			{ path: "registrations", component: RegisteredGroupsComponent, pathMatch: "full" },
+			{
+				path: "editor",
+				loadChildren: () =>
+					import("../assessment-editor/assessment-editor.module").then(
+						m => m.AssessmentEditorModule
+					)
+			},
+			{ path: "", redirectTo: "created", pathMatch: "full" }
+		]
 	}
 ];
 
@@ -20,4 +34,4 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class AssessmentOverviewRoutingModule { }
+export class AssessmentOverviewRoutingModule {}

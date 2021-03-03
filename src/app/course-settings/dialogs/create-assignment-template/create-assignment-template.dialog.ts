@@ -22,19 +22,20 @@ export class CreateAssignmentTemplateDialogData {
 	styleUrls: ["./create-assignment-template.dialog.scss"]
 })
 export class CreateAssignmentTemplateDialog implements OnInit {
-
 	form: FormGroup;
-	@ViewChild(AssignmentTemplatesForm, { static: true }) assignmentTemplatesForm: AssignmentTemplatesForm;
+	@ViewChild(AssignmentTemplatesForm, { static: true })
+	assignmentTemplatesForm: AssignmentTemplatesForm;
 
-	constructor(private dialogRef: MatDialogRef<CreateAssignmentTemplateDialog>,
-				@Inject(MAT_DIALOG_DATA) private data: CreateAssignmentTemplateDialogData,
-				private courseConfigService: CourseConfigService,
-				private fb: FormBuilder,
-				private toast: ToastService) { 
-	
+	constructor(
+		private dialogRef: MatDialogRef<CreateAssignmentTemplateDialog>,
+		@Inject(MAT_DIALOG_DATA) private data: CreateAssignmentTemplateDialogData,
+		private courseConfigService: CourseConfigService,
+		private fb: FormBuilder,
+		private toast: ToastService
+	) {
 		this.form = this.fb.group({
 			config: this.fb.group({
-				assignmentTemplates: this.fb.array([]) // TODO: Currently form needs to be nested 
+				assignmentTemplates: this.fb.array([]) // TODO: Currently form needs to be nested
 			})
 		});
 	}
@@ -54,17 +55,19 @@ export class CreateAssignmentTemplateDialog implements OnInit {
 	 */
 	onSave(): void {
 		if (this.form.valid && this.assignmentTemplatesForm.getAssignmentTemplates().length == 1) {
-			const template = this.assignmentTemplatesForm.getAssignmentTemplates().value[0] as AssignmentTemplateDto;
-			this.courseConfigService.createAssignmentTemplate(template, this.data.courseId, this.data.configId).subscribe(
-				result => {
-					this.toast.success("Domain.AssignmentTemplate", "Message.Created");
-					this.dialogRef.close(result);
-				},
-				error => {
-					this.toast.apiError(error);
-				}
-			);
+			const template = this.assignmentTemplatesForm.getAssignmentTemplates()
+				.value[0] as AssignmentTemplateDto;
+			this.courseConfigService
+				.createAssignmentTemplate(template, this.data.courseId, this.data.configId)
+				.subscribe(
+					result => {
+						this.toast.success("Domain.AssignmentTemplate", "Message.Created");
+						this.dialogRef.close(result);
+					},
+					error => {
+						this.toast.apiError(error);
+					}
+				);
 		}
 	}
-
 }

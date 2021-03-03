@@ -28,21 +28,24 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		NavigationComponent
-	],
+	declarations: [AppComponent, NavigationComponent],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
-		ApiModule.forRoot(() => new Configuration({
-			basePath: window["__env"]["API_BASE_PATH"] ?? environment.API_BASE_PATH,
-			accessToken: (): string => AuthService.getAccessToken()
-		})),
-		AuthApiModule.forRoot(() => new Configuration({
-			basePath: window["__env"]["AUTH_BASE_PATH"] ?? environment.AUTH_BASE_PATH,
-			accessToken: (): string => AuthService.getAccessTokenOfAuthSystem()
-		})),
+		ApiModule.forRoot(
+			() =>
+				new Configuration({
+					basePath: window["__env"]["API_BASE_PATH"] ?? environment.API_BASE_PATH,
+					accessToken: (): string => AuthService.getAccessToken()
+				})
+		),
+		AuthApiModule.forRoot(
+			() =>
+				new Configuration({
+					basePath: window["__env"]["AUTH_BASE_PATH"] ?? environment.AUTH_BASE_PATH,
+					accessToken: (): string => AuthService.getAccessTokenOfAuthSystem()
+				})
+		),
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		ToastrModule.forRoot({
@@ -52,7 +55,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 			defaultLanguage: localStorage.getItem("language") ?? "de",
 			loader: {
 				provide: TranslateLoader,
-				useFactory: (createTranslateLoader),
+				useFactory: createTranslateLoader,
 				deps: [HttpClient]
 			}
 		}),
@@ -63,8 +66,8 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "de" },
-		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" }}
+		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" } }
 	],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

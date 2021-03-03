@@ -8,31 +8,32 @@ import { Course } from "../../domain/course.model";
 
 @Injectable({ providedIn: "root" })
 export class CourseFacade {
-
 	private courseSubject = new BehaviorSubject<Course>(undefined);
 	/** Emits the currently loaded course (includes group settings). */
 	course$ = this.courseSubject.asObservable();
 
-	constructor(private courseService: CoursesService,
-				private courseConfigService: CourseConfigService,
-				private router: Router,
-				private dialog: MatDialog) { }
+	constructor(
+		private courseService: CoursesService,
+		private courseConfigService: CourseConfigService,
+		private router: Router,
+		private dialog: MatDialog
+	) {}
 
 	loadCourse(courseId: string): Observable<Course> {
 		return forkJoin([
 			this.courseService.getCourseById(courseId),
 			this.courseConfigService.getGroupSettings(courseId)
 		]).pipe(
-			map((value) => {
+			map(value => {
 				const course = new Course(value[0]);
 				course.setGroupSettings(value[1]);
 				return course;
 			}),
-			tap((course) => {
+			tap(course => {
 				this.courseSubject.next(course);
 				//console.log("Current course:", course);
-			}),
-		//	catchError(error => of)
+			})
+			//	catchError(error => of)
 		);
 	}
 
@@ -43,5 +44,4 @@ export class CourseFacade {
 	clear(): void {
 		this.courseSubject.next(undefined);
 	}
-
 }

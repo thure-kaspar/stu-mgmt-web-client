@@ -44,7 +44,6 @@ const assignmentTemplate: Partial<AssignmentDto> = {
 };
 
 describe("", () => {
-
 	let component: CreateAssignmentDialog;
 	let fixture: ComponentFixture<CreateAssignmentDialog>;
 	let dialogRef: MatDialogRef<CreateAssignmentDialog>;
@@ -62,8 +61,7 @@ describe("", () => {
 				{ provide: MAT_DIALOG_DATA, useValue: assignmentTemplate }
 			],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -81,33 +79,31 @@ describe("", () => {
 	});
 
 	describe("Constructor", () => {
-	
 		it("Form values get initialized with values assignmentTemplate", () => {
 			expect(component.form.get("courseId").value).toEqual(assignmentTemplate.courseId);
 			expect(component.form.get("state").value).toEqual(assignmentTemplate.state);
 			// Add more values when they're implemented
 		});
-	
 	});
 
 	describe("onCancel", () => {
-	
 		it("Closes the dialog", () => {
 			component.onCancel();
 			expect(dialogRef.close).toHaveBeenCalled();
 		});
-	
 	});
 
 	describe("onSave", () => {
-	
 		it("Calls the assignmentService for creation", async () => {
 			const expected = copy(assignment);
 			expected.id = undefined;
 
 			component.onSave();
 
-			expect(assignmentService.createAssignment).toHaveBeenCalledWith(expected, expected.courseId);
+			expect(assignmentService.createAssignment).toHaveBeenCalledWith(
+				expected,
+				expected.courseId
+			);
 		});
 
 		it("Success -> Closes the dialog and returns created assignment", async () => {
@@ -119,7 +115,5 @@ describe("", () => {
 			component.onSave();
 			expect(snackbar.open).toHaveBeenCalled();
 		});
-	
 	});
-
 });

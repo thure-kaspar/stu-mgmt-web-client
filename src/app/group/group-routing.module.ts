@@ -5,11 +5,11 @@ import { GroupListComponent } from "./components/group-list/group-list.component
 
 const routes: Routes = [
 	{ path: "", component: GroupListComponent, pathMatch: "full" },
-	{ path: ":groupId", component: GroupDetailComponent },
+	{ path: ":groupId", component: GroupDetailComponent }
 ];
 
 @NgModule({
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class GroupRoutingModule { }
+export class GroupRoutingModule {}

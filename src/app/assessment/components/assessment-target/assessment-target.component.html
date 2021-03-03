@@ -1,40 +1,50 @@
 <ng-container *ngIf="group">
-	
 	<mat-card class="group-card mat-elevation-z2">
 		<mat-card-title class="card-title">
 			<span>
 				<!-- Only display link to group, if participant is teaching staff member or group member -->
-				<span class="name" *ngIf="participant.isStudent && participant.groupId !== group.id; else nameWithLink">
-					{{group.name}}
+				<span
+					class="name"
+					*ngIf="
+						participant.isStudent && participant.groupId !== group.id;
+						else nameWithLink
+					"
+				>
+					{{ group.name }}
 				</span>
 				<ng-template #nameWithLink>
-					<a [routerLink]="['/courses', courseId, 'groups', group.id]" class="name link-none">
-						{{group.name}}
+					<a
+						[routerLink]="['/courses', courseId, 'groups', group.id]"
+						class="name link-none"
+					>
+						{{ group.name }}
 					</a>
 				</ng-template>
 			</span>
 		</mat-card-title>
-	
+
 		<div class="member-info">
-			<span class="text-light font-bold">{{ 'Domain.Members' | translate }}: {{group.size}}</span>
+			<span class="text-light font-bold"
+				>{{ "Domain.Members" | translate }}: {{ group.size }}</span
+			>
 		</div>
-	
+
 		<div class="member-list">
-			<a class="member link-none font-bold" [routerLink]="['/courses', courseId, 'users', member.userId]" *ngFor="let member of group.members">
-				<button mat-flat-button color="primary">{{member.displayName}}</button>
+			<a
+				class="member link-none font-bold"
+				[routerLink]="['/courses', courseId, 'users', member.userId]"
+				*ngFor="let member of group.members"
+			>
+				<button mat-flat-button color="primary">{{ member.displayName }}</button>
 			</a>
 		</div>
-	
 	</mat-card>
-	
-
 </ng-container>
 
 <ng-container *ngIf="targetedParticipant">
-
 	<a [routerLink]="['/courses', courseId, 'users', targetedParticipant.userId]">
-		<button class="targeted-participant-btn" mat-flat-button color="accent">{{targetedParticipant.displayName}}</button>
+		<button class="targeted-participant-btn" mat-flat-button color="accent">
+			{{ targetedParticipant.displayName }}
+		</button>
 	</a>
-
 </ng-container>
-

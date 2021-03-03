@@ -6,16 +6,13 @@ import { AuthenticationInfoDto } from "../../../../api_auth";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
-
 	private userSubject = new BehaviorSubject<UserDto>(undefined);
 	public user$ = this.userSubject.asObservable();
 
 	static readonly studentMgmtTokenKey = "studentMgmtToken";
 	static readonly extAuthTokenKey = "extAuthTokenKey";
 
-	constructor(private authenticationService: AuthenticationService,
-				private router: Router) {
-
+	constructor(private authenticationService: AuthenticationService, private router: Router) {
 		// Check if user still has a token from last login
 		const authToken = this.getAuthToken();
 		if (authToken) {
@@ -35,7 +32,9 @@ export class AuthService {
 	 * Login to the StudentMgmt-Backend via the token provided by the external authentication system.
 	 */
 	async loginWithToken(authInfo: AuthenticationInfoDto): Promise<void> {
-		const authToken = await this.authenticationService.loginWithToken({ token: authInfo.token.token}).toPromise()
+		const authToken = await this.authenticationService
+			.loginWithToken({ token: authInfo.token.token })
+			.toPromise()
 			.catch(error => {
 				// Rethrow the error, so calling component is able to display the error
 				throw new Error(error.error.message);
@@ -58,10 +57,12 @@ export class AuthService {
 	 * Login to the StudentMgmt-Backend directly.
 	 */
 	async login(authCredentials: AuthCredentialsDto): Promise<void> {
-		const authToken = await this.authenticationService.login(authCredentials).toPromise()
-			.catch(error => { 
+		const authToken = await this.authenticationService
+			.login(authCredentials)
+			.toPromise()
+			.catch(error => {
 				// Rethrow the error, so calling component is able to display the error
-				throw new Error(error.error.message); 
+				throw new Error(error.error.message);
 			});
 
 		// If login was successful, store the received authentication token
@@ -123,7 +124,9 @@ export class AuthService {
 	 * to authenticate the user for requests to the server.
 	 */
 	static getAccessToken(): string {
-		const authToken = JSON.parse(localStorage.getItem(AuthService.studentMgmtTokenKey)) as AuthTokenDto;
+		const authToken = JSON.parse(
+			localStorage.getItem(AuthService.studentMgmtTokenKey)
+		) as AuthTokenDto;
 		return authToken?.accessToken;
 	}
 
@@ -134,5 +137,4 @@ export class AuthService {
 	static getAccessTokenOfAuthSystem(): string {
 		return localStorage.getItem(AuthService.extAuthTokenKey);
 	}
-
 }

@@ -6,7 +6,8 @@ table {
 	@media screen and (min-width: 800px) {
 		width: fit-content;
 
-		td, th {
+		td,
+		th {
 			padding-left: 32px;
 			padding-right: 32px;
 		}

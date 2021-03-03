@@ -8,4 +8,4 @@ const routes: Routes = [{ path: "", component: ParticipantsListComparisonCompone
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class ParticipantsListComparisonRoutingModule { }
+export class ParticipantsListComparisonRoutingModule {}

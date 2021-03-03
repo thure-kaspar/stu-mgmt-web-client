@@ -8,11 +8,7 @@ import { AssessmentTargetPickerModule } from "../assessment-target-picker/assess
 import { AssessmentModule } from "../assessment/assessment.module";
 
 @NgModule({
-	declarations: [
-		CreateAssessmentComponent, 
-		AssessmentForm, 
-		EditAssessmentComponent,
-	],
+	declarations: [CreateAssessmentComponent, AssessmentForm, EditAssessmentComponent],
 	imports: [
 		SharedModule,
 		AssessmentModule,
@@ -20,4 +16,4 @@ import { AssessmentModule } from "../assessment/assessment.module";
 		AssessmentTargetPickerModule
 	]
 })
-export class AssessmentEditorModule { }
+export class AssessmentEditorModule {}

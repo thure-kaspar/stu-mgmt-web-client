@@ -9,7 +9,7 @@ import { ToastService } from "../../../shared/services/toast.service";
 
 export class EditAssignmentTemplateDialogData {
 	template: AssignmentTemplateDto;
-	courseId: string
+	courseId: string;
 }
 
 /**
@@ -22,19 +22,20 @@ export class EditAssignmentTemplateDialogData {
 	styleUrls: ["./edit-assignment-template.dialog.scss"]
 })
 export class EditAssignmentTemplateDialog implements OnInit {
-
 	form: FormGroup;
-	@ViewChild(AssignmentTemplatesForm, { static: true }) assignmentTemplatesForm: AssignmentTemplatesForm;
+	@ViewChild(AssignmentTemplatesForm, { static: true })
+	assignmentTemplatesForm: AssignmentTemplatesForm;
 
-	constructor(private dialogRef: MatDialogRef<EditAssignmentTemplateDialog>,
-				@Inject(MAT_DIALOG_DATA) private data: EditAssignmentTemplateDialogData,
-				private courseConfigService: CourseConfigService,
-				private fb: FormBuilder,
-				private toast: ToastService) {
-
+	constructor(
+		private dialogRef: MatDialogRef<EditAssignmentTemplateDialog>,
+		@Inject(MAT_DIALOG_DATA) private data: EditAssignmentTemplateDialogData,
+		private courseConfigService: CourseConfigService,
+		private fb: FormBuilder,
+		private toast: ToastService
+	) {
 		this.form = this.fb.group({
 			config: this.fb.group({
-				assignmentTemplates: this.fb.array([]) // TODO: Currently form needs to be nested 
+				assignmentTemplates: this.fb.array([]) // TODO: Currently form needs to be nested
 			})
 		});
 	}
@@ -54,17 +55,19 @@ export class EditAssignmentTemplateDialog implements OnInit {
 	 */
 	onSave(): void {
 		if (this.form.valid && this.assignmentTemplatesForm.getAssignmentTemplates().length == 1) {
-			const template = this.assignmentTemplatesForm.getAssignmentTemplates().value[0] as AssignmentTemplateDto;
-			this.courseConfigService.updateAssignmentTemplate(template, this.data.courseId, this.data.template.id).subscribe(
-				result => {
-					this.toast.success("Domain.AssignmentTemplate", "Message.Saved");
-					this.dialogRef.close(result);
-				},
-				error => {
-					this.toast.apiError(error);
-				}
-			);
+			const template = this.assignmentTemplatesForm.getAssignmentTemplates()
+				.value[0] as AssignmentTemplateDto;
+			this.courseConfigService
+				.updateAssignmentTemplate(template, this.data.courseId, this.data.template.id)
+				.subscribe(
+					result => {
+						this.toast.success("Domain.AssignmentTemplate", "Message.Saved");
+						this.dialogRef.close(result);
+					},
+					error => {
+						this.toast.apiError(error);
+					}
+				);
 		}
 	}
-
 }

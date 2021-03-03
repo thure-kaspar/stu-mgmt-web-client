@@ -9,8 +9,7 @@ describe("AssessmentAllocationOverviewComponent", () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [AssessmentAllocationOverviewComponent]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

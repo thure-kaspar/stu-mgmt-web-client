@@ -25,8 +25,7 @@ import { TranslateModule } from "@ngx-translate/core";
 	providers: [
 		AuthGuard,
 		AdminGuard,
-		{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
 	]
-
 })
-export class AuthModule { }
+export class AuthModule {}

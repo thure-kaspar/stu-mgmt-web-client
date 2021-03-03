@@ -1,5 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FormBuilder, Validators, FormArray, FormGroup, ValidatorFn, AbstractControl } from "@angular/forms";
+import {
+	FormBuilder,
+	Validators,
+	FormArray,
+	FormGroup,
+	ValidatorFn,
+	AbstractControl
+} from "@angular/forms";
 import { AbstractForm } from "../../../shared/abstract-form";
 import { AssessmentCreateDto, PartialAssessmentDto, AssignmentDto } from "../../../../../api";
 
@@ -9,7 +16,6 @@ import { AssessmentCreateDto, PartialAssessmentDto, AssignmentDto } from "../../
 	styleUrls: ["./assessment-form.component.scss"]
 })
 export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements OnInit {
-
 	@Input() assignment: AssignmentDto;
 
 	/** Emits the id of the removed PartialAssessment, if it had an id (existed before). */
@@ -28,8 +34,7 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 		});
 	}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	/** Validates that the achieved points do not exceed the max. possible amount of points. */
 	private achievedPointsMaxValueValidator(): ValidatorFn {
@@ -37,9 +42,10 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 			let isTooBig = false;
 			// Only validate, if assignment is loaded and has can awards points
 			if (this.assignment?.points) {
-				isTooBig = control.value > this.assignment.points + (this.assignment.bonusPoints ?? 0);
+				isTooBig =
+					control.value > this.assignment.points + (this.assignment.bonusPoints ?? 0);
 			}
-			return isTooBig ? { "achievedPointsMaxValue": { value: control.value } } : null;
+			return isTooBig ? { achievedPointsMaxValue: { value: control.value } } : null;
 		};
 	}
 
@@ -85,5 +91,4 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 	getPartialAssessment(index: number): FormGroup {
 		return this.getPartialAssessments().at(index) as FormGroup;
 	}
-
 }

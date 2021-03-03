@@ -8,9 +8,8 @@ describe("RegisteredGroupsComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ RegisteredGroupsComponent ]
-		})
-			.compileComponents();
+			declarations: [RegisteredGroupsComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

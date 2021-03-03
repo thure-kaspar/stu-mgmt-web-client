@@ -16,7 +16,6 @@ export class EditAssignmentDialogData {
 	styleUrls: ["./edit-assignment.dialog.scss"]
 })
 export class EditAssignmentDialog implements OnInit {
-
 	@ViewChild(AssignmentForm, { static: true }) form: AssignmentForm;
 	private assignmentId: string;
 	private courseId: string;
@@ -27,7 +26,6 @@ export class EditAssignmentDialog implements OnInit {
 		private assignmentManagement: AssignmentManagementFacade,
 		private toast: ToastService
 	) {
-
 		this.courseId = courseId;
 		this.assignmentId = assignmentId;
 	}
@@ -64,5 +62,4 @@ export class EditAssignmentDialog implements OnInit {
 			}
 		);
 	}
-
 }

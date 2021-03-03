@@ -1,22 +1,23 @@
 <div class="dialog-container">
-
-	<mat-card-title matDialogTitle>{{ 'Title.JoinGroup' | translate }}: {{group.name}}</mat-card-title>
+	<mat-card-title matDialogTitle
+		>{{ 'Title.JoinGroup' | translate }}: {{group.name}}</mat-card-title
+	>
 
 	<div matDialogContent class="dialog-content">
 		<mat-form-field *ngIf="group.hasPassword">
 			<mat-label>{{ 'Common.Password' | translate }}</mat-label>
-			<input matInput type="password" [(ngModel)]="password">
+			<input matInput type="password" [(ngModel)]="password" />
 		</mat-form-field>
 
 		<mat-error *ngIf="error">{{error}}</mat-error>
-
 	</div>
 
 	<div matDialogActions class="dialog-actions">
 		<div>
-			<button mat-raised-button color="accent" (click)="onJoin()">{{ 'Action.Join' | translate }}</button>
+			<button mat-raised-button color="accent" (click)="onJoin()">
+				{{ 'Action.Join' | translate }}
+			</button>
 			<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
 		</div>
 	</div>
-
 </div>

@@ -1,8 +1,24 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ChangeDetectorRef } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnInit,
+	ViewChild,
+	ChangeDetectorRef
+} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { tap } from "rxjs/operators";
-import { AssessmentCreateDto, AssessmentsService, AssignmentDto, AssignmentRegistrationService, AssignmentsService, CourseParticipantsService, GroupDto, GroupsService, ParticipantDto } from "../../../../api";
+import {
+	AssessmentCreateDto,
+	AssessmentsService,
+	AssignmentDto,
+	AssignmentRegistrationService,
+	AssignmentsService,
+	CourseParticipantsService,
+	GroupDto,
+	GroupsService,
+	ParticipantDto
+} from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { DialogService } from "../../shared/services/dialog.service";
@@ -18,10 +34,10 @@ import { AssessmentTargetPickerComponent } from "../../assessment-target-picker/
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
-	@ViewChild(AssessmentTargetPickerComponent, { static: true}) targetPicker: AssessmentTargetPickerComponent;
-	
+	@ViewChild(AssessmentTargetPickerComponent, { static: true })
+	targetPicker: AssessmentTargetPickerComponent;
+
 	selectedId: string;
 	forParticipant$ = new Subject<ParticipantDto>();
 	forGroup$ = new Subject<GroupDto>();
@@ -46,18 +62,20 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		private toast: ToastService,
 		private dialog: DialogService,
 		private cdRef: ChangeDetectorRef
-	) { super(); }
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
 		this.assignmentId = this.route.snapshot.params.assignmentId;
 
-		this.subs.sink = this.assignmentService.getAssignmentById(this.courseId, this.assignmentId).subscribe(
-			assignment => {
+		this.subs.sink = this.assignmentService
+			.getAssignmentById(this.courseId, this.assignmentId)
+			.subscribe(assignment => {
 				this.assignment = assignment;
 				this.cdRef.detectChanges();
-			}
-		);
+			});
 
 		this.setPreselectedGroupOrUser();
 	}
@@ -88,39 +106,43 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		const assessment: AssessmentCreateDto = this.form.getModel();
 		assessment.assignmentId = this.assignmentId;
 
-		this.assessmentService.createAssessment(assessment, this.courseId, this.assignmentId).subscribe(
-			created => {
-				this.form.form.reset({ achievedPoints: 0 });
-				this.selectedId = undefined;
-				this.forGroup$.next(undefined);
-				this.forParticipant$.next(undefined);
-				this.targetPicker.updateNameFilter(); // Trigger reload of targets to remove current selection
-				this.toast.success("Message.Saved");
-			},
-			error => {
-				this.toast.apiError(error);
-			}
-		);
+		this.assessmentService
+			.createAssessment(assessment, this.courseId, this.assignmentId)
+			.subscribe(
+				created => {
+					this.form.form.reset({ achievedPoints: 0 });
+					this.selectedId = undefined;
+					this.forGroup$.next(undefined);
+					this.forParticipant$.next(undefined);
+					this.targetPicker.updateNameFilter(); // Trigger reload of targets to remove current selection
+					this.toast.success("Message.Saved");
+				},
+				error => {
+					this.toast.apiError(error);
+				}
+			);
 	}
 
 	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
 	groupSelectedHandler(group: GroupDto): void {
 		this.forParticipant$.next(undefined);
-		
+
 		// Set route fragment
-		this.router.navigate([], { fragment: "group" + group.id});
+		this.router.navigate([], { fragment: "group" + group.id });
 
 		// Load members of the group
-		this.registrationService.getRegisteredGroup(this.courseId,  this.assignmentId, group.id).subscribe(
-			result => {
-				this.selectedId = group.id;
-				this.forGroup$.next(result);
-				this.form.patchModel({ groupId: group.id, userId: null });
-			},
-			error => {
-				this.toast.apiError(error);
-			}
-		);
+		this.registrationService
+			.getRegisteredGroup(this.courseId, this.assignmentId, group.id)
+			.subscribe(
+				result => {
+					this.selectedId = group.id;
+					this.forGroup$.next(result);
+					this.form.patchModel({ groupId: group.id, userId: null });
+				},
+				error => {
+					this.toast.apiError(error);
+				}
+			);
 	}
 
 	/** Sets the selected user and removes the selected group, it it exists. */
@@ -131,7 +153,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		this.forParticipant$.next(participant);
 
 		// Set route fragment
-		this.router.navigate([], { fragment: "user" + participant.userId});
+		this.router.navigate([], { fragment: "user" + participant.userId });
 	}
 
 	/**
@@ -140,20 +162,26 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 	 */
 	switchToEdit(assessmentId: string): void {
 		// Route to the assessment
-		const routeCmds = ["courses", this.courseId, "assignments", this.assignmentId, "assessments", "editor", "edit", assessmentId];
+		const routeCmds = [
+			"courses",
+			this.courseId,
+			"assignments",
+			this.assignmentId,
+			"assessments",
+			"editor",
+			"edit",
+			assessmentId
+		];
 		// If user has inserted data in the form
 		if (this.form.form.dirty) {
 			// Ask user, if he wants to discard his unsaved changes
-			this.dialog.openUnsavedChangesDialog().subscribe(
-				confirmed => {
-					if (confirmed) {
-						this.router.navigate(routeCmds);
-					}
+			this.dialog.openUnsavedChangesDialog().subscribe(confirmed => {
+				if (confirmed) {
+					this.router.navigate(routeCmds);
 				}
-			);
+			});
 		} else {
 			this.router.navigate(routeCmds);
 		}
 	}
-
 }

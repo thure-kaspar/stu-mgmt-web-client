@@ -8,9 +8,8 @@ describe("ParticipantAdmissionStatusComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ ParticipantAdmissionStatusComponent ]
-		})
-			.compileComponents();
+			declarations: [ParticipantAdmissionStatusComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

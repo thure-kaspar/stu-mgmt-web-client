@@ -5,7 +5,13 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { filter, take } from "rxjs/operators";
-import { AssessmentDto, AssessmentsService, GroupSettingsDto, GroupsService, ParticipantDto } from "../../../../../api";
+import {
+	AssessmentDto,
+	AssessmentsService,
+	GroupSettingsDto,
+	GroupsService,
+	ParticipantDto
+} from "../../../../../api";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
 import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
@@ -23,11 +29,10 @@ import { CourseFacade } from "../../../shared/services/course.facade";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	private groupSubject = new Subject<Group>();
 	group$ = this.groupSubject.asObservable();
 	private group: Group;
-	
+
 	participant$: Observable<Participant>;
 	private participant: Participant;
 
@@ -40,38 +45,42 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	assessmentsDataSource$ = new Subject<MatTableDataSource<AssessmentDto>>();
 	private assessmentsDataSource: MatTableDataSource<AssessmentDto>;
 	@ViewChild(MatSort) sort: MatSort;
-	
-	constructor(private groupService: GroupsService,
-				private assessmentService: AssessmentsService,
-				public participantFacade: ParticipantFacade,
-				private courseFacade: CourseFacade,
-				private route: ActivatedRoute,
-				private router: Router,
-				private dialogService: DialogService,
-				private dialog: MatDialog,
-				private snackbar: SnackbarService) { super(); }
+
+	constructor(
+		private groupService: GroupsService,
+		private assessmentService: AssessmentsService,
+		public participantFacade: ParticipantFacade,
+		private courseFacade: CourseFacade,
+		private route: ActivatedRoute,
+		private router: Router,
+		private dialogService: DialogService,
+		private dialog: MatDialog,
+		private snackbar: SnackbarService
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
 		this.groupId = this.route.snapshot.paramMap.get("groupId");
 
 		this.loadGroup();
-	
-		this.subs.sink = this.participantFacade.participant$.pipe(
-			filter(p => !!p)
-		).subscribe(p => {
+
+		this.subs.sink = this.participantFacade.participant$.pipe(filter(p => !!p)).subscribe(p => {
 			this.participant = p;
 
 			if (this.participant.isTeachingStaffMember) {
 				this.loadAssessmentsOfGroup();
 			}
 		});
-		this.subs.sink = this.courseFacade.course$.subscribe(c => this.groupSettings = c?.groupSettings);
+		this.subs.sink = this.courseFacade.course$.subscribe(
+			c => (this.groupSettings = c?.groupSettings)
+		);
 	}
 
 	loadGroup(): void {
 		this.groupService.getGroup(this.courseId, this.groupId).subscribe(
-			result => { 
+			result => {
 				this.group = new Group(result);
 				this.groupSubject.next(this.group);
 			},
@@ -81,12 +90,12 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 
 	loadAssessmentsOfGroup(): void {
 		this.groupService.getAssessmentsOfGroup(this.courseId, this.groupId).subscribe({
-			next: (assessments) => {
+			next: assessments => {
 				this.assessmentsDataSource = new MatTableDataSource(assessments);
 				this.assessmentsDataSource.sort = this.sort;
 				this.assessmentsDataSource$.next(this.assessmentsDataSource);
 			},
-			error: (error) => this.snackbar.openApiExceptionMessage(error)
+			error: error => this.snackbar.openApiExceptionMessage(error)
 		});
 	}
 
@@ -95,13 +104,14 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	 * If the user edited the group successfully, reloads the group.
 	 */
 	onEditGroup(): void {
-		this.dialog.open(EditGroupDialog, { data: this.groupId }).afterClosed().subscribe(
-			updated => {
+		this.dialog
+			.open(EditGroupDialog, { data: this.groupId })
+			.afterClosed()
+			.subscribe(updated => {
 				if (updated) {
 					this.loadGroup();
 				}
-			}
-		);
+			});
 	}
 
 	/**
@@ -109,24 +119,32 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	 * If successful, the group is reloaded.
 	 */
 	onAddParticipant(): void {
-		this.dialog.open<SearchParticipantDialog, string, ParticipantDto[]>(SearchParticipantDialog, { data: this.courseId })
-			.afterClosed().subscribe(
-				participants => {
-					if (participants?.length > 0) {
-						this.addParticipantToGroup(participants[0]);
-					}
+		this.dialog
+			.open<SearchParticipantDialog, string, ParticipantDto[]>(SearchParticipantDialog, {
+				data: this.courseId
+			})
+			.afterClosed()
+			.subscribe(participants => {
+				if (participants?.length > 0) {
+					this.addParticipantToGroup(participants[0]);
 				}
-			);
+			});
 	}
 
 	private addParticipantToGroup(participant: ParticipantDto): void {
-		this.groupService.addUserToGroup({ password: undefined }, this.courseId, this.groupId, participant.userId)
+		this.groupService
+			.addUserToGroup(
+				{ password: undefined },
+				this.courseId,
+				this.groupId,
+				participant.userId
+			)
 			.subscribe({
 				next: () => {
 					this.snackbar.openSuccessMessage();
 					this.loadGroup();
 				},
-				error: (error) => {
+				error: error => {
 					console.log(error);
 					this.snackbar.openErrorMessage();
 				}
@@ -139,24 +157,26 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		if (participant.userId === this.participant.userId) {
 			this.onLeaveGroup();
 		} else {
-			this.dialogService.openConfirmDialog({ 
-				title: "Action.Custom.RemoveUserFromGroup",
-				params: [participant.displayName], 
-			}).subscribe(
-				confirmed => {
+			this.dialogService
+				.openConfirmDialog({
+					title: "Action.Custom.RemoveUserFromGroup",
+					params: [participant.displayName]
+				})
+				.subscribe(confirmed => {
 					if (confirmed) {
-						this.groupService.removeUserFromGroup(this.courseId, this.group.id, participant.userId).subscribe(
-							success => {
-								this.snackbar.openSuccessMessage();
-								this.loadGroup();
-							},
-							error => {
-								this.snackbar.openApiExceptionMessage(error);
-							}
-						);
+						this.groupService
+							.removeUserFromGroup(this.courseId, this.group.id, participant.userId)
+							.subscribe(
+								success => {
+									this.snackbar.openSuccessMessage();
+									this.loadGroup();
+								},
+								error => {
+									this.snackbar.openApiExceptionMessage(error);
+								}
+							);
 					}
-				}
-			);
+				});
 		}
 	}
 
@@ -165,24 +185,26 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	 * if successful. User will be asked to confirm this action.
 	 */
 	onLeaveGroup(): void {
-		this.participantFacade.leaveGroup(this.group).pipe(take(1)).subscribe(
-			leftGroup => {
+		this.participantFacade
+			.leaveGroup(this.group)
+			.pipe(take(1))
+			.subscribe(leftGroup => {
 				if (leftGroup) {
 					this.router.navigate(["/courses", this.courseId, "groups"]);
 				}
-			}
-		);
+			});
 	}
 
 	/**
 	 * Removes the group, if the user confirms the action.
 	 */
 	onRemoveGroup(): void {
-		this.dialogService.openConfirmDialog({
-			title: "Action.Custom.RemoveGroup",
-			params: [this.group.name]
-		}).subscribe(
-			confirmed => {
+		this.dialogService
+			.openConfirmDialog({
+				title: "Action.Custom.RemoveGroup",
+				params: [this.group.name]
+			})
+			.subscribe(confirmed => {
 				if (confirmed) {
 					this.groupService.deleteGroup(this.courseId, this.groupId).subscribe({
 						next: () => {
@@ -193,14 +215,13 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 							this.snackbar.openSuccessMessage();
 							this.router.navigate(["/courses", this.courseId, "groups"]);
 						},
-						error: (error) => {
+						error: error => {
 							console.log(error);
 							this.snackbar.openErrorMessage();
 						}
 					});
 				}
-			}
-		);
+			});
 	}
 
 	isGroupMember(participant: ParticipantDto): boolean {
@@ -211,5 +232,4 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		// Reload the participant to remove his current group
 		this.participantFacade.reload();
 	}
-
 }

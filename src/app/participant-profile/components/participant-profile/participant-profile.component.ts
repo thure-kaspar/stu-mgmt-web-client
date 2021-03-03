@@ -15,7 +15,6 @@ import { ParticipantFacade } from "../../../shared/services/participant.facade";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	/** Participant, whose profile is being viewed. */
 	participant$: Observable<ParticipantDto>;
 
@@ -30,8 +29,10 @@ export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements
 	constructor(
 		private participantService: CourseParticipantsService,
 		private participantFacade: ParticipantFacade,
-		private route: ActivatedRoute,
-	) { super(); }
+		private route: ActivatedRoute
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.userId = getRouteParam("userId", this.route);
@@ -55,5 +56,4 @@ export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements
 	isViewingOwnProfile(participant: Participant): boolean {
 		return participant.userId === this.userId;
 	}
-
 }

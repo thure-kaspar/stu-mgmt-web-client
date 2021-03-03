@@ -6,14 +6,7 @@ import { ParticipantsOverviewComponent } from "./participants-overview/participa
 import { AdmissionStatusModule } from "../admission-status/admission-status.module";
 
 @NgModule({
-	declarations: [
-		UserListComponent,
-		ParticipantsOverviewComponent,
-	],
-	imports: [
-		SharedModule,
-		CourseParticipantsRoutingModule,
-		AdmissionStatusModule,
-	]
+	declarations: [UserListComponent, ParticipantsOverviewComponent],
+	imports: [SharedModule, CourseParticipantsRoutingModule, AdmissionStatusModule]
 })
-export class CourseParticipantsModule { }
+export class CourseParticipantsModule {}

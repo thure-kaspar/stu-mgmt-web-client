@@ -1,39 +1,53 @@
 <div id="edit-assessment-container" class="tab">
-
 	<div id="grid">
 		<div id="left">
-			<h2 id="title">{{ 'Title.EditAssessment' | translate }}</h2>
-				
-			<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
-				<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
+			<h2 id="title">{{ "Title.EditAssessment" | translate }}</h2>
+
+			<p
+				id="review-state-error"
+				class="text-red"
+				*ngIf="assignment?.state !== stateEnum.INREVIEW"
+			>
+				<mat-icon>error</mat-icon>{{ "Error.AssignmentNotInReview" | translate }}
 			</p>
 
 			<div class="assessment-header" *ngIf="assessment$ | async as assessment">
 				<div>
 					<span class="created-by">
-						{{ 'Common.CreatedBy' | translate }}
-						<span class="font-bold">{{assessment.creator.displayName}}</span>
-						<span class="text-light">({{ assessment.creationDate | date:'medium' }})</span>
+						{{ "Common.CreatedBy" | translate }}
+						<span class="font-bold">{{ assessment.creator.displayName }}</span>
+						<span class="text-light"
+							>({{ assessment.creationDate | date: "medium" }})</span
+						>
 					</span>
-	
+
 					<span class="last-updated-by" *ngIf="assessment.lastUpdatedBy">
-						{{ 'Common.LastUpdatedBy' | translate }}
-						<span class="font-bold">{{assessment.lastUpdatedBy.displayName}}</span>
-						<span class="text-light"> ({{ assessment.updateDate | date:'medium' }})</span>
-	
-						<button mat-icon-button class="btn-load-history" matTooltip="Load edit history" (click)="loadAssessmentEvents()">
+						{{ "Common.LastUpdatedBy" | translate }}
+						<span class="font-bold">{{ assessment.lastUpdatedBy.displayName }}</span>
+						<span class="text-light">
+							({{ assessment.updateDate | date: "medium" }})</span
+						>
+
+						<button
+							mat-icon-button
+							class="btn-load-history"
+							matTooltip="Load edit history"
+							(click)="loadAssessmentEvents()"
+						>
 							<mat-icon class="icon-light">history</mat-icon>
 						</button>
 					</span>
 				</div>
 
 				<div *ngIf="showEvents" class="events">
-					<p *ngIf="events.length == 0">{{ 'Common.None' | translate }}.</p>
+					<p *ngIf="events.length == 0">{{ "Common.None" | translate }}.</p>
 					<span *ngFor="let event of events">
-						[{{ event.timestamp | date }}] - {{ 'Property.Assessment.AchievedPoints' | translate }}: {{ event.payload.oldScore }} -> {{ event.payload.newScore }}
+						[{{ event.timestamp | date }}] -
+						{{ "Property.Assessment.AchievedPoints" | translate }}:
+						{{ event.payload.oldScore }} -> {{ event.payload.newScore }}
 					</span>
 				</div>
-			
+
 				<div class="assessment-target">
 					<app-assessment-target
 						[group]="group"
@@ -45,23 +59,31 @@
 				</div>
 			</div>
 
-			<app-assessment-form [assignment]="assignment" (onPartialRemoved)="addToRemovedPartials($event)"></app-assessment-form>
+			<app-assessment-form
+				[assignment]="assignment"
+				(onPartialRemoved)="addToRemovedPartials($event)"
+			></app-assessment-form>
 
-			<button mat-raised-button color="accent" id="btn-save" [disabled]="form.isInvalid() || assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
-				{{ 'Action.Save' | translate }}
+			<button
+				mat-raised-button
+				color="accent"
+				id="btn-save"
+				[disabled]="form.isInvalid() || assignment?.state !== stateEnum.INREVIEW"
+				(click)="onSave()"
+			>
+				{{ "Action.Save" | translate }}
 			</button>
 		</div>
-	
+
 		<div id="right tab">
-			<app-assessment-target-picker 
-				[courseId]="courseId"  
-				[assignmentId]="assignmentId" 
+			<app-assessment-target-picker
+				[courseId]="courseId"
+				[assignmentId]="assignmentId"
 				(onGroupSelected)="groupSelectedHandler($event)"
 				(onUserSelected)="userSelectedHandler($event)"
-				(onSwitchToEdit)="switchToEdit($event)">
+				(onSwitchToEdit)="switchToEdit($event)"
+			>
 			</app-assessment-target-picker>
 		</div>
 	</div>
-
 </div>
-

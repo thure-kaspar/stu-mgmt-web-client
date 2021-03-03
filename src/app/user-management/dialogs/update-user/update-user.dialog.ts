@@ -14,10 +14,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 	styleUrls: ["./update-user.dialog.scss"]
 })
 export class UpdateUserDialog extends UnsubscribeOnDestroy implements OnInit {
-	
 	form: FormGroup;
 	roles = UserDto.RoleEnum;
-	
+
 	constructor(
 		public dialogRef: MatDialogRef<UpdateUserDialog, UserDto>,
 		@Inject(MAT_DIALOG_DATA) public user: UserDto,
@@ -25,7 +24,7 @@ export class UpdateUserDialog extends UnsubscribeOnDestroy implements OnInit {
 		private userService: UsersService,
 		private toast: ToastService
 	) {
-		super(); 
+		super();
 	}
 
 	ngOnInit(): void {
@@ -43,17 +42,16 @@ export class UpdateUserDialog extends UnsubscribeOnDestroy implements OnInit {
 	onSave(): void {
 		if (this.form.valid) {
 			const update: UserUpdateDto = this.form.value;
-	
+
 			this.subs.sink = this.userService.updateUser(update, this.user.id).subscribe({
-				next: (user) => {
+				next: user => {
 					this.toast.success(this.user.username, "Message.Saved");
 					this.dialogRef.close(user);
 				},
-				error: (error) => {
+				error: error => {
 					this.toast.apiError(error);
 				}
 			});
 		}
 	}
-
 }

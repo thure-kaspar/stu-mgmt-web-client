@@ -23,7 +23,7 @@ import { SearchGroupDialog } from "./dialogs/search-group/search-group.dialog";
 		GroupDetailComponent,
 		GroupCardComponent,
 		EditGroupDialog,
-		SearchGroupDialog,
+		SearchGroupDialog
 	],
 	imports: [
 		SharedModule,
@@ -33,4 +33,4 @@ import { SearchGroupDialog } from "./dialogs/search-group/search-group.dialog";
 	],
 	exports: [GroupListComponent]
 })
-export class GroupModule { }
+export class GroupModule {}

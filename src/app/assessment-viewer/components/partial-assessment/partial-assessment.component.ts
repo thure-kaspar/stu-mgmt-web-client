@@ -8,14 +8,11 @@ import { PartialAssessmentDto } from "../../../../../api";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PartialAssessmentComponent implements OnInit {
-
 	@Input("partialAssessment") partial: PartialAssessmentDto;
 
 	severityEnum = PartialAssessmentDto.SeverityEnum;
 
-	constructor() { }
+	constructor() {}
 
-	ngOnInit(): void {
-	}
-
+	ngOnInit(): void {}
 }

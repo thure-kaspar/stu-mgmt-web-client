@@ -8,4 +8,4 @@ const routes: Routes = [{ path: "", component: UserManagementComponent, pathMatc
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class UserManagementRoutingModule { }
+export class UserManagementRoutingModule {}

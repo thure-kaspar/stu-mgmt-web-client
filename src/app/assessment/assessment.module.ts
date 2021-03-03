@@ -7,11 +7,8 @@ import { AssessmentTargetComponent } from "./components/assessment-target/assess
 
 @NgModule({
 	declarations: [AssessmentTargetComponent],
-	imports: [
-		SharedModule,
-		AssessmentRoutingModule
-	],
+	imports: [SharedModule, AssessmentRoutingModule],
 	providers: [EvaluatorsFacade, SelectedAssignmentFacade],
 	exports: [AssessmentTargetComponent]
 })
-export class AssessmentModule { }
+export class AssessmentModule {}

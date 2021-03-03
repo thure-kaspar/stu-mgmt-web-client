@@ -1,4 +1,10 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import {
+	HttpErrorResponse,
+	HttpEvent,
+	HttpHandler,
+	HttpInterceptor,
+	HttpRequest
+} from "@angular/common/http";
 import { Injectable, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, throwError } from "rxjs";
@@ -8,10 +14,7 @@ import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptorService implements HttpInterceptor {
-
-	constructor(
-		private injector: Injector
-	) { }
+	constructor(private injector: Injector) {}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(req).pipe(catchError(x => this.handleHttpError(x)));

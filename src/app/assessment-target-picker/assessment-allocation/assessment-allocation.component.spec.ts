@@ -8,9 +8,8 @@ describe("AssessmentAllocationComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ AssessmentAllocationComponent ]
-		})
-			.compileComponents();
+			declarations: [AssessmentAllocationComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

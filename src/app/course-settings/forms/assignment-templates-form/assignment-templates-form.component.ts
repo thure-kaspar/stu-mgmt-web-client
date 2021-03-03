@@ -8,30 +8,30 @@ import { FormBuilder, Validators, FormArray, FormGroup } from "@angular/forms";
 	styleUrls: ["./assignment-templates-form.component.scss"]
 })
 export class AssignmentTemplatesForm implements OnInit {
-
 	@Input() form: FormGroup;
 
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
-	constructor(private fb: FormBuilder) { }
+	constructor(private fb: FormBuilder) {}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	addAssignmentTemplate(template?: AssignmentTemplateDto): void {
-		this.getAssignmentTemplates().push(this.fb.group({
-			id: [template?.id],
-			templateName: [template?.templateName || "Unnamed template", Validators.required],
-			name: [template?.name || null],
-			state: [template?.state || null],
-			type: [template?.type || null],
-			collaboration: [template?.collaboration || null],
-			points: [template?.points ||null],
-			bonusPoints: [template?.bonusPoints || null],
-			timespanDays: [template?.timespanDays || null]
-		}));
+		this.getAssignmentTemplates().push(
+			this.fb.group({
+				id: [template?.id],
+				templateName: [template?.templateName || "Unnamed template", Validators.required],
+				name: [template?.name || null],
+				state: [template?.state || null],
+				type: [template?.type || null],
+				collaboration: [template?.collaboration || null],
+				points: [template?.points || null],
+				bonusPoints: [template?.bonusPoints || null],
+				timespanDays: [template?.timespanDays || null]
+			})
+		);
 	}
 
 	removeAssignmentTemplate(index: number): void {
@@ -43,7 +43,7 @@ export class AssignmentTemplatesForm implements OnInit {
 	}
 
 	getAssignmentTemplateName(index: number): string {
-		return this.form.get("config.assignmentTemplates." + index ).get("templateName").value as string;
+		return this.form.get("config.assignmentTemplates." + index).get("templateName")
+			.value as string;
 	}
-
 }

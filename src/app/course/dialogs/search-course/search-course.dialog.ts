@@ -19,7 +19,6 @@ import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
-
 	title = "";
 	shortname: string;
 	selectedSemester = getSemester();
@@ -30,8 +29,12 @@ export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	@ViewChild(Paginator, { static: true }) paginator: Paginator;
 
-	constructor(public dialogRef: MatDialogRef<SearchCourseDialog, CourseDto[]>,
-				private courseService: CoursesService) { super(); }
+	constructor(
+		public dialogRef: MatDialogRef<SearchCourseDialog, CourseDto[]>,
+		private courseService: CoursesService
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.searchCourses();
@@ -51,14 +54,16 @@ export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 	searchCourses(triggeredByPaginator = false): void {
 		const [skip, take] = this.paginator.getSkipAndTake();
 
-		this.subs.sink = this.courseService.getCourses(skip, take, this.shortname, this.selectedSemester, this.title, "response").subscribe(
-			response => {
-				if (!triggeredByPaginator) this.paginator.goToFirstPage();
-				this.paginator.setTotalCountFromHttp(response);
-				this.dataSource$.next(new MatTableDataSource(response.body));
-			},
-			error => console.log(error)
-		);
+		this.subs.sink = this.courseService
+			.getCourses(skip, take, this.shortname, this.selectedSemester, this.title, "response")
+			.subscribe(
+				response => {
+					if (!triggeredByPaginator) this.paginator.goToFirstPage();
+					this.paginator.setTotalCountFromHttp(response);
+					this.dataSource$.next(new MatTableDataSource(response.body));
+				},
+				error => console.log(error)
+			);
 	}
 
 	/** Selects the given row. Removes selection, if already selected. */
@@ -68,7 +73,5 @@ export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 		} else {
 			this.selection.select(row);
 		}
-		
 	}
-
 }

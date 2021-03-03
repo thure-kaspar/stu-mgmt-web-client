@@ -1,7 +1,10 @@
 <form id="course-creation-form" class="form-container" [formGroup]="form" autocomplete="off">
-
-	<mat-tab-group color="accent" animationDuration="0ms" [selectedIndex]="selectedIndex" (selectedIndexChange)="tabChanged($event)">
-
+	<mat-tab-group
+		color="accent"
+		animationDuration="0ms"
+		[selectedIndex]="selectedIndex"
+		(selectedIndexChange)="tabChanged($event)"
+	>
 		<mat-tab label="{{ 'Misc.BasicData' | translate }}">
 			<app-course-form [form]="form" [isEditMode]="true"></app-course-form>
 		</mat-tab>
@@ -12,11 +15,11 @@
 			</mat-tab>
 
 			<mat-tab label="{{ 'Misc.Secrets' | translate }}">
-				<div id="secrets">			
+				<div id="secrets">
 					<mat-form-field>
-						<mat-label>{{ 'Common.Password' | translate }}</mat-label>
-						<input matInput formControlName="password">
-						<mat-hint>{{ 'Text.CourseConfig.Password' | translate }}</mat-hint>
+						<mat-label>{{ "Common.Password" | translate }}</mat-label>
+						<input matInput formControlName="password" />
+						<mat-hint>{{ "Text.CourseConfig.Password" | translate }}</mat-hint>
 					</mat-form-field>
 				</div>
 			</mat-tab>
@@ -27,19 +30,37 @@
 
 			<mat-tab label="{{ 'Domain.AssignmentTemplates' | translate }}">
 				<div id="assignment-templates-tab">
-					<button type="button" id="btn-add-assignment-template" mat-flat-button color="accent" (click)="openCreateAssignmentTemplateDialog()">
-						<mat-icon>add</mat-icon>{{ 'Action.Custom.AddAssignmentTemplate' | translate }}
-					</button> 
-					
+					<button
+						type="button"
+						id="btn-add-assignment-template"
+						mat-flat-button
+						color="accent"
+						(click)="openCreateAssignmentTemplateDialog()"
+					>
+						<mat-icon>add</mat-icon
+						>{{ "Action.Custom.AddAssignmentTemplate" | translate }}
+					</button>
+
 					<div class="assignment-template-list">
 						<mat-card *ngFor="let template of assignmentTemplates$ | async">
 							<mat-card-title class="assignment-template">
 								<span class="left">
-									{{template.templateName}}
+									{{ template.templateName }}
 								</span>
 								<span class="right">
-									<button mat-stroked-button (click)="openEditAssignmentTemplateDialog(template)">{{ 'Action.Edit' | translate }}</button>
-									<button mat-stroked-button color="warn" (click)="deleteAssignmentTemplate(template)">{{ 'Action.Delete' | translate }}</button>
+									<button
+										mat-stroked-button
+										(click)="openEditAssignmentTemplateDialog(template)"
+									>
+										{{ "Action.Edit" | translate }}
+									</button>
+									<button
+										mat-stroked-button
+										color="warn"
+										(click)="deleteAssignmentTemplate(template)"
+									>
+										{{ "Action.Delete" | translate }}
+									</button>
 								</span>
 							</mat-card-title>
 						</mat-card>
@@ -49,13 +70,16 @@
 
 			<mat-tab disabled>
 				<ng-template mat-tab-label>
-					<button mat-flat-button color="accent" [disabled]="form.invalid || selectedIndex == 4" (click)="onSave()">{{ 'Action.Save' | translate }}</button>
+					<button
+						mat-flat-button
+						color="accent"
+						[disabled]="form.invalid || selectedIndex == 4"
+						(click)="onSave()"
+					>
+						{{ "Action.Save" | translate }}
+					</button>
 				</ng-template>
 			</mat-tab>
-			
 		</ng-container>
-
 	</mat-tab-group>
-
 </form>
-

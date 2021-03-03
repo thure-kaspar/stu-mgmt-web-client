@@ -6,15 +6,8 @@ import { AdmissionStatusComponent } from "./components/admission-status/admissio
 import { AdmissionRuleComponent } from "./components/admission-rule/admission-rule.component";
 
 @NgModule({
-	declarations: [
-		PointsOverviewComponent,
-		AdmissionStatusComponent,
-		AdmissionRuleComponent
-	],
-	imports: [
-		SharedModule,
-		AdmissionStatusRoutingModule
-	],
+	declarations: [PointsOverviewComponent, AdmissionStatusComponent, AdmissionRuleComponent],
+	imports: [SharedModule, AdmissionStatusRoutingModule],
 	exports: [AdmissionRuleComponent]
 })
-export class AdmissionStatusModule { }
+export class AdmissionStatusModule {}

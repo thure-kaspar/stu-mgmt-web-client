@@ -8,9 +8,8 @@ describe("AdmissionRuleComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ AdmissionRuleComponent ]
-		})
-			.compileComponents();
+			declarations: [AdmissionRuleComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

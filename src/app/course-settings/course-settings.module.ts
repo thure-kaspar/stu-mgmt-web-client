@@ -12,25 +12,22 @@ import { SharedModule } from "../shared/shared.module";
 @NgModule({
 	declarations: [
 		CourseForm,
-		AdmissionCriteriaForm, 
-		GroupSettingsForm, 
-		AssignmentTemplatesForm, 
-		EditCourseComponent, 
-		CreateAssignmentTemplateDialog, 
+		AdmissionCriteriaForm,
+		GroupSettingsForm,
+		AssignmentTemplatesForm,
+		EditCourseComponent,
+		CreateAssignmentTemplateDialog,
 		EditAssignmentTemplateDialog
 	],
-	imports: [
-		SharedModule,
-		CourseSettingsRoutingModule
-	],
+	imports: [SharedModule, CourseSettingsRoutingModule],
 	exports: [
 		CourseForm,
-		AdmissionCriteriaForm, 
-		GroupSettingsForm, 
-		AssignmentTemplatesForm, 
-		EditCourseComponent, 
-		CreateAssignmentTemplateDialog, 
+		AdmissionCriteriaForm,
+		GroupSettingsForm,
+		AssignmentTemplatesForm,
+		EditCourseComponent,
+		CreateAssignmentTemplateDialog,
 		EditAssignmentTemplateDialog
 	]
 })
-export class CourseSettingsModule { }
+export class CourseSettingsModule {}

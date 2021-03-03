@@ -6,10 +6,6 @@ import { CourseSettingsModule } from "../course-settings/course-settings.module"
 
 @NgModule({
 	declarations: [CreateCourseComponent],
-	imports: [
-		SharedModule,
-		CourseCreatorRoutingModule,
-		CourseSettingsModule
-	]
+	imports: [SharedModule, CourseCreatorRoutingModule, CourseSettingsModule]
 })
-export class CourseCreatorModule { }
+export class CourseCreatorModule {}

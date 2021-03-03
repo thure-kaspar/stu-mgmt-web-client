@@ -4,7 +4,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { take, takeLast, delay, filter } from "rxjs/operators";
 import { CourseDto, CoursesService } from "../../../../../api";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import {
+	ConfirmDialog,
+	ConfirmDialogData
+} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { CourseMembershipsFacade } from "../../../shared/services/course-memberships.facade";
 import { CourseFacade } from "../../../shared/services/course.facade";
@@ -19,17 +22,20 @@ import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnDestroy {
-
 	private course: CourseDto;
 
-	constructor(private route: ActivatedRoute,
-				private router: Router,
-				private courseService: CoursesService,
-				private courseMemberships: CourseMembershipsFacade,
-				public participantFacade: ParticipantFacade,
-				public courseFacade: CourseFacade,
-				private dialog: MatDialog,
-				private toast: ToastService) { super(); }
+	constructor(
+		private route: ActivatedRoute,
+		private router: Router,
+		private courseService: CoursesService,
+		private courseMemberships: CourseMembershipsFacade,
+		public participantFacade: ParticipantFacade,
+		public courseFacade: CourseFacade,
+		private dialog: MatDialog,
+		private toast: ToastService
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.loadCourse();
@@ -41,28 +47,36 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnD
 	loadCourse(): void {
 		const courseId = this.route.snapshot.paramMap.get("courseId");
 		this.subs.sink = this.courseFacade.loadCourse(courseId).subscribe({
-			next: (course) => this.course = course,
-			error: (error) => {
+			next: course => (this.course = course),
+			error: error => {
 				// If user is not a member of this course, open JoinCourseDialog
 				if (isNotACourseMember(error)) {
-					this.dialog.open<JoinCourseDialog, string, boolean>(JoinCourseDialog, { data: courseId }).afterClosed().subscribe(
-						joined => {
+					this.dialog
+						.open<JoinCourseDialog, string, boolean>(JoinCourseDialog, {
+							data: courseId
+						})
+						.afterClosed()
+						.subscribe(joined => {
 							if (joined) {
 								// If user joined, try load the course again
 								this.loadCourse();
 
-								this.subs.sink = this.participantFacade.participant$.pipe(filter(p => !!p), take(1)).subscribe(
-									participant => {
+								this.subs.sink = this.participantFacade.participant$
+									.pipe(
+										filter(p => !!p),
+										take(1)
+									)
+									.subscribe(participant => {
 										if (participant.group) {
-											this.toast.info("Message.Custom.AutoJoinedGroup", "", { groupName: participant.group.name });
+											this.toast.info("Message.Custom.AutoJoinedGroup", "", {
+												groupName: participant.group.name
+											});
 										}
-									}
-								); 
+									});
 							} else {
 								this.router.navigateByUrl("courses");
 							}
-						}
-					);
+						});
 				} else if (error.status == 404) {
 					this.router.navigateByUrl("404");
 				}
@@ -74,29 +88,28 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnD
 	leaveCourse(): void {
 		const data: ConfirmDialogData = {
 			title: "Action.Custom.LeaveCourse",
-			params: [this.course.title, this.course.semester] 
+			params: [this.course.title, this.course.semester]
 		};
-		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
-			.afterClosed().subscribe(
-				confirmed => {
-					if (confirmed) {
-						this.courseMemberships.leaveCourse(this.course.id).subscribe(
-							success => {
-								this.router.navigateByUrl("");
-								this.toast.success("Action.Custom.LeaveCourse");
-							},
-							error => {
-								this.toast.apiError(error);
-							}
-						);
-					}
+		this.dialog
+			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
+			.afterClosed()
+			.subscribe(confirmed => {
+				if (confirmed) {
+					this.courseMemberships.leaveCourse(this.course.id).subscribe(
+						success => {
+							this.router.navigateByUrl("");
+							this.toast.success("Action.Custom.LeaveCourse");
+						},
+						error => {
+							this.toast.apiError(error);
+						}
+					);
 				}
-			);
+			});
 	}
 
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
 		this.courseFacade.clear();
 	}
-
 }

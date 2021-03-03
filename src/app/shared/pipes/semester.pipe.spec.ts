@@ -1,7 +1,6 @@
 import { SemesterPipe } from "./semester.pipe";
 
 describe("SemesterPipe", () => {
-
 	let semesterPipe: SemesterPipe;
 
 	beforeEach(() => {
@@ -9,7 +8,6 @@ describe("SemesterPipe", () => {
 	});
 
 	describe("Valid inputs", () => {
-	
 		it("wise1920 -> WiSe 19/20", () => {
 			const result = semesterPipe.transform("wise1920");
 			expect(result).toEqual("WiSe 19/20");
@@ -29,11 +27,9 @@ describe("SemesterPipe", () => {
 			const result = semesterPipe.transform("sose2021");
 			expect(result).toEqual("SoSe 2021");
 		});
-	
 	});
 
 	describe("Invalid inputs", () => {
-		
 		it("Correct syntax, but invalid characters -> ?", () => {
 			const result = semesterPipe.transform("abcd1234");
 			expect(result).toEqual("?");
@@ -53,7 +49,5 @@ describe("SemesterPipe", () => {
 			const result = semesterPipe.transform(null);
 			expect(result).toEqual(null);
 		});
-	
 	});
-
 });

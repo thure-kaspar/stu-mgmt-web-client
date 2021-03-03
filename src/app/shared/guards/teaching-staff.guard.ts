@@ -7,12 +7,11 @@ import { ToastService } from "../services/toast.service";
 
 @Injectable({ providedIn: "root" })
 export class TeachingStaffGuard implements CanActivate {
-
 	constructor(
 		private participantFacade: ParticipantFacade,
 		private router: Router,
 		private toast: ToastService
-	) { }
+	) {}
 
 	// TODO: Will always timeout
 	canActivate(): boolean {
@@ -32,5 +31,4 @@ export class TeachingStaffGuard implements CanActivate {
 		// 	timeoutWith(2000, of(false)),
 		// );
 	}
-
 }

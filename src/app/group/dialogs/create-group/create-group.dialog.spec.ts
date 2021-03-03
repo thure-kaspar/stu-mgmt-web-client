@@ -28,11 +28,10 @@ const mock_MatSnackBar = () => ({
 });
 
 const groupTemplate: Partial<GroupDto> = {
-	courseId: group.courseId,
+	courseId: group.courseId
 };
 
 describe("", () => {
-
 	let component: CreateGroupDialog;
 	let fixture: ComponentFixture<CreateGroupDialog>;
 	let dialogRef: MatDialogRef<CreateGroupDialog>;
@@ -50,8 +49,7 @@ describe("", () => {
 				{ provide: MAT_DIALOG_DATA, useValue: groupTemplate }
 			],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -69,25 +67,20 @@ describe("", () => {
 	});
 
 	describe("Constructor", () => {
-	
 		it("Form values get initialized with values groupTemplate", () => {
 			expect(component.form.get("courseId").value).toEqual(groupTemplate.courseId);
 			// Add more values when they're implemented
 		});
-	
 	});
 
 	describe("onCancel", () => {
-	
 		it("Closes the dialog", () => {
 			component.onCancel();
 			expect(dialogRef.close).toHaveBeenCalled();
 		});
-	
 	});
 
 	describe("onSaveSingle", () => {
-	
 		it("Calls the GroupService for creation", async () => {
 			const expected = copy(group);
 			expected.id = undefined;
@@ -106,7 +99,5 @@ describe("", () => {
 			component.onSaveSingle();
 			expect(snackbar.open).toHaveBeenCalled();
 		});
-	
 	});
-
 });

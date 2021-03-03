@@ -14,7 +14,6 @@ const mock_Router = () => ({
 });
 
 describe("AuthGuard", () => {
-
 	let adminGuard: AdminGuard;
 	let authService: AuthService;
 	let router: Router;
@@ -28,8 +27,7 @@ describe("AuthGuard", () => {
 				{ provide: Router, useFactory: mock_Router }
 			],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -49,9 +47,7 @@ describe("AuthGuard", () => {
 	});
 
 	describe("canActivate", () => {
-
 		describe("Allows", () => {
-		
 			it("User is MGMT_Admin -> Returns true", () => {
 				authToken.role = AuthTokenDto.RoleEnum.MGTMADMIN;
 				authService.getAuthToken = jest.fn().mockReturnValueOnce(authToken);
@@ -59,7 +55,7 @@ describe("AuthGuard", () => {
 				const result = adminGuard.canActivate();
 				expect(result).toEqual(true);
 			});
-	
+
 			it("User is SYSTEM_ADMIN -> Returns true", () => {
 				authToken.role = AuthTokenDto.RoleEnum.SYSTEMADMIN;
 				authService.getAuthToken = jest.fn().mockReturnValueOnce(authToken);
@@ -67,11 +63,9 @@ describe("AuthGuard", () => {
 				const result = adminGuard.canActivate();
 				expect(result).toEqual(true);
 			});
-		
 		});
 
 		describe("Blocks", () => {
-		
 			it("User is USER -> Returns false and navigates to login", () => {
 				authToken.role = AuthTokenDto.RoleEnum.USER;
 				authService.getAuthToken = jest.fn().mockReturnValueOnce(authToken);
@@ -89,9 +83,6 @@ describe("AuthGuard", () => {
 				expect(router.navigateByUrl).toHaveBeenCalledWith("/login");
 				expect(result).toEqual(false);
 			});
-		
 		});
-	
 	});
-
 });

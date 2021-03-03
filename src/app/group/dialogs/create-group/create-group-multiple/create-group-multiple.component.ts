@@ -9,18 +9,19 @@ import { SnackbarService } from "../../../../shared/services/snackbar.service";
 	styleUrls: ["./create-group-multiple.component.scss"]
 })
 export class CreateGroupMultipleComponent implements OnInit {
-
 	@Input() courseId: string;
 	@Output() onGroupsCreated = new EventEmitter<GroupDto[]>();
 
 	/** Form with the structure of a GroupCreateBulkDto. */
-	form: FormGroup
+	form: FormGroup;
 	/** Determines, wether the user wants to specify group names explicitly or use a naming schema. */
 	useNamingSchema: boolean;
 
-	constructor(private fb: FormBuilder,
-				private groupService: GroupsService,
-				private snackbar: SnackbarService) {
+	constructor(
+		private fb: FormBuilder,
+		private groupService: GroupsService,
+		private snackbar: SnackbarService
+	) {
 		this.form = this.fb.group({
 			names: [null],
 			nameSchema: [null],
@@ -28,8 +29,7 @@ export class CreateGroupMultipleComponent implements OnInit {
 		});
 	}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	onChange(): void {
 		this.form.reset();
@@ -37,7 +37,7 @@ export class CreateGroupMultipleComponent implements OnInit {
 
 	onSave(): void {
 		const groupCreateBulk: GroupCreateBulkDto = this.form.value;
-		
+
 		if (!this.useNamingSchema) {
 			groupCreateBulk.names = (this.form.get("names").value as string)?.split("\n");
 			groupCreateBulk.names = groupCreateBulk.names.filter(name => name.length > 1); // Remove empty lines
@@ -51,5 +51,4 @@ export class CreateGroupMultipleComponent implements OnInit {
 			}
 		);
 	}
-
 }

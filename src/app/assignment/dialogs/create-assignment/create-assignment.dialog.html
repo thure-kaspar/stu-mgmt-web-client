@@ -1,15 +1,22 @@
 <div class="dialog-container">
-
 	<mat-card-title mat-dialog-title class="dialog-title card-title">
 		{{ 'Title.CreateAssignment' | translate }}
 		<mat-menu #templateMenu="matMenu">
-			<div id="template-menu-container">	
-				<button mat-menu-item *ngFor="let template of templates" (click)="fillInTemplate(template)">
+			<div id="template-menu-container">
+				<button
+					mat-menu-item
+					*ngFor="let template of templates"
+					(click)="fillInTemplate(template)"
+				>
 					{{template.templateName}}
 				</button>
 			</div>
 		</mat-menu>
-		<button mat-icon-button matTooltip="Select assignment template" [matMenuTriggerFor]="templateMenu">
+		<button
+			mat-icon-button
+			matTooltip="Select assignment template"
+			[matMenuTriggerFor]="templateMenu"
+		>
 			<mat-icon class="icon-light" color="accent">file_copy</mat-icon>
 		</button>
 	</mat-card-title>
@@ -17,9 +24,16 @@
 	<div mat-dialog-content class="dialog-content">
 		<app-assignment-form></app-assignment-form>
 	</div>
-	
+
 	<div mat-dialog-actions class="actions">
-		<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form?.isInvalid()">{{ 'Action.Save' | translate }}</button>
+		<button
+			mat-flat-button
+			(click)="onSave()"
+			color="accent"
+			[disabled]="this.form?.isInvalid()"
+		>
+			{{ 'Action.Save' | translate }}
+		</button>
 		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
 	</div>
 </div>

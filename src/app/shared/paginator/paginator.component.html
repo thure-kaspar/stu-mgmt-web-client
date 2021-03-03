@@ -1,8 +1,9 @@
-	<mat-paginator class="bg-transparent"
-  		[length]="totalCount"
-  		[pageSize]="pageSize"
-  		[pageIndex]="_currentPage"
-		(page)="_onPageChanged($event.pageIndex)"
-		[pageSizeOptions]="pageSizeOptions"
-	>
-	</mat-paginator>
+<mat-paginator
+	class="bg-transparent"
+	[length]="totalCount"
+	[pageSize]="pageSize"
+	[pageIndex]="_currentPage"
+	(page)="_onPageChanged($event.pageIndex)"
+	[pageSizeOptions]="pageSizeOptions"
+>
+</mat-paginator>

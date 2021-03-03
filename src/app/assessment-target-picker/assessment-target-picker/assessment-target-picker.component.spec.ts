@@ -8,9 +8,8 @@ describe("AssessmentTargetPickerComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ AssessmentTargetPickerComponent ]
-		})
-			.compileComponents();
+			declarations: [AssessmentTargetPickerComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

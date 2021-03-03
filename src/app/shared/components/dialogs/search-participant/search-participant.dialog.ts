@@ -26,10 +26,9 @@ class ParticipantsFilter {
 	styleUrls: ["./search-participant.dialog.scss"]
 })
 export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnInit {
-
 	participants: ParticipantDto[];
 	filter = new ParticipantsFilter();
-	displayedColumns: string[] = ["select", "username", "displayName", "role" ];
+	displayedColumns: string[] = ["select", "username", "displayName", "role"];
 	dataSource: MatTableDataSource<ParticipantDto>;
 	selection = new SelectionModel<ParticipantDto>(false, []);
 
@@ -37,18 +36,21 @@ export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnI
 
 	@ViewChild(Paginator, { static: true }) paginator: Paginator;
 
-	constructor(private dialogRef: MatDialogRef<SearchParticipantDialog>,
-				@Inject(MAT_DIALOG_DATA) private courseId: string,
-				private courseParticipants: CourseParticipantsService) { super(); }
+	constructor(
+		private dialogRef: MatDialogRef<SearchParticipantDialog>,
+		@Inject(MAT_DIALOG_DATA) private courseId: string,
+		private courseParticipants: CourseParticipantsService
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.searchParticipants();
 
 		// Subscribe to changes of username filter: Trigger search 500ms after user stopped typing
 		this.subs.sink = this.usernameFilterChangedSubject
-			.pipe(debounceTime(300)).subscribe(() => 
-				this.searchParticipants()
-			);
+			.pipe(debounceTime(300))
+			.subscribe(() => this.searchParticipants());
 	}
 
 	/** Closes the dialog and returns `undefined`. */
@@ -64,27 +66,22 @@ export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnI
 	searchParticipants(triggeredByPaginator = false): void {
 		const skip = triggeredByPaginator ? this.paginator.getSkip() : 0;
 		const take = this.paginator.pageSize;
-		
+
 		const roles = [];
 		if (this.filter.includeTutors) roles.push(ParticipantDto.RoleEnum.TUTOR);
 		if (this.filter.includeLecturers) roles.push(ParticipantDto.RoleEnum.LECTURER);
 		if (this.filter.includeStudents) roles.push(ParticipantDto.RoleEnum.STUDENT);
 
-		this.courseParticipants.getUsersOfCourse(
-			this.courseId,
-			skip,
-			take,
-			roles,
-			this.filter.username,
-			"response"
-		).subscribe(
-			response => {
-				this.dataSource = new MatTableDataSource(response.body);
-				this.paginator.setTotalCountFromHttp(response);
-				if (!triggeredByPaginator) this.paginator.goToFirstPage();
-			},
-			error => console.log(error)
-		);
+		this.courseParticipants
+			.getUsersOfCourse(this.courseId, skip, take, roles, this.filter.username, "response")
+			.subscribe(
+				response => {
+					this.dataSource = new MatTableDataSource(response.body);
+					this.paginator.setTotalCountFromHttp(response);
+					if (!triggeredByPaginator) this.paginator.goToFirstPage();
+				},
+				error => console.log(error)
+			);
 	}
 
 	/** Selects the given row. Removes selection, if already selected. */
@@ -94,19 +91,19 @@ export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnI
 		} else {
 			this.selection.select(row);
 		}
-			
 	}
-	
+
 	/** Whether the number of selected elements matches the total number of rows. */
 	isAllSelected(): boolean {
 		const numSelected = this.selection.selected.length;
 		const numRows = this.dataSource.data.length;
 		return numSelected === numRows;
 	}
-	
+
 	/** Selects all rows if they are not all selected; otherwise clear selection. */
 	masterToggle(): void {
-		this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(row => this.selection.select(row));
+		this.isAllSelected()
+			? this.selection.clear()
+			: this.dataSource.data.forEach(row => this.selection.select(row));
 	}
-
 }

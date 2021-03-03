@@ -1,16 +1,26 @@
 <div class="dialog-container" cdkFocusRegionstart>
-	<mat-card-title>{{ 'Action.Custom.ChangeRole' | translate }}: {{data.participant.displayName}}</mat-card-title>
+	<mat-card-title
+		>{{ 'Action.Custom.ChangeRole' | translate }}:
+		{{data.participant.displayName}}</mat-card-title
+	>
 
 	<!-- <label>{{ 'Property.User.CourseRole' | translate }}</label> -->
 	<mat-radio-group id="roles-group" [(ngModel)]="selectedRole">
-		<mat-radio-button [value]="roles.STUDENT">{{ 'Enum.CourseRole.' + roles.STUDENT | translate }}</mat-radio-button>
-		<mat-radio-button [value]="roles.TUTOR">{{ 'Enum.CourseRole.' + roles.TUTOR | translate }}</mat-radio-button>
-		<mat-radio-button [value]="roles.LECTURER">{{ 'Enum.CourseRole.' + roles.LECTURER | translate }}</mat-radio-button>
+		<mat-radio-button [value]="roles.STUDENT"
+			>{{ 'Enum.CourseRole.' + roles.STUDENT | translate }}</mat-radio-button
+		>
+		<mat-radio-button [value]="roles.TUTOR"
+			>{{ 'Enum.CourseRole.' + roles.TUTOR | translate }}</mat-radio-button
+		>
+		<mat-radio-button [value]="roles.LECTURER"
+			>{{ 'Enum.CourseRole.' + roles.LECTURER | translate }}</mat-radio-button
+		>
 	</mat-radio-group>
 
 	<div class="button-container">
-		<button mat-flat-button color="accent" (click)="onSave()">{{ 'Action.Save' | translate }}</button>
+		<button mat-flat-button color="accent" (click)="onSave()">
+			{{ 'Action.Save' | translate }}
+		</button>
 		<button mat-flat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
 	</div>
-
 </div>

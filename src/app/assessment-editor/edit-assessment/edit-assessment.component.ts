@@ -2,7 +2,18 @@ import { Location } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subject } from "rxjs";
-import { AssessmentDto, AssessmentEventDto, AssessmentsService, AssessmentUpdateDto, AssignmentDto, AssignmentsService, GroupDto, GroupsService, PartialAssessmentDto, ParticipantDto } from "../../../../api";
+import {
+	AssessmentDto,
+	AssessmentEventDto,
+	AssessmentsService,
+	AssessmentUpdateDto,
+	AssignmentDto,
+	AssignmentsService,
+	GroupDto,
+	GroupsService,
+	PartialAssessmentDto,
+	ParticipantDto
+} from "../../../../api";
 import { DialogService } from "../../shared/services/dialog.service";
 import { ParticipantFacade } from "../../shared/services/participant.facade";
 import { ToastService } from "../../shared/services/toast.service";
@@ -15,7 +26,6 @@ import { AssessmentForm } from "../forms/assessment-form/assessment-form.compone
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAssessmentComponent implements OnInit {
-
 	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
 
 	assessment$ = new Subject<AssessmentDto>();
@@ -48,13 +58,19 @@ export class EditAssessmentComponent implements OnInit {
 		private location: Location,
 		private dialog: DialogService,
 		private toast: ToastService
-	) { }
+	) {}
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
 		this.assignmentId = this.route.snapshot.params.assignmentId;
 		this.assessmentId = this.route.snapshot.params.assessmentId;
-		this.routeToAssessmentsCmds = ["courses", this.courseId, "assignments", this.assignmentId, "assessments"];
+		this.routeToAssessmentsCmds = [
+			"courses",
+			this.courseId,
+			"assignments",
+			this.assignmentId,
+			"assessments"
+		];
 		this.loadAssessment();
 	}
 
@@ -63,9 +79,9 @@ export class EditAssessmentComponent implements OnInit {
 		this.assignment = assessment.assignment;
 		this.group = assessment.group;
 		this.targetedParticipant = assessment.participant;
-		
+
 		// Empty the form
-		this.form.form.reset(); 
+		this.form.form.reset();
 		this.form.getPartialAssessments().clear();
 
 		// Apply update to form
@@ -79,7 +95,8 @@ export class EditAssessmentComponent implements OnInit {
 
 	/** Loads the assessment. Uses the current route params to determine courseId, assignmentId and assessmentId. */
 	loadAssessment(): void {
-		this.assessmentService.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId)
+		this.assessmentService
+			.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId)
 			.subscribe(
 				result => {
 					this.assignLoadAssessmentResult(result);
@@ -92,7 +109,8 @@ export class EditAssessmentComponent implements OnInit {
 
 	loadAssessmentEvents(): void {
 		if (!this.showEvents) {
-			this.assessmentService.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
+			this.assessmentService
+				.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
 				.subscribe(
 					result => {
 						this.events = result;
@@ -116,18 +134,20 @@ export class EditAssessmentComponent implements OnInit {
 		};
 
 		// Ensure that assessmentId of partial assessments is set
-		update.addPartialAssessments?.forEach(p => p.assessmentId = this.assessmentId);
-		update.updatePartialAssignments?.forEach(p => p.assessmentId = this.assessmentId);
+		update.addPartialAssessments?.forEach(p => (p.assessmentId = this.assessmentId));
+		update.updatePartialAssignments?.forEach(p => (p.assessmentId = this.assessmentId));
 
-		this.assessmentService.updateAssessment(update, this.courseId, this.assignmentId, this.assessmentId).subscribe(
-			result => {
-				this.assignLoadAssessmentResult(result);
-				this.toast.success("Message.Saved");
-			},
-			error => {
-				this.toast.apiError(error);
-			}
-		);
+		this.assessmentService
+			.updateAssessment(update, this.courseId, this.assignmentId, this.assessmentId)
+			.subscribe(
+				result => {
+					this.assignLoadAssessmentResult(result);
+					this.toast.success("Message.Saved");
+				},
+				error => {
+					this.toast.apiError(error);
+				}
+			);
 	}
 
 	addToRemovedPartials(partialAssessmentId: number): void {
@@ -139,18 +159,16 @@ export class EditAssessmentComponent implements OnInit {
 
 	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
 	groupSelectedHandler(group: GroupDto): void {
-		this.router.navigate(
-			[...this.routeToAssessmentsCmds, "editor", "create"],
-			{ fragment: "group" + group.id }
-		);
+		this.router.navigate([...this.routeToAssessmentsCmds, "editor", "create"], {
+			fragment: "group" + group.id
+		});
 	}
 
 	/** Sets the selected user and removes the selected group, it it exists. */
 	userSelectedHandler(participant: ParticipantDto): void {
-		this.router.navigate(
-			[...this.routeToAssessmentsCmds, "editor", "create"],
-			{ fragment: "user" + participant.userId }
-		);
+		this.router.navigate([...this.routeToAssessmentsCmds, "editor", "create"], {
+			fragment: "user" + participant.userId
+		});
 	}
 
 	/**
@@ -161,13 +179,11 @@ export class EditAssessmentComponent implements OnInit {
 		// If user has inserted data in the form
 		if (this.form.form.dirty) {
 			// Ask user, if he wants to discard his unsaved changes
-			this.dialog.openUnsavedChangesDialog().subscribe(
-				confirmed => {
-					if (confirmed) {
-						this.navigateToAssessment(assessmentId);
-					}
+			this.dialog.openUnsavedChangesDialog().subscribe(confirmed => {
+				if (confirmed) {
+					this.navigateToAssessment(assessmentId);
 				}
-			);
+			});
 		} else {
 			this.navigateToAssessment(assessmentId);
 		}
@@ -199,5 +215,4 @@ export class EditAssessmentComponent implements OnInit {
 		this.events = undefined;
 		this.showEvents = false;
 	}
-
 }

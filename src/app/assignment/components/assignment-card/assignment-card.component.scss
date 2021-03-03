@@ -4,7 +4,7 @@
 	margin-bottom: 16px;
 	display: flex;
 	flex-direction: column;
-	padding-bottom: 8px!important;
+	padding-bottom: 8px !important;
 }
 
 .comment {
@@ -23,9 +23,9 @@
 }
 
 .assignment-card-title {
-	margin-top: -16px!important;
-	margin-bottom: -8px!important;
-	align-items: center!important;
+	margin-top: -16px !important;
+	margin-bottom: -8px !important;
+	align-items: center !important;
 	justify-content: space-between;
 	display: flex;
 	padding-bottom: 12px;
@@ -45,7 +45,7 @@
 
 	mat-chip {
 		justify-content: space-between;
-		
+
 		mat-icon {
 			margin-right: 8px;
 		}
@@ -69,19 +69,21 @@
 }
 
 .type-chip {
-	color: white!important;
+	color: white !important;
 }
 
-.HOMEWORK { 
-	background-color: rgb(0, 89, 255)!important;
+.HOMEWORK {
+	background-color: rgb(0, 89, 255) !important;
 }
 
 .TESTAT {
-	background-color: rgb(194, 149, 0)!important;
+	background-color: rgb(194, 149, 0) !important;
 }
 
-.PROJECT, .SEMINAR, .OTHER {
-	background-color:rgb(0, 153, 102)!important;
+.PROJECT,
+.SEMINAR,
+.OTHER {
+	background-color: rgb(0, 153, 102) !important;
 }
 
 .warning {
@@ -102,10 +104,10 @@
 }
 
 .member-card {
-	padding-top: 8px!important;
-	padding-bottom: 8px!important;
+	padding-top: 8px !important;
+	padding-bottom: 8px !important;
 
-	background-color: var(--color-header)!important;
+	background-color: var(--color-header) !important;
 }
 
 .member-card-title {
@@ -114,4 +116,4 @@
 
 .actions a {
 	margin-right: 8px;
-}	
+}

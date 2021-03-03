@@ -7,10 +7,6 @@ import { AssessmentModule } from "../assessment/assessment.module";
 
 @NgModule({
 	declarations: [AssessmentViewerComponent, PartialAssessmentComponent],
-	imports: [
-		SharedModule,
-		AssessmentViewerRoutingModule,
-		AssessmentModule
-	]
+	imports: [SharedModule, AssessmentViewerRoutingModule, AssessmentModule]
 })
-export class AssessmentViewerModule { }
+export class AssessmentViewerModule {}

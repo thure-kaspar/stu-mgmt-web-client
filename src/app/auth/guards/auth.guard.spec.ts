@@ -13,7 +13,6 @@ const mock_Router = () => ({
 });
 
 describe("AuthGuard", () => {
-
 	let authGuard: AuthGuard;
 	let authService: AuthService;
 	let router: Router;
@@ -26,8 +25,7 @@ describe("AuthGuard", () => {
 				{ provide: Router, useFactory: mock_Router }
 			],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -41,7 +39,6 @@ describe("AuthGuard", () => {
 	});
 
 	describe("canActivate", () => {
-	
 		it("User is logged in -> Returns true", () => {
 			const result = authGuard.canActivate();
 			expect(result).toEqual(true);
@@ -58,7 +55,5 @@ describe("AuthGuard", () => {
 			const result = authGuard.canActivate();
 			expect(router.navigateByUrl).toBeCalledWith("/login");
 		});
-	
 	});
-
 });

@@ -1,6 +1,13 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { OverlayContainer } from "@angular/cdk/overlay";
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	OnInit,
+	Output,
+	ViewChild
+} from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSidenav } from "@angular/material/sidenav";
 import { NavigationEnd, Router } from "@angular/router";
@@ -23,11 +30,11 @@ import { ToastService } from "../shared/services/toast.service";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent implements OnInit {
-
 	@Output() onLanguageChange = new EventEmitter<string>();
 
 	@ViewChild("drawer") drawer: MatSidenav;
-	isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Handset])
+	isHandset$: Observable<boolean> = this.breakpointObserver
+		.observe([Breakpoints.Small, Breakpoints.Handset])
 		.pipe(
 			map(result => result.matches),
 			shareReplay()
@@ -35,31 +42,34 @@ export class NavigationComponent implements OnInit {
 
 	_isDevelopmentEnv = !environment.production;
 
-	constructor(private breakpointObserver: BreakpointObserver,
-				private router: Router,
-				public authService: AuthService,
-				public courseMemberships: CourseMembershipsFacade,
-				public theme: ThemeService,
-				private overlayContainer: OverlayContainer,
-				private dialog: MatDialog,
-				public snackbar: SnackbarService,
-				private toast: ToastService) {
-
-		router.events.pipe(
-			withLatestFrom(this.isHandset$),
-			filter(([a, b]) => b && a instanceof NavigationEnd)
-		).subscribe(x => this.drawer.close());
+	constructor(
+		private breakpointObserver: BreakpointObserver,
+		private router: Router,
+		public authService: AuthService,
+		public courseMemberships: CourseMembershipsFacade,
+		public theme: ThemeService,
+		private overlayContainer: OverlayContainer,
+		private dialog: MatDialog,
+		public snackbar: SnackbarService,
+		private toast: ToastService
+	) {
+		router.events
+			.pipe(
+				withLatestFrom(this.isHandset$),
+				filter(([a, b]) => b && a instanceof NavigationEnd)
+			)
+			.subscribe(x => this.drawer.close());
 	}
 
 	ngOnInit(): void {
-		this.theme.theme$.subscribe(
-			theme => this.onThemeChange(theme)
-		);
+		this.theme.theme$.subscribe(theme => this.onThemeChange(theme));
 	}
 
 	onThemeChange(theme: string): void {
 		const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
-		const themeClassesToRemove = Array.from(overlayContainerClasses).filter((item: string) => item.includes("-theme"));
+		const themeClassesToRemove = Array.from(overlayContainerClasses).filter((item: string) =>
+			item.includes("-theme")
+		);
 		if (themeClassesToRemove.length) {
 			overlayContainerClasses.remove(...themeClassesToRemove);
 		}
@@ -85,7 +95,8 @@ export class NavigationComponent implements OnInit {
 
 	// TODO: Function is used to allow reloading the course component, if params change -> Search for better solution
 	navigateToCourse(course: CourseDto): void {
-		this.router.navigateByUrl("/").then(x => this.router.navigateByUrl(`/courses/${course.id}`));
+		this.router
+			.navigateByUrl("/")
+			.then(x => this.router.navigateByUrl(`/courses/${course.id}`));
 	}
-
 }

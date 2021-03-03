@@ -2,17 +2,16 @@
 	::ng-deep .mat-form-field-underline {
 		display: none;
 	}
-	
-	::ng-deep .mat-form-field-wrapper{
+
+	::ng-deep .mat-form-field-wrapper {
 		margin-top: -16px;
 		margin-bottom: -16px;
 		vertical-align: middle;
 	}
-	
 }
 
- mat-form-field {
+mat-form-field {
 	width: 128px;
 	padding-left: 4px;
 	border-radius: 4px;
- }
+}

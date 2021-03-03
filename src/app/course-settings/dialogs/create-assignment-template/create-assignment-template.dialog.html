@@ -2,10 +2,16 @@
 	<div>
 		<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
 	</div>
-	
+
 	<div mat-dialog-actions>
-		<button mat-flat-button (click)="onSave()" color="accent" [disabled]="this.form.invalid || this.assignmentTemplatesForm?.getAssignmentTemplates().length != 1">{{ 'Action.Save' | translate }}</button>
+		<button
+			mat-flat-button
+			(click)="onSave()"
+			color="accent"
+			[disabled]="this.form.invalid || this.assignmentTemplatesForm?.getAssignmentTemplates().length != 1"
+		>
+			{{ 'Action.Save' | translate }}
+		</button>
 		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
 	</div>
-
 </div>

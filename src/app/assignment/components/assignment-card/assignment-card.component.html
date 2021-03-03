@@ -1,25 +1,28 @@
 <mat-card class="assignment mat-elevation-z2">
 	<mat-card-title class="assignment-card-title">
 		<span class="font-bold name">
-			<a class="link-none" [routerLink]="[ assignment.id, 'assessments']" *ngIf="participant?.isTeachingStaffMember; else noLink">
-				{{assignment.name}}
+			<a
+				class="link-none"
+				[routerLink]="[assignment.id, 'assessments']"
+				*ngIf="participant?.isTeachingStaffMember; else noLink"
+			>
+				{{ assignment.name }}
 			</a>
 			<ng-template #noLink>
-				<span>{{assignment.name}}</span>
+				<span>{{ assignment.name }}</span>
 			</ng-template>
-			
 		</span>
-		
+
 		<mat-menu #assignmentMenu>
 			<ng-container *ngIf="participant?.isTeachingStaffMember">
 				<button mat-menu-item (click)="openEditDialog()">
 					<mat-icon class="icon-light">edit</mat-icon>
-					<span class="font-bold">{{ 'Action.Edit' | translate }}</span>
+					<span class="font-bold">{{ "Action.Edit" | translate }}</span>
 				</button>
 				<button mat-menu-item (click)="onDelete()">
 					<mat-icon class="icon-light">delete</mat-icon>
 					<span class="font-bold text-red">
-					{{ 'Action.Delete' | translate }}
+						{{ "Action.Delete" | translate }}
 					</span>
 				</button>
 			</ng-container>
@@ -31,11 +34,13 @@
 	</mat-card-title>
 
 	<div class="comment" *ngIf="assignment.comment">
-		<pre class="preformatted">{{assignment.comment}}</pre>
+		<pre class="preformatted">{{ assignment.comment }}</pre>
 	</div>
 
 	<div class="links" *ngIf="assignment.links?.length > 0">
-		<a class="link-none text-light" *ngFor="let link of assignment.links" [href]="link.url">#{{link.name}}</a>
+		<a class="link-none text-light" *ngFor="let link of assignment.links" [href]="link.url"
+			>#{{ link.name }}</a
+		>
 	</div>
 
 	<mat-chip-list class="chips">
@@ -45,43 +50,60 @@
 			<mat-icon *ngIf="assignment.type === typeEnum.PROJECT">build</mat-icon>
 			<mat-icon *ngIf="assignment.type === typeEnum.SEMINAR">description</mat-icon>
 			<mat-icon *ngIf="assignment.type === typeEnum.OTHER">help</mat-icon>
-			<span class="assignment-type">{{ 'Enum.AssignmentType.' + assignment.type | translate }}</span>
+			<span class="assignment-type">{{
+				"Enum.AssignmentType." + assignment.type | translate
+			}}</span>
 		</mat-chip>
 
 		<mat-chip color="primary" selected class="collaboration">
-			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.GROUP || assignment.collaboration === collaborationEnum.GROUPORSINGLE">groups</mat-icon>
-			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.SINGLE">person</mat-icon>
-			<span class="collaboration-type">{{ 'Enum.CollaborationType.' + assignment.collaboration | translate }}</span>
+			<mat-icon
+				*ngIf="
+					assignment.collaboration === collaborationEnum.GROUP ||
+					assignment.collaboration === collaborationEnum.GROUPORSINGLE
+				"
+				>groups</mat-icon
+			>
+			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.SINGLE"
+				>person</mat-icon
+			>
+			<span class="collaboration-type">{{
+				"Enum.CollaborationType." + assignment.collaboration | translate
+			}}</span>
 		</mat-chip>
 	</mat-chip-list>
 
 	<div class="dates" *ngIf="assignment.startDate || assignment.endDate">
 		<span class="startdate" *ngIf="assignment.startDate">
-			<span class="font-bold uppercase text-green">{{ 'Common.Start' | translate }}:</span> {{assignment.startDate | date:"medium" }}
+			<span class="font-bold uppercase text-green">{{ "Common.Start" | translate }}:</span>
+			{{ assignment.startDate | date: "medium" }}
 		</span>
 		<span class="enddate" *ngIf="assignment.endDate">
-			<span class="font-bold uppercase text-red">{{ 'Common.End' | translate }}:</span> {{assignment.endDate | date:"medium" }}
+			<span class="font-bold uppercase text-red">{{ "Common.End" | translate }}:</span>
+			{{ assignment.endDate | date: "medium" }}
 		</span>
 	</div>
 
 	<div class="group" *ngIf="group$ | async as group">
 		<a class="link-none" [routerLink]="['/courses', courseId, 'groups', group.id]">
 			<mat-card-title class="group-title">
-				<span class="text-light">{{ 'Domain.Group' | translate }}:</span>
-				{{group.name}}
+				<span class="text-light">{{ "Domain.Group" | translate }}:</span>
+				{{ group.name }}
 			</mat-card-title>
 		</a>
 
 		<div class="member-list">
 			<mat-card class="member-card mat-elevation-z2" *ngFor="let member of group.members">
 				<mat-card-title class="member-card-title">
-					<a class="link-none member-name" [routerLink]="[ '/courses', courseId, 'users', member.userId ]">
-						{{member.displayName}}
+					<a
+						class="link-none member-name"
+						[routerLink]="['/courses', courseId, 'users', member.userId]"
+					>
+						{{ member.displayName }}
 					</a>
 				</mat-card-title>
-	
+
 				<span class="email" class="text-light" *ngIf="member.email">
-					Email: {{member.email}}
+					Email: {{ member.email }}
 				</span>
 			</mat-card>
 		</div>
@@ -95,18 +117,26 @@
 	</div>
 
 	<div class="actions">
-		<button mat-stroked-button 
+		<button
+			mat-stroked-button
 			*ngIf="participant?.isStudent && assignment.state === 'EVALUATED'"
 			(click)="goToAssessment()"
 		>
-			{{ 'Domain.Assessment' | translate }}
+			{{ "Domain.Assessment" | translate }}
 		</button>
-		<a class="link-none" [routerLink]="[assignment.id, 'assessments']" *ngIf="participant?.isTeachingStaffMember">
-			<button mat-stroked-button >{{ 'Domain.Assessments' | translate }}</button>
+		<a
+			class="link-none"
+			[routerLink]="[assignment.id, 'assessments']"
+			*ngIf="participant?.isTeachingStaffMember"
+		>
+			<button mat-stroked-button>{{ "Domain.Assessments" | translate }}</button>
 		</a>
-		<a class="link-none" [routerLink]="[assignment.id, 'assessments', 'registrations']" *ngIf="participant?.isTeachingStaffMember">
-			<button mat-stroked-button >{{ 'Domain.Registrations' | translate }}</button>
+		<a
+			class="link-none"
+			[routerLink]="[assignment.id, 'assessments', 'registrations']"
+			*ngIf="participant?.isTeachingStaffMember"
+		>
+			<button mat-stroked-button>{{ "Domain.Registrations" | translate }}</button>
 		</a>
 	</div>
-
 </mat-card>

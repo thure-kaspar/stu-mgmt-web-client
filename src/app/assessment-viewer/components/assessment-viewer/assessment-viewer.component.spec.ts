@@ -8,9 +8,8 @@ describe("AssessmentViewerComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ AssessmentViewerComponent ]
-		})
-			.compileComponents();
+			declarations: [AssessmentViewerComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

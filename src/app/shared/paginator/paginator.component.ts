@@ -9,13 +9,12 @@ import { TranslateService } from "@ngx-translate/core";
 	styleUrls: ["./paginator.component.scss"]
 })
 export class Paginator implements OnInit {
-
 	/** The total number of items. (Default: 0) */
 	@Input() totalCount = 0;
 	/** The number of items that should be displayed on a single page. (Default: 15) */
 	@Input() pageSize = 15;
 	/** Set of provided page size options. */
-	@Input() pageSizeOptions = [5, 15, 25, 50, 500]
+	@Input() pageSizeOptions = [5, 15, 25, 50, 500];
 
 	/** Zero-based index of the current page. (Default: 0) */
 	_currentPage = 0;
@@ -23,18 +22,29 @@ export class Paginator implements OnInit {
 	@Output() onPageChanged = new EventEmitter<void>();
 	@ViewChild(MatPaginator, { static: true }) private matPaginator: MatPaginator;
 
-	constructor(private translate: TranslateService) { }
+	constructor(private translate: TranslateService) {}
 
 	ngOnInit(): void {
-		this.matPaginator._intl.itemsPerPageLabel = this.translate.instant("Misc.Paginator.ItemsPerPageLabel");
-		this.matPaginator._intl.nextPageLabel = this.translate.instant("Misc.Paginator.NextPageLabel");
-		this.matPaginator._intl.previousPageLabel = this.translate.instant("Misc.Paginator.PreviousPageLabel");
-		this.matPaginator._intl.firstPageLabel = this.translate.instant("Misc.Paginator.FirstPageLabel");
-		this.matPaginator._intl.lastPageLabel = this.translate.instant("Misc.Paginator.LastPageLabel");
-		this.matPaginator._intl.getRangeLabel = (a, b, c) => this.translate.instant("Misc.Paginator.RangeLabel", {
-			currentPage: this._currentPage + 1,
-			numberOfPages: this.matPaginator.getNumberOfPages()
-		});
+		this.matPaginator._intl.itemsPerPageLabel = this.translate.instant(
+			"Misc.Paginator.ItemsPerPageLabel"
+		);
+		this.matPaginator._intl.nextPageLabel = this.translate.instant(
+			"Misc.Paginator.NextPageLabel"
+		);
+		this.matPaginator._intl.previousPageLabel = this.translate.instant(
+			"Misc.Paginator.PreviousPageLabel"
+		);
+		this.matPaginator._intl.firstPageLabel = this.translate.instant(
+			"Misc.Paginator.FirstPageLabel"
+		);
+		this.matPaginator._intl.lastPageLabel = this.translate.instant(
+			"Misc.Paginator.LastPageLabel"
+		);
+		this.matPaginator._intl.getRangeLabel = (a, b, c) =>
+			this.translate.instant("Misc.Paginator.RangeLabel", {
+				currentPage: this._currentPage + 1,
+				numberOfPages: this.matPaginator.getNumberOfPages()
+			});
 	}
 
 	/** Move to first page, if not already there. */
@@ -71,5 +81,4 @@ export class Paginator implements OnInit {
 		this.pageSize = this.matPaginator.pageSize;
 		this.onPageChanged.emit();
 	}
-
 }

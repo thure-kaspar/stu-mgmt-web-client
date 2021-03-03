@@ -17,32 +17,31 @@ import { SelectionModel } from "@angular/cdk/collections";
 	styleUrls: ["./search-assignment.dialog.scss"]
 })
 export class SearchAssignmentDialog implements OnInit {
-
 	dataSource: MatTableDataSource<AssignmentDto>;
 	selection = new SelectionModel<AssignmentDto>(false, null);
-	@ViewChild(MatPaginator) paginator: MatPaginator
+	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns = ["select", "name", "action"]
+	displayedColumns = ["select", "name", "action"];
 
-	constructor(private assignmentService: AssignmentsService,
-				@Inject(MAT_DIALOG_DATA) public courseId: string,
-				private dialogRef: MatDialogRef<SearchAssignmentDialog>) { }
+	constructor(
+		private assignmentService: AssignmentsService,
+		@Inject(MAT_DIALOG_DATA) public courseId: string,
+		private dialogRef: MatDialogRef<SearchAssignmentDialog>
+	) {}
 
 	ngOnInit(): void {
-		this.assignmentService.getAssignmentsOfCourse(this.courseId).subscribe(
-			assignments => {
-				this.dataSource = new MatTableDataSource(assignments);
-				this.dataSource.paginator = this.paginator;
-				this.dataSource.sort = this.sort;
-			}
-		);
+		this.assignmentService.getAssignmentsOfCourse(this.courseId).subscribe(assignments => {
+			this.dataSource = new MatTableDataSource(assignments);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+		});
 	}
 
 	/** Closes the dialog without returning data. */
 	onCancel(): void {
 		this.dialogRef.close();
 	}
-	
+
 	/** Closes the dialog and returns the selected users. */
 	onConfirm(): void {
 		this.dialogRef.close(this.selection.selected);
@@ -62,12 +61,12 @@ export class SearchAssignmentDialog implements OnInit {
 		} else {
 			this.selection.select(row);
 		}
-			
-	}
-		
-	/** Selects all rows if they are not all selected; otherwise clear selection. */
-	masterToggle(): void {
-		this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(row => this.selection.select(row));
 	}
 
+	/** Selects all rows if they are not all selected; otherwise clear selection. */
+	masterToggle(): void {
+		this.isAllSelected()
+			? this.selection.clear()
+			: this.dataSource.data.forEach(row => this.selection.select(row));
+	}
 }

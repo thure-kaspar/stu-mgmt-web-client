@@ -7,12 +7,9 @@ import { FormGroup } from "@angular/forms";
 	styleUrls: ["./group-settings-form.component.scss"]
 })
 export class GroupSettingsForm implements OnInit {
-
 	@Input() form: FormGroup;
 
-	constructor() { }
+	constructor() {}
 
-	ngOnInit(): void {
-	}
-
+	ngOnInit(): void {}
 }

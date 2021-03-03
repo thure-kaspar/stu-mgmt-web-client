@@ -8,15 +8,17 @@
 	width: 100%;
 	column-gap: 48px;
 
-
 	#right {
 		margin-top: -8px;
 	}
 
-
 	@media (max-width: 600px) {
-		#right { order: 1; }
-		#left { order: 2; }
+		#right {
+			order: 1;
+		}
+		#left {
+			order: 2;
+		}
 
 		display: flex;
 		flex-direction: column;

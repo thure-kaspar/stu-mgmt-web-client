@@ -12,7 +12,6 @@ import { SnackbarService } from "../../../shared/services/snackbar.service";
 	styleUrls: ["./register.component.scss"]
 })
 export class RegisterComponent {
-
 	registerForm = this.fb.group({
 		email: ["", [Validators.required, Validators.email]],
 		password: ["", Validators.required],
@@ -21,10 +20,12 @@ export class RegisterComponent {
 
 	errorMessage: Observable<string>;
 
-	constructor(private fb: FormBuilder, 
-				private authService: AuthService,
-				private router: Router,
-				private snackbar: SnackbarService) { }
+	constructor(
+		private fb: FormBuilder,
+		private authService: AuthService,
+		private router: Router,
+		private snackbar: SnackbarService
+	) {}
 
 	register(): void {
 		if (this.registerForm.valid) {
@@ -47,8 +48,11 @@ export class RegisterComponent {
 	}
 
 	getEmailErrorMessage(): string {
-		return this.getEmail().hasError("required") ? "You must enter a value" :
-			this.getEmail().hasError("email") ? "Not a valid email" : "";
+		return this.getEmail().hasError("required")
+			? "You must enter a value"
+			: this.getEmail().hasError("email")
+			? "Not a valid email"
+			: "";
 	}
 
 	getPasswordErrorMessage(): string {
@@ -70,6 +74,4 @@ export class RegisterComponent {
 	getPasswordConfirm(): AbstractControl {
 		return this.registerForm.get("passwordConfirm");
 	}
-
 }
-

@@ -1,11 +1,14 @@
 <div id="create-assessment-container" class="tab">
-
 	<div id="grid">
 		<div id="left">
-			<h2>{{ 'Title.CreateAssessment' | translate }}: {{assignment?.name}}</h2>
+			<h2>{{ "Title.CreateAssessment" | translate }}: {{ assignment?.name }}</h2>
 
-			<p id="review-state-error" class="text-red" *ngIf="assignment?.state !== stateEnum.INREVIEW">
-				<mat-icon>error</mat-icon>{{ 'Error.AssignmentNotInReview' | translate }}
+			<p
+				id="review-state-error"
+				class="text-red"
+				*ngIf="assignment?.state !== stateEnum.INREVIEW"
+			>
+				<mat-icon>error</mat-icon>{{ "Error.AssignmentNotInReview" | translate }}
 			</p>
 
 			<div class="assessment-target">
@@ -20,15 +23,21 @@
 
 			<app-assessment-form [assignment]="assignment"></app-assessment-form>
 
-			<button mat-raised-button color="accent" id="btn-create" [disabled]="form.form.invalid || assignment?.state !== stateEnum.INREVIEW" (click)="onSave()">
-				{{ 'Action.Create' | translate }}
+			<button
+				mat-raised-button
+				color="accent"
+				id="btn-create"
+				[disabled]="form.form.invalid || assignment?.state !== stateEnum.INREVIEW"
+				(click)="onSave()"
+			>
+				{{ "Action.Create" | translate }}
 			</button>
 		</div>
-	
+
 		<div id="right tab">
 			<app-assessment-target-picker
-				[courseId]="courseId"  
-				[assignmentId]="assignmentId" 
+				[courseId]="courseId"
+				[assignmentId]="assignmentId"
 				(onGroupSelected)="groupSelectedHandler($event)"
 				(onUserSelected)="userSelectedHandler($event)"
 				(onSwitchToEdit)="switchToEdit($event)"
@@ -37,6 +46,4 @@
 			</app-assessment-target-picker>
 		</div>
 	</div>
-
 </div>
-

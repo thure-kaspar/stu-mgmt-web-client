@@ -10,7 +10,6 @@ import { AssignmentForm } from "./forms/assignment-form/assignment-form.componen
 import { SearchAssignmentDialog } from "./dialogs/search-assignment/search-assignment.dialog";
 import { AssignmentCardComponent } from "./components/assignment-card/assignment-card.component";
 
-
 @NgModule({
 	declarations: [
 		AssignmentListComponent,
@@ -20,11 +19,7 @@ import { AssignmentCardComponent } from "./components/assignment-card/assignment
 		SearchAssignmentDialog,
 		AssignmentCardComponent
 	],
-	imports: [
-		SharedModule,
-		TranslateModule.forChild({ extend: true }),
-		AssignmentRoutingModule
-	],
+	imports: [SharedModule, TranslateModule.forChild({ extend: true }), AssignmentRoutingModule],
 	exports: [AssignmentListComponent]
 })
-export class AssignmentModule { }
+export class AssignmentModule {}

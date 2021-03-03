@@ -13,19 +13,13 @@ import { SearchParticipantDialog } from "./components/dialogs/search-participant
 
 @NgModule({
 	declarations: [
-		PageNotFoundComponent, 
+		PageNotFoundComponent,
 		ConfirmDialog,
 		Paginator,
 		SemesterPipe,
 		SearchParticipantDialog
 	],
-	imports: [ 
-		CommonModule,
-		AuthModule,
-		MaterialModule,
-		TranslateModule,
-		FormsModule
-	],
+	imports: [CommonModule, AuthModule, MaterialModule, TranslateModule, FormsModule],
 	exports: [
 		CommonModule,
 		AuthModule,
@@ -37,6 +31,6 @@ import { SearchParticipantDialog } from "./components/dialogs/search-participant
 		Paginator,
 		SemesterPipe
 	],
-	providers: [],
+	providers: []
 })
 export class SharedModule {}

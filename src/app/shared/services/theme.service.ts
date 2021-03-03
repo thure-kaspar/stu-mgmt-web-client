@@ -4,7 +4,6 @@ import { distinctUntilChanged } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class ThemeService {
-
 	availableThemes = [
 		{
 			cssClass: "default-theme",
@@ -31,16 +30,21 @@ export class ThemeService {
 		const storedTheme = localStorage.getItem("theme");
 		let theme: string;
 
-		if (!storedTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+		if (
+			!storedTheme &&
+			window.matchMedia &&
+			window.matchMedia("(prefers-color-scheme: dark)").matches
+		) {
 			theme = "dark-theme";
-		} else if(storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
+		} else if (storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
 			theme = storedTheme;
 		} else {
 			theme = "default-theme";
 		}
 
 		this.themeSubject = new BehaviorSubject(theme);
-		this.theme$ = this.themeSubject.asObservable()
+		this.theme$ = this.themeSubject
+			.asObservable()
 			.pipe(distinctUntilChanged((x, y) => x === y));
 	}
 
@@ -56,5 +60,4 @@ export class ThemeService {
 			console.error(`Theme '${cssClass}' is not a registered theme.`);
 		}
 	}
-
 }

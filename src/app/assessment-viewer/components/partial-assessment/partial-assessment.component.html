@@ -1,29 +1,36 @@
 <mat-card>
-
 	<mat-card-title class="card-title">
 		<div class="left">
-			<span [class]="'severity ' + partial.severity">{{ 'Enum.Severity.' + partial.severity | translate }}</span>
-			<span>{{partial.title}}</span>
+			<span [class]="'severity ' + partial.severity">{{
+				"Enum.Severity." + partial.severity | translate
+			}}</span>
+			<span>{{ partial.title }}</span>
 		</div>
 		<div class="right">
 			<span *ngIf="partial.points !== undefined">
-				<span class="text-light">{{ 'Property.PartialAssessment.Points' | translate }}:</span> 
-				{{partial.points}}
+				<span class="text-light"
+					>{{ "Property.PartialAssessment.Points" | translate }}:</span
+				>
+				{{ partial.points }}
 			</span>
 		</div>
 	</mat-card-title>
 
 	<mat-card-content class="content">
 		<div class="comment">
-			<pre class="preformatted">{{partial.comment}}</pre>
+			<pre class="preformatted">{{ partial.comment }}</pre>
 		</div>
 
 		<div class="info">
-			<span *ngIf="partial.type"><span class="font-bold text-light">Type: </span>{{partial.type}}</span>
-			<span *ngIf="partial.path"><span class="font-bold text-light">Path: </span>{{partial.path}}</span>
-			<span *ngIf="partial.line"><span class="font-bold text-light">Line: </span>{{partial.line}}</span>
+			<span *ngIf="partial.type"
+				><span class="font-bold text-light">Type: </span>{{ partial.type }}</span
+			>
+			<span *ngIf="partial.path"
+				><span class="font-bold text-light">Path: </span>{{ partial.path }}</span
+			>
+			<span *ngIf="partial.line"
+				><span class="font-bold text-light">Line: </span>{{ partial.line }}</span
+			>
 		</div>
-
 	</mat-card-content>
-
 </mat-card>

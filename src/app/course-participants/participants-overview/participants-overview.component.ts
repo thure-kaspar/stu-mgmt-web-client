@@ -9,13 +9,11 @@ import { getRouteParam } from "../../../../utils/helper";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantsOverviewComponent implements OnInit {
-
 	courseId: string;
 
-	constructor(private route: ActivatedRoute) { }
+	constructor(private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
 	}
-
 }

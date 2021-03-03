@@ -2,50 +2,72 @@
 	<mat-card-title class="card-title">
 		<span>
 			<span class="name" *ngIf="participant.isStudent; else nameWithLink">
-				{{group.name}}
+				{{ group.name }}
 			</span>
 			<ng-template #nameWithLink>
 				<a [routerLink]="[group.id]" class="name link-none">
-					{{group.name}}
+					{{ group.name }}
 				</a>
 			</ng-template>
 
-			<mat-icon *ngIf="group.isClosed" class="icon-light" [matTooltip]="'Property.Group.IsClosed' | translate">lock</mat-icon>
-			<mat-icon *ngIf="group.hasPassword" class="icon-light" [matTooltip]="'Misc.PasswordProtected' | translate">vpn_key</mat-icon>
+			<mat-icon
+				*ngIf="group.isClosed"
+				class="icon-light"
+				[matTooltip]="'Property.Group.IsClosed' | translate"
+				>lock</mat-icon
+			>
+			<mat-icon
+				*ngIf="group.hasPassword"
+				class="icon-light"
+				[matTooltip]="'Misc.PasswordProtected' | translate"
+				>vpn_key</mat-icon
+			>
 		</span>
 
 		<mat-menu #groupMenu>
 			<ng-container *ngIf="participant.isTeachingStaffMember">
 				<button mat-menu-item (click)="addParticipant()">
-					<mat-icon class="icon-light">person_add</mat-icon>{{ 'Action.Custom.AddParticipant' | translate }}
+					<mat-icon class="icon-light">person_add</mat-icon
+					>{{ "Action.Custom.AddParticipant" | translate }}
 				</button>
 				<button mat-menu-item (click)="removeGroup()">
 					<mat-icon class="icon-light">delete</mat-icon>
 					<span class="text-red font-bold">
-					{{ 'Action.Delete' | translate }}
+						{{ "Action.Delete" | translate }}
 					</span>
 				</button>
 			</ng-container>
 		</mat-menu>
 
-		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn"><mat-icon class="icon-light">more_vert</mat-icon></button>
+		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn">
+			<mat-icon class="icon-light">more_vert</mat-icon>
+		</button>
 	</mat-card-title>
 
 	<div class="member-info">
-		<span [class]="'text-light font-bold ' + cssClass">{{ 'Domain.Members' | translate }}: {{group.size}}</span>
+		<span [class]="'text-light font-bold ' + cssClass"
+			>{{ "Domain.Members" | translate }}: {{ group.size }}</span
+		>
 	</div>
 
 	<div class="member-list" *ngIf="participant.isTeachingStaffMember">
-		<a class="member link-none font-bold" [routerLink]="['/courses', course.id, 'users', member.userId]" *ngFor="let member of group.members">
-			<button mat-flat-button color="primary">{{member.displayName}}</button>
+		<a
+			class="member link-none font-bold"
+			[routerLink]="['/courses', course.id, 'users', member.userId]"
+			*ngFor="let member of group.members"
+		>
+			<button mat-flat-button color="primary">{{ member.displayName }}</button>
 		</a>
 	</div>
-	
+
 	<div class="group-buttons" *ngIf="participant.isStudent">
-		<button mat-flat-button color="accent" 
-			[disabled]="group.isClosed || group.id === participant.groupId || group.isFull(course)" (click)="onJoinGroup()">
-			{{ 'Action.Join' | translate }}
+		<button
+			mat-flat-button
+			color="accent"
+			[disabled]="group.isClosed || group.id === participant.groupId || group.isFull(course)"
+			(click)="onJoinGroup()"
+		>
+			{{ "Action.Join" | translate }}
 		</button>
 	</div>
-
 </mat-card>

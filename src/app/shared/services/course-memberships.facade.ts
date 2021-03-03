@@ -6,31 +6,29 @@ import { AuthService } from "../../auth/services/auth.service";
 
 @Injectable({ providedIn: "root" })
 export class CourseMembershipsFacade {
-
 	private coursesSubject = new BehaviorSubject<CourseDto[]>([]);
 	public courses$ = this.coursesSubject.asObservable();
 
-	constructor(private courseParticipantsService: CourseParticipantsService,
-				private userService: UsersService,
-				private authService: AuthService) {
-
+	constructor(
+		private courseParticipantsService: CourseParticipantsService,
+		private userService: UsersService,
+		private authService: AuthService
+	) {
 		// Subscribe to login/logout
-		this.authService.user$.subscribe(
-			user => {
-				// If user is logged in
-				if (user) {
-					this.userService.getCoursesOfUser(user.id).subscribe(
-						courses => { 
-							this.coursesSubject.next(courses);
-						},
-						error => console.log(error)
-					);
-				} else {
-					// User is logged out
-					this.coursesSubject.next([]);
-				}
-			} 
-		);
+		this.authService.user$.subscribe(user => {
+			// If user is logged in
+			if (user) {
+				this.userService.getCoursesOfUser(user.id).subscribe(
+					courses => {
+						this.coursesSubject.next(courses);
+					},
+					error => console.log(error)
+				);
+			} else {
+				// User is logged out
+				this.coursesSubject.next([]);
+			}
+		});
 	}
 
 	/** Allows to manually query the API for the user's courses. Results will be emitted via the courses-observable. */
@@ -38,7 +36,7 @@ export class CourseMembershipsFacade {
 		const userId = this.getUserId();
 		if (userId) {
 			this.userService.getCoursesOfUser(userId).subscribe(
-				courses => { 
+				courses => {
 					this.coursesSubject.next(courses);
 				},
 				error => console.log(error)
@@ -52,19 +50,16 @@ export class CourseMembershipsFacade {
 	 */
 	joinCourse(courseId: string, password?: string): Observable<void> {
 		const userId = this.getUserId();
-		return this.courseParticipantsService.addUser({ password }, courseId, userId)
-			.pipe(
-				switchMap(
-					success => {
-						this.loadCoursesOfUser();
-						return of(null);
-					}
-				),
-				catchError(error => {
-					console.log(error);
-					return throwError(error);
-				})
-			);
+		return this.courseParticipantsService.addUser({ password }, courseId, userId).pipe(
+			switchMap(success => {
+				this.loadCoursesOfUser();
+				return of(null);
+			}),
+			catchError(error => {
+				console.log(error);
+				return throwError(error);
+			})
+		);
 	}
 
 	/**
@@ -74,24 +69,20 @@ export class CourseMembershipsFacade {
 	leaveCourse(courseId: string): Observable<void> {
 		const userId = this.getUserId();
 
-		return this.courseParticipantsService.removeUser(courseId, userId)
-			.pipe(
-				switchMap(
-					success => {
-						const courses = this.coursesSubject.getValue().filter(c => c.id !== courseId);
-						this.coursesSubject.next(courses);
-						return of(null);
-					}
-				),
-				catchError(error => {
-					console.log(error);
-					return throwError(error);
-				})
-			);
+		return this.courseParticipantsService.removeUser(courseId, userId).pipe(
+			switchMap(success => {
+				const courses = this.coursesSubject.getValue().filter(c => c.id !== courseId);
+				this.coursesSubject.next(courses);
+				return of(null);
+			}),
+			catchError(error => {
+				console.log(error);
+				return throwError(error);
+			})
+		);
 	}
 
 	private getUserId(): string {
 		return this.authService.getAuthToken()?.user.id;
 	}
-	
 }

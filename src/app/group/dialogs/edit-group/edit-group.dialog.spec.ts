@@ -8,9 +8,8 @@ describe("EditGroupDialog", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ EditGroupDialog ]
-		})
-			.compileComponents();
+			declarations: [EditGroupDialog]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

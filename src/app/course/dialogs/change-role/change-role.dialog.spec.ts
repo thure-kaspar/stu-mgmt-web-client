@@ -8,9 +8,8 @@ describe("ChangeRoleDialog", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ ChangeRoleDialog ]
-		})
-			.compileComponents();
+			declarations: [ChangeRoleDialog]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

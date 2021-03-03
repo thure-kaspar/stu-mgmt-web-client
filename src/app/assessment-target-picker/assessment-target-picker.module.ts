@@ -8,20 +8,17 @@ import { RouterModule } from "@angular/router";
 
 @NgModule({
 	declarations: [
-		AssessmentTargetPickerComponent, 
+		AssessmentTargetPickerComponent,
 		AssessmentAllocationComponent,
-		AssessmentGroupPickerComponent, 
-		AssessmentUserPickerComponent, 
+		AssessmentGroupPickerComponent,
+		AssessmentUserPickerComponent
 	],
-	imports: [
-		SharedModule,
-		RouterModule
-	],
+	imports: [SharedModule, RouterModule],
 	exports: [
-		AssessmentTargetPickerComponent, 
+		AssessmentTargetPickerComponent,
 		AssessmentAllocationComponent,
-		AssessmentGroupPickerComponent, 
-		AssessmentUserPickerComponent, 
+		AssessmentGroupPickerComponent,
+		AssessmentUserPickerComponent
 	]
 })
-export class AssessmentTargetPickerModule { }
+export class AssessmentTargetPickerModule {}

@@ -15,7 +15,6 @@ const mock_AuthService = () => ({
 });
 
 describe("LoginComponent", () => {
-
 	let component: LoginComponent;
 	let fixture: ComponentFixture<LoginComponent>;
 	let authService: AuthService;
@@ -23,12 +22,9 @@ describe("LoginComponent", () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [LoginComponent],
-			providers: [
-				{ provide: AuthService, useFactory: mock_AuthService }
-			],
+			providers: [{ provide: AuthService, useFactory: mock_AuthService }],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -47,7 +43,6 @@ describe("LoginComponent", () => {
 	});
 
 	describe("login", () => {
-	
 		it("Calls AuthService for login", () => {
 			component.login();
 			expect(authService.login).toHaveBeenCalledWith(authCredentials);
@@ -58,7 +53,5 @@ describe("LoginComponent", () => {
 			await component.login();
 			expect(component.errorMessage).toBeTruthy();
 		});
-	
 	});
-
 });

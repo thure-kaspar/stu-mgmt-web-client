@@ -2,7 +2,16 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { AssignmentDto, CourseConfigService, CourseCreateDto, CourseDto, CourseParticipantsService, CoursesService, ParticipantDto, UserDto } from "../../../../../api";
+import {
+	AssignmentDto,
+	CourseConfigService,
+	CourseCreateDto,
+	CourseDto,
+	CourseParticipantsService,
+	CoursesService,
+	ParticipantDto,
+	UserDto
+} from "../../../../../api";
 import { getSemester } from "../../../../../utils/helper";
 import { AdmissionCriteriaForm } from "../../../course-settings/forms/admission-criteria-form/admission-criteria-form.component";
 import { AssignmentTemplatesForm } from "../../../course-settings/forms/assignment-templates-form/assignment-templates-form.component";
@@ -10,7 +19,10 @@ import { CourseForm } from "../../../course-settings/forms/course-form/course-fo
 import { GroupSettingsForm } from "../../../course-settings/forms/group-settings-form/group-settings-form.component";
 import { SearchCourseDialog } from "../../../course/dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "../../../course/dialogs/search-user/search-user.dialog";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import {
+	ConfirmDialog,
+	ConfirmDialogData
+} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
@@ -19,7 +31,6 @@ import { SnackbarService } from "../../../shared/services/snackbar.service";
 	styleUrls: ["./create-course.component.scss"]
 })
 export class CreateCourseComponent implements OnInit {
-
 	/** Form with the structure of a CourseCreateDto. */
 	form: FormGroup;
 
@@ -29,17 +40,20 @@ export class CreateCourseComponent implements OnInit {
 
 	@ViewChild(CourseForm, { static: true }) courseForm: CourseForm;
 	@ViewChild(GroupSettingsForm, { static: true }) groupSettingsForm: GroupSettingsForm;
-	@ViewChild(AdmissionCriteriaForm, { static: true }) admissionCriteriaForm: AdmissionCriteriaForm;
-	@ViewChild(AssignmentTemplatesForm, { static: true }) assignmentTemplatesForm: AssignmentTemplatesForm;
+	@ViewChild(AdmissionCriteriaForm, { static: true })
+	admissionCriteriaForm: AdmissionCriteriaForm;
+	@ViewChild(AssignmentTemplatesForm, { static: true })
+	assignmentTemplatesForm: AssignmentTemplatesForm;
 
-	constructor(private courseService: CoursesService,
-				private courseConfigService: CourseConfigService,
-				private courseParticipantsService: CourseParticipantsService,
-				private fb: FormBuilder,
-				private dialog: MatDialog,
-				private snackbar: SnackbarService,
-				private router: Router) {
-
+	constructor(
+		private courseService: CoursesService,
+		private courseConfigService: CourseConfigService,
+		private courseParticipantsService: CourseParticipantsService,
+		private fb: FormBuilder,
+		private dialog: MatDialog,
+		private snackbar: SnackbarService,
+		private router: Router
+	) {
 		this.form = this.fb.group({
 			id: [null],
 			shortname: [null, Validators.required],
@@ -48,7 +62,7 @@ export class CreateCourseComponent implements OnInit {
 			isClosed: [false, Validators.required],
 			links: this.fb.array([]),
 			config: this.fb.group({
-				password: [null] ,
+				password: [null],
 				groupSettings: this.fb.group({
 					allowGroups: [false, Validators.required],
 					nameSchema: [null],
@@ -63,21 +77,22 @@ export class CreateCourseComponent implements OnInit {
 				}),
 				assignmentTemplates: this.fb.array([])
 			}),
-			lecturers: this.fb.array([]),
+			lecturers: this.fb.array([])
 		});
 	}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	createCourse(): void {
 		const course: CourseCreateDto = this.form.value;
 		const data: ConfirmDialogData = {
-			params: [course.title, course.semester] 
+			params: [course.title, course.semester]
 		};
 
-		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed().subscribe(
-			isConfirmed => {
+		this.dialog
+			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
+			.afterClosed()
+			.subscribe(isConfirmed => {
 				if (isConfirmed) {
 					this.courseService.createCourse(course).subscribe(
 						result => {
@@ -90,38 +105,39 @@ export class CreateCourseComponent implements OnInit {
 						}
 					);
 				}
-			}
-		);
+			});
 	}
 
 	/**
-	 * Opens a dialog that allows the user to search and select a course. 
+	 * Opens a dialog that allows the user to search and select a course.
 	 * The selected course will be returned to this component and it's configuration will be loaded
 	 * as a template for the creation of a new course.
 	 */
 	openSearchCourseDialog(): void {
-		this.dialog.open<SearchCourseDialog, undefined, CourseDto[]>(SearchCourseDialog).afterClosed().subscribe(
-			courses => {
+		this.dialog
+			.open<SearchCourseDialog, undefined, CourseDto[]>(SearchCourseDialog)
+			.afterClosed()
+			.subscribe(courses => {
 				// Check if user selected a course (Dialog returns all selected courses)
 				if (courses[0]) {
 					this.loadCourseTemplate(courses[0].id);
 				}
-			}
-		);
+			});
 	}
 
 	/**
 	 * Opens the SearchUserDialog and inserts the username of the chosen user as as lecturer.
 	 */
 	openSearchUserDialog(index: number): void {
-		this.dialog.open<SearchUserDialog, undefined, UserDto[]>(SearchUserDialog).afterClosed().subscribe(
-			users => {
+		this.dialog
+			.open<SearchUserDialog, undefined, UserDto[]>(SearchUserDialog)
+			.afterClosed()
+			.subscribe(users => {
 				if (users[0]) {
 					// Insert username of returned user in the input field of the form
 					this.getLecturers().at(index).setValue(users[0].username);
 				}
-			}
-		);
+			});
 	}
 
 	/**
@@ -129,30 +145,34 @@ export class CreateCourseComponent implements OnInit {
 	 */
 	loadCourseTemplate(courseId: string): void {
 		// Load basic course data
-		this.courseService.getCourseById(courseId).subscribe(
-			course => this.form.patchValue(course)
-		);
+		this.courseService
+			.getCourseById(courseId)
+			.subscribe(course => this.form.patchValue(course));
 
 		// Load course config
-		this.courseConfigService.getCourseConfig(courseId).subscribe(
-			config => {
-				this.form.get("config").patchValue(config);
+		this.courseConfigService.getCourseConfig(courseId).subscribe(config => {
+			this.form.get("config").patchValue(config);
 
-				// Insert admission criteria
-				//config.admissionCriteria?.criteria.forEach(c=> this.admissionCriteriaForm.addCriteria(c));
+			// Insert admission criteria
+			//config.admissionCriteria?.criteria.forEach(c=> this.admissionCriteriaForm.addCriteria(c));
 
-				// Insert assignment templates
-				config.assignmentTemplates?.forEach(t => this.assignmentTemplatesForm.addAssignmentTemplate(t));
-			}
-		);
+			// Insert assignment templates
+			config.assignmentTemplates?.forEach(t =>
+				this.assignmentTemplatesForm.addAssignmentTemplate(t)
+			);
+		});
 
-		// Load lecturers 
+		// Load lecturers
 		this.getLecturers().clear();
-		this.courseParticipantsService.getUsersOfCourse(courseId, undefined, undefined, [ParticipantDto.RoleEnum.LECTURER]).subscribe(
-			lecturers => {
-				lecturers.forEach(lecturer => this.getLecturers().push(this.fb.control(lecturer.username, Validators.required)));
-			}
-		);
+		this.courseParticipantsService
+			.getUsersOfCourse(courseId, undefined, undefined, [ParticipantDto.RoleEnum.LECTURER])
+			.subscribe(lecturers => {
+				lecturers.forEach(lecturer =>
+					this.getLecturers().push(
+						this.fb.control(lecturer.username, Validators.required)
+					)
+				);
+			});
 	}
 
 	/**
@@ -176,5 +196,4 @@ export class CreateCourseComponent implements OnInit {
 	getLecturers(): FormArray {
 		return this.form.get("lecturers") as FormArray;
 	}
-
 }

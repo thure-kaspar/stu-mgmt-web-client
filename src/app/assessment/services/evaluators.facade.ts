@@ -1,26 +1,31 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { catchError, take, tap } from "rxjs/operators";
-import { AssessmentAllocationService, CourseParticipantsService, ParticipantDto, UserDto } from "../../../../api";
+import {
+	AssessmentAllocationService,
+	CourseParticipantsService,
+	ParticipantDto,
+	UserDto
+} from "../../../../api";
 
 @Injectable()
 export class EvaluatorsFacade {
-
 	private evaluatorsSubject = new BehaviorSubject<ParticipantDto[]>(undefined);
 	private evaluatorMap = new Map<string, ParticipantDto>();
 
-	
 	/**
 	 * Evaluators (course participants with permission to create assessments) of an assignment.
 	 * Emits `undefined`, if no evaluators are loaded.
 	 */
 	evaluators$ = this.evaluatorsSubject.asObservable();
 
-	constructor(private allocationService: AssessmentAllocationService,
-				private courseParticipantsService: CourseParticipantsService) { }
+	constructor(
+		private allocationService: AssessmentAllocationService,
+		private courseParticipantsService: CourseParticipantsService
+	) {}
 
 	/**
-	 * Removes all data that is stored by this service. 
+	 * Removes all data that is stored by this service.
 	 * Should be called once the parent component that is managing an assessment gets destroyed.
 	 */
 	clear(): void {
@@ -39,19 +44,19 @@ export class EvaluatorsFacade {
 	 * to access the evaluators.
 	 */
 	loadEvaluators(courseId: string): Observable<ParticipantDto[]> {
-		return this.courseParticipantsService.getUsersOfCourse(
-			courseId,
-			undefined,
-			undefined, 
-			[ParticipantDto.RoleEnum.LECTURER, ParticipantDto.RoleEnum.TUTOR]
-		).pipe(
-			take(1),
-			tap((evaluators) => this.setEvaluators(evaluators)),
-			catchError((error) => {
-				console.log(error);
-				return throwError(error);
-			})
-		);
+		return this.courseParticipantsService
+			.getUsersOfCourse(courseId, undefined, undefined, [
+				ParticipantDto.RoleEnum.LECTURER,
+				ParticipantDto.RoleEnum.TUTOR
+			])
+			.pipe(
+				take(1),
+				tap(evaluators => this.setEvaluators(evaluators)),
+				catchError(error => {
+					console.log(error);
+					return throwError(error);
+				})
+			);
 	}
 
 	/** Sets the evaluators of an assignment */
@@ -60,5 +65,4 @@ export class EvaluatorsFacade {
 		users.forEach(e => this.evaluatorMap.set(e.userId, e));
 		this.evaluatorsSubject.next(users);
 	}
-
 }

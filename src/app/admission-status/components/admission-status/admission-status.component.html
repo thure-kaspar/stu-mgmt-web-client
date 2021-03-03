@@ -1,14 +1,13 @@
 <div class="tab" *ngIf="criteria$ | async as criteria">
-
 	<h2 class="title">
-		<span>{{ 'Title.AdmissionStatus' | translate }}</span>
+		<span>{{ "Title.AdmissionStatus" | translate }}</span>
 		<span>
 			<button mat-stroked-button (click)="downloadCsv()">Export</button>
 		</span>
 	</h2>
 
 	<div class="admission-criteria">
-		<h3>{{ 'Domain.AdmissionCriteria' | translate }}</h3>
+		<h3>{{ "Domain.AdmissionCriteria" | translate }}</h3>
 
 		<div class="rules" *ngIf="criteria; else noAdmissionCriteria">
 			<ng-container *ngFor="let rule of criteria.rules; let i = index">
@@ -17,68 +16,81 @@
 		</div>
 
 		<ng-template #noAdmissionCriteria>
-			{{ 'Common.None' | translate }}
+			{{ "Common.None" | translate }}
 		</ng-template>
 	</div>
 
 	<div class="participants">
-		<h3>{{ 'Domain.Participants' | translate }}</h3>
+		<h3>{{ "Domain.Participants" | translate }}</h3>
 
 		<table class="full-width" mat-table [dataSource]="dataSource$ | async">
-
 			<ng-container matColumnDef="displayName">
 				<th class="name-column" mat-header-cell *matHeaderCellDef>Name</th>
 				<td mat-cell *matCellDef="let row">
-					<a class="link-none font-bold" [routerLink]="['/courses', courseId, 'users', row.participant.userId]">
-						{{row.participant.displayName}}
+					<a
+						class="link-none font-bold"
+						[routerLink]="['/courses', courseId, 'users', row.participant.userId]"
+					>
+						{{ row.participant.displayName }}
 					</a>
 				</td>
 			</ng-container>
-			
+
 			<ng-container matColumnDef="hasAdmission">
-				<th class="total-column" mat-header-cell *matHeaderCellDef>{{ 'Domain.Admission' | translate }}</th>
+				<th class="total-column" mat-header-cell *matHeaderCellDef>
+					{{ "Domain.Admission" | translate }}
+				</th>
 				<td mat-cell *matCellDef="let row">
 					<div class="total font-bold">
-						<span *ngIf="row.hasAdmission; else noAdmission" class="text-green text-bold">{{ 'Common.Yes' | translate }}</span>
+						<span
+							*ngIf="row.hasAdmission; else noAdmission"
+							class="text-green text-bold"
+							>{{ "Common.Yes" | translate }}</span
+						>
 						<ng-template #noAdmission>
-							<span class="text-red">{{ 'Common.No' | translate }}</span>
+							<span class="text-red">{{ "Common.No" | translate }}</span>
 						</ng-template>
 					</div>
 				</td>
 			</ng-container>
-	
+
 			<ng-container *ngFor="let rule of criteria?.rules; let i = index">
 				<ng-container [matColumnDef]="'rule' + i">
 					<th class="rule-column" mat-header-cell *matHeaderCellDef>
 						<div class="rule-info">
-							<span>{{ 'Common.Criteria' | translate }} #{{i}}</span>
+							<span>{{ "Common.Criteria" | translate }} #{{ i }}</span>
 						</div>
 					</th>
 					<td class="result" mat-cell *matCellDef="let row">
 						<div class="font-bold">
-							<span *ngIf="row.results[i].passed; else no" class="text-green text-bold">{{ 'Common.Yes' | translate }}</span>
+							<span
+								*ngIf="row.results[i].passed; else no"
+								class="text-green text-bold"
+								>{{ "Common.Yes" | translate }}</span
+							>
 							<ng-template #no>
-								<span class="text-red">{{ 'Common.No' | translate }}</span>
+								<span class="text-red">{{ "Common.No" | translate }}</span>
 							</ng-template>
-							({{row.results[i].achievedPoints}} - 
-							{{ row.results[i].achievedPercent !== undefined && row.results[i].achievedPercent !== null 
-								? (row.results[i].achievedPercent | number:'1.0-2') : 'NaN' 
+							({{ row.results[i].achievedPoints }} -
+							{{
+								row.results[i].achievedPercent !== undefined &&
+								row.results[i].achievedPercent !== null
+									? (row.results[i].achievedPercent | number: "1.0-2")
+									: "NaN"
 							}}%)
 						</div>
 					</td>
 				</ng-container>
 			</ng-container>
-	
+
 			<!-- Prevents columns from using full table width -->
 			<ng-container matColumnDef="spacer">
 				<th mat-header-cell *matHeaderCellDef></th>
 				<td mat-cell *matCellDef="let row"></td>
 			</ng-container>
-	
+
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-	
+			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 		</table>
 	</div>
-
 </div>

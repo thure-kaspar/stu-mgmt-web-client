@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from "@angular/core";
 	name: "semester"
 })
 export class SemesterPipe implements PipeTransform {
-
 	private readonly regex: RegExp = /^(wise|sose)\d{4}$/g;
 
 	transform(value: string): string {
@@ -17,14 +16,13 @@ export class SemesterPipe implements PipeTransform {
 		let semName = value.substring(0, 4); // wise or sose
 		let semYear = value.substring(4); // i.e 2020
 
-		if (semName  === "wise") {
+		if (semName === "wise") {
 			semName = "WiSe";
-			semYear = value.substring(4,6) + "/" + value.substring(6); // i.e 1920 -> 19/20
+			semYear = value.substring(4, 6) + "/" + value.substring(6); // i.e 1920 -> 19/20
 		} else {
 			semName = "SoSe";
 		}
-		
+
 		return `${semName} ${semYear}`;
 	}
-
 }

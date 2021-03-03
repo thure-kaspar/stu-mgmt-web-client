@@ -8,9 +8,8 @@ describe("SearchUserDialog", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ SearchUserDialog ]
-		})
-			.compileComponents();
+			declarations: [SearchUserDialog]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

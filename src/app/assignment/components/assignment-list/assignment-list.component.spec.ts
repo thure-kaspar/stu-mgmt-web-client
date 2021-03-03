@@ -36,7 +36,6 @@ const mock_MatDialog = () => ({
 });
 
 describe("AssignmentListComponent", () => {
-
 	let component: AssignmentListComponent;
 	let fixture: ComponentFixture<AssignmentListComponent>;
 	let dialog: MatDialog;
@@ -44,13 +43,10 @@ describe("AssignmentListComponent", () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [AssignmentListComponent],
-			providers: [
-				{ provide: MatDialog, useFactory: mock_MatDialog }
-			],
+			providers: [{ provide: MatDialog, useFactory: mock_MatDialog }],
 			imports: [SharedModule],
 			schemas: [NO_ERRORS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -68,7 +64,6 @@ describe("AssignmentListComponent", () => {
 	});
 
 	describe("openAddDialog", () => {
-	
 		it("Opens the CreateAssignmentDialog", () => {
 			component.openAddDialog();
 			expect(dialog.open).toHaveBeenCalled();
@@ -79,7 +74,5 @@ describe("AssignmentListComponent", () => {
 			expect(mock_MatDialogRef.afterClosed).toHaveBeenCalled();
 			expect(component.assignments).toContain(assignment);
 		});
-	
 	});
-
 });

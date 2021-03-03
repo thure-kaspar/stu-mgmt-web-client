@@ -7,20 +7,18 @@ import { take } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
-
-	constructor(
-		private authService: AuthService,
-		private dialog: MatDialog
-	) { }
+	constructor(private authService: AuthService, private dialog: MatDialog) {}
 
 	async canActivate(): Promise<boolean> {
 		const user = await this.authService.user$.pipe(take(1)).toPromise();
 		if (user) {
 			return true;
 		} else {
-			const loggedIn = await this.dialog.open<LoginDialog, undefined, boolean>(LoginDialog).afterClosed().toPromise();
+			const loggedIn = await this.dialog
+				.open<LoginDialog, undefined, boolean>(LoginDialog)
+				.afterClosed()
+				.toPromise();
 			return loggedIn;
 		}
 	}
-
 }

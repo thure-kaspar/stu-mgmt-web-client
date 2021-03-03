@@ -6,10 +6,16 @@ import { filter, take } from "rxjs/operators";
 import { AssignmentDto, GroupDto, UsersService, AssessmentsService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Participant } from "../../../domain/participant.model";
-import { ConfirmDialog, ConfirmDialogData } from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import {
+	ConfirmDialog,
+	ConfirmDialogData
+} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ToastService } from "../../../shared/services/toast.service";
-import { EditAssignmentDialog, EditAssignmentDialogData } from "../../dialogs/edit-assignment/edit-assignment.dialog";
+import {
+	EditAssignmentDialog,
+	EditAssignmentDialogData
+} from "../../dialogs/edit-assignment/edit-assignment.dialog";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 import { Course } from "../../../domain/course.model";
 import { TranslateService } from "@ngx-translate/core";
@@ -22,7 +28,6 @@ import { ParticipantFacade } from "../../../shared/services/participant.facade";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnInit {
-
 	@Input() assignment: AssignmentDto;
 	@Input() course: Course;
 
@@ -41,81 +46,105 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 	courseId: string;
 
-	constructor(private participantFacade: ParticipantFacade,
-				private assessmentService: AssessmentsService,
-				private route: ActivatedRoute,
-				private router: Router,
-				private dialog: MatDialog,
-				private assignmentManagement: AssignmentManagementFacade,
-				private userService: UsersService,
-				private translate: TranslateService,
-				private toast: ToastService) { super(); }
+	constructor(
+		private participantFacade: ParticipantFacade,
+		private assessmentService: AssessmentsService,
+		private route: ActivatedRoute,
+		private router: Router,
+		private dialog: MatDialog,
+		private assignmentManagement: AssignmentManagementFacade,
+		private userService: UsersService,
+		private translate: TranslateService,
+		private toast: ToastService
+	) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-		this.subs.sink = this.participantFacade.participant$.pipe(
-			filter(p => !!p) // Only perform the following check once participant is loaded
-		).subscribe(p => {
-			this.participant = p;
+		this.subs.sink = this.participantFacade.participant$
+			.pipe(
+				filter(p => !!p) // Only perform the following check once participant is loaded
+			)
+			.subscribe(p => {
+				this.participant = p;
 
-			if (this.studentShouldHaveAGroup(this.assignment, this.participant)) {
-				this.displayGroupOrWarning();
-			}
-		});
+				if (this.studentShouldHaveAGroup(this.assignment, this.participant)) {
+					this.displayGroupOrWarning();
+				}
+			});
 	}
 
 	private displayGroupOrWarning(): void {
-		this.subs.sink = this.participantFacade.assignmentGroups$.pipe(
-			filter(tuples => !!tuples),
-			take(1)
-		).subscribe(tuples => {
-			const group = tuples.find(a => a.assignment.id === this.assignment.id)?.group;
-			
-			if (!group && this.assignment.state === "IN_PROGRESS") {
-				this.warning = this.translate.instant("Text.Group.NoGroupForAssignment");
-				this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
-			}
+		this.subs.sink = this.participantFacade.assignmentGroups$
+			.pipe(
+				filter(tuples => !!tuples),
+				take(1)
+			)
+			.subscribe(tuples => {
+				const group = tuples.find(a => a.assignment.id === this.assignment.id)?.group;
 
-			this.group$.next(group);
-		});
+				if (!group && this.assignment.state === "IN_PROGRESS") {
+					this.warning = this.translate.instant("Text.Group.NoGroupForAssignment");
+					this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
+				}
+
+				this.group$.next(group);
+			});
 	}
 
 	private studentShouldHaveAGroup(assignment: AssignmentDto, participant: Participant): boolean {
-		return assignment.collaboration === AssignmentDto.CollaborationEnum.GROUP && participant.isStudent;
+		return (
+			assignment.collaboration === AssignmentDto.CollaborationEnum.GROUP &&
+			participant.isStudent
+		);
 	}
 
 	openEditDialog(): void {
-		const data: EditAssignmentDialogData = { courseId: this.courseId, assignmentId: this.assignment.id };
+		const data: EditAssignmentDialogData = {
+			courseId: this.courseId,
+			assignmentId: this.assignment.id
+		};
 		this.dialog.open(EditAssignmentDialog, { data });
 	}
 
 	onDelete(): void {
 		const data: ConfirmDialogData = { params: [this.assignment.name] };
-		this.dialog.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data }).afterClosed().subscribe(
-			confirmed => {
+		this.dialog
+			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
+			.afterClosed()
+			.subscribe(confirmed => {
 				if (confirmed) {
-					this.subs.sink = this.assignmentManagement.remove(this.assignment, this.courseId).subscribe(
-						deleted => {
+					this.subs.sink = this.assignmentManagement
+						.remove(this.assignment, this.courseId)
+						.subscribe(deleted => {
 							this.toast.success(this.assignment.name, "Message.Removed");
-						},
-					);
+						});
 				}
-			}
-		);
+			});
 	}
 
 	/**
 	 * Navigates the user to his assessment for this assignment.
 	 */
 	goToAssessment(): void {
-		this.subs.sink = this.userService.getAssessmentOfUser(this.participant.userId, this.courseId, this.assignment.id).subscribe({
-			next: (assessment) => {
-				this.router.navigate(["/courses", this.courseId, "assignments", this.assignment.id, "assessments", "view", assessment.id]);
-			},
-			error: (error) => {
-				this.toast.apiError(error);		
-			}
-		});
+		this.subs.sink = this.userService
+			.getAssessmentOfUser(this.participant.userId, this.courseId, this.assignment.id)
+			.subscribe({
+				next: assessment => {
+					this.router.navigate([
+						"/courses",
+						this.courseId,
+						"assignments",
+						this.assignment.id,
+						"assessments",
+						"view",
+						assessment.id
+					]);
+				},
+				error: error => {
+					this.toast.apiError(error);
+				}
+			});
 	}
-
 }

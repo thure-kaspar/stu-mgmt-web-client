@@ -1,23 +1,29 @@
-<mat-card class="rule" >
+<mat-card class="rule">
 	<mat-card-title class="rule-title flex">
 		<span class="left">
-			<span class="text-light">{{ 'Common.Criteria' | translate }} #{{index}}</span>
-			
-			<ng-container [ngSwitch]="rule.type">
-				<span *ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL">{{ 'Enum.RuleType.' + rule.type | translate:{requiredPercent: rule.requiredPercent } }}</span>
-				<ng-container *ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
-				<span>
-					{{ 'Enum.RuleType.' + rule.type | translate:{
-						requiredPercent: getRuleAsXPercentOfY(rule).requiredPercent, 
-						allowedFailures: getRuleAsXPercentOfY(rule).allowedFailures 
-					} }}
-				</span>
-				</ng-container>
-				<p *ngSwitchDefault>
-					Unknown rule type
-				</p>
-			</ng-container>
+			<span class="text-light">{{ "Common.Criteria" | translate }} #{{ index }}</span>
 
+			<ng-container [ngSwitch]="rule.type">
+				<span *ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL">{{
+					"Enum.RuleType." + rule.type
+						| translate: { requiredPercent: rule.requiredPercent }
+				}}</span>
+				<ng-container *ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
+					<span>
+						{{
+							"Enum.RuleType." + rule.type
+								| translate
+									: {
+											requiredPercent: getRuleAsXPercentOfY(rule)
+												.requiredPercent,
+											allowedFailures: getRuleAsXPercentOfY(rule)
+												.allowedFailures
+									  }
+						}}
+					</span>
+				</ng-container>
+				<p *ngSwitchDefault>Unknown rule type</p>
+			</ng-container>
 		</span>
 		<mat-chip-list class="chips">
 			<mat-chip [class]="'type-chip ' + rule.assignmentType">
@@ -26,50 +32,75 @@
 				<mat-icon *ngIf="rule.assignmentType === 'PROJECT'">engineering</mat-icon>
 				<mat-icon *ngIf="rule.assignmentType === 'SEMINAR'">menu_book</mat-icon>
 				<mat-icon *ngIf="rule.assignmentType === 'OTHER'">not_listed_location</mat-icon>
-				<span class="assignment-type">{{ 'Enum.AssignmentType.' + rule.assignmentType | translate }}</span>
+				<span class="assignment-type">{{
+					"Enum.AssignmentType." + rule.assignmentType | translate
+				}}</span>
 			</mat-chip>
 		</mat-chip-list>
 	</mat-card-title>
 
 	<div class="rounding-info flex-column">
 		<div>
-			<span class="text-light font-bold">{{ 'Property.Assessment.AchievedPoints' | translate }}-%:</span>
-				{{ 'Enum.RoundingType.' + rule.achievedPercentRounding.type | translate }}
-			<span *ngIf="rule.achievedPercentRounding.decimals !== null && rule.achievedPercentRounding.decimals !== undefined">
-			({{rule.achievedPercentRounding.decimals}} {{ 'Misc.Decimals' | translate }})
+			<span class="text-light font-bold"
+				>{{ "Property.Assessment.AchievedPoints" | translate }}-%:</span
+			>
+			{{ "Enum.RoundingType." + rule.achievedPercentRounding.type | translate }}
+			<span
+				*ngIf="
+					rule.achievedPercentRounding.decimals !== null &&
+					rule.achievedPercentRounding.decimals !== undefined
+				"
+			>
+				({{ rule.achievedPercentRounding.decimals }} {{ "Misc.Decimals" | translate }})
 			</span>
 		</div>
 	</div>
 
 	<div class="result" *ngIf="result">
 		<ng-container [ngSwitch]="rule.type">
-
 			<ng-container *ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL">
-				<span><span class="font-bold text-light">{{ 'Property.Assessment.AchievedPoints' | translate }} ({{ 'Common.Total' | translate }}):</span> {{result.achievedPoints}}</span>
+				<span
+					><span class="font-bold text-light"
+						>{{ "Property.Assessment.AchievedPoints" | translate }} ({{
+							"Common.Total" | translate
+						}}):</span
+					>
+					{{ result.achievedPoints }}</span
+				>
 				<span>
-					<span class="font-bold text-light">{{ 'Property.Assessment.AchievedPoints' | translate }}-%:</span>
-					{{ result.achievedPercent !== undefined && result.achievedPercent !== null 
-						? (result.achievedPercent | number:'1.0-2') : 'NaN' 
+					<span class="font-bold text-light"
+						>{{ "Property.Assessment.AchievedPoints" | translate }}-%:</span
+					>
+					{{
+						result.achievedPercent !== undefined && result.achievedPercent !== null
+							? (result.achievedPercent | number: "1.0-2")
+							: "NaN"
 					}}%
 				</span>
 			</ng-container>
 
 			<ng-container *ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
-			<span><span class="font-bold text-light">{{ 'Property.AdmissionRule.FailedAssignments' | translate }}:</span> 
-				{{result.achievedPoints}} {{ 'Common.Of' | translate }} {{ getRuleAsXPercentOfY(rule).allowedFailures }}
-			</span>
+				<span
+					><span class="font-bold text-light"
+						>{{ "Property.AdmissionRule.FailedAssignments" | translate }}:</span
+					>
+					{{ result.achievedPoints }} {{ "Common.Of" | translate }}
+					{{ getRuleAsXPercentOfY(rule).allowedFailures }}
+				</span>
 			</ng-container>
-			<p *ngSwitchDefault>
-				Unknown rule type
-			</p>
-
+			<p *ngSwitchDefault>Unknown rule type</p>
 		</ng-container>
 
-		<span><span class="font-bold text-light">{{ 'Property.AdmissionRule.Passed' | translate }}: </span>
-		<span *ngIf="result.passed; else no" class="text-green font-bold passed">{{ 'Common.Yes' | translate }}</span>
-		<ng-template #no>
-			<span class="text-red passed">{{ 'Common.No' | translate }}</span>
-		</ng-template>
-	</span>
+		<span
+			><span class="font-bold text-light"
+				>{{ "Property.AdmissionRule.Passed" | translate }}:
+			</span>
+			<span *ngIf="result.passed; else no" class="text-green font-bold passed">{{
+				"Common.Yes" | translate
+			}}</span>
+			<ng-template #no>
+				<span class="text-red passed">{{ "Common.No" | translate }}</span>
+			</ng-template>
+		</span>
 	</div>
 </mat-card>

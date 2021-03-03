@@ -7,11 +7,10 @@ import { Participant } from "../../../domain/participant.model";
 @Component({
 	selector: "app-assessment-target",
 	templateUrl: "./assessment-target.component.html",
-	styleUrls: ["./assessment-target.component.scss"],
+	styleUrls: ["./assessment-target.component.scss"]
 	//changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentTargetComponent implements OnInit {
-
 	/** The group that was targeted by this assessment. */
 	@Input() group?: GroupDto;
 	/** The participant that was targeted by this assessment. */
@@ -21,10 +20,7 @@ export class AssessmentTargetComponent implements OnInit {
 	/** CourseId */
 	@Input() courseId: string;
 
-	constructor(
-	) { }
+	constructor() {}
 
-	ngOnInit(): void {
-	}
-
+	ngOnInit(): void {}
 }

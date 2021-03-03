@@ -11,18 +11,14 @@ import { SearchUserDialog } from "./dialogs/search-user/search-user.dialog";
 
 @NgModule({
 	declarations: [
-		CourseListComponent, 
-		CourseComponent, 
-		ChangeRoleDialog, 
-		SearchCourseDialog, 
-		SearchUserDialog, 
-		JoinCourseDialog, 
+		CourseListComponent,
+		CourseComponent,
+		ChangeRoleDialog,
+		SearchCourseDialog,
+		SearchUserDialog,
+		JoinCourseDialog
 	],
-	imports: [
-		SharedModule,
-		TranslateModule.forChild({ extend: true }),
-		CourseRoutingModule
-	],
+	imports: [SharedModule, TranslateModule.forChild({ extend: true }), CourseRoutingModule],
 	providers: []
 })
-export class CourseModule { }
+export class CourseModule {}

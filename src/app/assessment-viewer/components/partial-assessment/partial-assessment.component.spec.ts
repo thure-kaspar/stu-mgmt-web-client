@@ -8,9 +8,8 @@ describe("PartialAssessmentComponent", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ PartialAssessmentComponent ]
-		})
-			.compileComponents();
+			declarations: [PartialAssessmentComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

@@ -1,7 +1,7 @@
 .sidenav-container {
 	height: 100%;
 }
-  
+
 .sidenav {
 	width: 240px;
 	margin-top: var(--titlebar-height);
@@ -17,17 +17,17 @@
 		color: rgba(0, 0, 0, 0.6);
 	}
 }
-  
+
 .sidenav .mat-toolbar {
 	background: inherit;
 }
-  
+
 .sidenav mat-icon {
 	margin-right: 24px;
 	padding-left: 8px;
 	color: var(--text-light);
 }
-  
+
 .sidenav a {
 	height: 40px;
 	font-size: 14px;
@@ -43,16 +43,16 @@
 	position: fixed;
 	bottom: 0;
 }
-  
+
 .router-link-active {
 	background-color: var(--link-active-bg);
-	font-weight: 500!important;
+	font-weight: 500 !important;
 
 	mat-icon {
 		color: var(--link-active);
 	}
 }
-  
+
 .titlebar {
 	display: flex;
 	background-color: var(--color-titlebar);
@@ -119,7 +119,6 @@
 		font-weight: 500;
 		padding-left: 26px;
 		margin-bottom: 16px;
-
 	}
 
 	a {

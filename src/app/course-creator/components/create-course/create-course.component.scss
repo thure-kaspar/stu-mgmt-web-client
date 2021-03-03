@@ -10,12 +10,14 @@ mat-card-title {
 	justify-content: space-between;
 }
 
-#basic-data, #lecturers, #secrets {
+#basic-data,
+#lecturers,
+#secrets {
 	margin-top: 8px;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	
+
 	mat-form-field {
 		width: 100%;
 		margin-bottom: 16px;

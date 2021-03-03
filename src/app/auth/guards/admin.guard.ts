@@ -7,9 +7,7 @@ import { UserDto } from "../../../../api";
 	providedIn: "root"
 })
 export class AdminGuard implements CanActivate {
-
-	constructor(private authService: AuthService, 
-				private router: Router) { }
+	constructor(private authService: AuthService, private router: Router) {}
 
 	canActivate(): boolean {
 		const role = this.authService.getAuthToken()?.user.role;
@@ -21,5 +19,4 @@ export class AdminGuard implements CanActivate {
 		this.router.navigateByUrl("/login");
 		return false;
 	}
-
 }

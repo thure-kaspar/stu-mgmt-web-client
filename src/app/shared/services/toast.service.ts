@@ -5,18 +5,34 @@ import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
 export class ToastService {
+	constructor(private toast: ToastrService, private translate: TranslateService) {}
 
-	constructor(private toast: ToastrService,
-				private translate: TranslateService) { }
-	
-	/** Displays a success-themed toast message. */			
-	success(message?: string, title = "Message.Success", interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
-		this.toast.success(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), override);
+	/** Displays a success-themed toast message. */
+	success(
+		message?: string,
+		title = "Message.Success",
+		interpolatedParams?: object,
+		override?: Partial<IndividualConfig>
+	): void {
+		this.toast.success(
+			this.tryGetTranslation(message, interpolatedParams),
+			this.tryGetTranslation(title),
+			override
+		);
 	}
 
 	/** Displays an error-themed toast message. */
-	error(message?: string, title?: string, interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
-		this.toast.error(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), { disableTimeOut: true, ...override });
+	error(
+		message?: string,
+		title?: string,
+		interpolatedParams?: object,
+		override?: Partial<IndividualConfig>
+	): void {
+		this.toast.error(
+			this.tryGetTranslation(message, interpolatedParams),
+			this.tryGetTranslation(title),
+			{ disableTimeOut: true, ...override }
+		);
 	}
 
 	/**
@@ -26,18 +42,38 @@ export class ToastService {
 	apiError(error: HttpErrorResponse, title?: string): void {
 		console.log(error);
 		const exception = error?.error?.error;
-		const translation = exception ? this.translate.instant("Error." + exception) : this.translate.instant("Error.Unknown");
+		const translation = exception
+			? this.translate.instant("Error." + exception)
+			: this.translate.instant("Error.Unknown");
 		this.error(translation, title);
 	}
 
 	/** Displays a warning-themed toast message. */
-	warning(message?: string, title?: string, interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
-		this.toast.warning(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), { disableTimeOut: true, ...override });
+	warning(
+		message?: string,
+		title?: string,
+		interpolatedParams?: object,
+		override?: Partial<IndividualConfig>
+	): void {
+		this.toast.warning(
+			this.tryGetTranslation(message, interpolatedParams),
+			this.tryGetTranslation(title),
+			{ disableTimeOut: true, ...override }
+		);
 	}
 
 	/** Displays an info-themed toast message. */
-	info(message?: string, title?: string, interpolatedParams?: object, override?: Partial<IndividualConfig>): void {
-		this.toast.info(this.tryGetTranslation(message, interpolatedParams), this.tryGetTranslation(title), override);
+	info(
+		message?: string,
+		title?: string,
+		interpolatedParams?: object,
+		override?: Partial<IndividualConfig>
+	): void {
+		this.toast.info(
+			this.tryGetTranslation(message, interpolatedParams),
+			this.tryGetTranslation(title),
+			override
+		);
 	}
 
 	/**
@@ -45,7 +81,6 @@ export class ToastService {
 	 * Returns `undefined` if no translation found or word was undefined.
 	 */
 	private tryGetTranslation(word?: string, params?: object): string {
-		return word ? this.translate.instant(word, params): undefined;
+		return word ? this.translate.instant(word, params) : undefined;
 	}
-
 }

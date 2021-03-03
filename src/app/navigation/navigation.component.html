@@ -1,103 +1,146 @@
 <div [class]="theme.theme$ | async" *ngIf="{ user: authService.user$ | async } as obs">
-<!-- TOP BAR -->
-<mat-toolbar class="titlebar">
-	<div id="nav-left">
-		<button mat-icon-button type="button" (click)="drawer.toggle()">
-			<mat-icon>menu</mat-icon>
-		</button>
-		<img id="logo" src="./assets/img/uni-logo.png">
-		{{ 'Title.AppName' | translate }}
-	</div>
-	<div id="nav-right">
+	<!-- TOP BAR -->
+	<mat-toolbar class="titlebar">
+		<div id="nav-left">
+			<button mat-icon-button type="button" (click)="drawer.toggle()">
+				<mat-icon>menu</mat-icon>
+			</button>
+			<img id="logo" src="./assets/img/uni-logo.png" />
+			{{ "Title.AppName" | translate }}
+		</div>
+		<div id="nav-right">
+			<ng-container *ngIf="authService.user$ | async as user; else loginBtn">
+				<button class="btn-link" mat-button>{{ user.displayName }}</button>
+				<button class="btn-link btn-logout" mat-button (click)="logout()">Logout</button>
+			</ng-container>
 
-		<ng-container *ngIf="(authService.user$ | async) as user; else loginBtn">
-			<button class="btn-link" mat-button>{{user.displayName}}</button>
-			<button class="btn-link btn-logout" mat-button (click)="logout()">Logout</button>
-		</ng-container>
+			<ng-template #loginBtn>
+				<button class="btn-link" mat-button (click)="openLoginDialog()">Login</button>
+			</ng-template>
 
-		<ng-template #loginBtn>
-			<button  class="btn-link" mat-button (click)="openLoginDialog()">Login</button>
-		</ng-template>
-		
-		<mat-menu #appMenu="matMenu">
-			<div id="appMenu-container">
-				<button mat-menu-item [matMenuTriggerFor]="langMenu">{{ 'Misc.Language' | translate }}</button>
-				<mat-menu #langMenu="matMenu">
-					<button mat-menu-item (click)="setLanguage('en')">English</button>
-					<button mat-menu-item (click)="setLanguage('de')">Deutsch</button>
-				</mat-menu>
-				
-				<button mat-menu-item [matMenuTriggerFor]="themeMenu">Theme</button>
-				<mat-menu #themeMenu="matMenu">
-					<button mat-menu-item *ngFor="let t of theme.availableThemes" (click)="theme.setTheme(t.cssClass)">{{t.name}}</button>
-				</mat-menu>
-				<button mat-menu-item (click)="copyJwtToClipboard()" *ngIf="_isDevelopmentEnv">Copy JWT to clipboard</button>
-			</div>
-		</mat-menu>
-		  
-		  <button mat-icon-button [matMenuTriggerFor]="appMenu">
-			<mat-icon>more_vert</mat-icon>
-		  </button>
-	</div>
-</mat-toolbar>
+			<mat-menu #appMenu="matMenu">
+				<div id="appMenu-container">
+					<button mat-menu-item [matMenuTriggerFor]="langMenu">
+						{{ "Misc.Language" | translate }}
+					</button>
+					<mat-menu #langMenu="matMenu">
+						<button mat-menu-item (click)="setLanguage('en')">English</button>
+						<button mat-menu-item (click)="setLanguage('de')">Deutsch</button>
+					</mat-menu>
 
-<!-- SIDE MENU -->
-<mat-sidenav-container class="sidenav-container">
-	<mat-sidenav #drawer class="sidenav" fixedInViewport 
-	[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
-	[opened]="(isHandset$ | async) === false" 
-	[mode]="(isHandset$ | async) ? 'over' : 'side'">
+					<button mat-menu-item [matMenuTriggerFor]="themeMenu">Theme</button>
+					<mat-menu #themeMenu="matMenu">
+						<button
+							mat-menu-item
+							*ngFor="let t of theme.availableThemes"
+							(click)="theme.setTheme(t.cssClass)"
+						>
+							{{ t.name }}
+						</button>
+					</mat-menu>
+					<button mat-menu-item (click)="copyJwtToClipboard()" *ngIf="_isDevelopmentEnv">
+						Copy JWT to clipboard
+					</button>
+				</div>
+			</mat-menu>
 
-		<mat-nav-list>
-			<div id="sidenav-links">
-				<a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }">
-					<mat-icon>home</mat-icon>{{ "Misc.Home" | translate }} 
-				</a>
+			<button mat-icon-button [matMenuTriggerFor]="appMenu">
+				<mat-icon>more_vert</mat-icon>
+			</button>
+		</div>
+	</mat-toolbar>
 
-				<a mat-list-item [routerLink]="['/admin/user-management']" routerLinkActive="router-link-active" *ngIf="obs?.user?.role === 'MGMT_ADMIN' || obs?.user?.role === 'SYSTEM_ADMIN'">
-					<mat-icon>supervisor_account</mat-icon>{{ "Title.UserManagement" | translate }} 
-				</a>
+	<!-- SIDE MENU -->
+	<mat-sidenav-container class="sidenav-container">
+		<mat-sidenav
+			#drawer
+			class="sidenav"
+			fixedInViewport
+			[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+			[opened]="(isHandset$ | async) === false"
+			[mode]="(isHandset$ | async) ? 'over' : 'side'"
+		>
+			<mat-nav-list>
+				<div id="sidenav-links">
+					<a
+						mat-list-item
+						[routerLink]="['/']"
+						routerLinkActive="router-link-active"
+						[routerLinkActiveOptions]="{ exact: true }"
+					>
+						<mat-icon>home</mat-icon>{{ "Misc.Home" | translate }}
+					</a>
 
-				<a mat-list-item [routerLink]="['/courses']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: true}">
-					<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }} 
-				</a>
+					<a
+						mat-list-item
+						[routerLink]="['/admin/user-management']"
+						routerLinkActive="router-link-active"
+						*ngIf="
+							obs?.user?.role === 'MGMT_ADMIN' || obs?.user?.role === 'SYSTEM_ADMIN'
+						"
+					>
+						<mat-icon>supervisor_account</mat-icon
+						>{{ "Title.UserManagement" | translate }}
+					</a>
 
-				<div id="course-membership-list" *ngIf="authService.user$ | async">
+					<a
+						mat-list-item
+						[routerLink]="['/courses']"
+						routerLinkActive="router-link-active"
+						[routerLinkActiveOptions]="{ exact: true }"
+					>
+						<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }}
+					</a>
+
+					<div id="course-membership-list" *ngIf="authService.user$ | async">
+						<mat-divider></mat-divider>
+						<span id="my-courses"
+							>{{ "Common.My" | translate | uppercase }}
+							{{ "Domain.Courses" | translate | uppercase }}</span
+						>
+
+						<div *ngFor="let course of courseMemberships.courses$ | async">
+							<a
+								mat-list-item
+								[routerLink]="['/courses', course.id]"
+								routerLinkActive="router-link-active"
+								(click)="navigateToCourse(course)"
+							>
+								<mat-icon>lens</mat-icon>{{ course.id }}
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div id="sidenav-footer">
 					<mat-divider></mat-divider>
-					<span id="my-courses">{{ 'Common.My' | translate | uppercase }} {{ 'Domain.Courses' | translate | uppercase }}</span>
+					<a
+						mat-list-item
+						[routerLink]="['/login']"
+						routerLinkActive="router-link-active"
+						*ngIf="_isDevelopmentEnv"
+					>
+						<mat-icon>code</mat-icon>Developer-Login
+					</a>
 
-					<div *ngFor="let course of courseMemberships.courses$ | async">
-						<a mat-list-item [routerLink]="['/courses', course.id]" routerLinkActive="router-link-active" (click)="navigateToCourse(course)">
-							<mat-icon>lens</mat-icon>{{course.id}}
-						</a>
-					</div>				
+					<a mat-list-item href="https://www.uni-hildesheim.de/datenschutz">
+						<mat-icon>security</mat-icon>{{ "Misc.Privacy" | translate }}
+					</a>
+
+					<a mat-list-item href=" https://www.uni-hildesheim.de/impressum">
+						<mat-icon>info</mat-icon>{{ "Misc.Imprint" | translate }}
+					</a>
+				</div>
+			</mat-nav-list>
+		</mat-sidenav>
+
+		<mat-sidenav-content>
+			<!-- Add Content Here -->
+			<div class="background-container">
+				<div class="titlebar-padding">
+					<router-outlet></router-outlet>
 				</div>
 			</div>
-
-			<div id="sidenav-footer">
-				<mat-divider></mat-divider>
-				<a mat-list-item [routerLink]="['/login']" routerLinkActive="router-link-active" *ngIf="_isDevelopmentEnv">
-					<mat-icon>code</mat-icon>Developer-Login
-				</a>
-
-				<a mat-list-item href="https://www.uni-hildesheim.de/datenschutz">
-					<mat-icon>security</mat-icon>{{ 'Misc.Privacy' | translate }} 
-				</a>
-	
-				<a mat-list-item href=" https://www.uni-hildesheim.de/impressum">
-					<mat-icon>info</mat-icon>{{ 'Misc.Imprint' | translate }} 
-				</a>
-			</div>
-		</mat-nav-list>
-	</mat-sidenav>
-
-	<mat-sidenav-content>
-		<!-- Add Content Here -->
-		<div class="background-container">
-			<div class="titlebar-padding">
-				<router-outlet></router-outlet>
-			</div>
-		</div>
-	</mat-sidenav-content>
-</mat-sidenav-container>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
 </div>

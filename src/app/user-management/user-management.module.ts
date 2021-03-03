@@ -6,9 +6,6 @@ import { UpdateUserDialog } from "./dialogs/update-user/update-user.dialog";
 
 @NgModule({
 	declarations: [UserManagementComponent, UpdateUserDialog],
-	imports: [
-		SharedModule,
-		UserManagementRoutingModule,
-	]
+	imports: [SharedModule, UserManagementRoutingModule]
 })
-export class UserManagementModule { }
+export class UserManagementModule {}

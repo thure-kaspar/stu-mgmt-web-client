@@ -1,5 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from "@angular/core";
-import { AdmissionRuleDto, OverallPercentRuleDto, IndividualPercentWithAllowedFailuresRuleDto, RuleCheckResult } from "../../../../../api";
+import {
+	AdmissionRuleDto,
+	OverallPercentRuleDto,
+	IndividualPercentWithAllowedFailuresRuleDto,
+	RuleCheckResult
+} from "../../../../../api";
 
 @Component({
 	selector: "app-admission-rule",
@@ -8,17 +13,15 @@ import { AdmissionRuleDto, OverallPercentRuleDto, IndividualPercentWithAllowedFa
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdmissionRuleComponent implements OnInit {
-
 	@Input() rule: AdmissionRuleDto;
 	@Input() index: number;
-	@Input() result?: RuleCheckResult
-	
+	@Input() result?: RuleCheckResult;
+
 	ruleTypes = AdmissionRuleDto.TypeEnum;
 
-	constructor() { }
+	constructor() {}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	getRuleAsXPercentOfY(rule: AdmissionRuleDto): IndividualPercentWithAllowedFailuresRuleDto {
 		return rule as IndividualPercentWithAllowedFailuresRuleDto;
@@ -27,5 +30,4 @@ export class AdmissionRuleComponent implements OnInit {
 	getRuleAs(rule: AdmissionRuleDto): OverallPercentRuleDto {
 		return rule as OverallPercentRuleDto;
 	}
-
 }
