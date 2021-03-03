@@ -42,9 +42,9 @@
 		<mat-chip [class]="'type-chip ' + assignment.type">
 			<mat-icon *ngIf="assignment.type === typeEnum.HOMEWORK">assignment</mat-icon>
 			<mat-icon *ngIf="assignment.type === typeEnum.TESTAT">grade</mat-icon>
-			<mat-icon *ngIf="assignment.type === typeEnum.PROJECT">engineering</mat-icon>
-			<mat-icon *ngIf="assignment.type === typeEnum.SEMINAR">menu_book</mat-icon>
-			<mat-icon *ngIf="assignment.type === typeEnum.OTHER">not_listed_location</mat-icon>
+			<mat-icon *ngIf="assignment.type === typeEnum.PROJECT">build</mat-icon>
+			<mat-icon *ngIf="assignment.type === typeEnum.SEMINAR">description</mat-icon>
+			<mat-icon *ngIf="assignment.type === typeEnum.OTHER">help</mat-icon>
 			<span class="assignment-type">{{ 'Enum.AssignmentType.' + assignment.type | translate }}</span>
 		</mat-chip>
 
