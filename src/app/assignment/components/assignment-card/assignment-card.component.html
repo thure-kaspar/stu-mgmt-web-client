@@ -1,6 +1,6 @@
 <mat-card class="assignment mat-elevation-z2">
 	<mat-card-title class="assignment-card-title">
-		<span class="name font-bold">
+		<span class="font-bold name">
 			<a class="link-none" [routerLink]="[ assignment.id, 'assessments']" *ngIf="participant?.isTeachingStaffMember; else noLink">
 				{{assignment.name}}
 			</a>
@@ -18,7 +18,7 @@
 				</button>
 				<button mat-menu-item (click)="onDelete()">
 					<mat-icon class="icon-light">delete</mat-icon>
-					<span class="text-red font-bold">
+					<span class="font-bold text-red">
 					{{ 'Action.Delete' | translate }}
 					</span>
 				</button>
@@ -31,7 +31,7 @@
 	</mat-card-title>
 
 	<div class="comment" *ngIf="assignment.comment">
-		{{assignment.comment}}
+		<pre class="preformatted">{{assignment.comment}}</pre>
 	</div>
 
 	<div class="links" *ngIf="assignment.links?.length > 0">
@@ -57,10 +57,10 @@
 
 	<div class="dates" *ngIf="assignment.startDate || assignment.endDate">
 		<span class="startdate" *ngIf="assignment.startDate">
-			<span class="font-bold text-green uppercase">{{ 'Common.Start' | translate }}:</span> {{assignment.startDate | date:"medium" }}
+			<span class="font-bold uppercase text-green">{{ 'Common.Start' | translate }}:</span> {{assignment.startDate | date:"medium" }}
 		</span>
 		<span class="enddate" *ngIf="assignment.endDate">
-			<span class="font-bold text-red uppercase">{{ 'Common.End' | translate }}:</span> {{assignment.endDate | date:"medium" }}
+			<span class="font-bold uppercase text-red">{{ 'Common.End' | translate }}:</span> {{assignment.endDate | date:"medium" }}
 		</span>
 	</div>
 

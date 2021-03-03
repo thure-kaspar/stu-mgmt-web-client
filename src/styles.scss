@@ -334,6 +334,12 @@ table, mat-paginator {
 	font-weight: 500;
 }
 
+.preformatted {
+	white-space: pre-wrap;
+	text-align: justify;
+	font-family: inherit;
+}
+
 .text-justify {
 	text-align: justify;
 }
