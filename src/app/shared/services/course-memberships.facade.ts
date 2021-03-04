@@ -14,26 +14,17 @@ export class CourseMembershipsFacade {
 		private userService: UsersService,
 		private authService: AuthService
 	) {
-		// Subscribe to login/logout
 		this.authService.user$.subscribe(user => {
-			// If user is logged in
 			if (user) {
-				this.userService.getCoursesOfUser(user.id).subscribe(
-					courses => {
-						this.coursesSubject.next(courses);
-					},
-					error => console.log(error)
-				);
+				this.loadCoursesOfUser(user.id);
 			} else {
-				// User is logged out
 				this.coursesSubject.next([]);
 			}
 		});
 	}
 
 	/** Allows to manually query the API for the user's courses. Results will be emitted via the courses-observable. */
-	loadCoursesOfUser(): void {
-		const userId = this.getUserId();
+	loadCoursesOfUser(userId: string): void {
 		if (userId) {
 			this.userService.getCoursesOfUser(userId).subscribe(
 				courses => {
@@ -52,7 +43,7 @@ export class CourseMembershipsFacade {
 		const userId = this.getUserId();
 		return this.courseParticipantsService.addUser({ password }, courseId, userId).pipe(
 			switchMap(success => {
-				this.loadCoursesOfUser();
+				this.loadCoursesOfUser(userId);
 				return of(null);
 			}),
 			catchError(error => {
