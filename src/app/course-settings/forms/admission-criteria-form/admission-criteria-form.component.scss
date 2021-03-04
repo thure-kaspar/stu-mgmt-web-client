@@ -18,8 +18,7 @@
 .add-rule-btns {
 	margin-bottom: 16px;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 16px;
+	row-gap: 8px;
 
 	@media (max-width: 600px) {
 		display: flex;
