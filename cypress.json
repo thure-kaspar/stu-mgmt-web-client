@@ -1,0 +1,5 @@
+{
+	"baseUrl": "http://localhost:4200",
+	"watchForFileChanges": true,
+	"defaultCommandTimeout": 2000
+}
