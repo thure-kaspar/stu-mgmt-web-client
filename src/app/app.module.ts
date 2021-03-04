@@ -19,6 +19,7 @@ import { AuthService } from "./auth/services/auth.service";
 import { MaterialModule } from "./material/material.module";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { SharedModule } from "./shared/shared.module";
+import { ServiceWorkerModule } from "@angular/service-worker";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -54,7 +55,8 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		SharedModule,
 		MaterialModule,
 		LayoutModule,
-		AuthModule
+		AuthModule,
+		ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production })
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "de" },
