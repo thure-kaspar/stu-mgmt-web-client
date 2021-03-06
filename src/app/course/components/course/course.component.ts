@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { take, takeLast, delay, filter } from "rxjs/operators";
+import { filter, take } from "rxjs/operators";
 import { CourseDto, CoursesService } from "../../../../../api";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
 import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+	ExtendedConfirmDialog,
+	ExtendedConfirmDialogData
+} from "../../../shared/components/dialogs/extended-confirm-dialog/extended-confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { CourseMembershipsFacade } from "../../../shared/services/course-memberships.facade";
 import { CourseFacade } from "../../../shared/services/course.facade";
@@ -86,12 +86,17 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnD
 
 	/** Allows the user to leave the course, if he gives confirmation. */
 	leaveCourse(): void {
-		const data: ConfirmDialogData = {
+		const data: ExtendedConfirmDialogData = {
 			title: "Action.Custom.LeaveCourse",
-			params: [this.course.title, this.course.semester]
+			params: [this.course.title, this.course.semester],
+			stringToConfirm: this.course.id
 		};
+
 		this.dialog
-			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
+			.open<ExtendedConfirmDialog, ExtendedConfirmDialogData, boolean>(
+				ExtendedConfirmDialog,
+				{ data }
+			)
 			.afterClosed()
 			.subscribe(confirmed => {
 				if (confirmed) {
