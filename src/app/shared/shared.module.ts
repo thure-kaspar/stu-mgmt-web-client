@@ -10,6 +10,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { Paginator } from "./paginator/paginator.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
 import { SearchParticipantDialog } from "./components/dialogs/search-participant/search-participant.dialog";
+import { ExtendedConfirmDialog } from "./components/dialogs/extended-confirm-dialog/extended-confirm-dialog.dialog";
 
 @NgModule({
 	declarations: [
@@ -17,7 +18,8 @@ import { SearchParticipantDialog } from "./components/dialogs/search-participant
 		ConfirmDialog,
 		Paginator,
 		SemesterPipe,
-		SearchParticipantDialog
+		SearchParticipantDialog,
+		ExtendedConfirmDialog
 	],
 	imports: [CommonModule, AuthModule, MaterialModule, TranslateModule, FormsModule],
 	exports: [

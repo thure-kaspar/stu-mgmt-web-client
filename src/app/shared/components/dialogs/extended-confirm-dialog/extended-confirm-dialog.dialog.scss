@@ -1,0 +1,26 @@
+.extended-confirm-dialog {
+	width: 300px;
+}
+
+.params {
+	margin-bottom: 16px;
+}
+
+.info {
+	display: grid;
+	justify-items: center;
+}
+
+.confirm-info {
+	color: var(--text-light);
+}
+
+.confirm-text {
+	margin-top: 4px;
+	font-weight: 500;
+}
+
+mat-form-field {
+	margin-top: 8px;
+	width: 100%;
+}

@@ -315,6 +315,9 @@
     }
   },
   "Text": {
+    "Common": {
+      "EnterToConfirm": "Please enter the following text to confirm"
+    },
     "Course": {
       "Closed": "If the course is closed, joining, creation of new assignments, groups, etc. is not possible.",
       "Id": "Id will default to shortname-semeste, if not specified. Will be used in the URL.",

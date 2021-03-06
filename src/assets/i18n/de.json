@@ -315,6 +315,9 @@
     }
   },
   "Text": {
+    "Common": {
+      "EnterToConfirm": "Bitte den folgenden Text eingeben, um zu bestätigen"
+    },
     "Course": {
       "Closed": "Wenn die Veranstaltung geschlossen ist kann niemand beitreten und es können keine Aufgaben oder Gruppen erstellt werden.",
       "Id": "Id setzt sich aus Kürzel-Semester zusammen, wenn nicht angegeben. Wird in der URL verwendet.",
