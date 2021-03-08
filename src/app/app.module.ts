@@ -43,7 +43,9 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		ToastrModule.forRoot({
-			positionClass: "toast-bottom-right"
+			positionClass: "toast-bottom-right",
+			progressBar: true,
+			preventDuplicates: true
 		}),
 		TranslateModule.forRoot({
 			defaultLanguage: localStorage.getItem("language") ?? "de",

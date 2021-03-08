@@ -31,7 +31,7 @@ export class ToastService {
 		this.toast.error(
 			this.tryGetTranslation(message, interpolatedParams),
 			this.tryGetTranslation(title),
-			{ disableTimeOut: true, ...override }
+			{ timeOut: 10000, ...override }
 		);
 	}
 
