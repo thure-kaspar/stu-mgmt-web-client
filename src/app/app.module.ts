@@ -20,6 +20,7 @@ import { MaterialModule } from "./material/material.module";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { SharedModule } from "./shared/shared.module";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { StateModule } from "./state/state.module";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 				deps: [HttpClient]
 			}
 		}),
+		StateModule,
 		SharedModule,
 		MaterialModule,
 		LayoutModule,

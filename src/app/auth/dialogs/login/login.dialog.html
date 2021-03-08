@@ -1,4 +1,4 @@
-<div class="dialog-container" id="login-dialog">
+<div class="dialog-container" id="login-dialog" *ngIf="authState$ | async as authState">
 	<mat-card-title id="dialog-title">Login</mat-card-title>
 
 	<div mat-dialog-content class="dialog-content">
@@ -28,11 +28,11 @@
 			<mat-icon matSuffix class="icon-light">lock</mat-icon> </mat-form-field
 		><br />
 
-		<div id="error-container" *ngIf="!loading">
+		<div id="error-container" *ngIf="authState.error">
 			<mat-error *ngIf="errorMessage">{{errorMessage | translate}}</mat-error>
 		</div>
 
-		<div class="loading" *ngIf="loading">
+		<div class="loading" *ngIf="authState.isLoading">
 			<mat-spinner color="accent" [diameter]="32"></mat-spinner>
 		</div>
 	</div>
@@ -43,7 +43,7 @@
 			color="accent"
 			id="btn-login"
 			(click)="onLogin()"
-			[disabled]="loading"
+			[disabled]="authState.isLoading"
 		>
 			Login
 		</button>
