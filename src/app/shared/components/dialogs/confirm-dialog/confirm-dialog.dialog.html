@@ -1,7 +1,7 @@
-<div class="dialog-container">
+<div class="confirm-dialog dialog-container">
 	<mat-card-title> {{ getTitle() | translate }} </mat-card-title>
 
-	<p>{{ getMessage() | translate }}</p>
+	<pre class="preformatted">{{ getMessage() | translate }}</pre>
 
 	<p id="param-container">
 		<ng-container *ngFor="let param of data?.params"> {{ param }}<br /> </ng-container>
