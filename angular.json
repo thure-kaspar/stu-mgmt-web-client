@@ -19,7 +19,12 @@
 						"polyfills": "src/polyfills.ts",
 						"tsConfig": "tsconfig.app.json",
 						"aot": true,
-						"assets": ["src/favicon.ico", "src/assets", "src/env.js", "src/manifest.webmanifest"],
+						"assets": [
+							"src/favicon.ico",
+							"src/assets",
+							"src/env.js",
+							"src/manifest.webmanifest"
+						],
 						"styles": [
 							"src/custom-theme.scss",
 							"src/styles.scss",
@@ -110,44 +115,6 @@
 						"production": {
 							"devServerTarget": "student-mgmt-client:serve:production"
 						}
-					}
-				}
-			}
-		},
-		"Student-mgmt-api": {
-			"projectType": "library",
-			"root": "projects/student-mgmt-api",
-			"sourceRoot": "projects/student-mgmt-api/src",
-			"prefix": "lib",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:ng-packagr",
-					"options": {
-						"tsConfig": "projects/student-mgmt-api/tsconfig.lib.json",
-						"project": "projects/student-mgmt-api/ng-package.json"
-					},
-					"configurations": {
-						"production": {
-							"tsConfig": "projects/student-mgmt-api/tsconfig.lib.prod.json"
-						}
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/student-mgmt-api/src/test.ts",
-						"tsConfig": "projects/student-mgmt-api/tsconfig.spec.json",
-						"karmaConfig": "projects/student-mgmt-api/karma.conf.js"
-					}
-				},
-				"lint": {
-					"builder": "@angular-devkit/build-angular:tslint",
-					"options": {
-						"tsConfig": [
-							"projects/student-mgmt-api/tsconfig.lib.json",
-							"projects/student-mgmt-api/tsconfig.spec.json"
-						],
-						"exclude": ["**/node_modules/**"]
 					}
 				}
 			}
