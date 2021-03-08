@@ -670,6 +670,54 @@ export class GroupsService {
     }
 
     /**
+     * Join or create group.
+     * Tries to add the user to an open group with sufficient capacity. If no such group exists, creates a new group and adds the requesting user. Returns the joined group and its members.
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public joinOrCreateGroup(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<GroupDto>;
+    public joinOrCreateGroup(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GroupDto>>;
+    public joinOrCreateGroup(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GroupDto>>;
+    public joinOrCreateGroup(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling joinOrCreateGroup.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<GroupDto>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/groups/joinOrCreateGroup`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Remove user.
      * Removes the user from the group.
      * @param courseId 
