@@ -326,6 +326,9 @@
     "CourseConfig": {
       "Password": "Teilnehmer müssen das Passwort angeben, um dem Kurs beizutreten."
     },
+    "Dialog": {
+      "SuggestGroupJoin": "Die Teilnahme an Gruppenaufgaben erfordert die Mitgliedschaft in einer Gruppe.\n\nWenn Sie diese Aktion bestätigen, versucht das System Sie in eine freie Gruppe hinzuzufügen. Sollte es aktuell keine freie Gruppe geben, wird eine neue Gruppe für Sie erstellt."
+    },
     "Group": {
       "CanNotBeClosed": "Diese Gruppe kann nicht von Studenten geschlossen werden.",
       "CanNotBeRenamed": "Der Name der Gruppe kann von Studenten nicht verändert werden.",

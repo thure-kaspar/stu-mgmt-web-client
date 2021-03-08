@@ -326,6 +326,9 @@
     "CourseConfig": {
       "Password": "Participants must enter the password to join the course."
     },
+    "Dialog": {
+      "SuggestGroupJoin": "Participation in group assignments requires membership in a group.\n\nIf you confirm this action, the system will try to add you into an open group. Should there be no available groups, a new group will be created for you."
+    },
     "Group": {
       "CanNotBeClosed": "The group cannot be closed by students.",
       "CanNotBeRenamed": "This group cannot be renamed by students.",

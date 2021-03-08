@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { filter, take } from "rxjs/operators";
-import { CourseDto, CoursesService } from "../../../../../api";
+import { CourseDto, GroupsService } from "../../../../../api";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
+import {
+	ConfirmDialog,
+	ConfirmDialogData
+} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import {
 	ExtendedConfirmDialog,
 	ExtendedConfirmDialogData
@@ -27,10 +30,10 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnD
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private courseService: CoursesService,
 		private courseMemberships: CourseMembershipsFacade,
 		public participantFacade: ParticipantFacade,
 		public courseFacade: CourseFacade,
+		private groupService: GroupsService,
 		private dialog: MatDialog,
 		private toast: ToastService
 	) {
@@ -59,20 +62,13 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnD
 						.subscribe(joined => {
 							if (joined) {
 								// If user joined, try load the course again
-								this.loadCourse();
+								this.courseFacade.loadCourse(courseId).subscribe(course => {
+									this.course = course;
 
-								this.subs.sink = this.participantFacade.participant$
-									.pipe(
-										filter(p => !!p),
-										take(1)
-									)
-									.subscribe(participant => {
-										if (participant.group) {
-											this.toast.info("Message.Custom.AutoJoinedGroup", "", {
-												groupName: participant.group.name
-											});
-										}
-									});
+									if (course.groupSettings.autoJoinGroupOnCourseJoined) {
+										this.suggestGroupJoin();
+									}
+								});
 							} else {
 								this.router.navigateByUrl("courses");
 							}
@@ -82,6 +78,33 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnD
 				}
 			}
 		});
+	}
+
+	/**
+	 * Opens a `ConfirmDialog` that suggest the user to automatically join a random group.
+	 */
+	suggestGroupJoin(): void {
+		this.dialog
+			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, {
+				data: {
+					title: "Title.JoinGroup",
+					message: "Text.Dialog.SuggestGroupJoin"
+				}
+			})
+			.afterClosed()
+			.subscribe(confirmed => {
+				if (confirmed) {
+					this.groupService.joinOrCreateGroup(this.course.id).subscribe({
+						next: group => {
+							this.participantFacade.changeGroup(group);
+							this.toast.info("Message.Custom.AutoJoinedGroup", "", {
+								groupName: group.name
+							});
+						},
+						error: error => this.toast.apiError(error)
+					});
+				}
+			});
 	}
 
 	/** Allows the user to leave the course, if he gives confirmation. */
