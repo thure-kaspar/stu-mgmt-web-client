@@ -11,6 +11,7 @@ import {
 import { MatDialog } from "@angular/material/dialog";
 import { MatSidenav } from "@angular/material/sidenav";
 import { NavigationEnd, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
 import { CourseDto } from "../../../api";
@@ -18,9 +19,9 @@ import { environment } from "../../environments/environment";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { AuthService } from "../auth/services/auth.service";
 import { CourseMembershipsFacade } from "../shared/services/course-memberships.facade";
-import { SnackbarService } from "../shared/services/snackbar.service";
 import { ThemeService } from "../shared/services/theme.service";
 import { ToastService } from "../shared/services/toast.service";
+import { AuthActions, AuthSelectors } from "../state/auth";
 
 @Component({
 	selector: "app-navigation",
@@ -29,6 +30,8 @@ import { ToastService } from "../shared/services/toast.service";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent implements OnInit {
+	user$ = this.store.select(AuthSelectors.selectUser);
+
 	@Output() onLanguageChange = new EventEmitter<string>();
 
 	@ViewChild("drawer") drawer: MatSidenav;
@@ -42,15 +45,15 @@ export class NavigationComponent implements OnInit {
 	_isDevelopmentEnv = !environment.production;
 
 	constructor(
-		private breakpointObserver: BreakpointObserver,
-		private router: Router,
 		public authService: AuthService,
 		public courseMemberships: CourseMembershipsFacade,
 		public theme: ThemeService,
+		private breakpointObserver: BreakpointObserver,
+		private router: Router,
 		private overlayContainer: OverlayContainer,
 		private dialog: MatDialog,
-		public snackbar: SnackbarService,
-		private toast: ToastService
+		private toast: ToastService,
+		private store: Store
 	) {
 		router.events
 			.pipe(
@@ -84,12 +87,12 @@ export class NavigationComponent implements OnInit {
 	}
 
 	logout(): void {
-		return this.authService.logout();
+		this.store.dispatch(AuthActions.logout());
 	}
 
 	async copyJwtToClipboard(): Promise<void> {
 		await navigator.clipboard.writeText(this.authService.getAuthToken().accessToken);
-		this.snackbar.openSuccessMessage("Copied!");
+		this.toast.success("Copied!");
 	}
 
 	// TODO: Function is used to allow reloading the course component, if params change -> Search for better solution

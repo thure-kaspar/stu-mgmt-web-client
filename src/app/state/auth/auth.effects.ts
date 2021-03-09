@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
-import { catchError, map, switchMap } from "rxjs/operators";
+import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { AuthenticationService } from "../../../../api";
 import { AuthenticationInfoDto } from "../../auth/auth-info.dto";
 import { ToastService } from "../../shared/services/toast.service";
@@ -20,6 +21,7 @@ export class AuthEffects {
 					}),
 					map(token => {
 						this.toast.success(token.user.displayName, "Common.Welcome");
+						localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(token));
 						return AuthActions.loginSuccess({ token });
 					}),
 					catchError(error => {
@@ -30,10 +32,25 @@ export class AuthEffects {
 		)
 	);
 
+	logout$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(AuthActions.logout),
+				tap(() => {
+					localStorage.removeItem(this.studentMgmtTokenKey);
+					this.router.navigateByUrl("courses");
+				})
+			),
+		{ dispatch: false }
+	);
+
+	private studentMgmtTokenKey = "studentMgmtToken";
+
 	constructor(
 		private actions$: Actions,
 		private http: HttpClient,
 		private authApi: AuthenticationService,
+		private router: Router,
 		private toast: ToastService,
 		@Inject("SPARKY_AUTHENTICATE_URL") private authUrl: string
 	) {}

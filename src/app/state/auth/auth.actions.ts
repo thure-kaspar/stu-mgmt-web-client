@@ -15,3 +15,5 @@ export const loginFailure = createAction(
 	"[login$ Effect] Login Failure",
 	props<{ error: unknown }>()
 );
+
+export const logout = createAction("[Logout] Logout");

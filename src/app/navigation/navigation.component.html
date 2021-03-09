@@ -1,4 +1,4 @@
-<div [class]="theme.theme$ | async" *ngIf="{ user: authService.user$ | async } as obs">
+<div [class]="theme.theme$ | async" *ngIf="{ user: user$ | async } as obs">
 	<!-- TOP BAR -->
 	<mat-toolbar class="titlebar">
 		<div id="nav-left">
@@ -9,8 +9,8 @@
 			{{ "Title.AppName" | translate }}
 		</div>
 		<div id="nav-right">
-			<ng-container *ngIf="authService.user$ | async as user; else loginBtn">
-				<button class="btn-link" mat-button>{{ user.displayName }}</button>
+			<ng-container *ngIf="obs.user; else loginBtn">
+				<button class="btn-link" mat-button>{{ obs.user.displayName }}</button>
 				<button class="btn-link btn-logout" mat-button (click)="logout()">Logout</button>
 			</ng-container>
 
@@ -92,7 +92,7 @@
 						<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }}
 					</a>
 
-					<div id="course-membership-list" *ngIf="authService.user$ | async">
+					<div id="course-membership-list" *ngIf="obs.user">
 						<mat-divider></mat-divider>
 						<span id="my-courses"
 							>{{ "Common.My" | translate | uppercase }}

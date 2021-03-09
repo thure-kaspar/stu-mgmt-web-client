@@ -25,7 +25,7 @@ export class DownloadService {
 			.get(`${this.basePath}/${endpoint}`, {
 				responseType: "blob",
 				headers: {
-					["Authorization"]: `Bearer ${this.authService.getAccessToken()}`
+					["Authorization"]: `Bearer ${AuthService.getAccessToken()}`
 				}
 			})
 			.subscribe({
