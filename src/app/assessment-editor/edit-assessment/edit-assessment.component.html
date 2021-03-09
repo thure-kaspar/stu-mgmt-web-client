@@ -3,14 +3,6 @@
 		<div id="left">
 			<h2 id="title">{{ "Title.EditAssessment" | translate }}</h2>
 
-			<p
-				id="review-state-error"
-				class="text-red"
-				*ngIf="assignment?.state !== stateEnum.INREVIEW"
-			>
-				<mat-icon>error</mat-icon>{{ "Error.AssignmentNotInReview" | translate }}
-			</p>
-
 			<div class="assessment-header" *ngIf="assessment$ | async as assessment">
 				<div>
 					<span class="created-by">
@@ -68,7 +60,7 @@
 				mat-raised-button
 				color="accent"
 				id="btn-save"
-				[disabled]="form.isInvalid() || assignment?.state !== stateEnum.INREVIEW"
+				[disabled]="form.form.invalid"
 				(click)="onSave()"
 			>
 				{{ "Action.Save" | translate }}
