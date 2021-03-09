@@ -7,14 +7,13 @@ import { TranslateModule } from "@ngx-translate/core";
 import { environment } from "../../environments/environment";
 import { MaterialModule } from "../material/material.module";
 import { LoginComponent } from "./components/login/login.component";
-import { RegisterComponent } from "./components/register/register.component";
 import { LoginDialog } from "./dialogs/login/login.dialog";
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
 
 @NgModule({
-	declarations: [LoginComponent, RegisterComponent, LoginDialog],
+	declarations: [LoginComponent, LoginDialog],
 	imports: [
 		CommonModule,
 		RouterModule,
