@@ -13,6 +13,7 @@ class ParticipantsFilter {
 	includeTutors = false;
 	includeLecturers = false;
 	username: string;
+	groupName: string;
 }
 
 /**
@@ -73,7 +74,15 @@ export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnI
 		if (this.filter.includeStudents) roles.push(ParticipantDto.RoleEnum.STUDENT);
 
 		this.courseParticipants
-			.getUsersOfCourse(this.courseId, skip, take, roles, this.filter.username, "response")
+			.getUsersOfCourse(
+				this.courseId,
+				skip,
+				take,
+				roles,
+				this.filter.username?.trim(),
+				this.filter.groupName?.trim(),
+				"response"
+			)
 			.subscribe(
 				response => {
 					this.dataSource = new MatTableDataSource(response.body);

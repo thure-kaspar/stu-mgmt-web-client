@@ -379,17 +379,19 @@ export class CourseParticipantsService {
      * @param take [Pagination] The amount of elements that should be included in the response.
      * @param courseRole 
      * @param name Compared to the participant&#x27;s username and displayName with ILIKE %name%.
+     * @param groupName Filters by a student&#x27;s current group. Compared with ILIKE %groupName%.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<ParticipantDto>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ParticipantDto>>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ParticipantDto>>>;
-    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, groupName?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<ParticipantDto>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, groupName?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ParticipantDto>>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, groupName?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ParticipantDto>>>;
+    public getUsersOfCourse(courseId: string, skip?: number, take?: number, courseRole?: Array<string>, name?: string, groupName?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling getUsersOfCourse.');
         }
+
 
 
 
@@ -409,6 +411,9 @@ export class CourseParticipantsService {
         }
         if (name !== undefined && name !== null) {
             queryParameters = queryParameters.set('name', <any>name);
+        }
+        if (groupName !== undefined && groupName !== null) {
+            queryParameters = queryParameters.set('groupName', <any>groupName);
         }
 
         let headers = this.defaultHeaders;

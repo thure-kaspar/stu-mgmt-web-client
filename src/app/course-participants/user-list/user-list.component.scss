@@ -11,6 +11,12 @@
 		display: flex;
 		justify-content: space-between;
 	}
+
+	.bottom {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 8px;
+	}
 }
 
 .roles {
@@ -32,10 +38,42 @@
 	width: 96px;
 }
 
-.action-column {
+.chips {
+	mat-chip {
+		margin-right: 32px;
+		width: 118px;
+		color: white;
+
+		mat-icon {
+			margin-right: 8px;
+		}
+	}
+
+	.LECTURER {
+		background-color: #e72a67 !important;
+	}
+
+	.TUTOR {
+		background-color: rgb(91, 0, 175) !important;
+	}
+
+	.STUDENT {
+		background-color: rgb(0, 153, 102) !important;
+	}
+}
+
+.column-action {
 	width: 64px;
+}
+
+.column-matrnr {
+	width: 96px;
 }
 
 .column-username {
 	width: 128px;
+}
+
+.column-displayname {
+	width: 256px;
 }

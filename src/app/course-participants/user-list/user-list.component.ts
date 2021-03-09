@@ -4,12 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import {
-	CourseParticipantsService,
-	CoursesService,
-	CsvService,
-	ParticipantDto
-} from "../../../../api";
+import { CourseParticipantsService, CoursesService, ParticipantDto } from "../../../../api";
 import {
 	ChangeRoleDialog,
 	ChangeRoleDialogData
@@ -20,15 +15,15 @@ import {
 } from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../shared/paginator/paginator.component";
-import { SnackbarService } from "../../shared/services/snackbar.service";
-import { ToastService } from "../../shared/services/toast.service";
 import { DownloadService } from "../../shared/services/download.service";
+import { ToastService } from "../../shared/services/toast.service";
 
 class ParticipantsFilter {
 	includeStudents = false;
 	includeTutors = false;
 	includeLecturers = false;
 	username: string;
+	groupName: string;
 }
 
 @Component({
@@ -40,13 +35,23 @@ class ParticipantsFilter {
 export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;
 	private participants: ParticipantDto[];
-	displayedColumns: string[] = ["actions", "role", "username", "displayName", "spacer"];
+	displayedColumns: string[] = [
+		"actions",
+		"role",
+		"matrNr",
+		"username",
+		"displayName",
+		"group",
+		"spacer"
+	];
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<ParticipantDto>([]));
 	filter = new ParticipantsFilter();
 
 	usernameFilterChangedSubject = new Subject();
 
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
+
+	courseRole = ParticipantDto.RoleEnum;
 
 	constructor(
 		private courseService: CoursesService,
@@ -83,12 +88,21 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 		if (this.filter.includeStudents) roles.push(ParticipantDto.RoleEnum.STUDENT);
 
 		this.courseParticipantsService
-			.getUsersOfCourse(this.courseId, skip, take, roles, this.filter.username, "response")
+			.getUsersOfCourse(
+				this.courseId,
+				skip,
+				take,
+				roles,
+				this.filter.username?.trim(),
+				this.filter.groupName?.trim(),
+				"response"
+			)
 			.subscribe(
 				response => {
 					if (!triggeredByPaginator) this.paginator.goToFirstPage();
 					this.paginator.setTotalCountFromHttp(response);
-					(this.participants = response.body), this.refreshDataSource();
+					this.participants = response.body;
+					this.refreshDataSource();
 				},
 				error => console.log(error)
 			);
