@@ -41,8 +41,8 @@ export class AuthService {
 
 		// If login was successful, store the received authentication token
 		if (authToken) {
-			this.store.dispatch(AuthActions.loginSuccess({ token: authToken }));
 			localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
+			this.store.dispatch(AuthActions.loginSuccess({ token: authToken }));
 			this.router.navigate(["/courses"]);
 		}
 	}
