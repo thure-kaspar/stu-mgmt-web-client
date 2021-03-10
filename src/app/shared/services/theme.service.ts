@@ -39,7 +39,7 @@ export class ThemeService {
 			window.matchMedia &&
 			window.matchMedia("(prefers-color-scheme: dark)").matches
 		) {
-			theme = "dark-theme";
+			theme = "twitch-theme";
 		} else if (storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
 			theme = storedTheme;
 		} else {
