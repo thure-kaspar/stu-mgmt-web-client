@@ -6,14 +6,13 @@ import {
 	HttpRequest
 } from "@angular/common/http";
 import { Injectable, Injector } from "@angular/core";
-import { Router } from "@angular/router";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { ToastService } from "../../shared/services/toast.service";
 import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: "root" })
-export class TokenInterceptorService implements HttpInterceptor {
+export class ErrorInterceptorService implements HttpInterceptor {
 	constructor(private injector: Injector) {}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,7 +24,6 @@ export class TokenInterceptorService implements HttpInterceptor {
 	 */
 	private handleHttpError(err: HttpErrorResponse): Observable<any> {
 		const authService = this.injector.get(AuthService);
-		const router = this.injector.get(Router);
 
 		if (err.status == 0) {
 			const toast = this.injector.get(ToastService);

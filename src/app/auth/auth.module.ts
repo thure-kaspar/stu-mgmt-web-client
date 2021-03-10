@@ -10,7 +10,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { LoginDialog } from "./dialogs/login/login.dialog";
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
-import { TokenInterceptorService } from "./services/token-interceptor.service";
+import { ErrorInterceptorService } from "./services/error-interceptor.service";
 
 @NgModule({
 	declarations: [LoginComponent, LoginDialog],
@@ -31,7 +31,7 @@ import { TokenInterceptorService } from "./services/token-interceptor.service";
 				(window["__env"]["AUTH_BASE_PATH"] ?? environment.AUTH_BASE_PATH) +
 				"/api/v1/authenticate"
 		},
-		{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
 	]
 })
 export class AuthModule {}
