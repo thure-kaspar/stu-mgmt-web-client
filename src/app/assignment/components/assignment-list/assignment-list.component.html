@@ -22,6 +22,7 @@
 							<app-assignment-card
 								[course]="course"
 								[assignment]="assignment"
+								[participant]="participant"
 							></app-assignment-card>
 						</ng-container>
 					</div>
@@ -38,6 +39,7 @@
 							<app-assignment-card
 								[course]="course"
 								[assignment]="assignment"
+								[participant]="participant"
 							></app-assignment-card>
 						</ng-container>
 					</div>
@@ -54,6 +56,7 @@
 							<app-assignment-card
 								[course]="course"
 								[assignment]="assignment"
+								[participant]="participant"
 							></app-assignment-card>
 						</ng-container>
 					</div>
@@ -70,6 +73,7 @@
 							<app-assignment-card
 								[course]="course"
 								[assignment]="assignment"
+								[participant]="participant"
 							></app-assignment-card>
 						</ng-container>
 					</div>
@@ -78,7 +82,7 @@
 				<ng-container *ngIf="participant?.isTeachingStaffMember">
 					<mat-divider inset></mat-divider>
 
-					<div class="state invisible">
+					<div class="invisible state">
 						<h3 class="assignment-state">
 							{{ "Enum.AssignmentState.INVISIBLE" | translate }}
 						</h3>
@@ -87,6 +91,7 @@
 								<app-assignment-card
 									[course]="course"
 									[assignment]="assignment"
+									[participant]="participant"
 								></app-assignment-card>
 							</ng-container>
 						</div>

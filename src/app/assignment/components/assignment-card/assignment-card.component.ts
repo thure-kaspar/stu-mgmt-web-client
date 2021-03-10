@@ -31,9 +31,15 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	@Input() assignment: AssignmentDto;
 	@Input() course: Course;
 
-	group$ = new Subject<GroupDto>();
+	_participant: Participant;
+	@Input() set participant(p: Participant) {
+		this._participant = p;
+		if (this.studentShouldHaveAGroup(this.assignment, this._participant)) {
+			this.displayGroupOrWarning();
+		}
+	}
 
-	participant: Participant;
+	group$ = new Subject<GroupDto>();
 
 	/**
 	 * Can be used to display a warning about this assignment, i.e. "You have no group for this assignment."
@@ -48,7 +54,6 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 	constructor(
 		private participantFacade: ParticipantFacade,
-		private assessmentService: AssessmentsService,
 		private route: ActivatedRoute,
 		private router: Router,
 		private dialog: MatDialog,
@@ -62,17 +67,6 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-		this.subs.sink = this.participantFacade.participant$
-			.pipe(
-				filter(p => !!p) // Only perform the following check once participant is loaded
-			)
-			.subscribe(p => {
-				this.participant = p;
-
-				if (this.studentShouldHaveAGroup(this.assignment, this.participant)) {
-					this.displayGroupOrWarning();
-				}
-			});
 	}
 
 	private displayGroupOrWarning(): void {
@@ -129,7 +123,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	 */
 	goToAssessment(): void {
 		this.subs.sink = this.userService
-			.getAssessmentOfUser(this.participant.userId, this.courseId, this.assignment.id)
+			.getAssessmentOfUser(this._participant.userId, this.courseId, this.assignment.id)
 			.subscribe({
 				next: assessment => {
 					this.router.navigate([

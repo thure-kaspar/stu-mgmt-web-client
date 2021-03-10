@@ -86,6 +86,15 @@
 	background-color: rgb(0, 153, 102) !important;
 }
 
+.SINGLE {
+	background-color: #7f23c5 !important;
+}
+
+.GROUP,
+.GROUP_OR_SINGLE {
+	background-color: #00838f !important;
+}
+
 .warning {
 	mat-icon {
 		margin-right: 8px;
