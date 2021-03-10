@@ -1,19 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { AssignmentRegistrationService, GroupDto, ParticipantDto } from "../../../../api";
-import { BehaviorSubject } from "rxjs";
-import { DialogService } from "../../shared/services/dialog.service";
-import { SnackbarService } from "../../shared/services/snackbar.service";
-import { ActivatedRoute } from "@angular/router";
-import { getRouteParam } from "../../../../utils/helper";
-import { SelectedAssignmentFacade } from "../../assessment/services/selected-assignment.facade";
-import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { SearchParticipantDialog } from "../../shared/components/dialogs/search-participant/search-participant.dialog";
 import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute } from "@angular/router";
+import { BehaviorSubject } from "rxjs";
+import { AssignmentRegistrationService, GroupDto, ParticipantDto } from "../../../../api";
+import { getRouteParam } from "../../../../utils/helper";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
-import { ToastService } from "../../shared/services/toast.service";
-import { ParticipantFacade } from "../../shared/services/participant.facade";
+import { SearchParticipantDialog } from "../../shared/components/dialogs/search-participant/search-participant.dialog";
+import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { DialogService } from "../../shared/services/dialog.service";
 import { DownloadService } from "../../shared/services/download.service";
+import { ParticipantFacade } from "../../shared/services/participant.facade";
+import { ToastService } from "../../shared/services/toast.service";
 
 @Component({
 	selector: "app-registered-groups",
@@ -23,24 +21,21 @@ import { DownloadService } from "../../shared/services/download.service";
 })
 export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements OnInit {
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<GroupDto>([]));
-
 	hasRegisteredGroups = false;
-
 	courseId: string;
 	assignmentId: string;
-
 	displayedColumns = ["action", "name", "members"];
+	filter: string;
+	private groups: GroupDto[] = [];
 
 	constructor(
 		public participantFacade: ParticipantFacade,
 		private registrations: AssignmentRegistrationService,
-		private selectedAssignment: SelectedAssignmentFacade,
 		private route: ActivatedRoute,
 		private dialogService: DialogService,
 		private downloadService: DownloadService,
 		private dialog: MatDialog,
-		private toast: ToastService,
-		private snackbar: SnackbarService
+		private toast: ToastService
 	) {
 		super();
 	}
@@ -61,12 +56,40 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 			.subscribe({
 				next: result => {
 					this.hasRegisteredGroups = result.length > 0;
+					this.groups = result;
 					this.dataSource$.next(new MatTableDataSource(result));
 				},
 				error: error => {
 					this.toast.apiError(error);
 				}
 			});
+	}
+
+	filterUpdated(): void {
+		if (this.filter?.length > 0) {
+			const filteredGroups = this.groups.filter(group => {
+				const _filter = this.filter.trim().toLowerCase();
+				const groupName = group.name.toLowerCase();
+
+				if (groupName.includes(_filter)) {
+					return true;
+				}
+
+				for (const member of group.members) {
+					if (
+						member.displayName.toLowerCase().includes(_filter) ||
+						member.username.toLowerCase().includes(_filter)
+					) {
+						return true;
+					}
+				}
+
+				return false;
+			});
+			this.dataSource$.next(new MatTableDataSource(filteredGroups));
+		} else {
+			this.dataSource$.next(new MatTableDataSource(this.groups));
+		}
 	}
 
 	/**

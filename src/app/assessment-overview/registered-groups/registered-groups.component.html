@@ -23,6 +23,13 @@
 	</ng-container>
 </h2>
 
+<div class="filter">
+	<mat-form-field class="group-filter">
+		<mat-label>Filter</mat-label>
+		<input matInput cdkFocusInitial [(ngModel)]="filter" (keyup)="filterUpdated()" />
+	</mat-form-field>
+</div>
+
 <table class="full-width" mat-table #table [dataSource]="dataSource$ | async">
 	<ng-container matColumnDef="action">
 		<th class="action-column" mat-header-cell *matHeaderCellDef></th>
