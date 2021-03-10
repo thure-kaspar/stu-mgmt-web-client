@@ -467,3 +467,7 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 .bg-titlebar {
 	background-color: var(--color-titlebar);
 }
+
+.mat-form-field-flex {
+	background-color: var(--card-bg) !important;
+}
