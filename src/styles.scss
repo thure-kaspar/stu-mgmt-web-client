@@ -101,6 +101,24 @@
 	--link-active-bg: rgba(255, 255, 255, 0.1);
 }
 
+.twitch-theme {
+	height: 100%;
+	--color-bg: #0e0e10;
+	--color-titlebar: #18181b;
+	--color-sidenav: #1f1f23;
+	--color-header: #18181b;
+
+	--card-bg: #18181b;
+	--table-bg: #18181b;
+
+	--text: white;
+	--text-inverse: #654597;
+	--text-light: #adadb8;
+
+	--link-active: #8e24aa;
+	--link-active-bg: #26262c;
+}
+
 .green-theme {
 	height: 100%;
 	--link-active: green;

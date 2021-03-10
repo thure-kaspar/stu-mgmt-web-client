@@ -51,6 +51,16 @@ $student-mgmt-client-theme: mat-light-theme(
 	@include angular-material-theme($blue-theme);
 }
 
+.twitch-theme {
+	color: $light-primary-text;
+	$twitch-primary: mat-palette($mat-grey, 600, 800, 900);
+	$twitch-accent: mat-palette($mat-purple, 600);
+	$twitch-warn: mat-palette($mat-red);
+	$twitch-theme: mat-dark-theme($twitch-primary, $twitch-accent, $twitch-warn);
+
+	@include angular-material-theme($twitch-theme);
+}
+
 .green-theme {
 	color: $light-primary-text;
 	$green-primary: mat-palette($mat-grey, 600);

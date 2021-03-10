@@ -18,6 +18,10 @@ export class ThemeService {
 			name: "Blue"
 		},
 		{
+			cssClass: "twitch-theme",
+			name: "Twitch"
+		},
+		{
 			cssClass: "green-theme",
 			name: "Green"
 		}
