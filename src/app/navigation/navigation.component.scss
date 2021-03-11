@@ -12,10 +12,16 @@
 	border: transparent;
 	background-color: var(--color-sidenav);
 	transition: background 500ms ease-in-out, color 1000ms ease-in-out;
-
 	mat-icon {
 		color: rgba(0, 0, 0, 0.6);
 	}
+}
+
+.sidenav-sections {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: calc(100% - 8px);
 }
 
 .sidenav .mat-toolbar {
@@ -36,12 +42,6 @@
 
 .sidenav a:hover {
 	background-color: var(--link-active-bg);
-}
-
-#sidenav-footer {
-	width: 240px;
-	position: fixed;
-	bottom: 0;
 }
 
 .router-link-active {
@@ -107,7 +107,7 @@
 	}
 }
 
-#course-membership-list {
+.course-membership-list {
 	mat-divider {
 		margin-top: 8px;
 		margin-bottom: 8px;

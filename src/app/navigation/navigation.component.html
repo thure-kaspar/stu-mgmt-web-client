@@ -60,7 +60,7 @@
 			[opened]="(isHandset$ | async) === false"
 			[mode]="(isHandset$ | async) ? 'over' : 'side'"
 		>
-			<mat-nav-list>
+			<mat-nav-list class="sidenav-sections">
 				<div id="sidenav-links">
 					<a
 						mat-list-item
@@ -92,7 +92,7 @@
 						<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }}
 					</a>
 
-					<div id="course-membership-list" *ngIf="obs.user">
+					<div class="course-membership-list" *ngIf="obs.user">
 						<mat-divider></mat-divider>
 						<span id="my-courses"
 							>{{ "Common.My" | translate | uppercase }}
@@ -104,7 +104,7 @@
 								mat-list-item
 								[routerLink]="['/courses', course.id]"
 								routerLinkActive="router-link-active"
-								(click)="navigateToCourse(course)"
+								data-course-link
 							>
 								<mat-icon>lens</mat-icon>{{ course.id }}
 							</a>
