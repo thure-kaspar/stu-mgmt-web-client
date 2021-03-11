@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { CourseDto, GroupsService } from "../../../../../api";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
 import {
@@ -16,6 +17,7 @@ import { CourseMembershipsFacade } from "../../../shared/services/course-members
 import { CourseFacade } from "../../../shared/services/course.facade";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
 import { ToastService } from "../../../shared/services/toast.service";
+import { CourseActions } from "../../../state/course";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 
 @Component({
@@ -35,20 +37,22 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit, OnD
 		public courseFacade: CourseFacade,
 		private groupService: GroupsService,
 		private dialog: MatDialog,
-		private toast: ToastService
+		private toast: ToastService,
+		private store: Store
 	) {
 		super();
 	}
 
 	ngOnInit(): void {
-		this.loadCourse();
+		this.subs.sink = this.route.params.subscribe(({ courseId }) => {
+			this.loadCourse(courseId);
+		});
 	}
 
 	/**
 	 * Calls the API to load the course. If user is not a member, opens the JoinCourseDialog.
 	 */
-	loadCourse(): void {
-		const courseId = this.route.snapshot.paramMap.get("courseId");
+	loadCourse(courseId: string): void {
 		this.subs.sink = this.courseFacade.loadCourse(courseId).subscribe({
 			next: course => (this.course = course),
 			error: error => {

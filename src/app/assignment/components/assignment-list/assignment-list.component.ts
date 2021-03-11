@@ -42,23 +42,15 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	}
 
 	ngOnInit(): void {
-		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
-		this.assignmentManagement.loadAssignmentsOfCourse(this.courseId);
-		this.subscribeToAssignments();
-
-		this.participant$ = this.participantFacade.participant$.pipe(
-			filter(p => !!p), // Only perform the following check once participant is loaded
-			tap(participant => {
-				if (participant.isStudent) {
-					this.participantFacade.loadAssignmentGroups();
-				}
-			})
-		);
-
-		this.subs.sink = this.participant$.subscribe();
+		this.subs.sink = this.route.params.subscribe(({ courseId }) => {
+			this.courseId = courseId;
+			this.loadAssignments();
+		});
 	}
 
-	private subscribeToAssignments(): void {
+	loadAssignments(): void {
+		this.assignmentManagement.loadAssignmentsOfCourse(this.courseId);
+
 		this.assignments$ = this.assignmentManagement.assignments$.pipe(
 			map(assignments => {
 				const map = new AssignmentsStateMap();
@@ -68,6 +60,15 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 				map.closed = assignments.filter(a => a.state === "CLOSED");
 				map.invisible = assignments.filter(a => a.state === "INVISIBLE");
 				return map;
+			})
+		);
+
+		this.participant$ = this.participantFacade.participant$.pipe(
+			filter(p => !!p), // Only perform the following check once participant is loaded
+			tap(participant => {
+				if (participant.isStudent) {
+					this.participantFacade.loadAssignmentGroups();
+				}
 			})
 		);
 	}

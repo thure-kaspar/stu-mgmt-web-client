@@ -14,7 +14,6 @@ import { NavigationEnd, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
-import { CourseDto } from "../../../api";
 import { environment } from "../../environments/environment";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { AuthService } from "../auth/services/auth.service";
@@ -93,12 +92,5 @@ export class NavigationComponent implements OnInit {
 	async copyJwtToClipboard(): Promise<void> {
 		await navigator.clipboard.writeText(this.authService.getAuthToken().accessToken);
 		this.toast.success("Copied!");
-	}
-
-	// TODO: Function is used to allow reloading the course component, if params change -> Search for better solution
-	navigateToCourse(course: CourseDto): void {
-		this.router
-			.navigateByUrl("/")
-			.then(x => this.router.navigateByUrl(`/courses/${course.id}`));
 	}
 }
