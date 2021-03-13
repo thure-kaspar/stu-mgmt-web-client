@@ -4,7 +4,7 @@ export class Participant implements ParticipantDto {
 	readonly userId: string;
 	readonly username: string;
 	readonly displayName: string;
-	readonly email: string;
+	readonly email?: string;
 	readonly role: ParticipantDto.RoleEnum;
 	readonly groupId?: string;
 	readonly group?: GroupDto;
@@ -23,23 +23,5 @@ export class Participant implements ParticipantDto {
 
 		this.isStudent = this.role === "STUDENT";
 		this.isTeachingStaffMember = this.role === "LECTURER" || this.role === "TUTOR";
-	}
-
-	canCreateAssessment(): boolean {
-		return this.isTeachingStaffMember;
-	}
-
-	canCreateAssignments(): boolean {
-		return this.isTeachingStaffMember;
-	}
-
-	canCreateGroup(): boolean {
-		if (this.isTeachingStaffMember) return true;
-
-		if (this.groupId) {
-			return false; // Student can only have one group
-		}
-
-		return true;
 	}
 }
