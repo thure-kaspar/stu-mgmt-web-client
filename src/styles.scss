@@ -3,6 +3,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
+	--primary: map-get($student-mgmt-client-primary, 600);
+	--accent: map-get($student-mgmt-client-accent, 900);
+	--warn: red;
+
 	--titlebar-height: 56px;
 	--margin-default: 8px;
 	--margin-content: 128px;
@@ -26,10 +30,6 @@
 	--link-active: red;
 	--link-active-bg: rgba(0, 0, 0, 0.1);
 
-	--primary: map-get($student-mgmt-client-primary, 600);
-	--accent: map-get($student-mgmt-client-accent, 900);
-	--warn: map-get($student-mgmt-client-warn);
-
 	@media (max-width: 799px) {
 		--margin-content: 8px;
 		--margin-default: 8px;
@@ -46,6 +46,10 @@
 
 .default-theme {
 	height: 100%;
+	--primary: #757575;
+	--accent: #b71c1c;
+	--warn: red;
+
 	--grey-light: rgb(230, 230, 230);
 	--grey-normal: rgb(255, 255, 255);
 	--grey-dark: rgb(41, 41, 41);
@@ -67,6 +71,11 @@
 
 .dark-theme {
 	height: 100%;
+
+	--primary: #757575;
+	--accent: #b71c1c;
+	--warn: red;
+
 	--color-bg: rgb(15, 15, 15);
 	--color-titlebar: #202020;
 	--color-sidenav: #212121;
@@ -85,6 +94,11 @@
 
 .blue-theme {
 	height: 100%;
+
+	--primary: #00838f;
+	--accent: #4dd0e1;
+	--warn: red;
+
 	--color-bg: #0f1724;
 	--color-titlebar: #212c3d;
 	--color-sidenav: #1d2636;
@@ -103,6 +117,11 @@
 
 .twitch-theme {
 	height: 100%;
+
+	--primary: #757575;
+	--accent: #8e24aa;
+	--warn: red;
+
 	--color-bg: #0e0e10;
 	--color-titlebar: #18181b;
 	--color-sidenav: #1f1f23;
@@ -121,6 +140,11 @@
 
 .green-theme {
 	height: 100%;
+
+	--primary: #757575;
+	--accent: #2e7d32;
+	--warn: red;
+
 	--link-active: green;
 }
 

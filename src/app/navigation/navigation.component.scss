@@ -63,8 +63,10 @@
 }
 
 #logo {
-	padding: 8px;
-	height: 48px;
+	margin: 8px;
+	path {
+		fill: var(--accent) !important;
+	}
 }
 
 #nav-left {
