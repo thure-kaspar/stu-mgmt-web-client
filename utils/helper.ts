@@ -27,7 +27,38 @@ export function getSemester(): string {
 	return semester;
 }
 
+export function getSemesterString(value: string): string {
+	if (!value || value === "") {
+		return value;
+	}
+
+	if (!/^(wise|sose)\d{4}$/g.test(value)) return "?";
+
+	let semName = value.substring(0, 4); // wise or sose
+	let semYear = value.substring(4); // i.e 2020
+
+	if (semName === "wise") {
+		semName = "WiSe";
+		semYear = value.substring(4, 6) + "/" + value.substring(6); // i.e 1920 -> 19/20
+	} else {
+		semName = "SoSe";
+	}
+
+	return `${semName} ${semYear}`;
+}
+
 /** Returns the specified route parameter. */
 export function getRouteParam(param: string, route: ActivatedRoute): string | null {
 	return route.snapshot.paramMap.get(param);
+}
+
+export function createDictionary<T>(
+	data: T[],
+	property: (item: T) => string
+): { [key: string]: T } {
+	const map = {};
+	for (const value of data) {
+		map[property(value)] = value;
+	}
+	return map;
 }

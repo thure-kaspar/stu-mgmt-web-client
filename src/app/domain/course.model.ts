@@ -10,13 +10,14 @@ export class Course implements CourseDto {
 
 	groupSettings: GroupSettingsDto;
 
-	constructor(dto: CourseDto) {
+	constructor(dto: CourseDto, groupSettings: GroupSettingsDto) {
 		this.id = dto.id;
 		this.shortname = dto.shortname;
 		this.semester = dto.semester;
 		this.title = dto.title;
 		this.isClosed = dto.isClosed;
 		this.links = dto.links;
+		this.groupSettings = groupSettings;
 	}
 
 	setGroupSettings(dto: GroupSettingsDto): void {
