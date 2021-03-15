@@ -14,12 +14,16 @@ export class ThemeService {
 			name: "Dark"
 		},
 		{
+			cssClass: "dark-purple-theme",
+			name: "Dark-Purple"
+		},
+		{
 			cssClass: "blue-theme",
 			name: "Blue"
 		},
 		{
-			cssClass: "twitch-theme",
-			name: "Twitch"
+			cssClass: "blue-red-theme",
+			name: "Blue-Red"
 		},
 		{
 			cssClass: "green-theme",
@@ -39,7 +43,7 @@ export class ThemeService {
 			window.matchMedia &&
 			window.matchMedia("(prefers-color-scheme: dark)").matches
 		) {
-			theme = "twitch-theme";
+			theme = "dark-purple-theme";
 		} else if (storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
 			theme = storedTheme;
 		} else {

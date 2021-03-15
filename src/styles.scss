@@ -88,7 +88,7 @@
 	--text-inverse: black;
 	--text-light: rgba(255, 255, 255, 0.5);
 
-	--link-active: white;
+	--link-active: #b71c1c;
 	--link-active-bg: rgba(255, 255, 255, 0.1);
 }
 
@@ -111,11 +111,11 @@
 	--text-inverse: black;
 	--text-light: #92abcfe7;
 
-	--link-active: white;
+	--link-active: #4dd0e1;
 	--link-active-bg: rgba(255, 255, 255, 0.1);
 }
 
-.twitch-theme {
+.dark-purple-theme {
 	height: 100%;
 
 	--primary: #757575;
@@ -136,6 +136,29 @@
 
 	--link-active: #8e24aa;
 	--link-active-bg: #26262c;
+}
+
+.blue-red-theme {
+	height: 100%;
+
+	--primary: #757575;
+	--accent: #fd4d4d;
+	--warn: red;
+
+	--color-bg: #11151b;
+	--color-titlebar: #151a21;
+	--color-sidenav: #1c232b;
+	--color-header: #151a21;
+
+	--card-bg: #242c37;
+	--table-bg: #242c37;
+
+	--text: white;
+	--text-inverse: #fd4d4d;
+	--text-light: #adadb8;
+
+	--link-active: #fd4d4d;
+	--link-active-bg: #242c37;
 }
 
 .green-theme {
