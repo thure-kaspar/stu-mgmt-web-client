@@ -15,8 +15,8 @@
 		</ng-container>
 	</mat-card-title>
 
-	<div class="courseFilter-container">
-		<mat-form-field class="courseFilter-field">
+	<div class="course-filter-container">
+		<mat-form-field>
 			<mat-label for="title">{{ "Common.Title" | translate }}</mat-label>
 			<input
 				#titleRef
@@ -30,7 +30,7 @@
 			/>
 		</mat-form-field>
 
-		<mat-form-field class="courseFilter-field">
+		<mat-form-field>
 			<mat-label for="">{{ "Domain.Semester" | translate }}</mat-label>
 			<mat-select
 				[(value)]="filter.selectedSemester"
@@ -41,24 +41,19 @@
 				<mat-option value="wise1920">WiSe 19/20</mat-option>
 				<mat-option value="sose2020">SoSe 2020</mat-option>
 				<mat-option value="wise2021">WiSe 20/21</mat-option>
-				<mat-option value="">{{ "Common.All" | translate }}</mat-option>
+				<mat-option value="" data-option-all>{{ "Common.All" | translate }}</mat-option>
 			</mat-select>
 		</mat-form-field>
 	</div>
 
-	<div>
-		<table
-			class="bg-transparent full-width"
-			mat-table
-			[dataSource]="dataSource$ | async"
-			matSort
-		>
+	<div class="table-container">
+		<table class="full-width" mat-table [dataSource]="dataSource$ | async" matSort>
 			<!-- Title Column -->
 			<ng-container matColumnDef="title">
 				<th class="column-title" mat-header-cell *matHeaderCellDef>
 					{{ "Common.Title" | translate }}
 				</th>
-				<td mat-cell *matCellDef="let row">
+				<td mat-cell data-course-title *matCellDef="let row">
 					<a class="link-bold" [routerLink]="['/courses', row.id]">{{ row.title }}</a>
 				</td>
 			</ng-container>

@@ -14,10 +14,10 @@
 	margin-left: 16px;
 }
 
-.courseFilter-container {
+.course-filter-container {
 	max-width: 500px;
 	display: grid;
-	grid-template-columns: 4fr 1fr 1fr;
+	grid-template-columns: 4fr 1fr;
 	column-gap: 8px;
 	align-items: center;
 
@@ -29,4 +29,8 @@
 
 .column-title {
 	width: 20rem;
+}
+
+.table-container {
+	width: 500px;
 }
