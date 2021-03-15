@@ -6,10 +6,6 @@ import { distinctUntilChanged } from "rxjs/operators";
 export class ThemeService {
 	availableThemes = [
 		{
-			cssClass: "default-theme",
-			name: "Default"
-		},
-		{
 			cssClass: "dark-theme",
 			name: "Dark"
 		},
@@ -26,8 +22,12 @@ export class ThemeService {
 			name: "Blue-Red"
 		},
 		{
-			cssClass: "green-theme",
-			name: "Green"
+			cssClass: "light-red-theme",
+			name: "Light-Red"
+		},
+		{
+			cssClass: "light-green-theme",
+			name: "Light-Green"
 		}
 	] as const;
 
@@ -47,7 +47,7 @@ export class ThemeService {
 		} else if (storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
 			theme = storedTheme;
 		} else {
-			theme = "default-theme";
+			theme = "light-red-theme";
 		}
 
 		this.themeSubject = new BehaviorSubject(theme);

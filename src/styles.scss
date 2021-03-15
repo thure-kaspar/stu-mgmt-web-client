@@ -44,7 +44,7 @@
 	}
 }
 
-.default-theme {
+.light-red-theme {
 	height: 100%;
 	--primary: #757575;
 	--accent: #b71c1c;
@@ -59,6 +59,7 @@
 	--color-sidenav: white;
 	--color-header: #f9f9f9;
 
+	--card-bg: white;
 	--table-bg: white;
 
 	--text: black;
@@ -161,14 +162,30 @@
 	--link-active-bg: #242c37;
 }
 
-.green-theme {
+.light-green-theme {
 	height: 100%;
-
 	--primary: #757575;
 	--accent: #2e7d32;
 	--warn: red;
 
+	--grey-light: rgb(230, 230, 230);
+	--grey-normal: rgb(255, 255, 255);
+	--grey-dark: rgb(41, 41, 41);
+
+	--color-bg: #f1f1f1;
+	--color-titlebar: white;
+	--color-sidenav: white;
+	--color-header: #f9f9f9;
+
+	--card-bg: white;
+	--table-bg: white;
+
+	--text: black;
+	--text-inverse: white;
+	--text-light: rgba(0, 0, 0, 0.6);
+
 	--link-active: green;
+	--link-active-bg: rgba(0, 0, 0, 0.1);
 }
 
 // Roboto
@@ -275,6 +292,22 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
 	-moz-appearance: textfield;
+}
+
+.primary {
+	background-color: var(--primary) !important;
+}
+
+.accent {
+	background-color: var(--accent) !important;
+}
+
+.bg-card {
+	background-color: var(--card-bg) !important;
+}
+
+.color-bg {
+	background-color: var(--color-bg) !important;
 }
 
 .titlebar-padding {

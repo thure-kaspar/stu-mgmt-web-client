@@ -1,0 +1,118 @@
+.home-component {
+	padding: 32px;
+}
+
+.header {
+	padding: 32px;
+	min-width: 400px;
+	background-color: var(--color-header);
+	display: grid;
+	grid-template-columns: 1fr min-content;
+	border-radius: 8px;
+}
+
+.header-left {
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.app-name {
+	margin-top: 32px;
+	font-size: 48px;
+	font-weight: 300;
+	line-height: 48px;
+}
+
+.actions {
+	margin: auto;
+	margin-top: 36px;
+	display: flex;
+	gap: 16px;
+}
+
+.actions button {
+	height: 64px;
+	width: 180px;
+}
+
+#uni-logo-with-text {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 8px;
+	padding-right: 32px;
+	height: 256px;
+	width: 256px;
+
+	@media (max-width: 800px) {
+		display: none;
+	}
+}
+
+#logo-text {
+	fill: var(--text) !important;
+}
+
+#logo-icon {
+	fill: var(--accent) !important;
+}
+
+.languages {
+	padding-top: 32px;
+	display: flex;
+}
+
+.language-buttons {
+	margin-left: 16px;
+	height: fit-content;
+	display: flex;
+	gap: 8px;
+}
+
+.themes {
+	padding-left: 0px;
+	padding-top: 16px;
+}
+
+.select-theme-buttons {
+	margin-left: 16px;
+	display: flex;
+	gap: 8px;
+	height: fit-content;
+}
+
+.theme-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	row-gap: 32px;
+	column-gap: 32px;
+	margin-top: 8px;
+	padding-left: 48px;
+	padding-right: 48px;
+}
+
+.theme {
+	padding: 32px;
+	background-color: var(--color-bg) !important;
+	height: fit-content;
+	border: 1px solid gray;
+	border-style: dashed;
+
+	.theme-name {
+		color: var(--text) !important;
+	}
+
+	mat-card {
+		background-color: var(--card-bg) !important;
+	}
+}
+
+.theme-buttons {
+	margin-top: 16px;
+	display: flex;
+	gap: 8px;
+
+	button {
+		color: white !important;
+	}
+}

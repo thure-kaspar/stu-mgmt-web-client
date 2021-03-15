@@ -3,10 +3,11 @@ import { registerLocaleData } from "@angular/common";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import localeDe from "@angular/common/locales/de";
 import localeDeExtra from "@angular/common/locales/extra/de";
-import { InjectionToken, LOCALE_ID, NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ServiceWorkerModule } from "@angular/service-worker";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToastrModule } from "ngx-toastr";
@@ -16,10 +17,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AuthModule } from "./auth/auth.module";
 import { AuthService } from "./auth/services/auth.service";
+import { HomeComponent } from "./home/home.component";
 import { MaterialModule } from "./material/material.module";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { SharedModule } from "./shared/shared.module";
-import { ServiceWorkerModule } from "@angular/service-worker";
 import { StateModule } from "./state/state.module";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
@@ -29,7 +30,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 }
 
 @NgModule({
-	declarations: [AppComponent, NavigationComponent],
+	declarations: [AppComponent, NavigationComponent, HomeComponent],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
