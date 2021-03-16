@@ -1,10 +1,14 @@
 .home-component {
 	padding: 32px;
+
+	@media screen and (min-width: 1000px) {
+		padding-left: 96px;
+		padding-right: 96px;
+	}
 }
 
 .header {
 	padding: 32px;
-	min-width: 400px;
 	background-color: var(--color-header);
 	display: grid;
 	grid-template-columns: 1fr min-content;
@@ -28,6 +32,7 @@
 	margin: auto;
 	margin-top: 36px;
 	display: flex;
+	flex-wrap: wrap;
 	gap: 16px;
 }
 
@@ -76,19 +81,24 @@
 
 .select-theme-buttons {
 	margin-left: 16px;
+	display: grid;
 	display: flex;
+	flex-wrap: wrap;
 	gap: 8px;
 	height: fit-content;
 }
 
 .theme-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	grid-template-columns: 1fr 1fr;
+	justify-content: center;
 	row-gap: 32px;
 	column-gap: 32px;
-	margin-top: 8px;
-	padding-left: 48px;
-	padding-right: 48px;
+	margin-top: 16px;
+
+	@media screen and (max-width: 600px) {
+		grid-template-columns: 1fr;
+	}
 }
 
 .theme {

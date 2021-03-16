@@ -37,7 +37,7 @@
 	<div class="themes">
 		<span class="flex">
 			<h2>Choose theme</h2>
-			<span class="select-theme-buttons" *ngIf="themeService.theme$ | async as currentTheme">
+			<div class="select-theme-buttons" *ngIf="themeService.theme$ | async as currentTheme">
 				<button
 					*ngFor="let theme of themeService.availableThemes"
 					mat-flat-button
@@ -46,7 +46,7 @@
 				>
 					{{ theme.name }}
 				</button>
-			</span>
+			</div>
 		</span>
 		<div class="theme-grid">
 			<div *ngFor="let theme of themeService.availableThemes" [class]="theme.cssClass">
