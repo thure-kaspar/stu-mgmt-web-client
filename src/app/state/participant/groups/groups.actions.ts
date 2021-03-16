@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 import { AssignmentGroupTuple } from "../../../../../api";
 
 export const loadGroups = createAction(
-	"[onLoadParticipantSuccess$] Load Groups",
+	"[loadParticipantSuccess$] Load Groups",
 	props<{ courseId: string }>()
 );
 

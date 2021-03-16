@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 import { AdmissionStatusDto } from "../../../../../api";
 
 export const loadAdmissionsStatus = createAction(
-	"[onLoadParticipantSuccess$] Load AdmissionStatus",
+	"[loadParticipantSuccess$] Load AdmissionStatus",
 	props<{ courseId: string }>()
 );
 
