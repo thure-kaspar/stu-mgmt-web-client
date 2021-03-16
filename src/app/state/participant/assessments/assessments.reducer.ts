@@ -4,7 +4,7 @@ import { createDictionary } from "../../../../../utils/helper";
 import { MetaState } from "../../interfaces";
 import * as ParticipantAssessmentsActions from "./assessments.actions";
 
-export const participantAssessmentsFeatureKey = "participantAssessments";
+export const participantAssessmentsFeatureKey = "pAssessments";
 
 export interface State extends MetaState {
 	assessments?: { [assignmentId: string]: AssessmentDto };

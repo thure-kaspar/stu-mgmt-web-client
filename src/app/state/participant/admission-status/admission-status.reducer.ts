@@ -3,7 +3,7 @@ import { AdmissionStatusDto } from "../../../../../api";
 import { MetaState } from "../../interfaces";
 import * as ParticipantAdmissionStatusActions from "./admission-status.actions";
 
-export const participantAdmissionStatusFeatureKey = "participantAdmissionStatus";
+export const pAdmissionStatusFeatureKey = "pAdmissionStatus";
 
 export interface State extends MetaState {
 	admissionStatus: AdmissionStatusDto;

@@ -1,17 +1,16 @@
-import { Action, createReducer, on } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import { GroupDto } from "../../../../../api";
-import { createDictionary } from "../../../../../utils/helper";
 import { MetaState } from "../../interfaces";
 import * as ParticipantGroupsActions from "./groups.actions";
 
-export const participantGroupsFeatureKey = "participantGroups";
+export const pGroupsFeatureKey = "pGroups";
 
 export interface State extends MetaState {
-	groups: { [assignmentId: string]: GroupDto };
+	data: { [assignmentId: string]: GroupDto };
 }
 
 export const initialState: State = {
-	groups: null,
+	data: null,
 	isLoading: false,
 	hasLoaded: false,
 	error: null
@@ -32,7 +31,7 @@ export const reducer = createReducer(
 		});
 
 		const nextState: State = {
-			groups: dictionary,
+			data: dictionary,
 			isLoading: false,
 			hasLoaded: true,
 			error: null
