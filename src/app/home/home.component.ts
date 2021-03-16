@@ -1,10 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	OnInit,
-	ViewEncapsulation
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
@@ -15,8 +9,7 @@ import { ThemeService } from "../shared/services/theme.service";
 	selector: "app-home",
 	templateUrl: "./home.component.html",
 	styleUrls: ["./home.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	encapsulation: ViewEncapsulation.None
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	currentLanguage: string;
@@ -24,15 +17,13 @@ export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	constructor(
 		readonly dialog: MatDialog,
 		readonly themeService: ThemeService,
-		readonly translate: TranslateService,
-		private cdRef: ChangeDetectorRef
+		readonly translate: TranslateService
 	) {
 		super();
 	}
 
 	ngOnInit(): void {
 		this.currentLanguage = localStorage.getItem("language") ?? "de";
-		console.log(this.currentLanguage);
 		this.subs.sink = this.translate.onLangChange.subscribe(({ lang }) => {
 			this.currentLanguage = lang;
 		});
