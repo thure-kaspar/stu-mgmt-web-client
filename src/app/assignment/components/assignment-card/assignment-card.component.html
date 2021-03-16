@@ -4,7 +4,7 @@
 			<a
 				class="link-none"
 				[routerLink]="[assignment.id, 'assessments']"
-				*ngIf="_participant.isTeachingStaffMember; else noLink"
+				*ngIf="participant.isTeachingStaffMember; else noLink"
 			>
 				{{ assignment.name }}
 			</a>
@@ -14,7 +14,7 @@
 		</span>
 
 		<mat-menu #assignmentMenu>
-			<ng-container *ngIf="_participant.isTeachingStaffMember">
+			<ng-container *ngIf="participant.isTeachingStaffMember">
 				<button mat-menu-item (click)="openEditDialog()">
 					<mat-icon class="icon-light">edit</mat-icon>
 					<span class="font-bold">{{ "Action.Edit" | translate }}</span>
@@ -120,13 +120,13 @@
 	<div class="actions">
 		<button
 			mat-stroked-button
-			*ngIf="_participant.isStudent && assignment.state === 'EVALUATED'"
+			*ngIf="participant.isStudent && assignment.state === 'EVALUATED'"
 			(click)="goToAssessment()"
 		>
 			{{ "Domain.Assessment" | translate }}
 		</button>
 
-		<ng-container *ngIf="_participant.isTeachingStaffMember">
+		<ng-container *ngIf="participant.isTeachingStaffMember">
 			<a class="link-none" [routerLink]="[assignment.id, 'assessments']">
 				<button mat-stroked-button>{{ "Domain.Assessments" | translate }}</button>
 			</a>
