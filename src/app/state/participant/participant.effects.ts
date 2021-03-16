@@ -4,6 +4,7 @@ import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, map, switchMap, withLatestFrom } from "rxjs/operators";
 import { CourseParticipantsService } from "../../../../api";
+import { createParticipant } from "../../domain/participant.model";
 import { AuthSelectors } from "../auth";
 import { CourseActions, CourseSelectors } from "../course";
 import { loadAdmissionsStatus } from "./admission-status/admission-status.actions";
@@ -28,11 +29,7 @@ export class ParticipantEffects {
 				this.courseParticipants.getParticipant(action.courseId, user.id).pipe(
 					map(participant =>
 						ParticipantActions.loadParticipantSuccess({
-							data: {
-								...participant,
-								isStudent: participant.role === "STUDENT",
-								isTeachingStaffMember: participant.role !== "STUDENT"
-							}
+							data: createParticipant(participant)
 						})
 					),
 					catchError(error =>

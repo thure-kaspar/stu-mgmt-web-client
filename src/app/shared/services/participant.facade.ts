@@ -11,7 +11,7 @@ import {
 	UsersService
 } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
-import { Participant } from "../../domain/participant.model";
+import { createParticipant, Participant } from "../../domain/participant.model";
 import { DialogService } from "../../shared/services/dialog.service";
 import { ToastService } from "../../shared/services/toast.service";
 import { CourseFacade } from "./course.facade";
@@ -128,7 +128,7 @@ export class ParticipantFacade {
 			groupId: group?.id
 		};
 
-		this.participantSubject.next(new Participant(dto));
+		this.participantSubject.next(createParticipant(dto));
 	}
 
 	/**
@@ -138,7 +138,7 @@ export class ParticipantFacade {
 	private loadParticipant(courseId: string, userId: string): void {
 		this.courseParticipants.getParticipant(courseId, userId).subscribe(
 			participant => {
-				const p = new Participant(participant);
+				const p = createParticipant(participant);
 				this.participantSubject.next(p);
 				this.toast.info("Enum.CourseRole." + participant.role, courseId);
 
