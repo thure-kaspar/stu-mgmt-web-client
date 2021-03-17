@@ -15,3 +15,8 @@ export const loadParticipantFailure = createAction(
 	"[loadParticipant$] Load Participant Failure",
 	props<{ error: any }>()
 );
+
+export const updateParticipant = createAction(
+	"[Participant] Update Participant",
+	props<{ changes: Partial<Participant> }>()
+);

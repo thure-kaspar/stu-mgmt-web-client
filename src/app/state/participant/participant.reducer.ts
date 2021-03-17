@@ -41,5 +41,15 @@ export const reducer = createReducer(
 			isLoading: false,
 			hasLoaded: true
 		})
+	),
+	on(
+		ParticipantActions.updateParticipant,
+		(state, action): State => ({
+			...state,
+			data: {
+				...state.data,
+				...action.changes
+			}
+		})
 	)
 );
