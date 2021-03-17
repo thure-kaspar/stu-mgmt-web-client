@@ -15,11 +15,8 @@ export class CourseMembershipsFacade {
 		private authService: AuthService
 	) {
 		this.authService.user$.subscribe(user => {
-			if (user) {
-				this.loadCoursesOfUser(user.id);
-			} else {
-				this.coursesSubject.next([]);
-			}
+			// Course memberships are currently part of user state
+			this.coursesSubject.next(user?.courses ?? []);
 		});
 	}
 
