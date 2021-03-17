@@ -3,24 +3,18 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { filter, take } from "rxjs/operators";
-import {
-	AssessmentDto,
-	AssessmentsService,
-	GroupSettingsDto,
-	GroupsService,
-	ParticipantDto
-} from "../../../../../api";
+import { AssessmentDto, GroupsService, ParticipantDto } from "../../../../../api";
+import { getRouteParam } from "../../../../../utils/helper";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
 import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { DialogService } from "../../../shared/services/dialog.service";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
-import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { CourseFacade } from "../../../shared/services/course.facade";
+import { ToastService } from "../../../shared/services/toast.service";
+import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 
 @Component({
 	selector: "app-group-detail",
@@ -29,40 +23,31 @@ import { CourseFacade } from "../../../shared/services/course.facade";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit {
-	private groupSubject = new Subject<Group>();
-	group$ = this.groupSubject.asObservable();
-	private group: Group;
-
-	participant$: Observable<Participant>;
-	private participant: Participant;
-
-	groupSettings: GroupSettingsDto;
-
 	courseId: string;
 	groupId: string;
-
+	group$ = new BehaviorSubject<Group>(null);
+	private group: Group;
+	private participant: Participant;
 	displayedColumns: string[] = ["name", "type", "score"];
 	assessmentsDataSource$ = new Subject<MatTableDataSource<AssessmentDto>>();
 	private assessmentsDataSource: MatTableDataSource<AssessmentDto>;
 	@ViewChild(MatSort) sort: MatSort;
 
 	constructor(
+		readonly participantFacade: ParticipantFacade,
 		private groupService: GroupsService,
-		private assessmentService: AssessmentsService,
-		public participantFacade: ParticipantFacade,
-		private courseFacade: CourseFacade,
 		private route: ActivatedRoute,
 		private router: Router,
 		private dialogService: DialogService,
 		private dialog: MatDialog,
-		private snackbar: SnackbarService
+		private toast: ToastService
 	) {
 		super();
 	}
 
 	ngOnInit(): void {
-		this.courseId = this.route.parent.parent.snapshot.paramMap.get("courseId");
-		this.groupId = this.route.snapshot.paramMap.get("groupId");
+		this.courseId = getRouteParam("courseId", this.route);
+		this.groupId = getRouteParam("groupId", this.route);
 
 		this.loadGroup();
 
@@ -73,18 +58,15 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 				this.loadAssessmentsOfGroup();
 			}
 		});
-		this.subs.sink = this.courseFacade.course$.subscribe(
-			c => (this.groupSettings = c?.groupSettings)
-		);
 	}
 
 	loadGroup(): void {
 		this.groupService.getGroup(this.courseId, this.groupId).subscribe(
 			result => {
 				this.group = new Group(result);
-				this.groupSubject.next(this.group);
+				this.group$.next(this.group);
 			},
-			error => console.log(error)
+			error => this.toast.apiError(error)
 		);
 	}
 
@@ -95,7 +77,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 				this.assessmentsDataSource.sort = this.sort;
 				this.assessmentsDataSource$.next(this.assessmentsDataSource);
 			},
-			error: error => this.snackbar.openApiExceptionMessage(error)
+			error: error => this.toast.apiError(error)
 		});
 	}
 
@@ -141,12 +123,12 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 			)
 			.subscribe({
 				next: () => {
-					this.snackbar.openSuccessMessage();
+					this.toast.success();
 					this.loadGroup();
 				},
 				error: error => {
 					console.log(error);
-					this.snackbar.openErrorMessage();
+					this.toast.success();
 				}
 			});
 	}
@@ -167,12 +149,12 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 						this.groupService
 							.removeUserFromGroup(this.courseId, this.group.id, participant.userId)
 							.subscribe(
-								success => {
-									this.snackbar.openSuccessMessage();
+								() => {
+									this.toast.success();
 									this.loadGroup();
 								},
 								error => {
-									this.snackbar.openApiExceptionMessage(error);
+									this.toast.apiError(error);
 								}
 							);
 					}
@@ -209,15 +191,14 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 					this.groupService.deleteGroup(this.courseId, this.groupId).subscribe({
 						next: () => {
 							if (this.isGroupMember(this.participant)) {
-								this.handleRemovalOfOwnGroup();
+								this.participantFacade.changeGroup(null);
 							}
 
-							this.snackbar.openSuccessMessage();
+							this.toast.success();
 							this.router.navigate(["/courses", this.courseId, "groups"]);
 						},
 						error: error => {
-							console.log(error);
-							this.snackbar.openErrorMessage();
+							this.toast.apiError(error);
 						}
 					});
 				}
@@ -225,11 +206,6 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	}
 
 	isGroupMember(participant: ParticipantDto): boolean {
-		return !!this.group.members.find(m => m.userId === this.participant.userId);
-	}
-
-	private handleRemovalOfOwnGroup(): void {
-		// Reload the participant to remove his current group
-		this.participantFacade.reload();
+		return !!this.group.members.find(m => m.userId === participant.userId);
 	}
 }
