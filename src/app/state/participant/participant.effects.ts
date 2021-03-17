@@ -14,10 +14,10 @@ import * as ParticipantActions from "./participant.actions";
 
 @Injectable()
 export class ParticipantEffects {
-	loadCourseSuccess$ = createEffect(() =>
+	loadCourse$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(CourseActions.loadCourseSuccess),
-			map(action => ParticipantActions.loadParticipant({ courseId: action.data.id }))
+			ofType(CourseActions.loadCourse),
+			map(action => ParticipantActions.loadParticipant({ courseId: action.courseId }))
 		)
 	);
 

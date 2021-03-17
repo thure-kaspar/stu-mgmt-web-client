@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 import { Participant } from "../../domain/participant.model";
 
 export const loadParticipant = createAction(
-	"[loadCourseSuccess$] Load Participant",
+	"[loadCourse$] Load Participant",
 	props<{ courseId: string }>()
 );
 
