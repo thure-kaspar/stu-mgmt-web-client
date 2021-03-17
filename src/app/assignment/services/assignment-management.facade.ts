@@ -1,23 +1,22 @@
 import { Injectable } from "@angular/core";
-import { AssignmentsService, AssignmentDto } from "../../../../api";
-import { BehaviorSubject, Observable, of } from "rxjs";
-import { tap, switchMap } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+import { Observable, of } from "rxjs";
+import { switchMap, tap } from "rxjs/operators";
+import { AssignmentDto, AssignmentsService } from "../../../../api";
+import { AssignmentActions, AssignmentSelectors } from "../../state/assignment";
 
 @Injectable({ providedIn: "root" })
 export class AssignmentManagementFacade {
-	private assignmentsSubject = new BehaviorSubject<AssignmentDto[]>([]);
-	assignments$ = this.assignmentsSubject.asObservable();
+	assignments$ = this.store.select(AssignmentSelectors.selectAssignments);
 
-	constructor(private assignmentService: AssignmentsService) {}
+	constructor(private assignmentService: AssignmentsService, private store: Store) {}
 
 	/**
 	 * Calls the API to retrieve the assignments of the specified course.
 	 * The assignments will be published via the assignments-Observable.
 	 */
 	loadAssignmentsOfCourse(courseId: string): void {
-		this.assignmentService.getAssignmentsOfCourse(courseId).subscribe(result => {
-			this.assignmentsSubject.next(result);
-		});
+		this.store.dispatch(AssignmentActions.loadAssignments({ courseId }));
 	}
 
 	/**
