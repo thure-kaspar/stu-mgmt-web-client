@@ -461,16 +461,16 @@ export class GroupsService {
      * @param skip [Pagination] The amount of elements that should be skipped.
      * @param take [Pagination] The amount of elements that should be included in the response.
      * @param name Name of the group. Compared with ILIKE %name%.
-     * @param isClosed If true, only includes
-     * @param minSize Only include groups with at least minSize members.
-     * @param maxSize Only include groups with at most maxSize members.
+     * @param memberName Name of a member. Compared with ILIKE %memberName%.
+     * @param isClosed If true, only includes closed groups.
+     * @param excludeEmpty If true, excludes empty groups.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, minSize?: number, maxSize?: number, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
-    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, minSize?: number, maxSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
-    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, minSize?: number, maxSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
-    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, isClosed?: boolean, minSize?: number, maxSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, memberName?: string, isClosed?: boolean, excludeEmpty?: boolean, observe?: 'body', reportProgress?: boolean): Observable<Array<GroupDto>>;
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, memberName?: string, isClosed?: boolean, excludeEmpty?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GroupDto>>>;
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, memberName?: string, isClosed?: boolean, excludeEmpty?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GroupDto>>>;
+    public getGroupsOfCourse(courseId: string, skip?: number, take?: number, name?: string, memberName?: string, isClosed?: boolean, excludeEmpty?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (courseId === null || courseId === undefined) {
             throw new Error('Required parameter courseId was null or undefined when calling getGroupsOfCourse.');
@@ -492,14 +492,14 @@ export class GroupsService {
         if (name !== undefined && name !== null) {
             queryParameters = queryParameters.set('name', <any>name);
         }
+        if (memberName !== undefined && memberName !== null) {
+            queryParameters = queryParameters.set('memberName', <any>memberName);
+        }
         if (isClosed !== undefined && isClosed !== null) {
             queryParameters = queryParameters.set('isClosed', <any>isClosed);
         }
-        if (minSize !== undefined && minSize !== null) {
-            queryParameters = queryParameters.set('minSize', <any>minSize);
-        }
-        if (maxSize !== undefined && maxSize !== null) {
-            queryParameters = queryParameters.set('maxSize', <any>maxSize);
+        if (excludeEmpty !== undefined && excludeEmpty !== null) {
+            queryParameters = queryParameters.set('excludeEmpty', <any>excludeEmpty);
         }
 
         let headers = this.defaultHeaders;

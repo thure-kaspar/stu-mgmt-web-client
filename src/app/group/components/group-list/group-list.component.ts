@@ -1,18 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { debounceTime, take } from "rxjs/operators";
-import {
-	CourseConfigService,
-	CourseParticipantsService,
-	GroupDto,
-	GroupsService,
-	ParticipantDto
-} from "../../../../../api";
+import { debounceTime, take, tap } from "rxjs/operators";
+import { GroupDto, GroupsService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
-import { Course } from "../../../domain/course.model";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
@@ -24,9 +16,13 @@ import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialo
 
 class GroupFilter {
 	name?: string;
-	username?: string;
 	onlyClosed?: boolean;
 	onlyOpen?: boolean;
+	excludeEmpty?: boolean;
+
+	constructor(defaults: Partial<GroupFilter>) {
+		Object.assign(this, defaults);
+	}
 }
 
 @Component({
@@ -36,131 +32,83 @@ class GroupFilter {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
-	participant$: Observable<Participant>;
 	private participant: Participant;
+	participant$ = this.participantFacade.participant$.pipe(tap(p => (this.participant = p)));
 
-	private groupsSubject = new BehaviorSubject<Group[]>([]);
-	groups$ = this.groupsSubject.asObservable();
+	groups$ = new BehaviorSubject<Group[]>([]);
+	private allGroups: Group[] = [];
 
-	private course: Course;
-	private groups: Group[] = [];
-
-	warning: string;
-
-	filter = new GroupFilter();
-	nameFilterChangedSubject = new Subject();
-	filterSubject = new Subject();
-
-	/** Amount of groups loaded per request. */
-	batchSize = 30;
-	/** True, if all groups were loaded. */
-	isFinished = false;
 	/** Count of groups matching the filter. */
 	totalCount = 0;
-
 	courseId: string;
+
+	filter = new GroupFilter({ excludeEmpty: true });
+	nameFilterChangedSubject = new Subject();
+	filterSubject = new Subject();
 
 	constructor(
 		private dialog: MatDialog,
 		public participantFacade: ParticipantFacade,
 		public courseFacade: CourseFacade,
 		private groupService: GroupsService,
-		private courseConfig: CourseConfigService,
-		private courseParticipantsService: CourseParticipantsService,
 		private toast: ToastService,
-		private translate: TranslateService,
 		private router: Router,
 		private route: ActivatedRoute
 	) {
 		super();
 	}
 
+	private updateGroups(groups: Group[]): void {
+		const filteredGroups = this.applyGroupFilter(groups);
+		this.totalCount = filteredGroups.length;
+		this.groups$.next(filteredGroups);
+	}
+
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
-
-		this.subs.sink = this.courseFacade.course$.subscribe(course => {
-			this.course = course;
-
-			this.participant$ = this.participantFacade.participant$;
-			this.subs.sink = this.participant$.subscribe(p => {
-				this.participant = p;
-
-				if (this.participant?.group) {
-					const group = new Group(this.participant.group);
-					if (group.hasNotEnoughMembers(this.course)) {
-						this.warning = this.translate.instant("Text.Group.NotEnoughMembers", {
-							minSize: this.course.getMinGroupSizeRequirement()
-						});
-					}
-				}
-			});
-		});
-
 		this.loadGroups();
 
-		this.subs.sink = this.nameFilterChangedSubject
-			.pipe(debounceTime(300))
-			.subscribe(() => this.filterSubject.next());
-
-		this.subs.sink = this.filterSubject.subscribe(() => {
-			this.loadInitialGroups();
+		this.filterSubject.subscribe(() => {
+			this.updateGroups(this.allGroups);
 		});
 	}
 
-	onScroll(): void {
-		//console.log("Scrolled");
-		if (this.isFinished) {
-			return;
-		} else {
-			//console.log("Loading groups");
-			this.loadGroups();
-		}
-	}
-
-	/**
-	 * Loads the first batch of groups according to the current filters.
-	 * Clears the total count and current groups.
-	 */
-	private loadInitialGroups(): void {
-		this.totalCount = 0;
-		this.groups = [];
-		this.isFinished = false;
-		this.loadGroups();
-	}
-
-	/**
-	 * Loads a batch of groups.
-	 * If all groups were loaded, `isFinished` will be set true.
-	 */
-	private loadGroups(): void {
-		let isClosed = undefined;
-		if (this.filter?.onlyOpen) {
-			isClosed = false;
-		} else if (this.filter.onlyClosed) {
-			isClosed = true;
-		}
-
+	loadGroups(): void {
 		this.groupService
 			.getGroupsOfCourse(
 				this.courseId,
-				this.groups.length,
-				this.batchSize,
-				this.filter.name,
-				isClosed,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
 				undefined,
 				undefined,
 				"response"
 			)
 			.subscribe(response => {
-				this.groups = [...this.groups, ...response.body.map(g => new Group(g))];
-				this.totalCount = parseInt(response.headers.get("x-total-count"));
-
-				this.groupsSubject.next(this.groups);
-
-				if (this.totalCount === this.groups.length) {
-					this.isFinished = true;
-				}
+				this.allGroups = response.body.map(g => new Group(g));
+				this.updateGroups(this.allGroups);
 			});
+	}
+
+	applyGroupFilter(groups: Group[]): Group[] {
+		return groups.filter(group => {
+			const { onlyOpen, onlyClosed, excludeEmpty, name } = this.filter;
+
+			if (onlyOpen && group.isClosed) return false;
+			if (onlyClosed && !group.isClosed) return false;
+			if (excludeEmpty && group.size == 0) return false;
+
+			if (name?.length > 0) {
+				const _name = name.toLowerCase();
+				const matchesName =
+					group.name.toLowerCase().includes(_name) ||
+					group.members?.find(member => member.displayName.toLowerCase().includes(_name));
+				if (!matchesName) return false;
+			}
+
+			return true;
+		});
 	}
 
 	/**
@@ -191,8 +139,8 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	onRemoveGroup(group: GroupDto): void {
 		this.groupService.deleteGroup(this.courseId, group.id).subscribe({
 			next: () => {
-				this.groups = this.groups.filter(g => g.id !== group.id);
-				this.groupsSubject.next(this.groups);
+				this.allGroups = this.allGroups.filter(g => g.id !== group.id);
+				this.groups$.next(this.allGroups);
 				this.toast.success("Message.Deleted", group.name);
 			},
 			error: error => {
@@ -216,13 +164,13 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 			)
 			.subscribe({
 				next: () => {
-					const index = this.groups.findIndex(g => g.id === event.group.id);
-					this.groups[index] = new Group({
-						...this.groups[index],
-						members: [...this.groups[index].members, event.participant],
-						size: this.groups[index].size + 1
+					const index = this.allGroups.findIndex(g => g.id === event.group.id);
+					this.allGroups[index] = new Group({
+						...this.allGroups[index],
+						members: [...this.allGroups[index].members, event.participant],
+						size: this.allGroups[index].size + 1
 					});
-					this.groupsSubject.next(this.groups);
+					this.groups$.next(this.allGroups);
 					this.toast.success("Message.Custom.ParticipantAddedToGroup", "", {
 						name: event.participant.displayName,
 						groupName: event.group.name
@@ -248,7 +196,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		const dialogRef = this.dialog.open(CreateGroupDialog, { data: this.courseId });
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				this.loadInitialGroups();
+				this.loadGroups();
 			}
 		});
 	}

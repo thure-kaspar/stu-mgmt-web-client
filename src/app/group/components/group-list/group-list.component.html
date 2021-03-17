@@ -22,14 +22,17 @@
 					<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
 						{{ "Common.Closed" | translate }}
 					</mat-checkbox>
+					<mat-checkbox [(ngModel)]="filter.excludeEmpty" (change)="filterSubject.next()">
+						{{ "Misc.ExcludeEmptyGroups" | translate }}
+					</mat-checkbox>
 				</div>
 
-				<mat-form-field class="groupname-filter">
-					<mat-label>{{ "Property.Group.Name" | translate }}</mat-label>
+				<mat-form-field class="name-filter">
+					<mat-label>Filter</mat-label>
 					<input
 						matInput
 						[(ngModel)]="filter.name"
-						(keyup)="nameFilterChangedSubject.next()"
+						(keyup)="filterSubject.next()"
 						autocomplete="off"
 					/>
 				</mat-form-field>
@@ -48,14 +51,5 @@
 				</ng-container>
 			</div>
 		</div>
-
-		<div
-			infiniteScroll
-			[infiniteScrollDistance]="2"
-			[infiniteScrollThrottle]="500"
-			(scrolled)="onScroll()"
-			[infiniteScrollContainer]="'.mat-drawer-content'"
-			[fromRoot]="true"
-		></div>
 	</div>
 </ng-container>
