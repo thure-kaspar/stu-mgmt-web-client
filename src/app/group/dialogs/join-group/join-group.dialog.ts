@@ -56,6 +56,7 @@ export class JoinGroupDialog implements OnInit {
 					this.dialogRef.close(true);
 				},
 				error => {
+					this.error = error.error.error;
 					this.toast.apiError(error);
 				}
 			);
