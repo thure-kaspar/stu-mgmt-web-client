@@ -25,19 +25,19 @@
 							(click)="onLeaveGroup()"
 							*ngIf="isGroupMember(participant)"
 						>
-							<span class="text-red"
-								><mat-icon>meeting_room</mat-icon
-								>{{ "Action.Custom.LeaveGroup" | translate }}</span
-							>
+							<span class="text-red">
+								<mat-icon>cancel</mat-icon>
+								{{ "Action.Custom.LeaveGroup" | translate }}
+							</span>
 						</button>
 						<button
 							mat-menu-item
 							(click)="onRemoveGroup()"
 							*ngIf="participant.isTeachingStaffMember"
 						>
-							<span class="text-red"
-								><mat-icon>delete</mat-icon>{{ "Action.Delete" | translate }}</span
-							>
+							<span class="text-red">
+								<mat-icon>delete</mat-icon>{{ "Action.Delete" | translate }}
+							</span>
 						</button>
 					</div>
 				</mat-menu>
@@ -114,7 +114,7 @@
 					</th>
 					<td class="name-column" mat-cell *matCellDef="let row">
 						<a
-							class="link-none font-bold"
+							class="font-bold link-none"
 							[routerLink]="[
 								'/courses',
 								courseId,
