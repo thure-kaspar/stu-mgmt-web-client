@@ -97,7 +97,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	}
 
 	onDelete(): void {
-		const data: ConfirmDialogData = { params: [this.assignment.name] };
+		const data: ConfirmDialogData = { title: "Action.Delete", params: [this.assignment.name] };
 		this.dialog
 			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
 			.afterClosed()
