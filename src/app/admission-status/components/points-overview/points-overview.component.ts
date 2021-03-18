@@ -1,17 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Subject, BehaviorSubject } from "rxjs";
-import {
-	AdmissionStatusService,
-	PointsOverviewDto,
-	AssessmentsService,
-	CsvService
-} from "../../../../../api";
-import { getRouteParam } from "../../../../../utils/helper";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
-import { ToastService } from "../../../shared/services/toast.service";
+import { ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
+import { AdmissionStatusService, ParticipantDto, PointsOverviewDto } from "../../../../../api";
+import { getRouteParam, matchesParticipant } from "../../../../../utils/helper";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { DownloadService } from "../../../shared/services/download.service";
+import { ToastService } from "../../../shared/services/toast.service";
 
 @Component({
 	selector: "app-points-overview",
@@ -20,18 +16,16 @@ import { DownloadService } from "../../../shared/services/download.service";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnInit {
-	overview$ = new Subject<PointsOverviewDto>();
-	dataSource$ = new BehaviorSubject(new MatTableDataSource<any>([]));
-	displayedColumns = [];
-
 	courseId: string;
+	overview$ = new Subject<PointsOverviewDto>();
+	dataSource = new MatTableDataSource<any>([]);
+	@ViewChild(MatSort) sort: MatSort;
+	displayedColumns = [];
 
 	constructor(
 		private admissionStatusService: AdmissionStatusService,
-		private assessmentService: AssessmentsService,
 		private downloadService: DownloadService,
 		private route: ActivatedRoute,
-		private router: Router,
 		private toast: ToastService
 	) {
 		super();
@@ -42,27 +36,25 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 		this.loadPointsOverview(this.courseId);
 	}
 
-	private loadPointsOverview(courseId: string): void {
+	loadPointsOverview(courseId: string): void {
 		this.subs.sink = this.admissionStatusService.getPointsOverview(courseId).subscribe({
 			next: overview => {
-				//console.log("Overview:", overview);
 				this.displayedColumns = [
 					"displayName",
+					"matrNr",
 					"total",
 					...overview.assignments.map(a => a.id),
 					"spacer"
 				];
 
-				const data = overview.results.map(result => {
-					const studentResult = { student: result.student, total: 0 };
-					overview.assignments.forEach((assignment, index) => {
-						studentResult[assignment.id] = result.achievedPoints[index];
-						studentResult.total += result.achievedPoints[index];
-					});
-					return studentResult;
-				});
+				const data = this.createTableData(overview);
 
-				this.dataSource$.next(new MatTableDataSource(data));
+				const dataSource = new MatTableDataSource(data);
+				dataSource.sort = this.sort;
+				dataSource.filterPredicate = ({ student }, filter): boolean =>
+					matchesParticipant(filter.toLowerCase(), student);
+
+				this.dataSource = dataSource;
 				this.overview$.next(overview);
 			},
 			error: error => {
@@ -71,32 +63,21 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 		});
 	}
 
-	goToAssessment(assignmentId: string, userId: string): void {
-		this.subs.sink = this.assessmentService
-			.getAssessmentsForAssignment(
-				this.courseId,
-				assignmentId,
-				undefined,
-				undefined,
-				undefined,
-				undefined,
-				userId
-			)
-			.subscribe(assessments => {
-				if (assessments.length == 1) {
-					this.router.navigate([
-						"/courses",
-						this.courseId,
-						"assignments",
-						assignmentId,
-						"assessments",
-						"view",
-						assessments[0].id
-					]);
-				} else {
-					this.toast.error("Failed to find the assessment.", "Not found");
-				}
+	private createTableData(
+		overview: PointsOverviewDto
+	): { student: ParticipantDto; total: number }[] {
+		return overview.results.map(result => {
+			const studentResult = { student: result.student, total: 0 };
+			overview.assignments.forEach((assignment, index) => {
+				studentResult[assignment.id] = {
+					achievedPoints: result.achievedPoints[index],
+					achievedPointsPercent: (result.achievedPoints[index] / assignment.points) * 100,
+					assessmentId: result.assessmentIds[index]
+				};
+				studentResult.total += result.achievedPoints[index];
 			});
+			return studentResult;
+		});
 	}
 
 	downloadCsv(): void {

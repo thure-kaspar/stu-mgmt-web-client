@@ -14,4 +14,5 @@ import { ParticipantDto } from './participantDto';
 export interface StudentResults { 
     student: ParticipantDto;
     achievedPoints: Array<number>;
+    assessmentIds: Array<string>;
 }

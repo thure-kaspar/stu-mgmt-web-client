@@ -1,4 +1,5 @@
 import { ActivatedRoute } from "@angular/router";
+import { ParticipantDto } from "../api";
 
 /**
  * Returns the current semester.
@@ -61,4 +62,22 @@ export function createDictionary<T>(
 		map[property(value)] = value;
 	}
 	return map;
+}
+
+/**
+ * Checks, if one of the following properties of the given `participant` matches the `filter`.
+ *  - `displayName` (lowercase),
+ *  - `matrNr`
+ * @param filter
+ * @param participant
+ * @return `true` if one of the named properties matches the `filter`.
+ */
+export function matchesParticipant(filter: string, participant: ParticipantDto): boolean {
+	if (participant.displayName.toLowerCase().includes(filter)) {
+		return true;
+	}
+	if ((participant as any).matrNr?.includes(filter)) {
+		return true;
+	}
+	return false;
 }

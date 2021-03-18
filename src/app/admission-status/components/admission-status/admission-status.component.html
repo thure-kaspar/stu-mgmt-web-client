@@ -23,12 +23,17 @@
 	<div class="participants">
 		<h3>{{ "Domain.Participants" | translate }}</h3>
 
-		<table class="full-width" mat-table [dataSource]="dataSource$ | async">
+		<mat-form-field class="full-width">
+			<mat-label>Filter</mat-label>
+			<input matInput #filter [(ngModel)]="dataSource.filter" />
+		</mat-form-field>
+
+		<table class="full-width" mat-table matSort [dataSource]="dataSource">
 			<ng-container matColumnDef="displayName">
-				<th class="name-column" mat-header-cell *matHeaderCellDef>Name</th>
+				<th class="name-column" mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
 				<td mat-cell *matCellDef="let row">
 					<a
-						class="link-none font-bold"
+						class="font-bold link-none"
 						[routerLink]="['/courses', courseId, 'users', row.participant.userId]"
 					>
 						{{ row.participant.displayName }}
@@ -36,12 +41,24 @@
 				</td>
 			</ng-container>
 
+			<ng-container matColumnDef="matrNr">
+				<th class="matrNr-column" mat-header-cell *matHeaderCellDef>MatrNr</th>
+				<td mat-cell *matCellDef="let row">
+					<a
+						class="font-bold link-none"
+						[routerLink]="['/courses', courseId, 'users', row.participant.userId]"
+					>
+						{{ row.participant.matrNr || "??????" }}
+					</a>
+				</td>
+			</ng-container>
+
 			<ng-container matColumnDef="hasAdmission">
-				<th class="total-column" mat-header-cell *matHeaderCellDef>
+				<th class="total-column" mat-header-cell mat-sort-header *matHeaderCellDef>
 					{{ "Domain.Admission" | translate }}
 				</th>
 				<td mat-cell *matCellDef="let row">
-					<div class="total font-bold">
+					<div class="font-bold total">
 						<span
 							*ngIf="row.hasAdmission; else noAdmission"
 							class="text-green text-bold"

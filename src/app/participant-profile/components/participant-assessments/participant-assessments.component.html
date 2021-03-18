@@ -43,7 +43,7 @@
 		<ng-container matColumnDef="percent">
 			<th mat-header-cell *matHeaderCellDef>%</th>
 			<td mat-cell *matCellDef="let row">
-				{{ (row.achievedPoints / row.assignment.points) * 100 }}
+				{{ (row.achievedPoints / row.assignment.points) * 100 | number: "1.0-2" }}
 			</td>
 		</ng-container>
 
