@@ -1,0 +1,9 @@
+.vertical-bar-chart {
+	display: flex;
+	width: 100%;
+	background-color: var(--card-bg);
+	fill: var(--text) !important;
+	border-radius: 4px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
