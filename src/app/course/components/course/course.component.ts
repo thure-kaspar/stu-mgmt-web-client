@@ -75,8 +75,10 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 										.pipe(
 											ofType(CourseActions.loadCourseSuccess),
 											take(1),
-											tap(({ groupSettings }) => {
-												if (groupSettings.autoJoinGroupOnCourseJoined) {
+											tap(({ data }) => {
+												if (
+													data.groupSettings.autoJoinGroupOnCourseJoined
+												) {
 													this.suggestGroupJoin(courseId);
 												}
 											})

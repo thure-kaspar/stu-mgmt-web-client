@@ -1,4 +1,4 @@
-import { CourseDto, GroupSettingsDto, LinkDto } from "../../../api";
+import { AdmissionCriteriaDto, CourseDto, GroupSettingsDto, LinkDto } from "../../../api";
 
 export class Course implements CourseDto {
 	id?: string;
@@ -7,21 +7,18 @@ export class Course implements CourseDto {
 	title: string;
 	isClosed: boolean;
 	links?: LinkDto[];
-
 	groupSettings: GroupSettingsDto;
+	admissionCriteria: AdmissionCriteriaDto;
 
-	constructor(dto: CourseDto, groupSettings: GroupSettingsDto) {
+	constructor(dto: CourseDto) {
 		this.id = dto.id;
 		this.shortname = dto.shortname;
 		this.semester = dto.semester;
 		this.title = dto.title;
 		this.isClosed = dto.isClosed;
 		this.links = dto.links;
-		this.groupSettings = groupSettings;
-	}
-
-	setGroupSettings(dto: GroupSettingsDto): void {
-		this.groupSettings = dto;
+		this.groupSettings = dto.groupSettings;
+		this.admissionCriteria = dto.admissionCriteria;
 	}
 
 	hasGroupNamingRule(): boolean {

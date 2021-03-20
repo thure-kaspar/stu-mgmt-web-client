@@ -9,6 +9,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { AdmissionCriteriaDto } from './admissionCriteriaDto';
+import { GroupSettingsDto } from './groupSettingsDto';
 import { LinkDto } from './linkDto';
 
 export interface CourseDto { 
@@ -33,4 +35,6 @@ export interface CourseDto {
      */
     isClosed: boolean;
     links?: Array<LinkDto>;
+    groupSettings?: GroupSettingsDto;
+    admissionCriteria?: AdmissionCriteriaDto;
 }

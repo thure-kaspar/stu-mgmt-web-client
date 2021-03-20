@@ -7,9 +7,5 @@ export const selectCourseState = createFeatureSelector<fromCourse.State>(
 );
 
 export const selectCourse = createSelector(selectCourseState, state => {
-	if (state.data && state.groupSettings) {
-		return new Course(state.data, state.groupSettings);
-	}
-
-	return null;
+	return state.data ? new Course(state.data) : null;
 });
