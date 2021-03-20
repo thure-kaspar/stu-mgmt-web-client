@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
-import { AssignmentsService, AssignmentDto, AssessmentAllocationService } from "../../../../api";
+import { AssessmentAllocationService, AssignmentDto } from "../../../../api";
 import { getRouteParam } from "../../../../utils/helper";
+import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignment/search-assignment.dialog";
 import { SnackbarService } from "../../shared/services/snackbar.service";
-import { SelectedAssignmentFacade } from "../../assessment/services/selected-assignment.facade";
-import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 
 @Component({
 	selector: "app-assessment-allocation-overview",
@@ -19,9 +18,7 @@ export class AssessmentAllocationOverviewComponent implements OnInit {
 	assignmentId: string;
 
 	constructor(
-		public selectedAssignment: SelectedAssignmentFacade,
 		private route: ActivatedRoute,
-		private assignmentService: AssignmentsService,
 		private allocationService: AssessmentAllocationService,
 		private evaluatorsFacade: EvaluatorsFacade,
 		private dialog: MatDialog,

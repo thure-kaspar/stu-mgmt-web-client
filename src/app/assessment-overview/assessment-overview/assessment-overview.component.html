@@ -1,7 +1,4 @@
-<div
-	id="assessment-overview-container"
-	*ngIf="selectedAssignment.selectedAssignment$ | async as assignment"
->
+<div id="assessment-overview-container" *ngIf="assignment$ | async as assignment">
 	<nav mat-tab-nav-bar color="accent">
 		<a
 			mat-tab-link
