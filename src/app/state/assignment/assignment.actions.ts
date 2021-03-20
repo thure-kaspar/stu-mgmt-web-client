@@ -1,5 +1,4 @@
 import { createAction, props } from "@ngrx/store";
-import { Update } from "@ngrx/entity";
 import { AssignmentDto } from "../../../../api";
 
 export const loadAssignments = createAction(
@@ -17,44 +16,59 @@ export const loadAssignmentsFailure = createAction(
 	props<{ error: any }>()
 );
 
-export const addAssignment = createAction(
-	"[Assignment/API] Add Assignment",
+export const loadAssignmentById = createAction(
+	"[Assignment] Load Assignment By Id",
+	props<{ courseId: string; assignmentId: string }>()
+);
+
+export const loadAssignmentByIdSuccess = createAction(
+	"[loadAssignmentById$] Load Assignment By Id Success",
 	props<{ assignment: AssignmentDto }>()
 );
 
-export const upsertAssignment = createAction(
-	"[Assignment/API] Upsert Assignment",
-	props<{ assignment: AssignmentDto }>()
+export const loadAssignmentByIdFailure = createAction(
+	"[loadAssignmentById$] Load Assignment By Id Failure",
+	props<{ error: any }>()
 );
 
-export const addAssignments = createAction(
-	"[Assignment/API] Add Assignments",
-	props<{ assignments: AssignmentDto[] }>()
-);
+// export const addAssignment = createAction(
+// 	"[Assignment/API] Add Assignment",
+// 	props<{ assignment: AssignmentDto }>()
+// );
 
-export const upsertAssignments = createAction(
-	"[Assignment/API] Upsert Assignments",
-	props<{ assignments: AssignmentDto[] }>()
-);
+// export const upsertAssignment = createAction(
+// 	"[Assignment/API] Upsert Assignment",
+// 	props<{ assignment: AssignmentDto }>()
+// );
 
-export const updateAssignment = createAction(
-	"[Assignment/API] Update Assignment",
-	props<{ assignment: Update<AssignmentDto> }>()
-);
+// export const addAssignments = createAction(
+// 	"[Assignment/API] Add Assignments",
+// 	props<{ assignments: AssignmentDto[] }>()
+// );
 
-export const updateAssignments = createAction(
-	"[Assignment/API] Update Assignments",
-	props<{ assignments: Update<AssignmentDto>[] }>()
-);
+// export const upsertAssignments = createAction(
+// 	"[Assignment/API] Upsert Assignments",
+// 	props<{ assignments: AssignmentDto[] }>()
+// );
 
-export const deleteAssignment = createAction(
-	"[Assignment/API] Delete Assignment",
-	props<{ id: string }>()
-);
+// export const updateAssignment = createAction(
+// 	"[Assignment/API] Update Assignment",
+// 	props<{ assignment: Update<AssignmentDto> }>()
+// );
 
-export const deleteAssignments = createAction(
-	"[Assignment/API] Delete Assignments",
-	props<{ ids: string[] }>()
-);
+// export const updateAssignments = createAction(
+// 	"[Assignment/API] Update Assignments",
+// 	props<{ assignments: Update<AssignmentDto>[] }>()
+// );
 
-export const clearAssignments = createAction("[Assignment/API] Clear Assignments");
+// export const deleteAssignment = createAction(
+// 	"[Assignment/API] Delete Assignment",
+// 	props<{ id: string }>()
+// );
+
+// export const deleteAssignments = createAction(
+// 	"[Assignment/API] Delete Assignments",
+// 	props<{ ids: string[] }>()
+// );
+
+// export const clearAssignments = createAction("[Assignment/API] Clear Assignments");

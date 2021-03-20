@@ -40,27 +40,33 @@ export const reducer = createReducer(
 		error: action.error
 	})),
 
-	on(AssignmentActions.addAssignment, (state, action) =>
-		adapter.addOne(action.assignment, state)
+	on(AssignmentActions.loadAssignmentById, (state, action) => state),
+	on(AssignmentActions.loadAssignmentByIdSuccess, (state, action) =>
+		adapter.setOne(action.assignment, state)
 	),
-	on(AssignmentActions.upsertAssignment, (state, action) =>
-		adapter.upsertOne(action.assignment, state)
-	),
-	on(AssignmentActions.addAssignments, (state, action) =>
-		adapter.addMany(action.assignments, state)
-	),
-	on(AssignmentActions.upsertAssignments, (state, action) =>
-		adapter.upsertMany(action.assignments, state)
-	),
-	on(AssignmentActions.updateAssignment, (state, action) =>
-		adapter.updateOne(action.assignment, state)
-	),
-	on(AssignmentActions.updateAssignments, (state, action) =>
-		adapter.updateMany(action.assignments, state)
-	),
-	on(AssignmentActions.deleteAssignment, (state, action) => adapter.removeOne(action.id, state)),
-	on(AssignmentActions.deleteAssignments, (state, action) =>
-		adapter.removeMany(action.ids, state)
-	),
-	on(AssignmentActions.clearAssignments, state => adapter.removeAll(state))
+	on(AssignmentActions.loadAssignmentByIdFailure, (state, action) => state)
+
+	// on(AssignmentActions.addAssignment, (state, action) =>
+	// 	adapter.addOne(action.assignment, state)
+	// ),
+	// on(AssignmentActions.upsertAssignment, (state, action) =>
+	// 	adapter.upsertOne(action.assignment, state)
+	// ),
+	// on(AssignmentActions.addAssignments, (state, action) =>
+	// 	adapter.addMany(action.assignments, state)
+	// ),
+	// on(AssignmentActions.upsertAssignments, (state, action) =>
+	// 	adapter.upsertMany(action.assignments, state)
+	// ),
+	// on(AssignmentActions.updateAssignment, (state, action) =>
+	// 	adapter.updateOne(action.assignment, state)
+	// ),
+	// on(AssignmentActions.updateAssignments, (state, action) =>
+	// 	adapter.updateMany(action.assignments, state)
+	// ),
+	// on(AssignmentActions.deleteAssignment, (state, action) => adapter.removeOne(action.id, state)),
+	// on(AssignmentActions.deleteAssignments, (state, action) =>
+	// 	adapter.removeMany(action.ids, state)
+	// ),
+	// on(AssignmentActions.clearAssignments, state => adapter.removeAll(state))
 );
