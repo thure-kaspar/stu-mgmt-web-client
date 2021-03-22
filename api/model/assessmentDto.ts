@@ -25,9 +25,13 @@ export interface AssessmentDto {
      */
     assignmentId: string;
     /**
+     * Marks the assessment as a draft.
+     */
+    isDraft: boolean;
+    /**
      * The amount of points that the student or group achieved with their submission.
      */
-    achievedPoints: number;
+    achievedPoints?: number;
     /**
      * A comment providing additional feedback.
      */

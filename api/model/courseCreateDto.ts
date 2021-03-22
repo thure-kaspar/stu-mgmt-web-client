@@ -33,7 +33,7 @@ export interface CourseCreateDto {
      * Determines, wether changes (i.e joining this course) can be made to this course.
      */
     isClosed: boolean;
-    links?: Array<LinkDto>;
     config: CourseConfigDto;
     lecturers?: Array<string>;
+    links?: Array<LinkDto>;
 }
