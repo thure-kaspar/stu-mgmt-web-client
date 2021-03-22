@@ -6,7 +6,7 @@ import {
 } from "../../../../api";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { ToastService } from "../../shared/services/toast.service";
 
 /**
  * Component that provides a selection of users (evaluators), which can be assigned to a group or user.
@@ -40,7 +40,7 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 	constructor(
 		private allocationService: AssessmentAllocationService,
 		private evaluatorsFacade: EvaluatorsFacade,
-		private snackbar: SnackbarService
+		private toast: ToastService
 	) {
 		super();
 	}
@@ -90,11 +90,10 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 				result => {
 					this.evaluator = evaluator;
 					this.assignedTo = evaluator.userId;
-					this.snackbar.openSuccessMessage();
+					this.toast.success();
 				},
 				error => {
-					console.log(error);
-					this.snackbar.openErrorMessage();
+					this.toast.apiError(error);
 				}
 			);
 	}
@@ -107,11 +106,10 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 				result => {
 					this.evaluator = undefined;
 					this.assignedTo = undefined;
-					this.snackbar.openSuccessMessage();
+					this.toast.success();
 				},
 				error => {
-					console.log(error);
-					this.snackbar.openErrorMessage();
+					this.toast.apiError(error);
 				}
 			);
 	}
