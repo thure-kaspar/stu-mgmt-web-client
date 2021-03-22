@@ -197,7 +197,7 @@
 				{{ "Common.CreationDate" | translate }}
 			</th>
 			<td mat-cell *matCellDef="let row">
-				{{ row.creationDate | date: "dd.mm.yy (HH:MM)" }}
+				{{ row.creationDate | date: "dd.MM.yy (HH:MM)" }}
 			</td>
 		</ng-container>
 
@@ -215,7 +215,7 @@
 				{{ "Common.UpdateDate" | translate }}
 			</th>
 			<td mat-cell *matCellDef="let row">
-				{{ row.lastUpdatedBy ? (row.updateDate | date: "dd.mm.yy (HH:MM)") : "-" }}
+				{{ row.lastUpdatedBy ? (row.updateDate | date: "dd.MM.yy (HH:MM)") : "-" }}
 			</td>
 		</ng-container>
 
