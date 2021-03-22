@@ -302,6 +302,10 @@ input[type="number"] {
 	background-color: var(--accent) !important;
 }
 
+.warn {
+	background-color: var(--warn) !important;
+}
+
 .bg-card {
 	background-color: var(--card-bg) !important;
 }
@@ -373,7 +377,7 @@ input[type="number"] {
 
 .tab {
 	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-bottom: 32px;
 }
 
 .card-title {
@@ -514,6 +518,10 @@ mat-form-field .mat-hint {
 	background-color: transparent !important;
 }
 
+mat-chip {
+	color: white !important;
+}
+
 // Used to display button in mat-tab-group
 app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 	min-width: 0;
@@ -549,4 +557,9 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 
 .mat-form-field-flex {
 	background-color: var(--card-bg) !important;
+}
+
+.spinner {
+	margin-top: 128px;
+	margin-left: 256px;
 }

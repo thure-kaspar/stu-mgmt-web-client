@@ -81,3 +81,21 @@ export function matchesParticipant(filter: string, participant: ParticipantDto):
 	}
 	return false;
 }
+
+/**
+ * Data accessor function for `mat-table` that is used for accessing nested properties for sorting
+ * through the default sortData function. In contrast to the default `sortingDataAccessor`,
+ * this function can deal with nested properties. The `matColumnDef` in the component's template
+ * and the `displayedColumns` entry specify the path to this property through dots (i.e. "user.displayName").
+ * @example
+ * // Template
+ * matColumnDef="user.displayName"
+ * // Component
+ * displayedColumns = ["user.displayName"]
+ * this.dataSource.sortingDataAccessor = nestedPropertyAccessor;
+ */
+export function nestedPropertyAccessor<T>(item: T, path: string): any {
+	return path.split(".").reduce((accumulator: any, key: string) => {
+		return accumulator ? accumulator[key] : undefined;
+	}, item);
+}

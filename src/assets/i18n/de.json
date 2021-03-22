@@ -48,6 +48,7 @@
   "Common": {
     "All": "Alle",
     "AssignedTo": "Zugewiesen an",
+    "Average": "Durchschnitt",
     "Closed": "Geschlossen",
     "Count": "Anzahl",
     "CreatedBy": "Erstellt von",
@@ -58,8 +59,10 @@
     "End": "Ende",
     "For": "Für",
     "Help": "Hilfe",
+    "Highest": "Höchste",
     "Joinable": "Offen",
     "LastUpdatedBy": "Zuletzt geändert von",
+    "Lowest": "Niedrigste",
     "Multiple": "Mehrere",
     "My": "Meine",
     "Name": "Name",
@@ -108,6 +111,7 @@
     "PartialAssessments": "Teilbewertungen",
     "Participant": "Teilnehmer",
     "Participants": "Teilnehmer",
+    "Points": "Punkte",
     "Problem": "Problem",
     "Problems": "Probleme",
     "RegisteredGroups": "Angemeldete Gruppen",
@@ -256,9 +260,11 @@
       "Type": "Regel"
     },
     "Assessment": {
-      "AchievedPoints": "Erreichte Punktzahl",
+      "AchievedPoints": "Punktzahl",
       "Comment": "Kommentar",
       "Creator": "Erstellt von",
+      "HasPassed": "Bestanden",
+      "IsDraft": "Ist Entwurf",
       "PartialAssessments": "Teilbewertungen"
     },
     "Assignment": {

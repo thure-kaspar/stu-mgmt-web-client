@@ -10,9 +10,6 @@
 				'editor',
 				'create'
 			]"
-			[matTooltip]="
-				createAssessmentButton.disabled ? ('Error.AssignmentNotInReview' | translate) : ''
-			"
 		>
 			<button
 				#createAssessmentButton
@@ -26,6 +23,48 @@
 
 		<button mat-stroked-button (click)="download()">Export</button>
 	</div>
+
+	<mat-spinner class="spinner" color="accent" *ngIf="loading$ | async"></mat-spinner>
+
+	<div class="chart" *ngIf="chartData">
+		<app-vertical-bar-chart
+			[data]="chartData"
+			[options]="chartOptions"
+			[xAxisLabel]="'Property.Assessment.AchievedPoints' | translate"
+			[yAxisLabel]="'Common.Count' | translate"
+		></app-vertical-bar-chart>
+	</div>
+
+	<div class="stat-cards" *ngIf="statistics">
+		<div class="stat-card">
+			<span class="category">{{ "Common.Lowest" | translate }}</span>
+			<span class="value"
+				>{{ statistics?.lowestScore }} {{ "Domain.Points" | translate }}</span
+			>
+		</div>
+
+		<div class="stat-card">
+			<span class="category">{{ "Common.Average" | translate }}</span>
+			<span class="value"
+				>{{ statistics?.averageScore | number: "1.0-2" }}
+				{{ "Domain.Points" | translate }}</span
+			>
+		</div>
+
+		<div class="stat-card">
+			<span class="category">{{ "Common.Highest" | translate }}</span>
+			<span class="value"
+				>{{ statistics?.highestScore }} {{ "Domain.Points" | translate }}</span
+			>
+		</div>
+
+		<div class="stat-card">
+			<span class="category">{{ "Property.Assessment.HasPassed" | translate }}</span>
+			<span class="value">{{ statistics?.countPassed }}</span>
+		</div>
+	</div>
+
+	<h2>{{ "Domain.Assessments" | translate }} ({{ dataSource?.filteredData.length || 0 }})</h2>
 
 	<div class="flex filter">
 		<mat-form-field class="full-width">
@@ -56,18 +95,84 @@
 			</td>
 		</ng-container>
 
+		<ng-container matColumnDef="isDraft">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ "Property.Assessment.IsDraft" | translate }}
+			</th>
+			<td mat-cell class="column-is-draft" *matCellDef="let row">
+				<mat-chip-list>
+					<mat-chip
+						class="draft"
+						*ngIf="row.isDraft"
+						[matTooltip]="'Common.Yes' | translate"
+					>
+						<mat-icon>edit</mat-icon>
+					</mat-chip>
+					<mat-chip
+						class="non-draft"
+						*ngIf="!row.isDraft"
+						[matTooltip]="'Common.No' | translate"
+					>
+						<mat-icon>done</mat-icon>
+					</mat-chip>
+				</mat-chip-list>
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="hasPassed">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ "Property.Assessment.HasPassed" | translate }}
+			</th>
+			<td mat-cell class="column-has-passed" *matCellDef="let row">
+				<mat-chip-list [ngSwitch]="row.hasPassed">
+					<mat-chip class="success" *ngSwitchCase="true"
+						><mat-icon>thumb_up</mat-icon></mat-chip
+					>
+					<mat-chip class="failure" *ngSwitchCase="false"
+						><mat-icon>thumb_down</mat-icon></mat-chip
+					>
+					<mat-chip *ngSwitchDefault><mat-icon>help</mat-icon></mat-chip>
+				</mat-chip-list>
+			</td>
+		</ng-container>
+
+		<!-- AchievedPoints Column -->
+		<ng-container matColumnDef="achievedPoints">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ "Property.Assessment.AchievedPoints" | translate }}
+			</th>
+			<td mat-cell *matCellDef="let row" class="column-achieved-points">
+				{{ row.achievedPoints || "-" }}
+				<span
+					*ngIf="
+						requiredPoints &&
+						row.roundedPoints &&
+						row.roundedPoints !== row.achievedPoints
+					"
+					class="text-light"
+					>({{ row.roundedPoints }})</span
+				>
+			</td>
+		</ng-container>
+
 		<!-- For Column -->
 		<ng-container matColumnDef="for">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+			<th mat-header-cell class="column-for" *matHeaderCellDef>
 				{{ "Common.For" | translate }}
 			</th>
-			<td mat-cell *matCellDef="let row">
-				<a
-					*ngIf="row.groupId; else userId"
-					class="font-bold link-none"
-					[routerLink]="['/courses', courseId, 'groups', row.groupId]"
-					>{{ row.group.name }}</a
-				>
+			<td mat-cell class="column-for" *matCellDef="let row">
+				<div class="group-card" *ngIf="row.groupId; else userId">
+					<a
+						class="font-bold link-none"
+						[routerLink]="['/courses', courseId, 'groups', row.groupId]"
+						>{{ row.group.name }}</a
+					>
+					<div class="group-members">
+						<span class="group-member-name" *ngFor="let member of row.group.members">
+							{{ member.displayName }}
+						</span>
+					</div>
+				</div>
 				<ng-template #userId>
 					<a
 						class="font-bold link-none"
@@ -78,18 +183,8 @@
 			</td>
 		</ng-container>
 
-		<!-- AchievedPoints Column -->
-		<ng-container matColumnDef="achievedPoints">
-			<th class="column-achieved-points" mat-header-cell *matHeaderCellDef mat-sort-header>
-				{{ "Property.Assessment.AchievedPoints" | translate }}
-			</th>
-			<td mat-cell *matCellDef="let row" class="column-achieved-points">
-				{{ row.achievedPoints }}
-			</td>
-		</ng-container>
-
 		<!-- Creator Column -->
-		<ng-container matColumnDef="creator">
+		<ng-container matColumnDef="creator.displayName">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header>
 				{{ "Property.Assessment.Creator" | translate }}
 			</th>
@@ -101,15 +196,17 @@
 			<th mat-header-cell *matHeaderCellDef mat-sort-header>
 				{{ "Common.CreationDate" | translate }}
 			</th>
-			<td mat-cell *matCellDef="let row">{{ row.creationDate | date: "medium" }}</td>
+			<td mat-cell *matCellDef="let row">
+				{{ row.creationDate | date: "dd.mm.yy (HH:MM)" }}
+			</td>
 		</ng-container>
 
 		<!-- LastUpdatedBy Column -->
-		<ng-container matColumnDef="lastUpdatedBy">
+		<ng-container matColumnDef="lastUpdatedBy.displayName">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header>
 				{{ "Common.LastUpdatedBy" | translate }}
 			</th>
-			<td mat-cell *matCellDef="let row">{{ row.lastUpdatedBy?.displayName }}</td>
+			<td mat-cell *matCellDef="let row">{{ row.lastUpdatedBy?.displayName || "-" }}</td>
 		</ng-container>
 
 		<!-- UpdateDate Column -->
@@ -118,17 +215,11 @@
 				{{ "Common.UpdateDate" | translate }}
 			</th>
 			<td mat-cell *matCellDef="let row">
-				{{ (row.lastUpdatedBy ? row.updateDate : null) | date: "medium" }}
+				{{ row.lastUpdatedBy ? (row.updateDate | date: "dd.mm.yy (HH:MM)") : "-" }}
 			</td>
 		</ng-container>
 
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
-
-	<app-paginator
-		[pageSizeOptions]="[1000]"
-		[pageSize]="1000"
-		[totalCount]="dataSource.data.length"
-	></app-paginator>
 </div>

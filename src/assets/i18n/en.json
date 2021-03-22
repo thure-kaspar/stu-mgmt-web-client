@@ -48,6 +48,7 @@
   "Common": {
     "All": "All",
     "AssignedTo": "Assigned to",
+    "Average": "Average",
     "Closed": "Closed",
     "Count": "Count",
     "CreatedBy": "Created by",
@@ -58,8 +59,10 @@
     "End": "End",
     "For": "For",
     "Help": "Help",
+    "Highest": "Highest",
     "Joinable": "Joinable",
     "LastUpdatedBy": "Last updated by",
+    "Lowest": "Lowest",
     "Multiple": "Multiple",
     "My": "My",
     "Name": "Name",
@@ -108,6 +111,7 @@
     "PartialAssessments": "Partial assessments",
     "Participant": "Participant",
     "Participants": "Participants",
+    "Points": "Points",
     "Problem": "Problem",
     "Problems": "Problems",
     "RegisteredGroups": "Registered groups",
@@ -256,9 +260,11 @@
       "Type": "Rule"
     },
     "Assessment": {
-      "AchievedPoints": "Achieved points",
+      "AchievedPoints": "Points",
       "Comment": "Comment",
       "Creator": "Created by",
+      "HasPassed": "Passed",
+      "IsDraft": "Is draft",
       "PartialAssessments": "Partial assessments"
     },
     "Assignment": {
