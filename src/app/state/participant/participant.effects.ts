@@ -29,6 +29,7 @@ export class ParticipantEffects {
 				this.courseParticipants.getParticipant(action.courseId, user.id).pipe(
 					map(participant =>
 						ParticipantActions.loadParticipantSuccess({
+							courseId: action.courseId,
 							data: createParticipant(participant)
 						})
 					),
@@ -43,10 +44,9 @@ export class ParticipantEffects {
 	loadParticipantSuccess$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(ParticipantActions.loadParticipantSuccess),
-			withLatestFrom(this.store.select(CourseSelectors.selectCourseState)),
-			switchMap(([action, course]) => {
+			switchMap(action => {
 				if (action.data.role === "STUDENT") {
-					const props = { courseId: course.data.id };
+					const props = { courseId: action.courseId };
 					return [loadAssessments(props), loadGroups(props), loadAdmissionsStatus(props)];
 				}
 

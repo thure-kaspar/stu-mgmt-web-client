@@ -8,7 +8,7 @@ export const loadParticipant = createAction(
 
 export const loadParticipantSuccess = createAction(
 	"[loadParticipant$] Load Participant Success",
-	props<{ data: Participant }>()
+	props<{ courseId: string; data: Participant }>()
 );
 
 export const loadParticipantFailure = createAction(
