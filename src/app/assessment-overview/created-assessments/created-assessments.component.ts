@@ -103,7 +103,7 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 			)
 			.subscribe(
 				([assessments, assignment, course]) => {
-					const rule = course.admissionCriteria.rules.find(
+					const rule = course.admissionCriteria?.rules.find(
 						r =>
 							r.assignmentType === assignment.type &&
 							r.type === "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES"
@@ -242,7 +242,7 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		assignment: AssignmentDto,
 		admissionCriteria: AdmissionCriteriaDto
 	): number | undefined {
-		const rule = admissionCriteria.rules.find(
+		const rule = admissionCriteria?.rules.find(
 			r =>
 				r.assignmentType === assignment.type &&
 				r.type === "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES"
