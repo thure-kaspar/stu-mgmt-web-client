@@ -16,6 +16,7 @@ import { CsvService } from './api/csv.service';
 import { DefaultService } from './api/default.service';
 import { GroupsService } from './api/groups.service';
 import { MailService } from './api/mail.service';
+import { SubmissionService } from './api/submission.service';
 import { TaskSchedulerService } from './api/taskScheduler.service';
 import { TestService } from './api/test.service';
 import { UsersService } from './api/users.service';
@@ -38,6 +39,7 @@ import { UsersService } from './api/users.service';
     DefaultService,
     GroupsService,
     MailService,
+    SubmissionService,
     TaskSchedulerService,
     TestService,
     UsersService ]

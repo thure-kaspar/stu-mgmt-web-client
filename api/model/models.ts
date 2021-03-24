@@ -43,5 +43,7 @@ export * from './ruleCheckResult';
 export * from './studentMgmtEvent';
 export * from './studentMgmtException';
 export * from './studentResults';
+export * from './submissionCreateDto';
+export * from './submissionDto';
 export * from './userDto';
 export * from './userUpdateDto';
