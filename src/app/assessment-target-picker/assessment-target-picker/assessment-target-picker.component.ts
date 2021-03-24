@@ -1,28 +1,21 @@
 import {
-	Component,
-	OnInit,
-	Input,
-	Output,
-	EventEmitter,
 	ChangeDetectionStrategy,
-	OnDestroy
+	Component,
+	EventEmitter,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output
 } from "@angular/core";
-import {
-	AssignmentsService,
-	GroupDto,
-	CoursesService,
-	UserDto,
-	ParticipantDto
-} from "../../../../api";
-import { SnackbarService } from "../../shared/services/snackbar.service";
-
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
+import { AssignmentsService, CoursesService, GroupDto, ParticipantDto } from "../../../../api";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
+import { SnackbarService } from "../../shared/services/snackbar.service";
 
 export class AssessmentTargetFilter {
 	assignedEvaluatorId?: string;
-	excludeAlreadyReviewed = true;
+	excludeAlreadyReviewed = false;
 	nameOfGroupOrUser?: string;
 }
 
