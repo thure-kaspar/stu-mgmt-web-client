@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { AssessmentTargetPickerModule } from "../assessment-target-picker/assessment-target-picker.module";
+import { ChartsModule } from "../charts/charts.module";
 import { SharedModule } from "../shared/shared.module";
 import { AssessmentAllocationOverviewComponent } from "./assessment-allocation-overview/assessment-allocation-overview.component";
 import { AssessmentOverviewRoutingModule } from "./assessment-overview-routing.module";
@@ -14,7 +15,12 @@ import { RegisteredGroupsComponent } from "./registered-groups/registered-groups
 		CreatedAssessmentsComponent,
 		RegisteredGroupsComponent
 	],
-	imports: [SharedModule, AssessmentOverviewRoutingModule, AssessmentTargetPickerModule],
+	imports: [
+		SharedModule,
+		AssessmentOverviewRoutingModule,
+		AssessmentTargetPickerModule,
+		ChartsModule
+	],
 	exports: []
 })
 export class AssessmentOverviewModule {}

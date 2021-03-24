@@ -164,7 +164,6 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		};
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
-		console.log(this.sort);
 		this.dataSource.sortingDataAccessor = nestedPropertyAccessor;
 	}
 
