@@ -1,0 +1,18 @@
+.submission-overview {
+	display: flex;
+	flex-direction: column;
+}
+
+.filter {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.column-date {
+	width: 164px;
+}
+
+.column-display-name {
+	width: 164px;
+}

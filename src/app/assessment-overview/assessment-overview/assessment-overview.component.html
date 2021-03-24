@@ -21,10 +21,19 @@
 		</a>
 		<a
 			mat-tab-link
-			routerLink="allocations"
+			routerLink="submissions"
 			routerLinkActive
 			#rla3="routerLinkActive"
 			[active]="rla3.isActive"
+		>
+			{{ "Domain.Submissions" | translate }}
+		</a>
+		<a
+			mat-tab-link
+			routerLink="allocations"
+			routerLinkActive
+			#rla4="routerLinkActive"
+			[active]="rla4.isActive"
 		>
 			{{ "Domain.AssessmentAllocations" | translate }}
 		</a>

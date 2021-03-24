@@ -14,13 +14,16 @@ import { AssignmentActions, AssignmentSelectors } from "../../state/assignment";
 })
 export class AssessmentOverviewComponent implements OnInit {
 	assignment$: Observable<AssignmentDto>;
+	courseId: string;
 
 	constructor(private store: Store, private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
-		const courseId = getRouteParam("courseId", this.route);
+		this.courseId = getRouteParam("courseId", this.route);
 		const assignmentId = getRouteParam("assignmentId", this.route);
-		this.store.dispatch(AssignmentActions.loadAssignmentById({ courseId, assignmentId }));
+		this.store.dispatch(
+			AssignmentActions.loadAssignmentById({ courseId: this.courseId, assignmentId })
+		);
 		this.assignment$ = this.store.select(AssignmentSelectors.selectAssignment(assignmentId));
 	}
 }
