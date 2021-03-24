@@ -3,10 +3,17 @@ import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
-import { Observable } from "rxjs";
-import { map, tap } from "rxjs/operators";
-import { AssignmentDto, GroupDto, UsersService } from "../../../../../api";
+import { Observable, pipe } from "rxjs";
+import { filter, map, tap } from "rxjs/operators";
+import {
+	AdmissionCriteriaDto,
+	AssessmentDto,
+	AssignmentDto,
+	GroupDto,
+	UsersService
+} from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
+import { RoundingMethod } from "../../../../../utils/math";
 import { Course } from "../../../domain/course.model";
 import { Participant } from "../../../domain/participant.model";
 import {
@@ -23,6 +30,13 @@ import {
 } from "../../dialogs/edit-assignment/edit-assignment.dialog";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 
+type AssessmentDtoExtended = AssessmentDto & {
+	roundedPoints?: number;
+	hasPassed?: boolean;
+};
+
+type AssessmentState = "passed" | "failed" | "submitted" | null;
+
 @Component({
 	selector: "app-assignment-card",
 	templateUrl: "./assignment-card.component.html",
@@ -34,13 +48,19 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	@Input() course: Course;
 	@Input() participant: Participant;
 
+	/** If the course has defined admission criteria for this type of assignment,
+	 * this will contain the required points for this assignment.
+	 */
+	requiredPoints: number | undefined;
 	/**
 	 * Can be used to display a warning about this assignment, i.e. "You have no group for this assignment."
 	 * Will be translated in the template.
 	 */
-	warning?: string;
+	warning?: string | undefined;
 	courseId: string;
 	group$: Observable<GroupDto>;
+	assessment$: Observable<AssessmentDtoExtended>;
+	assessmentState$: Observable<AssessmentState>;
 
 	typeEnum = AssignmentDto.TypeEnum;
 	stateEnum = AssignmentDto.StateEnum;
@@ -61,6 +81,15 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);
+
+		if (this.participant.isStudent) {
+			this.tryFindGroupOfParticipant();
+		}
+
+		this.tryFindRequiredPoints(this.course.admissionCriteria);
+	}
+
+	private tryFindGroupOfParticipant(): void {
 		this.group$ = this.store.select(ParticipantSelectors.selectParticipantGroupsState).pipe(
 			tap(state => {
 				if (this.studentHasNoGroup(state)) {
@@ -75,6 +104,45 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 			}),
 			map(state => state.data?.[this.assignment.id])
 		);
+	}
+
+	private tryFindRequiredPoints(admissionCriteria: AdmissionCriteriaDto): void {
+		const rule = admissionCriteria?.rules.find(
+			r =>
+				r.type === "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES" &&
+				r.assignmentType === this.assignment.type
+		);
+
+		if (rule) {
+			this.requiredPoints = (this.assignment.points * rule.requiredPercent) / 100;
+
+			if (this.participant.isStudent) {
+				const round = RoundingMethod(
+					rule.achievedPercentRounding.type,
+					rule.achievedPercentRounding.decimals
+				);
+
+				this.assessment$ = this.store
+					.select(ParticipantSelectors.selectAssessmentByAssignmentId(this.assignment.id))
+					.pipe(
+						map(assessment => {
+							if (assessment?.achievedPoints) {
+								const roundedPoints = round(assessment.achievedPoints);
+								return {
+									...assessment,
+									roundedPoints,
+									hasPassed: roundedPoints > this.requiredPoints
+								};
+							}
+						})
+					);
+
+				this.assessmentState$ = this.assessment$.pipe(
+					filter(assessment => !!assessment),
+					map(assessment => (assessment.hasPassed ? "passed" : "failed"))
+				);
+			}
+		}
 	}
 
 	private studentHasNoGroup(state: State): boolean {

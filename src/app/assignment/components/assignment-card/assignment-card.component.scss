@@ -1,131 +1,47 @@
-.assignment {
-	background-color: var(--card-bg);
-	width: 500px;
-	margin-bottom: 16px;
-	display: flex;
-	flex-direction: column;
-	padding-bottom: 8px !important;
-}
-
-.comment {
-	text-align: justify;
-	padding-bottom: 8px;
-}
-
-.links {
-	margin-top: -4px;
-	padding-bottom: 8px;
-	display: flex;
-
-	a {
-		margin-right: 8px;
-	}
-}
-
-.assignment-card-title {
-	margin-top: -16px !important;
-	margin-bottom: -8px !important;
-	align-items: center !important;
-	justify-content: space-between;
-	display: flex;
-	padding-bottom: 12px;
-
-	.name {
-		padding-top: 2px;
-		font-size: 18px;
-	}
-
-	.menu-btn {
-		margin-right: -16px;
-	}
+.assignment-card {
 }
 
 .chips {
-	margin-bottom: 16px;
-
-	mat-chip {
-		justify-content: space-between;
-
-		mat-icon {
-			margin-right: 8px;
-		}
-	}
-}
-
-.collaboration {
-	mat-icon {
-		vertical-align: text-bottom;
-	}
-
-	.collaboration-type {
-		vertical-align: text-top;
-	}
-}
-
-.dates {
-	margin-bottom: 12px;
 	display: flex;
-	flex-direction: column;
-}
-
-.type-chip {
-	color: white !important;
-}
-
-.HOMEWORK {
-	background-color: rgb(0, 89, 255) !important;
-}
-
-.TESTAT {
-	background-color: rgb(194, 149, 0) !important;
-}
-
-.PROJECT,
-.SEMINAR,
-.OTHER {
-	background-color: rgb(0, 153, 102) !important;
-}
-
-.SINGLE {
-	background-color: #7f23c5 !important;
-}
-
-.GROUP,
-.GROUP_OR_SINGLE {
-	background-color: #00838f !important;
-}
-
-.warning {
-	padding-top: 4px;
-	padding-bottom: 4px;
-
-	mat-icon {
-		margin-right: 8px;
-		vertical-align: sub;
-	}
+	gap: 8px;
+	margin-bottom: 16px;
 }
 
 .group-title {
 	font-size: 16px;
 }
 
-.member-list {
+.group {
+	margin-top: 14px;
+	background-color: var(--color-bg);
+	border-radius: 4px;
+	padding: 8px;
+	width: fit-content;
+}
+
+.links {
+	color: var(--accent);
+	font-weight: 500;
+}
+
+.member {
+	margin-top: 4px;
+	padding-left: 16px;
+	border-left: 2px solid var(--accent);
 	display: grid;
-	row-gap: 8px;
-	margin-bottom: 8px;
 }
 
-.member-card {
-	padding-top: 8px !important;
-	padding-bottom: 8px !important;
+.warning {
+	display: flex;
+	gap: 8px;
+	padding-top: 16px;
 
-	background-color: var(--color-header) !important;
+	mat-icon {
+		margin-top: -2px;
+	}
 }
 
-.member-card-title {
-	font-size: 16px;
-}
-
-.actions a {
-	margin-right: 8px;
+.state {
+	margin-left: 16px;
+	margin-top: -4px;
 }

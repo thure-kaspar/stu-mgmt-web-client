@@ -99,6 +99,7 @@
     "Expression": {
       "EmptyGroup": "Diese Gruppe hat keine Mitglieder."
     },
+    "Failed": "Nicht bestanden",
     "Group": "Gruppe",
     "GroupNames": "Gruppennamen",
     "GroupSettings": "Gruppen-Einstellungen",
@@ -117,6 +118,8 @@
     "RegisteredGroups": "Angemeldete Gruppen",
     "Registrations": "Anmeldungen",
     "Semester": "Semester",
+    "Submission": "Abgabe",
+    "Submissions": "Abgaben",
     "User": "Nutzer",
     "Users": "Nutzer"
   },

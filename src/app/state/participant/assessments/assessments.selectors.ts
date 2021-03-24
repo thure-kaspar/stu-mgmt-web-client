@@ -1,6 +1,9 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import * as fromParticipantAssessments from "./assessments.reducer";
 
-export const selectParticipantAssessmentsState = createFeatureSelector<fromParticipantAssessments.State>(
+const selectParticipantAssessmentsState = createFeatureSelector<fromParticipantAssessments.State>(
 	fromParticipantAssessments.participantAssessmentsFeatureKey
 );
+
+export const selectAssessmentByAssignmentId = (assignmentId: string) =>
+	createSelector(selectParticipantAssessmentsState, state => state.assessments?.[assignmentId]);

@@ -1,5 +1,5 @@
-<mat-card class="assignment mat-elevation-z2">
-	<mat-card-title class="assignment-card-title">
+<app-card class="assignment-card">
+	<ng-container title>
 		<span class="font-bold name" data-assignment-name>
 			<a
 				class="link-none"
@@ -9,9 +9,57 @@
 				{{ assignment.name }}
 			</a>
 			<ng-template #noLink>
-				<span>{{ assignment.name }}</span>
+				{{ assignment.name }}
 			</ng-template>
 		</span>
+		<span class="state" [ngSwitch]="assessmentState$ | async">
+			<app-chip
+				*ngSwitchCase="'submitted'"
+				color="#14abb3"
+				icon="assignment_turned_in"
+				text="Abgegeben"
+			></app-chip>
+			<app-chip
+				*ngSwitchCase="'passed'"
+				color="#2fac6f"
+				icon="thumb_up"
+				[text]="'Property.Assessment.HasPassed' | translate"
+			></app-chip>
+			<app-chip
+				*ngSwitchCase="'failed'"
+				color="#ff0134"
+				icon="thumb_down"
+				[text]="'Domain.Failed' | translate"
+			></app-chip>
+			<app-chip
+				*ngSwitchCase="'evaluated'"
+				color="#5335b0"
+				icon="assignment_turned_in"
+				text="Bewertet"
+			></app-chip>
+		</span>
+	</ng-container>
+
+	<ng-container subtitle>
+		<span>
+			<span>{{ assignment.points }} {{ "Domain.Points" | translate }}</span>
+			<span *ngIf="assignment.bonusPoints > 0">
+				(+{{ assignment.points }} {{ "Property.Assignment.BonusPoints" | translate }})
+			</span>
+			<span *ngIf="requiredPoints">
+				- {{ "Common.Required" | translate }}: {{ requiredPoints }}
+				{{ "Domain.Points" | translate }}</span
+			>
+			<span *ngIf="(assessment$ | async)?.achievedPoints as achievedPoints">
+				- Erreicht: {{ achievedPoints }} {{ "Domain.Points" | translate }}
+			</span>
+		</span>
+	</ng-container>
+
+	<ng-container menu *ngIf="participant.isTeachingStaffMember">
+		<button mat-icon-button [mat-menu-trigger-for]="assignmentMenu">
+			<mat-icon>more_vert</mat-icon>
+		</button>
 
 		<mat-menu #assignmentMenu>
 			<ng-container *ngIf="participant.isTeachingStaffMember">
@@ -27,97 +75,123 @@
 				</button>
 			</ng-container>
 		</mat-menu>
+	</ng-container>
 
-		<button mat-icon-button class="menu-btn" [matMenuTriggerFor]="assignmentMenu">
-			<mat-icon class="icon-light">more_vert</mat-icon>
-		</button>
-	</mat-card-title>
+	<ng-container content>
+		<div class="chips">
+			<ng-container [ngSwitch]="assignment.type">
+				<app-chip
+					*ngSwitchCase="typeEnum.HOMEWORK"
+					icon="assignment"
+					color="#2B5592"
+					[text]="'Enum.AssignmentType.' + assignment.type | translate"
+				></app-chip>
+				<app-chip
+					*ngSwitchCase="typeEnum.TESTAT"
+					icon="grade"
+					color="#ff8000"
+					[text]="'Enum.AssignmentType.' + assignment.type | translate"
+				></app-chip>
+				<app-chip
+					*ngSwitchCase="typeEnum.PROJECT"
+					icon="build"
+					color="#96003a"
+					[text]="'Enum.AssignmentType.' + assignment.type | translate"
+				></app-chip>
+				<app-chip
+					*ngSwitchCase="typeEnum.SEMINAR"
+					icon="description"
+					color="#5442f5"
+					[text]="'Enum.AssignmentType.' + assignment.type | translate"
+				></app-chip>
+				<app-chip
+					*ngSwitchCase="typeEnum.OTHER"
+					icon="help"
+					color="#7a7a7a"
+					[text]="'Enum.AssignmentType.' + assignment.type | translate"
+				></app-chip>
+				<app-chip *ngSwitchDefault></app-chip>
+			</ng-container>
 
-	<div class="comment" *ngIf="assignment.comment">
-		<pre class="preformatted">{{ assignment.comment }}</pre>
-	</div>
-
-	<div class="links" *ngIf="assignment.links?.length > 0">
-		<a class="link-none text-light" *ngFor="let link of assignment.links" [href]="link.url"
-			>#{{ link.name }}</a
-		>
-	</div>
-
-	<mat-chip-list class="chips">
-		<mat-chip [class]="'type-chip ' + assignment.type">
-			<mat-icon *ngIf="assignment.type === typeEnum.HOMEWORK">assignment</mat-icon>
-			<mat-icon *ngIf="assignment.type === typeEnum.TESTAT">grade</mat-icon>
-			<mat-icon *ngIf="assignment.type === typeEnum.PROJECT">build</mat-icon>
-			<mat-icon *ngIf="assignment.type === typeEnum.SEMINAR">description</mat-icon>
-			<mat-icon *ngIf="assignment.type === typeEnum.OTHER">help</mat-icon>
-			<span class="assignment-type">{{
-				"Enum.AssignmentType." + assignment.type | translate
-			}}</span>
-		</mat-chip>
-
-		<mat-chip color="primary" selected [class]="'collaboration ' + assignment.collaboration">
-			<mat-icon
-				*ngIf="
-					assignment.collaboration === collaborationEnum.GROUP ||
-					assignment.collaboration === collaborationEnum.GROUPORSINGLE
-				"
-			>
-				groups
-			</mat-icon>
-			<mat-icon *ngIf="assignment.collaboration === collaborationEnum.SINGLE"
-				>person</mat-icon
-			>
-			<span class="collaboration-type">{{
-				"Enum.CollaborationType." + assignment.collaboration | translate
-			}}</span>
-		</mat-chip>
-	</mat-chip-list>
-
-	<div class="dates" *ngIf="assignment.startDate || assignment.endDate">
-		<span class="startdate" *ngIf="assignment.startDate">
-			<span class="font-bold uppercase text-green">{{ "Common.Start" | translate }}:</span>
-			{{ assignment.startDate | date: "medium" }}
-		</span>
-		<span class="enddate" *ngIf="assignment.endDate">
-			<span class="font-bold uppercase text-red">{{ "Common.End" | translate }}:</span>
-			{{ assignment.endDate | date: "medium" }}
-		</span>
-	</div>
-
-	<div class="group" *ngIf="group$ | async as group">
-		<a class="link-none" [routerLink]="['/courses', courseId, 'groups', group.id]">
-			<mat-card-title class="group-title">
-				<span class="text-light">{{ "Domain.Group" | translate }}:</span>
-				{{ group.name }}
-			</mat-card-title>
-		</a>
-
-		<div class="member-list">
-			<mat-card class="member-card mat-elevation-z2" *ngFor="let member of group.members">
-				<mat-card-title class="member-card-title">
-					<a
-						class="link-none member-name"
-						[routerLink]="['/courses', courseId, 'users', member.userId]"
-					>
-						{{ member.displayName }}
-					</a>
-				</mat-card-title>
-
-				<span class="email" class="text-light" *ngIf="member.email">
-					Email: {{ member.email }}
-				</span>
-			</mat-card>
+			<ng-container [ngSwitch]="assignment.collaboration">
+				<app-chip
+					*ngSwitchCase="collaborationEnum.GROUP"
+					icon="group"
+					color="#009664"
+					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
+				></app-chip>
+				<app-chip
+					*ngSwitchCase="collaborationEnum.GROUPORSINGLE"
+					icon="group"
+					color="#00838f"
+					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
+				></app-chip>
+				<app-chip
+					*ngSwitchCase="collaborationEnum.SINGLE"
+					icon="person"
+					color="#7f23c5"
+					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
+				></app-chip>
+				<app-chip *ngSwitchDefault></app-chip>
+			</ng-container>
 		</div>
-	</div>
 
-	<div class="warning" *ngIf="warning">
-		<span class="WARNING">
+		<div class="flex-column" *ngIf="assignment.startDate || assignment.endDate">
+			<span class="startdate" *ngIf="assignment.startDate">
+				<span class="font-bold uppercase x text-green"
+					>{{ "Common.Start" | translate }}:</span
+				>
+				{{ assignment.startDate | date: "dd.MM.YYYY (mm:HH)" }}
+			</span>
+			<span class="enddate" *ngIf="assignment.endDate">
+				<span class="font-bold uppercase x text-red">{{ "Common.End" | translate }}:</span>
+				{{ assignment.endDate | date: "dd.MM.YYYY (mm:HH)" }}
+			</span>
+		</div>
+
+		<div class="comment" *ngIf="assignment.comment">
+			<pre class="preformatted">{{ assignment.comment }}</pre>
+		</div>
+
+		<div class="links" *ngIf="assignment.links?.length > 0">
+			<a class="link-none" *ngFor="let link of assignment.links" [href]="link.url"
+				>#{{ link.name }}</a
+			>
+		</div>
+
+		<div class="group" *ngIf="group$ | async as group">
+			<a
+				class="font-bold group-title link-none"
+				[routerLink]="['/courses', courseId, 'groups', group.id]"
+				>{{ group.name }}
+			</a>
+
+			<div class="member-list">
+				<div class="member" *ngFor="let member of group.members">
+					<ng-container *ngIf="participant.userId !== member.userId">
+						<span class="member-name">
+							{{ member.displayName }}
+						</span>
+
+						<a
+							class="text-light link-none"
+							[href]="'mailto:' + member.email"
+							*ngIf="member.email"
+						>
+							Email: {{ member.email }}
+						</a>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+
+		<span class="warning WARNING" *ngIf="warning">
 			<mat-icon>warning</mat-icon>
-			{{ warning }}
+			<span class="warning-text">{{ warning }}</span>
 		</span>
-	</div>
+	</ng-container>
 
-	<div class="actions">
+	<ng-container footer>
 		<button
 			mat-stroked-button
 			*ngIf="participant.isStudent && assignment.state === 'EVALUATED'"
@@ -128,15 +202,19 @@
 
 		<ng-container *ngIf="participant.isTeachingStaffMember">
 			<a class="link-none" [routerLink]="[assignment.id, 'assessments']">
-				<button mat-stroked-button>{{ "Domain.Assessments" | translate }}</button>
+				<button mat-stroked-button>
+					{{ "Domain.Assessments" | translate }}
+				</button>
 			</a>
 			<a
 				class="link-none"
 				[routerLink]="[assignment.id, 'assessments', 'registrations']"
 				*ngIf="assignment.collaboration !== collaborationEnum.SINGLE"
 			>
-				<button mat-stroked-button>{{ "Domain.Registrations" | translate }}</button>
+				<button mat-stroked-button>
+					{{ "Domain.Registrations" | translate }}
+				</button>
 			</a>
 		</ng-container>
-	</div>
-</mat-card>
+	</ng-container>
+</app-card>

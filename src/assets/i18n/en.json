@@ -99,6 +99,7 @@
     "Expression": {
       "EmptyGroup": "This group has no members."
     },
+    "Failed": "Failed",
     "Group": "Group",
     "GroupNames": "Group names",
     "GroupSettings": "Group settings",
@@ -117,6 +118,8 @@
     "RegisteredGroups": "Registered groups",
     "Registrations": "Registrations",
     "Semester": "Semester",
+    "Submission": "Submission",
+    "Submissions": "Submissions",
     "User": "User",
     "Users": "Users"
   },
