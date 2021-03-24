@@ -1,0 +1,21 @@
+.chip {
+	background-color: var(--accent);
+	color: white;
+	padding: 6px 8px 6px 8px;
+	font-size: 13px;
+	display: flex;
+	border-radius: 4px;
+	width: fit-content;
+	height: 16px;
+
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+
+	mat-icon {
+		position: relative;
+		top: 2px;
+		margin-right: 2px;
+		font-size: 20px;
+	}
+}

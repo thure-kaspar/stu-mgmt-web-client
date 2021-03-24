@@ -4,8 +4,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatNativeDateModule } from "@angular/material/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { AuthModule } from "../auth/auth.module";
-import { ChartsModule } from "../charts/charts.module";
 import { MaterialModule } from "../material/material.module";
+import { CardComponent } from "./components/card/card.component";
+import { ChipComponent } from "./components/chip/chip.component";
 import { ConfirmDialog } from "./components/dialogs/confirm-dialog/confirm-dialog.dialog";
 import { ExtendedConfirmDialog } from "./components/dialogs/extended-confirm-dialog/extended-confirm-dialog.dialog";
 import { SearchParticipantDialog } from "./components/dialogs/search-participant/search-participant.dialog";
@@ -20,9 +21,11 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		Paginator,
 		SemesterPipe,
 		SearchParticipantDialog,
-		ExtendedConfirmDialog
+		ExtendedConfirmDialog,
+		CardComponent,
+		ChipComponent
 	],
-	imports: [CommonModule, AuthModule, MaterialModule, TranslateModule, FormsModule, ChartsModule],
+	imports: [CommonModule, AuthModule, MaterialModule, TranslateModule, FormsModule],
 	exports: [
 		CommonModule,
 		AuthModule,
@@ -31,9 +34,10 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		FormsModule,
 		ReactiveFormsModule,
 		MatNativeDateModule,
-		ChartsModule,
 		Paginator,
-		SemesterPipe
+		SemesterPipe,
+		CardComponent,
+		ChipComponent
 	],
 	providers: []
 })
