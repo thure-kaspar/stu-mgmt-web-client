@@ -1,0 +1,70 @@
+<div class="admission-from-previous-semester">
+	<button mat-flat-button color="accent" class="mb-8 btn-save" (click)="save()">
+		{{ "Action.Save" | translate }}
+	</button>
+
+	<h2>{{ "Domain.AdmissionFromPreviousSemester" | translate }} ({{ dataSource.data.length }})</h2>
+
+	<div class="description text-light">
+		{{ "Text.CourseConfig.AdmissionFromPreviousSemester" | translate }}
+	</div>
+
+	<div class="grid">
+		<mat-form-field class="matrnr-input" floatLabel="always">
+			<mat-label>MatrNrs</mat-label>
+			<textarea
+				[(ngModel)]="matrNrs"
+				matInput
+				[placeholder]="'111111\n222222\n333333'"
+				rows="25"
+			></textarea>
+		</mat-form-field>
+
+		<table mat-table #table [dataSource]="dataSource">
+			<ng-container matColumnDef="matrNr">
+				<th class="column-sm" mat-header-cell *matHeaderCellDef>MatrNr</th>
+				<td mat-cell *matCellDef="let row">{{ row.matrNr }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="participant.displayName">
+				<th class="column-md" mat-header-cell *matHeaderCellDef>Name</th>
+				<td mat-cell *matCellDef="let row">
+					<a
+						*ngIf="row.participant?.displayName; else unknownUser"
+						class="font-bold link-none"
+						[routerLink]="['/courses', courseId, 'users', row.participant.userId]"
+					>
+						{{ row.participant.displayName }}
+					</a>
+					<ng-template #unknownUser>
+						<span class="text-light">(unknown)</span>
+					</ng-template>
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="participant.email">
+				<th mat-header-cell *matHeaderCellDef>Email</th>
+				<td mat-cell *matCellDef="let row">
+					<a
+						*ngIf="row.participant?.email; else unknownUser"
+						class="font-bold link-none"
+						[href]="'mailto:' + row.participant.email"
+					>
+						{{ row.participant.email }}
+					</a>
+					<ng-template #unknownUser>
+						<span class="text-light">(unknown)</span>
+					</ng-template>
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="spacer">
+				<th mat-header-cell *matHeaderCellDef></th>
+				<td mat-cell *matCellDef="let row"></td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+		</table>
+	</div>
+</div>

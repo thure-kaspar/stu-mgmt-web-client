@@ -76,7 +76,7 @@ export function matchesParticipant(filter: string, participant: ParticipantDto):
 	if (participant.displayName.toLowerCase().includes(filter)) {
 		return true;
 	}
-	if ((participant as any).matrNr?.includes(filter)) {
+	if (participant.matrNr?.toString().includes(filter)) {
 		return true;
 	}
 	return false;

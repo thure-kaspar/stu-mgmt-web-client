@@ -50,6 +50,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 		"group-settings",
 		"secrets",
 		"admission-criteria",
+		"admission-from-previous-semester",
 		"assignment-templates"
 	];
 

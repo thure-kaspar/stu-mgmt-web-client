@@ -15,7 +15,6 @@ export class CourseForm implements OnInit {
 	ngOnInit(): void {}
 
 	addLink(link?: { name: string; url: string }): void {
-		console.log(this.form);
 		this.getLinks().push(
 			this.fb.group({
 				name: [link?.name ?? null, Validators.required],

@@ -86,6 +86,7 @@
   "Domain": {
     "Admission": "Admission",
     "AdmissionCriteria": "Admission criteria",
+    "AdmissionFromPreviousSemester": "Admission from previous semester",
     "Assessment": "Assessment",
     "AssessmentAllocations": "Allocations",
     "Assessments": "Assessments",
@@ -335,6 +336,7 @@
       "Shortname": "Shortname of this course. Should be reused every semester (i.e \"java\")."
     },
     "CourseConfig": {
+      "AdmissionFromPreviousSemester": "Admissions from previous semesters can be entered in the textfield on the left. Every row should contain a single matriculation number. After saving, the selected matriculation numbers will be displayed in the table along with the corresponding student. If the  student is not yet registered in this system, their name won't be displayed.",
       "Password": "Participants must enter the password to join the course."
     },
     "Dialog": {

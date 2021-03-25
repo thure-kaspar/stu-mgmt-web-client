@@ -86,6 +86,7 @@
   "Domain": {
     "Admission": "Zulassung",
     "AdmissionCriteria": "Zulassungskriterien",
+    "AdmissionFromPreviousSemester": "Altzulassungen",
     "Assessment": "Bewertung",
     "AssessmentAllocations": "Zuweisungen",
     "Assessments": "Bewertungen",
@@ -335,6 +336,7 @@
       "Shortname": "Kürzel der Veranstaltung. Sollte jedes Semester gleich bleiben (z. B. \"java\")."
     },
     "CourseConfig": {
+      "AdmissionFromPreviousSemester": "Altzulassungen können im Textfield auf der linken Seite eingetragen werden. Jede Reihe sollte eine einzige Matrikelnummer enthalten. Nach dem Speichern werden alle eingegebenen Matrikelnummern zusammen mit dem zugehörigen Studenten in der Tabelle angezeigt. Sollte sich ein Student noch nicht im System befinden, wird kein Name angezeigt.",
       "Password": "Teilnehmer müssen das Passwort angeben, um dem Kurs beizutreten."
     },
     "Dialog": {

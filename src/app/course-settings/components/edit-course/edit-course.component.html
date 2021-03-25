@@ -28,6 +28,10 @@
 				<app-admission-criteria-form [form]="form"></app-admission-criteria-form>
 			</mat-tab>
 
+			<mat-tab label="{{ 'Domain.AdmissionFromPreviousSemester' | translate }}">
+				<app-admission-from-previous-semester-form></app-admission-from-previous-semester-form>
+			</mat-tab>
+
 			<mat-tab label="{{ 'Domain.AssignmentTemplates' | translate }}">
 				<div id="assignment-templates-tab">
 					<button
