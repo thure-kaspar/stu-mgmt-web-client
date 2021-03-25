@@ -348,6 +348,54 @@ export class CourseConfigService {
     }
 
     /**
+     * Get admission from previous semester.
+     * Retrieves a dictionary that maps matrNrs to a UserDto or null (if user does not exist in the system).
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAdmissionFromPreviousSemester(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getAdmissionFromPreviousSemester(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getAdmissionFromPreviousSemester(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getAdmissionFromPreviousSemester(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getAdmissionFromPreviousSemester.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config/admission-from-previous-semester`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get assignment templates.
      * Retrieves the assignment templates of a course.
      * @param courseId 
@@ -492,7 +540,7 @@ export class CourseConfigService {
     }
 
     /**
-     * Remove admssion criteria.
+     * Remove admission criteria.
      * Removes the admission criteria of a course.
      * @param courseId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -577,6 +625,65 @@ export class CourseConfigService {
 
         return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Set admission from previous semester.
+     * 
+     * @param body 
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setAdmissionFromPreviousSemester(body: Array<number>, courseId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public setAdmissionFromPreviousSemester(body: Array<number>, courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public setAdmissionFromPreviousSemester(body: Array<number>, courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public setAdmissionFromPreviousSemester(body: Array<number>, courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling setAdmissionFromPreviousSemester.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling setAdmissionFromPreviousSemester.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('put',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/config/admission-from-previous-semester`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

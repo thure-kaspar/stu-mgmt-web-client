@@ -20,6 +20,7 @@ export interface UserDto {
      * Role within the application.
      */
     role: UserDto.RoleEnum;
+    matrNr?: number;
     email?: string;
     username: string;
     displayName: string;

@@ -15,6 +15,7 @@ export interface UserUpdateDto {
      * Role within the application.
      */
     role: UserUpdateDto.RoleEnum;
+    matrNr?: number;
     email?: string;
     displayName: string;
 }

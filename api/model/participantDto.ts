@@ -15,6 +15,7 @@ export interface ParticipantDto {
     userId: string;
     username: string;
     displayName: string;
+    matrNr?: number;
     email?: string;
     role: ParticipantDto.RoleEnum;
     groupId?: string;

@@ -291,6 +291,67 @@ export class CourseParticipantsService {
     }
 
     /**
+     * Get participants of course by matrNr.
+     * Returns participants by their matrNr. The response only includes participants that were found, meaning unknown matrNrs will be ignored.
+     * @param courseId 
+     * @param matrNr 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getParticipantsByMatrNr(courseId: string, matrNr: Array<number>, observe?: 'body', reportProgress?: boolean): Observable<Array<ParticipantDto>>;
+    public getParticipantsByMatrNr(courseId: string, matrNr: Array<number>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ParticipantDto>>>;
+    public getParticipantsByMatrNr(courseId: string, matrNr: Array<number>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ParticipantDto>>>;
+    public getParticipantsByMatrNr(courseId: string, matrNr: Array<number>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getParticipantsByMatrNr.');
+        }
+
+        if (matrNr === null || matrNr === undefined) {
+            throw new Error('Required parameter matrNr was null or undefined when calling getParticipantsByMatrNr.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (matrNr) {
+            matrNr.forEach((element) => {
+                queryParameters = queryParameters.append('matrNr', <any>element);
+            })
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<ParticipantDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/users/matrNrs`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get participants with assigned evaluator.
      * Returns participants with their assigned evaluator for a particular assignment.
      * @param courseId 
