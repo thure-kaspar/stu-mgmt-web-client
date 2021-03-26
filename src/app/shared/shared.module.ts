@@ -13,6 +13,8 @@ import { SearchParticipantDialog } from "./components/dialogs/search-participant
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { Paginator } from "./paginator/paginator.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
+import { AssignmentTypeChipComponent } from "./components/assignment-type-chip/assignment-type-chip.component";
+import { ThumbChipComponent } from "./components/thumb-chip/thumb-chip.component";
 
 @NgModule({
 	declarations: [
@@ -23,7 +25,9 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		SearchParticipantDialog,
 		ExtendedConfirmDialog,
 		CardComponent,
-		ChipComponent
+		ChipComponent,
+		AssignmentTypeChipComponent,
+		ThumbChipComponent
 	],
 	imports: [CommonModule, AuthModule, MaterialModule, TranslateModule, FormsModule],
 	exports: [
@@ -37,7 +41,9 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		Paginator,
 		SemesterPipe,
 		CardComponent,
-		ChipComponent
+		ChipComponent,
+		AssignmentTypeChipComponent,
+		ThumbChipComponent
 	],
 	providers: []
 })
