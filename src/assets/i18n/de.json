@@ -327,6 +327,10 @@
     }
   },
   "Text": {
+    "AdmissionStatus": {
+      "CriteriaFulfilled": "Kriteren erfüllt",
+      "CriteriaNotFulfilled": "Kriteren nicht erfüllt"
+    },
     "Common": {
       "EnterToConfirm": "Bitte den folgenden Text eingeben, um zu bestätigen"
     },

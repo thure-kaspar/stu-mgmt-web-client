@@ -1,0 +1,91 @@
+<div class="participant-admission-status">
+	<app-card>
+		<ng-container title>{{ "Title.AdmissionStatus" | translate }}</ng-container>
+		<ng-container subtitle>Aktueller Stand</ng-container>
+		<ng-container content *ngIf="admissionStatus$ | async as admissionStatus">
+			<mat-spinner *ngIf="admissionStatus.isLoading" diameter="64"></mat-spinner>
+
+			<ng-container *ngIf="vm$ | async as vm">
+				<div class="overall-result">
+					<span
+						class="overall-result-column"
+						*ngIf="admissionStatus.admissionStatus.hasAdmissionFromPreviousSemester"
+					>
+						<app-thumb-chip [condition]="true"></app-thumb-chip>
+						<span>Altzulassung</span>
+					</span>
+
+					<span class="overall-result-column">
+						<app-thumb-chip
+							[condition]="admissionStatus.admissionStatus.hasAdmission"
+						></app-thumb-chip>
+						<span class="font-bold" *ngIf="admissionStatus.admissionStatus.hasAdmission"
+							>{{ "Text.AdmissionStatus.CriteriaFulfilled" | translate }}.</span
+						>
+						<span
+							class="font-bold"
+							*ngIf="!admissionStatus.admissionStatus.hasAdmission"
+							>{{ "Text.AdmissionStatus.CriteriaNotFulfilled" | translate }}.</span
+						>
+					</span>
+				</div>
+
+				<div class="rules">
+					<div class="rule" *ngFor="let rule of vm; let index = index">
+						<mat-divider></mat-divider>
+						<div class="rule-title">
+							<span class="top">
+								<app-thumb-chip [condition]="rule.result.passed"></app-thumb-chip>
+
+								<app-assignment-type-chip
+									class="assignment-type-chip"
+									[type]="rule.assignmentType"
+								></app-assignment-type-chip>
+							</span>
+						</div>
+
+						<div class="type">
+							<ng-container [ngSwitch]="rule.type">
+								<span
+									class="text-light"
+									*ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL"
+									>{{
+										"Enum.RuleType." + rule.type
+											| translate: { requiredPercent: rule.requiredPercent }
+									}}.</span
+								>
+								<ng-container
+									*ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES"
+								>
+									<span class="text-light"
+										>{{
+											"Enum.RuleType." + rule.type
+												| translate
+													: {
+															requiredPercent:
+																rule["requiredPercent"],
+															allowedFailures: rule["allowedFailures"]
+													  }
+										}}.
+									</span>
+								</ng-container>
+								<p *ngSwitchDefault>Unknown rule type</p>
+							</ng-container>
+						</div>
+
+						<div class="result">
+							<span class="text-light">Erreicht: </span>
+							<span class="font-bold"
+								>{{ rule.result.achievedPoints }} ({{
+									rule.result.achievedPercent | number: "1.0-2"
+								}}%)</span
+							>
+						</div>
+					</div>
+				</div>
+			</ng-container>
+		</ng-container>
+	</app-card>
+</div>
+
+<ng-template #assignmentTypeChip let-rule> </ng-template>

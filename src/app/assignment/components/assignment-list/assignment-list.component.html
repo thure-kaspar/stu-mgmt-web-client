@@ -12,82 +12,14 @@
 				{{ "Action.Custom.AddAssignment" | translate }}
 			</button>
 
-			<div class="assignment-states">
-				<div class="state in-progress">
-					<h3 class="assignment-state">
-						{{ "Enum.AssignmentState.IN_PROGRESS" | translate }}
-					</h3>
-					<div class="assignment-list">
-						<ng-container *ngFor="let assignment of assignments.inProgress">
-							<app-assignment-card
-								[course]="course"
-								[assignment]="assignment"
-								[participant]="participant"
-							></app-assignment-card>
-						</ng-container>
-					</div>
-				</div>
-
-				<mat-divider inset></mat-divider>
-
-				<div class="state in-review">
-					<h3 class="assignment-state">
-						{{ "Enum.AssignmentState.IN_REVIEW" | translate }}
-					</h3>
-					<div class="assignment-list">
-						<ng-container *ngFor="let assignment of assignments.inReview">
-							<app-assignment-card
-								[course]="course"
-								[assignment]="assignment"
-								[participant]="participant"
-							></app-assignment-card>
-						</ng-container>
-					</div>
-				</div>
-
-				<mat-divider inset></mat-divider>
-
-				<div class="state evaluated">
-					<h3 class="assignment-state">
-						{{ "Enum.AssignmentState.EVALUATED" | translate }}
-					</h3>
-					<div class="assignment-list">
-						<ng-container *ngFor="let assignment of assignments.evaluated">
-							<app-assignment-card
-								[course]="course"
-								[assignment]="assignment"
-								[participant]="participant"
-							></app-assignment-card>
-						</ng-container>
-					</div>
-				</div>
-
-				<mat-divider inset></mat-divider>
-
-				<div class="state closed">
-					<h3 class="assignment-state">
-						{{ "Enum.AssignmentState.CLOSED" | translate }}
-					</h3>
-					<div class="assignment-list">
-						<ng-container *ngFor="let assignment of assignments.closed">
-							<app-assignment-card
-								[course]="course"
-								[assignment]="assignment"
-								[participant]="participant"
-							></app-assignment-card>
-						</ng-container>
-					</div>
-				</div>
-
-				<ng-container *ngIf="participant?.isTeachingStaffMember">
-					<mat-divider inset></mat-divider>
-
-					<div class="invisible state">
+			<div class="split">
+				<div class="assignment-states">
+					<div class="state in-progress">
 						<h3 class="assignment-state">
-							{{ "Enum.AssignmentState.INVISIBLE" | translate }}
+							{{ "Enum.AssignmentState.IN_PROGRESS" | translate }}
 						</h3>
 						<div class="assignment-list">
-							<ng-container *ngFor="let assignment of assignments.invisible">
+							<ng-container *ngFor="let assignment of assignments.inProgress">
 								<app-assignment-card
 									[course]="course"
 									[assignment]="assignment"
@@ -96,7 +28,81 @@
 							</ng-container>
 						</div>
 					</div>
-				</ng-container>
+
+					<mat-divider inset></mat-divider>
+
+					<div class="state in-review">
+						<h3 class="assignment-state">
+							{{ "Enum.AssignmentState.IN_REVIEW" | translate }}
+						</h3>
+						<div class="assignment-list">
+							<ng-container *ngFor="let assignment of assignments.inReview">
+								<app-assignment-card
+									[course]="course"
+									[assignment]="assignment"
+									[participant]="participant"
+								></app-assignment-card>
+							</ng-container>
+						</div>
+					</div>
+
+					<mat-divider inset></mat-divider>
+
+					<div class="state evaluated">
+						<h3 class="assignment-state">
+							{{ "Enum.AssignmentState.EVALUATED" | translate }}
+						</h3>
+						<div class="assignment-list">
+							<ng-container *ngFor="let assignment of assignments.evaluated">
+								<app-assignment-card
+									[course]="course"
+									[assignment]="assignment"
+									[participant]="participant"
+								></app-assignment-card>
+							</ng-container>
+						</div>
+					</div>
+
+					<mat-divider inset></mat-divider>
+
+					<div class="state closed">
+						<h3 class="assignment-state">
+							{{ "Enum.AssignmentState.CLOSED" | translate }}
+						</h3>
+						<div class="assignment-list">
+							<ng-container *ngFor="let assignment of assignments.closed">
+								<app-assignment-card
+									[course]="course"
+									[assignment]="assignment"
+									[participant]="participant"
+								></app-assignment-card>
+							</ng-container>
+						</div>
+					</div>
+
+					<ng-container *ngIf="participant?.isTeachingStaffMember">
+						<mat-divider inset></mat-divider>
+
+						<div class="invisible state">
+							<h3 class="assignment-state">
+								{{ "Enum.AssignmentState.INVISIBLE" | translate }}
+							</h3>
+							<div class="assignment-list">
+								<ng-container *ngFor="let assignment of assignments.invisible">
+									<app-assignment-card
+										[course]="course"
+										[assignment]="assignment"
+										[participant]="participant"
+									></app-assignment-card>
+								</ng-container>
+							</div>
+						</div>
+					</ng-container>
+				</div>
+
+				<div class="admission-status" *ngIf="participant.isStudent">
+					<app-participant-admission-status></app-participant-admission-status>
+				</div>
 			</div>
 		</div>
 	</ng-container>

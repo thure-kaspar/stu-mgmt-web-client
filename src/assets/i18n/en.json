@@ -327,6 +327,10 @@
     }
   },
   "Text": {
+    "AdmissionStatus": {
+      "CriteriaFulfilled": "Criteria fulfilled",
+      "CriteriaNotFulfilled": "Criteria not fulfilled"
+    },
     "Common": {
       "EnterToConfirm": "Please enter the following text to confirm"
     },

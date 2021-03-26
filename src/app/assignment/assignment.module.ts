@@ -9,6 +9,7 @@ import { EditAssignmentDialog } from "./dialogs/edit-assignment/edit-assignment.
 import { AssignmentForm } from "./forms/assignment-form/assignment-form.component";
 import { SearchAssignmentDialog } from "./dialogs/search-assignment/search-assignment.dialog";
 import { AssignmentCardComponent } from "./components/assignment-card/assignment-card.component";
+import { ParticipantAdmissionStatusComponent } from "./components/participant-admission-status/participant-admission-status.component";
 
 @NgModule({
 	declarations: [
@@ -17,7 +18,8 @@ import { AssignmentCardComponent } from "./components/assignment-card/assignment
 		EditAssignmentDialog,
 		AssignmentForm,
 		SearchAssignmentDialog,
-		AssignmentCardComponent
+		AssignmentCardComponent,
+		ParticipantAdmissionStatusComponent
 	],
 	imports: [SharedModule, TranslateModule.forChild({ extend: true }), AssignmentRoutingModule],
 	exports: [AssignmentListComponent]

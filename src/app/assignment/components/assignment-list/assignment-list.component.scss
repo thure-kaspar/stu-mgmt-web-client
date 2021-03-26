@@ -7,7 +7,7 @@
 }
 
 .assignment-state {
-	margin-bottom: 4px;
+	margin-bottom: 16px;
 	font-weight: 500;
 }
 
@@ -15,9 +15,20 @@
 	margin-top: 8px;
 }
 
+.assignment-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
 mat-divider {
 	width: 100%;
 	margin-top: 24px;
 	margin-bottom: 24px;
 	margin-left: -0px !important;
+}
+
+.split {
+	display: flex;
+	gap: 32px;
 }
