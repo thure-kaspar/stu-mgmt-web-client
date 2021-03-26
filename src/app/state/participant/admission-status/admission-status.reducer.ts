@@ -26,7 +26,7 @@ export const reducer = createReducer(
 	})),
 	on(ParticipantAdmissionStatusActions.loadAdmissionsStatusSuccess, (state, action) => ({
 		admissionStatus: action.data,
-		isLoading: true,
+		isLoading: false,
 		hasLoaded: true,
 		error: null
 	})),
