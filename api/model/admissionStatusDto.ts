@@ -14,6 +14,7 @@ import { RuleCheckResult } from './ruleCheckResult';
 
 export interface AdmissionStatusDto { 
     hasAdmission: boolean;
+    hasAdmissionFromPreviousSemester: boolean;
     results: Array<RuleCheckResult>;
     participant: ParticipantDto;
 }
