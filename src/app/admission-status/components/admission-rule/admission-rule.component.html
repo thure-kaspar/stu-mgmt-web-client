@@ -1,5 +1,5 @@
 <mat-card class="rule">
-	<mat-card-title class="rule-title flex">
+	<mat-card-title class="flex rule-title">
 		<span class="left">
 			<span class="text-light">{{ "Common.Criteria" | translate }} #{{ index }}</span>
 
@@ -25,23 +25,44 @@
 				<p *ngSwitchDefault>Unknown rule type</p>
 			</ng-container>
 		</span>
-		<mat-chip-list class="chips">
-			<mat-chip [class]="'type-chip ' + rule.assignmentType">
-				<mat-icon *ngIf="rule.assignmentType === 'HOMEWORK'">assignment</mat-icon>
-				<mat-icon *ngIf="rule.assignmentType === 'TESTAT'">grade</mat-icon>
-				<mat-icon *ngIf="rule.assignmentType === 'PROJECT'">engineering</mat-icon>
-				<mat-icon *ngIf="rule.assignmentType === 'SEMINAR'">menu_book</mat-icon>
-				<mat-icon *ngIf="rule.assignmentType === 'OTHER'">not_listed_location</mat-icon>
-				<span class="assignment-type">{{
-					"Enum.AssignmentType." + rule.assignmentType | translate
-				}}</span>
-			</mat-chip>
-		</mat-chip-list>
+		<ng-container [ngSwitch]="rule.assignmentType">
+			<app-chip
+				*ngSwitchCase="'HOMEWORK'"
+				icon="assignment"
+				color="#2B5592"
+				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
+			></app-chip>
+			<app-chip
+				*ngSwitchCase="'TESTAT'"
+				icon="grade"
+				color="#ff8000"
+				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
+			></app-chip>
+			<app-chip
+				*ngSwitchCase="'PROJECT'"
+				icon="build"
+				color="#96003a"
+				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
+			></app-chip>
+			<app-chip
+				*ngSwitchCase="'SEMINAR'"
+				icon="description"
+				color="#5442f5"
+				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
+			></app-chip>
+			<app-chip
+				*ngSwitchCase="'OTHER'"
+				icon="help"
+				color="#7a7a7a"
+				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
+			></app-chip>
+			<app-chip *ngSwitchDefault></app-chip>
+		</ng-container>
 	</mat-card-title>
 
 	<div class="rounding-info flex-column">
 		<div>
-			<span class="text-light font-bold"
+			<span class="font-bold text-light"
 				>{{ "Property.Assessment.AchievedPoints" | translate }}-%:</span
 			>
 			{{ "Enum.RoundingType." + rule.achievedPercentRounding.type | translate }}
@@ -95,7 +116,7 @@
 			><span class="font-bold text-light"
 				>{{ "Property.AdmissionRule.Passed" | translate }}:
 			</span>
-			<span *ngIf="result.passed; else no" class="text-green font-bold passed">{{
+			<span *ngIf="result.passed; else no" class="font-bold text-green passed">{{
 				"Common.Yes" | translate
 			}}</span>
 			<ng-template #no>

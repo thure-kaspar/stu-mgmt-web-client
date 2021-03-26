@@ -36,30 +36,7 @@
 
 .column-role {
 	width: 96px;
-}
-
-.chips {
-	mat-chip {
-		margin-right: 32px;
-		width: 118px;
-		color: white;
-
-		mat-icon {
-			margin-right: 8px;
-		}
-	}
-
-	.LECTURER {
-		background-color: #e72a67 !important;
-	}
-
-	.TUTOR {
-		background-color: rgb(91, 0, 175) !important;
-	}
-
-	.STUDENT {
-		background-color: rgb(0, 153, 102) !important;
-	}
+	padding-right: 32px;
 }
 
 .column-action {

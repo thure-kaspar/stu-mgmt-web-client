@@ -4,18 +4,23 @@
 	padding: 6px 8px 6px 8px;
 	font-size: 13px;
 	display: flex;
+	gap: 8px;
 	border-radius: 4px;
 	width: fit-content;
 	height: 16px;
 
-	justify-content: center;
 	align-content: center;
 	align-items: center;
+
+	mat-icon:empty,
+	span:empty {
+		display: none;
+	}
 
 	mat-icon {
 		position: relative;
 		top: 2px;
-		margin-right: 2px;
 		font-size: 20px;
+		margin-right: -4px;
 	}
 }

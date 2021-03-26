@@ -100,22 +100,12 @@
 				{{ "Property.Assessment.IsDraft" | translate }}
 			</th>
 			<td mat-cell class="column-is-draft" *matCellDef="let row">
-				<mat-chip-list>
-					<mat-chip
-						class="draft"
-						*ngIf="row.isDraft"
-						[matTooltip]="'Common.Yes' | translate"
-					>
-						<mat-icon>edit</mat-icon>
-					</mat-chip>
-					<mat-chip
-						class="non-draft"
-						*ngIf="!row.isDraft"
-						[matTooltip]="'Common.No' | translate"
-					>
-						<mat-icon>done</mat-icon>
-					</mat-chip>
-				</mat-chip-list>
+				<app-chip
+					*ngIf="row.isDraft"
+					icon="edit"
+					color="orange"
+					[matTooltip]="'Common.Yes' | translate"
+				></app-chip>
 			</td>
 		</ng-container>
 
@@ -124,15 +114,11 @@
 				{{ "Property.Assessment.HasPassed" | translate }}
 			</th>
 			<td mat-cell class="column-has-passed" *matCellDef="let row">
-				<mat-chip-list [ngSwitch]="row.hasPassed">
-					<mat-chip class="success" *ngSwitchCase="true"
-						><mat-icon>thumb_up</mat-icon></mat-chip
-					>
-					<mat-chip class="failure" *ngSwitchCase="false"
-						><mat-icon>thumb_down</mat-icon></mat-chip
-					>
-					<mat-chip *ngSwitchDefault><mat-icon>help</mat-icon></mat-chip>
-				</mat-chip-list>
+				<ng-container [ngSwitch]="row.hasPassed">
+					<app-chip *ngSwitchCase="true" icon="thumb_up" color="#2fac6f"></app-chip>
+					<app-chip *ngSwitchCase="false" icon="thumb_down" color="#ff0134"></app-chip>
+					<app-chip *ngSwitchDefault icon="help" color="primary"></app-chip>
+				</ng-container>
 			</td>
 		</ng-container>
 
