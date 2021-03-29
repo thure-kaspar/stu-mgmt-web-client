@@ -28,8 +28,8 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 	displayedColumns = [
 		"displayName",
 		"matrNr",
-		"hasAdmissionCombined",
 		"hasAdmission",
+		"fulfillsAdmissionCriteria",
 		"hasAdmissionFromPreviousSemester"
 	];
 	criteria$ = this.store.select(CourseSelectors.selectCourse).pipe(
@@ -66,12 +66,7 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 			.getAdmissionStatusOfParticipants(this.courseId, "response")
 			.subscribe({
 				next: response => {
-					const data = response.body;
-					data.forEach(entry => {
-						entry["hasAdmissionCombined"] =
-							entry.hasAdmission || entry.hasAdmissionFromPreviousSemester;
-					});
-					this.dataSource = new MatTableDataSource(data);
+					this.dataSource = new MatTableDataSource(response.body);
 					this.dataSource.sort = this.sort;
 					this.dataSource.filterPredicate = (data, filter): boolean =>
 						matchesParticipant(filter, data.participant);

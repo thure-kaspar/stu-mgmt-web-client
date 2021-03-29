@@ -53,19 +53,19 @@
 				</td>
 			</ng-container>
 
-			<ng-container matColumnDef="hasAdmissionCombined">
+			<ng-container matColumnDef="hasAdmission">
 				<th mat-header-cell mat-sort-header *matHeaderCellDef>
 					{{ "Domain.Admission" | translate }}
 				</th>
 				<td mat-cell *matCellDef="let row">
-					<app-thumb-chip [condition]="row.hasAdmissionCombined"></app-thumb-chip>
+					<app-thumb-chip [condition]="row.hasAdmission"></app-thumb-chip>
 				</td>
 			</ng-container>
 
-			<ng-container matColumnDef="hasAdmission">
+			<ng-container matColumnDef="fulfillsAdmissionCriteria">
 				<th mat-header-cell mat-sort-header *matHeaderCellDef>Kriterien erfüllt</th>
 				<td mat-cell *matCellDef="let row">
-					<app-thumb-chip [condition]="row.hasAdmission"></app-thumb-chip>
+					<app-thumb-chip [condition]="row.fulfillsAdmissionCriteria"></app-thumb-chip>
 				</td>
 			</ng-container>
 

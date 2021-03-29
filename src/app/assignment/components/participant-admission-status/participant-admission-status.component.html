@@ -17,14 +17,16 @@
 
 					<span class="overall-result-column">
 						<app-thumb-chip
-							[condition]="admissionStatus.admissionStatus.hasAdmission"
+							[condition]="admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
 						></app-thumb-chip>
-						<span class="font-bold" *ngIf="admissionStatus.admissionStatus.hasAdmission"
+						<span
+							class="font-bold"
+							*ngIf="admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
 							>{{ "Text.AdmissionStatus.CriteriaFulfilled" | translate }}.</span
 						>
 						<span
 							class="font-bold"
-							*ngIf="!admissionStatus.admissionStatus.hasAdmission"
+							*ngIf="!admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
 							>{{ "Text.AdmissionStatus.CriteriaNotFulfilled" | translate }}.</span
 						>
 					</span>
