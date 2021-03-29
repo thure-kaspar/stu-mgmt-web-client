@@ -20,8 +20,59 @@
 		</ng-template>
 	</div>
 
+	<mat-spinner *ngIf="(admissionStatusState$ | async).isLoading" diameter="32"></mat-spinner>
+
+	<div class="charts">
+		<h3>Charts</h3>
+
+		<div class="chart-grid">
+			<div class="chart" *ngFor="let chart of charts$ | async; let index = index">
+				<app-vertical-bar-chart
+					[data]="chart.data"
+					[xAxisLabel]="chart.xAxisLabel | translate"
+					[yAxisLabel]="chart.yAxisLabel | translate"
+				></app-vertical-bar-chart>
+
+				<span class="chart-description">
+					<span class="font-bold">
+						{{
+							"Enum.RuleType." + chart.rule.type
+								| translate
+									: {
+											requiredPercent: chart.rule.requiredPercent,
+											allowedFailures: chart.rule["allowedFailures"]
+									  }
+						}}
+					</span>
+
+					<app-assignment-type-chip
+						[type]="chart.rule.assignmentType"
+					></app-assignment-type-chip>
+				</span>
+
+				<div class="statistics">
+					<ng-container *ngFor="let stat of ruleStatistics[index]">
+						<app-stat-card
+							[title]="stat.title | translate"
+							[value]="stat.value"
+						></app-stat-card>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="participants">
 		<h3>{{ "Domain.Participants" | translate }}</h3>
+
+		<div class="mb-16 statistics">
+			<ng-container *ngFor="let stat of overallStatistics">
+				<app-stat-card
+					[title]="stat.title | translate"
+					[value]="stat.value"
+				></app-stat-card>
+			</ng-container>
+		</div>
 
 		<mat-form-field class="full-width">
 			<mat-label>Filter</mat-label>

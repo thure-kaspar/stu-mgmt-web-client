@@ -2,62 +2,19 @@
 	<mat-card-title class="flex rule-title">
 		<span class="left">
 			<span class="text-light">{{ "Common.Criteria" | translate }} #{{ index }}</span>
-
-			<ng-container [ngSwitch]="rule.type">
-				<span *ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL">{{
+			<span>
+				{{
 					"Enum.RuleType." + rule.type
-						| translate: { requiredPercent: rule.requiredPercent }
-				}}</span>
-				<ng-container *ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
-					<span>
-						{{
-							"Enum.RuleType." + rule.type
-								| translate
-									: {
-											requiredPercent: getRuleAsXPercentOfY(rule)
-												.requiredPercent,
-											allowedFailures: getRuleAsXPercentOfY(rule)
-												.allowedFailures
-									  }
-						}}
-					</span>
-				</ng-container>
-				<p *ngSwitchDefault>Unknown rule type</p>
-			</ng-container>
+						| translate
+							: {
+									requiredPercent: rule.requiredPercent,
+									allowedFailures: rule["allowedFailures"]
+							  }
+				}}
+			</span>
 		</span>
-		<ng-container [ngSwitch]="rule.assignmentType">
-			<app-chip
-				*ngSwitchCase="'HOMEWORK'"
-				icon="assignment"
-				color="#2B5592"
-				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
-			></app-chip>
-			<app-chip
-				*ngSwitchCase="'TESTAT'"
-				icon="grade"
-				color="#ff8000"
-				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
-			></app-chip>
-			<app-chip
-				*ngSwitchCase="'PROJECT'"
-				icon="build"
-				color="#96003a"
-				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
-			></app-chip>
-			<app-chip
-				*ngSwitchCase="'SEMINAR'"
-				icon="description"
-				color="#5442f5"
-				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
-			></app-chip>
-			<app-chip
-				*ngSwitchCase="'OTHER'"
-				icon="help"
-				color="#7a7a7a"
-				[text]="'Enum.AssignmentType.' + rule.assignmentType | translate"
-			></app-chip>
-			<app-chip *ngSwitchDefault></app-chip>
-		</ng-container>
+
+		<app-assignment-type-chip [type]="rule.assignmentType"></app-assignment-type-chip>
 	</mat-card-title>
 
 	<div class="rounding-info flex-column">
