@@ -37,7 +37,7 @@ export class GroupCardComponent implements OnInit {
 		participant: ParticipantDto;
 	}>();
 
-	cssClass: string;
+	cssClass = "text-light";
 
 	constructor(
 		private dialog: MatDialog,

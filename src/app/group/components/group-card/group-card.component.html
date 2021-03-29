@@ -1,31 +1,18 @@
-<mat-card class="group-card mat-elevation-z2">
-	<mat-card-title class="card-title">
-		<span>
-			<span class="name" *ngIf="participant.isStudent; else nameWithLink">
-				{{ group.name }}
-			</span>
-			<ng-template #nameWithLink>
-				<a [routerLink]="[group.id]" class="name link-none">
-					{{ group.name }}
-				</a>
-			</ng-template>
-
-			<mat-icon
-				*ngIf="group.isClosed"
-				class="icon-light"
-				[matTooltip]="'Property.Group.IsClosed' | translate"
-				>lock</mat-icon
-			>
-			<mat-icon
-				*ngIf="group.hasPassword"
-				class="icon-light"
-				[matTooltip]="'Misc.PasswordProtected' | translate"
-				>vpn_key</mat-icon
-			>
+<app-card class="group-card">
+	<ng-container title>
+		<span *ngIf="participant.isStudent; else nameWithLink">
+			{{ group.name }}
 		</span>
+		<ng-template #nameWithLink>
+			<a [routerLink]="[group.id]" class="link-none">
+				{{ group.name }}
+			</a>
+		</ng-template>
+	</ng-container>
 
+	<ng-container menu *ngIf="participant.isTeachingStaffMember">
 		<mat-menu #groupMenu>
-			<ng-container *ngIf="participant.isTeachingStaffMember">
+			<ng-container>
 				<button mat-menu-item (click)="addParticipant()">
 					<mat-icon class="icon-light">person_add</mat-icon
 					>{{ "Action.Custom.AddParticipant" | translate }}
@@ -42,26 +29,34 @@
 		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn">
 			<mat-icon class="icon-light">more_vert</mat-icon>
 		</button>
-	</mat-card-title>
+	</ng-container>
 
-	<div class="member-info">
-		<span [class]="'text-light font-bold ' + cssClass"
-			>{{ "Domain.Members" | translate }}: {{ group.size }}</span
-		>
-	</div>
+	<ng-container subtitle>
+		<div class="chips">
+			<app-chip
+				*ngIf="group.isClosed"
+				color="#ff0134"
+				icon="lock"
+				[text]="'Property.Group.IsClosed' | translate"
+			></app-chip>
+			<app-chip
+				*ngIf="group.hasPassword"
+				color="var(--primary)"
+				icon="vpn_key"
+				[text]="'Misc.PasswordProtected' | translate"
+			></app-chip>
+		</div>
+	</ng-container>
 
-	<div class="member-list" *ngIf="participant.isTeachingStaffMember">
-		<a
-			class="member link-none font-bold"
-			[routerLink]="['/courses', course.id, 'users', member.userId]"
-			*ngFor="let member of group.members"
-		>
-			<button mat-flat-button color="primary">{{ member.displayName }}</button>
-		</a>
-	</div>
+	<ng-container content>
+		<span [class]="cssClass + ' font-bold'">
+			{{ "Domain.Members" | translate }}: {{ group.size }}
+		</span>
+	</ng-container>
 
-	<div class="group-buttons" *ngIf="participant.isStudent">
+	<ng-container footer>
 		<button
+			*ngIf="participant.isStudent"
 			mat-flat-button
 			color="accent"
 			[disabled]="group.isClosed || group.id === participant.groupId || group.isFull(course)"
@@ -69,5 +64,15 @@
 		>
 			{{ "Action.Join" | translate }}
 		</button>
-	</div>
-</mat-card>
+
+		<div class="member-list" *ngIf="participant.isTeachingStaffMember">
+			<a
+				class="member link-none font-bold"
+				[routerLink]="['/courses', course.id, 'users', member.userId]"
+				*ngFor="let member of group.members"
+			>
+				<button mat-stroked-button>{{ member.displayName }}</button>
+			</a>
+		</div>
+	</ng-container>
+</app-card>
