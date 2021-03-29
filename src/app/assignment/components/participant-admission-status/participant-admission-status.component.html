@@ -74,12 +74,23 @@
 						</div>
 
 						<div class="result">
-							<span class="text-light">Erreicht: </span>
-							<span class="font-bold"
-								>{{ rule.result.achievedPoints }} ({{
-									rule.result.achievedPercent | number: "1.0-2"
-								}}%)</span
+							<ng-container *ngIf="rule.type === ruleTypes.REQUIREDPERCENTOVERALL">
+								<span class="text-light"
+									>{{ "Common.Achieved" | translate }}:
+								</span>
+								<span class="font-bold">
+									{{ rule.result.achievedPercent || 0 | number: "1.0-2" }}%
+								</span>
+							</ng-container>
+
+							<ng-container
+								*ngIf="rule.type === ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES"
 							>
+								<span class="text-light">{{ "Domain.Failed" | translate }}: </span>
+								<span class="font-bold">
+									{{ rule.result.achievedPoints || 0 }}
+								</span>
+							</ng-container>
 						</div>
 					</div>
 				</div>
