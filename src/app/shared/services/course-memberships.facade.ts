@@ -1,31 +1,26 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of, throwError } from "rxjs";
+import { Store } from "@ngrx/store";
+import { Observable, of, throwError } from "rxjs";
 import { catchError, switchMap } from "rxjs/operators";
-import { CourseDto, CourseParticipantsService, UsersService } from "../../../../api";
+import { CourseParticipantsService, UsersService } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
+import { AuthActions } from "../../state/auth";
 
 @Injectable({ providedIn: "root" })
 export class CourseMembershipsFacade {
-	private coursesSubject = new BehaviorSubject<CourseDto[]>([]);
-	public courses$ = this.coursesSubject.asObservable();
-
 	constructor(
 		private courseParticipantsService: CourseParticipantsService,
 		private userService: UsersService,
-		private authService: AuthService
-	) {
-		this.authService.user$.subscribe(user => {
-			// Course memberships are currently part of user state
-			this.coursesSubject.next(user?.courses ?? []);
-		});
-	}
+		private authService: AuthService,
+		private store: Store
+	) {}
 
 	/** Allows to manually query the API for the user's courses. Results will be emitted via the courses-observable. */
 	loadCoursesOfUser(userId: string): void {
 		if (userId) {
 			this.userService.getCoursesOfUser(userId).subscribe(
 				courses => {
-					this.coursesSubject.next(courses);
+					this.store.dispatch(AuthActions.setCourses({ courses }));
 				},
 				error => console.log(error)
 			);
@@ -59,8 +54,7 @@ export class CourseMembershipsFacade {
 
 		return this.courseParticipantsService.removeUser(courseId, userId).pipe(
 			switchMap(success => {
-				const courses = this.coursesSubject.getValue().filter(c => c.id !== courseId);
-				this.coursesSubject.next(courses);
+				this.loadCoursesOfUser(userId);
 				return of(null);
 			}),
 			catchError(error => {

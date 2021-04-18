@@ -24,7 +24,8 @@ export function clearCourse(reducer: ActionReducer<any>): ActionReducer<any> {
 		if (action.type === "[Meta] Clear Course") {
 			return reducer(
 				{
-					auth: state.auth,
+					...state,
+					// Reset course related state
 					course: fromCourse.initialState,
 					assignments: fromAssignment.initialState,
 					admissionStatus: fromAdmissionStatus.initialState,
