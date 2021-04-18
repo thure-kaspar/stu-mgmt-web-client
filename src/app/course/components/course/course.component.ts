@@ -71,20 +71,7 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 							.afterClosed()
 							.subscribe(joined => {
 								if (joined) {
-									this.actions
-										.pipe(
-											ofType(CourseActions.loadCourseSuccess),
-											take(1),
-											tap(({ data }) => {
-												if (
-													data.groupSettings.autoJoinGroupOnCourseJoined
-												) {
-													this.suggestGroupJoin(courseId);
-												}
-											})
-										)
-										.subscribe();
-									this.store.dispatch(CourseActions.loadCourse({ courseId }));
+									this.onUserJoinedCourse(courseId);
 								} else {
 									this.router.navigateByUrl("courses");
 								}
@@ -95,6 +82,21 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 				})
 			)
 			.subscribe();
+	}
+
+	private onUserJoinedCourse(courseId: string): void {
+		this.actions
+			.pipe(
+				ofType(CourseActions.loadCourseSuccess),
+				take(1),
+				tap(({ data }) => {
+					if (data.groupSettings.autoJoinGroupOnCourseJoined) {
+						this.suggestGroupJoin(courseId);
+					}
+				})
+			)
+			.subscribe();
+		this.store.dispatch(CourseActions.loadCourse({ courseId }));
 	}
 
 	/**
