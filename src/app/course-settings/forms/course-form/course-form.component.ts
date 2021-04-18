@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { getSemesterList } from "../../../../../utils/helper";
 
 @Component({
 	selector: "app-course-form",
@@ -9,6 +10,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class CourseForm implements OnInit {
 	@Input() form: FormGroup;
 	@Input() isEditMode = false;
+
+	semesters = getSemesterList();
 
 	constructor(private fb: FormBuilder) {}
 

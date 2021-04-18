@@ -3,7 +3,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { CourseDto, CoursesService, UserDto } from "../../../../../api";
-import { getSemester } from "../../../../../utils/helper";
+import { getSemester, getSemesterList } from "../../../../../utils/helper";
 import { AuthService } from "../../../auth/services/auth.service";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../../shared/paginator/paginator.component";
@@ -11,7 +11,7 @@ import { Paginator } from "../../../shared/paginator/paginator.component";
 class CourseFilter {
 	title: string;
 	shortname: string;
-	selectedSemester = getSemester();
+	selectedSemester = getSemester(new Date());
 }
 
 @Component({
@@ -28,6 +28,7 @@ export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit 
 	nameFilterChanged = new Subject();
 
 	roles = UserDto.RoleEnum;
+	semesters = getSemesterList();
 
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
@@ -57,6 +58,7 @@ export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit 
 			)
 			.subscribe(
 				response => {
+					console.log(response.body);
 					if (!triggeredByPaginator) this.paginator.goToFirstPage();
 					this.paginator.setTotalCountFromHttp(response);
 					this.dataSource$.next(new MatTableDataSource(response.body));

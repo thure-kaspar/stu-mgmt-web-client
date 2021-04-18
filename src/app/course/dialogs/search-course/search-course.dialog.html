@@ -25,9 +25,10 @@
 					name="semester"
 					placeholder="Enter semester..."
 				>
-					<mat-option value="wise1920">WiSe 19/20</mat-option>
-					<mat-option value="sose2020">SoSe 2020</mat-option>
-					<mat-option value="">All</mat-option>
+					<mat-option *ngFor="let semester of semesters" [value]="semester"
+						>{{ semester | semester }}</mat-option
+					>
+					<mat-option value="">{{ 'Common.All' | translate }}</mat-option>
 				</mat-select>
 			</mat-form-field>
 
@@ -75,7 +76,7 @@
 				<ng-container matColumnDef="action">
 					<th class="column-action" mat-header-cell *matHeaderCellDef></th>
 					<td mat-cell *matCellDef="let row">
-						<a [routerLink]="[ '/courses', row.semester, row.shortname ]">
+						<a [routerLink]="[ '/courses', row.id ]">
 							<button mat-icon-button matTooltip="Open course" (click)="onCancel()">
 								<mat-icon class="icon-light">open_in_new</mat-icon>
 							</button>

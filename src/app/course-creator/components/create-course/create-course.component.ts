@@ -57,7 +57,7 @@ export class CreateCourseComponent implements OnInit {
 		this.form = this.fb.group({
 			id: [null],
 			shortname: [null, Validators.required],
-			semester: [getSemester(), Validators.required],
+			semester: [getSemester(new Date()), Validators.required],
 			title: [null, Validators.required],
 			isClosed: [false, Validators.required],
 			links: this.fb.array([]),
@@ -119,7 +119,7 @@ export class CreateCourseComponent implements OnInit {
 			.afterClosed()
 			.subscribe(courses => {
 				// Check if user selected a course (Dialog returns all selected courses)
-				if (courses[0]) {
+				if (courses && courses[0]) {
 					this.loadCourseTemplate(courses[0].id);
 				}
 			});

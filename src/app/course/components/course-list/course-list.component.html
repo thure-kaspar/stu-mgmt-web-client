@@ -38,9 +38,9 @@
 				id="semester"
 				name="semester"
 			>
-				<mat-option value="wise1920">WiSe 19/20</mat-option>
-				<mat-option value="sose2020">SoSe 2020</mat-option>
-				<mat-option value="wise2021">WiSe 20/21</mat-option>
+				<mat-option *ngFor="let semester of semesters" [value]="semester">{{
+					semester | semester
+				}}</mat-option>
 				<mat-option value="" data-option-all>{{ "Common.All" | translate }}</mat-option>
 			</mat-select>
 		</mat-form-field>

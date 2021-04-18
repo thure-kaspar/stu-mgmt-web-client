@@ -4,7 +4,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject } from "rxjs";
 import { CourseDto, CoursesService } from "../../../../../api";
-import { getSemester } from "../../../../../utils/helper";
+import { getSemester, getSemesterList } from "../../../../../utils/helper";
 import { Paginator } from "../../../shared/paginator/paginator.component";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 
@@ -21,7 +21,8 @@ import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-
 export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 	title = "";
 	shortname: string;
-	selectedSemester = getSemester();
+	selectedSemester = getSemester(new Date());
+	semesters = getSemesterList();
 
 	displayedColumns: string[] = ["select", "title", "semester", "action"];
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<CourseDto>([]));

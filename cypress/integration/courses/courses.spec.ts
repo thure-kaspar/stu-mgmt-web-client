@@ -18,7 +18,7 @@ describe("Registered Groups", () => {
 
 	it("Filters courses by name", () => {
 		cy.get(".course-filter-container #semester")
-			.contains(getSemesterString(getSemester()))
+			.contains(getSemesterString(getSemester(new Date())))
 			.click()
 			.get("[data-option-all]")
 			.click();
@@ -33,7 +33,7 @@ describe("Registered Groups", () => {
 
 	it("Filters courses by semester", () => {
 		cy.get(".course-filter-container #semester")
-			.contains(getSemesterString(getSemester()))
+			.contains(getSemesterString(getSemester(new Date())))
 			.click()
 			.get(".mat-option-text")
 			.contains("SoSe 2020")
@@ -44,7 +44,7 @@ describe("Registered Groups", () => {
 
 	it.only("Clicking on course navigates to course", () => {
 		cy.get(".course-filter-container #semester")
-			.contains(getSemesterString(getSemester()))
+			.contains(getSemesterString(getSemester(new Date())))
 			.click()
 			.get("[data-option-all]")
 			.click();

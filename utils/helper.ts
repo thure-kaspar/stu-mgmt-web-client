@@ -2,16 +2,17 @@ import { ActivatedRoute } from "@angular/router";
 import { ParticipantDto } from "../api";
 
 /**
- * Returns the current semester.
+ * Returns the semester corresponding to the given date.
  * Winter semesters will be represented as "wise" followed by the last two digits of the years that the semester will take place in.
  * Summer semesters will be represented as "sose" followed by the corresponding year.
  * - Example 1: "wise1819"
  * - Example 2: "sose2021"
+ * @example
+ * const currentSemester = getSemester(new Date());
  */
-export function getSemester(): string {
-	const now = new Date();
-	const month = now.getMonth() + 1;
-	const year = now.getFullYear();
+export function getSemester(date: Date): string {
+	const month = date.getMonth() + 1;
+	const year = date.getFullYear();
 	let semester = undefined;
 
 	if (month <= 9 && month >= 4) {
@@ -46,6 +47,26 @@ export function getSemesterString(value: string): string {
 	}
 
 	return `${semName} ${semYear}`;
+}
+
+/**
+ * Returns a list of semesters beginning with `sose2019` and ending with the current year's winter
+ * semester.
+ * @param currentYear - defaults to `new Date().getFullYear()`
+ * @example
+ * getSemesterList(2020); // [sose2019, wise1920, sose2020, wise2021]
+ */
+export function getSemesterList(currentYear = new Date().getFullYear()): string[] {
+	const semesters: string[] = [];
+
+	for (let year = 2019; year <= currentYear; year++) {
+		semesters.push(
+			getSemester(new Date(year, 6)), // Summer semester
+			getSemester(new Date(year, 12)) // Winter semester
+		);
+	}
+
+	return semesters;
 }
 
 /** Returns the specified route parameter. */
