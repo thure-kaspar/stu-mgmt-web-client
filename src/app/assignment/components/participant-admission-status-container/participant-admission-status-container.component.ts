@@ -7,15 +7,15 @@ import { CourseSelectors } from "../../../state/course";
 import { ParticipantSelectors } from "../../../state/participant";
 
 @Component({
-	selector: "app-participant-admission-status",
-	templateUrl: "./participant-admission-status.component.html",
-	styleUrls: ["./participant-admission-status.component.scss"],
+	selector: "app-participant-admission-status-container",
+	templateUrl: "./participant-admission-status-container.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ParticipantAdmissionStatusComponent implements OnInit {
+export class ParticipantAdmissionStatusContainerComponent implements OnInit {
 	admissionStatus$ = this.store.select(
 		ParticipantSelectors.selectParticipantAdmissionStatusState
 	);
+
 	criteria$ = this.store
 		.select(CourseSelectors.selectCourse)
 		.pipe(map(course => course.admissionCriteria));
