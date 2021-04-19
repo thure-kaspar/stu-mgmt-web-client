@@ -58,7 +58,6 @@ export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit 
 			)
 			.subscribe(
 				response => {
-					console.log(response.body);
 					if (!triggeredByPaginator) this.paginator.goToFirstPage();
 					this.paginator.setTotalCountFromHttp(response);
 					this.dataSource$.next(new MatTableDataSource(response.body));

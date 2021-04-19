@@ -108,7 +108,7 @@
 							{{ "Domain.Courses" | translate | uppercase }}</span
 						>
 
-						<div *ngFor="let course of (user$ | async).courses">
+						<div *ngFor="let course of obs.user.courses">
 							<a
 								mat-list-item
 								[routerLink]="['/courses', course.id]"

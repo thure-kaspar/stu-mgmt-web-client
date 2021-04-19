@@ -5,6 +5,7 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
  * - title
  * - subtitle
  * - menu (should contain a mat-icon-button with icon more_vert)
+ * - content
  * - footer
  * @example 
  * <app-card>

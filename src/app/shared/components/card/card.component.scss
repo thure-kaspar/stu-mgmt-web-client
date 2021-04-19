@@ -4,6 +4,15 @@
 	border-radius: 4px;
 }
 
+.header:empty,
+.header-left:empty,
+.title:empty,
+.menu:empty,
+.subtitle:empty,
+.footer:empty {
+	display: none;
+}
+
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -23,10 +32,6 @@
 	font-weight: 500;
 }
 
-.subtitle:empty {
-	display: none;
-}
-
 .subtitle {
 	margin-top: 8px;
 	display: flex;
@@ -37,10 +42,6 @@
 .menu {
 	margin-top: -10px;
 	margin-right: -10px;
-}
-
-.footer:empty {
-	display: none;
 }
 
 .footer {

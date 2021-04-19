@@ -15,6 +15,7 @@ import { Paginator } from "./paginator/paginator.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
 import { AssignmentTypeChipComponent } from "./components/assignment-type-chip/assignment-type-chip.component";
 import { ThumbChipComponent } from "./components/thumb-chip/thumb-chip.component";
+import { ParticipantAdmissionStatusComponent } from "./components/participant-admission-status/participant-admission-status.component";
 
 @NgModule({
 	declarations: [
@@ -27,7 +28,8 @@ import { ThumbChipComponent } from "./components/thumb-chip/thumb-chip.component
 		CardComponent,
 		ChipComponent,
 		AssignmentTypeChipComponent,
-		ThumbChipComponent
+		ThumbChipComponent,
+		ParticipantAdmissionStatusComponent
 	],
 	imports: [CommonModule, AuthModule, MaterialModule, TranslateModule, FormsModule],
 	exports: [
@@ -43,7 +45,8 @@ import { ThumbChipComponent } from "./components/thumb-chip/thumb-chip.component
 		CardComponent,
 		ChipComponent,
 		AssignmentTypeChipComponent,
-		ThumbChipComponent
+		ThumbChipComponent,
+		ParticipantAdmissionStatusComponent
 	],
 	providers: []
 })
