@@ -64,7 +64,7 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 	charts$ = combineLatest([this.criteria$, this.admissionStatusState$]).pipe(
 		filter(([criteria, admissionStatusState]) => !!criteria && !!admissionStatusState.data),
 		tap(([criteria, admissionStatusState]) => {
-			this.overallStatistics = this.createStatistics(criteria, admissionStatusState.data);
+			this.overallStatistics = this.createStatistics(admissionStatusState.data);
 			this.ruleStatistics = this.createAdmissionRuleStatistics(
 				criteria,
 				admissionStatusState.data
@@ -188,24 +188,27 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 		}));
 	}
 
-	createStatistics(
-		criteria: AdmissionCriteriaDto,
-		admissionStatus: AdmissionStatusDto[]
-	): Statistic[] {
+	createStatistics(admissionStatus: AdmissionStatusDto[]): Statistic[] {
 		const counts = {
 			hasAdmission: 0,
 			fulfillsAdmissionCriteria: 0,
 			hasAdmissionFromPreviousSemester: 0
 		};
 
+		const translations = {
+			hasAdmission: "Zulassungen",
+			fulfillsAdmissionCriteria: "Kriterien erfüllt",
+			hasAdmissionFromPreviousSemester: "Altzulassungen"
+		};
+
 		for (const result of admissionStatus) {
 			if (result.hasAdmission) counts.hasAdmission++;
 			if (result.fulfillsAdmissionCriteria) counts.hasAdmissionFromPreviousSemester++;
-			if (result.hasAdmissionFromPreviousSemester) counts.hasAdmissionFromPreviousSemester;
+			if (result.hasAdmissionFromPreviousSemester) counts.hasAdmissionFromPreviousSemester++;
 		}
 
 		return Object.keys(counts).map(key => ({
-			title: "Count: " + key,
+			title: translations[key],
 			value: `${counts[key]} (${(counts[key] / admissionStatus.length) * 100}%)`
 		}));
 	}

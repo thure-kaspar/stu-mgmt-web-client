@@ -522,6 +522,15 @@ mat-chip {
 	color: white !important;
 }
 
+mat-expansion-panel {
+	background-color: var(--card-bg) !important;
+	box-shadow: none !important;
+}
+
+.mat-expansion-panel-content {
+	//background-color: opac;
+}
+
 // Used to display button in mat-tab-group
 app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 	min-width: 0;
