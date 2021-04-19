@@ -1,12 +1,21 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
-import { filter, tap } from "rxjs/operators";
-import { CourseParticipantsService, ParticipantDto } from "../../../../../api";
+import { BehaviorSubject, combineLatest, Observable } from "rxjs";
+import { filter, map, switchMap, tap } from "rxjs/operators";
+import {
+	AdmissionStatusDto,
+	AdmissionStatusService,
+	AssignmentGroupTuple,
+	CourseParticipantsService,
+	GroupEventDto,
+	ParticipantDto,
+	UsersService
+} from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Participant } from "../../../domain/participant.model";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { State as ParticipantAdmissionStatusState } from "../../../state/participant/admission-status/admission-status.reducer";
 
 @Component({
 	selector: "app-participant-profile",
@@ -17,9 +26,12 @@ import { ParticipantFacade } from "../../../shared/services/participant.facade";
 export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements OnInit {
 	/** Participant, whose profile is being viewed. */
 	participant$: Observable<ParticipantDto>;
-
 	/** Participant that is currently logged in. */
 	userParticipant$: Observable<Participant>;
+
+	admissionStatus$ = new BehaviorSubject<ParticipantAdmissionStatusState>(null);
+	assignmentGroups$: Observable<AssignmentGroupTuple[]>;
+	groupHistory$: Observable<GroupEventDto[]>;
 
 	showFullProfile$ = new BehaviorSubject<boolean>(false);
 
@@ -28,6 +40,8 @@ export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements
 
 	constructor(
 		private participantService: CourseParticipantsService,
+		private userService: UsersService,
+		private admissionStatusService: AdmissionStatusService,
 		private participantFacade: ParticipantFacade,
 		private route: ActivatedRoute
 	) {
@@ -35,25 +49,49 @@ export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements
 	}
 
 	ngOnInit(): void {
-		this.userId = getRouteParam("userId", this.route);
-		this.courseId = getRouteParam("courseId", this.route);
+		this.subs.sink = this.route.params.subscribe(({ userId, courseId }) => {
+			this.userId = userId;
+			this.courseId = courseId;
+		});
 
-		this.userParticipant$ = this.participantFacade.participant$.pipe(
-			filter(p => !!p),
-			tap(participant => {
-				if (participant.isTeachingStaffMember || this.isViewingOwnProfile(participant)) {
-					this.showFullProfile$.next(true);
-				}
-			})
+		this.participant$ = this.route.params.pipe(
+			switchMap(({ courseId, userId }) =>
+				this.participantService.getParticipant(courseId, userId)
+			)
 		);
 
-		this.participant$ = this.participantService.getParticipant(this.courseId, this.userId);
+		this.userParticipant$ = this.participantFacade.participant$;
+
+		this.subs.sink = combineLatest([this.participant$, this.userParticipant$])
+			.pipe(
+				filter(([participant, loggedInUser]) => !!participant && !!loggedInUser),
+				tap(([participant, loggedInUser]) => {
+					if (
+						loggedInUser.isTeachingStaffMember ||
+						this.isViewingOwnProfile(participant, loggedInUser)
+					) {
+						this.loadAdmissionStatus(this.courseId, participant.userId);
+						this.showFullProfile$.next(true);
+					}
+				})
+			)
+			.subscribe();
 	}
 
-	/**
-	 * Returns `true`, if the userId of this route matches the userId of the logged in user.
-	 */
-	isViewingOwnProfile(participant: Participant): boolean {
-		return participant.userId === this.userId;
+	private loadAdmissionStatus(courseId: string, userId: string): void {
+		this.admissionStatusService
+			.getAdmissionStatusOfParticipant(courseId, userId)
+			.pipe(
+				map(admissionStatus => ({
+					admissionStatus,
+					isLoading: false,
+					hasLoaded: true
+				}))
+			)
+			.subscribe(state => this.admissionStatus$.next(state));
+	}
+
+	private isViewingOwnProfile(p1: ParticipantDto, p2: ParticipantDto): boolean {
+		return p1.userId === p2.userId;
 	}
 }

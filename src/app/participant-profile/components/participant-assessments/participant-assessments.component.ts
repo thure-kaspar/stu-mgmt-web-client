@@ -1,10 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { AssessmentDto, UsersService } from "../../../../../api";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
-import { getRouteParam } from "../../../../../utils/helper";
 import { ActivatedRoute } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { BehaviorSubject, combineLatest, Observable } from "rxjs";
+import { filter, map, switchMap } from "rxjs/operators";
+import { AssessmentDto, UsersService } from "../../../../../api";
+import { getRouteParam } from "../../../../../utils/helper";
+import {
+	AssignmentWithAssessment,
+	mapAssessmentsToAssignment
+} from "../../../domain/assignment.model";
+import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { AssignmentActions, AssignmentSelectors } from "../../../state/assignment";
+import { CourseSelectors } from "../../../state/course";
 
 @Component({
 	selector: "app-participant-assessments",
@@ -13,31 +21,46 @@ import { ActivatedRoute } from "@angular/router";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {
-	assessmentsDataSource$ = new BehaviorSubject(new MatTableDataSource<AssessmentDto>([]));
-	displayedColumns = ["view", "assignment", "achievedPoints", "maxPoints", "percent"];
+	assignmentsWithAssessments$: Observable<AssignmentWithAssessment[]>;
 
 	userId: string;
 	courseId: string;
 
-	constructor(private userService: UsersService, private route: ActivatedRoute) {
+	constructor(
+		private userService: UsersService,
+		private store: Store,
+		private route: ActivatedRoute
+	) {
 		super();
 	}
 
 	ngOnInit(): void {
-		this.userId = getRouteParam("userId", this.route);
-		this.courseId = getRouteParam("courseId", this.route);
+		this.store.dispatch(
+			AssignmentActions.loadAssignments({ courseId: getRouteParam("courseId", this.route) })
+		);
 
-		this.loadAssessmentsOfUser();
-	}
+		this.subs.sink = this.route.params.subscribe(({ courseId, userId }) => {
+			this.userId = userId;
+			this.courseId = courseId;
+		});
 
-	/**
-	 * Loads the assessments of this participant and emits them via `assessments$`.
-	 */
-	private loadAssessmentsOfUser(): void {
-		this.subs.sink = this.userService
-			.getAssessmentsOfUserForCourse(this.userId, this.courseId)
-			.subscribe(assessments => {
-				this.assessmentsDataSource$.next(new MatTableDataSource(assessments));
-			});
+		const assessments$ = this.route.params.pipe(
+			switchMap(({ courseId, userId }) =>
+				this.userService.getAssessmentsOfUserForCourse(userId, courseId)
+			)
+		);
+
+		this.assignmentsWithAssessments$ = combineLatest([
+			assessments$,
+			this.store.select(AssignmentSelectors.selectAssignments),
+			this.store.select(CourseSelectors.selectCourse)
+		]).pipe(
+			filter(
+				([assessments, assignments, course]) => !!assessments && !!assignments && !!course
+			),
+			map(([assessments, assignments, course]) =>
+				mapAssessmentsToAssignment(assessments, assignments, course.admissionCriteria)
+			)
+		);
 	}
 }

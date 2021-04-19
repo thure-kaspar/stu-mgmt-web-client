@@ -1,19 +1,13 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { ParticipantProfileComponent } from "./components/participant-profile/participant-profile.component";
+import { RouterModule, Routes } from "@angular/router";
 import { ParticipantAssessmentsComponent } from "./components/participant-assessments/participant-assessments.component";
-import { ParticipantAdmissionStatusComponent } from "./components/participant-admission-status/participant-admission-status.component";
+import { ParticipantProfileComponent } from "./components/participant-profile/participant-profile.component";
 
 const routes: Routes = [
 	{
 		path: "",
 		component: ParticipantProfileComponent,
 		children: [
-			{
-				path: "admission-status",
-				component: ParticipantAdmissionStatusComponent,
-				pathMatch: "full"
-			},
 			{ path: "", component: ParticipantAssessmentsComponent, pathMatch: "full" },
 			{ path: "", redirectTo: "", pathMatch: "full" }
 		]

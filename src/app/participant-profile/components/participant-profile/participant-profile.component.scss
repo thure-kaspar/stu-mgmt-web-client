@@ -1,13 +1,26 @@
-.title {
-	padding-top: 8px;
-	padding-bottom: 8px;
+.participant-profile {
+	padding-top: 16px;
+	padding-bottom: 32px;
+}
+
+.profile {
+	display: grid;
+	gap: 32px;
+
+	@media screen and (min-width: 900px) {
+		display: flex;
+		justify-content: space-between;
+	}
 }
 
 .info {
 	display: grid;
-	row-gap: 8px;
+	gap: 8px;
 }
 
-.nav {
-	margin-top: 16px;
+.left {
+	width: 100%;
+	display: grid;
+	row-gap: 16px;
+	height: max-content;
 }

@@ -1,55 +1,62 @@
-<div class="tab">
-	<table
-		class="full-width table-bg"
-		mat-table
-		#table
-		[dataSource]="assessmentsDataSource$ | async"
+<div class="participant-assessments">
+	<div
+		class="assignment"
+		[class.evaluated]="assignment.state === 'EVALUATED'"
+		*ngFor="let assignment of assignmentsWithAssessments$ | async"
 	>
-		<ng-container matColumnDef="view">
-			<th mat-header-cell *matHeaderCellDef></th>
-			<td mat-cell *matCellDef="let row">
+		<app-assignment-type-chip [type]="assignment.type"></app-assignment-type-chip>
+
+		<div class="assignment-and-group-name">
+			<ng-container *ngIf="assignment.assessment?.id; else noAssessment">
 				<a
-					class="link-none"
+					class="font-bold link-none"
 					[routerLink]="[
 						'/courses',
 						courseId,
 						'assignments',
-						row.assignmentId,
+						assignment.id,
 						'assessments',
 						'view',
-						row.id
+						assignment.assessment.id
 					]"
 				>
-					<button mat-stroked-button>{{ "Action.View" | translate }}</button>
+					{{ assignment.name }}
 				</a>
-			</td>
-		</ng-container>
-		<ng-container matColumnDef="assignment">
-			<th mat-header-cell *matHeaderCellDef>{{ "Domain.Assignment" | translate }}</th>
-			<td mat-cell *matCellDef="let row">{{ row.assignment.name }}</td>
-		</ng-container>
-		<ng-container matColumnDef="achievedPoints">
-			<th mat-header-cell *matHeaderCellDef>
-				{{ "Property.Assessment.AchievedPoints" | translate }}
-			</th>
-			<td mat-cell *matCellDef="let row">{{ row.achievedPoints }}</td>
-		</ng-container>
-		<ng-container matColumnDef="maxPoints">
-			<th mat-header-cell *matHeaderCellDef>
-				Max. {{ "Property.Assignment.Points" | translate }}
-			</th>
-			<td mat-cell *matCellDef="let row">{{ row.assignment.points }}</td>
-		</ng-container>
-		<ng-container matColumnDef="percent">
-			<th mat-header-cell *matHeaderCellDef>%</th>
-			<td mat-cell *matCellDef="let row">
-				{{ (row.achievedPoints / row.assignment.points) * 100 | number: "1.0-2" }}
-			</td>
-		</ng-container>
+			</ng-container>
+			<ng-template #noAssessment>
+				<div class="text-light">{{ assignment.name }}</div>
+			</ng-template>
 
-		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-	</table>
+			<span class="group text-light" *ngIf="assignment.assessment?.group">
+				{{ "Domain.Group" | translate }}: {{ assignment.assessment.group.name }}
+			</span>
+		</div>
 
-	<app-paginator></app-paginator>
+		<div class="points">
+			<span class="font-bold achieved">
+				{{
+					assignment.assessment?.achievedPoints >= 0
+						? assignment.assessment.achievedPoints
+						: "-"
+				}}</span
+			>
+			<span class="max-points text-light"> / {{ assignment.points }}</span>
+			<span class="percent text-light" *ngIf="assignment.assessment.achievedPoints >= 0">
+				({{
+					((assignment.assessment.roundedPoints >= 0
+						? assignment.assessment.roundedPoints
+						: assignment.assessment.achievedPoints) /
+						assignment.points) *
+						100 | number: "1.0-2"
+				}}%)</span
+			>
+		</div>
+
+		<div>
+			<app-thumb-chip
+				*ngIf="assignment.state === 'EVALUATED'"
+				[condition]="assignment.assessment?.hasPassed"
+			></app-thumb-chip>
+		</div>
+	</div>
 </div>

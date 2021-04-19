@@ -1,75 +1,101 @@
-<ng-container *ngIf="userParticipant$ | async as userParticipant">
-	<div class="tab" *ngIf="participant$ | async as participant">
-		<mat-card-title class="title"
-			><span>{{ participant.displayName }}</span></mat-card-title
-		>
+<div class="participant-profile">
+	<ng-container *ngIf="userParticipant$ | async as userParticipant">
+		<ng-container *ngIf="participant$ | async as participant">
+			<div class="profile">
+				<div class="left">
+					<app-card class="profile-card">
+						<ng-container title>{{ participant.displayName }}</ng-container>
+						<ng-container content>
+							<div class="info">
+								<span *ngIf="participant.email">
+									<span class="font-bold"
+										>{{ "Property.User.Email" | translate }}:
+									</span>
+									<span class="text-light">{{ participant.email }}</span>
+								</span>
 
-		<div class="mini-profile">
-			<div class="info">
-				<span *ngIf="participant.email">
-					<span class="font-bold">{{ "Property.User.Email" | translate }}: </span>
-					<span>{{ participant.email }}</span>
-				</span>
+								<span>
+									<span class="font-bold"
+										>{{ "Property.User.Username" | translate }}:
+									</span>
+									<span class="text-light">{{ participant.username }}</span>
+								</span>
 
-				<span>
-					<span class="font-bold">{{ "Property.User.Username" | translate }}: </span>
-					<span>{{ participant.username }}</span>
-				</span>
+								<span>
+									<span class="font-bold">MatrNr: </span>
+									<span class="text-light">{{ participant.matrNr }}</span>
+								</span>
 
-				<span>
-					<span class="font-bold">{{ "Property.User.Role" | translate }}: </span>
-					<span>{{ "Enum.CourseRole." + participant.role | translate }}</span>
-				</span>
+								<span>
+									<span class="font-bold"
+										>{{ "Property.User.Role" | translate }}:
+									</span>
+									<span class="text-light">{{
+										"Enum.CourseRole." + participant.role | translate
+									}}</span>
+								</span>
 
-				<span *ngIf="participant.group">
-					<span class="font-bold">{{ "Domain.Group" | translate }}: </span>
-					<a
-						class="link-none"
-						[routerLink]="['/courses', courseId, 'groups', participant.groupId]"
-						*ngIf="
-							userParticipant.isTeachingStaffMember ||
-								isViewingOwnProfile(userParticipant);
-							else groupWithoutLink
-						"
+								<span *ngIf="participant.group">
+									<span class="font-bold"
+										>{{ "Domain.Group" | translate }}:
+									</span>
+									<a
+										class="link-none text-light"
+										[routerLink]="[
+											'/courses',
+											courseId,
+											'groups',
+											participant.groupId
+										]"
+										*ngIf="
+											userParticipant.isTeachingStaffMember;
+											else groupWithoutLink
+										"
+									>
+										{{ participant.group.name }}
+									</a>
+									<ng-template #groupWithoutLink>
+										<span class="text-light">{{ participant.group.name }}</span>
+									</ng-template>
+								</span>
+							</div>
+						</ng-container>
+					</app-card>
+
+					<div
+						class="full-profile"
+						*ngIf="(showFullProfile$ | async) && participant.role === 'STUDENT'"
 					>
-						{{ participant.group.name }}
-					</a>
-					<ng-template #groupWithoutLink>
-						<span>{{ participant.group.name }}</span>
-					</ng-template>
-				</span>
-			</div>
-		</div>
+						<nav class="nav" mat-tab-nav-bar color="accent">
+							<a
+								mat-tab-link
+								[routerLink]="['/courses', courseId, 'users', userId]"
+								routerLinkActive
+								[routerLinkActiveOptions]="{ exact: true }"
+								#rla1="routerLinkActive"
+								[active]="rla1.isActive"
+							>
+								<span class="uppercase">{{
+									"Domain.Assessments" | translate
+								}}</span>
+							</a>
+						</nav>
 
-		<div
-			class="full-profile"
-			*ngIf="(showFullProfile$ | async) && participant.role === 'STUDENT'"
-		>
-			<nav class="nav" mat-tab-nav-bar color="accent">
-				<a
-					mat-tab-link
-					[routerLink]="['/courses', courseId, 'users', userId]"
-					routerLinkActive
-					[routerLinkActiveOptions]="{ exact: true }"
-					#rla1="routerLinkActive"
-					[active]="rla1.isActive"
-				>
-					<span class="uppercase">{{ "Domain.Assessments" | translate }}</span>
-				</a>
-				<a
-					mat-tab-link
-					[routerLink]="['/courses', courseId, 'users', userId, 'admission-status']"
-					routerLinkActive
-					#rla2="routerLinkActive"
-					[active]="rla2.isActive"
-				>
-					<span class="uppercase">{{ "Title.AdmissionStatus" | translate }}</span>
-				</a>
-			</nav>
+						<div class="profile-content">
+							<router-outlet></router-outlet>
+						</div>
+					</div>
+				</div>
 
-			<div class="profile-content">
-				<router-outlet></router-outlet>
+				<div
+					class="admission-status"
+					*ngIf="(showFullProfile$ | async) && participant.role === 'STUDENT'"
+				>
+					<app-participant-admission-status
+						[admissionStatus$]="admissionStatus$"
+					></app-participant-admission-status>
+				</div>
 			</div>
-		</div>
-	</div>
-</ng-container>
+		</ng-container>
+	</ng-container>
+</div>
