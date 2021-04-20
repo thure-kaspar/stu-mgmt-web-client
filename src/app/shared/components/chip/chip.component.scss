@@ -8,9 +8,14 @@
 	border-radius: 4px;
 	width: fit-content;
 	height: 16px;
-
 	align-content: center;
 	align-items: center;
+
+	.text {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+	}
 
 	mat-icon:empty,
 	span:empty {

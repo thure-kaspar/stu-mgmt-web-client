@@ -49,6 +49,11 @@ const routes: Routes = [
 				pathMatch: "full",
 				canActivate: [TeachingStaffGuard]
 			},
+			{
+				path: "about",
+				loadChildren: () =>
+					import("../course-about/course-about.module").then(m => m.CourseAboutModule)
+			},
 			{ path: "", pathMatch: "full", redirectTo: "assignments" }
 		]
 	},

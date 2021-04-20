@@ -1,0 +1,23 @@
+.content {
+	display: grid;
+}
+
+.teaching-staff {
+	margin-top: 16px;
+	display: grid;
+	row-gap: 8px;
+}
+
+.member {
+	display: flex;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 16px;
+}
+
+.links {
+	margin-top: 16px;
+	display: grid;
+	row-gap: 4px;
+	color: var(--accent);
+}

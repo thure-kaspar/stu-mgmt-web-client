@@ -14,6 +14,7 @@ import { CourseParticipantsService } from './api/courseParticipants.service';
 import { CoursesService } from './api/courses.service';
 import { CsvService } from './api/csv.service';
 import { DefaultService } from './api/default.service';
+import { ExportService } from './api/export.service';
 import { GroupsService } from './api/groups.service';
 import { MailService } from './api/mail.service';
 import { SubmissionService } from './api/submission.service';
@@ -37,6 +38,7 @@ import { UsersService } from './api/users.service';
     CoursesService,
     CsvService,
     DefaultService,
+    ExportService,
     GroupsService,
     MailService,
     SubmissionService,

@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { CourseAboutDto } from '../model/courseAboutDto';
 import { CourseCreateDto } from '../model/courseCreateDto';
 import { CourseDto } from '../model/courseDto';
 
@@ -148,6 +149,54 @@ export class CoursesService {
         ];
 
         return this.httpClient.request<any>('delete',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get information about the course.
+     * Retrieves the course and information that is required by its /about page.
+     * @param courseId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCourseAbout(courseId: string, observe?: 'body', reportProgress?: boolean): Observable<CourseAboutDto>;
+    public getCourseAbout(courseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CourseAboutDto>>;
+    public getCourseAbout(courseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CourseAboutDto>>;
+    public getCourseAbout(courseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getCourseAbout.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<CourseAboutDto>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/about`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

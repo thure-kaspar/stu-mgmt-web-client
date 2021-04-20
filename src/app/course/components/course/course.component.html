@@ -86,6 +86,16 @@
 					<span class="uppercase">{{ "Misc.Settings" | translate }}</span>
 				</a>
 			</ng-container>
+
+			<a
+				mat-tab-link
+				routerLink="about"
+				routerLinkActive
+				#rla7="routerLinkActive"
+				[active]="rla7.isActive"
+			>
+				<span class="uppercase">{{ "Misc.About" | translate }}</span>
+			</a>
 		</nav>
 	</div>
 

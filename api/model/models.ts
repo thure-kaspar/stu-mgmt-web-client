@@ -15,6 +15,7 @@ export * from './authSystemCredentials';
 export * from './authTokenDto';
 export * from './canJoinCourseDto';
 export * from './changeCourseRoleDto';
+export * from './courseAboutDto';
 export * from './courseConfigDto';
 export * from './courseConfigUpdateDto';
 export * from './courseCreateDto';

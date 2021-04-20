@@ -9,6 +9,7 @@
 .title:empty,
 .menu:empty,
 .subtitle:empty,
+.content:empty,
 .footer:empty {
 	display: none;
 }
@@ -16,7 +17,6 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 16px;
 }
 
 .header-left {
@@ -42,6 +42,10 @@
 .menu {
 	margin-top: -10px;
 	margin-right: -10px;
+}
+
+.content {
+	margin-top: 16px;
 }
 
 .footer {
