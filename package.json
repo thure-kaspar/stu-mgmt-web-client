@@ -3,9 +3,9 @@
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
-		"start": "ng serve",
+		"start": "gulp",
+		"build": "gulp build",
 		"start:pwa": "http-server -p 8080 --proxy http://localhost:8080? -c-1 dist/student-mgmt-client",
-		"build": "ng build",
 		"test": "jest",
 		"test:e2e": "cypress open",
 		"lint": "eslint src --ext .ts",
