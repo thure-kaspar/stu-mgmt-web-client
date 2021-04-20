@@ -50,7 +50,7 @@
 
 				<button
 					mat-flat-button
-					color="primary"
+					color="accent"
 					(click)="onAddParticipant()"
 					*ngIf="participant.isTeachingStaffMember"
 				>
@@ -60,40 +60,30 @@
 			</h2>
 
 			<div *ngIf="group.members.length > 0; else emptyGroupText" dense class="member-list">
-				<ng-container *ngFor="let user of group.members">
-					<mat-card class="member-card">
-						<mat-card-title class="card-title">
-							<a
-								class="link-none member-name"
-								[routerLink]="['/courses', courseId, 'users', user.userId]"
-								>{{ user.displayName }}</a
-							>
-
-							<ng-container *ngIf="participant.isTeachingStaffMember">
-								<mat-menu #memberMenu>
-									<button mat-menu-item (click)="onRemoveUser(user)">
-										<span class="text-red"
-											><mat-icon>delete</mat-icon
-											>{{
-												"Action.Custom.RemoveParticipant" | translate
-											}}</span
-										>
-									</button>
-								</mat-menu>
-
-								<button
-									[matMenuTriggerFor]="memberMenu"
-									mat-icon-button
-									class="member-menu-btn"
+				<app-card *ngFor="let user of group.members">
+					<ng-container title>
+						<a
+							class="link-none member-name"
+							[routerLink]="['/courses', courseId, 'users', user.userId]"
+							>{{ user.displayName }}</a
+						>
+					</ng-container>
+					<ng-container subtitle>{{ user.email }}</ng-container>
+					<ng-container menu *ngIf="participant.isTeachingStaffMember">
+						<mat-menu #memberMenu>
+							<button mat-menu-item (click)="onRemoveUser(user)">
+								<span class="text-red"
+									><mat-icon>delete</mat-icon
+									>{{ "Action.Custom.RemoveParticipant" | translate }}</span
 								>
-									<mat-icon class="icon-light">more_vert</mat-icon>
-								</button>
-							</ng-container>
-						</mat-card-title>
+							</button>
+						</mat-menu>
 
-						<span class="email" class="text-light"> Email: {{ user.email }} </span>
-					</mat-card>
-				</ng-container>
+						<button [matMenuTriggerFor]="memberMenu" mat-icon-button>
+							<mat-icon class="icon-light">more_vert</mat-icon>
+						</button>
+					</ng-container>
+				</app-card>
 			</div>
 
 			<ng-template #emptyGroupText>
