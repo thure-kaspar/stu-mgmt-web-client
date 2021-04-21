@@ -279,7 +279,7 @@ input[type="number"] {
 }
 
 app-icon {
-	fill: var(--text);
+	fill: white;
 }
 
 .titlebar-padding {
@@ -439,6 +439,11 @@ mat-paginator {
 
 .bg-transparent {
 	background-color: transparent !important;
+}
+
+.text {
+	color: var(--text);
+	fill: var(--text);
 }
 
 .text-red {
