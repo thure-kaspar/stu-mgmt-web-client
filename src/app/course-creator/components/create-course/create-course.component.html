@@ -17,7 +17,8 @@
 			matTooltip="Opens the Search-Course-Dialog"
 			(click)="openSearchCourseDialog()"
 		>
-			<mat-icon>search</mat-icon>{{ "Action.Custom.SelectCourseTemplate" | translate }}
+			<app-icon name="search"></app-icon
+			>{{ "Action.Custom.SelectCourseTemplate" | translate }}
 		</button>
 	</mat-card-title>
 
@@ -54,7 +55,7 @@
 						color="accent"
 						(click)="assignmentTemplatesForm.addAssignmentTemplate()"
 					>
-						<mat-icon>add</mat-icon
+						<app-icon name="add"></app-icon
 						>{{ "Action.Custom.AddAssignmentTemplate" | translate }}
 					</button>
 					<app-assignment-templates-form [form]="form"></app-assignment-templates-form>
@@ -70,7 +71,8 @@
 						color="accent"
 						(click)="addLecturer()"
 					>
-						<mat-icon>add</mat-icon>{{ "Action.Custom.AddLecturer" | translate }}
+						<app-icon name="add"></app-icon
+						>{{ "Action.Custom.AddLecturer" | translate }}
 					</button>
 
 					<mat-form-field
@@ -85,7 +87,7 @@
 							matTooltip="{{ 'Action.Search' | translate }}"
 							(click)="openSearchUserDialog(i)"
 						>
-							<mat-icon>search</mat-icon>
+							<app-icon name="search"></app-icon>
 						</button>
 						<button
 							matSuffix
@@ -93,7 +95,7 @@
 							matTooltip="{{ 'Action.Remove' | translate }}"
 							(click)="removeLecturer(i)"
 						>
-							<mat-icon>clear</mat-icon>
+							<app-icon name="clear"></app-icon>
 						</button>
 					</mat-form-field>
 				</div>

@@ -12,7 +12,7 @@
 				id="username"
 				(keydown.enter)="onLogin()"
 			/>
-			<mat-icon matSuffix class="icon-light">person</mat-icon>
+			<app-icon matSuffix class="icon-light" name="person"></app-icon>
 		</mat-form-field>
 
 		<mat-form-field class="form-field" appearance="outline">
@@ -25,7 +25,7 @@
 				id="password"
 				(keydown.enter)="onLogin()"
 			/>
-			<mat-icon matSuffix class="icon-light">lock</mat-icon> </mat-form-field
+			<app-icon matSuffix class="icon-light" name="lock"></app-icon> </mat-form-field
 		><br />
 
 		<div id="error-container" *ngIf="authState.error">

@@ -8,7 +8,7 @@
 				*ngIf="user?.role === roles.MGMTADMIN || user?.role === roles.SYSTEMADMIN"
 			>
 				<button mat-flat-button class="btn-add" color="accent">
-					<mat-icon>add</mat-icon>
+					<app-icon name="add"></app-icon>
 					{{ "Action.Custom.CreateCourse" | translate }}
 				</button>
 			</a>

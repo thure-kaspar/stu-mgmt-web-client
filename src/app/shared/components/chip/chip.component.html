@@ -1,4 +1,4 @@
 <span class="chip" [ngStyle]="{ 'background-color': color }">
-	<mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+	<app-icon *ngIf="icon" [name]="icon"></app-icon>
 	<span class="text">{{ text }}</span>
 </span>

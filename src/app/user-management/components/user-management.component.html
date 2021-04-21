@@ -45,15 +45,15 @@
 				<th class="action-column" mat-header-cell *matHeaderCellDef></th>
 				<td mat-cell *matCellDef="let row">
 					<button mat-icon-button [matMenuTriggerFor]="userOptionsMenu">
-						<mat-icon class="icon-light">settings</mat-icon>
+						<app-icon class="icon-light" name="settings"></app-icon>
 					</button>
 					<mat-menu #userOptionsMenu="matMenu" yPosition="above">
 						<button mat-menu-item (click)="editUser(row)">
-							<mat-icon>edit</mat-icon>
+							<app-icon name="edit"></app-icon>
 							<span>{{ "Action.Edit" | translate }}</span>
 						</button>
 						<button mat-menu-item (click)="removeUser(row)">
-							<mat-icon>delete_forever</mat-icon>
+							<app-icon name="delete_forever"></app-icon>
 							<span>{{ "Action.Remove" | translate }}</span>
 						</button>
 					</mat-menu>

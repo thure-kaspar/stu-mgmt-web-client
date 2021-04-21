@@ -14,12 +14,12 @@
 		<mat-menu #groupMenu>
 			<ng-container>
 				<button mat-menu-item (click)="addParticipant()">
-					<mat-icon class="icon-light">person_add</mat-icon
+					<app-icon class="mr-16 icon-light" name="person_add"></app-icon
 					>{{ "Action.Custom.AddParticipant" | translate }}
 				</button>
 				<button mat-menu-item (click)="removeGroup()">
-					<mat-icon class="icon-light">delete</mat-icon>
-					<span class="text-red font-bold">
+					<app-icon class="mr-16 icon-light" name="delete"></app-icon>
+					<span class="font-bold text-red">
 						{{ "Action.Delete" | translate }}
 					</span>
 				</button>
@@ -27,7 +27,7 @@
 		</mat-menu>
 
 		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn">
-			<mat-icon class="icon-light">more_vert</mat-icon>
+			<app-icon class="icon-light" name="more_vert"></app-icon>
 		</button>
 	</ng-container>
 
@@ -67,7 +67,7 @@
 
 		<div class="member-list" *ngIf="participant.isTeachingStaffMember">
 			<a
-				class="member link-none font-bold"
+				class="font-bold member link-none"
 				[routerLink]="['/courses', course.id, 'users', member.userId]"
 				*ngFor="let member of group.members"
 			>

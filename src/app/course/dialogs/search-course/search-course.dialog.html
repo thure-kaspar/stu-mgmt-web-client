@@ -78,7 +78,7 @@
 					<td mat-cell *matCellDef="let row">
 						<a [routerLink]="[ '/courses', row.id ]">
 							<button mat-icon-button matTooltip="Open course" (click)="onCancel()">
-								<mat-icon class="icon-light">open_in_new</mat-icon>
+								<app-icon class="icon-light" name="open_in_new"></app-icon>
 							</button>
 						</a>
 					</td>

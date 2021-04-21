@@ -3,21 +3,22 @@
 		<mat-card-title class="title">
 			<span class="left">
 				{{ group.name }}
-				<mat-icon
+				<app-icon
 					*ngIf="group.isClosed"
 					class="icon-light"
+					name="lock"
 					[matTooltip]="'Property.Group.IsClosed' | translate"
-					>lock</mat-icon
 				>
+				</app-icon>
 			</span>
 			<span class="right">
 				<button mat-icon-button [matMenuTriggerFor]="menu">
-					<mat-icon class="icon-light">settings</mat-icon>
+					<app-icon class="icon-light" name="settings"></app-icon>
 				</button>
 				<mat-menu #menu="matMenu">
 					<div id="menu-container">
 						<button mat-menu-item (click)="onEditGroup()">
-							<mat-icon>edit</mat-icon>
+							<app-icon class="mr-16" name="edit"></app-icon>
 							{{ "Action.Edit" | translate }}
 						</button>
 						<button
@@ -26,7 +27,7 @@
 							*ngIf="isGroupMember(participant)"
 						>
 							<span class="text-red">
-								<mat-icon>cancel</mat-icon>
+								<app-icon class="mr-16" name="cancel"></app-icon>
 								{{ "Action.Custom.LeaveGroup" | translate }}
 							</span>
 						</button>
@@ -36,7 +37,8 @@
 							*ngIf="participant.isTeachingStaffMember"
 						>
 							<span class="text-red">
-								<mat-icon>delete</mat-icon>{{ "Action.Delete" | translate }}
+								<app-icon class="mr-16" name="delete"></app-icon
+								>{{ "Action.Delete" | translate }}
 							</span>
 						</button>
 					</div>
@@ -54,7 +56,7 @@
 					(click)="onAddParticipant()"
 					*ngIf="participant.isTeachingStaffMember"
 				>
-					<mat-icon>person_add</mat-icon>
+					<app-icon name="person_add"></app-icon>
 					{{ "Action.Custom.AddParticipant" | translate }}
 				</button>
 			</h2>
@@ -73,14 +75,14 @@
 						<mat-menu #memberMenu>
 							<button mat-menu-item (click)="onRemoveUser(user)">
 								<span class="text-red"
-									><mat-icon>delete</mat-icon
+									><app-icon class="mr-16" name="delete"></app-icon
 									>{{ "Action.Custom.RemoveParticipant" | translate }}</span
 								>
 							</button>
 						</mat-menu>
 
 						<button [matMenuTriggerFor]="memberMenu" mat-icon-button>
-							<mat-icon class="icon-light">more_vert</mat-icon>
+							<app-icon class="icon-light" name="more_vert"></app-icon>
 						</button>
 					</ng-container>
 				</app-card>

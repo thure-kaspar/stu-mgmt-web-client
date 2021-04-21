@@ -278,6 +278,10 @@ input[type="number"] {
 	background-color: var(--color-bg) !important;
 }
 
+app-icon {
+	fill: var(--text);
+}
+
 .titlebar-padding {
 	padding-top: calc(var(--titlebar-height));
 }
@@ -422,6 +426,7 @@ mat-paginator {
 
 .icon-light {
 	color: var(--text-light);
+	fill: var(--text-light);
 }
 
 .text-light {

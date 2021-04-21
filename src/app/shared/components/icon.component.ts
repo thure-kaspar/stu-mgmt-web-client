@@ -4,7 +4,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from "@angular/core";
 	selector: "app-icon",
 	template: `<svg
 		[ngStyle]="{ color: 'red', height: size + 'px', width: size + 'px' }"
-		style="display: inline-block; vertical-align: top; position: relative;"
+		style="display: inline-block; margin-top: -2px; vertical-align: middle; position: relative;"
 	>
 		<use [attr.href]="'assets/icons/sprites.svg#' + name"></use>
 	</svg>`,

@@ -17,14 +17,13 @@
 		justify-content: center;
 	}
 
-	mat-icon:empty,
+	app-icon:empty,
 	span:empty {
 		display: none;
 	}
 
-	mat-icon {
+	app-icon {
 		position: relative;
-		top: 2px;
 		font-size: 20px;
 		margin-right: -4px;
 	}

@@ -22,7 +22,6 @@
 						"assets": [
 							"src/favicon.ico",
 							"src/assets",
-							"!src/assets/icons/svg",
 							"src/env.js",
 							"src/manifest.webmanifest"
 						],

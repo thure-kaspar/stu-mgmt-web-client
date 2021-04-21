@@ -3,7 +3,7 @@
 	<mat-toolbar class="titlebar">
 		<div id="nav-left">
 			<button mat-icon-button type="button" (click)="drawer.toggle()">
-				<mat-icon>menu</mat-icon>
+				<app-icon name="menu"></app-icon>
 			</button>
 			<svg
 				id="logo"
@@ -54,7 +54,7 @@
 			</mat-menu>
 
 			<button mat-icon-button [matMenuTriggerFor]="appMenu">
-				<mat-icon>more_vert</mat-icon>
+				<app-icon name="more_vert"></app-icon>
 			</button>
 		</div>
 	</mat-toolbar>
@@ -77,7 +77,7 @@
 						routerLinkActive="router-link-active"
 						[routerLinkActiveOptions]="{ exact: true }"
 					>
-						<mat-icon>home</mat-icon>{{ "Misc.Home" | translate }}
+						<app-icon name="home"></app-icon>{{ "Misc.Home" | translate }}
 					</a>
 
 					<a
@@ -88,7 +88,7 @@
 							obs?.user?.role === 'MGMT_ADMIN' || obs?.user?.role === 'SYSTEM_ADMIN'
 						"
 					>
-						<mat-icon>supervisor_account</mat-icon
+						<app-icon name="supervisor_account"></app-icon
 						>{{ "Title.UserManagement" | translate }}
 					</a>
 
@@ -98,7 +98,7 @@
 						routerLinkActive="router-link-active"
 						[routerLinkActiveOptions]="{ exact: true }"
 					>
-						<mat-icon>school</mat-icon>{{ "Domain.Courses" | translate }}
+						<app-icon name="school"></app-icon>{{ "Domain.Courses" | translate }}
 					</a>
 
 					<div class="course-membership-list" *ngIf="obs.user">
@@ -115,7 +115,7 @@
 								routerLinkActive="router-link-active"
 								data-course-link
 							>
-								<mat-icon>lens</mat-icon>{{ course.id }}
+								<app-icon name="lens" size="10"></app-icon>{{ course.id }}
 							</a>
 						</div>
 					</div>
@@ -129,15 +129,15 @@
 						routerLinkActive="router-link-active"
 						*ngIf="_isDevelopmentEnv"
 					>
-						<mat-icon>code</mat-icon>Developer-Login
+						<app-icon name="code"></app-icon>Developer-Login
 					</a>
 
 					<a mat-list-item href="https://www.uni-hildesheim.de/datenschutz">
-						<mat-icon>security</mat-icon>{{ "Misc.Privacy" | translate }}
+						<app-icon name="security"></app-icon>{{ "Misc.Privacy" | translate }}
 					</a>
 
 					<a mat-list-item href=" https://www.uni-hildesheim.de/impressum">
-						<mat-icon>info</mat-icon>{{ "Misc.Imprint" | translate }}
+						<app-icon name="info"></app-icon>{{ "Misc.Imprint" | translate }}
 					</a>
 				</div>
 			</mat-nav-list>

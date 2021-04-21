@@ -12,7 +12,7 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 		<ng-container title>Assignment 01</ng-container>
 		<ng-container subtitle>Hello World</ng-container>
 		<ng-container menu>
-			<button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+			<button mat-icon-button><app-icon name="more_vert"></app-icon></button>
 		</ng-container>
 		<ng-container content>Lorem ipsum...</ng-container>
 		<ng-container footer>

@@ -59,16 +59,16 @@
 				<th class="column-action" mat-header-cell *matHeaderCellDef></th>
 				<td class="column-action" mat-cell *matCellDef="let row">
 					<button mat-icon-button [matMenuTriggerFor]="userOptionsMenu">
-						<mat-icon class="icon-light">settings</mat-icon>
+						<app-icon class="icon-light" name="settings"></app-icon>
 					</button>
 					<mat-menu #userOptionsMenu="matMenu" yPosition="above">
 						<button mat-menu-item (click)="openChangeRoleDialog(row)">
-							<mat-icon>import_export</mat-icon>
+							<app-icon name="import_export"></app-icon>
 							<span>{{ "Action.Custom.ChangeRole" | translate }}</span>
 						</button>
 						<button mat-menu-item (click)="openRemoveDialog(row)">
 							<span class="text-red">
-								<mat-icon>delete_forever</mat-icon>
+								<app-icon name="delete_forever"></app-icon>
 								<span>{{ "Action.Remove" | translate }}</span>
 							</span>
 						</button>

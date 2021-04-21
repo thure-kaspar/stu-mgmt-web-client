@@ -58,17 +58,17 @@
 
 	<ng-container menu *ngIf="participant.isTeachingStaffMember">
 		<button mat-icon-button [mat-menu-trigger-for]="assignmentMenu">
-			<mat-icon>more_vert</mat-icon>
+			<app-icon name="more_vert"></app-icon>
 		</button>
 
 		<mat-menu #assignmentMenu>
 			<ng-container *ngIf="participant.isTeachingStaffMember">
 				<button mat-menu-item (click)="openEditDialog()">
-					<mat-icon class="icon-light">edit</mat-icon>
+					<app-icon class="icon-light" name="edit"></app-icon>
 					<span class="font-bold">{{ "Action.Edit" | translate }}</span>
 				</button>
 				<button mat-menu-item (click)="onDelete()">
-					<mat-icon class="icon-light">delete</mat-icon>
+					<app-icon class="icon-light" name="delete"></app-icon>
 					<span class="font-bold text-red">
 						{{ "Action.Delete" | translate }}
 					</span>
@@ -84,13 +84,13 @@
 			<ng-container [ngSwitch]="assignment.collaboration">
 				<app-chip
 					*ngSwitchCase="collaborationEnum.GROUP"
-					icon="group"
+					icon="groups"
 					color="#009664"
 					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
 				></app-chip>
 				<app-chip
 					*ngSwitchCase="collaborationEnum.GROUPORSINGLE"
-					icon="group"
+					icon="groups"
 					color="#00838f"
 					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
 				></app-chip>
@@ -154,7 +154,7 @@
 		</div>
 
 		<span class="warning WARNING" *ngIf="warning">
-			<mat-icon>warning</mat-icon>
+			<app-icon name="warning"></app-icon>
 			<span class="warning-text">{{ warning }}</span>
 		</span>
 	</ng-container>

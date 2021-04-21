@@ -9,7 +9,7 @@
 					color="primary"
 					(click)="_addRequiredPercentOverallRule()"
 				>
-					<mat-icon>add</mat-icon>
+					<app-icon name="add"></app-icon>
 					{{
 						"Enum.RuleType." + ruleTypeEnum.REQUIREDPERCENTOVERALL
 							| translate: { requiredPercent: "X" }
@@ -23,7 +23,7 @@
 					color="primary"
 					(click)="_addPassedXPercentWithAtLeastYPercentRule()"
 				>
-					<mat-icon>add</mat-icon>
+					<app-icon name="add"></app-icon>
 					{{
 						"Enum.RuleType." + ruleTypeEnum.INDIVIDUALPERCENTWITHALLOWEDFAILURES
 							| translate: { requiredPercent: "X", allowedFailures: "Y" }
@@ -72,7 +72,7 @@
 							[matTooltip]="'Action.Remove' | translate"
 							(click)="removeCriteria(i)"
 						>
-							<mat-icon>clear</mat-icon>
+							<app-icon name="clear"></app-icon>
 						</button>
 					</mat-card-title>
 
