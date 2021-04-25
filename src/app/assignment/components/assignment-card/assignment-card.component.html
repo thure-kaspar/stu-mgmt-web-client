@@ -64,11 +64,11 @@
 		<mat-menu #assignmentMenu>
 			<ng-container *ngIf="participant.isTeachingStaffMember">
 				<button mat-menu-item (click)="openEditDialog()">
-					<app-icon class="icon-light" name="edit"></app-icon>
+					<app-icon class="mr-16 icon-light" name="edit"></app-icon>
 					<span class="font-bold">{{ "Action.Edit" | translate }}</span>
 				</button>
 				<button mat-menu-item (click)="onDelete()">
-					<app-icon class="icon-light" name="delete"></app-icon>
+					<app-icon class="mr-16 icon-light" name="delete"></app-icon>
 					<span class="font-bold text-red">
 						{{ "Action.Delete" | translate }}
 					</span>

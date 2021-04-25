@@ -46,5 +46,6 @@ export * from './studentMgmtException';
 export * from './studentResults';
 export * from './submissionCreateDto';
 export * from './submissionDto';
+export * from './subscriberDto';
 export * from './userDto';
 export * from './userUpdateDto';

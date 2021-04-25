@@ -15,8 +15,4 @@ export interface CourseConfigUpdateDto {
      * Password required to sign up for the course.
      */
     password?: string;
-    /**
-     * The route that update messages (i.e user left group or assignment submission closed) should be send to. Will be send via HTTP-POST.
-     */
-    subscriptionUrl?: string;
 }
