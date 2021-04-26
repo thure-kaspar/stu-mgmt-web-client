@@ -195,7 +195,8 @@
     "SomethingWentWrong": "Oops, something went wrong!",
     "Unauthorized": "You're not logged in.",
     "Unknown": "Unknown error",
-    "ValueMissing": "Value is missing."
+    "ValueMissing": "Value is missing.",
+    "NoAdmissionCriteria": "This course did not define any admission criteria."
   },
   "Event": {
     "UserJoinedCourseEvent": "joined the course.",
@@ -244,7 +245,8 @@
     "Secrets": "Secrets",
     "Settings": "Settings",
     "UnsavedChanges": "Unsaved changes",
-    "Notifications": "Notifications"
+    "Notifications": "Notifications",
+    "CurrentStatus": "Current status"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "If you continue, your unsaved changes will be discarded.",

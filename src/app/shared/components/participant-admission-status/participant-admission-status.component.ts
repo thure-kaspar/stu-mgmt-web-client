@@ -19,6 +19,8 @@ export class ParticipantAdmissionStatusComponent implements OnInit {
 		.select(CourseSelectors.selectCourse)
 		.pipe(map(course => course.admissionCriteria));
 
+	noCriteriaError$ = this.criteria$.pipe(map(criteria => !criteria));
+
 	vm$: Observable<
 		{
 			result: RuleCheckResult;

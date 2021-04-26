@@ -195,7 +195,8 @@
     "SomethingWentWrong": "Ups, da ist etwas schief gelaufen!",
     "Unauthorized": "Du bist nicht angemeldet.",
     "Unknown": "Unbekannter Fehler",
-    "ValueMissing": "Fehlender Wert."
+    "ValueMissing": "Fehlender Wert.",
+    "NoAdmissionCriteria": "Für diesen Kurs sind keine Zulassungskriterien festgelegt."
   },
   "Event": {
     "UserJoinedCourseEvent": "ist dem Kurs beigreten.",
@@ -244,7 +245,8 @@
     "Secrets": "Geheime Einstellungen",
     "Settings": "Einstellungen",
     "UnsavedChanges": "Ungespeicherte Änderungen",
-    "Notifications": "Benachrichtigungen"
+    "Notifications": "Benachrichtigungen",
+    "CurrentStatus": "Aktueller Stand"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "Wenn Sie fortfahren, werden ihre ungespeicherten Änderungen verworfen.",

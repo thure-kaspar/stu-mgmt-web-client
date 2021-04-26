@@ -35,16 +35,17 @@
 		<div class="points">
 			<span class="font-bold achieved">
 				{{
-					assignment.assessment?.achievedPoints >= 0
+					assignment.assessment?.achievedPoints !== undefined &&
+					assignment.assessment?.achievedPoints !== null
 						? assignment.assessment.achievedPoints
 						: "-"
 				}}</span
 			>
 			<span class="max-points text-light"> / {{ assignment.points }}</span>
-			<span class="percent text-light" *ngIf="assignment.assessment.achievedPoints >= 0">
+			<span class="percent text-light" *ngIf="assignment.assessment?.achievedPoints >= 0">
 				({{
-					((assignment.assessment.roundedPoints >= 0
-						? assignment.assessment.roundedPoints
+					((assignment.assessment?.roundedPoints >= 0
+						? assignment.assessment?.roundedPoints
 						: assignment.assessment.achievedPoints) /
 						assignment.points) *
 						100 | number: "1.0-2"

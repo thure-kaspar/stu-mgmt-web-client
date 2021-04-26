@@ -42,9 +42,12 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 				"matrNr",
 				"hasAdmission",
 				"fulfillsAdmissionCriteria",
-				"hasAdmissionFromPreviousSemester",
-				...criteria.rules.map((rule, index) => "rule" + index)
+				"hasAdmissionFromPreviousSemester"
 			];
+
+			if (criteria?.rules) {
+				this.displayedColumns.push(...criteria.rules.map((rule, index) => "rule" + index));
+			}
 		})
 	);
 

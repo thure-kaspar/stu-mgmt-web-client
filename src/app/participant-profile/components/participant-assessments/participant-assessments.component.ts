@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
+import { combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
-import { AssessmentDto, UsersService } from "../../../../../api";
+import { UsersService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import {
 	AssignmentWithAssessment,

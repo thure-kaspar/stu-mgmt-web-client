@@ -1,7 +1,12 @@
 <div class="participant-admission-status">
 	<app-card>
 		<ng-container title>{{ "Title.AdmissionStatus" | translate }}</ng-container>
-		<ng-container subtitle>Aktueller Stand</ng-container>
+		<ng-container subtitle>
+			<ng-container *ngIf="noCriteriaError$ | async; else subtitle">
+				{{ "Error.NoAdmissionCriteria" | translate }}
+			</ng-container>
+			<ng-template #subtitle>{{ "Misc.CurrentStatus" | translate }}</ng-template>
+		</ng-container>
 		<ng-container content *ngIf="admissionStatus$ | async as admissionStatus">
 			<mat-spinner *ngIf="admissionStatus.isLoading" diameter="64"></mat-spinner>
 
