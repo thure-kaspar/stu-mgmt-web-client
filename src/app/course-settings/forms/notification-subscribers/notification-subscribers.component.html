@@ -4,6 +4,10 @@
 		<span>{{ "Action.Add" | translate }}</span>
 	</button>
 
+	<mat-hint>
+		<pre class="preformatted">{{ "Text.NotificationDescription" | translate }}</pre>
+	</mat-hint>
+
 	<div class="subscribers">
 		<app-card *ngFor="let subscriber of subscribers$ | async">
 			<ng-container title>{{ subscriber.name }}</ng-container>

@@ -3,8 +3,11 @@
 	padding-bottom: 32px;
 }
 
+pre {
+	max-width: 800px;
+}
+
 .subscribers {
-	padding-top: 16px;
 	display: grid;
 	row-gap: 16px;
 	max-width: 500px;

@@ -371,7 +371,8 @@
       "Selfmanaged": "TBD",
       "SizeMax": "Max. erlaubte Anzahl an Gruppenmitgliedern.",
       "SizeMin": "Min. Größe, um an Aufgaben teilzunehmen."
-    }
+    },
+    "NotificationDescription": "Das Studenten Management System kann Benachrichtigungen an andere Systeme versenden, um diese über gewisse Ereignisse zu benachrichtigen (z. B. Start einer neuen Hausaufgabe).\nDamit ein System diese Benachrichtigungen erhalten kann, muss es eine Schnittstelle zur Verfügung stellen, die HTTP-POST Anfragen bearbeitet.\n\nDiese Konfiguration kann nur von folgenden Nutzerrollen durchgeführt werden:\nSYSTEM_ADMIN, MGMT_ADMIN oder ADMIN_TOOL. "
   },
   "Title": {
     "AdmissionStatus": "Zulassungsstatus",

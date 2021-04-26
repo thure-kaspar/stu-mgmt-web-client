@@ -371,7 +371,8 @@
       "Selfmanaged": "TBD",
       "SizeMax": "Max. amount of allowed group members.",
       "SizeMin": "Group must have this size to participate in assignments."
-    }
+    },
+    "NotificationDescription": "The Student Management System can notify other systems about certain events (i.e., start of an assignment).\nIn order to receive these notifications, it must provide an endpoint that listens to HTTP-POST requests.\n\nConfiguring subscriptions requires one of the following roles: \nSYSTEM_ADMIN, MGMT_ADMIN or ADMIN_TOOL."
   },
   "Title": {
     "AdmissionStatus": "Admission status",
