@@ -243,7 +243,8 @@
     "Rounding": "Rounding",
     "Secrets": "Secrets",
     "Settings": "Settings",
-    "UnsavedChanges": "Unsaved changes"
+    "UnsavedChanges": "Unsaved changes",
+    "Notifications": "Notifications"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "If you continue, your unsaved changes will be discarded.",
@@ -374,6 +375,7 @@
     "AdmissionStatus": "Admission status",
     "AppName": "Student-Management",
     "CompareParticipantsList": "Compare participants list",
+    "ConfigureSubscriber": "Configure subscriber",
     "CreateAssessment": "Create assessment",
     "CreateAssignment": "Create assignment",
     "CreateGroup": "Create group",

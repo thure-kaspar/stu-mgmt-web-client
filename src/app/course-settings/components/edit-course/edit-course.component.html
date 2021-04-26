@@ -5,12 +5,12 @@
 		[selectedIndex]="selectedIndex"
 		(selectedIndexChange)="tabChanged($event)"
 	>
-		<mat-tab label="{{ 'Misc.BasicData' | translate }}">
+		<mat-tab [label]="'Misc.BasicData' | translate">
 			<app-course-form [form]="form" [isEditMode]="true"></app-course-form>
 		</mat-tab>
 
 		<ng-container formGroupName="config">
-			<mat-tab label="{{ 'Domain.GroupSettings' | translate }}">
+			<mat-tab [label]="'Domain.GroupSettings' | translate">
 				<app-group-settings-form [form]="form"></app-group-settings-form>
 			</mat-tab>
 
@@ -24,15 +24,17 @@
 				</div>
 			</mat-tab>
 
-			<mat-tab label="{{ 'Domain.AdmissionCriteria' | translate }}">
+			<mat-tab [label]="'Domain.AdmissionCriteria' | translate">
 				<app-admission-criteria-form [form]="form"></app-admission-criteria-form>
 			</mat-tab>
 
-			<mat-tab label="{{ 'Domain.AdmissionFromPreviousSemester' | translate }}">
-				<app-admission-from-previous-semester-form></app-admission-from-previous-semester-form>
+			<mat-tab [label]="'Domain.AdmissionFromPreviousSemester' | translate">
+				<ng-template matTabContent>
+					<app-admission-from-previous-semester-form></app-admission-from-previous-semester-form>
+				</ng-template>
 			</mat-tab>
 
-			<mat-tab label="{{ 'Domain.AssignmentTemplates' | translate }}">
+			<mat-tab [label]="'Domain.AssignmentTemplates' | translate">
 				<div id="assignment-templates-tab">
 					<button
 						type="button"
@@ -72,12 +74,18 @@
 				</div>
 			</mat-tab>
 
+			<mat-tab [label]="'Misc.Notifications' | translate">
+				<ng-template matTabContent>
+					<app-notification-subscribers></app-notification-subscribers>
+				</ng-template>
+			</mat-tab>
+
 			<mat-tab disabled>
 				<ng-template mat-tab-label>
 					<button
 						mat-flat-button
 						color="accent"
-						[disabled]="form.invalid || selectedIndex == 4"
+						[disabled]="form.invalid || selectedIndex == 4 || selectedIndex == 6"
 						(click)="onSave()"
 					>
 						{{ "Action.Save" | translate }}

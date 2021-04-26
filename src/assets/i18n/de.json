@@ -243,7 +243,8 @@
     "Rounding": "Runden",
     "Secrets": "Geheime Einstellungen",
     "Settings": "Einstellungen",
-    "UnsavedChanges": "Ungespeicherte Änderungen"
+    "UnsavedChanges": "Ungespeicherte Änderungen",
+    "Notifications": "Benachrichtigungen"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "Wenn Sie fortfahren, werden ihre ungespeicherten Änderungen verworfen.",
@@ -374,6 +375,7 @@
     "AdmissionStatus": "Zulassungsstatus",
     "AppName": "Studenten-Management",
     "CompareParticipantsList": "Teilnehmerliste vergleichen",
+    "ConfigureSubscriber": "Subscriber konfigurieren",
     "CreateAssessment": "Bewertung erstellen",
     "CreateAssignment": "Aufgabe erstellen",
     "CreateGroup": "Gruppe erstellen",

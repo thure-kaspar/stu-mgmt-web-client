@@ -1,0 +1,44 @@
+<div class="notification-subscribers">
+	<button mat-flat-button color="accent" (click)="addOrUpdate()">
+		<app-icon name="add"></app-icon>
+		<span>{{ "Action.Add" | translate }}</span>
+	</button>
+
+	<div class="subscribers">
+		<app-card *ngFor="let subscriber of subscribers$ | async">
+			<ng-container title>{{ subscriber.name }}</ng-container>
+			<ng-container subtitle>{{ subscriber.url }}</ng-container>
+			<ng-container menu>
+				<mat-menu #menu>
+					<button mat-menu-item (click)="addOrUpdate(subscriber)">
+						<app-icon class="mr-16" name="edit"></app-icon
+						>{{ "Action.Edit" | translate }}
+					</button>
+					<button mat-menu-item (click)="remove(subscriber)">
+						<span class="text-red">
+							<app-icon class="mr-16" name="delete"></app-icon
+							>{{ "Action.Remove" | translate }}
+						</span>
+					</button>
+				</mat-menu>
+
+				<button mat-icon-button [matMenuTriggerFor]="menu">
+					<app-icon class="icon-light" name="more_vert"></app-icon>
+				</button>
+			</ng-container>
+			<ng-container content>
+				<div class="grid">
+					<span *ngFor="let event of getSubscribedEventsAsArray(subscriber)">{{
+						event
+					}}</span>
+				</div>
+			</ng-container>
+			<ng-container footer>
+				<span class="text-light"
+					>{{ "Common.UpdateDate" | translate }}:
+					{{ subscriber.updateDate | date: "dd.MM.YYYY (HH:mm:ss)" }}</span
+				>
+			</ng-container>
+		</app-card>
+	</div>
+</div>

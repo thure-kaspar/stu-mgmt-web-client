@@ -51,7 +51,8 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 		"secrets",
 		"admission-criteria",
 		"admission-from-previous-semester",
-		"assignment-templates"
+		"assignment-templates",
+		"notifications"
 	];
 
 	stateEnum = AssignmentDto.StateEnum;

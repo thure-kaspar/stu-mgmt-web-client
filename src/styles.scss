@@ -391,6 +391,10 @@ mat-paginator {
 	flex-direction: column;
 }
 
+.grid {
+	display: grid;
+}
+
 .flex {
 	display: flex;
 }
@@ -581,4 +585,16 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 
 .mr-16 {
 	margin-right: 16px;
+}
+
+.g-8 {
+	gap: 8px;
+}
+
+.g-16 {
+	gap: 16;
+}
+
+.align-items-center {
+	align-items: center;
 }

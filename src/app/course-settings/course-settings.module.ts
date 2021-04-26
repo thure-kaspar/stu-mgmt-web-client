@@ -9,6 +9,8 @@ import { AdmissionFromPreviousSemesterFormComponent } from "./forms/admission-fr
 import { AssignmentTemplatesForm } from "./forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseForm } from "./forms/course-form/course-form.component";
 import { GroupSettingsForm } from "./forms/group-settings-form/group-settings-form.component";
+import { NotificationSubscribersComponent } from "./forms/notification-subscribers/notification-subscribers.component";
+import { NotificationSubscriberDialog } from "./dialogs/notification-subscriber/notification-subscriber.dialog";
 
 @NgModule({
 	declarations: [
@@ -19,7 +21,9 @@ import { GroupSettingsForm } from "./forms/group-settings-form/group-settings-fo
 		EditCourseComponent,
 		CreateAssignmentTemplateDialog,
 		EditAssignmentTemplateDialog,
-		AdmissionFromPreviousSemesterFormComponent
+		AdmissionFromPreviousSemesterFormComponent,
+		NotificationSubscribersComponent,
+		NotificationSubscriberDialog
 	],
 	imports: [SharedModule, CourseSettingsRoutingModule],
 	exports: [
