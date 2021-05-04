@@ -31,6 +31,7 @@ export * from './individualPercentWithAllowedFailuresRuleDto';
 export * from './jobInfoDto';
 export * from './linkDto';
 export * from './mailDto';
+export * from './markerDto';
 export * from './notificationDto';
 export * from './overallPercentRuleDto';
 export * from './partialAssessmentDto';

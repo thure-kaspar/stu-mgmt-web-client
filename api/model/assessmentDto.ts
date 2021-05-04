@@ -53,8 +53,17 @@ export interface AssessmentDto {
      */
     lastUpdatedById?: string;
     assignment?: AssignmentDto;
+    /**
+     * The group, whose submission was evaluated by this assessment.
+     */
     group?: GroupDto;
+    /**
+     * If assessment targets a single user, contains the user.
+     */
     participant?: ParticipantDto;
+    /**
+     * The creator of this assessment.
+     */
     creator?: UserDto;
     lastUpdatedBy?: UserDto;
     creationDate?: Date;

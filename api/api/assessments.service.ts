@@ -60,75 +60,6 @@ export class AssessmentsService {
 
 
     /**
-     * Add partial assessment.
-     * Adds a partial assessment for an existing assessment. Alternatively, partial assessments can be created together with the assessment.
-     * @param body 
-     * @param courseId 
-     * @param assignmentId 
-     * @param assessmentId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public addPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'body', reportProgress?: boolean): Observable<PartialAssessmentDto>;
-    public addPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PartialAssessmentDto>>;
-    public addPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PartialAssessmentDto>>;
-    public addPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling addPartialAssessment.');
-        }
-
-        if (courseId === null || courseId === undefined) {
-            throw new Error('Required parameter courseId was null or undefined when calling addPartialAssessment.');
-        }
-
-        if (assignmentId === null || assignmentId === undefined) {
-            throw new Error('Required parameter assignmentId was null or undefined when calling addPartialAssessment.');
-        }
-
-        if (assessmentId === null || assessmentId === undefined) {
-            throw new Error('Required parameter assessmentId was null or undefined when calling addPartialAssessment.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearer) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<PartialAssessmentDto>('post',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments/${encodeURIComponent(String(assessmentId))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Create assessment.
      * Creates a new assessment.
      * @param body 
@@ -448,6 +379,75 @@ export class AssessmentsService {
 
         return this.httpClient.request<Array<AssessmentEventDto>>('get',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments/${encodeURIComponent(String(assessmentId))}/events`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Set partial assessment.
+     * Adds or updates the partial assessment with the specified key.
+     * @param body 
+     * @param courseId 
+     * @param assignmentId 
+     * @param assessmentId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'body', reportProgress?: boolean): Observable<PartialAssessmentDto>;
+    public setPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PartialAssessmentDto>>;
+    public setPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PartialAssessmentDto>>;
+    public setPartialAssessment(body: PartialAssessmentDto, courseId: string, assignmentId: string, assessmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling setPartialAssessment.');
+        }
+
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling setPartialAssessment.');
+        }
+
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling setPartialAssessment.');
+        }
+
+        if (assessmentId === null || assessmentId === undefined) {
+            throw new Error('Required parameter assessmentId was null or undefined when calling setPartialAssessment.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<PartialAssessmentDto>('put',`${this.basePath}/courses/${encodeURIComponent(String(courseId))}/assignments/${encodeURIComponent(String(assignmentId))}/assessments/${encodeURIComponent(String(assessmentId))}`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

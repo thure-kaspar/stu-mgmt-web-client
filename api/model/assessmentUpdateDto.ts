@@ -15,7 +15,5 @@ export interface AssessmentUpdateDto {
     achievedPoints?: number;
     isDraft?: boolean;
     comment?: string;
-    addPartialAssessments?: Array<PartialAssessmentDto>;
-    updatePartialAssignments?: Array<PartialAssessmentDto>;
-    removePartialAssignments?: Array<PartialAssessmentDto>;
+    partialAssessments?: Array<PartialAssessmentDto>;
 }

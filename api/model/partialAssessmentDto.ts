@@ -9,24 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { MarkerDto } from './markerDto';
 
 export interface PartialAssessmentDto { 
-    id?: number;
-    assessmentId: string;
+    /**
+     * * Unique identifier for this partial assessment.   * Must be unique within a single assessment.   * If not specified, it will be automatically generated.   * @example \"task_1\"
+     */
+    key?: string;
     title: string;
-    type?: string;
-    severity?: PartialAssessmentDto.SeverityEnum;
-    points?: number;
+    /**
+     * Determines whether the partial assessment should be included, when the assessment is not a draft anymore.
+     */
+    draftOnly: boolean;
     comment?: string;
-    path?: string;
-    line?: number;
-}
-export namespace PartialAssessmentDto {
-    export type SeverityEnum = 'INFORMATIONAL' | 'WARNING' | 'ERROR' | 'CRITICAL';
-    export const SeverityEnum = {
-        INFORMATIONAL: 'INFORMATIONAL' as SeverityEnum,
-        WARNING: 'WARNING' as SeverityEnum,
-        ERROR: 'ERROR' as SeverityEnum,
-        CRITICAL: 'CRITICAL' as SeverityEnum
-    };
+    points?: number;
+    markers?: Array<MarkerDto>;
 }
