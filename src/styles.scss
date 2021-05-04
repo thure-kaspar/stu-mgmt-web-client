@@ -39,7 +39,7 @@
 		--margin-default: 16px;
 	}
 	@media (min-width: 1500px) {
-		--margin-content: 128px;
+		--margin-content: 182px;
 		--margin-default: 32px;
 	}
 }
@@ -344,7 +344,7 @@ app-icon {
 }
 
 .tab {
-	padding-top: 8px;
+	padding-top: 16px;
 	padding-bottom: 32px;
 }
 
@@ -505,10 +505,6 @@ mat-expansion-panel {
 	box-shadow: none !important;
 }
 
-.mat-expansion-panel-content {
-	//background-color: opac;
-}
-
 // Used to display button in mat-tab-group
 app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 	min-width: 0;
@@ -519,23 +515,6 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 
 .toast-container .ngx-toastr {
 	box-shadow: 0 0 12px var(--text-light) !important;
-}
-
-.INFORMATIONAL {
-	font-weight: 500;
-	color: rgb(0, 130, 173);
-}
-.WARNING {
-	font-weight: 500;
-	color: rgb(211, 165, 38);
-}
-.ERROR {
-	font-weight: 500;
-	color: rgb(206, 134, 0);
-}
-.CRITICAL {
-	font-weight: 500;
-	color: red;
 }
 
 .bg-titlebar {
@@ -592,7 +571,11 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 }
 
 .g-16 {
-	gap: 16;
+	gap: 16px;
+}
+
+.space-between {
+	justify-content: space-between;
 }
 
 .align-items-center {

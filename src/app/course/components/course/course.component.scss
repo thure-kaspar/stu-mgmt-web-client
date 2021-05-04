@@ -2,29 +2,33 @@
 	background-color: var(--color-header);
 	padding-left: var(--margin-content);
 	padding-right: var(--margin-content);
-	padding-top: 8px;
 	position: sticky;
 	top: 0;
 	z-index: 2;
 }
 
+.course-header-inner {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1024px;
+}
+
 .course-content {
 	padding-left: var(--margin-content);
 	padding-right: var(--margin-content);
+	margin-left: auto;
+	margin-right: auto;
 	padding-bottom: 4px;
+	max-width: 1024px;
 }
 
 #title-container {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	padding-top: 12px;
+}
 
-	span {
-		vertical-align: middle;
-	}
-
-	button {
-		vertical-align: top;
-		margin-left: auto;
-		margin-right: -8px;
-	}
+.course-nav {
+	border-bottom: none !important; // Remove grey bottom border
 }
