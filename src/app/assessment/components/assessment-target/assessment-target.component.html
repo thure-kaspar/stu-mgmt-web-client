@@ -1,50 +1,43 @@
 <ng-container *ngIf="group">
-	<mat-card class="group-card mat-elevation-z2">
-		<mat-card-title class="card-title">
-			<span>
-				<!-- Only display link to group, if participant is teaching staff member or group member -->
-				<span
-					class="name"
-					*ngIf="
-						participant.isStudent && participant.groupId !== group.id;
-						else nameWithLink
-					"
-				>
+	<app-card>
+		<ng-container title>
+			<ng-container
+				*ngIf="participant.isStudent && participant.groupId !== group.id; else nameWithLink"
+			>
+				{{ group.name }}
+			</ng-container>
+			<ng-template #nameWithLink>
+				<a [routerLink]="['/courses', courseId, 'groups', group.id]" class="name link-none">
 					{{ group.name }}
-				</span>
-				<ng-template #nameWithLink>
-					<a
-						[routerLink]="['/courses', courseId, 'groups', group.id]"
-						class="name link-none"
-					>
-						{{ group.name }}
-					</a>
-				</ng-template>
-			</span>
-		</mat-card-title>
+				</a>
+			</ng-template>
+		</ng-container>
 
-		<div class="member-info">
-			<span class="text-light font-bold"
-				>{{ "Domain.Members" | translate }}: {{ group.size }}</span
-			>
-		</div>
+		<ng-container subtitle>{{ "Domain.Members" | translate }}: {{ group.size }}</ng-container>
 
-		<div class="member-list">
-			<a
-				class="member link-none font-bold"
-				[routerLink]="['/courses', courseId, 'users', member.userId]"
-				*ngFor="let member of group.members"
-			>
-				<button mat-flat-button color="primary">{{ member.displayName }}</button>
-			</a>
-		</div>
-	</mat-card>
+		<ng-container content>
+			<div class="flex g-8">
+				<a
+					class="font-bold member link-none"
+					[routerLink]="['/courses', courseId, 'users', member.userId]"
+					*ngFor="let member of group.members"
+				>
+					<button mat-flat-button color="primary">{{ member.displayName }}</button>
+				</a>
+			</div>
+		</ng-container>
+	</app-card>
 </ng-container>
 
-<ng-container *ngIf="targetedParticipant">
-	<a [routerLink]="['/courses', courseId, 'users', targetedParticipant.userId]">
-		<button class="targeted-participant-btn" mat-flat-button color="accent">
-			{{ targetedParticipant.displayName }}
-		</button>
-	</a>
+<ng-container *ngIf="targetedParticipant || !group">
+	<app-card>
+		<ng-container title>
+			<a
+				class="link-none"
+				[routerLink]="['/courses', courseId, 'users', targetedParticipant.userId]"
+			>
+				{{ targetedParticipant.displayName }}
+			</a>
+		</ng-container>
+	</app-card>
 </ng-container>

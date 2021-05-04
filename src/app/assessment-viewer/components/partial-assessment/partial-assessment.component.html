@@ -1,36 +1,72 @@
-<mat-card>
-	<mat-card-title class="card-title">
-		<div class="left">
-			<span [class]="'severity ' + partial.severity">{{
-				"Enum.Severity." + partial.severity | translate
-			}}</span>
-			<span>{{ partial.title }}</span>
-		</div>
-		<div class="right">
-			<span *ngIf="partial.points !== undefined">
-				<span class="text-light"
-					>{{ "Property.PartialAssessment.Points" | translate }}:</span
-				>
-				{{ partial.points }}
-			</span>
-		</div>
-	</mat-card-title>
+<app-card>
+	<ng-container title>
+		{{ partial.title }}
+	</ng-container>
 
-	<mat-card-content class="content">
-		<div class="comment">
+	<ng-container subtitle *ngIf="partial.points">
+		{{ partial.points }} {{ "Domain.Points" | translate }}
+	</ng-container>
+
+	<ng-container content>
+		<div class="mb-16 comment">
 			<pre class="preformatted">{{ partial.comment }}</pre>
 		</div>
 
-		<div class="info">
-			<span *ngIf="partial.type"
-				><span class="font-bold text-light">Type: </span>{{ partial.type }}</span
-			>
-			<span *ngIf="partial.path"
-				><span class="font-bold text-light">Path: </span>{{ partial.path }}</span
-			>
-			<span *ngIf="partial.line"
-				><span class="font-bold text-light">Line: </span>{{ partial.line }}</span
-			>
+		<div class="grid g-16">
+			<div [class]="'grid marker ' + marker.severity" *ngFor="let marker of partial.markers">
+				<ng-container [ngSwitch]="marker.severity">
+					<app-chip
+						*ngSwitchCase="severityEnum.HINT"
+						icon="lightbulb"
+						color="#2ea569"
+						[text]="marker.severity"
+					></app-chip>
+					<app-chip
+						*ngSwitchCase="severityEnum.INFO"
+						icon="info"
+						color="#0d9fcf"
+						[text]="marker.severity"
+					></app-chip>
+					<app-chip
+						*ngSwitchCase="severityEnum.WARNING"
+						icon="warning"
+						color="#daa000"
+						[text]="marker.severity"
+					></app-chip>
+					<app-chip
+						*ngSwitchCase="severityEnum.ERROR"
+						icon="error"
+						color="red"
+						[text]="marker.severity"
+					></app-chip>
+					<app-chip
+						*ngSwitchDefault
+						icon="help"
+						color="primary"
+						text="Unknown"
+					></app-chip>
+				</ng-container>
+
+				<div class="mt-16 mb-8">
+					<pre class="font-bold preformatted">{{ marker.comment }}</pre>
+				</div>
+				<span>
+					<span>Path: </span>
+					<span class="text-light">{{ marker.path }}</span>
+				</span>
+				<span>
+					<span>Line: </span>
+					<span class="text-light"
+						>{{ marker.startLineNumber }} - {{ marker.endLineNumber }}</span
+					>
+				</span>
+				<span *ngIf="marker.startColumn || marker.endColumn">
+					<span>Column: </span>
+					<span class="text-light"
+						>{{ marker.startColumn || "?" }} - {{ marker.endColumn || "?" }}</span
+					>
+				</span>
+			</div>
 		</div>
-	</mat-card-content>
-</mat-card>
+	</ng-container>
+</app-card>

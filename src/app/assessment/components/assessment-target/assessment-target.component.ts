@@ -1,7 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, Input, OnInit } from "@angular/core";
 import { GroupDto, ParticipantDto } from "../../../../../api";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
 import { Participant } from "../../../domain/participant.model";
 
 @Component({

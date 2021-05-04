@@ -1,105 +1,142 @@
 <ng-container *ngIf="participantFacade.participant$ | async as participant">
-	<div id="assessment-viewer" class="tab" *ngIf="assessment$ | async as assessment">
-		<h2 class="title">
-			<span>{{ "Domain.Assessment" | translate }}: {{ assignment.name }}</span>
-			<button
-				mat-flat-button
-				class="btn-edit"
-				color="accent"
-				*ngIf="participant.isTeachingStaffMember"
-				(click)="navigateToEdit()"
-			>
-				{{ "Action.Edit" | translate }}
-			</button>
-		</h2>
-
-		<div class="assessment-header">
-			<div>
-				<span class="created-by">
-					{{ "Common.CreatedBy" | translate }}
-					<span class="font-bold">{{ assessment.creator.displayName }}</span>
-					<span class="text-light">
-						({{ assessment.creationDate | date: "medium" }})</span
-					>
-				</span>
-
-				<span class="last-updated-by" *ngIf="assessment.lastUpdatedBy">
-					{{ "Common.LastUpdatedBy" | translate }}
-					<span class="font-bold">{{ assessment.lastUpdatedBy.displayName }}</span>
-					<span class="text-light"> ({{ assessment.updateDate | date: "medium" }})</span>
-
-					<button
-						mat-icon-button
-						matTooltip="Load edit history"
-						(click)="loadAssessmentEvents()"
-						*ngIf="participant.isTeachingStaffMember"
-					>
-						<app-icon class="icon-light" name="history"></app-icon>
-					</button>
-				</span>
-			</div>
-
-			<div *ngIf="showEvents && participant.isTeachingStaffMember" class="events">
-				<ng-container *ngIf="assessmentEvents$ | async as events">
-					<span *ngFor="let event of events">
-						[{{ event.timestamp | date }}] -
-						{{ "Property.Assessment.AchievedPoints" | translate }}:
-						{{ event.payload.oldScore }} -> {{ event.payload.newScore }}
-					</span>
-
-					<p *ngIf="events?.length == 0">{{ "Common.None" | translate }}.</p>
-				</ng-container>
-			</div>
-
-			<div class="assessment-target">
-				<app-assessment-target
-					[group]="assessment.group"
-					[targetedParticipant]="assessment.participant"
-					[participant]="participant"
-					[courseId]="courseId"
-				>
-				</app-assessment-target>
-			</div>
-		</div>
-
-		<mat-divider class="divider"></mat-divider>
-
-		<div class="assessment-content">
-			<h2>{{ "Common.Total" | translate }}</h2>
-
-			<mat-card>
-				<h2 class="achieved-points">
-					<span>{{ "Property.Assessment.AchievedPoints" | translate }}:</span>
-					<span class="achieved-points-number"
-						>{{ assessment.achievedPoints }}
-						<span class="of-points text-light">
-							/ {{ assignment.points }}
-							<span *ngIf="assignment.bonusPoints"
-								>(+{{ assignment.bonusPoints }})</span
-							>
-						</span>
-					</span>
-				</h2>
-
-				<div class="comment">
-					<pre class="preformatted">{{ assessment.comment }}</pre>
-				</div>
-			</mat-card>
-
-			<ng-container *ngIf="assessment.partialAssessments.length > 0">
-				<mat-divider class="divider"></mat-divider>
-
-				<h2>{{ "Domain.PartialAssessments" | translate }}</h2>
-
-				<div class="partial-assessments">
-					<ng-container *ngFor="let partial of assessment.partialAssessments">
-						<app-partial-assessment
-							class="partial-assessment"
-							[partialAssessment]="partial"
-						></app-partial-assessment>
+	<div class="assessment-viewer tab" *ngIf="vm$ | async as vm">
+		<app-card>
+			<ng-container title>{{ "Domain.Assessment" | translate }}: {{ vm.name }}</ng-container>
+			<ng-container subtitle>
+				<div class="flex mt-8 g-8">
+					<app-assignment-type-chip [type]="vm.type"></app-assignment-type-chip>
+					<ng-container [ngSwitch]="vm.collaboration">
+						<app-chip
+							*ngSwitchCase="collaborationEnum.GROUP"
+							icon="groups"
+							color="#009664"
+							[text]="'Enum.CollaborationType.' + vm.collaboration | translate"
+						></app-chip>
+						<app-chip
+							*ngSwitchCase="collaborationEnum.GROUPORSINGLE"
+							icon="groups"
+							color="#00838f"
+							[text]="'Enum.CollaborationType.' + vm.collaboration | translate"
+						></app-chip>
+						<app-chip
+							*ngSwitchCase="collaborationEnum.SINGLE"
+							icon="person"
+							color="#7f23c5"
+							[text]="'Enum.CollaborationType.' + vm.collaboration | translate"
+						></app-chip>
+						<app-chip *ngSwitchDefault></app-chip>
 					</ng-container>
 				</div>
 			</ng-container>
-		</div>
+
+			<ng-container menu>
+				<button
+					mat-flat-button
+					class="btn-edit"
+					color="accent"
+					*ngIf="participant.isTeachingStaffMember"
+					(click)="navigateToEdit()"
+				>
+					{{ "Action.Edit" | translate }}
+				</button>
+			</ng-container>
+			<ng-container content>
+				<div class="grid">
+					<span class="created-by text-light">
+						{{ "Common.CreatedBy" | translate }}
+						<span class="font-bold text">{{ vm.assessment.creator.displayName }}</span>
+						({{ vm.assessment.creationDate | date: "medium" }})
+					</span>
+
+					<span class="last-updated-by text-light" *ngIf="vm.assessment.lastUpdatedBy">
+						{{ "Common.LastUpdatedBy" | translate }}
+						<span class="font-bold text">{{
+							vm.assessment.lastUpdatedBy.displayName
+						}}</span>
+						({{ vm.assessment.updateDate | date: "medium" }})
+						<button
+							mat-icon-button
+							matTooltip="Load edit history"
+							(click)="loadAssessmentEvents()"
+							*ngIf="participant.isTeachingStaffMember"
+						>
+							<app-icon class="icon-light" name="history"></app-icon>
+						</button>
+
+						<div
+							*ngIf="showEvents && participant.isTeachingStaffMember"
+							class="grid events"
+						>
+							<ng-container *ngIf="assessmentEvents$ | async as events">
+								<span *ngFor="let event of events">
+									[{{ event.timestamp | date }}] -
+									{{ "Property.Assessment.AchievedPoints" | translate }}:
+									{{ event.payload.oldScore }} -> {{ event.payload.newScore }}
+								</span>
+
+								<p *ngIf="events?.length == 0">{{ "Common.None" | translate }}.</p>
+							</ng-container>
+						</div>
+					</span>
+				</div>
+			</ng-container>
+		</app-card>
+
+		<app-assessment-target
+			[group]="vm.assessment.group"
+			[targetedParticipant]="vm.assessment.participant"
+			[participant]="participant"
+			[courseId]="courseId"
+		>
+		</app-assessment-target>
+
+		<app-card>
+			<ng-container title>
+				<span class="overall-result">
+					<span class="achieved-points-number"
+						>{{ vm.assessment.achievedPoints }}
+						<span class="text-light">
+							/ {{ vm.points }}
+							<span *ngIf="vm.bonusPoints">(+{{ vm.bonusPoints }})</span>
+							{{ "Domain.Points" | translate }}
+						</span>
+					</span>
+					<ng-container *ngIf="vm.requiredPoints >= 0">
+						<app-chip
+							*ngIf="vm.assessment.hasPassed"
+							icon="thumb_up"
+							[text]="'Property.Assessment.HasPassed' | translate"
+							color="#2fac6f"
+						></app-chip>
+						<app-chip
+							*ngIf="!vm.assessment.hasPassed"
+							icon="thumb_down"
+							[text]="'Domain.Failed' | translate"
+							color="#ff0134"
+						></app-chip>
+					</ng-container>
+				</span>
+			</ng-container>
+
+			<ng-container subtitle *ngIf="vm.requiredPoints"
+				>{{ "Common.Required" | translate }}: {{ vm.requiredPoints || "?" }}
+				{{ "Domain.Points" | translate }}</ng-container
+			>
+
+			<ng-container content *ngIf="vm.assessment.comment">
+				<pre class="preformatted">{{ vm.assessment.comment }}</pre>
+			</ng-container>
+		</app-card>
+
+		<ng-container *ngIf="vm.assessment.partialAssessments.length > 0">
+			<div class="grid partial-assessments g-16">
+				<ng-container *ngFor="let partial of vm.assessment.partialAssessments">
+					<app-partial-assessment
+						class="partial-assessment"
+						[partialAssessment]="partial"
+					></app-partial-assessment>
+				</ng-container>
+			</div>
+		</ng-container>
 	</div>
 </ng-container>

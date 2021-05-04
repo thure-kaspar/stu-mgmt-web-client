@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from "@angular/core";
-import { PartialAssessmentDto } from "../../../../../api";
+import { MarkerDto, PartialAssessmentDto } from "../../../../../api";
 
 @Component({
 	selector: "app-partial-assessment",
@@ -10,7 +10,7 @@ import { PartialAssessmentDto } from "../../../../../api";
 export class PartialAssessmentComponent implements OnInit {
 	@Input("partialAssessment") partial: PartialAssessmentDto;
 
-	severityEnum = PartialAssessmentDto.SeverityEnum;
+	severityEnum = MarkerDto.SeverityEnum;
 
 	constructor() {}
 

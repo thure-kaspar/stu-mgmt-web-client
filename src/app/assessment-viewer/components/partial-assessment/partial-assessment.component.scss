@@ -1,22 +1,29 @@
-.card-title {
-	margin-top: -8px !important;
-	font-size: 18px;
-	display: flex;
+.marker {
+	background-color: var(--color-bg);
+	padding: 16px;
+	border-radius: 4px;
 }
 
-.left {
-	display: grid;
-	grid-auto-rows: auto;
-	row-gap: 4px;
+.HINT {
+	border-left: 1px transparent;
+	background-color: hsl(150, 56%, 41%, 0.2);
 }
 
-.content {
-	padding-top: 4px;
-	display: grid;
-	row-gap: 16px;
+.INFO {
+	border-left: 1px transparent;
+	background-color: hsl(195, 88%, 43%, 0.2);
 }
 
-.info {
-	margin-top: -8px;
-	display: grid;
+.WARNING {
+	border-left: 1px transparent;
+	background-color: hsl(44, 100%, 43%, 0.2);
+}
+
+.ERROR {
+	border-left: 1px transparent;
+	background-color: hsl(0, 100%, 50%, 0.2);
+}
+
+.preformatted {
+	margin: 0px !important;
 }
