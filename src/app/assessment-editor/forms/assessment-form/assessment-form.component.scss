@@ -1,62 +1,39 @@
-#assessment-form {
-	display: flex;
-	flex-direction: column;
+#points-container {
+	margin-top: -16px;
 
 	mat-form-field {
-		width: 100%;
+		width: 96px;
 	}
 }
 
-mat-card {
-	padding-bottom: 0px !important;
-}
-
-.btn-add-partial-assessment {
-	width: fit-content;
-}
-
-.overall-card {
-	margin-bottom: 16px;
+.comment-field {
+	margin-bottom: -22px;
 }
 
 .partial-assessment-form {
-	margin-bottom: 16px;
-}
-
-#points-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: baseline;
-
-	#achieved-points {
-		width: 48px;
-		margin-left: 4px;
-		margin-right: 4px;
-		input {
-			text-align: right;
-		}
-	}
-}
-
-.points-input {
-	text-align: center;
-}
-
-.title-points-severity-span {
+	background-color: var(--card-bg);
+	border-radius: 4px;
+	padding: 16px;
 	display: grid;
-	column-gap: 8px;
-	grid-template-columns: auto 96px 106px 32px;
-
-	button {
-		align-self: center;
-		margin-top: 6px;
-	}
 }
 
-.no-break {
-	width: max-content;
+.markers-outer {
+	padding: 16px;
+	background-color: var(--color-bg);
+	border-radius: 4px;
 }
 
-.severity-select {
-	text-align: center;
+.markers {
+	display: grid;
+	gap: 16px;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.marker-actions {
+	justify-content: flex-end;
+}
+
+.btn-remove-partial {
+	margin-left: auto;
+	margin-right: 0;
 }

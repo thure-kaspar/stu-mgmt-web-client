@@ -28,7 +28,8 @@
       "SelectCourseTemplate": "Select course template",
       "UnregisterAllGroups": "Unregister all group",
       "UseNamingSchemaAndCount": "Use prefix and count",
-      "UseNamingSchemeAndCount": "Use prefix and count"
+      "UseNamingSchemeAndCount": "Use prefix and count",
+      "SaveAsDraft": "Save as draft"
     },
     "Delete": "Delete",
     "Edit": "Edit",
@@ -123,7 +124,8 @@
     "Submission": "Submission",
     "Submissions": "Submissions",
     "User": "User",
-    "Users": "Users"
+    "Users": "Users",
+    "Draft": "Draft"
   },
   "Enum": {
     "AssignmentState": {
@@ -321,7 +323,8 @@
       "Points": "Points",
       "Severity": "Severity",
       "Title": "Title",
-      "Type": "Type"
+      "Type": "Type",
+      "DraftOnly": "Only visible when assessment is a draft"
     },
     "User": {
       "CourseRole": "Role in course",
@@ -372,7 +375,11 @@
       "SizeMax": "Max. amount of allowed group members.",
       "SizeMin": "Group must have this size to participate in assignments."
     },
-    "NotificationDescription": "The Student Management System can notify other systems about certain events (i.e., start of an assignment).\nIn order to receive these notifications, it must provide an endpoint that listens to HTTP-POST requests.\n\nConfiguring subscriptions requires one of the following roles: \nSYSTEM_ADMIN, MGMT_ADMIN or ADMIN_TOOL."
+    "NotificationDescription": "The Student Management System can notify other systems about certain events (i.e., start of an assignment).\nIn order to receive these notifications, it must provide an endpoint that listens to HTTP-POST requests.\n\nConfiguring subscriptions requires one of the following roles: \nSYSTEM_ADMIN, MGMT_ADMIN or ADMIN_TOOL.",
+    "Assessment": {
+      "Visibility": "Students will only be able to view the assessment once the assignment is set to EVALUATED. ",
+      "SelectGroupOrParticipant": "Please select a group or participant."
+    }
   },
   "Title": {
     "AdmissionStatus": "Admission status",

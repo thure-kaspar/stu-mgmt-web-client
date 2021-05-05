@@ -1,25 +1,23 @@
-<div id="filter">
-	<div class="top">
-		<mat-form-field id="group-filter">
-			<mat-label>Filter</mat-label>
-			<input
-				matInput
-				[(ngModel)]="filter.nameOfGroupOrUser"
-				(keyup)="updateNameFilter()"
-				autocomplete="false"
-			/>
-		</mat-form-field>
+<div id="filter" class="grid">
+	<mat-form-field id="group-filter">
+		<mat-label>Filter</mat-label>
+		<input
+			matInput
+			[(ngModel)]="filter.nameOfGroupOrUser"
+			(keyup)="updateNameFilter()"
+			autocomplete="false"
+		/>
+	</mat-form-field>
 
-		<mat-form-field>
-			<mat-label>{{ "Common.AssignedTo" | translate }}</mat-label>
-			<mat-select (selectionChange)="updateEvaluatorFilter($event.value)">
-				<mat-option value="undefined">-</mat-option>
-				<mat-option *ngFor="let evaluator of evaluators" [value]="evaluator">{{
-					evaluator.username
-				}}</mat-option>
-			</mat-select>
-		</mat-form-field>
-	</div>
+	<mat-form-field>
+		<mat-label>{{ "Common.AssignedTo" | translate }}</mat-label>
+		<mat-select (selectionChange)="updateEvaluatorFilter($event.value)">
+			<mat-option value="undefined">-</mat-option>
+			<mat-option *ngFor="let evaluator of evaluators" [value]="evaluator">{{
+				evaluator.username
+			}}</mat-option>
+		</mat-select>
+	</mat-form-field>
 
 	<div class="checkbox">
 		<mat-checkbox

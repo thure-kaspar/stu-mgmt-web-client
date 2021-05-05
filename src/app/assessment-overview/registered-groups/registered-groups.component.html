@@ -34,7 +34,7 @@
 	<ng-container matColumnDef="action">
 		<th class="action-column" mat-header-cell *matHeaderCellDef></th>
 		<td mat-cell *matCellDef="let row">
-			<mat-menu #registrationMenu>
+			<mat-menu #registrationMenu="matMenu">
 				<button mat-menu-item (click)="registerParticipant(row)">
 					<app-icon class="mr-16" name="person_add"></app-icon
 					>{{ "Action.Custom.AddParticipant" | translate }}

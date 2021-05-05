@@ -1,94 +1,10 @@
 <ng-container *ngIf="participantFacade.participant$ | async as participant">
-	<div class="assessment-viewer tab" *ngIf="vm$ | async as vm">
-		<app-card>
-			<ng-container title>{{ "Domain.Assessment" | translate }}: {{ vm.name }}</ng-container>
-			<ng-container subtitle>
-				<div class="flex mt-8 g-8">
-					<app-assignment-type-chip [type]="vm.type"></app-assignment-type-chip>
-					<ng-container [ngSwitch]="vm.collaboration">
-						<app-chip
-							*ngSwitchCase="collaborationEnum.GROUP"
-							icon="groups"
-							color="#009664"
-							[text]="'Enum.CollaborationType.' + vm.collaboration | translate"
-						></app-chip>
-						<app-chip
-							*ngSwitchCase="collaborationEnum.GROUPORSINGLE"
-							icon="groups"
-							color="#00838f"
-							[text]="'Enum.CollaborationType.' + vm.collaboration | translate"
-						></app-chip>
-						<app-chip
-							*ngSwitchCase="collaborationEnum.SINGLE"
-							icon="person"
-							color="#7f23c5"
-							[text]="'Enum.CollaborationType.' + vm.collaboration | translate"
-						></app-chip>
-						<app-chip *ngSwitchDefault></app-chip>
-					</ng-container>
-				</div>
-			</ng-container>
-
-			<ng-container menu>
-				<button
-					mat-flat-button
-					class="btn-edit"
-					color="accent"
-					*ngIf="participant.isTeachingStaffMember"
-					(click)="navigateToEdit()"
-				>
-					{{ "Action.Edit" | translate }}
-				</button>
-			</ng-container>
-			<ng-container content>
-				<div class="grid">
-					<span class="created-by text-light">
-						{{ "Common.CreatedBy" | translate }}
-						<span class="font-bold text">{{ vm.assessment.creator.displayName }}</span>
-						({{ vm.assessment.creationDate | date: "medium" }})
-					</span>
-
-					<span class="last-updated-by text-light" *ngIf="vm.assessment.lastUpdatedBy">
-						{{ "Common.LastUpdatedBy" | translate }}
-						<span class="font-bold text">{{
-							vm.assessment.lastUpdatedBy.displayName
-						}}</span>
-						({{ vm.assessment.updateDate | date: "medium" }})
-						<button
-							mat-icon-button
-							matTooltip="Load edit history"
-							(click)="loadAssessmentEvents()"
-							*ngIf="participant.isTeachingStaffMember"
-						>
-							<app-icon class="icon-light" name="history"></app-icon>
-						</button>
-
-						<div
-							*ngIf="showEvents && participant.isTeachingStaffMember"
-							class="grid events"
-						>
-							<ng-container *ngIf="assessmentEvents$ | async as events">
-								<span *ngFor="let event of events">
-									[{{ event.timestamp | date }}] -
-									{{ "Property.Assessment.AchievedPoints" | translate }}:
-									{{ event.payload.oldScore }} -> {{ event.payload.newScore }}
-								</span>
-
-								<p *ngIf="events?.length == 0">{{ "Common.None" | translate }}.</p>
-							</ng-container>
-						</div>
-					</span>
-				</div>
-			</ng-container>
-		</app-card>
-
-		<app-assessment-target
-			[group]="vm.assessment.group"
-			[targetedParticipant]="vm.assessment.participant"
-			[participant]="participant"
-			[courseId]="courseId"
-		>
-		</app-assessment-target>
+	<div class="grid g-16 tab" *ngIf="vm$ | async as vm">
+		<app-assessment-header
+			[assignment]="vm"
+			[assessment]="vm.assessment"
+			[courseId]="this.courseId"
+		></app-assessment-header>
 
 		<app-card>
 			<ng-container title>

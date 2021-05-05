@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from "@angular/core";
 import {
 	FormBuilder,
 	Validators,
@@ -8,7 +8,14 @@ import {
 	AbstractControl
 } from "@angular/forms";
 import { AbstractForm } from "../../../shared/abstract-form";
-import { AssessmentCreateDto, PartialAssessmentDto, AssignmentDto } from "../../../../../api";
+import {
+	AssessmentCreateDto,
+	PartialAssessmentDto,
+	AssignmentDto,
+	MarkerDto
+} from "../../../../../api";
+import { MatDialog } from "@angular/material/dialog";
+import { EditMarkerDialog } from "../../dialogs/edit-marker/edit-marker.dialog";
 
 @Component({
 	selector: "app-assessment-form",
@@ -18,18 +25,21 @@ import { AssessmentCreateDto, PartialAssessmentDto, AssignmentDto } from "../../
 export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements OnInit {
 	@Input() assignment: AssignmentDto;
 
-	/** Emits the id of the removed PartialAssessment, if it had an id (existed before). */
-	@Output() onPartialRemoved = new EventEmitter<number>();
+	severityEnum = MarkerDto.SeverityEnum;
+	collaborationEnum = AssignmentDto.CollaborationEnum;
 
-	severityEnum = PartialAssessmentDto.SeverityEnum;
-
-	constructor(private fb: FormBuilder) {
+	constructor(
+		private fb: FormBuilder,
+		private dialog: MatDialog,
+		private cdRef: ChangeDetectorRef
+	) {
 		super();
 		this.form = this.fb.group({
-			achievedPoints: [0, [Validators.required, this.achievedPointsMaxValueValidator()]],
+			achievedPoints: [0, [this.achievedPointsMaxValueValidator()]],
 			userId: [null],
 			groupId: [null],
 			comment: [null],
+			isDraft: [false],
 			partialAssessments: this.fb.array([])
 		});
 	}
@@ -63,25 +73,37 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 
 	/** Adds a partial assessment to the form. */
 	addPartialAssessment(partialAssessment?: PartialAssessmentDto): void {
-		this.getPartialAssessments().push(
-			this.fb.group({
-				id: [partialAssessment?.id ?? null],
-				title: [partialAssessment?.title ?? null, Validators.required],
-				points: [partialAssessment?.points ?? null],
-				comment: [partialAssessment?.comment ?? null],
-				severity: [partialAssessment?.severity ?? null],
-				type: [partialAssessment?.type ?? null]
-			})
-		);
+		const markerArray = this.fb.array([]);
+		partialAssessment?.markers?.forEach(marker => {
+			markerArray.push(
+				this.fb.group({
+					path: [marker.path, Validators.required],
+					startLineNumber: [marker.startLineNumber, Validators.required],
+					endLineNumber: [marker.endLineNumber, Validators.required],
+					startColumn: [marker.startColumn],
+					endColumn: [marker.endColumn],
+					severity: [marker.severity],
+					comment: [marker.comment, Validators.required],
+					points: [marker.points]
+				})
+			);
+		});
+
+		const formGroup = this.fb.group({
+			key: [partialAssessment?.key ?? null],
+			title: [partialAssessment?.title ?? null, Validators.required],
+			points: [partialAssessment?.points ?? null],
+			comment: [partialAssessment?.comment ?? null],
+			draftOnly: [partialAssessment?.draftOnly ?? false],
+			markers: markerArray
+		});
+
+		this.getPartialAssessments().push(formGroup);
 	}
 
 	/** Removes a partial assessment from the form. */
 	removePartialAssessment(index: number): void {
-		const id = this.getPartialAssessments().at(index).value.id;
 		this.getPartialAssessments().removeAt(index);
-		if (id) {
-			this.onPartialRemoved.emit(id);
-		}
 	}
 
 	getPartialAssessments(): FormArray {
@@ -90,5 +112,48 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 
 	getPartialAssessment(index: number): FormGroup {
 		return this.getPartialAssessments().at(index) as FormGroup;
+	}
+
+	getMarkers(partialIndex: number): FormArray {
+		return this.getPartialAssessments().at(partialIndex).get("markers") as FormArray;
+	}
+
+	addMarker(partialIndex: number): void {
+		this.dialog
+			.open(EditMarkerDialog)
+			.afterClosed()
+			.subscribe(marker => {
+				if (marker) {
+					this.getMarkers(partialIndex).push(
+						this.fb.group({
+							path: [null, Validators.required],
+							startLineNumber: [null, Validators.required],
+							endLineNumber: [null, Validators.required],
+							startColumn: [null],
+							endColumn: [null],
+							severity: [null],
+							comment: [null, Validators.required],
+							points: [null]
+						})
+					);
+					this.cdRef.detectChanges();
+				}
+			});
+	}
+
+	removeMarker(partialIndex: number, markerIndex: number): void {
+		this.getMarkers(partialIndex).removeAt(markerIndex);
+	}
+
+	editMarker(marker: MarkerDto, partialIndex: number, markerIndex: number): void {
+		this.dialog
+			.open(EditMarkerDialog, { data: marker })
+			.afterClosed()
+			.subscribe(changedMarker => {
+				if (changedMarker) {
+					this.getMarkers(partialIndex).at(markerIndex).patchValue(changedMarker);
+				}
+				this.cdRef.detectChanges();
+			});
 	}
 }

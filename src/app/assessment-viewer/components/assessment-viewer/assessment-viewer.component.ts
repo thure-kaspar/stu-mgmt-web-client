@@ -68,39 +68,4 @@ export class AssessmentViewerComponent implements OnInit {
 			)
 		);
 	}
-
-	/**
-	 * Loads the assessment events, if `showEvents` is false.
-	 */
-	loadAssessmentEvents(): void {
-		if (!this.showEvents) {
-			this.assessmentService
-				.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
-				.subscribe(
-					result => {
-						this.showEvents = true;
-						this.assessmentEvents$.next(result);
-					},
-					error => {
-						console.log(error);
-					}
-				);
-		}
-	}
-
-	/**
-	 * Navigates the user to the editor for this assessment.
-	 */
-	navigateToEdit(): void {
-		this.router.navigate([
-			"/courses",
-			this.courseId,
-			"assignments",
-			this.assignmentId,
-			"assessments",
-			"editor",
-			"edit",
-			this.assessmentId
-		]);
-	}
 }

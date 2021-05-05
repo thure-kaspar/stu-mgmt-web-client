@@ -28,7 +28,8 @@
       "SelectCourseTemplate": "Veranstaltung als Vorlage wählen",
       "UnregisterAllGroups": "Alle Gruppen abmelden",
       "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden",
-      "UseNamingSchemeAndCount": "Prefix und Anzahl verwenden"
+      "UseNamingSchemeAndCount": "Prefix und Anzahl verwenden",
+      "SaveAsDraft": "Als Entwurf speichern"
     },
     "Delete": "Löschen",
     "Edit": "Ändern",
@@ -123,7 +124,8 @@
     "Submission": "Abgabe",
     "Submissions": "Abgaben",
     "User": "Nutzer",
-    "Users": "Nutzer"
+    "Users": "Nutzer",
+    "Draft": "Entwurf"
   },
   "Enum": {
     "AssignmentState": {
@@ -321,7 +323,8 @@
       "Points": "Punkte",
       "Severity": "Schwere",
       "Title": "Titel",
-      "Type": "Typ"
+      "Type": "Typ",
+      "DraftOnly": "Nur sichtbar, wenn Bewertung ein Entwurf ist"
     },
     "User": {
       "CourseRole": "Rolle im Kurs",
@@ -372,7 +375,11 @@
       "SizeMax": "Max. erlaubte Anzahl an Gruppenmitgliedern.",
       "SizeMin": "Min. Größe, um an Aufgaben teilzunehmen."
     },
-    "NotificationDescription": "Das Studenten Management System kann Benachrichtigungen an andere Systeme versenden, um diese über gewisse Ereignisse zu benachrichtigen (z. B. Start einer neuen Hausaufgabe).\nDamit ein System diese Benachrichtigungen erhalten kann, muss es eine Schnittstelle zur Verfügung stellen, die HTTP-POST Anfragen bearbeitet.\n\nDiese Konfiguration kann nur von folgenden Nutzerrollen durchgeführt werden:\nSYSTEM_ADMIN, MGMT_ADMIN oder ADMIN_TOOL. "
+    "NotificationDescription": "Das Studenten Management System kann Benachrichtigungen an andere Systeme versenden, um diese über gewisse Ereignisse zu benachrichtigen (z. B. Start einer neuen Hausaufgabe).\nDamit ein System diese Benachrichtigungen erhalten kann, muss es eine Schnittstelle zur Verfügung stellen, die HTTP-POST Anfragen bearbeitet.\n\nDiese Konfiguration kann nur von folgenden Nutzerrollen durchgeführt werden:\nSYSTEM_ADMIN, MGMT_ADMIN oder ADMIN_TOOL. ",
+    "Assessment": {
+      "Visibility": "Studenten können die Bewertung erst einsehen, wenn die zugehörige Aufgabe auf BEWERTET gesetzt wurde.",
+      "SelectGroupOrParticipant": "Bitte Gruppe oder Teilnehmer auswählen."
+    }
   },
   "Title": {
     "AdmissionStatus": "Zulassungsstatus",

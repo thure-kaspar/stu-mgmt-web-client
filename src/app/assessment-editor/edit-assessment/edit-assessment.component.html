@@ -1,81 +1,62 @@
 <div id="edit-assessment-container" class="tab">
-	<div id="grid">
-		<div id="left">
-			<h2 id="title">{{ "Title.EditAssessment" | translate }}</h2>
+	<div class="title-container flex space-between">
+		<h2 id="title">{{ "Title.EditAssessment" | translate }}</h2>
 
-			<div class="assessment-header" *ngIf="assessment$ | async as assessment">
-				<div>
-					<span class="created-by">
-						{{ "Common.CreatedBy" | translate }}
-						<span class="font-bold">{{ assessment.creator.displayName }}</span>
-						<span class="text-light">
-							({{ assessment.creationDate | date: "medium" }})</span
-						>
-					</span>
-
-					<span class="last-updated-by" *ngIf="assessment.lastUpdatedBy">
-						{{ "Common.LastUpdatedBy" | translate }}
-						<span class="font-bold">{{ assessment.lastUpdatedBy.displayName }}</span>
-						<span class="text-light">
-							({{ assessment.updateDate | date: "medium" }})</span
-						>
-
-						<button
-							mat-icon-button
-							class="btn-load-history"
-							matTooltip="Load edit history"
-							(click)="loadAssessmentEvents()"
-						>
-							<app-icon class="icon-light" name="history"></app-icon>
-						</button>
-					</span>
-				</div>
-
-				<div *ngIf="showEvents" class="events">
-					<p *ngIf="events.length == 0">{{ "Common.None" | translate }}.</p>
-					<span *ngFor="let event of events">
-						[{{ event.timestamp | date }}] -
-						{{ "Property.Assessment.AchievedPoints" | translate }}:
-						{{ event.payload.oldScore }} -> {{ event.payload.newScore }}
-					</span>
-				</div>
-
-				<div class="assessment-target">
-					<app-assessment-target
-						[group]="group"
-						[targetedParticipant]="targetedParticipant"
-						[participant]="participantFacade.participant$ | async"
-						[courseId]="courseId"
-					>
-					</app-assessment-target>
-				</div>
-			</div>
-
-			<app-assessment-form
-				[assignment]="assignment"
-				(onPartialRemoved)="addToRemovedPartials($event)"
-			></app-assessment-form>
-
+		<div class="save-actions flex g-8">
 			<button
-				mat-raised-button
+				mat-flat-button
 				color="accent"
-				id="btn-save"
+				class="fit-content"
 				[disabled]="form.form.invalid"
 				(click)="onSave()"
 			>
 				{{ "Action.Save" | translate }}
 			</button>
-		</div>
 
-		<div id="right tab">
-			<app-assessment-target-picker
-				[courseId]="courseId"
-				[assignmentId]="assignmentId"
-				(onGroupSelected)="groupSelectedHandler($event)"
-				(onUserSelected)="userSelectedHandler($event)"
-				(onSwitchToEdit)="switchToEdit($event)"
+			<button
+				class="btn-save-as-draft fit-content"
+				mat-flat-button
+				[disabled]="form.form.invalid"
+				(click)="onSave(true)"
 			>
-			</app-assessment-target-picker>
+				{{ "Action.Custom.SaveAsDraft" | translate }}
+			</button>
 		</div>
+	</div>
+
+	<app-assessment-header
+		[assignment]="assignment"
+		[assessment]="assessment$ | async"
+		[courseId]="this.courseId"
+		[isEditMode]="true"
+	></app-assessment-header>
+
+	<div class="mt-16 mb-16">
+		<app-assessment-form [assignment]="assignment"></app-assessment-form>
+	</div>
+
+	<mat-hint>
+		{{ "Text.Assessment.Visibility" | translate }}
+	</mat-hint>
+
+	<div class="mt-16 flex g-8">
+		<button
+			mat-flat-button
+			color="accent"
+			id="btn-save"
+			[disabled]="form.form.invalid"
+			(click)="onSave()"
+		>
+			{{ "Action.Save" | translate }}
+		</button>
+
+		<button
+			class="btn-save-as-draft"
+			mat-flat-button
+			[disabled]="form.form.invalid"
+			(click)="onSave(true)"
+		>
+			{{ "Action.Custom.SaveAsDraft" | translate }}
+		</button>
 	</div>
 </div>

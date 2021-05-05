@@ -2,10 +2,11 @@
 	<nav mat-tab-nav-bar color="accent">
 		<a
 			mat-tab-link
-			routerLink="created"
+			[routerLink]="['/courses', courseId, 'assignments', assignment.id, 'assessments']"
 			routerLinkActive
 			#rla1="routerLinkActive"
 			[active]="rla1.isActive"
+			[routerLinkActiveOptions]="{ exact: true }"
 		>
 			{{ "Domain.Assessments" | translate }}
 		</a>

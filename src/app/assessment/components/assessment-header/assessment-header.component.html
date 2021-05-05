@@ -1,0 +1,114 @@
+<div
+	class="grid g-16"
+	*ngIf="assignment && assessment && participantFacade.participant$ | async as participant"
+>
+	<app-card>
+		<ng-container title>
+			<div class="flex g-16">
+				<span>{{ "Domain.Assessment" | translate }}: {{ assignment.name }}</span>
+				<app-chip
+					*ngIf="assessment.isDraft"
+					class="draft-chip"
+					icon="edit"
+					color="orange"
+					[text]="'Domain.Draft' | translate"
+				></app-chip>
+			</div>
+		</ng-container>
+		<ng-container subtitle>
+			<div class="flex mt-8 g-8">
+				<app-assignment-type-chip [type]="assignment.type"></app-assignment-type-chip>
+				<ng-container [ngSwitch]="assignment.collaboration">
+					<app-chip
+						*ngSwitchCase="collaborationEnum.GROUP"
+						icon="groups"
+						color="#009664"
+						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
+					></app-chip>
+					<app-chip
+						*ngSwitchCase="collaborationEnum.GROUPORSINGLE"
+						icon="groups"
+						color="#00838f"
+						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
+					></app-chip>
+					<app-chip
+						*ngSwitchCase="collaborationEnum.SINGLE"
+						icon="person"
+						color="#7f23c5"
+						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
+					></app-chip>
+					<app-chip *ngSwitchDefault></app-chip>
+				</ng-container>
+			</div>
+		</ng-container>
+
+		<ng-container
+			menu
+			*ngIf="(participantFacade.participant$ | async).isTeachingStaffMember && assessment"
+		>
+			<a
+				*ngIf="!isEditMode"
+				[routerLink]="[
+					'/courses',
+					courseId,
+					'assignments',
+					assignment.id,
+					'assessments',
+					'edit',
+					assessment.id
+				]"
+			>
+				<button mat-flat-button class="btn-edit" color="accent">
+					{{ "Action.Edit" | translate }}
+				</button>
+			</a>
+		</ng-container>
+
+		<ng-container content>
+			<div class="grid">
+				<span class="created-by text-light">
+					{{ "Common.CreatedBy" | translate }}
+					<span class="font-bold text">{{ assessment.creator.displayName }}</span>
+					({{ assessment.creationDate | date: "medium" }})
+				</span>
+
+				<span class="last-updated-by text-light" *ngIf="assessment.lastUpdatedBy">
+					{{ "Common.LastUpdatedBy" | translate }}
+					<span class="font-bold text">{{ assessment.lastUpdatedBy.displayName }}</span>
+					({{ assessment.updateDate | date: "medium" }})
+					<button
+						mat-icon-button
+						matTooltip="Load edit history"
+						(click)="loadAssessmentEvents()"
+						*ngIf="participant.isTeachingStaffMember"
+					>
+						<app-icon class="icon-light" name="history"></app-icon>
+					</button>
+
+					<div
+						*ngIf="showEvents && participant.isTeachingStaffMember"
+						class="grid events"
+					>
+						<ng-container *ngIf="assessmentEvents$ | async as events">
+							<span *ngFor="let event of events">
+								[{{ event.timestamp | date }}] -
+								{{ "Property.Assessment.AchievedPoints" | translate }}:
+								{{ event.payload.oldScore }} -> {{ event.payload.newScore }}
+							</span>
+
+							<p *ngIf="events?.length == 0">{{ "Common.None" | translate }}.</p>
+						</ng-container>
+					</div>
+				</span>
+			</div>
+		</ng-container>
+	</app-card>
+
+	<app-assessment-target
+		[group]="assessment.group"
+		[targetedParticipant]="assessment.participant"
+		[participant]="participant"
+		[courseId]="courseId"
+	>
+	</app-assessment-target>
+</div>

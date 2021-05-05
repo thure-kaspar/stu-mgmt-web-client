@@ -5,7 +5,7 @@ import { AssessmentOverviewComponent } from "./assessment-overview/assessment-ov
 import { CreatedAssessmentsComponent } from "./created-assessments/created-assessments.component";
 import { RegisteredGroupsComponent } from "./registered-groups/registered-groups.component";
 
-// courses/:courseId/assignments/:assignmentId
+// courses/:courseId/assignments/:assignmentId/assessments
 const routes: Routes = [
 	{
 		path: "",
@@ -16,10 +16,10 @@ const routes: Routes = [
 				component: AssessmentAllocationOverviewComponent,
 				pathMatch: "full"
 			},
-			{ path: "created", component: CreatedAssessmentsComponent },
+			{ path: "", component: CreatedAssessmentsComponent },
 			{ path: "registrations", component: RegisteredGroupsComponent, pathMatch: "full" },
 			{
-				path: "editor",
+				path: "edit",
 				loadChildren: () =>
 					import("../assessment-editor/assessment-editor.module").then(
 						m => m.AssessmentEditorModule
@@ -30,7 +30,7 @@ const routes: Routes = [
 				loadChildren: () =>
 					import("../submission/submission.module").then(m => m.SubmissionModule)
 			},
-			{ path: "", redirectTo: "created", pathMatch: "full" }
+			{ path: "", redirectTo: "", pathMatch: "full" }
 		]
 	}
 ];

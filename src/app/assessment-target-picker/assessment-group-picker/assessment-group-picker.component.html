@@ -51,10 +51,10 @@
 
 		<!-- Assigned evaluator Column -->
 		<ng-container matColumnDef="assignedTo">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+			<th class="column-assigned-to" mat-header-cell *matHeaderCellDef mat-sort-header>
 				{{ "Common.AssignedTo" | translate }}
 			</th>
-			<td mat-cell *matCellDef="let row">
+			<td class="column-assigned-to" mat-cell *matCellDef="let row">
 				<app-assessment-allocation
 					[courseId]="courseId"
 					[assignmentId]="assignmentId"

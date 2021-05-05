@@ -16,7 +16,7 @@ export class AssessmentOverviewComponent implements OnInit {
 	assignment$: Observable<AssignmentDto>;
 	courseId: string;
 
-	constructor(private store: Store, private route: ActivatedRoute) {}
+	constructor(private store: Store, public route: ActivatedRoute) {}
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);

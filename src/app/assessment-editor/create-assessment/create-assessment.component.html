@@ -1,41 +1,68 @@
 <div id="create-assessment-container" class="tab">
-	<div id="grid">
-		<div id="left">
-			<h2>{{ "Title.CreateAssessment" | translate }}: {{ assignment?.name }}</h2>
+	<div class="title-container flex space-between">
+		<h2>{{ "Title.CreateAssessment" | translate }}</h2>
 
-			<div class="assessment-target">
-				<app-assessment-target
-					[group]="forGroup$ | async"
-					[targetedParticipant]="forParticipant$ | async"
-					[participant]="participantFacade.participant$ | async"
-					[courseId]="courseId"
-				>
-				</app-assessment-target>
-			</div>
-
-			<app-assessment-form [assignment]="assignment"></app-assessment-form>
-
+		<div class="save-actions flex g-8">
 			<button
-				mat-raised-button
+				mat-flat-button
 				color="accent"
-				id="btn-create"
+				class="fit-content"
 				[disabled]="form.form.invalid"
 				(click)="onSave()"
 			>
 				{{ "Action.Create" | translate }}
 			</button>
 		</div>
+	</div>
 
-		<div id="right tab">
-			<app-assessment-target-picker
+	<div class="flex g-8">
+		<button mat-flat-button color="primary" (click)="openSearchGroupDialog()">
+			<app-icon name="search"></app-icon>
+			{{ "Title.SearchGroup" | translate }}
+		</button>
+
+		<button mat-flat-button color="primary" (click)="openSearchParticipantDialog()">
+			<app-icon name="search"></app-icon>
+			{{ "Title.SearchParticipant" | translate }}
+		</button>
+	</div>
+
+	<ng-container
+		*ngIf="{ forGroup: forGroup$ | async, forParticipant: forParticipant$ | async } as obs"
+	>
+		<div
+			class="assessment-target mt-16"
+			*ngIf="obs.forGroup || obs.forParticipant; else selectGroupOrParticipantText"
+		>
+			<app-assessment-target
+				[group]="obs.forGroup"
+				[targetedParticipant]="obs.forParticipant"
+				[participant]="participantFacade.participant$ | async"
 				[courseId]="courseId"
-				[assignmentId]="assignmentId"
-				(onGroupSelected)="groupSelectedHandler($event)"
-				(onUserSelected)="userSelectedHandler($event)"
-				(onSwitchToEdit)="switchToEdit($event)"
-				[selectedId]="selectedId"
 			>
-			</app-assessment-target-picker>
+			</app-assessment-target>
 		</div>
+
+		<ng-template #selectGroupOrParticipantText>
+			<div class="mt-16 text-light">
+				{{ "Text.Assessment.SelectGroupOrParticipant" | translate }}
+			</div>
+		</ng-template>
+	</ng-container>
+
+	<div class="mt-16">
+		<app-assessment-form [assignment]="assignment$ | async"></app-assessment-form>
+	</div>
+
+	<div class="mt-16">
+		<button
+			mat-raised-button
+			color="accent"
+			id="btn-create"
+			[disabled]="form.form.invalid"
+			(click)="onSave()"
+		>
+			{{ "Action.Create" | translate }}
+		</button>
 	</div>
 </div>

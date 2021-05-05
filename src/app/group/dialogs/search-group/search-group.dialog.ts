@@ -53,7 +53,7 @@ export class SearchGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	/**Closes the dialog and returns the selected courses. */
 	onConfirm(): void {
-		this.dialogRef.close(this.selection.selected);
+		this.dialogRef.close(this.selection.selected?.[0]);
 	}
 
 	searchGroups(triggeredByPaginator = false): void {
@@ -85,19 +85,5 @@ export class SearchGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 		} else {
 			this.selection.select(row);
 		}
-	}
-
-	/** Whether the number of selected elements matches the total number of rows. */
-	isAllSelected(): boolean {
-		const numSelected = this.selection.selected.length;
-		const numRows = this.dataSource.data.length;
-		return numSelected === numRows;
-	}
-
-	/** Selects all rows if they are not all selected; otherwise clear selection. */
-	masterToggle(): void {
-		this.isAllSelected()
-			? this.selection.clear()
-			: this.dataSource.data.forEach(row => this.selection.select(row));
 	}
 }

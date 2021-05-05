@@ -1,105 +1,116 @@
-<form id="assessment-form" [formGroup]="form" autocomplete="off">
-	<mat-card class="overall-card">
-		<span id="points-container">
-			<mat-label class="font-bold"
-				>{{ "Property.Assessment.AchievedPoints" | translate }}*:</mat-label
-			>
-			<div>
-				<mat-form-field id="achieved-points">
-					<input
-						matInput
-						mat-form
-						type="number"
-						formControlName="achievedPoints"
-						required
-					/>
-				</mat-form-field>
-				<span>
-					/ {{ assignment?.points }}
-					<ng-container *ngIf="assignment?.bonusPoints"
-						>({{ assignment.bonusPoints }}
-						{{ "Property.Assignment.BonusPoints" | translate }})</ng-container
-					>
-				</span>
-			</div>
-		</span>
-		<ng-container *ngIf="getErrors()">
-			<mat-error *ngFor="let error of getErrors()">
-				{{ error | translate }}
-			</mat-error>
-		</ng-container>
+<form class="grid g-16" id="assessment-form" [formGroup]="form" autocomplete="off">
+	<app-card>
+		<ng-container title>{{ "Common.Total" | translate }}</ng-container>
 
-		<mat-form-field appearance="outline">
-			<mat-label>{{ "Property.Assessment.Comment" | translate }}</mat-label>
-			<textarea rows="5" matInput class="full-width" formControlName="comment"></textarea>
-		</mat-form-field>
-	</mat-card>
+		<ng-container content>
+			<div class="grid">
+				<span id="points-container">
+					<mat-form-field>
+						<mat-label>{{ "Domain.Points" | translate }}</mat-label>
+						<input matInput mat-form type="number" formControlName="achievedPoints" />
+					</mat-form-field>
+					<span>
+						/ {{ assignment?.points }}
+						<ng-container *ngIf="assignment?.bonusPoints"
+							>({{ assignment.bonusPoints }}
+							{{ "Property.Assignment.BonusPoints" | translate }})</ng-container
+						>
+					</span>
+				</span>
+
+				<ng-container *ngIf="getErrors()">
+					<mat-error *ngFor="let error of getErrors()" class="mb-16">
+						{{ error | translate }}
+					</mat-error>
+				</ng-container>
+
+				<mat-form-field appearance="outline" class="comment-field">
+					<mat-label>{{ "Property.Assessment.Comment" | translate }}</mat-label>
+					<textarea
+						rows="5"
+						matInput
+						class="full-width"
+						formControlName="comment"
+					></textarea>
+				</mat-form-field>
+			</div>
+		</ng-container>
+	</app-card>
 
 	<div
 		id="partial-assessments"
 		formArrayName="partialAssessments"
 		*ngFor="let partial of getPartialAssessments()?.controls; let i = index"
 	>
-		<mat-card class="partial-assessment-form" [formGroup]="getPartialAssessment(i)">
-			<span class="title-points-severity-span">
-				<mat-form-field>
-					<mat-label>{{ "Property.PartialAssessment.Title" | translate }}</mat-label>
-					<input matInput formControlName="title" required />
-					<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
-				</mat-form-field>
+		<div class="partial-assessment-form" [formGroup]="getPartialAssessment(i)">
+			<div class="mb-8">
+				<mat-slide-toggle formControlName="draftOnly">
+					{{ "Property.PartialAssessment.DraftOnly" | translate }}
+				</mat-slide-toggle>
+			</div>
 
-				<mat-form-field>
-					<mat-label>{{ "Property.PartialAssessment.Points" | translate }}</mat-label>
-					<input class="points-input" matInput type="number" formControlName="points" />
-				</mat-form-field>
+			<mat-form-field>
+				<mat-label>{{ "Property.PartialAssessment.Title" | translate }}</mat-label>
+				<input matInput formControlName="title" required />
+				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+			</mat-form-field>
 
-				<mat-form-field>
-					<mat-select
-						class="severity-select"
-						formControlName="severity"
-						placeholder="{{ 'Property.PartialAssessment.Severity' | translate }}"
-					>
-						<mat-select-trigger
-							class="selected-severity"
-							[class]="partial.value.severity"
-						>
-							{{ "Enum.Severity." + partial.value.severity | translate }}
-						</mat-select-trigger>
+			<mat-form-field>
+				<mat-label>Key</mat-label>
+				<input matInput formControlName="key" />
+			</mat-form-field>
 
-						<mat-option [value]="null">-</mat-option>
-						<mat-option
-							[class]="severityEnum.INFORMATIONAL"
-							[value]="severityEnum.INFORMATIONAL"
-						>
-							{{ "Enum.Severity." + severityEnum.INFORMATIONAL | translate }}
-						</mat-option>
-						<mat-option [class]="severityEnum.WARNING" [value]="severityEnum.WARNING">
-							{{ "Enum.Severity." + severityEnum.WARNING | translate }}
-						</mat-option>
-						<mat-option [class]="severityEnum.ERROR" [value]="severityEnum.ERROR">
-							{{ "Enum.Severity." + severityEnum.ERROR | translate }}
-						</mat-option>
-						<mat-option [class]="severityEnum.CRITICAL" [value]="severityEnum.CRITICAL">
-							{{ "Enum.Severity." + severityEnum.CRITICAL | translate }}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
+			<mat-form-field>
+				<mat-label>{{ "Property.PartialAssessment.Points" | translate }}</mat-label>
+				<input class="points-input" matInput type="number" formControlName="points" />
+			</mat-form-field>
 
-				<button
-					type="button"
-					mat-icon-button
-					[matTooltip]="'Action.Remove' | translate"
-					(click)="removePartialAssessment(i)"
-				>
-					<app-icon class="text-red" name="clear"></app-icon>
-				</button>
-			</span>
-
-			<mat-form-field appearance="outline">
+			<mat-form-field appearance="outline" class="comment-field">
 				<mat-label>{{ "Property.PartialAssessment.Comment" | translate }}</mat-label>
 				<textarea rows="5" matInput class="full-width" formControlName="comment"></textarea>
 			</mat-form-field>
-		</mat-card>
+
+			<div class="mt-16 markers-outer">
+				<button mat-flat-button class="btn-remove" color="accent" (click)="addMarker(i)">
+					Add marker
+				</button>
+
+				<div class="markers">
+					<div *ngFor="let marker of getMarkers(i).controls; let markerIndex = index">
+						<div class="marker-actions flex">
+							<button
+								mat-icon-button
+								color="accent"
+								(click)="editMarker(marker.value, i, markerIndex)"
+							>
+								<app-icon class="icon-light" name="edit"></app-icon>
+							</button>
+							<button
+								mat-icon-button
+								color="primary"
+								(click)="removeMarker(i, markerIndex)"
+							>
+								<app-icon class="text-red" name="clear"></app-icon>
+							</button>
+						</div>
+						<app-marker [marker]="marker.value"></app-marker>
+					</div>
+				</div>
+			</div>
+
+			<div class="flex mt-16">
+				<button
+					class="fit-content btn-remove-partial"
+					type="button"
+					color="warn"
+					mat-flat-button
+					[matTooltip]="'Action.Remove' | translate"
+					(click)="removePartialAssessment(i)"
+				>
+					{{ "Action.Remove" | translate }}
+				</button>
+			</div>
+		</div>
 	</div>
 
 	<button

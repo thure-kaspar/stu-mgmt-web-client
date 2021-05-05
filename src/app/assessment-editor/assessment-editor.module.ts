@@ -6,9 +6,10 @@ import { EditAssessmentComponent } from "./edit-assessment/edit-assessment.compo
 import { SharedModule } from "../shared/shared.module";
 import { AssessmentTargetPickerModule } from "../assessment-target-picker/assessment-target-picker.module";
 import { AssessmentModule } from "../assessment/assessment.module";
+import { EditMarkerDialog } from './dialogs/edit-marker/edit-marker.dialog';
 
 @NgModule({
-	declarations: [CreateAssessmentComponent, AssessmentForm, EditAssessmentComponent],
+	declarations: [CreateAssessmentComponent, AssessmentForm, EditAssessmentComponent, EditMarkerDialog],
 	imports: [
 		SharedModule,
 		AssessmentModule,

@@ -1,0 +1,25 @@
+.marker {
+	background-color: var(--color-bg);
+	padding: 16px;
+	border-radius: 4px;
+}
+
+.HINT {
+	background-color: hsl(150, 56%, 41%, 0.2);
+}
+
+.INFO {
+	background-color: hsl(195, 88%, 43%, 0.2);
+}
+
+.WARNING {
+	background-color: hsl(44, 100%, 43%, 0.2);
+}
+
+.ERROR {
+	background-color: hsl(0, 100%, 50%, 0.2);
+}
+
+.preformatted {
+	margin: 0px !important;
+}

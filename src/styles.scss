@@ -452,10 +452,12 @@ mat-paginator {
 
 .text-red {
 	color: red;
+	fill: red;
 }
 
 .text-green {
 	color: green;
+	fill: green;
 }
 
 .uppercase {
@@ -521,7 +523,8 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 	background-color: var(--color-titlebar);
 }
 
-.mat-form-field-flex {
+.mat-form-field-flex,
+mat-select {
 	background-color: var(--card-bg) !important;
 }
 
@@ -580,4 +583,13 @@ app-edit-course .mat-tab-labels :last-child.mat-tab-label {
 
 .align-items-center {
 	align-items: center;
+}
+
+.fit-content {
+	width: fit-content;
+	height: fit-content;
+}
+
+.split {
+	grid-template-columns: 1fr 1fr;
 }
