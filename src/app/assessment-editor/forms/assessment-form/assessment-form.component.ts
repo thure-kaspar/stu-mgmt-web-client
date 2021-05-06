@@ -118,22 +118,22 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 		return this.getPartialAssessments().at(partialIndex).get("markers") as FormArray;
 	}
 
-	addMarker(partialIndex: number): void {
+	addMarker(partialIndex: number, severity: MarkerDto.SeverityEnum): void {
 		this.dialog
-			.open(EditMarkerDialog)
+			.open(EditMarkerDialog, { data: { severity } })
 			.afterClosed()
-			.subscribe(marker => {
+			.subscribe((marker: MarkerDto) => {
 				if (marker) {
 					this.getMarkers(partialIndex).push(
 						this.fb.group({
-							path: [null, Validators.required],
-							startLineNumber: [null, Validators.required],
-							endLineNumber: [null, Validators.required],
-							startColumn: [null],
-							endColumn: [null],
-							severity: [null],
-							comment: [null, Validators.required],
-							points: [null]
+							path: [marker.path, Validators.required],
+							startLineNumber: [marker.startLineNumber, Validators.required],
+							endLineNumber: [marker.endLineNumber, Validators.required],
+							startColumn: [marker.startColumn],
+							endColumn: [marker.endColumn],
+							severity: [marker.severity],
+							comment: [marker.comment, Validators.required],
+							points: [marker.points]
 						})
 					);
 					this.cdRef.detectChanges();

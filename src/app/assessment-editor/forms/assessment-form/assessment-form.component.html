@@ -71,13 +71,39 @@
 			</mat-form-field>
 
 			<div class="mt-16 markers-outer">
-				<button mat-flat-button class="btn-remove" color="accent" (click)="addMarker(i)">
-					Add marker
-				</button>
+				<div class="flex space-between">
+					<h2>Markers</h2>
+
+					<div class="flex marker-buttons g-8">
+						<button mat-flat-button class="btn-info" (click)="addMarker(i, 'INFO')">
+							<app-icon name="add"></app-icon>
+							INFO
+						</button>
+
+						<button mat-flat-button class="btn-hint" (click)="addMarker(i, 'HINT')">
+							<app-icon name="add"></app-icon>
+							HINT
+						</button>
+
+						<button
+							mat-flat-button
+							class="btn-warning"
+							(click)="addMarker(i, 'WARNING')"
+						>
+							<app-icon name="add"></app-icon>
+							WARNING
+						</button>
+
+						<button mat-flat-button class="btn-error" (click)="addMarker(i, 'ERROR')">
+							<app-icon name="add"></app-icon>
+							ERROR
+						</button>
+					</div>
+				</div>
 
 				<div class="markers">
 					<div *ngFor="let marker of getMarkers(i).controls; let markerIndex = index">
-						<div class="marker-actions flex">
+						<div class="flex marker-actions">
 							<button
 								mat-icon-button
 								color="accent"

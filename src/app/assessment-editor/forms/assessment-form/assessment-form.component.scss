@@ -23,6 +23,14 @@
 	border-radius: 4px;
 }
 
+.marker-buttons {
+	button {
+		height: fit-content;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+}
+
 .markers {
 	display: grid;
 	gap: 16px;
@@ -31,9 +39,30 @@
 
 .marker-actions {
 	justify-content: flex-end;
+	margin-bottom: -40px;
 }
 
 .btn-remove-partial {
 	margin-left: auto;
 	margin-right: 0;
+}
+
+.btn-info {
+	background-color: #0d9fcf;
+	color: white;
+}
+
+.btn-hint {
+	background-color: #2ea569;
+	color: white;
+}
+
+.btn-warning {
+	background-color: #daa000;
+	color: white;
+}
+
+.btn-error {
+	background-color: #ff0000;
+	color: white;
 }
