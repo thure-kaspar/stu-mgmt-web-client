@@ -30,7 +30,6 @@ import { AssessmentForm } from "../forms/assessment-form/assessment-form.compone
 export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements OnInit {
 	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
 
-	selectedId: string;
 	forParticipant$ = new Subject<ParticipantDto>();
 	forGroup$ = new Subject<GroupDto>();
 
@@ -63,6 +62,8 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		this.assignment$ = this.store.select(
 			AssignmentSelectors.selectAssignment(this.assignmentId)
 		);
+
+		this.setPreselectedGroupOrUser();
 
 		// TODO: Search Group dialog should use registered groups?
 	}
@@ -98,8 +99,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 			.afterClosed()
 			.subscribe(group => {
 				if (group) {
-					this.forGroup$.next(group);
-					this.forParticipant$.next(null);
+					this.groupSelectedHandler(group);
 				}
 			});
 	}
@@ -108,11 +108,63 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		this.dialog
 			.open(SearchParticipantDialog, { data: this.courseId })
 			.afterClosed()
-			.subscribe(p => {
-				if (p?.length > 0) {
-					this.forParticipant$.next(p[0]);
-					this.forGroup$.next(null);
+			.subscribe((participants: ParticipantDto[]) => {
+				if (participants?.length > 0) {
+					this.userSelectedHandler(participants[0]);
 				}
 			});
+	}
+
+	/**
+	 * If the URL-fragment contains `#group` or `#user` followed by the corresponding ID,
+	 * i.e. `#groupb4f24e81-dfa4-4641-af80-8e34e02d9c4a`, then this will select the specified group or user.
+	 */
+	private setPreselectedGroupOrUser(): void {
+		const fragment = this.route.snapshot.fragment;
+		const groupMatch = fragment?.match(/^group-(.+)/);
+		const userMatch = fragment?.match(/^user-(.+)/);
+
+		if (groupMatch) {
+			// Only pass id to handler, because it will query for group data itself
+			this.groupSelectedHandler({ id: groupMatch[1] } as any);
+		} else if (userMatch) {
+			this.participantService.getParticipant(this.courseId, userMatch[1]).subscribe(
+				user => this.userSelectedHandler(user),
+				error => {
+					this.toast.apiError(error);
+				}
+			);
+		}
+	}
+
+	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
+	groupSelectedHandler(group: GroupDto): void {
+		this.forParticipant$.next(undefined);
+
+		// Set route fragment
+		this.router.navigate([], { fragment: "group-" + group.id });
+
+		// Load members of the group
+		this.registrationService
+			.getRegisteredGroup(this.courseId, this.assignmentId, group.id)
+			.subscribe(
+				result => {
+					this.forGroup$.next(result);
+					this.form.patchModel({ groupId: group.id, userId: null });
+				},
+				error => {
+					this.toast.apiError(error);
+				}
+			);
+	}
+
+	/** Sets the selected user and removes the selected group, it it exists. */
+	userSelectedHandler(participant: ParticipantDto): void {
+		this.forGroup$.next(undefined);
+		this.form.patchModel({ userId: participant.userId, groupId: null });
+		this.forParticipant$.next(participant);
+
+		// Set route fragment
+		this.router.navigate([], { fragment: "user-" + participant.userId });
 	}
 }
