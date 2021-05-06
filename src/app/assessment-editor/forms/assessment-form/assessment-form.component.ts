@@ -5,7 +5,8 @@ import {
 	FormArray,
 	FormGroup,
 	ValidatorFn,
-	AbstractControl
+	AbstractControl,
+	ValidationErrors
 } from "@angular/forms";
 import { AbstractForm } from "../../../shared/abstract-form";
 import {
@@ -16,6 +17,15 @@ import {
 } from "../../../../../api";
 import { MatDialog } from "@angular/material/dialog";
 import { EditMarkerDialog } from "../../dialogs/edit-marker/edit-marker.dialog";
+
+/**
+ * Custom validator that checks, whether a `groupId` or `userId` was specified.
+ */
+const groupOrUserValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+	return control.get("groupId").value || control.get("userId").value
+		? null
+		: { noGroupOrUser: true };
+};
 
 @Component({
 	selector: "app-assessment-form",
@@ -34,14 +44,17 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 		private cdRef: ChangeDetectorRef
 	) {
 		super();
-		this.form = this.fb.group({
-			achievedPoints: [0, [this.achievedPointsMaxValueValidator()]],
-			userId: [null],
-			groupId: [null],
-			comment: [null],
-			isDraft: [false],
-			partialAssessments: this.fb.array([])
-		});
+		this.form = this.fb.group(
+			{
+				achievedPoints: [0, [this.achievedPointsMaxValueValidator()]],
+				userId: [null],
+				groupId: [null],
+				comment: [null],
+				isDraft: [false],
+				partialAssessments: this.fb.array([])
+			},
+			{ validators: [groupOrUserValidator] }
+		);
 	}
 
 	ngOnInit(): void {}
