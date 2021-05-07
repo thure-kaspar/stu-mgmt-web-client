@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { AuthTokenDto, CourseDto } from "../../../../api";
+import { CourseDto, UserDto } from "../../../../api";
 
 export const login = createAction(
 	"[Login Dialog] Login",
@@ -8,7 +8,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
 	"[login$ Effect] Login Success",
-	props<{ token: AuthTokenDto }>()
+	props<{ user: UserDto; accessToken: string }>()
 );
 
 export const loginFailure = createAction(

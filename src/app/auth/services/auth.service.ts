@@ -1,8 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { AuthCredentialsDto, AuthenticationService, AuthTokenDto } from "../../../../api";
+import { Observable } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
+import { AuthenticationService, UserDto } from "../../../../api";
 import { AuthActions, AuthSelectors } from "../../state/auth";
+
+type StoredAuthState = { user: UserDto; accessToken: string };
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -10,41 +14,47 @@ export class AuthService {
 
 	static readonly studentMgmtTokenKey = "studentMgmtToken";
 
-	constructor(
-		private authenticationService: AuthenticationService,
-		private store: Store,
-		private router: Router
-	) {}
+	constructor(private authenticationService: AuthenticationService, private store: Store) {}
 
 	/**
 	 * Returns the stored AccessToken (JWT), which can be assigned to the Authorization-header
 	 * to authenticate the user for requests to the server.
 	 */
 	static getAccessToken(): string {
-		const authToken = JSON.parse(
+		const authState = JSON.parse(
 			localStorage.getItem(AuthService.studentMgmtTokenKey)
-		) as AuthTokenDto;
-		return authToken?.accessToken;
+		) as StoredAuthState;
+		return authState?.accessToken;
+	}
+
+	static getUser(): UserDto {
+		const authState = JSON.parse(
+			localStorage.getItem(AuthService.studentMgmtTokenKey)
+		) as StoredAuthState;
+		return authState?.user;
+	}
+
+	static setAuthState(state: StoredAuthState): void {
+		localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(state));
 	}
 
 	/**
-	 * Login to the StudentMgmt-Backend directly.
+	 * **Only available when API is running in dev environment.**
+	 *
+	 * Sets the `accessToken` to the given `username` and queries the API to check whether
+	 * the given username is a valid test account. If successful, the user is logged in as the
+	 * specified user.
 	 */
-	async login(authCredentials: AuthCredentialsDto): Promise<void> {
-		const authToken = await this.authenticationService
-			.login(authCredentials)
-			.toPromise()
-			.catch(error => {
-				// Rethrow the error, so calling component is able to display the error
-				throw new Error(error.error.message);
-			});
+	devLogin(username: string): Observable<UserDto> {
+		AuthService.setAuthState({ accessToken: username, user: null });
 
-		// If login was successful, store the received authentication token
-		if (authToken) {
-			localStorage.setItem(AuthService.studentMgmtTokenKey, JSON.stringify(authToken));
-			this.store.dispatch(AuthActions.loginSuccess({ token: authToken }));
-			this.router.navigate(["/courses"]);
-		}
+		return this.authenticationService.whoAmI().pipe(
+			tap(user => {
+				const state = { user, accessToken: username };
+				AuthService.setAuthState(state);
+				this.store.dispatch(AuthActions.loginSuccess(state));
+			})
+		);
 	}
 
 	logout(): void {
@@ -57,12 +67,5 @@ export class AuthService {
 	 */
 	isLoggedIn(): boolean {
 		return !!localStorage.getItem(AuthService.studentMgmtTokenKey);
-	}
-
-	/**
-	 * Returns the stored AuthToken, containing information about the user's id, email, role and rights.
-	 */
-	getAuthToken(): AuthTokenDto {
-		return JSON.parse(localStorage.getItem(AuthService.studentMgmtTokenKey)) as AuthTokenDto;
 	}
 }

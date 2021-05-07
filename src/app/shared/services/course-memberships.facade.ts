@@ -65,6 +65,6 @@ export class CourseMembershipsFacade {
 	}
 
 	private getUserId(): string {
-		return this.authService.getAuthToken()?.user.id;
+		return AuthService.getUser()?.id;
 	}
 }

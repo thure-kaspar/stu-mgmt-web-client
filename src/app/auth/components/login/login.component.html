@@ -3,14 +3,15 @@
 		<mat-card-title>Login</mat-card-title>
 		<mat-card-content>
 			<mat-form-field class="form-field">
-				<mat-label for="email">Email</mat-label>
+				<mat-label>Username</mat-label>
 				<input
-					[(ngModel)]="email"
+					#username
 					matInput
+					value="mmustermann"
 					type="text"
 					name="email"
 					id="email"
-					(keydown.enter)="login()"
+					(keydown.enter)="login(username.value)"
 				/>
 			</mat-form-field>
 
@@ -23,14 +24,14 @@
 					type="submit"
 					class="full-width"
 					id="login-button"
-					(click)="login()"
+					(click)="login(username.value)"
 				>
 					Login
 				</button>
-				<button mat-flat-button color="primary" (click)="loginAsTutor()">
+				<button mat-flat-button color="primary" (click)="login('jdoe')">
 					Login as: Tutor
 				</button>
-				<button mat-flat-button color="primary" (click)="loginAsLecturer()">
+				<button mat-flat-button color="primary" (click)="login('mAdmin')">
 					Login as: Lecturer
 				</button>
 			</div>

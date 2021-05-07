@@ -198,7 +198,8 @@
     "Unauthorized": "You're not logged in.",
     "Unknown": "Unknown error",
     "ValueMissing": "Value is missing.",
-    "NoAdmissionCriteria": "This course did not define any admission criteria."
+    "NoAdmissionCriteria": "This course did not define any admission criteria.",
+    "Conflict": "Conflict"
   },
   "Event": {
     "UserJoinedCourseEvent": "joined the course.",

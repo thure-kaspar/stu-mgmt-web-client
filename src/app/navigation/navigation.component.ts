@@ -90,7 +90,7 @@ export class NavigationComponent implements OnInit {
 	}
 
 	async copyJwtToClipboard(): Promise<void> {
-		await navigator.clipboard.writeText(this.authService.getAuthToken().accessToken);
+		await navigator.clipboard.writeText(AuthService.getAccessToken());
 		this.toast.success("Copied!");
 	}
 }

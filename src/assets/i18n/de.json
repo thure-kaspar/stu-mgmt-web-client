@@ -198,7 +198,8 @@
     "Unauthorized": "Du bist nicht angemeldet.",
     "Unknown": "Unbekannter Fehler",
     "ValueMissing": "Fehlender Wert.",
-    "NoAdmissionCriteria": "Für diesen Kurs sind keine Zulassungskriterien festgelegt."
+    "NoAdmissionCriteria": "Für diesen Kurs sind keine Zulassungskriterien festgelegt.",
+    "Conflict": "Konflikt"
   },
   "Event": {
     "UserJoinedCourseEvent": "ist dem Kurs beigreten.",

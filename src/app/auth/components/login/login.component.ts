@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
@@ -7,29 +8,19 @@ import { AuthService } from "../../services/auth.service";
 	styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent {
-	email = "max.mustermann@test.com";
 	errorMessage: string;
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {}
 
-	async login(): Promise<void> {
-		const authCredentials = { email: this.email, password: "no_pw_required" };
-		await this.authService.login(authCredentials).catch(error => {
-			this.errorMessage = error;
-		});
-	}
-
-	async loginAsTutor(): Promise<void> {
-		const authCredentials = { email: "john.doe@test.com", password: "no_pw_required" };
-		await this.authService.login(authCredentials).catch(error => {
-			this.errorMessage = error;
-		});
-	}
-
-	async loginAsLecturer(): Promise<void> {
-		const authCredentials = { email: "mgtm.admin@test.com", password: "no_pw_required" };
-		await this.authService.login(authCredentials).catch(error => {
-			this.errorMessage = error;
+	login(username: string): void {
+		this.authService.devLogin(username).subscribe({
+			next: user => {
+				this.router.navigateByUrl("");
+			},
+			error: error => {
+				console.log(error);
+				this.errorMessage = error.error.message;
+			}
 		});
 	}
 }

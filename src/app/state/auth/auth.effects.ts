@@ -2,11 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
-import { AuthenticationService, AuthTokenDto } from "../../../../api";
+import { AuthenticationService } from "../../../../api";
 import { AuthenticationInfoDto } from "../../auth/auth-info.dto";
+import { AuthService } from "../../auth/services/auth.service";
 import { ToastService } from "../../shared/services/toast.service";
 import * as AuthActions from "./auth.actions";
 
@@ -18,14 +18,17 @@ export class AuthEffects {
 			switchMap(({ username, password }) =>
 				this.http.post(this.authUrl, { username, password }).pipe(
 					switchMap((authInfo: AuthenticationInfoDto) => {
-						return this.authApi.loginWithToken({ token: authInfo.token.token });
+						AuthService.setAuthState({ accessToken: authInfo.token.token } as any);
+						return this.authApi.whoAmI();
 					}),
-					map(token => {
-						this.toast.success(token.user.displayName, "Common.Welcome");
-						localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(token));
-						return AuthActions.loginSuccess({ token });
+					map(user => {
+						this.toast.success(user.displayName, "Common.Welcome");
+						const state = { user, accessToken: AuthService.getAccessToken() };
+						AuthService.setAuthState(state);
+						return AuthActions.loginSuccess(state);
 					}),
 					catchError(error => {
+						console.log(error);
 						return of(AuthActions.loginFailure({ error: error.error }));
 					})
 				)
@@ -50,11 +53,18 @@ export class AuthEffects {
 			this.actions$.pipe(
 				ofType(AuthActions.setCourses),
 				tap(action => {
-					const stored: AuthTokenDto = JSON.parse(
-						localStorage.getItem(this.studentMgmtTokenKey)
+					const user = AuthService.getUser();
+					const accessToken = AuthService.getAccessToken();
+
+					user.courses = action.courses;
+
+					localStorage.setItem(
+						this.studentMgmtTokenKey,
+						JSON.stringify({
+							user,
+							accessToken
+						})
 					);
-					stored.user.courses = action.courses;
-					localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(stored));
 				})
 			),
 		{ dispatch: false }
@@ -64,7 +74,6 @@ export class AuthEffects {
 
 	constructor(
 		private actions$: Actions,
-		private store: Store,
 		private http: HttpClient,
 		private authApi: AuthenticationService,
 		private router: Router,
