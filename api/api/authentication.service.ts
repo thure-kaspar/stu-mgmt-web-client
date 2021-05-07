@@ -17,9 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { AuthCredentialsDto } from '../model/authCredentialsDto';
-import { AuthSystemCredentials } from '../model/authSystemCredentials';
-import { AuthTokenDto } from '../model/authTokenDto';
+import { UserDto } from '../model/userDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -58,23 +56,25 @@ export class AuthenticationService {
 
 
     /**
-     * Login.
-     * Logs the user in to the StudentMgmt-Backend directly.
-     * @param body 
+     * Get user.
+     * Returns the authenticated user.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public login(body: AuthCredentialsDto, observe?: 'body', reportProgress?: boolean): Observable<AuthTokenDto>;
-    public login(body: AuthCredentialsDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AuthTokenDto>>;
-    public login(body: AuthCredentialsDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AuthTokenDto>>;
-    public login(body: AuthCredentialsDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling login.');
-        }
+    public whoAmI(observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public whoAmI(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public whoAmI(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public whoAmI(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -86,109 +86,10 @@ export class AuthenticationService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
 
-        return this.httpClient.request<AuthTokenDto>('post',`${this.basePath}/auth/login`,
+        return this.httpClient.request<UserDto>('get',`${this.basePath}/auth/whoAmI`,
             {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Login with token.
-     * Logs the user in to the StudentMgmt-Backend via the credentials provided by the external authentication system.
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public loginWithToken(body: AuthSystemCredentials, observe?: 'body', reportProgress?: boolean): Observable<AuthTokenDto>;
-    public loginWithToken(body: AuthSystemCredentials, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AuthTokenDto>>;
-    public loginWithToken(body: AuthSystemCredentials, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AuthTokenDto>>;
-    public loginWithToken(body: AuthSystemCredentials, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling loginWithToken.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<AuthTokenDto>('post',`${this.basePath}/auth/loginWithToken`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Register user.
-     * Creates a new account.
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public register(body: AuthCredentialsDto, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public register(body: AuthCredentialsDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public register(body: AuthCredentialsDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public register(body: AuthCredentialsDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling register.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<any>('post',`${this.basePath}/auth/register`,
-            {
-                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

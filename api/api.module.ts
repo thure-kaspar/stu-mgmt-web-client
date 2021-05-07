@@ -15,11 +15,8 @@ import { CoursesService } from './api/courses.service';
 import { CsvService } from './api/csv.service';
 import { DefaultService } from './api/default.service';
 import { GroupsService } from './api/groups.service';
-import { MailService } from './api/mail.service';
 import { NotificationService } from './api/notification.service';
 import { SubmissionService } from './api/submission.service';
-import { TaskSchedulerService } from './api/taskScheduler.service';
-import { TestService } from './api/test.service';
 import { UsersService } from './api/users.service';
 
 @NgModule({
@@ -39,15 +36,12 @@ import { UsersService } from './api/users.service';
     CsvService,
     DefaultService,
     GroupsService,
-    MailService,
     NotificationService,
     SubmissionService,
-    TaskSchedulerService,
-    TestService,
     UsersService ]
 })
 export class ApiModule {
-    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> { 
         return {
             ngModule: ApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]
