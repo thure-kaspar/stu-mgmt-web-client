@@ -65,15 +65,15 @@
 			</mat-radio-group>
 		</div>
 
-		<mat-form-field>
-			<mat-label>{{ "Property.Assignment.StartDate" | translate }}</mat-label>
-			<input matInput type="datetime-local" formControlName="startDate" />
-		</mat-form-field>
+		<app-date-time-picker
+			[label]="'Property.Assignment.StartDate' | translate"
+			[control]="$any(form.controls['startDate'])"
+		></app-date-time-picker>
 
-		<mat-form-field>
-			<mat-label>{{ "Property.Assignment.EndDate" | translate }}</mat-label>
-			<input matInput type="datetime-local" formControlName="endDate" />
-		</mat-form-field>
+		<app-date-time-picker
+			[label]="'Property.Assignment.EndDate' | translate"
+			[control]="$any(form.controls['endDate'])"
+		></app-date-time-picker>
 
 		<mat-form-field>
 			<mat-label>{{ "Property.Assignment.Points" | translate }}</mat-label>

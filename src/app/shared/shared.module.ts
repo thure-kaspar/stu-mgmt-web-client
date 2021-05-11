@@ -17,6 +17,7 @@ import { ParticipantAdmissionStatusComponent } from "./components/participant-ad
 import { ThumbChipComponent } from "./components/thumb-chip/thumb-chip.component";
 import { Paginator } from "./paginator/paginator.component";
 import { SemesterPipe } from "./pipes/semester.pipe";
+import { DateTimePickerComponent } from "./components/date-time-picker/date-time-picker.component";
 
 @NgModule({
 	declarations: [
@@ -31,9 +32,17 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		IconComponent,
 		AssignmentTypeChipComponent,
 		ThumbChipComponent,
-		ParticipantAdmissionStatusComponent
+		ParticipantAdmissionStatusComponent,
+		DateTimePickerComponent
 	],
-	imports: [CommonModule, AuthModule, MaterialModule, TranslateModule, FormsModule],
+	imports: [
+		CommonModule,
+		AuthModule,
+		MaterialModule,
+		TranslateModule,
+		FormsModule,
+		ReactiveFormsModule
+	],
 	exports: [
 		CommonModule,
 		AuthModule,
@@ -49,7 +58,8 @@ import { SemesterPipe } from "./pipes/semester.pipe";
 		IconComponent,
 		AssignmentTypeChipComponent,
 		ThumbChipComponent,
-		ParticipantAdmissionStatusComponent
+		ParticipantAdmissionStatusComponent,
+		DateTimePickerComponent
 	],
 	providers: []
 })

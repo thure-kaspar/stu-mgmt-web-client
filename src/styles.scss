@@ -354,7 +354,8 @@ app-icon {
 	justify-content: space-between !important;
 }
 
-mat-card {
+mat-card,
+mat-datepicker-content {
 	background-color: var(--card-bg) !important;
 }
 
