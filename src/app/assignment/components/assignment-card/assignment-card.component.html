@@ -109,11 +109,11 @@
 				<span class="font-bold uppercase x text-green"
 					>{{ "Common.Start" | translate }}:</span
 				>
-				{{ assignment.startDate | date: "dd.MM.YYYY (mm:HH)" }}
+				{{ assignment.startDate | date: "dd.MM.YYYY (HH:mm)" }}
 			</span>
 			<span class="enddate" *ngIf="assignment.endDate">
 				<span class="font-bold uppercase x text-red">{{ "Common.End" | translate }}:</span>
-				{{ assignment.endDate | date: "dd.MM.YYYY (mm:HH)" }}
+				{{ assignment.endDate | date: "dd.MM.YYYY (HH:mm)" }}
 			</span>
 		</div>
 
