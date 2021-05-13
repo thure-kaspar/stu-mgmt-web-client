@@ -134,6 +134,8 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 									hasPassed: roundedPoints > this.requiredPoints
 								};
 							}
+
+							return null;
 						})
 					);
 

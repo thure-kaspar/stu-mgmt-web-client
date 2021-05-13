@@ -250,6 +250,8 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		if (rule) {
 			return (assignment.points * rule.requiredPercent) / 100;
 		}
+
+		return undefined;
 	}
 
 	private setSemanticChartColors(requiredPoints: number): void {
