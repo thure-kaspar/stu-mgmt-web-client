@@ -5,7 +5,12 @@
 	"projects": {
 		"student-mgmt-client": {
 			"projectType": "application",
-			"schematics": {},
+			"schematics": {
+				"@schematics/angular:component": {
+					"changeDetection": "OnPush",
+					"style": "scss"
+				}
+			},
 			"root": "",
 			"sourceRoot": "src",
 			"prefix": "app",
