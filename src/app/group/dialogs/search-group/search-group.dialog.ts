@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { GroupDto, GroupsService } from "../../../../../api";
+import { GroupDto, GroupService } from "../../../../../api";
 import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../../shared/paginator/paginator.component";
@@ -32,7 +32,7 @@ export class SearchGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	constructor(
 		private dialogRef: MatDialogRef<SearchParticipantDialog>,
 		@Inject(MAT_DIALOG_DATA) public readonly courseId: string,
-		private groupService: GroupsService
+		private groupService: GroupService
 	) {
 		super();
 	}

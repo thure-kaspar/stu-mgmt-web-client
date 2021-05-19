@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { CourseParticipantsService, CoursesService, ParticipantDto } from "../../../../api";
+import { CourseParticipantsService, CourseService, ParticipantDto } from "../../../../api";
 import {
 	ChangeRoleDialog,
 	ChangeRoleDialogData
@@ -54,7 +54,7 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseRole = ParticipantDto.RoleEnum;
 
 	constructor(
-		private courseService: CoursesService,
+		private courseService: CourseService,
 		private courseParticipantsService: CourseParticipantsService,
 		private downloadService: DownloadService,
 		private route: ActivatedRoute,

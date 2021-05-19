@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
+ * The Student-Management-System-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -23,6 +23,7 @@ import { CourseDto } from '../model/courseDto';
 import { GroupDto } from '../model/groupDto';
 import { GroupEventDto } from '../model/groupEventDto';
 import { UserDto } from '../model/userDto';
+import { UserSettingsDto } from '../model/userSettingsDto';
 import { UserUpdateDto } from '../model/userUpdateDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,7 +31,7 @@ import { Configuration }                                     from '../configurat
 
 
 @Injectable()
-export class UsersService {
+export class UserService {
 
     protected basePath = '/';
     public defaultHeaders = new HttpHeaders();
@@ -539,6 +540,54 @@ export class UsersService {
     }
 
     /**
+     * Get settings.
+     * Returns the settings of a user.
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSettings(userId: string, observe?: 'body', reportProgress?: boolean): Observable<UserSettingsDto>;
+    public getSettings(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserSettingsDto>>;
+    public getSettings(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserSettingsDto>>;
+    public getSettings(userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getSettings.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<UserSettingsDto>('get',`${this.basePath}/users/${encodeURIComponent(String(userId))}/settings`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get user.
      * Retrieves the user.
      * @param userId 
@@ -699,6 +748,65 @@ export class UsersService {
         return this.httpClient.request<Array<UserDto>>('get',`${this.basePath}/users`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update settings.
+     * Updates the settings of a user.
+     * @param body 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateSettings(body: UserSettingsDto, userId: string, observe?: 'body', reportProgress?: boolean): Observable<UserSettingsDto>;
+    public updateSettings(body: UserSettingsDto, userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserSettingsDto>>;
+    public updateSettings(body: UserSettingsDto, userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserSettingsDto>>;
+    public updateSettings(body: UserSettingsDto, userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling updateSettings.');
+        }
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling updateSettings.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearer) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<UserSettingsDto>('put',`${this.basePath}/users/${encodeURIComponent(String(userId))}/settings`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

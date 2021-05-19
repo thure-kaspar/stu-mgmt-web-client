@@ -9,11 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CourseDto } from './courseDto';
-import { ParticipantDto } from './participantDto';
 
-export interface CourseAboutDto { 
-    course: CourseDto;
-    participantsCount: number;
-    teachingStaff: Array<ParticipantDto>;
+export interface UserSettingsDto { 
+    language: UserSettingsDto.LanguageEnum;
+    allowEmails: boolean;
+    blacklistedEvents?: any;
+}
+export namespace UserSettingsDto {
+    export type LanguageEnum = 'EN' | 'DE';
+    export const LanguageEnum = {
+        EN: 'EN' as LanguageEnum,
+        DE: 'DE' as LanguageEnum
+    };
 }

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject } from "rxjs";
-import { CourseDto, CoursesService } from "../../../../../api";
+import { CourseDto, CourseService } from "../../../../../api";
 import { getSemester, getSemesterList } from "../../../../../utils/helper";
 import { Paginator } from "../../../shared/paginator/paginator.component";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
@@ -32,7 +32,7 @@ export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	constructor(
 		public dialogRef: MatDialogRef<SearchCourseDialog, CourseDto[]>,
-		private courseService: CoursesService
+		private courseService: CourseService
 	) {
 		super();
 	}

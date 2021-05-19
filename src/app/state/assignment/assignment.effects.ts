@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
-import { AssignmentsService } from "../../../../api";
+import { AssignmentService } from "../../../../api";
 import * as AssignmentActions from "./assignment.actions";
 
 @Injectable({
@@ -29,5 +29,5 @@ export class AssignmentEffects {
 		)
 	);
 
-	constructor(private actions$: Actions, private assignmentService: AssignmentsService) {}
+	constructor(private actions$: Actions, private assignmentService: AssignmentService) {}
 }

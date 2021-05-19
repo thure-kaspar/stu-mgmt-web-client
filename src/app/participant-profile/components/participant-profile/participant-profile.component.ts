@@ -9,7 +9,7 @@ import {
 	CourseParticipantsService,
 	GroupEventDto,
 	ParticipantDto,
-	UsersService
+	UserService
 } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Participant } from "../../../domain/participant.model";
@@ -40,7 +40,7 @@ export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements
 
 	constructor(
 		private participantService: CourseParticipantsService,
-		private userService: UsersService,
+		private userService: UserService,
 		private admissionStatusService: AdmissionStatusService,
 		private participantFacade: ParticipantFacade,
 		private route: ActivatedRoute

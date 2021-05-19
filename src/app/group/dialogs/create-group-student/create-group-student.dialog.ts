@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CourseConfigService, GroupDto, GroupSettingsDto, GroupsService } from "../../../../../api";
+import { CourseConfigService, GroupDto, GroupSettingsDto, GroupService } from "../../../../../api";
 import { AuthService } from "../../../auth/services/auth.service";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ToastService } from "../../../shared/services/toast.service";
@@ -26,7 +26,7 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 		private dialogRef: MatDialogRef<CreateGroupStudentDialog>,
 		@Inject(MAT_DIALOG_DATA) public courseId: string,
 		private courseConfig: CourseConfigService,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private authService: AuthService,
 		private toast: ToastService
 	) {

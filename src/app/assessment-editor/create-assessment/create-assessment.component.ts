@@ -5,10 +5,10 @@ import { Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import {
 	AssessmentCreateDto,
-	AssessmentsService,
+	AssessmentService,
 	AssignmentDto,
 	AssignmentRegistrationService,
-	AssignmentsService,
+	AssignmentService,
 	CourseParticipantsService,
 	GroupDto,
 	ParticipantDto
@@ -42,8 +42,8 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 
 	constructor(
 		public participantFacade: ParticipantFacade,
-		public assignmentService: AssignmentsService,
-		private assessmentService: AssessmentsService,
+		public assignmentService: AssignmentService,
+		private assessmentService: AssessmentService,
 		private registrationService: AssignmentRegistrationService,
 		private participantService: CourseParticipantsService,
 		private route: ActivatedRoute,

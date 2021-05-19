@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
+ * The Student-Management-System-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -34,6 +34,9 @@ export interface CourseCreateDto {
      */
     isClosed: boolean;
     config: CourseConfigDto;
+    /**
+     * Usernames of the lecturers.
+     */
     lecturers?: Array<string>;
     links?: Array<LinkDto>;
 }

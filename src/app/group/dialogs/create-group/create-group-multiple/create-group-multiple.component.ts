@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { GroupDto, GroupsService, GroupCreateBulkDto } from "../../../../../../api";
+import { GroupDto, GroupService, GroupCreateBulkDto } from "../../../../../../api";
 import { SnackbarService } from "../../../../shared/services/snackbar.service";
 
 @Component({
@@ -19,7 +19,7 @@ export class CreateGroupMultipleComponent implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private snackbar: SnackbarService
 	) {
 		this.form = this.fb.group({

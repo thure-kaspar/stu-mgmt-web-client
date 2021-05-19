@@ -2,14 +2,14 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { switchMap, tap } from "rxjs/operators";
-import { AssignmentDto, AssignmentsService } from "../../../../api";
+import { AssignmentDto, AssignmentService } from "../../../../api";
 import { AssignmentActions, AssignmentSelectors } from "../../state/assignment";
 
 @Injectable({ providedIn: "root" })
 export class AssignmentManagementFacade {
 	assignments$ = this.store.select(AssignmentSelectors.selectAssignments);
 
-	constructor(private assignmentService: AssignmentsService, private store: Store) {}
+	constructor(private assignmentService: AssignmentService, private store: Store) {}
 
 	/**
 	 * Calls the API to retrieve the assignments of the specified course.

@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { UserDto, UsersService } from "../../../../api";
+import { UserDto, UserService } from "../../../../api";
 import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
 import { Paginator } from "../../shared/paginator/paginator.component";
 import { DialogService } from "../../shared/services/dialog.service";
@@ -35,7 +35,7 @@ export class UserManagementComponent extends UnsubscribeOnDestroy implements OnI
 	@ViewChild(Paginator, { static: true }) paginator: Paginator;
 
 	constructor(
-		private userService: UsersService,
+		private userService: UserService,
 		private dialog: MatDialog,
 		private dialogService: DialogService,
 		private toast: ToastService

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, map, switchMap, withLatestFrom } from "rxjs/operators";
-import { UsersService } from "../../../../../api";
+import { UserService } from "../../../../../api";
 import { AuthSelectors } from "../../auth";
 import * as ParticipantGroupsActions from "./groups.actions";
 
@@ -31,6 +31,6 @@ export class ParticipantGroupsEffects {
 	constructor(
 		private actions$: Actions,
 		private store: Store,
-		private userService: UsersService
+		private userService: UserService
 	) {}
 }

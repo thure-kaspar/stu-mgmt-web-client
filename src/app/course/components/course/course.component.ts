@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Actions, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { take, tap } from "rxjs/operators";
-import { GroupsService } from "../../../../../api";
+import { GroupService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
 import {
@@ -36,7 +36,7 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private courseMemberships: CourseMembershipsFacade,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private dialog: MatDialog,
 		private toast: ToastService,
 		private store: Store,

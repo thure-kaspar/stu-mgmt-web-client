@@ -2,7 +2,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
-import { UserDto, UsersService } from "../../../../../api";
+import { UserDto, UserService } from "../../../../../api";
 import { Paginator } from "../../../shared/paginator/paginator.component";
 import { BehaviorSubject, Subject } from "rxjs";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
@@ -35,7 +35,7 @@ export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 
 	constructor(
 		public dialogRef: MatDialogRef<SearchUserDialog, UserDto[]>,
-		private userService: UsersService
+		private userService: UserService
 	) {
 		super();
 	}

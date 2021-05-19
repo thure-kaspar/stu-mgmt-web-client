@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { AssessmentEventDto, AssessmentsService, AssignmentDto } from "../../../../../api";
+import { AssessmentEventDto, AssessmentService, AssignmentDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import {
 	AssignmentWithAssessment,
@@ -32,7 +32,7 @@ export class AssessmentViewerComponent implements OnInit {
 	constructor(
 		public participantFacade: ParticipantFacade,
 		private courseFacade: CourseFacade,
-		private assessmentService: AssessmentsService,
+		private assessmentService: AssessmentService,
 		private router: Router,
 		private route: ActivatedRoute
 	) {}

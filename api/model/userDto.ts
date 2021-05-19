@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
+ * The Student-Management-System-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -24,6 +24,9 @@ export interface UserDto {
     email?: string;
     username: string;
     displayName: string;
+    /**
+     * Courses that the user has signed up for.
+     */
     courses?: Array<CourseDto>;
 }
 export namespace UserDto {

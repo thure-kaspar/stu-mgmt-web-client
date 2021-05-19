@@ -5,7 +5,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
 import { filter, take } from "rxjs/operators";
-import { AssessmentDto, GroupsService, ParticipantDto } from "../../../../../api";
+import { AssessmentDto, GroupService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
@@ -35,7 +35,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 
 	constructor(
 		readonly participantFacade: ParticipantFacade,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private route: ActivatedRoute,
 		private router: Router,
 		private dialogService: DialogService,

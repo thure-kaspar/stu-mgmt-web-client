@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { CourseDto, CoursesService, UserDto } from "../../../../../api";
+import { CourseDto, CourseService, UserDto } from "../../../../../api";
 import { getSemester, getSemesterList } from "../../../../../utils/helper";
 import { AuthService } from "../../../auth/services/auth.service";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
@@ -32,7 +32,7 @@ export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit 
 
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
-	constructor(private courseService: CoursesService, public auth: AuthService) {
+	constructor(private courseService: CourseService, public auth: AuthService) {
 		super();
 	}
 

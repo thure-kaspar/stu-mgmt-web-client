@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { debounceTime, take, tap } from "rxjs/operators";
-import { GroupDto, GroupsService, ParticipantDto } from "../../../../../api";
+import { GroupDto, GroupService, ParticipantDto } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
@@ -50,7 +50,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		private dialog: MatDialog,
 		public participantFacade: ParticipantFacade,
 		public courseFacade: CourseFacade,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private toast: ToastService,
 		private router: Router,
 		private route: ActivatedRoute

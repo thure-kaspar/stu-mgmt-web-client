@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { AssignmentDto, AssignmentsService } from "../../../../../api";
+import { AssignmentDto, AssignmentService } from "../../../../../api";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
@@ -24,7 +24,7 @@ export class SearchAssignmentDialog implements OnInit {
 	displayedColumns = ["select", "name", "action"];
 
 	constructor(
-		private assignmentService: AssignmentsService,
+		private assignmentService: AssignmentService,
 		@Inject(MAT_DIALOG_DATA) public courseId: string,
 		private dialogRef: MatDialogRef<SearchAssignmentDialog>
 	) {}

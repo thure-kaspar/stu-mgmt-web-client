@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { combineLatest, Observable, of, throwError } from "rxjs";
 import { catchError, map, switchMap, take } from "rxjs/operators";
-import { CourseParticipantsService, GroupDto, GroupsService } from "../../../../api";
+import { CourseParticipantsService, GroupDto, GroupService } from "../../../../api";
 import { Participant } from "../../domain/participant.model";
 import { DialogService } from "../../shared/services/dialog.service";
 import { ToastService } from "../../shared/services/toast.service";
@@ -18,7 +18,7 @@ export class ParticipantFacade {
 
 	constructor(
 		private store: Store,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private courseParticipants: CourseParticipantsService,
 		private dialogService: DialogService,
 		private toast: ToastService

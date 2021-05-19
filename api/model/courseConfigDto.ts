@@ -1,6 +1,6 @@
 /**
  * Student-Management-System-API
- * The Student-Management-Sytem-API. <a href='http://localhost:3000/api-json'>JSON</a>
+ * The Student-Management-System-API. <a href='http://localhost:3000/api-json'>JSON</a>
  *
  * OpenAPI spec version: 1.0
  * 
@@ -22,7 +22,16 @@ export interface CourseConfigDto {
      * Password required to sign up for the course.
      */
     password?: string;
+    /**
+     * Settings that determine wether groups are allowed, allowed group sizes, etc.
+     */
     groupSettings?: GroupSettingsDto;
+    /**
+     * A rule-based description of the necessary requirements to receive admission to the exam or passing a course.
+     */
     admissionCriteria?: AdmissionCriteriaDto;
+    /**
+     * Templates that can be used in the client to create new assignments.
+     */
     assignmentTemplates?: Array<AssignmentTemplateDto>;
 }

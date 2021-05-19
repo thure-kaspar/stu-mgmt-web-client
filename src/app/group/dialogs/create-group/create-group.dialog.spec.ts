@@ -1,6 +1,6 @@
 import { TestBed, ComponentFixture, async } from "@angular/core/testing";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { GroupDto, GroupsService } from "../../../../../../api";
+import { GroupDto, GroupService } from "../../../../../../api";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -35,14 +35,14 @@ describe("", () => {
 	let component: CreateGroupDialog;
 	let fixture: ComponentFixture<CreateGroupDialog>;
 	let dialogRef: MatDialogRef<CreateGroupDialog>;
-	let groupService: GroupsService;
+	let groupService: GroupService;
 	let snackbar: MatSnackBar;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [CreateGroupDialog],
 			providers: [
-				{ provide: GroupsService, useFactory: mock_GroupService },
+				{ provide: GroupService, useFactory: mock_GroupService },
 				{ provide: MatDialogRef, useFactory: mock_MatDialogRef },
 				{ provide: FormBuilder, useClass: FormBuilder },
 				{ provide: MatSnackBar, useFactory: mock_MatSnackBar },
@@ -56,7 +56,7 @@ describe("", () => {
 		fixture = TestBed.createComponent(CreateGroupDialog);
 		component = fixture.componentInstance;
 		dialogRef = fixture.debugElement.injector.get(MatDialogRef);
-		groupService = fixture.debugElement.injector.get(GroupsService);
+		groupService = fixture.debugElement.injector.get(GroupService);
 		snackbar = fixture.debugElement.injector.get(MatSnackBar);
 
 		fixture.detectChanges();

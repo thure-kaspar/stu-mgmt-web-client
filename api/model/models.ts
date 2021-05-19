@@ -44,4 +44,5 @@ export * from './submissionCreateDto';
 export * from './submissionDto';
 export * from './subscriberDto';
 export * from './userDto';
+export * from './userSettingsDto';
 export * from './userUpdateDto';

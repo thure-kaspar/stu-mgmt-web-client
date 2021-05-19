@@ -9,7 +9,7 @@ import { filter, take } from "rxjs/operators";
 import {
 	AdmissionCriteriaDto,
 	AssessmentDto,
-	AssessmentsService,
+	AssessmentService,
 	AssignmentDto
 } from "../../../../api";
 import { nestedPropertyAccessor } from "../../../../utils/helper";
@@ -74,7 +74,7 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 
 	constructor(
 		private courseFacade: CourseFacade,
-		private assessmentService: AssessmentsService,
+		private assessmentService: AssessmentService,
 		private downloadService: DownloadService,
 		private route: ActivatedRoute,
 		private toast: ToastService,

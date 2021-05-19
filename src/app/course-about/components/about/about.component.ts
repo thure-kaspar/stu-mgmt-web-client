@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
-import { CourseAboutDto, CoursesService } from "../../../../../api";
+import { CourseAboutDto, CourseService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 
 @Component({
@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
 
 	courseId: string;
 
-	constructor(private courseService: CoursesService, private route: ActivatedRoute) {}
+	constructor(private courseService: CourseService, private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
 		this.courseId = getRouteParam("courseId", this.route);

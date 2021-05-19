@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupsService, GroupDto } from "../../../../../api";
+import { GroupService, GroupDto } from "../../../../../api";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CreateGroupMultipleComponent } from "./create-group-multiple/create-group-multiple.component";
@@ -20,7 +20,7 @@ export class CreateGroupDialog implements OnInit {
 	constructor(
 		public dialogRef: MatDialogRef<CreateGroupDialog>,
 		@Inject(MAT_DIALOG_DATA) public courseId: string,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private fb: FormBuilder,
 		private snackbar: SnackbarService
 	) {

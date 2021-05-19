@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupDto, GroupsService } from "../../../../../api";
+import { GroupDto, GroupService } from "../../../../../api";
 import { Participant } from "../../../domain/participant.model";
 import { ToastService } from "../../../shared/services/toast.service";
 
@@ -29,7 +29,7 @@ export class JoinGroupDialog implements OnInit {
 	constructor(
 		private dialogRef: MatDialogRef<JoinGroupDialog, boolean>,
 		@Inject(MAT_DIALOG_DATA) private data: JoinGroupDialogData,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private toast: ToastService
 	) {}
 

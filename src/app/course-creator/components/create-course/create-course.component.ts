@@ -8,7 +8,7 @@ import {
 	CourseCreateDto,
 	CourseDto,
 	CourseParticipantsService,
-	CoursesService,
+	CourseService,
 	ParticipantDto,
 	UserDto
 } from "../../../../../api";
@@ -46,7 +46,7 @@ export class CreateCourseComponent implements OnInit {
 	assignmentTemplatesForm: AssignmentTemplatesForm;
 
 	constructor(
-		private courseService: CoursesService,
+		private courseService: CourseService,
 		private courseConfigService: CourseConfigService,
 		private courseParticipantsService: CourseParticipantsService,
 		private fb: FormBuilder,

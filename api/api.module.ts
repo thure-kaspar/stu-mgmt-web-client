@@ -4,20 +4,20 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { AdmissionStatusService } from './api/admissionStatus.service';
+import { AssessmentService } from './api/assessment.service';
 import { AssessmentAllocationService } from './api/assessmentAllocation.service';
-import { AssessmentsService } from './api/assessments.service';
+import { AssignmentService } from './api/assignment.service';
 import { AssignmentRegistrationService } from './api/assignmentRegistration.service';
-import { AssignmentsService } from './api/assignments.service';
 import { AuthenticationService } from './api/authentication.service';
+import { CourseService } from './api/course.service';
 import { CourseConfigService } from './api/courseConfig.service';
 import { CourseParticipantsService } from './api/courseParticipants.service';
-import { CoursesService } from './api/courses.service';
 import { CsvService } from './api/csv.service';
 import { DefaultService } from './api/default.service';
-import { GroupsService } from './api/groups.service';
+import { GroupService } from './api/group.service';
 import { NotificationService } from './api/notification.service';
 import { SubmissionService } from './api/submission.service';
-import { UsersService } from './api/users.service';
+import { UserService } from './api/user.service';
 
 @NgModule({
   imports:      [],
@@ -25,23 +25,23 @@ import { UsersService } from './api/users.service';
   exports:      [],
   providers: [
     AdmissionStatusService,
+    AssessmentService,
     AssessmentAllocationService,
-    AssessmentsService,
+    AssignmentService,
     AssignmentRegistrationService,
-    AssignmentsService,
     AuthenticationService,
+    CourseService,
     CourseConfigService,
     CourseParticipantsService,
-    CoursesService,
     CsvService,
     DefaultService,
-    GroupsService,
+    GroupService,
     NotificationService,
     SubmissionService,
-    UsersService ]
+    UserService ]
 })
 export class ApiModule {
-    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> { 
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
         return {
             ngModule: ApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]

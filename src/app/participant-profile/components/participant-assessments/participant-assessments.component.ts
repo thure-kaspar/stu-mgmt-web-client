@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
-import { UsersService } from "../../../../../api";
+import { UserService } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import {
 	AssignmentWithAssessment,
@@ -26,7 +26,7 @@ export class ParticipantAssessmentsComponent extends UnsubscribeOnDestroy implem
 	courseId: string;
 
 	constructor(
-		private userService: UsersService,
+		private userService: UserService,
 		private store: Store,
 		private route: ActivatedRoute
 	) {

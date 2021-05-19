@@ -10,7 +10,7 @@ import {
 	AssessmentDto,
 	AssignmentDto,
 	GroupDto,
-	UsersService
+	UserService
 } from "../../../../../api";
 import { getRouteParam } from "../../../../../utils/helper";
 import { RoundingMethod } from "../../../../../utils/math";
@@ -71,7 +71,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		private router: Router,
 		private dialog: MatDialog,
 		private assignmentManagement: AssignmentManagementFacade,
-		private userService: UsersService,
+		private userService: UserService,
 		private translate: TranslateService,
 		private toast: ToastService,
 		private store: Store

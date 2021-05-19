@@ -9,7 +9,7 @@ import {
 } from "@angular/core";
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { AssignmentsService, CoursesService, GroupDto, ParticipantDto } from "../../../../api";
+import { AssignmentService, CourseService, GroupDto, ParticipantDto } from "../../../../api";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 
@@ -49,8 +49,8 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	private nameFilterSubscription: Subscription;
 
 	constructor(
-		private assigmentService: AssignmentsService,
-		private courseService: CoursesService,
+		private assigmentService: AssignmentService,
+		private courseService: CourseService,
 		private evaluatorsFacade: EvaluatorsFacade,
 		private snackbar: SnackbarService
 	) {}

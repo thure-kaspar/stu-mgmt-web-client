@@ -5,7 +5,7 @@ import { Subject } from "rxjs";
 import {
 	AssessmentDto,
 	AssessmentEventDto,
-	AssessmentsService,
+	AssessmentService,
 	AssessmentUpdateDto,
 	AssignmentDto,
 	GroupDto,
@@ -42,7 +42,7 @@ export class EditAssessmentComponent implements OnInit {
 
 	constructor(
 		public participantFacade: ParticipantFacade,
-		private assessmentService: AssessmentsService,
+		private assessmentService: AssessmentService,
 		private route: ActivatedRoute,
 		private router: Router,
 		private location: Location,

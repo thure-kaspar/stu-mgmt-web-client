@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, of, throwError } from "rxjs";
 import { catchError, switchMap } from "rxjs/operators";
-import { CourseParticipantsService, UsersService } from "../../../../api";
+import { CourseParticipantsService, UserService } from "../../../../api";
 import { AuthService } from "../../auth/services/auth.service";
 import { AuthActions } from "../../state/auth";
 
@@ -10,7 +10,7 @@ import { AuthActions } from "../../state/auth";
 export class CourseMembershipsFacade {
 	constructor(
 		private courseParticipantsService: CourseParticipantsService,
-		private userService: UsersService,
+		private userService: UserService,
 		private authService: AuthService,
 		private store: Store
 	) {}

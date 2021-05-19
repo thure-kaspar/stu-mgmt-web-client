@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { UserDto, UsersService, UserUpdateDto } from "../../../../../api";
+import { UserDto, UserService, UserUpdateDto } from "../../../../../api";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
 import { ToastService } from "../../../shared/services/toast.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -21,7 +21,7 @@ export class UpdateUserDialog extends UnsubscribeOnDestroy implements OnInit {
 		public dialogRef: MatDialogRef<UpdateUserDialog, UserDto>,
 		@Inject(MAT_DIALOG_DATA) public user: UserDto,
 		private fb: FormBuilder,
-		private userService: UsersService,
+		private userService: UserService,
 		private toast: ToastService
 	) {
 		super();

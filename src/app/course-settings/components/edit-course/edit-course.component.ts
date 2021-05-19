@@ -10,7 +10,7 @@ import {
 	CourseConfigService,
 	CourseConfigUpdateDto,
 	CourseDto,
-	CoursesService,
+	CourseService,
 	GroupSettingsUpdateDto
 } from "../../../../../api";
 import { getSemester } from "../../../../../utils/helper";
@@ -77,7 +77,7 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 		private route: ActivatedRoute,
 		private router: Router,
 		private courseConfigService: CourseConfigService,
-		private courseService: CoursesService,
+		private courseService: CourseService,
 		private dialog: MatDialog,
 		private toast: ToastService
 	) {

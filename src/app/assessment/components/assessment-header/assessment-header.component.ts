@@ -3,7 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import {
 	AssessmentDto,
 	AssessmentEventDto,
-	AssessmentsService,
+	AssessmentService,
 	AssignmentDto
 } from "../../../../../api";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
@@ -25,7 +25,7 @@ export class AssessmentHeaderComponent implements OnInit {
 
 	constructor(
 		public participantFacade: ParticipantFacade,
-		private assessmentService: AssessmentsService
+		private assessmentService: AssessmentService
 	) {}
 
 	ngOnInit(): void {}

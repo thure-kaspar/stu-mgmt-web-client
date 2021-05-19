@@ -8,7 +8,7 @@ import {
 	ViewChild,
 	ChangeDetectionStrategy
 } from "@angular/core";
-import { GroupsService, GroupDto, GroupWithAssignedEvaluatorDto } from "../../../../api";
+import { GroupService, GroupDto, GroupWithAssignedEvaluatorDto } from "../../../../api";
 import { Observable, Subscription, BehaviorSubject } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { Paginator } from "../../shared/paginator/paginator.component";
@@ -45,7 +45,7 @@ export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 	@ViewChild(Paginator, { static: true }) private paginator: Paginator;
 
 	constructor(
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private route: ActivatedRoute,
 		private snackbar: SnackbarService
 	) {}

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupDto, GroupSettingsDto, GroupsService, GroupUpdateDto } from "../../../../../api";
+import { GroupDto, GroupSettingsDto, GroupService, GroupUpdateDto } from "../../../../../api";
 import { Course } from "../../../domain/course.model";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
@@ -30,7 +30,7 @@ export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	constructor(
 		private dialogRef: MatDialogRef<EditGroupDialog, GroupDto>,
 		@Inject(MAT_DIALOG_DATA) private groupId: string,
-		private groupService: GroupsService,
+		private groupService: GroupService,
 		private courseFacade: CourseFacade,
 		private participantFacade: ParticipantFacade,
 		private toast: ToastService
