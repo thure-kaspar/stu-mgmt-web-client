@@ -333,6 +333,10 @@
       "Email": "Email",
       "Role": "Role",
       "Username": "Username"
+    },
+    "UserSettings": {
+      "Language": "Preferred language",
+      "AllowEmails": "Allow email-notifications"
     }
   },
   "Text": {
@@ -380,6 +384,17 @@
     "Assessment": {
       "Visibility": "Students will only be able to view the assessment once the assignment is set to EVALUATED. ",
       "SelectGroupOrParticipant": "Please select a group or participant."
+    },
+    "UserSettings": {
+      "Language": "Determines the language of received emails.",
+      "BlacklistedEvents": {
+        "ASSIGNMENT_STARTED": "Assignment has started",
+        "ASSIGNMENT_EVALUATED": "Assessment received",
+        "ASSESSMENT_SCORE_CHANGED": "Score of an assessment was changed",
+        "PARTICIPANT_JOINED_GROUP": "Participant joined my group",
+        "PARTICIPANT_LEFT_GROUP": "Participant left my group"
+      },
+      "EmailNotifications": "Notify me about ..."
     }
   },
   "Title": {

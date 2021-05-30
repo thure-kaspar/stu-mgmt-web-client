@@ -333,6 +333,10 @@
       "Email": "Email",
       "Role": "Rolle",
       "Username": "Nutzername"
+    },
+    "UserSettings": {
+      "Language": "Bevorzugte Sprache",
+      "AllowEmails": "Email-Benachrichtigungen erlauben"
     }
   },
   "Text": {
@@ -380,6 +384,17 @@
     "Assessment": {
       "Visibility": "Studenten können die Bewertung erst einsehen, wenn die zugehörige Aufgabe auf BEWERTET gesetzt wurde.",
       "SelectGroupOrParticipant": "Bitte Gruppe oder Teilnehmer auswählen."
+    },
+    "UserSettings": {
+      "Language": "Beeinflusst die Sprache von versendeten Emails.",
+      "BlacklistedEvents": {
+        "ASSESSMENT_SCORE_CHANGED": "Erreichte Punktzahl von Bewertung wurde verändert",
+        "ASSIGNMENT_EVALUATED": "Bewertung für Aufgabe erhalten",
+        "ASSIGNMENT_STARTED": "Start einer Hausaufgabe",
+        "PARTICIPANT_JOINED_GROUP": "Teilnehmer ist meiner Gruppe beigetreten",
+        "PARTICIPANT_LEFT_GROUP": "Teilnehmer hat meine Gruppe verlassen"
+      },
+      "EmailNotifications": "Informiere mich über ..."
     }
   },
   "Title": {

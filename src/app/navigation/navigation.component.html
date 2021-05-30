@@ -47,6 +47,13 @@
 							{{ t.name }}
 						</button>
 					</mat-menu>
+
+					<a routerLink="/user/settings" class="link-none" *ngIf="obs.user">
+						<button mat-menu-item>
+							{{ "Misc.Settings" | translate }}
+						</button>
+					</a>
+
 					<button mat-menu-item (click)="copyJwtToClipboard()" *ngIf="_isDevelopmentEnv">
 						Copy JWT to clipboard
 					</button>
