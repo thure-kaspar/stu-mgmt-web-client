@@ -151,36 +151,9 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 		this.router.navigate([], { fragment: this.tabs[index] });
 	}
 
-	onSave(): void {
-		const courseData = this.form.value;
-		const groupSettings = this.form.get("config.groupSettings").value;
-		const config: CourseConfigUpdateDto = {
-			password: this.form.get("config.password").value
-		};
-		const admissionCriteria: AdmissionCriteriaDto = {
-			rules: this.admissionCriteriaForm.getRules().value
-		};
+	saveBasicData(): void {
+		const update: CourseDto = this.form.value;
 
-		switch (this.selectedIndex) {
-			case 0:
-				this.saveBasicData(courseData);
-				break;
-			case 1:
-				this.saveGroupsSettings(groupSettings);
-				break;
-			case 2:
-				this.saveSecrets(config);
-				break;
-			case 3:
-				this.saveAdmissionCriteria(admissionCriteria);
-				break;
-			default:
-				this.toast.warning("No tab selected.");
-				break;
-		}
-	}
-
-	private saveBasicData(update: CourseDto): void {
 		this.subs.sink = this.courseService.updateCourse(update, this.courseId).subscribe({
 			next: result => {
 				this.form.patchValue(result);
@@ -192,7 +165,9 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 		});
 	}
 
-	private saveGroupsSettings(groupSettings: GroupSettingsUpdateDto): void {
+	saveGroupsSettings(): void {
+		const groupSettings: GroupSettingsUpdateDto = this.form.get("config.groupSettings").value;
+
 		this.subs.sink = this.courseConfigService
 			.updateGroupSettings(groupSettings, this.courseId)
 			.subscribe({
@@ -206,7 +181,11 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 			});
 	}
 
-	private saveSecrets(secrets: CourseConfigUpdateDto): void {
+	saveSecrets(): void {
+		const secrets: CourseConfigUpdateDto = {
+			password: this.form.get("config.password").value as string
+		};
+
 		this.subs.sink = this.courseConfigService
 			.updateCourseConfig(secrets, this.courseId)
 			.subscribe({
@@ -220,7 +199,9 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 			});
 	}
 
-	private saveAdmissionCriteria(criteria: AdmissionCriteriaDto): void {
+	saveAdmissionCriteria(): void {
+		const criteria: AdmissionCriteriaDto = this.form.get("config.admissionCriteria").value;
+
 		this.subs.sink = this.courseConfigService
 			.updateAdmissionCriteria(criteria, this.courseId)
 			.subscribe({

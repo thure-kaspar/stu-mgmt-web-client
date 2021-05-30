@@ -55,3 +55,30 @@ mat-card-title {
 		}
 	}
 }
+
+::ng-deep .form-container {
+	.mat-tab-group {
+		flex-direction: row !important;
+		border-radius: 4px;
+	}
+
+	.mat-tab-labels {
+		flex-direction: column !important;
+	}
+
+	.mat-tab-label-active {
+		border-right: 2px solid var(--accent) !important;
+	}
+
+	.mat-ink-bar {
+		display: none !important;
+	}
+
+	.mat-tab-body-wrapper {
+		padding-left: 32px;
+		padding-right: 32px;
+		padding-bottom: 16px;
+		padding-top: 8px;
+		width: 100%;
+	}
+}
