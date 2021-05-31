@@ -261,10 +261,10 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		}));
 	}
 
-	download(): void {
+	exportToExcel(): void {
 		this.downloadService.downloadFromApi(
-			`csv/courses/${this.courseId}/assignments/${this.assignmentId}/assessments`,
-			`${this.courseId}-${this.assignmentId}-assessments.tsv`
+			`export/${this.courseId}/assessments?assignmentId=${this.assignmentId}`,
+			`${this.courseId}-${this.assignmentId}-assessments.xlsx`
 		);
 	}
 }

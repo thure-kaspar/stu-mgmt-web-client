@@ -251,10 +251,10 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 			});
 	}
 
-	download(): void {
+	exportToExcel(): void {
 		this.downloadService.downloadFromApi(
-			`csv/courses/${this.courseId}/assignments/${this.assignmentId}/registrations`,
-			`${this.courseId}-${this.assignmentId}-registered-groups.tsv`
+			`export/${this.courseId}/registrations?assignmentId=${this.assignmentId}`,
+			`${this.courseId}-${this.assignmentId}-registered-groups.xlsx`
 		);
 	}
 }

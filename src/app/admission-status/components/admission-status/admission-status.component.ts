@@ -250,10 +250,10 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 		return allRuleStats;
 	}
 
-	downloadCsv(): void {
+	exportToExcel(): void {
 		this.downloadService.downloadFromApi(
-			`csv/courses/${this.courseId}/admission-status`,
-			`${this.courseId}-admission-status.tsv`
+			`export/${this.courseId}/admission-status`,
+			`${this.courseId}-admission-status.xlsx`
 		);
 	}
 }

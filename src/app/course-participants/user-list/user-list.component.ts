@@ -166,10 +166,10 @@ export class UserListComponent extends UnsubscribeOnDestroy implements OnInit {
 			);
 	}
 
-	downloadCsv(): void {
+	exportToExcel(): void {
 		this.downloadService.downloadFromApi(
-			`csv/courses/${this.courseId}/users`,
-			`${this.courseId}-participant.tsv`
+			`export/${this.courseId}/participants`,
+			`${this.courseId}-participants.xlsx`
 		);
 	}
 

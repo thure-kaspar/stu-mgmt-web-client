@@ -80,10 +80,10 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 		});
 	}
 
-	downloadCsv(): void {
+	exportToExcel(): void {
 		this.downloadService.downloadFromApi(
-			`csv/courses/${this.courseId}/admission-status/overview`,
-			`${this.courseId}-assessments.tsv`
+			`export/${this.courseId}/points-overview`,
+			`${this.courseId}-points-overview.xlsx`
 		);
 	}
 }
