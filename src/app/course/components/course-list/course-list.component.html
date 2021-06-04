@@ -5,7 +5,7 @@
 			<a
 				class="link-none"
 				[routerLink]="['/courses/create']"
-				*ngIf="user?.role === roles.MGMTADMIN || user?.role === roles.SYSTEMADMIN"
+				*ngIf="user?.role === roles.MGMT_ADMIN || user?.role === roles.SYSTEM_ADMIN"
 			>
 				<button mat-flat-button class="btn-add" color="accent">
 					<app-icon name="add"></app-icon>

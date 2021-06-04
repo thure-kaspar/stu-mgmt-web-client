@@ -36,7 +36,7 @@
 
 	<div class="result" *ngIf="result">
 		<ng-container [ngSwitch]="rule.type">
-			<ng-container *ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL">
+			<ng-container *ngSwitchCase="ruleTypes.REQUIRED_PERCENT_OVERALL">
 				<span
 					><span class="font-bold text-light"
 						>{{ "Property.Assessment.AchievedPoints" | translate }} ({{
@@ -57,7 +57,7 @@
 				</span>
 			</ng-container>
 
-			<ng-container *ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES">
+			<ng-container *ngSwitchCase="ruleTypes.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES">
 				<span
 					><span class="font-bold text-light"
 						>{{ "Property.AdmissionRule.FailedAssignments" | translate }}:</span

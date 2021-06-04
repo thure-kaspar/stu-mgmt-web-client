@@ -11,7 +11,7 @@ export class ToastService {
 	success(
 		message?: string,
 		title = "Message.Success",
-		interpolatedParams?: object,
+		interpolatedParams?: any,
 		override?: Partial<IndividualConfig>
 	): void {
 		this.toast.success(
@@ -25,7 +25,7 @@ export class ToastService {
 	error(
 		message?: string,
 		title?: string,
-		interpolatedParams?: object,
+		interpolatedParams?: any,
 		override?: Partial<IndividualConfig>
 	): void {
 		this.toast.error(
@@ -52,7 +52,7 @@ export class ToastService {
 	warning(
 		message?: string,
 		title?: string,
-		interpolatedParams?: object,
+		interpolatedParams?: any,
 		override?: Partial<IndividualConfig>
 	): void {
 		this.toast.warning(
@@ -66,7 +66,7 @@ export class ToastService {
 	info(
 		message?: string,
 		title?: string,
-		interpolatedParams?: object,
+		interpolatedParams?: any,
 		override?: Partial<IndividualConfig>
 	): void {
 		this.toast.info(
@@ -80,7 +80,7 @@ export class ToastService {
 	 * Tries to find the translation of the given `word`.
 	 * Returns `undefined` if no translation found or word was undefined.
 	 */
-	private tryGetTranslation(word?: string, params?: object): string {
+	private tryGetTranslation(word?: string, params?: any): string {
 		return word ? this.translate.instant(word, params) : undefined;
 	}
 }

@@ -55,10 +55,10 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 		const map = new AssignmentsStateMap();
 		for (const assignment of assignments) {
 			switch (assignment.state) {
-				case AssignmentDto.StateEnum.INPROGRESS:
+				case AssignmentDto.StateEnum.IN_PROGRESS:
 					map.inProgress.push(assignment);
 					break;
-				case AssignmentDto.StateEnum.INREVIEW:
+				case AssignmentDto.StateEnum.IN_REVIEW:
 					map.inReview.push(assignment);
 					break;
 				case AssignmentDto.StateEnum.EVALUATED:

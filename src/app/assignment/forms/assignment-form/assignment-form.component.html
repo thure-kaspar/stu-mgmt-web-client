@@ -9,8 +9,8 @@
 		<mat-form-field>
 			<mat-label>{{ "Property.Assignment.State" | translate }}</mat-label>
 			<mat-select formControlName="state" required>
-				<mat-option [value]="stateEnum.INPROGRESS">{{
-					"Enum.AssignmentState." + stateEnum.INPROGRESS | translate
+				<mat-option [value]="stateEnum.IN_PROGRESS">{{
+					"Enum.AssignmentState." + stateEnum.IN_PROGRESS | translate
 				}}</mat-option>
 				<mat-option [value]="stateEnum.CLOSED">{{
 					"Enum.AssignmentState." + stateEnum.CLOSED | translate
@@ -18,8 +18,8 @@
 				<mat-option [value]="stateEnum.INVISIBLE">{{
 					"Enum.AssignmentState." + stateEnum.INVISIBLE | translate
 				}}</mat-option>
-				<mat-option [value]="stateEnum.INREVIEW">{{
-					"Enum.AssignmentState." + stateEnum.INREVIEW | translate
+				<mat-option [value]="stateEnum.IN_REVIEW">{{
+					"Enum.AssignmentState." + stateEnum.IN_REVIEW | translate
 				}}</mat-option>
 				<mat-option [value]="stateEnum.EVALUATED">{{
 					"Enum.AssignmentState." + stateEnum.EVALUATED | translate
@@ -59,8 +59,8 @@
 				<mat-radio-button [value]="collaborationEnum.SINGLE">{{
 					"Enum.CollaborationType." + collaborationEnum.SINGLE | translate
 				}}</mat-radio-button>
-				<mat-radio-button [value]="collaborationEnum.GROUPORSINGLE">{{
-					"Enum.CollaborationType." + collaborationEnum.GROUPORSINGLE | translate
+				<mat-radio-button [value]="collaborationEnum.GROUP_OR_SINGLE">{{
+					"Enum.CollaborationType." + collaborationEnum.GROUP_OR_SINGLE | translate
 				}}</mat-radio-button>
 			</mat-radio-group>
 		</div>

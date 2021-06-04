@@ -57,9 +57,9 @@ export class UserManagementComponent extends UnsubscribeOnDestroy implements OnI
 
 		const roles = [];
 		if (this.filter.includeUsers) roles.push(UserDto.RoleEnum.USER);
-		if (this.filter.includeMgmtAdmins) roles.push(UserDto.RoleEnum.MGMTADMIN);
-		if (this.filter.includeSystemAdmins) roles.push(UserDto.RoleEnum.SYSTEMADMIN);
-		if (this.filter.includeAdminTools) roles.push(UserDto.RoleEnum.ADMINTOOL);
+		if (this.filter.includeMgmtAdmins) roles.push(UserDto.RoleEnum.MGMT_ADMIN);
+		if (this.filter.includeSystemAdmins) roles.push(UserDto.RoleEnum.SYSTEM_ADMIN);
+		if (this.filter.includeAdminTools) roles.push(UserDto.RoleEnum.ADMIN_TOOL);
 
 		this.subs.sink = this.userService
 			.getUsers(skip, take, this.filter.username, this.filter.displayName, roles, "response")

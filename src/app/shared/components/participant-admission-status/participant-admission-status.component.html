@@ -55,14 +55,16 @@
 							<ng-container [ngSwitch]="rule.type">
 								<span
 									class="text-light"
-									*ngSwitchCase="ruleTypes.REQUIREDPERCENTOVERALL"
+									*ngSwitchCase="ruleTypes.REQUIRED_PERCENT_OVERALL"
 									>{{
 										"Enum.RuleType." + rule.type
 											| translate: { requiredPercent: rule.requiredPercent }
 									}}.</span
 								>
 								<ng-container
-									*ngSwitchCase="ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES"
+									*ngSwitchCase="
+										ruleTypes.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES
+									"
 								>
 									<span class="text-light"
 										>{{
@@ -81,7 +83,7 @@
 						</div>
 
 						<div class="result">
-							<ng-container *ngIf="rule.type === ruleTypes.REQUIREDPERCENTOVERALL">
+							<ng-container *ngIf="rule.type === ruleTypes.REQUIRED_PERCENT_OVERALL">
 								<span class="text-light"
 									>{{ "Common.Achieved" | translate }}:
 								</span>
@@ -91,7 +93,9 @@
 							</ng-container>
 
 							<ng-container
-								*ngIf="rule.type === ruleTypes.INDIVIDUALPERCENTWITHALLOWEDFAILURES"
+								*ngIf="
+									rule.type === ruleTypes.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES
+								"
 							>
 								<span class="text-light">{{ "Domain.Failed" | translate }}: </span>
 								<span class="font-bold">

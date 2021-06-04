@@ -43,9 +43,9 @@ export class AdmissionCriteriaForm implements OnInit {
 	ngOnInit(): void {}
 
 	addRule(rule: AdmissionRuleDto): void {
-		if (rule?.type === this.ruleTypeEnum.REQUIREDPERCENTOVERALL) {
+		if (rule?.type === this.ruleTypeEnum.REQUIRED_PERCENT_OVERALL) {
 			this._addRequiredPercentOverallRule(rule);
-		} else if (rule?.type === this.ruleTypeEnum.INDIVIDUALPERCENTWITHALLOWEDFAILURES) {
+		} else if (rule?.type === this.ruleTypeEnum.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES) {
 			this._addPassedXPercentWithAtLeastYPercentRule(
 				rule as IndividualPercentWithAllowedFailuresRuleDto
 			);
@@ -59,7 +59,7 @@ export class AdmissionCriteriaForm implements OnInit {
 		this.getRules()?.push(
 			this.fb.group({
 				...this.baseRuleFormGroup(rule),
-				type: [this.ruleTypeEnum.REQUIREDPERCENTOVERALL, Validators.required]
+				type: [this.ruleTypeEnum.REQUIRED_PERCENT_OVERALL, Validators.required]
 			})
 		);
 	}
@@ -71,7 +71,10 @@ export class AdmissionCriteriaForm implements OnInit {
 		this.getRules()?.push(
 			this.fb.group({
 				...this.baseRuleFormGroup(rule),
-				type: [this.ruleTypeEnum.INDIVIDUALPERCENTWITHALLOWEDFAILURES, Validators.required],
+				type: [
+					this.ruleTypeEnum.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES,
+					Validators.required
+				],
 				allowedFailures: [
 					rule?.allowedFailures ?? 0,
 					[Validators.required, Validators.min(0)]

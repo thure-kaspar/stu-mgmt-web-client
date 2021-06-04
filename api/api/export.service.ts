@@ -26,7 +26,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class DefaultService {
+export class ExportService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -84,13 +84,31 @@ export class DefaultService {
     }
 
     /**
+     * @param courseId 
+     * @param domain 
+     * @param assignmentId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public appControllerGetUptime(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<object>;
-    public appControllerGetUptime(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<object>>;
-    public appControllerGetUptime(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<object>>;
-    public appControllerGetUptime(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public exportControllerExport(courseId: string, domain: string, assignmentId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+    public exportControllerExport(courseId: string, domain: string, assignmentId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+    public exportControllerExport(courseId: string, domain: string, assignmentId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+    public exportControllerExport(courseId: string, domain: string, assignmentId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling exportControllerExport.');
+        }
+        if (domain === null || domain === undefined) {
+            throw new Error('Required parameter domain was null or undefined when calling exportControllerExport.');
+        }
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling exportControllerExport.');
+        }
+
+        let queryParameters = new HttpParams({encoder: this.encoder});
+        if (assignmentId !== undefined && assignmentId !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>assignmentId, 'assignmentId');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -98,7 +116,6 @@ export class DefaultService {
         if (httpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -112,8 +129,9 @@ export class DefaultService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<object>(`${this.configuration.basePath}/uptime`,
+        return this.httpClient.get<any>(`${this.configuration.basePath}/export/${encodeURIComponent(String(courseId))}/${encodeURIComponent(String(domain))}`,
             {
+                params: queryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -38,8 +38,8 @@
 					<mat-form-field>
 						<mat-label>{{ "Property.AssignmentTemplate.State" | translate }}</mat-label>
 						<mat-select formControlName="state">
-							<mat-option [value]="stateEnum.INPROGRESS">{{
-								"Enum.AssignmentState." + stateEnum.INPROGRESS | translate
+							<mat-option [value]="stateEnum.IN_PROGRESS">{{
+								"Enum.AssignmentState." + stateEnum.IN_PROGRESS | translate
 							}}</mat-option>
 							<mat-option [value]="stateEnum.CLOSED">{{
 								"Enum.AssignmentState." + stateEnum.CLOSED | translate
@@ -47,8 +47,8 @@
 							<mat-option [value]="stateEnum.INVISIBLE">{{
 								"Enum.AssignmentState." + stateEnum.INVISIBLE | translate
 							}}</mat-option>
-							<mat-option [value]="stateEnum.INREVIEW">{{
-								"Enum.AssignmentState." + stateEnum.INREVIEW | translate
+							<mat-option [value]="stateEnum.IN_REVIEW">{{
+								"Enum.AssignmentState." + stateEnum.IN_REVIEW | translate
 							}}</mat-option>
 							<mat-option [value]="stateEnum.EVALUATED">{{
 								"Enum.AssignmentState." + stateEnum.EVALUATED | translate
@@ -86,8 +86,9 @@
 							<mat-option [value]="collaborationEnum.GROUP">{{
 								"Enum.Collaboration." + collaborationEnum.GROUP | translate
 							}}</mat-option>
-							<mat-option [value]="collaborationEnum.GROUPORSINGLE">{{
-								"Enum.Collaboration." + collaborationEnum.GROUPORSINGLE | translate
+							<mat-option [value]="collaborationEnum.GROUP_OR_SINGLE">{{
+								"Enum.Collaboration." + collaborationEnum.GROUP_OR_SINGLE
+									| translate
 							}}</mat-option>
 						</mat-select>
 					</mat-form-field>
