@@ -55,7 +55,11 @@
 
 		<div>
 			<app-thumb-chip
-				*ngIf="assignment.state === 'EVALUATED'"
+				*ngIf="
+					assignment.state === 'EVALUATED' &&
+					(assignment.assessment?.hasPassed === true ||
+						assignment.assessment?.hasPassed === false)
+				"
 				[condition]="assignment.assessment?.hasPassed"
 			></app-thumb-chip>
 		</div>
