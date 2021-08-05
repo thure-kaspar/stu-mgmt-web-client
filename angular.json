@@ -34,15 +34,17 @@
 							"src/styles.scss",
 							"node_modules/ngx-toastr/toastr.css"
 						],
-						"scripts": [],
-						"vendorChunk": true,
-						"extractLicenses": false,
-						"buildOptimizer": false,
-						"sourceMap": true,
-						"optimization": false,
-						"namedChunks": true
+						"scripts": []
 					},
 					"configurations": {
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						},
 						"production": {
 							"fileReplacements": [
 								{
@@ -81,10 +83,14 @@
 						"browserTarget": "student-mgmt-client:build"
 					},
 					"configurations": {
+						"development": {
+							"browserTarget": "student-mgmt-client:build:development"
+						},
 						"production": {
 							"browserTarget": "student-mgmt-client:build:production"
 						}
-					}
+					},
+					"defaultConfiguration": "development"
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
