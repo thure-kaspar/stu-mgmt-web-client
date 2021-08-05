@@ -49,11 +49,11 @@
 					</button>
 					<mat-menu #userOptionsMenu="matMenu" yPosition="above">
 						<button mat-menu-item (click)="editUser(row)">
-							<app-icon name="edit" class="mr-16"></app-icon>
+							<app-icon name="edit" class="mr-16 icon-light"></app-icon>
 							<span>{{ "Action.Edit" | translate }}</span>
 						</button>
 						<button mat-menu-item (click)="removeUser(row)">
-							<app-icon name="delete" class="mr-16"></app-icon>
+							<app-icon name="delete" class="mr-16 icon-light"></app-icon>
 							<span class="text-red">{{ "Action.Remove" | translate }}</span>
 						</button>
 					</mat-menu>
