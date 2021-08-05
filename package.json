@@ -3,8 +3,8 @@
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
-		"start": "gulp",
-		"build": "gulp build",
+		"start": "ng serve",
+		"build": "ng build",
 		"start:pwa": "http-server -p 8080 --proxy http://localhost:8080? -c-1 dist/student-mgmt-client",
 		"test": "jest",
 		"test:e2e": "cypress open",
@@ -12,7 +12,8 @@
 		"lint:fix": "eslint src --ext .ts --fix",
 		"prettier:check": "prettier --check **/*",
 		"prettier:write": "prettier --write **/*",
-		"apigen:stdmgmt": "openapi-generator-cli generate"
+		"apigen:stdmgmt": "openapi-generator-cli generate",
+		"svg-sprite": "gulp svg-sprite"
 	},
 	"private": true,
 	"dependencies": {
