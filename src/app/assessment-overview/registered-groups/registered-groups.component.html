@@ -71,13 +71,19 @@
 		<td mat-cell *matCellDef="let row">
 			<mat-chip-list>
 				<mat-chip
+					class="participant-chip"
 					[removable]="true"
 					*ngFor="let member of row.members"
 					(removed)="unregisterParticipant(member)"
 					disableRipple
 				>
 					{{ member.displayName }} ({{ member.username }})
-					<app-icon matChipRemove name="clear"></app-icon>
+					<app-icon
+						size="18"
+						class="remove-participant-icon"
+						matChipRemove
+						name="clear"
+					></app-icon>
 				</mat-chip>
 			</mat-chip-list>
 		</td>
