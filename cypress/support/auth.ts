@@ -72,9 +72,26 @@ const student: AuthInfo = {
 	accessToken: "mmustermann"
 };
 
+const notInCourse: AuthInfo = {
+	user: {
+		id: "57951d37-df30-4133-990f-fd12cee5f1bd",
+		matrNr: 999999,
+		email: "not.in.course@test.com",
+		username: "notInCourse",
+		displayName: "notInCourse",
+		role: "USER",
+		courses: []
+	},
+	accessToken: "notInCourse"
+};
+
 export const account = {
+	/** Account with `MGMT_ADMIN` role that is `LECTURER` in java-wise1920. */
 	mgmtAdmin,
-	student
+	/** Account with `USER` role that is `STUDENT` in java-wise1920. */
+	student,
+	/** Account with `USER` role that is not a member of any course. */
+	notInCourse
 };
 
 /**
