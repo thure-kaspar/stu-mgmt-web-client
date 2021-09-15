@@ -33,11 +33,13 @@
 
 .warning {
 	display: flex;
+	font-weight: 500;
 	gap: 8px;
 	padding-top: 16px;
 
 	app-icon {
 		margin-top: -2px;
+		fill: #daa000;
 	}
 }
 
