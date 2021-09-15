@@ -1,18 +1,16 @@
 import { getSemester, getSemesterString } from "../../../utils/helper";
+import { account, useAccount } from "../../support/auth";
 
-describe("Registered Groups", () => {
-	const courseName = "Programmierpraktikum I: Java";
-	const courseId = "java-wise1920";
+describe("Course list", () => {
+	const course = {
+		courseId: "java-wise1920",
+		name: "Programmierpraktikum I: Java"
+	};
+
 	const totalCourseCount = 4;
 
 	beforeEach(() => {
-		cy.request({
-			method: "POST",
-			url: "http://localhost:3000/auth/login",
-			body: { email: "not.in.course@test.com", password: "no_pw_required" }
-		}).then(resp => {
-			window.localStorage.setItem("studentMgmtToken", JSON.stringify(resp.body));
-		});
+		useAccount(account.mgmtAdmin);
 		cy.visit("/courses");
 	});
 
@@ -42,15 +40,14 @@ describe("Registered Groups", () => {
 		cy.get("[data-course-title]").should("have.length", 2);
 	});
 
-	it.only("Clicking on course navigates to course", () => {
+	it("User is member of course -> Clicking on course navigates to course", () => {
 		cy.get(".course-filter-container #semester")
 			.contains(getSemesterString(getSemester(new Date())))
 			.click()
 			.get("[data-option-all]")
 			.click();
 
-		cy.get("[data-course-title]").contains(courseName).click();
-		cy.get("input[type=password]").type("password");
-		cy.get(".btn-join").click();
+		cy.get("[data-course-title]").contains(course.name).click();
+		cy.url().should("contain", course.courseId);
 	});
 });

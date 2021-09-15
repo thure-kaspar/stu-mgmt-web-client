@@ -1,3 +1,5 @@
+import { account, useAccount } from "../../../support/auth";
+
 describe("Registered Groups", () => {
 	const courseId = "java-wise1920";
 	const assignmentId = "f50b8474-1fb9-4d69-85a2-76648d0fd3f9";
@@ -5,13 +7,7 @@ describe("Registered Groups", () => {
 	const totalGroupCount = 3;
 
 	beforeEach(() => {
-		cy.request({
-			method: "POST",
-			url: "http://localhost:3000/auth/login",
-			body: { email: "mgtm.admin@test.com", password: "no_pw_required" }
-		}).then(resp => {
-			window.localStorage.setItem("studentMgmtToken", JSON.stringify(resp.body));
-		});
+		useAccount(account.mgmtAdmin);
 		cy.visit(`/courses/${courseId}/assignments/${assignmentId}/assessments/registrations`);
 	});
 
