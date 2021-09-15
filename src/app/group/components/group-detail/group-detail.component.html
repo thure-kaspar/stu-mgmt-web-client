@@ -18,7 +18,7 @@
 				<mat-menu #menu="matMenu">
 					<div id="menu-container">
 						<button mat-menu-item (click)="onEditGroup()">
-							<app-icon class="mr-16" name="edit"></app-icon>
+							<app-icon class="mr-16 icon-light" name="edit"></app-icon>
 							{{ "Action.Edit" | translate }}
 						</button>
 						<button
@@ -27,7 +27,7 @@
 							*ngIf="isGroupMember(participant)"
 						>
 							<span class="text-red">
-								<app-icon class="mr-16" name="cancel"></app-icon>
+								<app-icon class="mr-16 icon-light" name="cancel"></app-icon>
 								{{ "Action.Custom.LeaveGroup" | translate }}
 							</span>
 						</button>
@@ -37,7 +37,7 @@
 							*ngIf="participant.isTeachingStaffMember"
 						>
 							<span class="text-red">
-								<app-icon class="mr-16" name="delete"></app-icon
+								<app-icon class="mr-16 icon-light" name="delete"></app-icon
 								>{{ "Action.Delete" | translate }}
 							</span>
 						</button>
