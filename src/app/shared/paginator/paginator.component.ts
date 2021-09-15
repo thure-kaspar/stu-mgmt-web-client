@@ -43,7 +43,7 @@ export class Paginator implements OnInit {
 		this.matPaginator._intl.getRangeLabel = (a, b, c) =>
 			this.translate.instant("Misc.Paginator.RangeLabel", {
 				currentPage: this._currentPage + 1,
-				numberOfPages: this.matPaginator.getNumberOfPages()
+				numberOfPages: Math.max(this.matPaginator.getNumberOfPages(), 1) // Display "1" when there are no pages
 			});
 	}
 
