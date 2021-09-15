@@ -13,6 +13,8 @@
 		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"@typescript-eslint/no-unused-vars": "warn",
 		"no-case-declarations": "off",
-		"@typescript-eslint/camelcase": "off"
+		"@typescript-eslint/camelcase": "off",
+		"no-use-before-define": "off",
+		"@typescript-eslint/no-use-before-define": "off"
 	}
 }
