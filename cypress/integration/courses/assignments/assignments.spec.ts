@@ -1,4 +1,5 @@
 import { account, useAccount } from "../../../support/auth";
+import { Selector } from "../../../support/elements";
 
 describe("Assignment list", () => {
 	const courseId = "java-wise1920";
@@ -18,13 +19,13 @@ describe("Assignment list", () => {
 		// Asserts that new content is loaded when switching between courses
 
 		// First course should have 8 assignments
-		cy.get("[data-assignment-name]").should("have.length", 8);
+		cy.getBySelector(Selector.assignment.card).should("have.length", 8);
 
 		// Locate link to other course in sidebar and click
 		cy.get(".course-membership-list").contains(otherCourseId).click();
 
 		// Other course should only have 4 assignments
 		cy.url().should("contain", otherCourseId);
-		cy.get("[data-assignment-name]").should("have.length", 4);
+		cy.getBySelector(Selector.assignment.card).should("have.length", 4);
 	});
 });

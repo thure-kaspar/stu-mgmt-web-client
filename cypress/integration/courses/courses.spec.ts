@@ -1,8 +1,9 @@
 import { getSemester, getSemesterString } from "../../../utils/helper";
 import { account, useAccount } from "../../support/auth";
+import { Selector } from "../../support/elements";
 
 function clickOnCourseWithTitle(title: string): void {
-	cy.get("[data-course-title]").contains(title).click();
+	cy.getBySelector(Selector.course.courseListLink).contains(title).click();
 }
 
 /** Opens the "Semester" dropdown and select the "All" option. */
@@ -27,11 +28,11 @@ describe("Course list", () => {
 		setSemesterFilterToAll();
 
 		cy.get(".table-container")
-			.get("[data-course-title]")
+			.getBySelector(Selector.course.courseListLink)
 			.should("have.length", totalCourseCount);
 
 		cy.get(".course-filter-container").get("#title").type("java");
-		cy.get("[data-course-title]").should("have.length", 3);
+		cy.getBySelector(Selector.course.courseListLink).should("have.length", 3);
 	});
 
 	it("Filters courses by semester", () => {
@@ -42,7 +43,7 @@ describe("Course list", () => {
 			.contains("SoSe 2020")
 			.click();
 
-		cy.get("[data-course-title]").should("have.length", 2);
+		cy.getBySelector(Selector.course.courseListLink).should("have.length", 2);
 	});
 
 	describe("Clicking on a course", () => {
@@ -56,10 +57,10 @@ describe("Course list", () => {
 			cy.url().should("contain", course.courseId);
 
 			// Course page should display some information (assignments)
-			cy.get("[data-assignment-name]").should("have.length.greaterThan", 0);
+			cy.getBySelector(Selector.assignment.card).should("have.length.greaterThan", 0);
 		});
 
-		it.only("User is NOT a member | Course requires password -> Opens Join Dialog", () => {
+		it("User is NOT a member | Course requires password -> Opens Join Dialog", () => {
 			useAccount(account.notInCourse);
 			setSemesterFilterToAll();
 			clickOnCourseWithTitle(course.title);

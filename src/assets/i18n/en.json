@@ -249,7 +249,8 @@
     "Settings": "Settings",
     "UnsavedChanges": "Unsaved changes",
     "Notifications": "Notifications",
-    "CurrentStatus": "Current status"
+    "CurrentStatus": "Current status",
+    "NoPasswordRequired": "No password required"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "If you continue, your unsaved changes will be discarded.",

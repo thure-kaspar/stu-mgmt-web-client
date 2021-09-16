@@ -249,7 +249,8 @@
     "Settings": "Einstellungen",
     "UnsavedChanges": "Ungespeicherte Änderungen",
     "Notifications": "Benachrichtigungen",
-    "CurrentStatus": "Aktueller Stand"
+    "CurrentStatus": "Aktueller Stand",
+    "NoPasswordRequired": "\nKein Einschreibeschlüssel notwendig"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "Wenn Sie fortfahren, werden ihre ungespeicherten Änderungen verworfen.",

@@ -1,4 +1,4 @@
-<div *ngIf="canJoinDto" class="dialog-container">
+<div *ngIf="canJoinDto" class="dialog-container" data-test="join-course-dialog">
 	<mat-card-title matDialogTitle
 		>{{ 'Title.JoinCourse' | translate }}: {{courseId}}</mat-card-title
 	>
@@ -11,11 +11,11 @@
 			</mat-form-field>
 
 			<ng-template #noPwRequiredText>
-				<p>No password required.</p>
+				<p>{{ 'Misc.NoPasswordRequired' | translate }}.</p>
 			</ng-template>
 		</ng-container>
 
-		<mat-error *ngIf="error">{{error}}</mat-error>
+		<mat-error *ngIf="error" data-test="join-course-error">{{ error | translate }}</mat-error>
 	</div>
 
 	<div matDialogActions class="dialog-actions">
@@ -28,6 +28,8 @@
 		>
 			{{ 'Action.Join' | translate }}
 		</button>
-		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
+		<button class="btn-cancel" mat-button (click)="onCancel()">
+			{{ 'Action.Cancel' | translate }}
+		</button>
 	</div>
 </div>
