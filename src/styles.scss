@@ -10,6 +10,7 @@
 	--titlebar-height: 56px;
 	--margin-default: 8px;
 	--margin-content: 128px;
+	--max-width: 1024px;
 
 	--color-bg: #f1f1f1;
 	--color-titlebar: white;
@@ -302,6 +303,16 @@ app-icon {
 	width: 100%;
 	min-height: 100%;
 	max-height: max-content;
+}
+
+.page-container {
+	padding-top: 32px;
+	padding-bottom: 32px;
+	padding-left: var(--margin-default);
+	padding-right: var(--margin-default);
+	max-width: var(--max-width);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .dialog-container {

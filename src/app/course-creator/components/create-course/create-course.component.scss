@@ -1,13 +1,15 @@
-.form-container {
-	padding-top: 16px;
-	padding-bottom: 16px;
-	padding-left: var(--margin-default);
-	padding-right: var(--margin-default);
-}
-
 mat-card-title {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 16px;
+
+	button {
+		height: fit-content;
+	}
+}
+
+.btn-create {
+	margin-left: 16px;
 }
 
 #basic-data,

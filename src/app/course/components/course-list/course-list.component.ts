@@ -21,7 +21,7 @@ class CourseFilter {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit {
-	displayedColumns: string[] = ["title", "semester"];
+	displayedColumns: string[] = ["semester", "title"];
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<CourseDto>([]));
 
 	filter = new CourseFilter();

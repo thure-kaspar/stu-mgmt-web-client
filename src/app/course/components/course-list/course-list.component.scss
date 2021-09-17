@@ -1,23 +1,13 @@
-.course-list-container {
-	padding-top: 16px;
-	padding-left: var(--margin-default);
-	padding-right: var(--margin-default);
-}
-
-.title {
-	display: flex;
-	align-items: center;
-	padding-bottom: 16px;
-}
-
 .btn-add {
+	position: absolute;
 	margin-left: 16px;
+	margin-top: -6px;
 }
 
 .course-filter-container {
-	max-width: 500px;
+	margin-top: 16px;
 	display: grid;
-	grid-template-columns: 4fr 1fr;
+	grid-template-columns: 128px auto;
 	column-gap: 8px;
 	align-items: center;
 
@@ -27,10 +17,6 @@
 	}
 }
 
-.column-title {
-	width: 20rem;
-}
-
-.table-container {
-	width: 500px;
+.column-semester {
+	width: 128px;
 }
