@@ -1,4 +1,5 @@
 import { getSemester, getSemesterString } from "../../../utils/helper";
+import { resetDemoDb } from "../../support/api";
 import { account, useAccount } from "../../support/auth";
 import { Selector } from "../../support/elements";
 
@@ -18,6 +19,10 @@ describe("Course list", () => {
 	};
 
 	const totalCourseCount = 4;
+
+	before(() => {
+		resetDemoDb();
+	});
 
 	beforeEach(() => {
 		useAccount(account.mgmtAdmin);
