@@ -1,28 +1,15 @@
-.home-component {
-	padding: 32px;
-
-	@media screen and (min-width: 1000px) {
-		padding-left: 96px;
-		padding-right: 96px;
-	}
-}
-
 .header {
 	padding: 32px;
 	background-color: var(--color-header);
-	display: grid;
-	grid-template-columns: 1fr min-content;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 	border-radius: 8px;
 }
 
-.header-left {
-	margin: auto;
-	display: flex;
-	flex-direction: column;
-}
-
 .app-name {
-	margin-top: 32px;
+	margin-left: auto;
+	margin-right: auto;
 	font-size: 48px;
 	font-weight: 300;
 	line-height: 48px;
@@ -30,28 +17,23 @@
 
 .actions {
 	margin: auto;
-	margin-top: 36px;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 16px;
-}
 
-.actions button {
-	height: 64px;
-	width: 180px;
+	button {
+		height: 48px;
+		width: 180px;
+	}
 }
 
 #uni-logo-with-text {
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-left: 8px;
-	padding-right: 32px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 32px;
+	margin-bottom: 38px;
 	height: 256px;
 	width: 256px;
-
-	@media (max-width: 800px) {
-		display: none;
-	}
 }
 
 #logo-text {
@@ -63,66 +45,13 @@
 }
 
 .languages {
-	padding-top: 32px;
+	margin-bottom: 16px;
 	display: flex;
+	justify-content: right;
 }
 
 .language-buttons {
-	margin-left: 16px;
 	height: fit-content;
 	display: flex;
 	gap: 8px;
-}
-
-.themes {
-	padding-left: 0px;
-	padding-top: 16px;
-}
-
-.select-theme-buttons {
-	margin-left: 16px;
-	display: grid;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
-	height: fit-content;
-}
-
-.theme-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-content: center;
-	row-gap: 32px;
-	column-gap: 32px;
-	margin-top: 16px;
-
-	@media screen and (max-width: 600px) {
-		grid-template-columns: 1fr;
-	}
-}
-
-.theme {
-	padding: 32px;
-	background-color: var(--color-bg) !important;
-	height: fit-content;
-	border: 1px solid gray;
-	border-style: dashed;
-
-	.theme-name {
-		color: var(--text) !important;
-	}
-
-	mat-card {
-		background-color: var(--card-bg) !important;
-	}
-}
-
-.theme-buttons {
-	margin-top: 16px;
-	display: flex;
-	gap: 8px;
-
-	button {
-		color: white !important;
-	}
 }

@@ -3,7 +3,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { LoginDialog } from "../auth/dialogs/login/login.dialog";
 import { UnsubscribeOnDestroy } from "../shared/components/unsubscribe-on-destroy.component";
-import { ThemeService } from "../shared/services/theme.service";
 
 @Component({
 	selector: "app-home",
@@ -14,11 +13,7 @@ import { ThemeService } from "../shared/services/theme.service";
 export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	currentLanguage: string;
 
-	constructor(
-		readonly dialog: MatDialog,
-		readonly themeService: ThemeService,
-		readonly translate: TranslateService
-	) {
+	constructor(readonly dialog: MatDialog, readonly translate: TranslateService) {
 		super();
 	}
 

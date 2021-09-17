@@ -1,21 +1,5 @@
-<div class="home-component">
-	<div class="header">
-		<div class="header-left">
-			<span class="app-name">{{ "Title.AppName" | translate }}</span>
-			<span class="actions">
-				<button mat-flat-button color="accent" (click)="openLoginDialog()">Login</button>
-				<a [routerLink]="['/courses']">
-					<button mat-flat-button>
-						{{ "Domain.Courses" | translate }}
-					</button>
-				</a>
-			</span>
-		</div>
-		<ng-container *ngTemplateOutlet="uniLogo"></ng-container>
-	</div>
-
+<div class="page-container">
 	<div class="languages">
-		<h2>Choose language</h2>
 		<span class="language-buttons">
 			<button
 				mat-flat-button
@@ -34,33 +18,19 @@
 		</span>
 	</div>
 
-	<div class="themes">
-		<span class="flex">
-			<h2>Choose theme</h2>
-			<div class="select-theme-buttons" *ngIf="themeService.theme$ | async as currentTheme">
-				<button
-					*ngFor="let theme of themeService.availableThemes"
-					mat-flat-button
-					[color]="currentTheme === theme.cssClass ? 'accent' : ''"
-					(click)="themeService.setTheme(theme.cssClass)"
-				>
-					{{ theme.name }}
+	<div class="header">
+		<span class="app-name">{{ "Title.AppName" | translate }}</span>
+
+		<ng-container *ngTemplateOutlet="uniLogo"></ng-container>
+
+		<span class="actions">
+			<button mat-flat-button color="accent" (click)="openLoginDialog()">Login</button>
+			<a [routerLink]="['/courses']" class="link-none">
+				<button mat-stroked-button>
+					{{ "Domain.Courses" | translate }}
 				</button>
-			</div>
+			</a>
 		</span>
-		<div class="theme-grid">
-			<div *ngFor="let theme of themeService.availableThemes" [class]="theme.cssClass">
-				<div class="theme">
-					<mat-card>
-						<h2 class="theme-name">{{ theme.name }}</h2>
-						<div class="theme-buttons">
-							<button mat-flat-button class="primary">Primary</button>
-							<button mat-flat-button class="accent">Accent</button>
-						</div>
-					</mat-card>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 
