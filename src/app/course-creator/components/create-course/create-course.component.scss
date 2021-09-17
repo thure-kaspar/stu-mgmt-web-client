@@ -1,4 +1,4 @@
-.container {
+.form-container {
 	padding-top: 16px;
 	padding-bottom: 16px;
 	padding-left: var(--margin-default);
@@ -13,7 +13,6 @@ mat-card-title {
 #basic-data,
 #lecturers,
 #secrets {
-	margin-top: 8px;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -37,6 +36,33 @@ mat-card-title {
 	vertical-align: middle;
 }
 
-#btn-add-assignment-template {
-	margin-top: 8px;
+::ng-deep .form-container {
+	.mat-tab-group {
+		flex-direction: row !important;
+		border-radius: 4px;
+	}
+
+	.mat-tab-labels {
+		flex-direction: column !important;
+	}
+
+	.mat-tab-label-active {
+		border-right: 2px solid var(--accent) !important;
+	}
+
+	.mat-ink-bar {
+		display: none !important;
+	}
+
+	.mat-tab-body-wrapper {
+		padding-left: 32px;
+		padding-right: 32px;
+		padding-bottom: 16px;
+		padding-top: 0px;
+		width: 100%;
+	}
+
+	.mat-tab-header {
+		border-bottom: none !important;
+	}
 }

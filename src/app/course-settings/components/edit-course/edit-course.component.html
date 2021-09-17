@@ -7,6 +7,7 @@
 	>
 		<mat-tab [label]="'Misc.BasicData' | translate">
 			<button
+				class="btn-top"
 				mat-flat-button
 				color="accent"
 				[disabled]="form.invalid"
@@ -20,6 +21,7 @@
 		<ng-container formGroupName="config">
 			<mat-tab [label]="'Domain.GroupSettings' | translate">
 				<button
+					class="btn-top"
 					mat-flat-button
 					color="accent"
 					[disabled]="form.get('config.groupSettings').invalid"
@@ -32,7 +34,7 @@
 
 			<mat-tab label="{{ 'Misc.Secrets' | translate }}">
 				<ng-template matTabContent>
-					<button mat-flat-button color="accent" (click)="saveSecrets()">
+					<button class="btn-top" mat-flat-button color="accent" (click)="saveSecrets()">
 						{{ "Action.Save" | translate }}
 					</button>
 					<div id="secrets">
@@ -47,6 +49,7 @@
 
 			<mat-tab [label]="'Domain.AdmissionCriteria' | translate">
 				<button
+					class="btn-top"
 					mat-flat-button
 					color="accent"
 					[disabled]="form.get('config.admissionCriteria').invalid"
@@ -66,6 +69,7 @@
 			<mat-tab [label]="'Domain.AssignmentTemplates' | translate">
 				<div id="assignment-templates-tab">
 					<button
+						class="btn-top"
 						type="button"
 						id="btn-add-assignment-template"
 						mat-flat-button

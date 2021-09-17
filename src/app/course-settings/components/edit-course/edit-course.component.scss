@@ -3,10 +3,14 @@ mat-card-title {
 	justify-content: space-between;
 }
 
+.btn-top {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
 #basic-data,
 #lecturers,
 #secrets {
-	margin-top: 8px;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -22,10 +26,6 @@ mat-card-title {
 }
 
 #assignment-templates-tab {
-	#btn-add-assignment-template {
-		margin-top: 8px;
-	}
-
 	.assignment-template-list {
 		display: grid;
 		width: 500px;
@@ -78,7 +78,11 @@ mat-card-title {
 		padding-left: 32px;
 		padding-right: 32px;
 		padding-bottom: 16px;
-		padding-top: 8px;
+		padding-top: 0px;
 		width: 100%;
+	}
+
+	.mat-tab-header {
+		border-bottom: none !important;
 	}
 }

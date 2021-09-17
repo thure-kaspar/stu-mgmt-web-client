@@ -1,12 +1,10 @@
 <div class="notification-subscribers">
-	<button mat-flat-button color="accent" (click)="addOrUpdate()">
+	<button class="btn-add" mat-flat-button color="accent" (click)="addOrUpdate()">
 		<app-icon name="add"></app-icon>
 		<span>{{ "Action.Add" | translate }}</span>
 	</button>
 
-	<mat-hint>
-		<pre class="preformatted">{{ "Text.NotificationDescription" | translate }}</pre>
-	</mat-hint>
+	<pre class="preformatted text-light">{{ "Text.NotificationDescription" | translate }}</pre>
 
 	<div class="subscribers">
 		<app-card *ngFor="let subscriber of subscribers$ | async">
