@@ -25,7 +25,7 @@ class UserFilter {
 export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 	filter = new UserFilter();
 
-	displayedColumns: string[] = ["select", "role", "username", "displayName", "email", "actions"];
+	displayedColumns: string[] = ["select", "role", "username", "displayName", "email"];
 	dataSource$ = new BehaviorSubject(new MatTableDataSource<UserDto>([]));
 	selection = new SelectionModel<UserDto>(false, []);
 

@@ -22,6 +22,18 @@ export const Selector = {
 		myGroupTab: "my-group-tab"
 	},
 
+	courseSettings: {
+		tabs: {
+			basicData: "basicDataTab",
+			groupSettings: "groupSettingsTab",
+			secrets: "secretsTab",
+			admissionCriteria: "admissionCriteriaTab",
+			assignmentTemplates: "assignmentTemplatesTab",
+			admissionFromPreviousSemester: "admissionFromPreviousSemesterTab",
+			lecturers: "lecturersTab"
+		}
+	},
+
 	joinCourseDialog: {
 		dialog: "join-course-dialog",
 		errorMessage: "join-course-error"

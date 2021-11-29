@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
@@ -52,7 +52,8 @@ export class CreateCourseComponent implements OnInit {
 		private fb: FormBuilder,
 		private dialog: MatDialog,
 		private snackbar: SnackbarService,
-		private router: Router
+		private router: Router,
+		private cdRef: ChangeDetectorRef
 	) {
 		this.form = this.fb.group({
 			id: [null],
@@ -126,21 +127,6 @@ export class CreateCourseComponent implements OnInit {
 	}
 
 	/**
-	 * Opens the SearchUserDialog and inserts the username of the chosen user as as lecturer.
-	 */
-	openSearchUserDialog(index: number): void {
-		this.dialog
-			.open<SearchUserDialog, undefined, UserDto[]>(SearchUserDialog)
-			.afterClosed()
-			.subscribe(users => {
-				if (users[0]) {
-					// Insert username of returned user in the input field of the form
-					this.getLecturers().at(index).setValue(users[0].username);
-				}
-			});
-	}
-
-	/**
 	 * Fills the form with the basic data and configuration of the selected course.
 	 */
 	loadCourseTemplate(courseId: string): void {
@@ -179,8 +165,20 @@ export class CreateCourseComponent implements OnInit {
 	 * Adds an additional input field for a lecturer.
 	 */
 	addLecturer(): void {
-		this.getLecturers().push(this.fb.control(null, Validators.required));
-		this.openSearchUserDialog(this.getLecturers().length - 1);
+		this.dialog
+			.open<SearchUserDialog, undefined, UserDto[]>(SearchUserDialog)
+			.afterClosed()
+			.subscribe(users => {
+				const lecturer = users?.[0];
+
+				if (lecturer) {
+					// Insert username of returned user in the input field of the form
+					this.getLecturers().push(
+						this.fb.control(lecturer.username, Validators.required)
+					);
+					this.cdRef.detectChanges();
+				}
+			});
 	}
 
 	/**
