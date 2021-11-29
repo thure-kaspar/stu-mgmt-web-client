@@ -25,7 +25,8 @@ export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnIni
 			startDate: [null],
 			endDate: [null],
 			comment: [null],
-			links: this.fb.array([])
+			links: this.fb.array([]),
+			configs: this.fb.array([])
 		});
 	}
 
@@ -46,5 +47,26 @@ export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnIni
 
 	getLinks(): FormArray {
 		return this.form.get("links") as FormArray;
+	}
+
+	addConfig(config?: { tool: string; config: string }): void {
+		this.getConfigs().push(
+			this.fb.group({
+				tool: [config?.tool ?? null, Validators.required],
+				config: [config?.config ?? null, Validators.required]
+			})
+		);
+	}
+
+	removeConfig(index: number): void {
+		this.getConfigs().removeAt(index);
+	}
+
+	getConfigs(): FormArray {
+		return this.form.get("configs") as FormArray;
+	}
+
+	getConfigValue(index: number): string {
+		return this.getConfigs().at(index).value;
 	}
 }

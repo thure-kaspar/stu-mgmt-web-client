@@ -1,5 +1,5 @@
 <form [formGroup]="form" autocomplete="off">
-	<div id="assignment-grid">
+	<div class="two-col">
 		<mat-form-field>
 			<mat-label>{{ "Common.Name" | translate }}</mat-label>
 			<input matInput formControlName="name" required />
@@ -26,8 +26,28 @@
 				}}</mat-option>
 			</mat-select>
 		</mat-form-field>
+	</div>
 
-		<div class="radio-group-container">
+	<div class="two-col">
+		<mat-form-field>
+			<mat-label>{{ "Property.Assignment.Points" | translate }}</mat-label>
+			<input matInput type="number" formControlName="points" required />
+			<mat-error>Points are missing.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>{{ "Property.Assignment.BonusPoints" | translate }}</mat-label>
+			<input matInput type="number" formControlName="bonusPoints" />
+		</mat-form-field>
+	</div>
+
+	<mat-form-field id="comment-field" appearance="outline">
+		<mat-label>{{ "Property.Assignment.Comment" | translate }}</mat-label>
+		<textarea width matInput formControlName="comment" rows="5"></textarea>
+	</mat-form-field>
+
+	<div class="two-col mb-8">
+		<div class="full-width">
 			<label class="radio-group-label">{{ "Property.Assignment.Type" | translate }}*</label>
 			<mat-radio-group class="radio-group" formControlName="type">
 				<mat-radio-button [value]="typeEnum.HOMEWORK">{{
@@ -48,7 +68,7 @@
 			</mat-radio-group>
 		</div>
 
-		<div class="radio-group-container">
+		<div class="full-width">
 			<label class="radio-group-label"
 				>{{ "Property.Assignment.Collaboration" | translate }}*</label
 			>
@@ -64,28 +84,17 @@
 				}}</mat-radio-button>
 			</mat-radio-group>
 		</div>
-
-		<app-date-time-picker
-			[label]="'Property.Assignment.StartDate' | translate"
-			[control]="$any(form.controls['startDate'])"
-		></app-date-time-picker>
-
-		<app-date-time-picker
-			[label]="'Property.Assignment.EndDate' | translate"
-			[control]="$any(form.controls['endDate'])"
-		></app-date-time-picker>
-
-		<mat-form-field>
-			<mat-label>{{ "Property.Assignment.Points" | translate }}</mat-label>
-			<input matInput type="number" formControlName="points" required />
-			<mat-error>Points are missing.</mat-error>
-		</mat-form-field>
-
-		<mat-form-field>
-			<mat-label>{{ "Property.Assignment.BonusPoints" | translate }}</mat-label>
-			<input matInput type="number" formControlName="bonusPoints" />
-		</mat-form-field>
 	</div>
+
+	<app-date-time-picker
+		[label]="'Property.Assignment.StartDate' | translate"
+		[control]="$any(form.controls['startDate'])"
+	></app-date-time-picker>
+
+	<app-date-time-picker
+		[label]="'Property.Assignment.EndDate' | translate"
+		[control]="$any(form.controls['endDate'])"
+	></app-date-time-picker>
 
 	<div class="links" formArrayName="links">
 		<h3>
@@ -116,8 +125,35 @@
 		</div>
 	</div>
 
-	<mat-form-field id="comment-field" appearance="outline">
-		<mat-label>{{ "Property.Assignment.Comment" | translate }}</mat-label>
-		<textarea width matInput formControlName="comment" rows="5"></textarea>
-	</mat-form-field>
+	<div class="configs" formArrayName="configs">
+		<h3>
+			<span>Configs</span>
+			<button type="button" mat-flat-button color="accent" (click)="addConfig()">
+				{{ "Action.Add" | translate }}
+			</button>
+		</h3>
+
+		<div
+			class="config-form"
+			*ngFor="let link of getConfigs().controls; let i = index"
+			[formGroupName]="i"
+		>
+			<div class="config-fields">
+				<mat-form-field class="full-width">
+					<mat-label>Tool</mat-label>
+					<input matInput formControlName="tool" required />
+				</mat-form-field>
+
+				<mat-form-field class="full-width">
+					<mat-label>Config</mat-label>
+					<input matInput formControlName="config" required />
+					<mat-hint>JSON</mat-hint>
+				</mat-form-field>
+
+				<button mat-icon-button class="remove-config-btn" (click)="removeConfig(i)">
+					<app-icon name="clear"></app-icon>
+				</button>
+			</div>
+		</div>
+	</div>
 </form>

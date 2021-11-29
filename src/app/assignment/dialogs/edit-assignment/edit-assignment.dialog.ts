@@ -39,6 +39,11 @@ export class EditAssignmentDialog implements OnInit {
 						this.form.addLink(link);
 					});
 				}
+				if ((result as any).configs?.length > 0) {
+					(result as any).configs.forEach(config => {
+						this.form.addConfig(config);
+					});
+				}
 			},
 			error => console.log(error)
 		);
