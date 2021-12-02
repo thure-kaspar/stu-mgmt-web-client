@@ -53,7 +53,7 @@ export class AssessmentViewerComponent implements OnInit {
 			filter(([assessment, course]) => !!assessment && !!course),
 			map(
 				([assessment, course]): AssignmentWithAssessment => {
-					if (!(course.admissionCriteria.rules?.length > 0)) {
+					if (!(course.admissionCriteria?.rules?.length > 0)) {
 						return { ...assessment.assignment, assessment };
 					}
 
