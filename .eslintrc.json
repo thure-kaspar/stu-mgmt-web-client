@@ -10,11 +10,18 @@
 	"rules": {
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
-		"indent": ["error", "tab", { "SwitchCase": 1 }],
-		"@typescript-eslint/no-unused-vars": "warn",
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
 		"no-case-declarations": "off",
-		"@typescript-eslint/camelcase": "off",
-		"no-use-before-define": "off",
-		"@typescript-eslint/no-use-before-define": "off"
+		"@typescript-eslint/no-unused-vars": [
+			2,
+			{ "args": "after-used", "argsIgnorePattern": "^_" }
+		],
+		"@typescript-eslint/camelcase": "off"
 	}
 }
