@@ -1,8 +1,8 @@
 <div id="create-assessment-container" class="tab">
-	<div class="title-container flex space-between">
+	<div class="title-container flex justify-between">
 		<h2>{{ "Title.CreateAssessment" | translate }}</h2>
 
-		<div class="save-actions flex g-8">
+		<div class="save-actions flex gap-2">
 			<button
 				mat-flat-button
 				color="accent"
@@ -15,7 +15,7 @@
 		</div>
 	</div>
 
-	<div class="flex g-8">
+	<div class="flex gap-2">
 		<button mat-flat-button color="primary" (click)="openSearchGroupDialog()">
 			<app-icon name="search"></app-icon>
 			{{ "Title.SearchGroup" | translate }}
@@ -31,7 +31,7 @@
 		*ngIf="{ forGroup: forGroup$ | async, forParticipant: forParticipant$ | async } as obs"
 	>
 		<div
-			class="assessment-target mt-16"
+			class="assessment-target mt-4"
 			*ngIf="obs.forGroup || obs.forParticipant; else selectGroupOrParticipantText"
 		>
 			<app-assessment-target
@@ -44,17 +44,17 @@
 		</div>
 
 		<ng-template #selectGroupOrParticipantText>
-			<div class="mt-16 text-light">
+			<div class="mt-4 text-light">
 				{{ "Text.Assessment.SelectGroupOrParticipant" | translate }}
 			</div>
 		</ng-template>
 	</ng-container>
 
-	<div class="mt-16">
+	<div class="mt-4">
 		<app-assessment-form [assignment]="assignment$ | async"></app-assessment-form>
 	</div>
 
-	<div class="mt-16">
+	<div class="mt-4">
 		<button
 			mat-raised-button
 			color="accent"

@@ -1,7 +1,7 @@
 <ng-container *ngIf="(isLoading$ | async) == false">
 	<table
 		#tableUsers
-		class="full-width"
+		class="w-full"
 		mat-table
 		[dataSource]="dataSource$ | async"
 		matSort
@@ -70,7 +70,7 @@
 <app-paginator (onPageChanged)="loadParticipants()"></app-paginator>
 
 <mat-progress-spinner
-	class="center"
+	class="m-auto"
 	mode="indeterminate"
 	color="primary"
 	*ngIf="isLoading$ | async"

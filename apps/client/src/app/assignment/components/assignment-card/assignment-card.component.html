@@ -64,11 +64,11 @@
 		<mat-menu #assignmentMenu>
 			<ng-container *ngIf="participant.isTeachingStaffMember">
 				<button mat-menu-item (click)="openEditDialog()">
-					<app-icon class="mr-16 icon-light" name="edit"></app-icon>
+					<app-icon class="mr-4 icon-light" name="edit"></app-icon>
 					<span class="font-bold">{{ "Action.Edit" | translate }}</span>
 				</button>
 				<button mat-menu-item (click)="onDelete()">
-					<app-icon class="mr-16 icon-light" name="delete"></app-icon>
+					<app-icon class="mr-4 icon-light" name="delete"></app-icon>
 					<span class="font-bold text-red">
 						{{ "Action.Delete" | translate }}
 					</span>
@@ -104,7 +104,7 @@
 			</ng-container>
 		</div>
 
-		<div class="flex-column" *ngIf="assignment.startDate || assignment.endDate">
+		<div class="flex flex-col" *ngIf="assignment.startDate || assignment.endDate">
 			<span class="startdate" *ngIf="assignment.startDate">
 				<span class="font-bold uppercase x text-green"
 					>{{ "Common.Start" | translate }}:</span

@@ -1,5 +1,5 @@
 <div id="created-assessments-container">
-	<div class="flex space-between">
+	<div class="flex justify-between">
 		<a
 			[routerLink]="[
 				'/courses',
@@ -67,13 +67,13 @@
 	<h2>{{ "Domain.Assessments" | translate }} ({{ dataSource?.filteredData.length || 0 }})</h2>
 
 	<div class="flex filter">
-		<mat-form-field class="full-width">
+		<mat-form-field class="w-full">
 			<mat-label>Filter</mat-label>
 			<input matInput [(ngModel)]="dataSource.filter" />
 		</mat-form-field>
 	</div>
 
-	<table class="full-width" mat-table [dataSource]="dataSource" matSort>
+	<table class="w-full" mat-table [dataSource]="dataSource" matSort>
 		<!-- View Column -->
 		<ng-container matColumnDef="view">
 			<th class="column-view" mat-header-cell *matHeaderCellDef></th>

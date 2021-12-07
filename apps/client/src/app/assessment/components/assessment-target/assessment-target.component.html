@@ -16,7 +16,7 @@
 		<ng-container subtitle>{{ "Domain.Members" | translate }}: {{ group.size }}</ng-container>
 
 		<ng-container content>
-			<div class="flex g-8">
+			<div class="flex gap-2">
 				<a
 					class="font-bold member link-none"
 					[routerLink]="['/courses', courseId, 'users', member.userId]"

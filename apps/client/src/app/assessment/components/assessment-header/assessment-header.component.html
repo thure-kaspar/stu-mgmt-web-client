@@ -1,10 +1,10 @@
 <div
-	class="grid g-16"
+	class="grid gap-4"
 	*ngIf="assignment && assessment && participantFacade.participant$ | async as participant"
 >
 	<app-card>
 		<ng-container title>
-			<div class="flex g-16">
+			<div class="flex gap-4">
 				<span>{{ "Domain.Assessment" | translate }}: {{ assignment.name }}</span>
 				<app-chip
 					*ngIf="assessment.isDraft"
@@ -16,7 +16,7 @@
 			</div>
 		</ng-container>
 		<ng-container subtitle>
-			<div class="flex mt-8 g-8">
+			<div class="flex mt-2 gap-2">
 				<app-assignment-type-chip [type]="assignment.type"></app-assignment-type-chip>
 				<ng-container [ngSwitch]="assignment.collaboration">
 					<app-chip

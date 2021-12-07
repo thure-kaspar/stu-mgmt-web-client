@@ -3,7 +3,7 @@
 		>{{ 'Action.Edit' | translate }}: {{user.username}}</mat-card-title
 	>
 
-	<form [formGroup]="form" class="flex-column">
+	<form [formGroup]="form" class="flex flex-col">
 		<mat-form-field>
 			<mat-label>{{ 'Property.User.DisplayName' | translate }}</mat-label>
 			<input matInput formControlName="displayName" required />

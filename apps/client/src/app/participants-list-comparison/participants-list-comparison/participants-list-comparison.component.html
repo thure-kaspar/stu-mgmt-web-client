@@ -31,7 +31,7 @@
 	<div class="bottom">
 		<div class="left">
 			<h2>In</h2>
-			<table class="full-width" mat-table matSort [dataSource]="inCoursesDataSource">
+			<table class="w-full" mat-table matSort [dataSource]="inCoursesDataSource">
 				<!-- Username Column -->
 				<ng-container matColumnDef="username">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -57,7 +57,7 @@
 
 		<div class="right">
 			<h2>Not in</h2>
-			<table class="full-width" mat-table matSort [dataSource]="notInCoursesDataSource">
+			<table class="w-full" mat-table matSort [dataSource]="notInCoursesDataSource">
 				<!-- Username Column -->
 				<ng-container matColumnDef="username">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>

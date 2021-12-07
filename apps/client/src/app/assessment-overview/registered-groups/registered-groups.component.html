@@ -30,18 +30,18 @@
 	</mat-form-field>
 </div>
 
-<table class="full-width" mat-table #table [dataSource]="dataSource$ | async">
+<table class="w-full" mat-table #table [dataSource]="dataSource$ | async">
 	<ng-container matColumnDef="action">
 		<th class="action-column" mat-header-cell *matHeaderCellDef></th>
 		<td mat-cell *matCellDef="let row">
 			<mat-menu #registrationMenu="matMenu">
 				<button mat-menu-item (click)="registerParticipant(row)">
-					<app-icon class="mr-16 icon-light" name="person_add"></app-icon
+					<app-icon class="mr-4 icon-light" name="person_add"></app-icon
 					>{{ "Action.Custom.AddParticipant" | translate }}
 				</button>
 				<button mat-menu-item (click)="unregisterGroup(row)">
 					<span class="text-red">
-						<app-icon class="mr-16 icon-light" name="delete"></app-icon
+						<app-icon class="mr-4 icon-light" name="delete"></app-icon
 						>{{ "Action.Custom.RemoveGroup" | translate }}
 					</span>
 				</button>

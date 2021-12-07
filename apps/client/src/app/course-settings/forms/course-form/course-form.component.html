@@ -1,4 +1,4 @@
-<div id="basic-data" [formGroup]="form">
+<div class="flex flex-col gap-4" [formGroup]="form">
 	<mat-form-field *ngIf="!isEditMode">
 		<mat-label>Id</mat-label>
 		<input matInput formControlName="id" />

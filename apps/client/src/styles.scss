@@ -1,3 +1,6 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 @import "./custom-theme.scss";
 
 /* You can add global styles to this file, and also import other style files */
@@ -385,36 +388,6 @@ mat-paginator {
 	opacity: 1 !important;
 }
 
-.center {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.full-width {
-	width: 100%;
-}
-
-.full-height {
-	height: 100%;
-}
-
-.flex-column {
-	display: flex;
-	flex-direction: column;
-}
-
-.grid {
-	display: grid;
-}
-
-.flex {
-	display: flex;
-}
-
-.space-between {
-	justify-content: space-between;
-}
-
 .link-none {
 	text-decoration: none;
 	color: inherit;
@@ -470,10 +443,6 @@ mat-paginator {
 .text-green {
 	color: green;
 	fill: green;
-}
-
-.uppercase {
-	text-transform: uppercase;
 }
 
 .snackbar-success {
@@ -556,38 +525,6 @@ mat-select {
 
 .column-md {
 	width: 200px;
-}
-
-.mb-8 {
-	margin-bottom: 8px;
-}
-
-.mb-16 {
-	margin-bottom: 16px;
-}
-
-.mt-8 {
-	margin-top: 8px;
-}
-
-.mt-16 {
-	margin-top: 16px;
-}
-
-.mr-8 {
-	margin-right: 8px;
-}
-
-.mr-16 {
-	margin-right: 16px;
-}
-
-.g-8 {
-	gap: 8px;
-}
-
-.g-16 {
-	gap: 16px;
 }
 
 .space-between {

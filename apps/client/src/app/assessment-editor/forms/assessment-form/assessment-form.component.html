@@ -1,4 +1,4 @@
-<form class="grid g-16" id="assessment-form" [formGroup]="form" autocomplete="off">
+<form class="grid gap-4" id="assessment-form" [formGroup]="form" autocomplete="off">
 	<app-card>
 		<ng-container title>{{ "Common.Total" | translate }}</ng-container>
 
@@ -19,19 +19,14 @@
 				</span>
 
 				<ng-container *ngIf="getErrors()">
-					<mat-error *ngFor="let error of getErrors()" class="mb-16">
+					<mat-error *ngFor="let error of getErrors()" class="mb-4">
 						{{ error | translate }}
 					</mat-error>
 				</ng-container>
 
 				<mat-form-field appearance="outline" class="comment-field">
 					<mat-label>{{ "Property.Assessment.Comment" | translate }}</mat-label>
-					<textarea
-						rows="5"
-						matInput
-						class="full-width"
-						formControlName="comment"
-					></textarea>
+					<textarea rows="5" matInput class="w-full" formControlName="comment"></textarea>
 				</mat-form-field>
 			</div>
 		</ng-container>
@@ -43,7 +38,7 @@
 		*ngFor="let partial of getPartialAssessments()?.controls; let i = index"
 	>
 		<div class="partial-assessment-form" [formGroup]="getPartialAssessment(i)">
-			<div class="mb-8">
+			<div class="mb-2">
 				<mat-slide-toggle formControlName="draftOnly">
 					{{ "Property.PartialAssessment.DraftOnly" | translate }}
 				</mat-slide-toggle>
@@ -67,14 +62,14 @@
 
 			<mat-form-field appearance="outline" class="comment-field">
 				<mat-label>{{ "Property.PartialAssessment.Comment" | translate }}</mat-label>
-				<textarea rows="5" matInput class="full-width" formControlName="comment"></textarea>
+				<textarea rows="5" matInput class="w-full" formControlName="comment"></textarea>
 			</mat-form-field>
 
-			<div class="mt-16 markers-outer">
-				<div class="flex space-between">
+			<div class="mt-4 markers-outer">
+				<div class="flex justify-between">
 					<h2>Markers</h2>
 
-					<div class="flex marker-buttons g-8">
+					<div class="flex marker-buttons gap-2">
 						<button mat-flat-button class="btn-info" (click)="addMarker(i, 'INFO')">
 							<app-icon name="add"></app-icon>
 							INFO
@@ -124,7 +119,7 @@
 				</div>
 			</div>
 
-			<div class="flex mt-16">
+			<div class="flex mt-4">
 				<button
 					class="fit-content btn-remove-partial"
 					type="button"

@@ -2,7 +2,7 @@
 	<h2>{{ 'Title.SearchGroup' | translate }}</h2>
 	<div dialog-content class="dialog-content">
 		<div class="filter">
-			<mat-form-field class="full-width">
+			<mat-form-field class="w-full">
 				<mat-label>{{ 'Property.Group.Name' | translate }}</mat-label>
 				<input
 					matInput
@@ -14,7 +14,7 @@
 			</mat-form-field>
 		</div>
 
-		<table class="full-width" mat-table [dataSource]="dataSource">
+		<table class="w-full" mat-table [dataSource]="dataSource">
 			<!-- Checkbox Column -->
 			<ng-container matColumnDef="select">
 				<th class="column-select" mat-header-cell *matHeaderCellDef></th>

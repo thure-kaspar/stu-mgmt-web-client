@@ -18,7 +18,7 @@
 				<mat-menu #menu="matMenu">
 					<div id="menu-container">
 						<button mat-menu-item (click)="onEditGroup()">
-							<app-icon class="mr-16 icon-light" name="edit"></app-icon>
+							<app-icon class="mr-4 icon-light" name="edit"></app-icon>
 							{{ "Action.Edit" | translate }}
 						</button>
 						<button
@@ -27,7 +27,7 @@
 							*ngIf="isGroupMember(participant)"
 						>
 							<span class="text-red">
-								<app-icon class="mr-16 icon-light" name="cancel"></app-icon>
+								<app-icon class="mr-4 icon-light" name="cancel"></app-icon>
 								{{ "Action.Custom.LeaveGroup" | translate }}
 							</span>
 						</button>
@@ -37,7 +37,7 @@
 							*ngIf="participant.isTeachingStaffMember"
 						>
 							<span class="text-red">
-								<app-icon class="mr-16 icon-light" name="delete"></app-icon
+								<app-icon class="mr-4 icon-light" name="delete"></app-icon
 								>{{ "Action.Delete" | translate }}
 							</span>
 						</button>
@@ -75,7 +75,7 @@
 						<mat-menu #memberMenu>
 							<button mat-menu-item (click)="onRemoveUser(user)">
 								<span class="text-red"
-									><app-icon class="mr-16" name="delete"></app-icon
+									><app-icon class="mr-4" name="delete"></app-icon
 									>{{ "Action.Custom.RemoveParticipant" | translate }}</span
 								>
 							</button>
@@ -98,7 +98,7 @@
 
 			<h2>{{ "Domain.Assessments" | translate }}</h2>
 
-			<table class="full-width" mat-table [dataSource]="dataSource" matSort>
+			<table class="w-full" mat-table [dataSource]="dataSource" matSort>
 				<!-- Assignment name Column -->
 				<ng-container matColumnDef="name">
 					<th class="name-column" mat-header-cell *matHeaderCellDef mat-sort-header>

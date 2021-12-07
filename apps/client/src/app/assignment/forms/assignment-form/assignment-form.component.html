@@ -46,8 +46,8 @@
 		<textarea width matInput formControlName="comment" rows="5"></textarea>
 	</mat-form-field>
 
-	<div class="two-col mb-8">
-		<div class="full-width">
+	<div class="two-col mb-2">
+		<div class="w-full">
 			<label class="radio-group-label">{{ "Property.Assignment.Type" | translate }}*</label>
 			<mat-radio-group class="radio-group" formControlName="type">
 				<mat-radio-button [value]="typeEnum.HOMEWORK">{{
@@ -68,7 +68,7 @@
 			</mat-radio-group>
 		</div>
 
-		<div class="full-width">
+		<div class="w-full">
 			<label class="radio-group-label"
 				>{{ "Property.Assignment.Collaboration" | translate }}*</label
 			>
@@ -139,12 +139,12 @@
 			[formGroupName]="i"
 		>
 			<div class="config-fields">
-				<mat-form-field class="full-width">
+				<mat-form-field class="w-full">
 					<mat-label>Tool</mat-label>
 					<input matInput formControlName="tool" required />
 				</mat-form-field>
 
-				<mat-form-field class="full-width">
+				<mat-form-field class="w-full">
 					<mat-label>Config</mat-label>
 					<input matInput formControlName="config" required />
 					<mat-hint>JSON</mat-hint>
