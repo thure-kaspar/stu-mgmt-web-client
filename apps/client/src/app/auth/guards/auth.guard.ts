@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
 		return this.store.select(AuthSelectors.selectAuthState).pipe(
 			take(1),
 			switchMap(authState => {
-				if (authState.accessToken) {
+				if (!!authState.authResult) {
 					return of(true);
 				} else {
 					return this.dialog

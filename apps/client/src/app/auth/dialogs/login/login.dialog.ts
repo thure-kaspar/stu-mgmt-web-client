@@ -1,10 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-import { Actions, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { tap } from "rxjs/operators";
+import { AuthenticationApi } from "@student-mgmt/api-client";
+import { BehaviorSubject, firstValueFrom } from "rxjs";
 import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
-import { AuthActions, AuthSelectors } from "../../../state/auth";
+import { ToastService } from "../../../shared/services/toast.service";
+import { AuthActions } from "../../../state/auth";
+import { AuthService } from "../../services/auth.service";
+
+type LoginState = { isLoading: boolean; error?: string | null };
 
 /**
  * Dialogs that allows the user to login to the Student-Management-System using the Sparkyservice as authentication provider.
@@ -13,46 +18,40 @@ import { AuthActions, AuthSelectors } from "../../../state/auth";
 @Component({
 	selector: "app-login",
 	templateUrl: "./login.dialog.html",
-	styleUrls: ["./login.dialog.scss"]
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginDialog extends UnsubscribeOnDestroy implements OnInit {
+export class LoginDialog extends UnsubscribeOnDestroy {
 	username: string;
 	password: string;
-	errorMessage: string;
-	loading = false;
-	authState$ = this.store.select(AuthSelectors.selectAuthState);
+	loginState$ = new BehaviorSubject<LoginState>({ isLoading: false });
 
 	constructor(
 		private dialogRef: MatDialogRef<LoginDialog, boolean>,
+		private auth: AuthenticationApi,
 		private store: Store,
-		private actions: Actions
+		private toast: ToastService
 	) {
 		super();
 	}
 
-	ngOnInit(): void {
-		this.subs.sink = this.actions
-			.pipe(
-				ofType(AuthActions.loginFailure),
-				tap(action => (this.errorMessage = this.getErrorMessage(action.error)))
-			)
-			.subscribe();
-
-		this.subs.sink = this.actions
-			.pipe(
-				ofType(AuthActions.loginSuccess),
-				tap(() => this.dialogRef.close(true))
-			)
-			.subscribe();
-	}
-
-	onLogin(): void {
+	async onLogin(): Promise<void> {
 		const username = this.username.trim();
 		const password = this.password.trim();
-		this.store.dispatch(AuthActions.login({ username, password }));
+
+		this.loginState$.next({ isLoading: true });
+
+		try {
+			const authResult = await firstValueFrom(this.auth.login({ username, password }));
+			AuthService.setAuthState(authResult);
+			this.store.dispatch(AuthActions.login({ authResult }));
+			this.toast.success(authResult.user.displayName, "Common.Welcome");
+			this.dialogRef.close(true);
+		} catch (error) {
+			this.loginState$.next({ isLoading: false, error: this.getErrorMessage(error) });
+		}
 	}
 
-	private getErrorMessage(error: any): string {
+	private getErrorMessage(error: HttpErrorResponse): string {
 		switch (error.status) {
 			case 0:
 				return "Error.ConnectionRefused";

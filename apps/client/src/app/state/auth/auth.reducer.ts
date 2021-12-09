@@ -1,32 +1,25 @@
 import { createReducer, on } from "@ngrx/store";
-import { UserDto } from "@student-mgmt/api-client";
-import { MetaState } from "../interfaces";
+import { AuthResultDto } from "@student-mgmt/api-client";
 import * as AuthActions from "./auth.actions";
 
 export const authFeatureKey = "auth";
 
-export interface State extends MetaState {
-	accessToken: string;
-	user: UserDto;
+export interface State {
+	authResult: AuthResultDto;
 }
 
 export const initialState: State = {
-	accessToken: null,
-	user: null,
-	hasLoaded: false,
-	isLoading: false
+	authResult: null
 };
 
 function createInitialState(): State {
-	const initial = initialState;
-	const authState = JSON.parse(localStorage.getItem("studentMgmtToken")) as {
-		user: UserDto;
-		accessToken: string;
-	};
+	let initial = initialState;
+	const authState = JSON.parse(localStorage.getItem("auth")) as AuthResultDto;
 
-	if (authState) {
-		initialState.user = authState.user;
-		initial.accessToken = authState.accessToken;
+	if (authState && authState.user && authState.accessToken) {
+		initial = {
+			authResult: authState
+		};
 	}
 
 	return initial;
@@ -37,43 +30,24 @@ export const reducer = createReducer(
 
 	on(
 		AuthActions.login,
-		(state): State => ({
-			...state,
-			isLoading: true,
-			hasLoaded: false,
-			error: undefined
-		})
-	),
-	on(
-		AuthActions.loginSuccess,
-		(state, action): State => ({
-			accessToken: action.accessToken,
-			user: action.user,
-			isLoading: false,
-			hasLoaded: true
-		})
-	),
-	on(
-		AuthActions.loginFailure,
-		(state, action): State => ({
-			...state,
-			isLoading: false,
-			hasLoaded: true,
-			error: action.error
+		(_state, action): State => ({
+			authResult: action.authResult
 		})
 	),
 	on(
 		AuthActions.logout,
-		(state): State => ({
-			accessToken: null,
-			user: null,
-			isLoading: false,
-			hasLoaded: false,
-			error: undefined
+		(_state): State => ({
+			authResult: null
 		})
 	),
 	on(AuthActions.setCourses, (state, action) => ({
 		...state,
-		user: { ...state.user, courses: action.courses }
+		authResult: {
+			...state.authResult,
+			user: {
+				...state.authResult.user,
+				courses: action.courses
+			}
+		}
 	}))
 );

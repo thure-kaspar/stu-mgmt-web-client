@@ -25,10 +25,6 @@ import { ErrorInterceptorService } from "./services/error-interceptor.service";
 	providers: [
 		AuthGuard,
 		AdminGuard,
-		{
-			provide: "SPARKY_AUTHENTICATE_URL",
-			useValue: window["__env"]["AUTH_BASE_PATH"] + "/api/v1/authenticate"
-		},
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
 	]
 })

@@ -1,8 +1,8 @@
-<div class="dialog-container" id="login-dialog" *ngIf="authState$ | async as authState">
-	<mat-card-title id="dialog-title">Login</mat-card-title>
+<div class="flex flex-col w-64" *ngIf="loginState$ | async as loginState">
+	<span mat-dialog-title>Login</span>
 
-	<div mat-dialog-content class="dialog-content">
-		<mat-form-field class="form-field" appearance="outline">
+	<div mat-dialog-content class="flex flex-col gap-4">
+		<mat-form-field class="w-full" appearance="outline">
 			<mat-label>{{ 'Property.User.Username' | translate }}</mat-label>
 			<input
 				[(ngModel)]="username"
@@ -15,7 +15,7 @@
 			<app-icon matSuffix class="icon-light" name="person"></app-icon>
 		</mat-form-field>
 
-		<mat-form-field class="form-field" appearance="outline">
+		<mat-form-field class="w-full" appearance="outline">
 			<mat-label>{{ 'Common.Password' | translate }}</mat-label>
 			<input
 				[(ngModel)]="password"
@@ -25,27 +25,25 @@
 				id="password"
 				(keydown.enter)="onLogin()"
 			/>
-			<app-icon matSuffix class="icon-light" name="lock"></app-icon> </mat-form-field
-		><br />
+			<app-icon matSuffix class="icon-light" name="lock"></app-icon>
+		</mat-form-field>
 
-		<div id="error-container" *ngIf="authState.error">
-			<mat-error *ngIf="errorMessage">{{errorMessage | translate}}</mat-error>
-		</div>
-
-		<div class="loading" *ngIf="authState.isLoading">
-			<mat-spinner color="accent" [diameter]="32"></mat-spinner>
+		<div class="flex justify-center">
+			<mat-error *ngIf="loginState.error">{{ loginState.error | translate}}</mat-error>
+			<mat-spinner *ngIf="loginState.isLoading" color="accent" [diameter]="32"></mat-spinner>
 		</div>
 	</div>
 
-	<div mat-dialog-actions class="dialog-actions">
+	<div mat-dialog-actions class="flex gap-4">
 		<button
 			mat-flat-button
 			color="accent"
 			id="btn-login"
 			(click)="onLogin()"
-			[disabled]="authState.isLoading"
+			[disabled]="loginState.isLoading"
 		>
 			Login
 		</button>
+		<button [mat-dialog-close]="false">{{ 'Action.Cancel' | translate }}</button>
 	</div>
 </div>

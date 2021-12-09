@@ -1,18 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
+import { AuthenticationApi, AuthResultDto, UserDto } from "@student-mgmt/api-client";
 import { Observable } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
-import { AuthenticationApi, UserDto } from "@student-mgmt/api-client";
+import { tap } from "rxjs/operators";
 import { AuthActions, AuthSelectors } from "../../state/auth";
-
-type StoredAuthState = { user: UserDto; accessToken: string };
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
 	user$ = this.store.select(AuthSelectors.selectUser);
 
-	static readonly studentMgmtTokenKey = "studentMgmtToken";
+	static readonly authKey = "auth";
 
 	constructor(private authenticationApi: AuthenticationApi, private store: Store) {}
 
@@ -21,21 +18,17 @@ export class AuthService {
 	 * to authenticate the user for requests to the server.
 	 */
 	static getAccessToken(): string {
-		const authState = JSON.parse(
-			localStorage.getItem(AuthService.studentMgmtTokenKey)
-		) as StoredAuthState;
+		const authState = JSON.parse(localStorage.getItem(AuthService.authKey)) as AuthResultDto;
 		return authState?.accessToken;
 	}
 
 	static getUser(): UserDto {
-		const authState = JSON.parse(
-			localStorage.getItem(AuthService.studentMgmtTokenKey)
-		) as StoredAuthState;
+		const authState = JSON.parse(localStorage.getItem(AuthService.authKey)) as AuthResultDto;
 		return authState?.user;
 	}
 
-	static setAuthState(state: StoredAuthState): void {
-		localStorage.setItem(this.studentMgmtTokenKey, JSON.stringify(state));
+	static setAuthState(state: AuthResultDto): void {
+		localStorage.setItem(this.authKey, JSON.stringify(state));
 	}
 
 	/**
@@ -52,7 +45,14 @@ export class AuthService {
 			tap(user => {
 				const state = { user, accessToken: username };
 				AuthService.setAuthState(state);
-				this.store.dispatch(AuthActions.loginSuccess(state));
+				this.store.dispatch(
+					AuthActions.login({
+						authResult: {
+							user: state.user,
+							accessToken: state.accessToken
+						}
+					})
+				);
 			})
 		);
 	}
@@ -66,6 +66,6 @@ export class AuthService {
 	 * (Attention: Does not guarantee that the token is still valid (i.e could be expired).)
 	 */
 	isLoggedIn(): boolean {
-		return !!localStorage.getItem(AuthService.studentMgmtTokenKey);
+		return !!localStorage.getItem(AuthService.authKey);
 	}
 }

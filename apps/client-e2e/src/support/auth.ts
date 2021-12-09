@@ -101,5 +101,5 @@ export const account = {
  * @param account Object that would be returned from the API's `/auth/whoAmI` route.
  */
 export function useAccount(account: AuthInfo): void {
-	window.localStorage.setItem("studentMgmtToken", JSON.stringify(account));
+	window.localStorage.setItem("auth", JSON.stringify(account));
 }

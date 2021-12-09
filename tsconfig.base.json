@@ -18,5 +18,10 @@
 			"@student-mgmt-client/util-helper": ["libs/util/helper/src/index.ts"]
 		}
 	},
+	"angularCompilerOptions": {
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	},
 	"exclude": ["node_modules", "tmp"]
 }
