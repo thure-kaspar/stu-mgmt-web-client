@@ -11,9 +11,9 @@ import { Group } from "@student-mgmt-client/domain-types";
 import { Participant } from "@student-mgmt-client/domain-types";
 import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { DialogService } from "../../../shared/services/dialog.service";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { ToastService } from "../../../shared/services/toast.service";
+import { DialogService } from "@student-mgmt-client/services";
+import { ParticipantFacade } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 
 @Component({

@@ -11,7 +11,7 @@ import {
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ActivatedRoute } from "@angular/router";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { SnackbarService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-participants-list-comparison",

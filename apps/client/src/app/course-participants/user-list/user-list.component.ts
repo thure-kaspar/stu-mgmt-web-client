@@ -12,8 +12,8 @@ import {
 import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { Paginator } from "@student-mgmt-client/shared-ui";
-import { DownloadService } from "../../shared/services/download.service";
-import { ToastService } from "../../shared/services/toast.service";
+import { DownloadService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 
 class ParticipantsFilter {
 	includeStudents = false;

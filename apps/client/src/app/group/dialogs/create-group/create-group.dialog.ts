@@ -5,7 +5,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CreateGroupMultipleComponent } from "./create-group-multiple/create-group-multiple.component";
 import { MatTabGroup } from "@angular/material/tabs";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { SnackbarService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-create-group",

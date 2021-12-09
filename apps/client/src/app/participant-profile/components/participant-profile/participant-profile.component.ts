@@ -1,21 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
-import { filter, map, switchMap, tap } from "rxjs/operators";
+import { Participant } from "@student-mgmt-client/domain-types";
+import { ParticipantFacade } from "@student-mgmt-client/services";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { ParticipantAdmissionStatusState } from "@student-mgmt-client/state";
 import {
-	AdmissionStatusDto,
 	AdmissionStatusApi,
 	AssignmentGroupTuple,
 	CourseParticipantsApi,
 	GroupEventDto,
-	ParticipantDto,
-	UserApi
+	ParticipantDto
 } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { Participant } from "@student-mgmt-client/domain-types";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { State as ParticipantAdmissionStatusState } from "@student-mgmt-client/state";
+import { BehaviorSubject, combineLatest, Observable } from "rxjs";
+import { filter, map, switchMap, tap } from "rxjs/operators";
 
 @Component({
 	selector: "app-participant-profile",

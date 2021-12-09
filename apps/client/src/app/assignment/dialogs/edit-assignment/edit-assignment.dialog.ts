@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { SnackbarService } from "@student-mgmt-client/services";
 import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
-import { ToastService } from "../../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 
 export class EditAssignmentDialogData {
 	courseId: string;

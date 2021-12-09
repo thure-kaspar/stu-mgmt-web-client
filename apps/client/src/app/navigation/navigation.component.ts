@@ -1,23 +1,31 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { OverlayContainer } from "@angular/cdk/overlay";
+import { CommonModule } from "@angular/common";
 import {
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
+	NgModule,
 	OnInit,
 	Output,
 	ViewChild
 } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { MatSidenav } from "@angular/material/sidenav";
-import { NavigationEnd, Router } from "@angular/router";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatListModule } from "@angular/material/list";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { NavigationEnd, Router, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
+import { TranslateModule } from "@ngx-translate/core";
+import { AuthService, LoginDialog } from "@student-mgmt-client/auth";
+import { CourseMembershipsFacade, ThemeService, ToastService } from "@student-mgmt-client/services";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
 import { Observable } from "rxjs";
 import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
 import { environment } from "../../environments/environment";
-import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
-import { AuthService } from "@student-mgmt-client/auth";
-import { CourseMembershipsFacade, ThemeService, ToastService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-navigation",
@@ -91,3 +99,20 @@ export class NavigationComponent implements OnInit {
 		this.toast.success("Copied!");
 	}
 }
+
+@NgModule({
+	declarations: [NavigationComponent],
+	exports: [NavigationComponent],
+	imports: [
+		CommonModule,
+		MatToolbarModule,
+		MatMenuModule,
+		TranslateModule,
+		IconComponentModule,
+		MatSidenavModule,
+		RouterModule,
+		MatDividerModule,
+		MatListModule
+	]
+})
+export class NavigationComponentModule {}

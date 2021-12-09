@@ -6,7 +6,7 @@ import {
 } from "@student-mgmt/api-client";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 
 /**
  * Component that provides a selection of users (evaluators), which can be assigned to a group or user.

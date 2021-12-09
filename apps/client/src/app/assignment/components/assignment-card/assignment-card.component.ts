@@ -3,8 +3,15 @@ import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
-import { Observable, pipe } from "rxjs";
-import { filter, map, tap } from "rxjs/operators";
+import { Course, Participant } from "@student-mgmt-client/domain-types";
+import { ToastService } from "@student-mgmt-client/services";
+import {
+	ConfirmDialog,
+	ConfirmDialogData,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import { ParticipantGroupsState, ParticipantSelectors } from "@student-mgmt-client/state";
+import { getRouteParam, RoundingMethod } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	AssessmentDto,
@@ -12,15 +19,8 @@ import {
 	GroupDto,
 	UserApi
 } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { RoundingMethod } from "@student-mgmt-client/util-helper";
-import { Course } from "@student-mgmt-client/domain-types";
-import { Participant } from "@student-mgmt-client/domain-types";
-import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "../../../shared/services/toast.service";
-import { ParticipantSelectors } from "@student-mgmt-client/state";
-import { State } from "@student-mgmt-client/state";
+import { Observable } from "rxjs";
+import { filter, map, tap } from "rxjs/operators";
 import {
 	EditAssignmentDialog,
 	EditAssignmentDialogData
@@ -144,7 +144,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		}
 	}
 
-	private studentHasNoGroup(state: State): boolean {
+	private studentHasNoGroup(state: ParticipantGroupsState): boolean {
 		return state.hasLoaded && !state.data?.[this.assignment.id];
 	}
 

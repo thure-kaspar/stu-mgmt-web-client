@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { TeachingStaffGuard } from "../shared/guards/teaching-staff.guard";
 
 // courses/:courseId/assignments/:assignmentId/assessments/
 const routes: Routes = [
@@ -16,8 +15,7 @@ const routes: Routes = [
 		loadChildren: () =>
 			import("../assessment-overview/assessment-overview.module").then(
 				m => m.AssessmentOverviewModule
-			),
-		canActivate: [TeachingStaffGuard]
+			)
 	}
 ];
 

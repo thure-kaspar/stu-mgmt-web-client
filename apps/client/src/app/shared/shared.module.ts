@@ -16,7 +16,7 @@ import {
 	ThumbChipComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { SemesterPipeModule } from "@student-mgmt-client/util-helper";
-import { AuthModule } from "../auth/auth.module";
+import { AuthModule } from "@student-mgmt-client/auth";
 import { MaterialModule } from "../material/material.module";
 
 const modules = [

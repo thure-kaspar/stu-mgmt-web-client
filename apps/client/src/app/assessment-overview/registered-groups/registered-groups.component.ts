@@ -8,10 +8,10 @@ import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
 import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { DialogService } from "../../shared/services/dialog.service";
-import { DownloadService } from "../../shared/services/download.service";
-import { ParticipantFacade } from "../../shared/services/participant.facade";
-import { ToastService } from "../../shared/services/toast.service";
+import { DialogService } from "@student-mgmt-client/services";
+import { DownloadService } from "@student-mgmt-client/services";
+import { ParticipantFacade } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-registered-groups",

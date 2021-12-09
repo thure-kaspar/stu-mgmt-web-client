@@ -6,7 +6,7 @@ import {
 	AssessmentApi,
 	AssignmentDto
 } from "@student-mgmt/api-client";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { ParticipantFacade } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-assessment-header",

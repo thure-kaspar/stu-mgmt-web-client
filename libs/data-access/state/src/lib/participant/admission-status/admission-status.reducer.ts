@@ -5,11 +5,11 @@ import * as ParticipantAdmissionStatusActions from "./admission-status.actions";
 
 export const pAdmissionStatusFeatureKey = "pAdmissionStatus";
 
-export interface State extends MetaState {
+export interface ParticipantAdmissionStatusState extends MetaState {
 	admissionStatus: AdmissionStatusDto;
 }
 
-export const initialState: State = {
+export const initialState: ParticipantAdmissionStatusState = {
 	admissionStatus: null,
 	isLoading: false,
 	hasLoaded: false,

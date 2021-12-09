@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Subject } from "rxjs";
 import { UserApi, UserSettingsDto } from "@student-mgmt/api-client";
-import { AuthService } from "../../../auth/services/auth.service";
+import { AuthService } from "@student-mgmt-client/auth";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "../../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 
 type BlacklistableEvents = {
 	ASSIGNMENT_STARTED: boolean;

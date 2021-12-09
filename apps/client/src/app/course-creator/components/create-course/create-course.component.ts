@@ -20,7 +20,7 @@ import { GroupSettingsForm } from "../../../course-settings/forms/group-settings
 import { SearchCourseDialog } from "../../../course/dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "../../../course/dialogs/search-user/search-user.dialog";
 import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
+import { SnackbarService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-create-course",

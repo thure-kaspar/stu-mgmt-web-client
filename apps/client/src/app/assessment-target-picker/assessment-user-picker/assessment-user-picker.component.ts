@@ -18,7 +18,7 @@ import {
 	UserDto
 } from "@student-mgmt/api-client";
 import { Paginator } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-target-picker.component";
 
 @Component({

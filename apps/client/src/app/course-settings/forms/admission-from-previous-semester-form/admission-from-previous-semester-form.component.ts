@@ -3,7 +3,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { CourseConfigApi, ParticipantDto } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { ToastService } from "../../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 
 type AdmissionFromPreviousResponse = { matrNrs: number[]; participants: ParticipantDto[] };
 

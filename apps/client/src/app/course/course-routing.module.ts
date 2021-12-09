@@ -2,8 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CourseListComponent } from "@student-mgmt-client/course-list";
 import { CourseComponent } from "./components/course/course.component";
-import { TeachingStaffGuard } from "../shared/guards/teaching-staff.guard";
-import { AuthGuard } from "../shared/guards/auth.guard";
 
 const routes: Routes = [
 	{
@@ -15,7 +13,6 @@ const routes: Routes = [
 	{
 		path: ":courseId",
 		component: CourseComponent,
-		canActivate: [AuthGuard],
 		children: [
 			{
 				path: "assignments",
@@ -46,8 +43,7 @@ const routes: Routes = [
 					import("../course-settings/course-settings.module").then(
 						m => m.CourseSettingsModule
 					),
-				pathMatch: "full",
-				canActivate: [TeachingStaffGuard]
+				pathMatch: "full"
 			},
 			{
 				path: "about",

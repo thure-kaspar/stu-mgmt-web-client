@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
+import { DialogService, ToastService } from "@student-mgmt-client/services";
+import { Paginator, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { UserDto, UserApi } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { Paginator } from "@student-mgmt-client/shared-ui";
-import { DialogService } from "../../shared/services/dialog.service";
-import { ToastService } from "../../shared/services/toast.service";
 import { UpdateUserDialog } from "../dialogs/update-user/update-user.dialog";
 
 class UserFilter {

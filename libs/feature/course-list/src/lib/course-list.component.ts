@@ -7,6 +7,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
+import { AuthService } from "@student-mgmt-client/auth";
 import {
 	IconComponentModule,
 	Paginator,
@@ -17,7 +18,7 @@ import { getSemesterList, SemesterPipeModule } from "@student-mgmt-client/util-h
 import { CourseApi, CourseDto, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { AuthService } from "../../../../../apps/client/src/app/auth/services/auth.service";
+import { CourseListRoutingModule } from "./course-list-routing.module";
 
 type CourseFilter = {
 	title?: string;
@@ -83,6 +84,7 @@ export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit 
 	declarations: [CourseListComponent],
 	exports: [CourseListComponent],
 	imports: [
+		CourseListRoutingModule,
 		CommonModule,
 		TranslateModule,
 		MatFormFieldModule,

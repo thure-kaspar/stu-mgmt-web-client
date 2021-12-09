@@ -6,8 +6,8 @@ import { Subject } from "rxjs";
 import { AdmissionStatusApi, ParticipantDto, PointsOverviewDto } from "@student-mgmt/api-client";
 import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { DownloadService } from "../../../shared/services/download.service";
-import { ToastService } from "../../../shared/services/toast.service";
+import { DownloadService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-points-overview",

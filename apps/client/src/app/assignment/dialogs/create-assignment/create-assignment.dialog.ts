@@ -3,8 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CourseConfigApi, AssignmentTemplateDto, AssignmentDto } from "@student-mgmt/api-client";
 import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
-import { ToastService } from "../../../shared/services/toast.service";
+import { SnackbarService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 
 /**
  * Dialog that allows the creation of new assignments. Expects the courseId. Returns the created assignment.

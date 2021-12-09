@@ -1,13 +1,22 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { LoginComponent } from "../../../../libs/util/auth/src/lib/components/login/login.component";
 import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
 	{ path: "", component: HomeComponent, pathMatch: "full" },
-	{ path: "login", component: LoginComponent, pathMatch: "full" },
+	{
+		path: "login",
+		loadChildren: () => import("@student-mgmt-client/auth").then(m => m.AuthModule)
+	},
 	{
 		path: "courses",
+		pathMatch: "full",
+		loadChildren: () =>
+			import("@student-mgmt-client/course-list").then(m => m.CourseListComponentModule)
+	},
+	{
+		path: "courses",
+		pathMatch: "full",
 		loadChildren: () => import("./course/course.module").then(m => m.CourseModule)
 	},
 	{

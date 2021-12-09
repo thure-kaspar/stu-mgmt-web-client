@@ -14,7 +14,7 @@ import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-hel
 import { VerticalBarChartData } from "../../../charts/components/vertical-bar-chart/vertical-bar-chart.component";
 import { mapToRangeLabel, Range } from "../../../charts/range";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { DownloadService } from "../../../shared/services/download.service";
+import { DownloadService } from "@student-mgmt-client/services";
 import {
 	AdmissionStatusActions,
 	AdmissionStatusSelectors,

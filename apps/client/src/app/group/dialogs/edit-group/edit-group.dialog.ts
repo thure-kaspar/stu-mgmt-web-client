@@ -5,9 +5,9 @@ import { Course } from "@student-mgmt-client/domain-types";
 import { Group } from "@student-mgmt-client/domain-types";
 import { Participant } from "@student-mgmt-client/domain-types";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { CourseFacade } from "../../../shared/services/course.facade";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { ToastService } from "../../../shared/services/toast.service";
+import { CourseFacade } from "@student-mgmt-client/services";
+import { ParticipantFacade } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 
 /**
  * Dialogs that allows users to edit a group.

@@ -5,11 +5,11 @@ import * as ParticipantGroupsActions from "./groups.actions";
 
 export const pGroupsFeatureKey = "pGroups";
 
-export interface State extends MetaState {
+export interface ParticipantGroupsState extends MetaState {
 	data: { [assignmentId: string]: GroupDto };
 }
 
-export const initialState: State = {
+export const initialState: ParticipantGroupsState = {
 	data: null,
 	isLoading: false,
 	hasLoaded: false,
@@ -30,7 +30,7 @@ export const reducer = createReducer(
 			dictionary[tuple.assignment.id] = tuple.group;
 		});
 
-		const nextState: State = {
+		const nextState: ParticipantGroupsState = {
 			data: dictionary,
 			isLoading: false,
 			hasLoaded: true,

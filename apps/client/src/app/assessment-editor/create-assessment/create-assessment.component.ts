@@ -16,8 +16,8 @@ import {
 } from "@student-mgmt/api-client";
 import { Observable, Subject } from "rxjs";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
-import { ParticipantFacade } from "../../shared/services/participant.facade";
-import { ToastService } from "../../shared/services/toast.service";
+import { ParticipantFacade } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 
 @Component({

@@ -8,8 +8,8 @@ import {
 	AssignmentWithAssessment,
 	mapToExtendedAssessmentDto
 } from "@student-mgmt-client/domain-types";
-import { CourseFacade } from "../../../shared/services/course.facade";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
+import { CourseFacade } from "@student-mgmt-client/services";
+import { ParticipantFacade } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-assessment-viewer",

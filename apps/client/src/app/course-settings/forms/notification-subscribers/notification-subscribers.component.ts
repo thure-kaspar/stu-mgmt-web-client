@@ -6,7 +6,7 @@ import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { NotificationApi, SubscriberDto } from "@student-mgmt/api-client";
 import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "../../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 import { NotificationSubscriberDialog } from "../../dialogs/notification-subscriber/notification-subscriber.dialog";
 
 @Component({

@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 import { map } from "rxjs/operators";
 import { AssignmentDto } from "@student-mgmt/api-client";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { CourseFacade } from "../../../shared/services/course.facade";
+import { CourseFacade } from "@student-mgmt-client/services";
 import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
 import { ParticipantSelectors } from "@student-mgmt-client/state";
 import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-assignment.dialog";

@@ -8,9 +8,9 @@ import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { Group } from "@student-mgmt-client/domain-types";
 import { Participant } from "@student-mgmt-client/domain-types";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { CourseFacade } from "../../../shared/services/course.facade";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { ToastService } from "../../../shared/services/toast.service";
+import { CourseFacade } from "@student-mgmt-client/services";
+import { ParticipantFacade } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
 import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
 

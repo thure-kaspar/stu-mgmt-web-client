@@ -23,3 +23,6 @@ export const ParticipantSelectors = {
 	...AssessmentSelectors,
 	...AdmissionStatusSelectors
 };
+
+export { ParticipantGroupsState } from "./groups/groups.reducer";
+export { ParticipantAdmissionStatusState } from "./admission-status/admission-status.reducer";

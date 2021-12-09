@@ -11,7 +11,7 @@ import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { AssignmentApi, CourseApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { SnackbarService } from "@student-mgmt-client/services";
 
 export class AssessmentTargetFilter {
 	assignedEvaluatorId?: string;

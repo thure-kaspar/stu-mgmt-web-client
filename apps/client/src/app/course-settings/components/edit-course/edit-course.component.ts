@@ -16,7 +16,7 @@ import {
 import { getSemester } from "@student-mgmt-client/util-helper";
 import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "../../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 import {
 	CreateAssignmentTemplateDialog,
 	CreateAssignmentTemplateDialogData

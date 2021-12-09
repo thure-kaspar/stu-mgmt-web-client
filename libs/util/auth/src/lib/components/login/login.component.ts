@@ -24,3 +24,16 @@ export class LoginComponent {
 		});
 	}
 }
+
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+
+@NgModule({
+	declarations: [LoginComponent],
+	exports: [LoginComponent],
+	imports: [CommonModule, MatFormFieldModule, MatCardModule, MatButtonModule]
+})
+export class LoginComponentModule {}

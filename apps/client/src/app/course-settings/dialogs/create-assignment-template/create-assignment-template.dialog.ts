@@ -4,8 +4,8 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseConfigApi, AssignmentTemplateDto } from "@student-mgmt/api-client";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
-import { ToastService } from "../../../shared/services/toast.service";
+import { SnackbarService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 
 export class CreateAssignmentTemplateDialogData {
 	courseId: string;

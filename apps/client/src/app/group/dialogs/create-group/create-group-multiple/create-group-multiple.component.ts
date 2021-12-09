@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { GroupDto, GroupApi, GroupCreateBulkDto } from "@student-mgmt/api-client";
-import { SnackbarService } from "../../../../shared/services/snackbar.service";
+import { SnackbarService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-create-group-multiple",

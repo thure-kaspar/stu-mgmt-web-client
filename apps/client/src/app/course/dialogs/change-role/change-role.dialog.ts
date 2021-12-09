@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { SnackbarService } from "@student-mgmt-client/services";
 import { CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
-import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 export class ChangeRoleDialogData {
 	courseId: string;

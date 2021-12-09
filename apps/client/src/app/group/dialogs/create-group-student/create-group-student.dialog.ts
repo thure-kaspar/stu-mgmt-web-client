@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CourseConfigApi, GroupDto, GroupSettingsDto, GroupApi } from "@student-mgmt/api-client";
-import { AuthService } from "../../../auth/services/auth.service";
+import { AuthService } from "@student-mgmt-client/auth";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "../../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 
 /**
  * Dialog that allows students to create groups.

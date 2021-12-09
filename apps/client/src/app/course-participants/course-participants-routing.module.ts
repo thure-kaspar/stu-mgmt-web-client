@@ -2,13 +2,11 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { UserListComponent } from "./user-list/user-list.component";
 import { ParticipantsOverviewComponent } from "./participants-overview/participants-overview.component";
-import { TeachingStaffGuard } from "../shared/guards/teaching-staff.guard";
 
 const routes: Routes = [
 	{
 		path: "",
 		component: ParticipantsOverviewComponent,
-		canActivate: [TeachingStaffGuard],
 		children: [
 			{
 				path: "admission-status",

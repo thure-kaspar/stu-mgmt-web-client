@@ -8,7 +8,7 @@ import {
 import { Injectable, Injector } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { ToastService } from "../../shared/services/toast.service";
+import { ToastService } from "@student-mgmt-client/services";
 import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: "root" })

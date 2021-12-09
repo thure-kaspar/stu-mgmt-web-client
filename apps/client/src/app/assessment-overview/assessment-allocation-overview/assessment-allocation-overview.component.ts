@@ -5,7 +5,7 @@ import { AssessmentAllocationApi, AssignmentDto } from "@student-mgmt/api-client
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignment/search-assignment.dialog";
-import { SnackbarService } from "../../shared/services/snackbar.service";
+import { SnackbarService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-assessment-allocation-overview",

@@ -9,17 +9,16 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { ToastrModule } from "ngx-toastr";
+import { AuthModule, AuthService } from "@student-mgmt-client/auth";
+import { StateModule } from "@student-mgmt-client/state";
 import { ApiModule, Configuration } from "@student-mgmt/api-client";
+import { ToastrModule } from "ngx-toastr";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AuthModule } from "./auth/auth.module";
-import { AuthService } from "./auth/services/auth.service";
 import { HomeComponent } from "./home/home.component";
 import { MaterialModule } from "./material/material.module";
-import { NavigationComponent } from "./navigation/navigation.component";
+import { NavigationComponentModule } from "./navigation/navigation.component";
 import { SharedModule } from "./shared/shared.module";
-import { StateModule } from "@student-mgmt-client/state";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -28,7 +27,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 }
 
 @NgModule({
-	declarations: [AppComponent, NavigationComponent, HomeComponent],
+	declarations: [AppComponent, HomeComponent],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
@@ -57,7 +56,8 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 		SharedModule,
 		MaterialModule,
 		LayoutModule,
-		AuthModule
+		AuthModule,
+		NavigationComponentModule
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "de" },
