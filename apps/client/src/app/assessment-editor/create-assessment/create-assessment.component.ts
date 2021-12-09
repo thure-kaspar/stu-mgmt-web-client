@@ -2,23 +2,22 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Observable, Subject } from "rxjs";
+import { SearchParticipantDialog, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { AssignmentSelectors } from "@student-mgmt-client/state";
 import {
-	AssessmentCreateDto,
 	AssessmentApi,
+	AssessmentCreateDto,
+	AssignmentApi,
 	AssignmentDto,
 	AssignmentRegistrationApi,
-	AssignmentApi,
 	CourseParticipantsApi,
 	GroupDto,
 	ParticipantDto
 } from "@student-mgmt/api-client";
+import { Observable, Subject } from "rxjs";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
-import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ParticipantFacade } from "../../shared/services/participant.facade";
 import { ToastService } from "../../shared/services/toast.service";
-import { AssignmentSelectors } from "@student-mgmt-client/state";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 
 @Component({

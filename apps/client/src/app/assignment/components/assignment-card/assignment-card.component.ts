@@ -14,8 +14,8 @@ import {
 } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { RoundingMethod } from "@student-mgmt-client/util-helper";
-import { Course } from "../../../domain/course.model";
-import { Participant } from "../../../domain/participant.model";
+import { Course } from "@student-mgmt-client/domain-types";
+import { Participant } from "@student-mgmt-client/domain-types";
 import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "../../../shared/services/toast.service";

@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { Participant } from "../../domain/participant.model";
+import { Participant } from "@student-mgmt-client/domain-types";
 import { MetaState } from "../interfaces";
 import * as ParticipantActions from "./participant.actions";
 

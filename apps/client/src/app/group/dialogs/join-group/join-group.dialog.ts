@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { GroupDto, GroupApi } from "@student-mgmt/api-client";
-import { Participant } from "../../../domain/participant.model";
+import { Participant } from "@student-mgmt-client/domain-types";
 import { ToastService } from "../../../shared/services/toast.service";
 
 export class JoinGroupDialogData {

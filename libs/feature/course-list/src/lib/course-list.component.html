@@ -46,8 +46,8 @@
 		</mat-form-field>
 	</div>
 
-	<div class="table-container">
-		<table class="w-full" mat-table [dataSource]="dataSource$ | async" matSort>
+	<div class="table-container" *ngIf="dataSource$ | async as dataSource">
+		<table class="w-full" mat-table [dataSource]="dataSource" matSort>
 			<!-- Semester Column -->
 			<ng-container matColumnDef="semester">
 				<th class="column-semester" mat-header-cell *matHeaderCellDef>

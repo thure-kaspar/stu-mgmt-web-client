@@ -1,18 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AuthService } from "../../auth/services/auth.service";
-import { environment } from "../../../environments/environment";
+import { AuthService } from "@student-mgmt-client/auth";
 import { ToastService } from "./toast.service";
 
 @Injectable({ providedIn: "root" })
 export class DownloadService {
 	private basePath = window["__env"]["API_BASE_PATH"];
 
-	constructor(
-		private http: HttpClient,
-		private authService: AuthService,
-		private toast: ToastService
-	) {}
+	constructor(private http: HttpClient, private toast: ToastService) {}
 
 	/**
 	 * Downloads a file from the API and opens a SaveFile-Dialog.

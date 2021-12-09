@@ -11,7 +11,7 @@ import {
 } from "../../course/dialogs/change-role/change-role.dialog";
 import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { Paginator } from "../../shared/paginator/paginator.component";
+import { Paginator } from "@student-mgmt-client/shared-ui";
 import { DownloadService } from "../../shared/services/download.service";
 import { ToastService } from "../../shared/services/toast.service";
 

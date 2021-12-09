@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
-import { Participant } from "../../../domain/participant.model";
+import { Participant } from "@student-mgmt-client/domain-types";
 
 @Component({
 	selector: "app-assessment-target",

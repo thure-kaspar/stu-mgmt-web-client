@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { tap } from "rxjs/operators";
-import { AuthService } from "../../auth/services/auth.service";
+import { AuthService } from "@student-mgmt-client/auth";
 import * as AuthActions from "./auth.actions";
 
 @Injectable()

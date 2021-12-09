@@ -15,9 +15,12 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@student-mgmt-client/auth": ["libs/util/auth/src/index.ts"],
 			"@student-mgmt-client/course-list": ["libs/feature/course-list/src/index.ts"],
+			"@student-mgmt-client/domain-types": ["libs/util/domain-types/src/index.ts"],
+			"@student-mgmt-client/services": ["libs/util/services/src/index.ts"],
 			"@student-mgmt-client/shared-ui": ["libs/ui/shared/src/index.ts"],
-			"@student-mgmt-client/data-access/state": ["libs/state/src/index.ts"],
+			"@student-mgmt-client/state": ["libs/data-access/state/src/index.ts"],
 			"@student-mgmt-client/util-helper": ["libs/util/helper/src/index.ts"]
 		}
 	},

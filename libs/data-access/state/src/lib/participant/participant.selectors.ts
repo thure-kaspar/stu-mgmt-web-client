@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { createParticipant } from "../../domain/participant.model";
+import { createParticipant } from "@student-mgmt-client/domain-types";
 import * as fromParticipant from "./participant.reducer";
 
 export const _selectParticipantState = createFeatureSelector<fromParticipant.State>(

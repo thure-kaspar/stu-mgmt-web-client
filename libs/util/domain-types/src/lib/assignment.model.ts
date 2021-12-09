@@ -4,7 +4,7 @@ import { AssessmentDtoExtended } from "./assessment.model";
 
 export type AssignmentDtoExtended = AssignmentDto & { requiredPoints?: number };
 export type AssignmentWithAssessment = AssignmentDtoExtended & {
-	assessment?: AssessmentDtoExtended;
+	assessment: AssessmentDtoExtended;
 };
 
 export function mapToExtendedAssessmentDto(

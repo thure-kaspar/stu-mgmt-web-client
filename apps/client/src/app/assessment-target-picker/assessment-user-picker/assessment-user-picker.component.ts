@@ -17,7 +17,7 @@ import {
 	ParticipantsWithAssignedEvaluatorDto,
 	UserDto
 } from "@student-mgmt/api-client";
-import { Paginator } from "../../shared/paginator/paginator.component";
+import { Paginator } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "../../shared/services/toast.service";
 import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-target-picker.component";
 

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { Course } from "../../domain/course.model";
+import { Course } from "@student-mgmt-client/domain-types";
 import * as fromCourse from "./course.reducer";
 
 export const selectCourseState = createFeatureSelector<fromCourse.State>(

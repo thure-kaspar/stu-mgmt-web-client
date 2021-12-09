@@ -10,12 +10,14 @@ import { isNotACourseMember } from "../../../shared/api-exceptions";
 import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { ExtendedConfirmDialog, ExtendedConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { CourseMembershipsFacade } from "../../../shared/services/course-memberships.facade";
-import { CourseFacade } from "../../../shared/services/course.facade";
-import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { ToastService } from "../../../shared/services/toast.service";
 import { CourseActions, CourseSelectors } from "@student-mgmt-client/state";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
+import {
+	ParticipantFacade,
+	CourseFacade,
+	CourseMembershipsFacade,
+	ToastService
+} from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-course",

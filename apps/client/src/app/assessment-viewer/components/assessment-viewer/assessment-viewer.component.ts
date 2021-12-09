@@ -7,7 +7,7 @@ import { getRouteParam } from "@student-mgmt-client/util-helper";
 import {
 	AssignmentWithAssessment,
 	mapToExtendedAssessmentDto
-} from "../../../domain/assignment.model";
+} from "@student-mgmt-client/domain-types";
 import { CourseFacade } from "../../../shared/services/course.facade";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
 

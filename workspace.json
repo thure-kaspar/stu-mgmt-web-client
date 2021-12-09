@@ -6,6 +6,9 @@
 		"feature-course-list": "libs/feature/course-list",
 		"state": "libs/data-access/state",
 		"ui-shared": "libs/ui/shared",
-		"util-helper": "libs/util/helper"
+		"util-auth": "libs/util/auth",
+		"util-domain-types": "libs/util/domain-types",
+		"util-helper": "libs/util/helper",
+		"util-services": "libs/util/services"
 	}
 }

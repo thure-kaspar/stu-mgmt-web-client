@@ -9,9 +9,9 @@ import {
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
-import { Course } from "../../../domain/course.model";
-import { Group } from "../../../domain/group.model";
-import { Participant } from "../../../domain/participant.model";
+import { Course } from "@student-mgmt-client/domain-types";
+import { Group } from "@student-mgmt-client/domain-types";
+import { Participant } from "@student-mgmt-client/domain-types";
 import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";

@@ -5,7 +5,7 @@ import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { SubmissionDto, SubmissionApi } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { Paginator } from "../../../shared/paginator/paginator.component";
+import { Paginator } from "@student-mgmt-client/shared-ui";
 
 @Component({
 	selector: "app-submissions-overview",

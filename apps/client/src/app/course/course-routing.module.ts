@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CourseListComponent } from "./components/course-list/course-list.component";
+import { CourseListComponent } from "@student-mgmt-client/course-list";
 import { CourseComponent } from "./components/course/course.component";
 import { TeachingStaffGuard } from "../shared/guards/teaching-staff.guard";
 import { AuthGuard } from "../shared/guards/auth.guard";

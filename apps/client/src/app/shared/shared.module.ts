@@ -15,9 +15,9 @@ import {
 	SearchParticipantDialogModule,
 	ThumbChipComponentModule
 } from "@student-mgmt-client/shared-ui";
+import { SemesterPipeModule } from "@student-mgmt-client/util-helper";
 import { AuthModule } from "../auth/auth.module";
 import { MaterialModule } from "../material/material.module";
-import { SemesterPipe } from "./pipes/semester.pipe";
 
 const modules = [
 	CommonModule,
@@ -26,7 +26,7 @@ const modules = [
 	TranslateModule,
 	FormsModule,
 	ReactiveFormsModule,
-	SemesterPipe,
+	SemesterPipeModule,
 	AssignmentTypeChipComponentModule,
 	CardComponentModule,
 	ChipComponentModule,
@@ -41,7 +41,6 @@ const modules = [
 ];
 
 @NgModule({
-	declarations: [SemesterPipe],
 	imports: modules,
 	exports: modules
 })

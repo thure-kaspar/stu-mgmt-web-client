@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CanJoinCourseDto, CourseParticipantsApi } from "@student-mgmt/api-client";
-import { AuthService } from "../../../auth/services/auth.service";
-import { CourseMembershipsFacade } from "../../../shared/services/course-memberships.facade";
+import { AuthService } from "@student-mgmt-client/auth";
+import { CourseMembershipsFacade } from "@student-mgmt-client/services";
 
 /**
  * Dialog that allows a user to join a course.

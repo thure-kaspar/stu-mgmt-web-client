@@ -5,7 +5,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject } from "rxjs";
 import { CourseDto, CourseApi } from "@student-mgmt/api-client";
 import { getSemester, getSemesterList } from "@student-mgmt-client/util-helper";
-import { Paginator } from "../../../shared/paginator/paginator.component";
+import { Paginator } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 
 /**

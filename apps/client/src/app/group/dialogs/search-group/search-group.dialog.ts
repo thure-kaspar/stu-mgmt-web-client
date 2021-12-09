@@ -7,7 +7,7 @@ import { debounceTime } from "rxjs/operators";
 import { GroupDto, GroupApi } from "@student-mgmt/api-client";
 import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { Paginator } from "../../../shared/paginator/paginator.component";
+import { Paginator } from "@student-mgmt-client/shared-ui";
 
 class GroupFilter {
 	name: string;

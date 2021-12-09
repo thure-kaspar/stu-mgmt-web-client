@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { UserDto, UserApi } from "@student-mgmt/api-client";
-import { Paginator } from "../../../shared/paginator/paginator.component";
+import { Paginator } from "@student-mgmt-client/shared-ui";
 import { BehaviorSubject, Subject } from "rxjs";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { debounceTime } from "rxjs/operators";

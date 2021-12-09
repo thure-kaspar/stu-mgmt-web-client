@@ -11,7 +11,7 @@ import {
 import { GroupApi, GroupDto, GroupWithAssignedEvaluatorDto } from "@student-mgmt/api-client";
 import { Observable, Subscription, BehaviorSubject } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
-import { Paginator } from "../../shared/paginator/paginator.component";
+import { Paginator } from "@student-mgmt-client/shared-ui";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-target-picker.component";

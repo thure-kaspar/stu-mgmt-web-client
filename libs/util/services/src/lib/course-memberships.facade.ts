@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 import { Observable, of, throwError } from "rxjs";
 import { catchError, switchMap } from "rxjs/operators";
 import { CourseParticipantsApi, UserApi } from "@student-mgmt/api-client";
-import { AuthService } from "../../auth/services/auth.service";
+import { AuthService } from "@student-mgmt-client/auth";
 import { AuthActions } from "@student-mgmt-client/state";
 
 @Injectable({ providedIn: "root" })
@@ -11,7 +11,6 @@ export class CourseMembershipsFacade {
 	constructor(
 		private courseParticipantsApi: CourseParticipantsApi,
 		private userApi: UserApi,
-		private authService: AuthService,
 		private store: Store
 	) {}
 

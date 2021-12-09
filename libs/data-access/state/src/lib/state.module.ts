@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { environment } from "../../environments/environment";
+import { environment } from "../../../../../apps/client/src/environments/environment";
 import { AdmissionStatusEffects } from "./admission-status/admission-status.effects";
 import { AssignmentEffects } from "./assignment/assignment.effects";
 import { AuthEffects } from "./auth/auth.effects";

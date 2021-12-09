@@ -9,9 +9,9 @@ import {
 import { CourseParticipantsApi, GroupApi, GroupDto } from "@student-mgmt/api-client";
 import { combineLatest, Observable, of, throwError } from "rxjs";
 import { catchError, map, switchMap, take } from "rxjs/operators";
-import { Participant } from "../../domain/participant.model";
-import { DialogService } from "../../shared/services/dialog.service";
-import { ToastService } from "../../shared/services/toast.service";
+import { Participant } from "@student-mgmt-client/domain-types";
+import { DialogService } from "./dialog.service";
+import { ToastService } from "./toast.service";
 
 @Injectable({ providedIn: "root" })
 export class ParticipantFacade {

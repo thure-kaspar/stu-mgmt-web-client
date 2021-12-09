@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Participant } from "../../domain/participant.model";
+import { Participant } from "@student-mgmt-client/domain-types";
 
 export const loadParticipant = createAction(
 	"[loadCourse$] Load Participant",

@@ -15,12 +15,9 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
 import { environment } from "../../environments/environment";
-import { LoginDialog } from "../auth/dialogs/login/login.dialog";
-import { AuthService } from "../auth/services/auth.service";
-import { CourseMembershipsFacade } from "../shared/services/course-memberships.facade";
-import { ThemeService } from "../shared/services/theme.service";
-import { ToastService } from "../shared/services/toast.service";
 import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
+import { AuthService } from "@student-mgmt-client/auth";
+import { CourseMembershipsFacade, ThemeService, ToastService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-navigation",
@@ -54,7 +51,7 @@ export class NavigationComponent implements OnInit {
 		private toast: ToastService,
 		private store: Store
 	) {
-		router.events
+		this.router.events
 			.pipe(
 				withLatestFrom(this.isHandset$),
 				filter(([a, b]) => b && a instanceof NavigationEnd)

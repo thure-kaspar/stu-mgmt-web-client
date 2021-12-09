@@ -1,10 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
-import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { Observable } from "rxjs";
 
 /**
@@ -12,7 +9,7 @@ import { Observable } from "rxjs";
  */
 @Injectable({ providedIn: "root" })
 export class DialogService {
-	constructor(private dialog: MatDialog, private translate: TranslateService) {}
+	constructor(private dialog: MatDialog) {}
 
 	/**
 	 * Opens the ConfirmDialog.

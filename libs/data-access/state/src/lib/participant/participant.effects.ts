@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, map, switchMap, withLatestFrom } from "rxjs/operators";
 import { CourseParticipantsApi } from "@student-mgmt/api-client";
-import { createParticipant } from "../../domain/participant.model";
+import { createParticipant } from "@student-mgmt-client/domain-types";
 import { AuthSelectors } from "../auth";
 import { CourseActions, CourseSelectors } from "../course";
 import { loadAdmissionsStatus } from "./admission-status/admission-status.actions";

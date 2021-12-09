@@ -4,9 +4,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { environment } from "../../environments/environment";
-import { MaterialModule } from "../material/material.module";
-import { LoginComponent } from "./components/login/login.component";
+import { LoginComponent } from "../../../../../libs/util/auth/src/lib/components/login/login.component";
 import { LoginDialog } from "./dialogs/login/login.dialog";
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -14,14 +12,7 @@ import { ErrorInterceptorService } from "./services/error-interceptor.service";
 
 @NgModule({
 	declarations: [LoginComponent, LoginDialog],
-	imports: [
-		CommonModule,
-		RouterModule,
-		TranslateModule,
-		MaterialModule,
-		FormsModule,
-		ReactiveFormsModule
-	],
+	imports: [CommonModule, RouterModule, TranslateModule, FormsModule, ReactiveFormsModule],
 	providers: [
 		AuthGuard,
 		AdminGuard,

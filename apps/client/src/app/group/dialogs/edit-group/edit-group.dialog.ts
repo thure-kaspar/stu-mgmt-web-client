@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { GroupDto, GroupSettingsDto, GroupApi, GroupUpdateDto } from "@student-mgmt/api-client";
-import { Course } from "../../../domain/course.model";
-import { Group } from "../../../domain/group.model";
-import { Participant } from "../../../domain/participant.model";
+import { Course } from "@student-mgmt-client/domain-types";
+import { Group } from "@student-mgmt-client/domain-types";
+import { Participant } from "@student-mgmt-client/domain-types";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { CourseFacade } from "../../../shared/services/course.facade";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";

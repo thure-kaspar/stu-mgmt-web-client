@@ -12,7 +12,7 @@ import {
 	UserApi
 } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { Participant } from "../../../domain/participant.model";
+import { Participant } from "@student-mgmt-client/domain-types";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
 import { State as ParticipantAdmissionStatusState } from "@student-mgmt-client/state";

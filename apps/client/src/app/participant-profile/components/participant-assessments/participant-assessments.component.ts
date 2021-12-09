@@ -8,7 +8,7 @@ import { getRouteParam } from "@student-mgmt-client/util-helper";
 import {
 	AssignmentWithAssessment,
 	mapAssessmentsToAssignment
-} from "../../../domain/assignment.model";
+} from "@student-mgmt-client/domain-types";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
 import { CourseSelectors } from "@student-mgmt-client/state";
