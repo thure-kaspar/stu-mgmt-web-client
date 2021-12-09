@@ -1,4 +1,7 @@
-<span class="chip" [ngStyle]="{ 'background-color': color }">
-	<app-icon *ngIf="icon" [name]="icon"></app-icon>
-	<span class="text">{{ text }}</span>
+<span
+	class="flex gap-2 px-2 py-1 leading-6 text-white rounded"
+	[ngStyle]="{ 'background-color': color }"
+>
+	<app-icon class="text-white fill-current" *ngIf="icon" [name]="icon"></app-icon>
+	<span class="text-white">{{ text }}</span>
 </span>
