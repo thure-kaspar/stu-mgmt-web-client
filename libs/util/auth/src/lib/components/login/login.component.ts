@@ -1,4 +1,8 @@
-import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, NgModule } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 
@@ -24,12 +28,6 @@ export class LoginComponent {
 		});
 	}
 }
-
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatCardModule } from "@angular/material/card";
-import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
 	declarations: [LoginComponent],

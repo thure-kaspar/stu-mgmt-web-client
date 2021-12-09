@@ -1,16 +1,21 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { Store } from "@ngrx/store";
-import { combineLatest, Observable } from "rxjs";
-import { filter, map } from "rxjs/operators";
+import { TranslateModule } from "@ngx-translate/core";
+import { CourseSelectors } from "@student-mgmt-client/state";
 import {
 	AdmissionRuleDto,
 	AdmissionStatusDto,
 	RoundingBehavior,
 	RuleCheckResult
 } from "@student-mgmt/api-client";
-import { CourseSelectors } from "@student-mgmt-client/state";
+import { combineLatest, Observable } from "rxjs";
+import { filter, map } from "rxjs/operators";
+import { ThumbChipComponentModule } from "../thumb-chip/thumb-chip.component";
+import { AssignmentTypeChipComponentModule } from "../assignment-type-chip/assignment-type-chip.component";
+import { CardComponentModule } from "../card/card.component";
 
 @Component({
 	selector: "app-participant-admission-status",
@@ -57,15 +62,6 @@ export class ParticipantAdmissionStatusComponent implements OnInit {
 	}
 }
 
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import {
-	AssignmentTypeChipComponentModule,
-	CardComponentModule,
-	ThumbChipComponentModule
-} from "../..";
-import { TranslateModule } from "@ngx-translate/core";
-
 @NgModule({
 	declarations: [ParticipantAdmissionStatusComponent],
 	exports: [ParticipantAdmissionStatusComponent],
@@ -73,8 +69,8 @@ import { TranslateModule } from "@ngx-translate/core";
 		CommonModule,
 		CardComponentModule,
 		AssignmentTypeChipComponentModule,
-		TranslateModule,
 		ThumbChipComponentModule,
+		TranslateModule,
 		MatDividerModule,
 		MatProgressSpinnerModule
 	]

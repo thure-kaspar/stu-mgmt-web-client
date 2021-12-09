@@ -10,6 +10,7 @@ import {
 	Output,
 	ViewChild
 } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatListModule } from "@angular/material/list";
@@ -112,7 +113,8 @@ export class NavigationComponent implements OnInit {
 		MatSidenavModule,
 		RouterModule,
 		MatDividerModule,
-		MatListModule
+		MatListModule,
+		MatButtonModule
 	]
 })
 export class NavigationComponentModule {}

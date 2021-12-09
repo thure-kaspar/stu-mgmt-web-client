@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
+import { TranslateModule } from "@ngx-translate/core";
 import { AssignmentDto } from "@student-mgmt/api-client";
+import { ChipComponentModule } from "../chip/chip.component";
 
 @Component({
 	selector: "app-assignment-type-chip",
@@ -11,11 +14,6 @@ export class AssignmentTypeChipComponent {
 	@Input() type!: AssignmentDto.TypeEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 }
-
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ChipComponentModule } from "../..";
-import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
 	declarations: [AssignmentTypeChipComponent],

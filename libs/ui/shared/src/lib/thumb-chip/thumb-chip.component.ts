@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
+import { ChipComponentModule } from "../chip/chip.component";
 
 /**
  * Component that uses the `app-chip` component to display a chip with a `thumb_up` or `thumb_down`
@@ -13,10 +15,6 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 export class ThumbChipComponent {
 	@Input() condition!: boolean;
 }
-
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ChipComponentModule } from "../chip/chip.component";
 
 @NgModule({
 	declarations: [ThumbChipComponent],
