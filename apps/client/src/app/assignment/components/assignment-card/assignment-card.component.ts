@@ -16,14 +16,11 @@ import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { RoundingMethod } from "@student-mgmt-client/util-helper";
 import { Course } from "../../../domain/course.model";
 import { Participant } from "../../../domain/participant.model";
-import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "../../../shared/services/toast.service";
-import { ParticipantSelectors } from "../../../state/participant";
-import { State } from "../../../state/participant/groups/groups.reducer";
+import { ParticipantSelectors } from "@student-mgmt-client/state";
+import { State } from "@student-mgmt-client/state";
 import {
 	EditAssignmentDialog,
 	EditAssignmentDialogData

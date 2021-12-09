@@ -3,8 +3,7 @@ import { TranslateService } from "@ngx-translate/core";
 
 @Component({
 	selector: "student-mgmt-client-root",
-	templateUrl: "./app.component.html",
-	styleUrls: ["./app.component.css"]
+	templateUrl: "./app.component.html"
 })
 export class AppComponent {
 	constructor(private translate: TranslateService) {}

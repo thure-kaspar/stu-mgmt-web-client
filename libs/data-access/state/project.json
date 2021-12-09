@@ -1,0 +1,23 @@
+{
+	"projectType": "library",
+	"root": "libs/state",
+	"sourceRoot": "libs/state/src",
+	"prefix": "student-mgmt-client",
+	"targets": {
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["coverage/libs/state"],
+			"options": {
+				"jestConfig": "libs/state/jest.config.js",
+				"passWithNoTests": true
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"options": {
+				"lintFilePatterns": ["libs/state/src/**/*.ts", "libs/state/src/**/*.html"]
+			}
+		}
+	},
+	"tags": []
+}

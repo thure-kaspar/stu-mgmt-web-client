@@ -4,7 +4,7 @@ import { Observable, of, throwError } from "rxjs";
 import { catchError, switchMap } from "rxjs/operators";
 import { CourseParticipantsApi, UserApi } from "@student-mgmt/api-client";
 import { AuthService } from "../../auth/services/auth.service";
-import { AuthActions } from "../../state/auth";
+import { AuthActions } from "@student-mgmt-client/state";
 
 @Injectable({ providedIn: "root" })
 export class CourseMembershipsFacade {

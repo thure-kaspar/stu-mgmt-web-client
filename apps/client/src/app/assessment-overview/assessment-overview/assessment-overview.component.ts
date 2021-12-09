@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { AssignmentDto } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { AssignmentActions, AssignmentSelectors } from "../../state/assignment";
+import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
 
 @Component({
 	selector: "app-assessment-overview",

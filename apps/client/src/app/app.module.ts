@@ -19,7 +19,7 @@ import { HomeComponent } from "./home/home.component";
 import { MaterialModule } from "./material/material.module";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { SharedModule } from "./shared/shared.module";
-import { StateModule } from "./state/state.module";
+import { StateModule } from "@student-mgmt-client/state";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 

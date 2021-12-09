@@ -6,7 +6,7 @@ import { BehaviorSubject } from "rxjs";
 import { CourseDto, CourseApi } from "@student-mgmt/api-client";
 import { getSemester, getSemesterList } from "@student-mgmt-client/util-helper";
 import { Paginator } from "../../../shared/paginator/paginator.component";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 
 /**
  * Dialog that allows searching for courses.

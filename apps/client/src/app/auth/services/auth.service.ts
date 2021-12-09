@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 import { AuthenticationApi, AuthResultDto, UserDto } from "@student-mgmt/api-client";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
-import { AuthActions, AuthSelectors } from "../../state/auth";
+import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {

@@ -18,11 +18,11 @@ import {
 	VerticalBarChartData,
 	VerticalBarChartOptions
 } from "../../charts/components/vertical-bar-chart/vertical-bar-chart.component";
-import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { CourseFacade } from "../../shared/services/course.facade";
 import { DownloadService } from "../../shared/services/download.service";
 import { ToastService } from "../../shared/services/toast.service";
-import { AssignmentSelectors } from "../../state/assignment";
+import { AssignmentSelectors } from "@student-mgmt-client/state";
 
 type AssessmentDtoExtended = AssessmentDto & {
 	roundedPoints?: number;

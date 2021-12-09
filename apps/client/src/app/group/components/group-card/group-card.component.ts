@@ -12,7 +12,7 @@ import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 import { Course } from "../../../domain/course.model";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
-import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
+import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";

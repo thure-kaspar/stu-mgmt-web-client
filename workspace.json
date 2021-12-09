@@ -3,6 +3,9 @@
 	"projects": {
 		"client": "apps/client",
 		"client-e2e": "apps/client-e2e",
+		"feature-course-list": "libs/feature/course-list",
+		"state": "libs/data-access/state",
+		"ui-shared": "libs/ui/shared",
 		"util-helper": "libs/util/helper"
 	}
 }

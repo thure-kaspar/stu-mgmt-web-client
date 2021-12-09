@@ -4,10 +4,10 @@ import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { map } from "rxjs/operators";
 import { AssignmentDto } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { CourseFacade } from "../../../shared/services/course.facade";
-import { AssignmentActions, AssignmentSelectors } from "../../../state/assignment";
-import { ParticipantSelectors } from "../../../state/participant";
+import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
+import { ParticipantSelectors } from "@student-mgmt-client/state";
 import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-assignment.dialog";
 
 class AssignmentsStateMap {

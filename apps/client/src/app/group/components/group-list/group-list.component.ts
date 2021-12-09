@@ -7,7 +7,7 @@ import { GroupDto, GroupApi, ParticipantDto } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { Group } from "../../../domain/group.model";
 import { Participant } from "../../../domain/participant.model";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { CourseFacade } from "../../../shared/services/course.facade";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
 import { ToastService } from "../../../shared/services/toast.service";

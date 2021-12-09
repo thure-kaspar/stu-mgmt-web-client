@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { switchMap, tap } from "rxjs/operators";
 import { AssignmentDto, AssignmentApi } from "@student-mgmt/api-client";
-import { AssignmentActions, AssignmentSelectors } from "../../state/assignment";
+import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
 
 @Injectable({ providedIn: "root" })
 export class AssignmentManagementFacade {

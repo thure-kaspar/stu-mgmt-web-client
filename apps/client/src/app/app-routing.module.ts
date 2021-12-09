@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./auth/components/login/login.component";
 import { HomeComponent } from "./home/home.component";
-import { PageNotFoundComponent } from "./shared/components/page-not-found/page-not-found.component";
+import { PageNotFoundComponent } from "@student-mgmt-client/shared-ui";
 
 const routes: Routes = [
 	{ path: "", component: HomeComponent, pathMatch: "full" },

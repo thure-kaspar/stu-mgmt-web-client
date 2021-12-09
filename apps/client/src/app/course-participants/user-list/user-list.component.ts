@@ -9,11 +9,8 @@ import {
 	ChangeRoleDialog,
 	ChangeRoleDialogData
 } from "../../course/dialogs/change-role/change-role.dialog";
-import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { Paginator } from "../../shared/paginator/paginator.component";
 import { DownloadService } from "../../shared/services/download.service";
 import { ToastService } from "../../shared/services/toast.service";

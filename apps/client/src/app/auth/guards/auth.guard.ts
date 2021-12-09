@@ -4,7 +4,7 @@ import { CanActivate } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { switchMap, take } from "rxjs/operators";
-import { AuthSelectors } from "../../state/auth";
+import { AuthSelectors } from "@student-mgmt-client/state";
 import { LoginDialog } from "../dialogs/login/login.dialog";
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { ParticipantSelectors } from "../../../state/participant";
+import { ParticipantSelectors } from "@student-mgmt-client/state";
 
 @Component({
 	selector: "app-participant-admission-status-container",

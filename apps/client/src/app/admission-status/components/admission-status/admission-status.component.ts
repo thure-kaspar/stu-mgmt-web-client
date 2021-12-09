@@ -13,10 +13,13 @@ import {
 import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
 import { VerticalBarChartData } from "../../../charts/components/vertical-bar-chart/vertical-bar-chart.component";
 import { mapToRangeLabel, Range } from "../../../charts/range";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { DownloadService } from "../../../shared/services/download.service";
-import { AdmissionStatusActions, AdmissionStatusSelectors } from "../../../state/admission-status";
-import { CourseSelectors } from "../../../state/course";
+import {
+	AdmissionStatusActions,
+	AdmissionStatusSelectors,
+	CourseSelectors
+} from "@student-mgmt-client/state";
 
 type ChartData = {
 	data: VerticalBarChartData;

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { UserDto, UserApi, UserUpdateDto } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "../../../shared/services/toast.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 

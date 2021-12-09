@@ -5,10 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { NotificationApi, SubscriberDto } from "@student-mgmt/api-client";
-import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "../../../shared/services/toast.service";
 import { NotificationSubscriberDialog } from "../../dialogs/notification-subscriber/notification-subscriber.dialog";
 

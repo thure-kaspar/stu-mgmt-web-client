@@ -13,9 +13,9 @@ import {
 } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { Participant } from "../../../domain/participant.model";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
-import { State as ParticipantAdmissionStatusState } from "../../../state/participant/admission-status/admission-status.reducer";
+import { State as ParticipantAdmissionStatusState } from "@student-mgmt-client/state";
 
 @Component({
 	selector: "app-participant-profile",

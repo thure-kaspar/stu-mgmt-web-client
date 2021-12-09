@@ -5,7 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Subject } from "rxjs";
 import { AdmissionStatusApi, ParticipantDto, PointsOverviewDto } from "@student-mgmt/api-client";
 import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { DownloadService } from "../../../shared/services/download.service";
 import { ToastService } from "../../../shared/services/toast.service";
 

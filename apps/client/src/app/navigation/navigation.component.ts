@@ -20,7 +20,7 @@ import { AuthService } from "../auth/services/auth.service";
 import { CourseMembershipsFacade } from "../shared/services/course-memberships.facade";
 import { ThemeService } from "../shared/services/theme.service";
 import { ToastService } from "../shared/services/toast.service";
-import { AuthActions, AuthSelectors } from "../state/auth";
+import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
 
 @Component({
 	selector: "app-navigation",

@@ -5,7 +5,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { UserDto, UserApi } from "@student-mgmt/api-client";
 import { Paginator } from "../../../shared/paginator/paginator.component";
 import { BehaviorSubject, Subject } from "rxjs";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { debounceTime } from "rxjs/operators";
 
 class UserFilter {

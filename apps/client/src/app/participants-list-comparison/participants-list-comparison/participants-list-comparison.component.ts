@@ -8,7 +8,7 @@ import {
 	CourseParticipantsApi,
 	ParticipantsComparisonDto
 } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ActivatedRoute } from "@angular/router";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { SnackbarService } from "../../shared/services/snackbar.service";

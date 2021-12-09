@@ -7,20 +7,14 @@ import { take, tap } from "rxjs/operators";
 import { GroupApi } from "@student-mgmt/api-client";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { isNotACourseMember } from "../../../shared/api-exceptions";
-import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import {
-	ExtendedConfirmDialog,
-	ExtendedConfirmDialogData
-} from "../../../shared/components/dialogs/extended-confirm-dialog/extended-confirm-dialog.dialog";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
+import { ExtendedConfirmDialog, ExtendedConfirmDialogData } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { CourseMembershipsFacade } from "../../../shared/services/course-memberships.facade";
 import { CourseFacade } from "../../../shared/services/course.facade";
 import { ParticipantFacade } from "../../../shared/services/participant.facade";
 import { ToastService } from "../../../shared/services/toast.service";
-import { CourseActions, CourseSelectors } from "../../../state/course";
+import { CourseActions, CourseSelectors } from "@student-mgmt-client/state";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 
 @Component({

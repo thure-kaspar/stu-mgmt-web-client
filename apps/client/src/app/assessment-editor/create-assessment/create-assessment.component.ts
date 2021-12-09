@@ -14,11 +14,11 @@ import {
 	ParticipantDto
 } from "@student-mgmt/api-client";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
-import { SearchParticipantDialog } from "../../shared/components/dialogs/search-participant/search-participant.dialog";
-import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ParticipantFacade } from "../../shared/services/participant.facade";
 import { ToastService } from "../../shared/services/toast.service";
-import { AssignmentSelectors } from "../../state/assignment";
+import { AssignmentSelectors } from "@student-mgmt-client/state";
 import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
 
 @Component({

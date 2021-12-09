@@ -9,9 +9,9 @@ import {
 	AssignmentWithAssessment,
 	mapAssessmentsToAssignment
 } from "../../../domain/assignment.model";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
-import { AssignmentActions, AssignmentSelectors } from "../../../state/assignment";
-import { CourseSelectors } from "../../../state/course";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
+import { CourseSelectors } from "@student-mgmt-client/state";
 
 @Component({
 	selector: "app-participant-assessments",

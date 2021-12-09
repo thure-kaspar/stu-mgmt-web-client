@@ -4,9 +4,9 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { AuthenticationApi } from "@student-mgmt/api-client";
 import { BehaviorSubject, firstValueFrom } from "rxjs";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "../../../shared/services/toast.service";
-import { AuthActions } from "../../../state/auth";
+import { AuthActions } from "@student-mgmt-client/state";
 import { AuthService } from "../../services/auth.service";
 
 type LoginState = { isLoading: boolean; error?: string | null };

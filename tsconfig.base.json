@@ -15,6 +15,9 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@student-mgmt-client/course-list": ["libs/feature/course-list/src/index.ts"],
+			"@student-mgmt-client/shared-ui": ["libs/ui/shared/src/index.ts"],
+			"@student-mgmt-client/data-access/state": ["libs/state/src/index.ts"],
 			"@student-mgmt-client/util-helper": ["libs/util/helper/src/index.ts"]
 		}
 	},

@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { UserDto, UserApi } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "../../shared/components/unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { Paginator } from "../../shared/paginator/paginator.component";
 import { DialogService } from "../../shared/services/dialog.service";
 import { ToastService } from "../../shared/services/toast.service";

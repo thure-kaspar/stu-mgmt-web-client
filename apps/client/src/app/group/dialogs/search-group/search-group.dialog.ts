@@ -5,8 +5,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { GroupDto, GroupApi } from "@student-mgmt/api-client";
-import { SearchParticipantDialog } from "../../../shared/components/dialogs/search-participant/search-participant.dialog";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { Paginator } from "../../../shared/paginator/paginator.component";
 
 class GroupFilter {

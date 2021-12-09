@@ -1,14 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
+import {
+	AuthSelectors,
+	CourseSelectors,
+	ParticipantActions,
+	ParticipantSelectors
+} from "@student-mgmt-client/state";
+import { CourseParticipantsApi, GroupApi, GroupDto } from "@student-mgmt/api-client";
 import { combineLatest, Observable, of, throwError } from "rxjs";
 import { catchError, map, switchMap, take } from "rxjs/operators";
-import { CourseParticipantsApi, GroupDto, GroupApi } from "@student-mgmt/api-client";
 import { Participant } from "../../domain/participant.model";
 import { DialogService } from "../../shared/services/dialog.service";
 import { ToastService } from "../../shared/services/toast.service";
-import { AuthSelectors } from "../../state/auth";
-import { CourseSelectors } from "../../state/course";
-import { ParticipantActions, ParticipantSelectors } from "../../state/participant";
 
 @Injectable({ providedIn: "root" })
 export class ParticipantFacade {

@@ -14,11 +14,8 @@ import {
 	GroupSettingsUpdateDto
 } from "@student-mgmt/api-client";
 import { getSemester } from "@student-mgmt-client/util-helper";
-import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
-import { UnsubscribeOnDestroy } from "../../../shared/components/unsubscribe-on-destroy.component";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "../../../shared/services/toast.service";
 import {
 	CreateAssignmentTemplateDialog,

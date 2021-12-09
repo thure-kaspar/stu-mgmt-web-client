@@ -19,10 +19,7 @@ import { CourseForm } from "../../../course-settings/forms/course-form/course-fo
 import { GroupSettingsForm } from "../../../course-settings/forms/group-settings-form/group-settings-form.component";
 import { SearchCourseDialog } from "../../../course/dialogs/search-course/search-course.dialog";
 import { SearchUserDialog } from "../../../course/dialogs/search-user/search-user.dialog";
-import {
-	ConfirmDialog,
-	ConfirmDialogData
-} from "../../../shared/components/dialogs/confirm-dialog/confirm-dialog.dialog";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { SnackbarService } from "../../../shared/services/snackbar.service";
 
 @Component({
