@@ -16,7 +16,7 @@ const routes: Routes = [
 			import("@student-mgmt-client/course-list").then(m => m.CourseListComponentModule)
 	},
 	{
-		path: "courses/create",
+		path: "new-course",
 		pathMatch: "full",
 		loadChildren: () =>
 			import("./course-creator/course-creator.module").then(m => m.CourseCreatorModule)
