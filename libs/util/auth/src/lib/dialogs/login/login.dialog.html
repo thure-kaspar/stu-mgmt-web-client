@@ -28,7 +28,7 @@
 			<app-icon matSuffix class="icon-light" name="lock"></app-icon>
 		</mat-form-field>
 
-		<div class="flex justify-center">
+		<div class="flex justify-center text-center">
 			<mat-error *ngIf="loginState.error">{{ loginState.error | translate}}</mat-error>
 			<mat-spinner *ngIf="loginState.isLoading" color="accent" [diameter]="32"></mat-spinner>
 		</div>

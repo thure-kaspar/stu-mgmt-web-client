@@ -1,8 +1,8 @@
-<div class="tab">
-	<mat-card id="login-form-container">
+<div class="mx-auto mt-4 w-96">
+	<mat-card class="flex flex-col gap-4">
 		<mat-card-title>Login</mat-card-title>
-		<mat-card-content>
-			<mat-form-field class="form-field">
+		<div class="flex flex-col gap-2 pt-2">
+			<mat-form-field class="form-field" appearance="outline">
 				<mat-label>Username</mat-label>
 				<input
 					#username
@@ -15,9 +15,11 @@
 				/>
 			</mat-form-field>
 
-			<mat-hint>Use the email of any test account to login.</mat-hint>
+			<div class="m-auto mb-2">
+				<mat-hint>Use the username of any test account to login.</mat-hint>
+			</div>
 
-			<div class="form-buttons">
+			<div class="flex flex-col gap-2">
 				<button
 					mat-raised-button
 					color="accent"
@@ -37,6 +39,6 @@
 			</div>
 
 			<p *ngIf="errorMessage != null" id="error-message">{{ errorMessage }}</p>
-		</mat-card-content>
+		</div>
 	</mat-card>
 </div>

@@ -1,24 +1,10 @@
-import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { MatCardModule } from "@angular/material/card";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatSelectModule } from "@angular/material/select";
-import { MatTableDataSource, MatTableModule } from "@angular/material/table";
-import { RouterModule } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
 import { AuthService } from "@student-mgmt-client/auth";
-import {
-	IconComponentModule,
-	Paginator,
-	PaginatorModule,
-	UnsubscribeOnDestroy
-} from "@student-mgmt-client/shared-ui";
-import { getSemesterList, SemesterPipeModule } from "@student-mgmt-client/util-helper";
+import { Paginator, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { getSemesterList } from "@student-mgmt-client/util-helper";
 import { CourseApi, CourseDto, UserDto } from "@student-mgmt/api-client";
-import { BehaviorSubject, Subject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
-import { CourseListRoutingModule } from "./course-list-routing.module";
+import { BehaviorSubject, debounceTime, Subject } from "rxjs";
 
 type CourseFilter = {
 	title?: string;
@@ -79,23 +65,3 @@ export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit 
 			});
 	}
 }
-
-@NgModule({
-	declarations: [CourseListComponent],
-	exports: [CourseListComponent],
-	imports: [
-		CourseListRoutingModule,
-		CommonModule,
-		TranslateModule,
-		MatFormFieldModule,
-		MatTableModule,
-		MatSelectModule,
-		FormsModule,
-		RouterModule,
-		PaginatorModule,
-		IconComponentModule,
-		MatCardModule,
-		SemesterPipeModule
-	]
-})
-export class CourseListComponentModule {}

@@ -6,6 +6,7 @@ const routes: Routes = [
 	{ path: "", component: HomeComponent, pathMatch: "full" },
 	{
 		path: "login",
+		pathMatch: "full",
 		loadChildren: () => import("@student-mgmt-client/auth").then(m => m.AuthModule)
 	},
 	{
@@ -15,8 +16,13 @@ const routes: Routes = [
 			import("@student-mgmt-client/course-list").then(m => m.CourseListComponentModule)
 	},
 	{
-		path: "courses",
+		path: "courses/create",
 		pathMatch: "full",
+		loadChildren: () =>
+			import("./course-creator/course-creator.module").then(m => m.CourseCreatorModule)
+	},
+	{
+		path: "courses",
 		loadChildren: () => import("./course/course.module").then(m => m.CourseModule)
 	},
 	{

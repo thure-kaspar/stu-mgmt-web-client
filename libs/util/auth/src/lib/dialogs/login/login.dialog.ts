@@ -1,12 +1,19 @@
+import { CommonModule } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { Store } from "@ngrx/store";
+import { TranslateModule } from "@ngx-translate/core";
+import { ToastService } from "@student-mgmt-client/services";
+import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { AuthActions } from "@student-mgmt-client/state";
 import { AuthenticationApi } from "@student-mgmt/api-client";
 import { BehaviorSubject, firstValueFrom } from "rxjs";
-import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "@student-mgmt-client/services";
-import { AuthActions } from "@student-mgmt-client/state";
 import { AuthService } from "../../services/auth.service";
 
 type LoginState = { isLoading: boolean; error?: string | null };
@@ -63,23 +70,18 @@ export class LoginDialog extends UnsubscribeOnDestroy {
 	}
 }
 
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { TranslateModule } from "@ngx-translate/core";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { FormsModule } from "@angular/forms";
-
 @NgModule({
 	declarations: [LoginDialog],
 	exports: [LoginDialog],
 	imports: [
 		CommonModule,
-		MatFormFieldModule,
-		MatDialogModule,
-		TranslateModule,
-		MatProgressSpinnerModule,
 		FormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		TranslateModule,
+		MatButtonModule,
+		MatDialogModule,
+		MatProgressSpinnerModule,
 		IconComponentModule
 	]
 })

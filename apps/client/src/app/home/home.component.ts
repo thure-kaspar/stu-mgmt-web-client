@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { TranslateService } from "@ngx-translate/core";
-import { LoginDialog } from "@student-mgmt-client/auth";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { RouterModule } from "@angular/router";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { AuthModule, LoginDialog } from "@student-mgmt-client/auth";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 
 @Component({
@@ -33,3 +36,10 @@ export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 		localStorage.setItem("language", lang);
 	}
 }
+
+@NgModule({
+	declarations: [HomeComponent],
+	exports: [HomeComponent],
+	imports: [CommonModule, RouterModule, TranslateModule, MatButtonModule, MatDialogModule]
+})
+export class HomeComponentModule {}

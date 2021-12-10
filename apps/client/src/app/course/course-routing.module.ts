@@ -1,15 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CourseListComponent } from "@student-mgmt-client/course-list";
 import { CourseComponent } from "./components/course/course.component";
 
 const routes: Routes = [
-	{
-		path: "create",
-		loadChildren: () =>
-			import("../course-creator/course-creator.module").then(m => m.CourseCreatorModule),
-		pathMatch: "full"
-	},
 	{
 		path: ":courseId",
 		component: CourseComponent,
@@ -52,8 +45,7 @@ const routes: Routes = [
 			},
 			{ path: "", pathMatch: "full", redirectTo: "assignments" }
 		]
-	},
-	{ path: "", component: CourseListComponent, pathMatch: "full" }
+	}
 ];
 
 @NgModule({

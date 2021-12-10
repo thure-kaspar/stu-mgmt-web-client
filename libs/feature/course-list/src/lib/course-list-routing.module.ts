@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CourseListComponent } from "@student-mgmt-client/course-list";
+import { CourseListComponent } from "./course-list.component";
 
 const routes: Routes = [{ path: "", component: CourseListComponent, pathMatch: "full" }];
 

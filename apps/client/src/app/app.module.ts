@@ -9,16 +9,14 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { AuthModule, AuthService } from "@student-mgmt-client/auth";
+import { AuthService } from "@student-mgmt-client/auth";
 import { StateModule } from "@student-mgmt-client/state";
 import { ApiModule, Configuration } from "@student-mgmt/api-client";
 import { ToastrModule } from "ngx-toastr";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home/home.component";
-import { MaterialModule } from "./material/material.module";
+import { HomeComponentModule } from "./home/home.component";
 import { NavigationComponentModule } from "./navigation/navigation.component";
-import { SharedModule } from "./shared/shared.module";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -27,10 +25,16 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 }
 
 @NgModule({
-	declarations: [AppComponent, HomeComponent],
+	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
+		LayoutModule,
+		BrowserAnimationsModule,
+		AppRoutingModule,
+		StateModule,
+		NavigationComponentModule,
+		HomeComponentModule,
 		ApiModule.forRoot(
 			() =>
 				new Configuration({
@@ -38,12 +42,6 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 					accessToken: (): string => AuthService.getAccessToken()
 				})
 		),
-		AppRoutingModule,
-		BrowserAnimationsModule,
-		ToastrModule.forRoot({
-			positionClass: "toast-bottom-right",
-			progressBar: true
-		}),
 		TranslateModule.forRoot({
 			defaultLanguage: localStorage.getItem("language") ?? "de",
 			loader: {
@@ -52,12 +50,10 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 				deps: [HttpClient]
 			}
 		}),
-		StateModule,
-		SharedModule,
-		MaterialModule,
-		LayoutModule,
-		AuthModule,
-		NavigationComponentModule
+		ToastrModule.forRoot({
+			positionClass: "toast-bottom-right",
+			progressBar: true
+		})
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "de" },

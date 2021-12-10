@@ -4,7 +4,8 @@ import { LoginComponent } from "./components/login/login.component";
 
 const routes: Routes = [
 	{
-		path: "create",
+		path: "",
+		pathMatch: "full",
 		component: LoginComponent
 	}
 ];
