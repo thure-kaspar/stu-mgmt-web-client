@@ -21,6 +21,7 @@
 			"@student-mgmt-client/services": ["libs/util/services/src/index.ts"],
 			"@student-mgmt-client/shared-ui": ["libs/ui/shared/src/index.ts"],
 			"@student-mgmt-client/state": ["libs/data-access/state/src/index.ts"],
+			"@student-mgmt-client/storybook": ["libs/storybook/src/index.ts"],
 			"@student-mgmt-client/util-helper": ["libs/util/helper/src/index.ts"]
 		}
 	},
