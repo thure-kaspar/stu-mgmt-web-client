@@ -8,8 +8,7 @@ import { SnackbarService } from "@student-mgmt-client/services";
 import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { AssessmentAllocationApi, AssignmentDto } from "@student-mgmt/api-client";
-import { AssessmentTargetPickerModule } from "../../assessment-target-picker/assessment-target-picker.module";
-import { AssessmentTargetComponentModule } from "../../assessment/components/assessment-target/assessment-target.component";
+import { AssessmentTargetPickerComponentModule } from "../../assessment-target-picker/assessment-target-picker.component";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignment/search-assignment.dialog";
 
@@ -73,7 +72,7 @@ export class AssessmentAllocationOverviewComponent implements OnInit {
 		MatButtonModule,
 		TranslateModule,
 		IconComponentModule,
-		AssessmentTargetPickerModule
+		AssessmentTargetPickerComponentModule
 	]
 })
 export class AssessmentAllocationOverviewComponentModule {}

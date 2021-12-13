@@ -1,25 +1,31 @@
+import { CommonModule } from "@angular/common";
 import {
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	Input,
+	NgModule,
 	OnDestroy,
 	OnInit,
 	Output,
 	ViewChild
 } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSortModule } from "@angular/material/sort";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { ToastService } from "@student-mgmt-client/services";
+import { Paginator, PaginatorModule } from "@student-mgmt-client/shared-ui";
 import {
 	CourseParticipantsApi,
 	ParticipantDto,
 	ParticipantsWithAssignedEvaluatorDto,
 	UserDto
 } from "@student-mgmt/api-client";
-import { Paginator } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "@student-mgmt-client/services";
-import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-target-picker.component";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { AssessmentAllocationComponentModule } from "../assessment-allocation/assessment-allocation.component";
+import { AssessmentTargetFilter } from "../assessment-target-picker.component";
 
 @Component({
 	selector: "app-assessment-user-picker",
@@ -106,3 +112,19 @@ export class AssessmentUserPickerComponent implements OnInit, OnDestroy {
 		this.filterSub.unsubscribe();
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentUserPickerComponent],
+	exports: [AssessmentUserPickerComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatTableModule,
+		MatSortModule,
+		MatProgressSpinnerModule,
+		TranslateModule,
+		AssessmentAllocationComponentModule,
+		PaginatorModule
+	]
+})
+export class AssessmentUserPickerComponentModule {}

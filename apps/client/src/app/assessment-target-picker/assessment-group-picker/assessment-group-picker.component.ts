@@ -1,20 +1,26 @@
+import { CommonModule } from "@angular/common";
 import {
+	ChangeDetectionStrategy,
 	Component,
-	OnInit,
-	Input,
 	EventEmitter,
-	Output,
+	Input,
+	NgModule,
 	OnDestroy,
-	ViewChild,
-	ChangeDetectionStrategy
+	OnInit,
+	Output,
+	ViewChild
 } from "@angular/core";
-import { GroupApi, GroupDto, GroupWithAssignedEvaluatorDto } from "@student-mgmt/api-client";
-import { Observable, Subscription, BehaviorSubject } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
-import { Paginator } from "@student-mgmt-client/shared-ui";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSortModule } from "@angular/material/sort";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 import { SnackbarService } from "@student-mgmt-client/services";
-import { MatTableDataSource } from "@angular/material/table";
-import { AssessmentTargetFilter } from "../assessment-target-picker/assessment-target-picker.component";
+import { Paginator, PaginatorModule } from "@student-mgmt-client/shared-ui";
+import { GroupApi, GroupDto, GroupWithAssignedEvaluatorDto } from "@student-mgmt/api-client";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { AssessmentAllocationComponentModule } from "../assessment-allocation/assessment-allocation.component";
+import { AssessmentTargetFilter } from "../assessment-target-picker.component";
 
 @Component({
 	selector: "app-assessment-group-picker",
@@ -103,3 +109,19 @@ export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 		this.filterSub.unsubscribe();
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentGroupPickerComponent],
+	exports: [AssessmentGroupPickerComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatTableModule,
+		MatSortModule,
+		MatProgressSpinnerModule,
+		TranslateModule,
+		AssessmentAllocationComponentModule,
+		PaginatorModule
+	]
+})
+export class AssessmentGroupPickerComponentModule {}

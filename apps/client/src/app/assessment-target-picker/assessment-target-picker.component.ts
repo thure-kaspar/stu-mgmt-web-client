@@ -1,17 +1,28 @@
+import { CommonModule } from "@angular/common";
 import {
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	Input,
+	NgModule,
 	OnDestroy,
 	OnInit,
 	Output
 } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatTabsModule } from "@angular/material/tabs";
+import { TranslateModule } from "@ngx-translate/core";
+import { SnackbarService } from "@student-mgmt-client/services";
+import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { AssignmentApi, CourseApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
-import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { EvaluatorsFacade } from "../assessment/services/evaluators.facade";
+import { AssessmentGroupPickerComponentModule } from "./assessment-group-picker/assessment-group-picker.component";
+import { AssessmentUserPickerComponentModule } from "./assessment-user-picker/assessment-user-picker.component";
 
 export class AssessmentTargetFilter {
 	assignedEvaluatorId?: string;
@@ -48,12 +59,7 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	private nameFilterChangedSubject = new Subject<void>();
 	private nameFilterSubscription: Subscription;
 
-	constructor(
-		private assignmentApi: AssignmentApi,
-		private courseApi: CourseApi,
-		private evaluatorsFacade: EvaluatorsFacade,
-		private snackbar: SnackbarService
-	) {}
+	constructor(private evaluatorsFacade: EvaluatorsFacade, private snackbar: SnackbarService) {}
 
 	ngOnInit(): void {
 		this.evaluatorsFacade.loadEvaluators(this.courseId).subscribe({
@@ -105,3 +111,21 @@ export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 		this.evaluatorsFacade.clear();
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentTargetPickerComponent],
+	exports: [AssessmentTargetPickerComponent],
+	imports: [
+		CommonModule,
+		FormsModule,
+		MatTabsModule,
+		MatSelectModule,
+		MatCheckboxModule,
+		MatFormFieldModule,
+		MatInputModule,
+		TranslateModule,
+		AssessmentGroupPickerComponentModule,
+		AssessmentUserPickerComponentModule
+	]
+})
+export class AssessmentTargetPickerComponentModule {}

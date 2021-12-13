@@ -1,12 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { ToastService } from "@student-mgmt-client/services";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import {
-	AssessmentAllocationDto,
 	AssessmentAllocationApi,
+	AssessmentAllocationDto,
 	ParticipantDto
 } from "@student-mgmt/api-client";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "@student-mgmt-client/services";
 
 /**
  * Component that provides a selection of users (evaluators), which can be assigned to a group or user.
@@ -114,3 +118,10 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 			);
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentAllocationComponent],
+	exports: [AssessmentAllocationComponent],
+	imports: [CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule]
+})
+export class AssessmentAllocationComponentModule {}
