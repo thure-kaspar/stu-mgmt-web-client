@@ -1,20 +1,25 @@
-import { Location } from "@angular/common";
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { CommonModule, Location } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { TranslateModule } from "@ngx-translate/core";
+import { DialogService, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
 import {
+	AssessmentApi,
 	AssessmentDto,
 	AssessmentEventDto,
-	AssessmentApi,
 	AssessmentUpdateDto,
 	AssignmentDto,
 	GroupDto,
 	ParticipantDto
 } from "@student-mgmt/api-client";
-import { DialogService } from "@student-mgmt-client/services";
-import { ParticipantFacade } from "@student-mgmt-client/services";
-import { ToastService } from "@student-mgmt-client/services";
-import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
+import { Subject } from "rxjs";
+import { AssessmentHeaderComponentModule } from "../../assessment/components/assessment-header/assessment-header.component";
+import {
+	AssessmentFormComponent,
+	AssessmentFormComponentModule
+} from "../forms/assessment-form/assessment-form.component";
 
 @Component({
 	selector: "app-edit-assessment",
@@ -23,7 +28,7 @@ import { AssessmentForm } from "../forms/assessment-form/assessment-form.compone
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAssessmentComponent implements OnInit {
-	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
+	@ViewChild(AssessmentFormComponent, { static: true }) form: AssessmentFormComponent;
 
 	assessment$ = new Subject<AssessmentDto>();
 
@@ -135,3 +140,17 @@ export class EditAssessmentComponent implements OnInit {
 			);
 	}
 }
+
+@NgModule({
+	declarations: [EditAssessmentComponent],
+	exports: [EditAssessmentComponent],
+	imports: [
+		CommonModule,
+		TranslateModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		AssessmentFormComponentModule,
+		AssessmentHeaderComponentModule
+	]
+})
+export class EditAssessmentComponentModule {}

@@ -1,21 +1,31 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectorRef, Component, Input, NgModule, OnInit } from "@angular/core";
 import {
-	FormBuilder,
-	Validators,
-	FormArray,
-	FormGroup,
-	ValidatorFn,
 	AbstractControl,
-	ValidationErrors
+	FormArray,
+	FormBuilder,
+	FormGroup,
+	ReactiveFormsModule,
+	ValidationErrors,
+	ValidatorFn,
+	Validators
 } from "@angular/forms";
-import { AbstractForm } from "../../../shared/abstract-form";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialog } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSliderModule } from "@angular/material/slider";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { TranslateModule } from "@ngx-translate/core";
+import { CardComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
 import {
 	AssessmentCreateDto,
-	PartialAssessmentDto,
 	AssignmentDto,
-	MarkerDto
+	MarkerDto,
+	PartialAssessmentDto
 } from "@student-mgmt/api-client";
-import { MatDialog } from "@angular/material/dialog";
+import { MarkerComponentModule } from "../../../assessment/components/marker/marker.component";
+import { AbstractForm } from "../../../shared/abstract-form";
 import { EditMarkerDialog } from "../../dialogs/edit-marker/edit-marker.dialog";
 
 /**
@@ -32,7 +42,7 @@ const groupOrUserValidator: ValidatorFn = (control: AbstractControl): Validation
 	templateUrl: "./assessment-form.component.html",
 	styleUrls: ["./assessment-form.component.scss"]
 })
-export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements OnInit {
+export class AssessmentFormComponent extends AbstractForm<AssessmentCreateDto> implements OnInit {
 	@Input() assignment: AssignmentDto;
 
 	severityEnum = MarkerDto.SeverityEnum;
@@ -170,3 +180,22 @@ export class AssessmentForm extends AbstractForm<AssessmentCreateDto> implements
 			});
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentFormComponent],
+	exports: [AssessmentFormComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatSliderModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatTooltipModule,
+		TranslateModule,
+		CardComponentModule,
+		IconComponentModule,
+		MarkerComponentModule
+	]
+})
+export class AssessmentFormComponentModule {}

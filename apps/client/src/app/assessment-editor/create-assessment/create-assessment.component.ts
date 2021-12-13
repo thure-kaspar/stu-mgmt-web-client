@@ -1,8 +1,16 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { SearchParticipantDialog, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { TranslateModule } from "@ngx-translate/core";
+import { ParticipantFacade, ToastService } from "@student-mgmt-client/services";
+import {
+	IconComponentModule,
+	SearchParticipantDialog,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
 import { AssignmentSelectors } from "@student-mgmt-client/state";
 import {
 	AssessmentApi,
@@ -15,10 +23,12 @@ import {
 	ParticipantDto
 } from "@student-mgmt/api-client";
 import { Observable, Subject } from "rxjs";
+import { AssessmentTargetComponentModule } from "../../assessment/components/assessment-target/assessment-target.component";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
-import { ParticipantFacade } from "@student-mgmt-client/services";
-import { ToastService } from "@student-mgmt-client/services";
-import { AssessmentForm } from "../forms/assessment-form/assessment-form.component";
+import {
+	AssessmentFormComponent,
+	AssessmentFormComponentModule
+} from "../forms/assessment-form/assessment-form.component";
 
 @Component({
 	selector: "app-create-assessment",
@@ -27,7 +37,7 @@ import { AssessmentForm } from "../forms/assessment-form/assessment-form.compone
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements OnInit {
-	@ViewChild(AssessmentForm, { static: true }) form: AssessmentForm;
+	@ViewChild(AssessmentFormComponent, { static: true }) form: AssessmentFormComponent;
 
 	forParticipant$ = new Subject<ParticipantDto>();
 	forGroup$ = new Subject<GroupDto>();
@@ -165,3 +175,17 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		this.router.navigate([], { fragment: "user-" + participant.userId });
 	}
 }
+
+@NgModule({
+	declarations: [CreateAssessmentComponent],
+	exports: [CreateAssessmentComponent],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		TranslateModule,
+		AssessmentFormComponentModule,
+		AssessmentTargetComponentModule,
+		IconComponentModule
+	]
+})
+export class CreateAssessmentComponentModule {}

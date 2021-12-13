@@ -1,6 +1,10 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatDialogModule, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
+import { TranslateModule } from "@ngx-translate/core";
 import { MarkerDto } from "@student-mgmt/api-client";
 
 @Component({
@@ -26,3 +30,17 @@ export class EditMarkerDialog implements OnInit {
 		});
 	}
 }
+
+@NgModule({
+	declarations: [EditMarkerDialog],
+	exports: [EditMarkerDialog],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatDialogModule,
+		MatFormFieldModule,
+		MatSelectModule,
+		TranslateModule
+	]
+})
+export class EditMarkerDialogModule {}
