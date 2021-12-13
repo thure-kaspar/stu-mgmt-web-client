@@ -53,7 +53,12 @@
 	--link-active-bg: rgba(0, 0, 0, 0.1);
 }
 
+.light {
+	height: 100%;
+}
+
 .dark {
+	height: 100%;
 	--primary: #757575;
 	--accent: #b71c1c;
 	--warn: red;
