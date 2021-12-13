@@ -6,6 +6,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
+	height: 100%;
 	--primary: map-get($student-mgmt-client-primary, 600);
 	--accent: map-get($student-mgmt-client-accent, 900);
 	--warn: red;
@@ -14,25 +15,6 @@
 	--margin-default: 8px;
 	--margin-content: 128px;
 	--max-width: 1024px;
-
-	--color-bg: #f1f1f1;
-	--color-titlebar: white;
-	--color-sidenav: white;
-	--color-header: #f9f9f9;
-
-	--card-bg: white;
-	--table-bg: transparent;
-
-	--grey-light: rgb(230, 230, 230);
-	--grey-normal: rgb(255, 255, 255);
-	--grey-dark: rgb(41, 41, 41);
-
-	--text: black;
-	--text-inverse: white;
-	--text-light: rgba(0, 0, 0, 0.6);
-
-	--link-active: red;
-	--link-active-bg: rgba(0, 0, 0, 0.1);
 
 	@media (max-width: 799px) {
 		--margin-content: 8px;
@@ -46,10 +28,7 @@
 		--margin-content: 182px;
 		--margin-default: 32px;
 	}
-}
 
-.light-red-theme {
-	height: 100%;
 	--primary: #757575;
 	--accent: #b71c1c;
 	--warn: red;
@@ -74,9 +53,7 @@
 	--link-active-bg: rgba(0, 0, 0, 0.1);
 }
 
-.dark-theme {
-	height: 100%;
-
+.dark {
 	--primary: #757575;
 	--accent: #b71c1c;
 	--warn: red;
@@ -95,101 +72,6 @@
 
 	--link-active: #b71c1c;
 	--link-active-bg: rgba(255, 255, 255, 0.1);
-}
-
-.blue-theme {
-	height: 100%;
-
-	--primary: #00838f;
-	--accent: #4dd0e1;
-	--warn: red;
-
-	--color-bg: #0f1724;
-	--color-titlebar: #212c3d;
-	--color-sidenav: #1d2636;
-	--color-header: #1f293a;
-
-	--card-bg: #1d2636;
-	--table-bg: #1f293a;
-
-	--text: #92abcf;
-	--text-inverse: black;
-	--text-light: #92abcfe7;
-
-	--link-active: #4dd0e1;
-	--link-active-bg: rgba(255, 255, 255, 0.1);
-}
-
-.dark-purple-theme {
-	height: 100%;
-
-	--primary: #757575;
-	--accent: #8e24aa;
-	--warn: red;
-
-	--color-bg: #0e0e10;
-	--color-titlebar: #18181b;
-	--color-sidenav: #1f1f23;
-	--color-header: #18181b;
-
-	--card-bg: #18181b;
-	--table-bg: #18181b;
-
-	--text: white;
-	--text-inverse: #654597;
-	--text-light: #adadb8;
-
-	--link-active: #8e24aa;
-	--link-active-bg: #26262c;
-}
-
-.blue-red-theme {
-	height: 100%;
-
-	--primary: #757575;
-	--accent: #fd4d4d;
-	--warn: red;
-
-	--color-bg: #11151b;
-	--color-titlebar: #151a21;
-	--color-sidenav: #1c232b;
-	--color-header: #151a21;
-
-	--card-bg: #242c37;
-	--table-bg: #242c37;
-
-	--text: white;
-	--text-inverse: #fd4d4d;
-	--text-light: #adadb8;
-
-	--link-active: #fd4d4d;
-	--link-active-bg: #242c37;
-}
-
-.light-green-theme {
-	height: 100%;
-	--primary: #757575;
-	--accent: #2e7d32;
-	--warn: red;
-
-	--grey-light: rgb(230, 230, 230);
-	--grey-normal: rgb(255, 255, 255);
-	--grey-dark: rgb(41, 41, 41);
-
-	--color-bg: #f1f1f1;
-	--color-titlebar: white;
-	--color-sidenav: white;
-	--color-header: #f9f9f9;
-
-	--card-bg: white;
-	--table-bg: white;
-
-	--text: black;
-	--text-inverse: white;
-	--text-light: rgba(0, 0, 0, 0.6);
-
-	--link-active: green;
-	--link-active-bg: rgba(0, 0, 0, 0.1);
 }
 
 // Roboto

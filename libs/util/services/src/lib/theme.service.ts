@@ -6,28 +6,12 @@ import { distinctUntilChanged } from "rxjs/operators";
 export class ThemeService {
 	availableThemes = [
 		{
-			cssClass: "dark-theme",
+			cssClass: "dark",
 			name: "Dark"
 		},
 		{
-			cssClass: "dark-purple-theme",
-			name: "Dark-Purple"
-		},
-		{
-			cssClass: "blue-theme",
-			name: "Blue"
-		},
-		{
-			cssClass: "blue-red-theme",
-			name: "Blue-Red"
-		},
-		{
-			cssClass: "light-red-theme",
-			name: "Light-Red"
-		},
-		{
-			cssClass: "light-green-theme",
-			name: "Light-Green"
+			cssClass: "light",
+			name: "Light"
 		}
 	] as const;
 
