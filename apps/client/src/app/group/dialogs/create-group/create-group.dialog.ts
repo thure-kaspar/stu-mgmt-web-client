@@ -1,11 +1,10 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupApi, GroupDto } from "@student-mgmt/api-client";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { CreateGroupMultipleComponent } from "./create-group-multiple/create-group-multiple.component";
 import { MatTabGroup } from "@angular/material/tabs";
 import { SnackbarService } from "@student-mgmt-client/services";
+import { GroupApi, GroupDto } from "@student-mgmt/api-client";
+import { CreateGroupMultipleComponent } from "./create-group-multiple/create-group-multiple.component";
 
 @Component({
 	selector: "app-create-group",

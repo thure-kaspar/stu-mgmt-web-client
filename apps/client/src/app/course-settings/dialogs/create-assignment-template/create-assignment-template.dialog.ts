@@ -1,11 +1,9 @@
-import { Component, OnInit, Inject, ViewChild } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
-import { CourseConfigApi, AssignmentTemplateDto } from "@student-mgmt/api-client";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { SnackbarService } from "@student-mgmt-client/services";
 import { ToastService } from "@student-mgmt-client/services";
+import { AssignmentTemplateDto, CourseConfigApi } from "@student-mgmt/api-client";
+import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
 
 export class CreateAssignmentTemplateDialogData {
 	courseId: string;
