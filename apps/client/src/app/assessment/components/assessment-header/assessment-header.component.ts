@@ -1,12 +1,26 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { ParticipantFacade } from "@student-mgmt-client/services";
 import {
+	AssignmentTypeChipComponentModule,
+	CardComponentModule,
+	ChipComponentModule,
+	IconComponentModule
+} from "@student-mgmt-client/shared-ui";
+import {
+	AssessmentApi,
 	AssessmentDto,
 	AssessmentEventDto,
-	AssessmentApi,
 	AssignmentDto
 } from "@student-mgmt/api-client";
-import { ParticipantFacade } from "@student-mgmt-client/services";
+import { BehaviorSubject } from "rxjs";
+import {
+	AssessmentTargetComponent,
+	AssessmentTargetComponentModule
+} from "../assessment-target/assessment-target.component";
 
 @Component({
 	selector: "app-assessment-header",
@@ -49,3 +63,21 @@ export class AssessmentHeaderComponent implements OnInit {
 		}
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentHeaderComponent],
+	exports: [AssessmentHeaderComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatButtonModule,
+		TranslateModule,
+		AssessmentTargetComponentModule,
+		IconComponentModule,
+		CardComponentModule,
+		AssignmentTypeChipComponentModule,
+		ChipComponentModule,
+		AssessmentTargetComponentModule
+	]
+})
+export class AssessmentHeaderComponentModule {}

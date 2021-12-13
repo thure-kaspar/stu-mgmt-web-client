@@ -1,6 +1,11 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
+import { CommonModule } from "@angular/common";
+import { Component, Input, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 import { Participant } from "@student-mgmt-client/domain-types";
+import { CardComponentModule } from "@student-mgmt-client/shared-ui";
+import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 
 @Component({
 	selector: "app-assessment-target",
@@ -22,3 +27,10 @@ export class AssessmentTargetComponent implements OnInit {
 
 	ngOnInit(): void {}
 }
+
+@NgModule({
+	declarations: [AssessmentTargetComponent],
+	exports: [AssessmentTargetComponent],
+	imports: [CommonModule, RouterModule, MatButtonModule, CardComponentModule, TranslateModule]
+})
+export class AssessmentTargetComponentModule {}

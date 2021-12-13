@@ -1,15 +1,23 @@
 import { NgModule } from "@angular/core";
-import { SharedModule } from "../shared/shared.module";
 import { AssessmentRoutingModule } from "./assessment-routing.module";
+import { AssessmentHeaderComponentModule } from "./components/assessment-header/assessment-header.component";
+import { AssessmentTargetComponentModule } from "./components/assessment-target/assessment-target.component";
+import { MarkerComponentModule } from "./components/marker/marker.component";
 import { EvaluatorsFacade } from "./services/evaluators.facade";
-import { AssessmentTargetComponent } from "./components/assessment-target/assessment-target.component";
-import { AssessmentHeaderComponent } from "./components/assessment-header/assessment-header.component";
-import { MarkerComponent } from "./components/marker/marker.component";
 
 @NgModule({
-	declarations: [AssessmentTargetComponent, AssessmentHeaderComponent, MarkerComponent],
-	imports: [SharedModule, AssessmentRoutingModule],
+	declarations: [],
+	imports: [
+		AssessmentRoutingModule,
+		AssessmentHeaderComponentModule,
+		AssessmentTargetComponentModule,
+		MarkerComponentModule
+	],
 	providers: [EvaluatorsFacade],
-	exports: [AssessmentTargetComponent, AssessmentHeaderComponent, MarkerComponent]
+	exports: [
+		AssessmentTargetComponentModule,
+		AssessmentHeaderComponentModule,
+		MarkerComponentModule
+	]
 })
 export class AssessmentModule {}

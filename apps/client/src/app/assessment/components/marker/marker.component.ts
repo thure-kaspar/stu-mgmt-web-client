@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
+import { ChipComponentModule } from "@student-mgmt-client/shared-ui";
 import { MarkerDto } from "@student-mgmt/api-client";
 
 @Component({
@@ -15,3 +17,10 @@ export class MarkerComponent implements OnInit {
 
 	ngOnInit(): void {}
 }
+
+@NgModule({
+	declarations: [MarkerComponent],
+	exports: [MarkerComponent],
+	imports: [CommonModule, ChipComponentModule]
+})
+export class MarkerComponentModule {}
