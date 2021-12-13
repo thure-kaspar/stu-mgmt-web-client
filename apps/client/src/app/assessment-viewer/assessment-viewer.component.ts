@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
-import { filter, map } from "rxjs/operators";
-import { AssessmentEventDto, AssessmentApi, AssignmentDto } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 import {
 	AssignmentWithAssessment,
 	mapToExtendedAssessmentDto
 } from "@student-mgmt-client/domain-types";
-import { CourseFacade } from "@student-mgmt-client/services";
-import { ParticipantFacade } from "@student-mgmt-client/services";
+import { CourseFacade, ParticipantFacade } from "@student-mgmt-client/services";
+import { CardComponentModule, ChipComponentModule } from "@student-mgmt-client/shared-ui";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { AssessmentApi, AssessmentEventDto, AssignmentDto } from "@student-mgmt/api-client";
+import { BehaviorSubject, combineLatest, Observable } from "rxjs";
+import { filter, map } from "rxjs/operators";
+import { AssessmentHeaderComponentModule } from "../assessment/components/assessment-header/assessment-header.component";
+import { PartialAssessmentComponentModule } from "./partial-assessment/partial-assessment.component";
 
 @Component({
 	selector: "app-assessment-viewer",
@@ -33,7 +37,6 @@ export class AssessmentViewerComponent implements OnInit {
 		public participantFacade: ParticipantFacade,
 		private courseFacade: CourseFacade,
 		private assessmentApi: AssessmentApi,
-		private router: Router,
 		private route: ActivatedRoute
 	) {}
 
@@ -67,3 +70,17 @@ export class AssessmentViewerComponent implements OnInit {
 		);
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentViewerComponent],
+	exports: [AssessmentViewerComponent],
+	imports: [
+		CommonModule,
+		TranslateModule,
+		AssessmentHeaderComponentModule,
+		ChipComponentModule,
+		CardComponentModule,
+		PartialAssessmentComponentModule
+	]
+})
+export class AssessmentViewerComponentModule {}
