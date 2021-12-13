@@ -1,13 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
-import { Subject } from "rxjs";
-import { AdmissionStatusApi, ParticipantDto, PointsOverviewDto } from "@student-mgmt/api-client";
-import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { DownloadService, ToastService } from "@student-mgmt-client/services";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { DownloadService } from "@student-mgmt-client/services";
-import { ToastService } from "@student-mgmt-client/services";
+import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
+import { AdmissionStatusApi, ParticipantDto, PointsOverviewDto } from "@student-mgmt/api-client";
+import { Subject } from "rxjs";
 
 @Component({
 	selector: "app-points-overview",
@@ -87,3 +92,19 @@ export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnI
 		);
 	}
 }
+
+@NgModule({
+	declarations: [PointsOverviewComponent],
+	exports: [PointsOverviewComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatButtonModule,
+		MatTableModule,
+		MatFormFieldModule,
+		MatInputModule,
+		TranslateModule
+	]
+})
+export class PointsOverviewComponentModule {}

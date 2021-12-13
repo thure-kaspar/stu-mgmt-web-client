@@ -1,25 +1,40 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { combineLatest } from "rxjs";
-import { filter, map, tap } from "rxjs/operators";
-import {
-	AdmissionCriteriaDto,
-	AdmissionRuleDto,
-	AdmissionStatusDto
-} from "@student-mgmt/api-client";
-import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
-import { VerticalBarChartData } from "../../../charts/components/vertical-bar-chart/vertical-bar-chart.component";
-import { mapToRangeLabel, Range } from "../../../charts/range";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { TranslateModule } from "@ngx-translate/core";
 import { DownloadService } from "@student-mgmt-client/services";
+import {
+	AssignmentTypeChipComponentModule,
+	ThumbChipComponentModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
 import {
 	AdmissionStatusActions,
 	AdmissionStatusSelectors,
 	CourseSelectors
 } from "@student-mgmt-client/state";
+import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
+import {
+	AdmissionCriteriaDto,
+	AdmissionRuleDto,
+	AdmissionStatusDto
+} from "@student-mgmt/api-client";
+import { combineLatest } from "rxjs";
+import { filter, map, tap } from "rxjs/operators";
+import { ChartsModule } from "../../../charts/charts.module";
+import { VerticalBarChartData } from "../../../charts/components/vertical-bar-chart/vertical-bar-chart.component";
+import { mapToRangeLabel, Range } from "../../../charts/range";
+import { AdmissionRuleComponentModule } from "../admission-rule/admission-rule.component";
 
 type ChartData = {
 	data: VerticalBarChartData;
@@ -264,3 +279,26 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 		);
 	}
 }
+
+@NgModule({
+	declarations: [AdmissionStatusComponent],
+	exports: [AdmissionStatusComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatButtonModule,
+		MatTableModule,
+		MatExpansionModule,
+		MatProgressSpinnerModule,
+		MatDividerModule,
+		MatFormFieldModule,
+		MatInputModule,
+		TranslateModule,
+		ChartsModule,
+		AdmissionRuleComponentModule,
+		AssignmentTypeChipComponentModule,
+		ThumbChipComponentModule
+	]
+})
+export class AdmissionStatusComponentModule {}

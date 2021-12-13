@@ -1,8 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
+import { MatCardModule } from "@angular/material/card";
+import { TranslateModule } from "@ngx-translate/core";
+import { AssignmentTypeChipComponentModule } from "@student-mgmt-client/shared-ui";
 import {
 	AdmissionRuleDto,
-	OverallPercentRuleDto,
 	IndividualPercentWithAllowedFailuresRuleDto,
+	OverallPercentRuleDto,
 	RuleCheckResult
 } from "@student-mgmt/api-client";
 
@@ -31,3 +35,10 @@ export class AdmissionRuleComponent implements OnInit {
 		return rule as OverallPercentRuleDto;
 	}
 }
+
+@NgModule({
+	declarations: [AdmissionRuleComponent],
+	exports: [AdmissionRuleComponent],
+	imports: [CommonModule, MatCardModule, TranslateModule, AssignmentTypeChipComponentModule]
+})
+export class AdmissionRuleComponentModule {}
