@@ -5,11 +5,6 @@ import { HomeComponent } from "./home/home.component";
 const routes: Routes = [
 	{ path: "", component: HomeComponent, pathMatch: "full" },
 	{
-		path: "login",
-		pathMatch: "full",
-		loadChildren: () => import("@student-mgmt-client/auth").then(m => m.AuthModule)
-	},
-	{
 		path: "courses",
 		pathMatch: "full",
 		loadChildren: () =>
@@ -34,6 +29,10 @@ const routes: Routes = [
 		path: "admin/user-management",
 		loadChildren: () =>
 			import("./user-management/user-management.module").then(m => m.UserManagementModule)
+	},
+	{
+		path: "auth",
+		loadChildren: () => import("@student-mgmt-client/auth").then(m => m.AuthModule)
 	}
 ];
 
