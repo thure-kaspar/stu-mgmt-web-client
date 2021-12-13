@@ -14,7 +14,7 @@
 	--titlebar-height: 56px;
 	--margin-default: 8px;
 	--margin-content: 128px;
-	--max-width: 1024px;
+	--max-width: 1440px;
 
 	@media (max-width: 799px) {
 		--margin-content: 8px;
@@ -25,7 +25,7 @@
 		--margin-default: 16px;
 	}
 	@media (min-width: 1500px) {
-		--margin-content: 182px;
+		--margin-content: 196px;
 		--margin-default: 32px;
 	}
 
