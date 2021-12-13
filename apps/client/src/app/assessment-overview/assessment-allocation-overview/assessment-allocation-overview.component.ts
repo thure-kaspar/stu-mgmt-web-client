@@ -1,11 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
-import { AssessmentAllocationApi, AssignmentDto } from "@student-mgmt/api-client";
+import { TranslateModule } from "@ngx-translate/core";
+import { SnackbarService } from "@student-mgmt-client/services";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { AssessmentAllocationApi, AssignmentDto } from "@student-mgmt/api-client";
+import { AssessmentTargetPickerModule } from "../../assessment-target-picker/assessment-target-picker.module";
+import { AssessmentTargetComponentModule } from "../../assessment/components/assessment-target/assessment-target.component";
 import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignment/search-assignment.dialog";
-import { SnackbarService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-assessment-allocation-overview",
@@ -58,3 +64,16 @@ export class AssessmentAllocationOverviewComponent implements OnInit {
 			});
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentAllocationOverviewComponent],
+	exports: [AssessmentAllocationOverviewComponent],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		TranslateModule,
+		IconComponentModule,
+		AssessmentTargetPickerModule
+	]
+})
+export class AssessmentAllocationOverviewComponentModule {}

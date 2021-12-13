@@ -1,28 +1,38 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { MatPaginator } from "@angular/material/paginator";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { BehaviorSubject, combineLatest } from "rxjs";
-import { filter, take } from "rxjs/operators";
+import { TranslateModule } from "@ngx-translate/core";
+import { CourseFacade, DownloadService, ToastService } from "@student-mgmt-client/services";
+import {
+	ChipComponentModule,
+	IconComponentModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import { AssignmentSelectors } from "@student-mgmt-client/state";
+import { nestedPropertyAccessor, RoundingMethod } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
-	AssessmentDto,
 	AssessmentApi,
+	AssessmentDto,
 	AssignmentDto
 } from "@student-mgmt/api-client";
-import { nestedPropertyAccessor } from "@student-mgmt-client/util-helper";
-import { RoundingMethod } from "@student-mgmt-client/util-helper";
+import { BehaviorSubject, combineLatest } from "rxjs";
+import { filter, take } from "rxjs/operators";
+import { ChartsModule } from "../../charts/charts.module";
 import {
 	VerticalBarChartData,
 	VerticalBarChartOptions
 } from "../../charts/components/vertical-bar-chart/vertical-bar-chart.component";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { CourseFacade } from "@student-mgmt-client/services";
-import { DownloadService } from "@student-mgmt-client/services";
-import { ToastService } from "@student-mgmt-client/services";
-import { AssignmentSelectors } from "@student-mgmt-client/state";
 
 type AssessmentDtoExtended = AssessmentDto & {
 	roundedPoints?: number;
@@ -268,3 +278,24 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		);
 	}
 }
+
+@NgModule({
+	declarations: [CreatedAssessmentsComponent],
+	exports: [CreatedAssessmentsComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatButtonModule,
+		MatTableModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatProgressSpinnerModule,
+		MatTooltipModule,
+		TranslateModule,
+		ChartsModule,
+		IconComponentModule,
+		ChipComponentModule
+	]
+})
+export class CreatedAssessmentsComponentModule {}

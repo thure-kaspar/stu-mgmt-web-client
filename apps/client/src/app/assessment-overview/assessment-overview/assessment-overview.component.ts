@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { MatTabsModule } from "@angular/material/tabs";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { AssignmentDto } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { TranslateModule } from "@ngx-translate/core";
 import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { AssignmentDto } from "@student-mgmt/api-client";
+import { Observable } from "rxjs";
 
 @Component({
 	selector: "app-assessment-overview",
@@ -27,3 +30,10 @@ export class AssessmentOverviewComponent implements OnInit {
 		this.assignment$ = this.store.select(AssignmentSelectors.selectAssignment(assignmentId));
 	}
 }
+
+@NgModule({
+	declarations: [AssessmentOverviewComponent],
+	exports: [AssessmentOverviewComponent],
+	imports: [CommonModule, RouterModule, MatTabsModule, TranslateModule]
+})
+export class AssessmentOverviewComponentModule {}

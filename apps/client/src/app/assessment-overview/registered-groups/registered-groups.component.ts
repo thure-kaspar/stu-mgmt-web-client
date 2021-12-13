@@ -1,17 +1,31 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatChipsModule } from "@angular/material/chips";
 import { MatDialog } from "@angular/material/dialog";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
-import { AssignmentRegistrationApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import {
+	DialogService,
+	DownloadService,
+	ParticipantFacade,
+	ToastService
+} from "@student-mgmt-client/services";
+import {
+	ChipComponentModule,
+	IconComponentModule,
+	SearchParticipantDialog,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { AssignmentRegistrationApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
+import { BehaviorSubject } from "rxjs";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
-import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { DialogService } from "@student-mgmt-client/services";
-import { DownloadService } from "@student-mgmt-client/services";
-import { ParticipantFacade } from "@student-mgmt-client/services";
-import { ToastService } from "@student-mgmt-client/services";
 
 @Component({
 	selector: "app-registered-groups",
@@ -258,3 +272,23 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 		);
 	}
 }
+
+@NgModule({
+	declarations: [RegisteredGroupsComponent],
+	exports: [RegisteredGroupsComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatTableModule,
+		MatChipsModule,
+		MatMenuModule,
+		TranslateModule,
+		IconComponentModule,
+		ChipComponentModule
+	]
+})
+export class RegisteredGroupsComponentModule {}
