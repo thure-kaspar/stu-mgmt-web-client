@@ -78,7 +78,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 	}
 
 	onSave(): void {
-		const assessment: AssessmentCreateDto = this.form.getModel();
+		const assessment: AssessmentCreateDto = this.form.form.value;
 		assessment.assignmentId = this.assignmentId;
 
 		this.assessmentApi.createAssessment(assessment, this.courseId, this.assignmentId).subscribe(
@@ -157,7 +157,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 			.subscribe(
 				result => {
 					this.forGroup$.next(result);
-					this.form.patchModel({ groupId: group.id, userId: null });
+					this.form.form.patchValue({ groupId: group.id, userId: null });
 				},
 				error => {
 					this.toast.apiError(error);
@@ -168,7 +168,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 	/** Sets the selected user and removes the selected group, it it exists. */
 	userSelectedHandler(participant: ParticipantDto): void {
 		this.forGroup$.next(undefined);
-		this.form.patchModel({ userId: participant.userId, groupId: null });
+		this.form.form.patchValue({ userId: participant.userId, groupId: null });
 		this.forParticipant$.next(participant);
 
 		// Set route fragment

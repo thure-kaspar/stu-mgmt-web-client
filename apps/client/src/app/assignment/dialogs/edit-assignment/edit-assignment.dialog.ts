@@ -39,14 +39,14 @@ export class EditAssignmentDialog implements OnInit {
 	ngOnInit(): void {
 		this.assignmentManagement.get(this.assignmentId, this.courseId).subscribe(
 			result => {
-				this.form.patchModel(result);
+				this.form.form.patchValue(result);
 				if (result.links?.length > 0) {
 					result.links.forEach(link => {
 						this.form.addLink(link);
 					});
 				}
-				if ((result as any).configs?.length > 0) {
-					(result as any).configs.forEach(config => {
+				if (result.configs?.length > 0) {
+					result.configs.forEach(config => {
 						this.form.addConfig(config);
 					});
 				}
@@ -60,7 +60,7 @@ export class EditAssignmentDialog implements OnInit {
 	}
 
 	onSave(): void {
-		const assignment = this.form.getModel();
+		const assignment = this.form.form.value;
 		assignment.id = this.assignmentId;
 
 		this.assignmentManagement.update(assignment, this.assignmentId, this.courseId).subscribe(

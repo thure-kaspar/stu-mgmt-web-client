@@ -34,7 +34,7 @@
 			mat-flat-button
 			(click)="onSave()"
 			color="accent"
-			[disabled]="this.form?.isInvalid()"
+			[disabled]="this.form?.form.valid"
 		>
 			{{ 'Action.Save' | translate }}
 		</button>

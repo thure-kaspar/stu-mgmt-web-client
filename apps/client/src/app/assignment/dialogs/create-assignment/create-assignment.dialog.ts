@@ -43,7 +43,7 @@ export class CreateAssignmentDialog implements OnInit {
 			.getAssignmentTemplates(this.courseId)
 			.subscribe(templates => (this.templates = templates));
 
-		this.form.patchModel({
+		this.form.form.patchValue({
 			type: AssignmentDto.TypeEnum.HOMEWORK,
 			collaboration: AssignmentDto.CollaborationEnum.GROUP
 		});
@@ -51,7 +51,7 @@ export class CreateAssignmentDialog implements OnInit {
 
 	fillInTemplate(template: AssignmentTemplateDto): void {
 		this.selectedTemplate = template;
-		this.form.patchModel(template);
+		this.form.form.patchValue(template);
 	}
 
 	onCancel(): void {
@@ -59,7 +59,7 @@ export class CreateAssignmentDialog implements OnInit {
 	}
 
 	onSave(): void {
-		const assignment = this.form.getModel();
+		const assignment = this.form.form.value;
 		this.assignmentManagement.create(assignment, this.courseId).subscribe(
 			created => {
 				this.dialogRef.close(created);

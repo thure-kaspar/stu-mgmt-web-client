@@ -86,7 +86,7 @@ export class EditAssessmentComponent implements OnInit {
 		this.form.getPartialAssessments().clear();
 
 		// Apply update to form
-		this.form.patchModel(assessment);
+		this.form.form.patchValue(assessment);
 		assessment.partialAssessments?.forEach(partial => {
 			this.form.addPartialAssessment(partial);
 		});
@@ -111,7 +111,7 @@ export class EditAssessmentComponent implements OnInit {
 	}
 
 	onSave(saveAsDraft = false): void {
-		const model = this.form.getModel();
+		const model = this.form.form.value;
 		const update: AssessmentUpdateDto = {
 			achievedPoints: model.achievedPoints,
 			comment: model.comment?.length > 0 ? model.comment : null,

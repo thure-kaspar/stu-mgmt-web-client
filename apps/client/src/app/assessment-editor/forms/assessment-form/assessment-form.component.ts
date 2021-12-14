@@ -18,7 +18,12 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
 import { CardComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
-import { AssignmentDto, MarkerDto, PartialAssessmentDto } from "@student-mgmt/api-client";
+import {
+	AssessmentDto,
+	AssignmentDto,
+	MarkerDto,
+	PartialAssessmentDto
+} from "@student-mgmt/api-client";
 import { MarkerComponentModule } from "../../../assessment/components/marker/marker.component";
 import { EditMarkerDialog } from "../../dialogs/edit-marker/edit-marker.dialog";
 
