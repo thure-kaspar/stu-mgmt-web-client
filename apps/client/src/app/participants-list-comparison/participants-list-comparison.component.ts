@@ -1,17 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
-import { SearchCourseDialog } from "../../course/dialogs/search-course/search-course.dialog";
-import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { SnackbarService } from "@student-mgmt-client/services";
+import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { getRouteParam, SemesterPipeModule } from "@student-mgmt-client/util-helper";
 import {
-	UserDto,
 	CourseDto,
 	CourseParticipantsApi,
-	ParticipantsComparisonDto
+	ParticipantsComparisonDto,
+	UserDto
 } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ActivatedRoute } from "@angular/router";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { SearchCourseDialog } from "../course/dialogs/search-course/search-course.dialog";
 
 @Component({
 	selector: "app-participants-list-comparison",
@@ -78,3 +82,18 @@ export class ParticipantsListComparisonComponent extends UnsubscribeOnDestroy im
 			);
 	}
 }
+
+@NgModule({
+	declarations: [ParticipantsListComparisonComponent],
+	exports: [ParticipantsListComparisonComponent],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		MatTableModule,
+		MatPaginatorModule,
+		TranslateModule,
+		IconComponentModule,
+		SemesterPipeModule
+	]
+})
+export class ParticipantsListComparisonComponentModule {}
