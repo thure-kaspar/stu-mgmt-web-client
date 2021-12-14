@@ -1,11 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { Paginator, PaginatorModule } from "@student-mgmt-client/shared-ui";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { SubmissionApi, SubmissionDto } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { SubmissionDto, SubmissionApi } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { Paginator } from "@student-mgmt-client/shared-ui";
 
 @Component({
 	selector: "app-submissions-overview",
@@ -64,3 +69,19 @@ export class SubmissionsOverviewComponent implements OnInit {
 			});
 	}
 }
+
+@NgModule({
+	declarations: [SubmissionsOverviewComponent],
+	exports: [SubmissionsOverviewComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatTableModule,
+		TranslateModule,
+		PaginatorModule
+	]
+})
+export class SubmissionsOverviewComponentModule {}
