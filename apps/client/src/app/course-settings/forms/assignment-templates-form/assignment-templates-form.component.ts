@@ -1,13 +1,21 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, Input, NgModule, OnInit } from "@angular/core";
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { TranslateModule } from "@ngx-translate/core";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { AssignmentDto, AssignmentTemplateDto } from "@student-mgmt/api-client";
-import { FormBuilder, Validators, FormArray, FormGroup } from "@angular/forms";
 
 @Component({
 	selector: "app-assignment-templates-form",
 	templateUrl: "./assignment-templates-form.component.html",
 	styleUrls: ["./assignment-templates-form.component.scss"]
 })
-export class AssignmentTemplatesForm implements OnInit {
+export class AssignmentTemplatesFormComponent implements OnInit {
 	@Input() form: FormGroup;
 
 	stateEnum = AssignmentDto.StateEnum;
@@ -47,3 +55,20 @@ export class AssignmentTemplatesForm implements OnInit {
 			.value as string;
 	}
 }
+
+@NgModule({
+	declarations: [AssignmentTemplatesFormComponent],
+	exports: [AssignmentTemplatesFormComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatSelectModule,
+		MatCardModule,
+		TranslateModule,
+		IconComponentModule
+	]
+})
+export class AssignmentTemplatesFormComponentModule {}

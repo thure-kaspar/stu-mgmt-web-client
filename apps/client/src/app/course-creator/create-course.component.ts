@@ -1,26 +1,39 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectorRef, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { SnackbarService } from "@student-mgmt-client/services";
+import {
+	ConfirmDialog,
+	ConfirmDialogData,
+	IconComponentModule
+} from "@student-mgmt-client/shared-ui";
+import { getSemester } from "@student-mgmt-client/util-helper";
 import {
 	AssignmentDto,
+	CourseApi,
 	CourseConfigApi,
 	CourseCreateDto,
 	CourseDto,
 	CourseParticipantsApi,
-	CourseApi,
 	ParticipantDto,
 	UserDto
 } from "@student-mgmt/api-client";
-import { getSemester } from "@student-mgmt-client/util-helper";
-import { AdmissionCriteriaForm } from "../../../course-settings/forms/admission-criteria-form/admission-criteria-form.component";
-import { AssignmentTemplatesForm } from "../../../course-settings/forms/assignment-templates-form/assignment-templates-form.component";
-import { CourseForm } from "../../../course-settings/forms/course-form/course-form.component";
-import { GroupSettingsForm } from "../../../course-settings/forms/group-settings-form/group-settings-form.component";
-import { SearchCourseDialog } from "../../../course/dialogs/search-course/search-course.dialog";
-import { SearchUserDialog } from "../../../course/dialogs/search-user/search-user.dialog";
-import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { CourseSettingsModule } from "../course-settings/course-settings.module";
+import { AdmissionCriteriaFormComponent } from "../course-settings/forms/admission-criteria-form/admission-criteria-form.component";
+import { AssignmentTemplatesFormComponent } from "../course-settings/forms/assignment-templates-form/assignment-templates-form.component";
+import { CourseFormComponent } from "../course-settings/forms/course-form/course-form.component";
+import { GroupSettingsFormComponent } from "../course-settings/forms/group-settings-form/group-settings-form.component";
+import { SearchCourseDialog } from "../course/dialogs/search-course/search-course.dialog";
+import { SearchUserDialog } from "../course/dialogs/search-user/search-user.dialog";
 
 @Component({
 	selector: "app-create-course",
@@ -35,12 +48,13 @@ export class CreateCourseComponent implements OnInit {
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
-	@ViewChild(CourseForm, { static: true }) courseForm: CourseForm;
-	@ViewChild(GroupSettingsForm, { static: true }) groupSettingsForm: GroupSettingsForm;
-	@ViewChild(AdmissionCriteriaForm, { static: true })
-	admissionCriteriaForm: AdmissionCriteriaForm;
-	@ViewChild(AssignmentTemplatesForm, { static: true })
-	assignmentTemplatesForm: AssignmentTemplatesForm;
+	@ViewChild(CourseFormComponent, { static: true }) courseForm: CourseFormComponent;
+	@ViewChild(GroupSettingsFormComponent, { static: true })
+	groupSettingsForm: GroupSettingsFormComponent;
+	@ViewChild(AdmissionCriteriaFormComponent, { static: true })
+	admissionCriteriaForm: AdmissionCriteriaFormComponent;
+	@ViewChild(AssignmentTemplatesFormComponent, { static: true })
+	assignmentTemplatesForm: AssignmentTemplatesFormComponent;
 
 	constructor(
 		private courseApi: CourseApi,
@@ -190,3 +204,22 @@ export class CreateCourseComponent implements OnInit {
 		return this.form.get("lecturers") as FormArray;
 	}
 }
+
+@NgModule({
+	declarations: [CreateCourseComponent],
+	exports: [CreateCourseComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatCardModule,
+		MatTabsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatTooltipModule,
+		TranslateModule,
+		IconComponentModule,
+		CourseSettingsModule
+	]
+})
+export class CreateCourseComponentModule {}

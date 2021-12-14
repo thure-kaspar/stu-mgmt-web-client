@@ -1,6 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Inject, NgModule, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { TranslateModule } from "@ngx-translate/core";
 import { StudentMgmtEvent, SubscriberDto } from "@student-mgmt/api-client";
 
 @Component({
@@ -90,3 +96,19 @@ export class NotificationSubscriberDialog implements OnInit {
 		subscriber.events = events;
 	}
 }
+
+@NgModule({
+	declarations: [NotificationSubscriberDialog],
+	exports: [NotificationSubscriberDialog],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatDialogModule,
+		MatButtonModule,
+		MatSlideToggleModule,
+		MatFormFieldModule,
+		MatInputModule,
+		TranslateModule
+	]
+})
+export class NotificationSubscriberDialogModule {}

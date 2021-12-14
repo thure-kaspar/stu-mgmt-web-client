@@ -1,42 +1,54 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatTabsModule } from "@angular/material/tabs";
 import { ActivatedRoute, Router } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { ToastService } from "@student-mgmt-client/services";
+import {
+	ConfirmDialog,
+	ConfirmDialogData,
+	IconComponentModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import { getSemester } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	AssignmentDto,
 	AssignmentTemplateDto,
-	CourseConfigDto,
+	CourseApi,
 	CourseConfigApi,
+	CourseConfigDto,
 	CourseConfigUpdateDto,
 	CourseDto,
-	CourseApi,
 	GroupSettingsUpdateDto
 } from "@student-mgmt/api-client";
-import { getSemester } from "@student-mgmt-client/util-helper";
-import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "@student-mgmt-client/services";
+import { Subject } from "rxjs";
+import { CourseSettingsModule } from "../course-settings/course-settings.module";
 import {
 	CreateAssignmentTemplateDialog,
 	CreateAssignmentTemplateDialogData
-} from "../../dialogs/create-assignment-template/create-assignment-template.dialog";
+} from "../course-settings/dialogs/create-assignment-template/create-assignment-template.dialog";
 import {
 	EditAssignmentTemplateDialog,
 	EditAssignmentTemplateDialogData
-} from "../../dialogs/edit-assignment-template/edit-assignment-template.dialog";
-import { AdmissionCriteriaForm } from "../../forms/admission-criteria-form/admission-criteria-form.component";
-import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
-import { CourseForm } from "../../forms/course-form/course-form.component";
-import { GroupSettingsForm } from "../../forms/group-settings-form/group-settings-form.component";
-import { Subject } from "rxjs";
+} from "../course-settings/dialogs/edit-assignment-template/edit-assignment-template.dialog";
+import { AdmissionCriteriaFormComponent } from "../course-settings/forms/admission-criteria-form/admission-criteria-form.component";
+import { AssignmentTemplatesFormComponent } from "../course-settings/forms/assignment-templates-form/assignment-templates-form.component";
+import { CourseFormComponent } from "../course-settings/forms/course-form/course-form.component";
+import { GroupSettingsFormComponent } from "../course-settings/forms/group-settings-form/group-settings-form.component";
 
 @Component({
-	selector: "app-edit-course",
-	templateUrl: "./edit-course.component.html",
-	styleUrls: ["./edit-course.component.scss"]
+	selector: "app-course-edit",
+	templateUrl: "./course-edit.component.html",
+	styleUrls: ["./course-edit.component.scss"]
 })
-export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit {
+export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit {
 	/** Form with the structure of a CourseCreateDto. */
 	form: FormGroup;
 
@@ -56,12 +68,13 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
-	@ViewChild(CourseForm, { static: true }) courseForm: CourseForm;
-	@ViewChild(GroupSettingsForm, { static: true }) groupSettingsForm: GroupSettingsForm;
-	@ViewChild(AdmissionCriteriaForm, { static: true })
-	admissionCriteriaForm: AdmissionCriteriaForm;
-	@ViewChild(AssignmentTemplatesForm, { static: true })
-	assignmentTemplatesForm: AssignmentTemplatesForm;
+	@ViewChild(CourseFormComponent, { static: true }) courseForm: CourseFormComponent;
+	@ViewChild(GroupSettingsFormComponent, { static: true })
+	groupSettingsForm: GroupSettingsFormComponent;
+	@ViewChild(AdmissionCriteriaFormComponent, { static: true })
+	admissionCriteriaForm: AdmissionCriteriaFormComponent;
+	@ViewChild(AssignmentTemplatesFormComponent, { static: true })
+	assignmentTemplatesForm: AssignmentTemplatesFormComponent;
 
 	courseId: string;
 	course: CourseDto;
@@ -288,3 +301,21 @@ export class EditCourseComponent extends UnsubscribeOnDestroy implements OnInit 
 			});
 	}
 }
+
+@NgModule({
+	declarations: [CourseEditComponent],
+	exports: [CourseEditComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatTabsModule,
+		MatButtonModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		TranslateModule,
+		IconComponentModule,
+		CourseSettingsModule
+	]
+})
+export class CourseEditComponentModule {}

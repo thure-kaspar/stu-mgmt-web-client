@@ -1,12 +1,21 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
+import { MatMenuModule } from "@angular/material/menu";
 import { ActivatedRoute } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { ToastService } from "@student-mgmt-client/services";
+import {
+	CardComponentModule,
+	ConfirmDialog,
+	ConfirmDialogData,
+	IconComponentModule
+} from "@student-mgmt-client/shared-ui";
+import { NotificationApi, SubscriberDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { NotificationApi, SubscriberDto } from "@student-mgmt/api-client";
-import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { ToastService } from "@student-mgmt-client/services";
 import { NotificationSubscriberDialog } from "../../dialogs/notification-subscriber/notification-subscriber.dialog";
 
 @Component({
@@ -93,3 +102,17 @@ export class NotificationSubscribersComponent implements OnInit {
 		return Object.keys(subscriber.events);
 	}
 }
+
+@NgModule({
+	declarations: [NotificationSubscribersComponent],
+	exports: [NotificationSubscribersComponent],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		MatMenuModule,
+		TranslateModule,
+		IconComponentModule,
+		CardComponentModule
+	]
+})
+export class NotificationSubscribersComponentModule {}

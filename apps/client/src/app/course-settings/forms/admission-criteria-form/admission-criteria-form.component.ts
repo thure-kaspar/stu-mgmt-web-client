@@ -1,19 +1,27 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { Component, Input, NgModule, OnInit } from "@angular/core";
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { TranslateModule } from "@ngx-translate/core";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import {
 	AdmissionRuleDto,
+	IndividualPercentWithAllowedFailuresRuleDto,
 	OverallPercentRuleDto,
-	RoundingBehavior,
-	IndividualPercentWithAllowedFailuresRuleDto
+	RoundingBehavior
 } from "@student-mgmt/api-client";
-import { min } from "rxjs/operators";
 
 @Component({
 	selector: "app-admission-criteria-form",
 	templateUrl: "./admission-criteria-form.component.html",
 	styleUrls: ["./admission-criteria-form.component.scss"]
 })
-export class AdmissionCriteriaForm implements OnInit {
+export class AdmissionCriteriaFormComponent implements OnInit {
 	@Input() form: FormGroup;
 
 	ruleTypeEnum = AdmissionRuleDto.TypeEnum;
@@ -103,3 +111,21 @@ export class AdmissionCriteriaForm implements OnInit {
 		return rule as OverallPercentRuleDto;
 	}
 }
+
+@NgModule({
+	declarations: [AdmissionCriteriaFormComponent],
+	exports: [AdmissionCriteriaFormComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatSelectModule,
+		MatTooltipModule,
+		TranslateModule,
+		IconComponentModule
+	]
+})
+export class AdmissionCriteriaFormComponentModule {}

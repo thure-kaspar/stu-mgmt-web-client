@@ -1,9 +1,21 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
-import { CourseConfigApi, ParticipantDto } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { CommonModule } from "@angular/common";
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	NgModule,
+	OnInit
+} from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { CourseConfigApi, ParticipantDto } from "@student-mgmt/api-client";
 
 type AdmissionFromPreviousResponse = { matrNrs: number[]; participants: ParticipantDto[] };
 
@@ -82,3 +94,19 @@ export class AdmissionFromPreviousSemesterFormComponent implements OnInit {
 		this.dataSource.data = data;
 	}
 }
+
+@NgModule({
+	declarations: [AdmissionFromPreviousSemesterFormComponent],
+	exports: [AdmissionFromPreviousSemesterFormComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatTableModule,
+		TranslateModule
+	]
+})
+export class AdmissionFromPreviousSemesterFormComponentModule {}

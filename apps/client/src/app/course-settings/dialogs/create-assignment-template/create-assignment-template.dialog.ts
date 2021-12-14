@@ -1,9 +1,15 @@
-import { Component, Inject, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
 import { AssignmentTemplateDto, CourseConfigApi } from "@student-mgmt/api-client";
-import { AssignmentTemplatesForm } from "../../forms/assignment-templates-form/assignment-templates-form.component";
+import {
+	AssignmentTemplatesFormComponent,
+	AssignmentTemplatesFormComponentModule
+} from "../../forms/assignment-templates-form/assignment-templates-form.component";
 
 export class CreateAssignmentTemplateDialogData {
 	courseId: string;
@@ -21,8 +27,8 @@ export class CreateAssignmentTemplateDialogData {
 })
 export class CreateAssignmentTemplateDialog implements OnInit {
 	form: FormGroup;
-	@ViewChild(AssignmentTemplatesForm, { static: true })
-	assignmentTemplatesForm: AssignmentTemplatesForm;
+	@ViewChild(AssignmentTemplatesFormComponent, { static: true })
+	assignmentTemplatesForm: AssignmentTemplatesFormComponent;
 
 	constructor(
 		private dialogRef: MatDialogRef<CreateAssignmentTemplateDialog>,
@@ -69,3 +75,16 @@ export class CreateAssignmentTemplateDialog implements OnInit {
 		}
 	}
 }
+
+@NgModule({
+	declarations: [CreateAssignmentTemplateDialog],
+	exports: [CreateAssignmentTemplateDialog],
+	imports: [
+		CommonModule,
+		MatDialogModule,
+		MatButtonModule,
+		TranslateModule,
+		AssignmentTemplatesFormComponentModule
+	]
+})
+export class CreateAssignmentTemplateDialogModule {}

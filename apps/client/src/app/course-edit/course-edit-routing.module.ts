@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { EditCourseComponent } from "./components/edit-course/edit-course.component";
+import { CourseEditComponent } from "./course-edit.component";
 
-const routes: Routes = [{ path: "", component: EditCourseComponent, pathMatch: "full" }];
+const routes: Routes = [{ path: "", component: CourseEditComponent, pathMatch: "full" }];
 
 @NgModule({
 	imports: [RouterModule.forChild(routes)],

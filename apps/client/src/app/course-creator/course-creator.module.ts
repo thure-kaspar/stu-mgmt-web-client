@@ -1,11 +1,8 @@
 import { NgModule } from "@angular/core";
-import { SharedModule } from "../shared/shared.module";
-import { CreateCourseComponent } from "./components/create-course/create-course.component";
 import { CourseCreatorRoutingModule } from "./course-creator-routing.module";
-import { CourseSettingsModule } from "../course-settings/course-settings.module";
+import { CreateCourseComponentModule } from "./create-course.component";
 
 @NgModule({
-	declarations: [CreateCourseComponent],
-	imports: [SharedModule, CourseCreatorRoutingModule, CourseSettingsModule]
+	imports: [CourseCreatorRoutingModule, CreateCourseComponentModule]
 })
 export class CourseCreatorModule {}
