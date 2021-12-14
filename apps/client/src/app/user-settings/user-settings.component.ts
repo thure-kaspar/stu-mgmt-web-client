@@ -1,9 +1,20 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { Subject } from "rxjs";
-import { UserApi, UserSettingsDto } from "@student-mgmt/api-client";
+import { CommonModule } from "@angular/common";
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	NgModule,
+	OnInit
+} from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { TranslateModule } from "@ngx-translate/core";
 import { AuthService } from "@student-mgmt-client/auth";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "@student-mgmt-client/services";
+import { CardComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UserApi, UserSettingsDto } from "@student-mgmt/api-client";
+import { Subject } from "rxjs";
 
 type BlacklistableEvents = {
 	ASSIGNMENT_STARTED: boolean;
@@ -128,3 +139,17 @@ export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnIni
 		this.triggerUpdate$.next(this.userSettings);
 	}
 }
+
+@NgModule({
+	declarations: [UserSettingsComponent],
+	exports: [UserSettingsComponent],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		MatSlideToggleModule,
+		MatDividerModule,
+		TranslateModule,
+		CardComponentModule
+	]
+})
+export class UserSettingsComponentModule {}

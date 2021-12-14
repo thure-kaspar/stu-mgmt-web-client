@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { UserSettingsComponent } from "./components/user-settings/user-settings.component";
+import { UserSettingsComponent } from "./user-settings.component";
 
 const routes: Routes = [{ path: "", pathMatch: "full", component: UserSettingsComponent }];
 
