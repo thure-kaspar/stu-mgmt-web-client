@@ -1,17 +1,26 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { combineLatest, Observable } from "rxjs";
-import { filter, map, switchMap } from "rxjs/operators";
-import { UserApi } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { TranslateModule } from "@ngx-translate/core";
 import {
 	AssignmentWithAssessment,
 	mapAssessmentsToAssignment
 } from "@student-mgmt-client/domain-types";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
-import { CourseSelectors } from "@student-mgmt-client/state";
+import {
+	AssignmentTypeChipComponentModule,
+	ThumbChipComponentModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import {
+	AssignmentActions,
+	AssignmentSelectors,
+	CourseSelectors
+} from "@student-mgmt-client/state";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { UserApi } from "@student-mgmt/api-client";
+import { combineLatest, Observable } from "rxjs";
+import { filter, map, switchMap } from "rxjs/operators";
 
 @Component({
 	selector: "app-participant-assessments",
@@ -59,3 +68,16 @@ export class ParticipantAssessmentsComponent extends UnsubscribeOnDestroy implem
 		);
 	}
 }
+
+@NgModule({
+	declarations: [ParticipantAssessmentsComponent],
+	exports: [ParticipantAssessmentsComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		TranslateModule,
+		AssignmentTypeChipComponentModule,
+		ThumbChipComponentModule
+	]
+})
+export class ParticipantAssessmentsComponentModule {}

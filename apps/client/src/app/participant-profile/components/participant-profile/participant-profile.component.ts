@@ -1,8 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { MatTabsModule } from "@angular/material/tabs";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 import { Participant } from "@student-mgmt-client/domain-types";
 import { ParticipantFacade } from "@student-mgmt-client/services";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import {
+	CardComponentModule,
+	ParticipantAdmissionStatusComponentModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
 import { ParticipantAdmissionStatusState } from "@student-mgmt-client/state";
 import {
 	AdmissionStatusApi,
@@ -91,3 +98,17 @@ export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements
 		return p1.userId === p2.userId;
 	}
 }
+
+@NgModule({
+	declarations: [ParticipantProfileComponent],
+	exports: [ParticipantProfileComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatTabsModule,
+		TranslateModule,
+		CardComponentModule,
+		ParticipantAdmissionStatusComponentModule
+	]
+})
+export class ParticipantProfileComponentModule {}
