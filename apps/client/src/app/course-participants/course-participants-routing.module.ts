@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { UserListComponent } from "./user-list/user-list.component";
+import { ParticipantsListComponent } from "./participants-list/participants-list.component";
 import { ParticipantsOverviewComponent } from "./participants-overview/participants-overview.component";
 
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
 						"../participants-list-comparison/participants-list-comparison.module"
 					).then(m => m.ParticipantsListComparisonModule)
 			},
-			{ path: "list", component: UserListComponent },
+			{ path: "list", component: ParticipantsListComponent },
 			{ path: "", pathMatch: "full", redirectTo: "list" }
 		]
 	}

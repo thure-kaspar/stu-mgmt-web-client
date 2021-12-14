@@ -1,5 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { MatTabsModule } from "@angular/material/tabs";
+import { ActivatedRoute, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 
 @Component({
@@ -17,3 +20,10 @@ export class ParticipantsOverviewComponent implements OnInit {
 		this.courseId = getRouteParam("courseId", this.route);
 	}
 }
+
+@NgModule({
+	declarations: [ParticipantsOverviewComponent],
+	exports: [ParticipantsOverviewComponent],
+	imports: [CommonModule, RouterModule, MatTabsModule, TranslateModule]
+})
+export class ParticipantsOverviewComponentModule {}
