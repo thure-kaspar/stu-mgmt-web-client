@@ -15,29 +15,21 @@ export class ThemeService {
 		}
 	] as const;
 
-	private themeSubject: BehaviorSubject<string>;
+	private _theme$: BehaviorSubject<string>;
 	theme$: Observable<string>;
 
 	constructor() {
 		const storedTheme = localStorage.getItem("theme");
 		let theme: string;
 
-		if (
-			!storedTheme &&
-			window.matchMedia &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches
-		) {
-			theme = "dark-purple-theme";
-		} else if (storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
+		if (storedTheme && this.availableThemes.find(t => t.cssClass === storedTheme)) {
 			theme = storedTheme;
 		} else {
-			theme = "light-red-theme";
+			theme = "light";
 		}
 
-		this.themeSubject = new BehaviorSubject(theme);
-		this.theme$ = this.themeSubject
-			.asObservable()
-			.pipe(distinctUntilChanged((x, y) => x === y));
+		this._theme$ = new BehaviorSubject(theme);
+		this.theme$ = this._theme$;
 	}
 
 	/**
@@ -47,7 +39,7 @@ export class ThemeService {
 	setTheme(cssClass: string): void {
 		if (this.availableThemes.find(t => t.cssClass === cssClass)) {
 			localStorage.setItem("theme", cssClass);
-			this.themeSubject.next(cssClass);
+			this._theme$.next(cssClass);
 		} else {
 			console.error(`Theme '${cssClass}' is not a registered theme.`);
 		}
