@@ -1,9 +1,16 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { UserDto, UserApi, UserUpdateDto } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatRadioModule } from "@angular/material/radio";
+import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UserApi, UserDto, UserUpdateDto } from "@student-mgmt/api-client";
 
 /**
  * Dialog that allows editing a user.
@@ -55,3 +62,20 @@ export class UpdateUserDialog extends UnsubscribeOnDestroy implements OnInit {
 		}
 	}
 }
+
+@NgModule({
+	declarations: [UpdateUserDialog],
+	exports: [UpdateUserDialog],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatDialogModule,
+		MatButtonModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatRadioModule,
+		TranslateModule
+	]
+})
+export class UpdateUserDialogModule {}

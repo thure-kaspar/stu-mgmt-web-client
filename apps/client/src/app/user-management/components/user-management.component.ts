@@ -1,8 +1,22 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialog } from "@angular/material/dialog";
-import { MatTableDataSource } from "@angular/material/table";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { TranslateModule } from "@ngx-translate/core";
 import { DialogService, ToastService } from "@student-mgmt-client/services";
-import { Paginator, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import {
+	IconComponentModule,
+	Paginator,
+	PaginatorModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
 import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
@@ -109,3 +123,23 @@ export class UserManagementComponent extends UnsubscribeOnDestroy implements OnI
 			});
 	}
 }
+
+@NgModule({
+	declarations: [UserManagementComponent],
+	exports: [UserManagementComponent],
+	imports: [
+		CommonModule,
+		FormsModule,
+		MatButtonModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatCheckboxModule,
+		MatMenuModule,
+		MatTableModule,
+		IconComponentModule,
+		TranslateModule,
+		PaginatorModule
+	]
+})
+export class UserManagementComponentModule {}
