@@ -1,5 +1,11 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatRadioModule } from "@angular/material/radio";
+import { TranslateModule } from "@ngx-translate/core";
 import { SnackbarService } from "@student-mgmt-client/services";
 import { CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
 
@@ -64,3 +70,18 @@ export class ChangeRoleDialog implements OnInit {
 			});
 	}
 }
+
+@NgModule({
+	declarations: [ChangeRoleDialog],
+	exports: [ChangeRoleDialog],
+	imports: [
+		CommonModule,
+		FormsModule,
+		MatDialogModule,
+		MatCardModule,
+		MatButtonModule,
+		MatRadioModule,
+		TranslateModule
+	]
+})
+export class ChangeRoleDialogModule {}

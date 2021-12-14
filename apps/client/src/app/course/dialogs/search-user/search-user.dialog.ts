@@ -1,11 +1,16 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
-import { MatTableDataSource } from "@angular/material/table";
-import { UserDto, UserApi } from "@student-mgmt/api-client";
-import { Paginator } from "@student-mgmt-client/shared-ui";
+import { CommonModule } from "@angular/common";
+import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { TranslateModule } from "@ngx-translate/core";
+import { Paginator, PaginatorModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { debounceTime } from "rxjs/operators";
 
 class UserFilter {
@@ -80,3 +85,20 @@ export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 			);
 	}
 }
+
+@NgModule({
+	declarations: [SearchUserDialog],
+	exports: [SearchUserDialog],
+	imports: [
+		CommonModule,
+		FormsModule,
+		MatDialogModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatCheckboxModule,
+		MatTableModule,
+		TranslateModule,
+		PaginatorModule
+	]
+})
+export class SearchUserDialogModule {}

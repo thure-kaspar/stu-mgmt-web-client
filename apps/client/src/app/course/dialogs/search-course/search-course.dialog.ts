@@ -1,12 +1,25 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
-import { MatTableDataSource } from "@angular/material/table";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import {
+	IconComponentModule,
+	Paginator,
+	PaginatorModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import { getSemester, getSemesterList, SemesterPipeModule } from "@student-mgmt-client/util-helper";
+import { CourseApi, CourseDto } from "@student-mgmt/api-client";
 import { BehaviorSubject } from "rxjs";
-import { CourseDto, CourseApi } from "@student-mgmt/api-client";
-import { getSemester, getSemesterList } from "@student-mgmt-client/util-helper";
-import { Paginator } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 
 /**
  * Dialog that allows searching for courses.
@@ -76,3 +89,25 @@ export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 		}
 	}
 }
+
+@NgModule({
+	declarations: [SearchCourseDialog],
+	exports: [SearchCourseDialog],
+	imports: [
+		CommonModule,
+		FormsModule,
+		RouterModule,
+		MatDialogModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatCheckboxModule,
+		MatTableModule,
+		MatSelectModule,
+		TranslateModule,
+		PaginatorModule,
+		IconComponentModule,
+		SemesterPipeModule
+	]
+})
+export class SearchCourseDialogModule {}

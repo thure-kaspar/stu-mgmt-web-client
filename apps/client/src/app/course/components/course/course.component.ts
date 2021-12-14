@@ -1,23 +1,34 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute, Router } from "@angular/router";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatTabsModule } from "@angular/material/tabs";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { Actions, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { take, tap } from "rxjs/operators";
-import { GroupApi } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { isNotACourseMember } from "../../../shared/api-exceptions";
-import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { ExtendedConfirmDialog, ExtendedConfirmDialogData } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { CourseActions, CourseSelectors } from "@student-mgmt-client/state";
-import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
+import { TranslateModule } from "@ngx-translate/core";
 import {
-	ParticipantFacade,
 	CourseFacade,
 	CourseMembershipsFacade,
+	ParticipantFacade,
 	ToastService
 } from "@student-mgmt-client/services";
+import {
+	ConfirmDialog,
+	ConfirmDialogData,
+	ExtendedConfirmDialog,
+	ExtendedConfirmDialogData,
+	IconComponentModule,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import { CourseActions, CourseSelectors } from "@student-mgmt-client/state";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { GroupApi } from "@student-mgmt/api-client";
+import { take, tap } from "rxjs/operators";
+import { isNotACourseMember } from "../../../shared/api-exceptions";
+import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 
 @Component({
 	selector: "app-course",
@@ -156,3 +167,19 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 			});
 	}
 }
+
+@NgModule({
+	declarations: [CourseComponent],
+	exports: [CourseComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatButtonModule,
+		MatTabsModule,
+		MatCardModule,
+		MatMenuModule,
+		TranslateModule,
+		IconComponentModule
+	]
+})
+export class CourseComponentModule {}
