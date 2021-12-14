@@ -11,7 +11,7 @@ import { DateTimePickerComponentModule, IconComponentModule } from "@student-mgm
 import { AssignmentDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-assignment-form",
+	selector: "student-mgmt-assignment-form",
 	templateUrl: "./assignment-form.component.html",
 	styleUrls: ["./assignment-form.component.scss"]
 })

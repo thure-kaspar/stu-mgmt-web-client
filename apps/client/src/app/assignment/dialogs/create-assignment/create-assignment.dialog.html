@@ -17,12 +17,16 @@
 			matTooltip="Select assignment template"
 			[matMenuTriggerFor]="templateMenu"
 		>
-			<app-icon class="icon-light" color="accent" name="assignment"></app-icon>
+			<student-mgmt-icon
+				class="icon-light"
+				color="accent"
+				name="assignment"
+			></student-mgmt-icon>
 		</button>
 	</mat-card-title>
 
 	<div mat-dialog-content class="dialog-content">
-		<app-assignment-form></app-assignment-form>
+		<student-mgmt-assignment-form></student-mgmt-assignment-form>
 	</div>
 
 	<div mat-dialog-actions class="actions">

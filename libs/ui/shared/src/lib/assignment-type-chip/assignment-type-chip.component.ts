@@ -5,7 +5,7 @@ import { AssignmentDto } from "@student-mgmt/api-client";
 import { ChipComponentModule } from "../chip/chip.component";
 
 @Component({
-	selector: "app-assignment-type-chip",
+	selector: "student-mgmt-assignment-type-chip",
 	templateUrl: "./assignment-type-chip.component.html",
 	styleUrls: ["./assignment-type-chip.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

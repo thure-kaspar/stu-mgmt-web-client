@@ -13,7 +13,7 @@ type CourseFilter = {
 };
 
 @Component({
-	selector: "app-course-list",
+	selector: "student-mgmt-course-list",
 	templateUrl: "./course-list.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

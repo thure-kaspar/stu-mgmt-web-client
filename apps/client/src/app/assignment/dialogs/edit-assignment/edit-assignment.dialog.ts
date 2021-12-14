@@ -17,7 +17,7 @@ export class EditAssignmentDialogData {
 }
 
 @Component({
-	selector: "app-edit-assignment",
+	selector: "student-mgmt-edit-assignment",
 	templateUrl: "./edit-assignment.dialog.html",
 	styleUrls: ["./edit-assignment.dialog.scss"]
 })

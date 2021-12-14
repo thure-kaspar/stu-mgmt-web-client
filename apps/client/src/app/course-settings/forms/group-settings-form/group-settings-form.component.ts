@@ -7,7 +7,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
-	selector: "app-group-settings-form",
+	selector: "student-mgmt-group-settings-form",
 	templateUrl: "./group-settings-form.component.html",
 	styleUrls: ["./group-settings-form.component.scss"]
 })

@@ -9,7 +9,7 @@ import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { getSemesterList, SemesterPipeModule } from "@student-mgmt-client/util-helper";
 
 @Component({
-	selector: "app-course-form",
+	selector: "student-mgmt-course-form",
 	templateUrl: "./course-form.component.html",
 	styleUrls: ["./course-form.component.scss"]
 })

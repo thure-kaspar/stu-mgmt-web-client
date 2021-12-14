@@ -16,7 +16,7 @@ import { AssessmentHeaderComponentModule } from "../assessment/components/assess
 import { PartialAssessmentComponentModule } from "./partial-assessment/partial-assessment.component";
 
 @Component({
-	selector: "app-assessment-viewer",
+	selector: "student-mgmt-assessment-viewer",
 	templateUrl: "./assessment-viewer.component.html",
 	styleUrls: ["./assessment-viewer.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

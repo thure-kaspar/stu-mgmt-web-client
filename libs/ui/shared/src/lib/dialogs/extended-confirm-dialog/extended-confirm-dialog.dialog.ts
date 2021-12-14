@@ -18,7 +18,7 @@ export type ExtendedConfirmDialogData = {
  * @returns boolean - `true` if user confirmed the action.
  */
 @Component({
-	selector: "app-extended-confirm-dialog",
+	selector: "student-mgmt-extended-confirm-dialog",
 	templateUrl: "./extended-confirm-dialog.dialog.html",
 	styleUrls: ["./extended-confirm-dialog.dialog.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

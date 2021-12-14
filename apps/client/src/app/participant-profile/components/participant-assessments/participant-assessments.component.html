@@ -4,7 +4,9 @@
 		[class.evaluated]="assignment.state === 'EVALUATED'"
 		*ngFor="let assignment of assignmentsWithAssessments$ | async"
 	>
-		<app-assignment-type-chip [type]="assignment.type"></app-assignment-type-chip>
+		<student-mgmt-assignment-type-chip
+			[type]="assignment.type"
+		></student-mgmt-assignment-type-chip>
 
 		<div class="assignment-and-group-name">
 			<ng-container *ngIf="assignment.assessment?.id; else noAssessment">
@@ -54,14 +56,14 @@
 		</div>
 
 		<div>
-			<app-thumb-chip
+			<student-mgmt-thumb-chip
 				*ngIf="
 					assignment.state === 'EVALUATED' &&
 					(assignment.assessment?.hasPassed === true ||
 						assignment.assessment?.hasPassed === false)
 				"
 				[condition]="assignment.assessment?.hasPassed"
-			></app-thumb-chip>
+			></student-mgmt-thumb-chip>
 		</div>
 	</div>
 </div>

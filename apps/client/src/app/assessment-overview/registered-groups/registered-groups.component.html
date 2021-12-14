@@ -4,7 +4,7 @@
 	<ng-container *ngIf="participantFacade.participant$ | async as participant">
 		<div class="title-buttons">
 			<button mat-flat-button color="accent" (click)="registerGroup()">
-				<app-icon name="add"></app-icon>
+				<student-mgmt-icon name="add"></student-mgmt-icon>
 				{{ "Action.Custom.RegisterGroup" | translate }}
 			</button>
 			<button
@@ -36,19 +36,19 @@
 		<td mat-cell *matCellDef="let row">
 			<mat-menu #registrationMenu="matMenu">
 				<button mat-menu-item (click)="registerParticipant(row)">
-					<app-icon class="mr-4 icon-light" name="person_add"></app-icon
+					<student-mgmt-icon class="mr-4 icon-light" name="person_add"></student-mgmt-icon
 					>{{ "Action.Custom.AddParticipant" | translate }}
 				</button>
 				<button mat-menu-item (click)="unregisterGroup(row)">
 					<span class="text-red">
-						<app-icon class="mr-4 icon-light" name="delete"></app-icon
+						<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon
 						>{{ "Action.Custom.RemoveGroup" | translate }}
 					</span>
 				</button>
 			</mat-menu>
 
 			<button mat-icon-button [matMenuTriggerFor]="registrationMenu">
-				<app-icon class="icon-light" name="settings"></app-icon>
+				<student-mgmt-icon class="icon-light" name="settings"></student-mgmt-icon>
 			</button>
 		</td>
 	</ng-container>
@@ -78,12 +78,12 @@
 					disableRipple
 				>
 					{{ member.displayName }} ({{ member.username }})
-					<app-icon
+					<student-mgmt-icon
 						size="18"
 						class="remove-participant-icon"
 						matChipRemove
 						name="clear"
-					></app-icon>
+					></student-mgmt-icon>
 				</mat-chip>
 			</mat-chip-list>
 		</td>

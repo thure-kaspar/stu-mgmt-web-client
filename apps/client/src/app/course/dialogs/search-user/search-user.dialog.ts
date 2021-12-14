@@ -23,7 +23,7 @@ class UserFilter {
 }
 
 @Component({
-	selector: "app-search-user",
+	selector: "student-mgmt-search-user",
 	templateUrl: "./search-user.dialog.html",
 	styleUrls: ["./search-user.dialog.scss"]
 })

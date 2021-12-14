@@ -28,7 +28,7 @@ import { BehaviorSubject } from "rxjs";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
 
 @Component({
-	selector: "app-registered-groups",
+	selector: "student-mgmt-registered-groups",
 	templateUrl: "./registered-groups.component.html",
 	styleUrls: ["./registered-groups.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

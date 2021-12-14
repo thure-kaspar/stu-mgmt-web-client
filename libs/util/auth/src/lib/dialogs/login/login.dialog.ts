@@ -23,7 +23,7 @@ type LoginState = { isLoading: boolean; error?: string | null };
  * @returns `True`, if user logged in successfully.
  */
 @Component({
-	selector: "app-login",
+	selector: "student-mgmt-login",
 	templateUrl: "./login.dialog.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -8,7 +8,7 @@
 				class="btn-add"
 				color="accent"
 			>
-				<app-icon name="add"></app-icon>
+				<student-mgmt-icon name="add"></student-mgmt-icon>
 				{{ "Action.Custom.AddAssignment" | translate }}
 			</button>
 
@@ -20,11 +20,11 @@
 						</h3>
 						<div class="assignment-list">
 							<ng-container *ngFor="let assignment of assignments.inProgress">
-								<app-assignment-card
+								<student-mgmt-assignment-card
 									[course]="course"
 									[assignment]="assignment"
 									[participant]="participant"
-								></app-assignment-card>
+								></student-mgmt-assignment-card>
 							</ng-container>
 						</div>
 					</div>
@@ -37,11 +37,11 @@
 						</h3>
 						<div class="assignment-list">
 							<ng-container *ngFor="let assignment of assignments.inReview">
-								<app-assignment-card
+								<student-mgmt-assignment-card
 									[course]="course"
 									[assignment]="assignment"
 									[participant]="participant"
-								></app-assignment-card>
+								></student-mgmt-assignment-card>
 							</ng-container>
 						</div>
 					</div>
@@ -54,11 +54,11 @@
 						</h3>
 						<div class="assignment-list">
 							<ng-container *ngFor="let assignment of assignments.evaluated">
-								<app-assignment-card
+								<student-mgmt-assignment-card
 									[course]="course"
 									[assignment]="assignment"
 									[participant]="participant"
-								></app-assignment-card>
+								></student-mgmt-assignment-card>
 							</ng-container>
 						</div>
 					</div>
@@ -71,11 +71,11 @@
 						</h3>
 						<div class="assignment-list">
 							<ng-container *ngFor="let assignment of assignments.closed">
-								<app-assignment-card
+								<student-mgmt-assignment-card
 									[course]="course"
 									[assignment]="assignment"
 									[participant]="participant"
-								></app-assignment-card>
+								></student-mgmt-assignment-card>
 							</ng-container>
 						</div>
 					</div>
@@ -89,11 +89,11 @@
 							</h3>
 							<div class="assignment-list">
 								<ng-container *ngFor="let assignment of assignments.invisible">
-									<app-assignment-card
+									<student-mgmt-assignment-card
 										[course]="course"
 										[assignment]="assignment"
 										[participant]="participant"
-									></app-assignment-card>
+									></student-mgmt-assignment-card>
 								</ng-container>
 							</div>
 						</div>
@@ -101,7 +101,7 @@
 				</div>
 
 				<div class="admission-status" *ngIf="participant.isStudent">
-					<app-participant-admission-status-container></app-participant-admission-status-container>
+					<student-mgmt-participant-admission-status-container></student-mgmt-participant-admission-status-container>
 				</div>
 			</div>
 		</div>

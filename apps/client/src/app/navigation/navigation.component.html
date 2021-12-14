@@ -3,7 +3,7 @@
 	<mat-toolbar class="titlebar">
 		<div id="nav-left">
 			<button mat-icon-button type="button" (click)="drawer.toggle()">
-				<app-icon name="menu" class="text"></app-icon>
+				<student-mgmt-icon name="menu" class="text"></student-mgmt-icon>
 			</button>
 			<svg
 				id="logo"
@@ -61,7 +61,7 @@
 			</mat-menu>
 
 			<button mat-icon-button [matMenuTriggerFor]="appMenu">
-				<app-icon name="more_vert" class="text"></app-icon>
+				<student-mgmt-icon name="more_vert" class="text"></student-mgmt-icon>
 			</button>
 		</div>
 	</mat-toolbar>
@@ -84,7 +84,8 @@
 						routerLinkActive="router-link-active"
 						[routerLinkActiveOptions]="{ exact: true }"
 					>
-						<app-icon name="home"></app-icon>{{ "Misc.Home" | translate }}
+						<student-mgmt-icon name="home"></student-mgmt-icon
+						>{{ "Misc.Home" | translate }}
 					</a>
 
 					<a
@@ -95,7 +96,7 @@
 							obs?.user?.role === 'MGMT_ADMIN' || obs?.user?.role === 'SYSTEM_ADMIN'
 						"
 					>
-						<app-icon name="supervisor_account"></app-icon
+						<student-mgmt-icon name="supervisor_account"></student-mgmt-icon
 						>{{ "Title.UserManagement" | translate }}
 					</a>
 
@@ -105,7 +106,8 @@
 						routerLinkActive="router-link-active"
 						[routerLinkActiveOptions]="{ exact: true }"
 					>
-						<app-icon name="school"></app-icon>{{ "Domain.Courses" | translate }}
+						<student-mgmt-icon name="school"></student-mgmt-icon
+						>{{ "Domain.Courses" | translate }}
 					</a>
 
 					<div class="course-membership-list" *ngIf="obs.user">
@@ -122,7 +124,8 @@
 								routerLinkActive="router-link-active"
 								data-test="sidebar-course-link"
 							>
-								<app-icon name="lens" size="10"></app-icon>{{ course.id }}
+								<student-mgmt-icon name="lens" size="10"></student-mgmt-icon
+								>{{ course.id }}
 							</a>
 						</div>
 					</div>
@@ -136,15 +139,17 @@
 						routerLinkActive="router-link-active"
 						*ngIf="_isDevelopmentEnv"
 					>
-						<app-icon name="code"></app-icon>Developer-Login
+						<student-mgmt-icon name="code"></student-mgmt-icon>Developer-Login
 					</a>
 
 					<a mat-list-item href="https://www.uni-hildesheim.de/datenschutz">
-						<app-icon name="security"></app-icon>{{ "Misc.Privacy" | translate }}
+						<student-mgmt-icon name="security"></student-mgmt-icon
+						>{{ "Misc.Privacy" | translate }}
 					</a>
 
 					<a mat-list-item href=" https://www.uni-hildesheim.de/impressum">
-						<app-icon name="info"></app-icon>{{ "Misc.Imprint" | translate }}
+						<student-mgmt-icon name="info"></student-mgmt-icon
+						>{{ "Misc.Imprint" | translate }}
 					</a>
 				</div>
 			</mat-nav-list>

@@ -23,7 +23,7 @@ import {
 } from "../assessment-target/assessment-target.component";
 
 @Component({
-	selector: "app-assessment-header",
+	selector: "student-mgmt-assessment-header",
 	templateUrl: "./assessment-header.component.html",
 	styleUrls: ["./assessment-header.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 
 @Component({
-	selector: "app-stat-card",
+	selector: "student-mgmt-stat-card",
 	templateUrl: "./stat-card.component.html",
 	styleUrls: ["./stat-card.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

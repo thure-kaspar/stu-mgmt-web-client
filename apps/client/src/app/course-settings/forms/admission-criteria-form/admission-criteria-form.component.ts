@@ -17,7 +17,7 @@ import {
 } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-admission-criteria-form",
+	selector: "student-mgmt-admission-criteria-form",
 	templateUrl: "./admission-criteria-form.component.html",
 	styleUrls: ["./admission-criteria-form.component.scss"]
 })

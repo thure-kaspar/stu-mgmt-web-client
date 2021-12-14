@@ -26,7 +26,7 @@ class GroupFilter {
 }
 
 @Component({
-	selector: "app-search-group",
+	selector: "student-mgmt-search-group",
 	templateUrl: "./search-group.dialog.html",
 	styleUrls: ["./search-group.dialog.scss"]
 	//changeDetection: ChangeDetectionStrategy.OnPush

@@ -82,7 +82,9 @@
 				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 			</table>
 
-			<app-paginator (onPageChanged)="searchParticipants(true)"></app-paginator>
+			<student-mgmt-paginator
+				(onPageChanged)="searchParticipants(true)"
+			></student-mgmt-paginator>
 		</div>
 	</div>
 

@@ -31,7 +31,7 @@ class GroupFilter {
 }
 
 @Component({
-	selector: "app-group-list",
+	selector: "student-mgmt-group-list",
 	templateUrl: "./group-list.component.html",
 	styleUrls: ["./group-list.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

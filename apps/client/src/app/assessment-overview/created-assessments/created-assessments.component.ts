@@ -49,7 +49,7 @@ type AssessmentStatistics = {
 };
 
 @Component({
-	selector: "app-created-assessments",
+	selector: "student-mgmt-created-assessments",
 	templateUrl: "./created-assessments.component.html",
 	styleUrls: ["./created-assessments.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

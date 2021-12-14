@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
-	selector: "app-login",
+	selector: "student-mgmt-login",
 	templateUrl: "./login.component.html"
 })
 export class LoginComponent {

@@ -28,7 +28,7 @@ import { AssessmentAllocationComponentModule } from "../assessment-allocation/as
 import { AssessmentTargetFilter } from "../assessment-target-picker.component";
 
 @Component({
-	selector: "app-assessment-user-picker",
+	selector: "student-mgmt-assessment-user-picker",
 	templateUrl: "./assessment-user-picker.component.html",
 	styleUrls: ["./assessment-user-picker.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

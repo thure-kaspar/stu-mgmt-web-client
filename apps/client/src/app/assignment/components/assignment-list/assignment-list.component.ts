@@ -28,7 +28,7 @@ class AssignmentsStateMap {
 }
 
 @Component({
-	selector: "app-assignment-list",
+	selector: "student-mgmt-assignment-list",
 	templateUrl: "./assignment-list.component.html",
 	styleUrls: ["./assignment-list.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

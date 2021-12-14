@@ -22,7 +22,7 @@ import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap, tap } from "rxjs/operators";
 
 @Component({
-	selector: "app-participant-profile",
+	selector: "student-mgmt-participant-profile",
 	templateUrl: "./participant-profile.component.html",
 	styleUrls: ["./participant-profile.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

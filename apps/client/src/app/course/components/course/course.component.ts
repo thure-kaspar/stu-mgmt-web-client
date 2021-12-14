@@ -31,7 +31,7 @@ import { take, tap } from "rxjs/operators";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 
 @Component({
-	selector: "app-course",
+	selector: "student-mgmt-course",
 	templateUrl: "./course.component.html",
 	styleUrls: ["./course.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

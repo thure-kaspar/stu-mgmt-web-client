@@ -37,7 +37,7 @@ class ParticipantsFilter {
 }
 
 @Component({
-	selector: "app-participants-list",
+	selector: "student-mgmt-participants-list",
 	templateUrl: "./participants-list.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

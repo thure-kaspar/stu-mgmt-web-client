@@ -45,15 +45,21 @@
 				<th class="action-column" mat-header-cell *matHeaderCellDef></th>
 				<td mat-cell *matCellDef="let row">
 					<button mat-icon-button [matMenuTriggerFor]="userOptionsMenu">
-						<app-icon class="icon-light" name="settings"></app-icon>
+						<student-mgmt-icon class="icon-light" name="settings"></student-mgmt-icon>
 					</button>
 					<mat-menu #userOptionsMenu="matMenu" yPosition="above">
 						<button mat-menu-item (click)="editUser(row)">
-							<app-icon name="edit" class="mr-4 icon-light"></app-icon>
+							<student-mgmt-icon
+								name="edit"
+								class="mr-4 icon-light"
+							></student-mgmt-icon>
 							<span>{{ "Action.Edit" | translate }}</span>
 						</button>
 						<button mat-menu-item (click)="removeUser(row)">
-							<app-icon name="delete" class="mr-4 icon-light"></app-icon>
+							<student-mgmt-icon
+								name="delete"
+								class="mr-4 icon-light"
+							></student-mgmt-icon>
 							<span class="text-red">{{ "Action.Remove" | translate }}</span>
 						</button>
 					</mat-menu>
@@ -94,6 +100,6 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 		</table>
 
-		<app-paginator (onPageChanged)="searchUsers(true)"></app-paginator>
+		<student-mgmt-paginator (onPageChanged)="searchUsers(true)"></student-mgmt-paginator>
 	</div>
 </div>

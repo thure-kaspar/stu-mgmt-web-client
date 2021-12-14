@@ -8,7 +8,7 @@ import { CourseAboutDto, CourseApi } from "@student-mgmt/api-client";
 import { Observable } from "rxjs";
 
 @Component({
-	selector: "app-about",
+	selector: "student-mgmt-about",
 	templateUrl: "./about.component.html",
 	styleUrls: ["./about.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

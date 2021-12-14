@@ -19,7 +19,7 @@ import { AssignmentApi, AssignmentDto } from "@student-mgmt/api-client";
  * @returns The selected assignment(s).
  */
 @Component({
-	selector: "app-search-assignment",
+	selector: "student-mgmt-search-assignment",
 	templateUrl: "./search-assignment.dialog.html",
 	styleUrls: ["./search-assignment.dialog.scss"]
 })

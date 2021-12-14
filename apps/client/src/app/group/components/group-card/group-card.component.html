@@ -1,4 +1,4 @@
-<app-card class="group-card">
+<student-mgmt-card class="group-card">
 	<ng-container title>
 		<span *ngIf="participant.isStudent; else nameWithLink">
 			{{ group.name }}
@@ -14,11 +14,11 @@
 		<mat-menu #groupMenu>
 			<ng-container>
 				<button mat-menu-item (click)="addParticipant()">
-					<app-icon class="mr-4 icon-light" name="person_add"></app-icon
+					<student-mgmt-icon class="mr-4 icon-light" name="person_add"></student-mgmt-icon
 					>{{ "Action.Custom.AddParticipant" | translate }}
 				</button>
 				<button mat-menu-item (click)="removeGroup()">
-					<app-icon class="mr-4 icon-light" name="delete"></app-icon>
+					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
 					<span class="font-bold text-red">
 						{{ "Action.Delete" | translate }}
 					</span>
@@ -27,24 +27,24 @@
 		</mat-menu>
 
 		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn">
-			<app-icon class="icon-light" name="more_vert"></app-icon>
+			<student-mgmt-icon class="icon-light" name="more_vert"></student-mgmt-icon>
 		</button>
 	</ng-container>
 
 	<ng-container subtitle>
 		<div class="chips">
-			<app-chip
+			<student-mgmt-chip
 				*ngIf="group.isClosed"
 				color="#ff0134"
 				icon="lock"
 				[text]="'Property.Group.IsClosed' | translate"
-			></app-chip>
-			<app-chip
+			></student-mgmt-chip>
+			<student-mgmt-chip
 				*ngIf="group.hasPassword"
 				color="var(--primary)"
 				icon="vpn_key"
 				[text]="'Misc.PasswordProtected' | translate"
-			></app-chip>
+			></student-mgmt-chip>
 		</div>
 	</ng-container>
 
@@ -75,4 +75,4 @@
 			</a>
 		</div>
 	</ng-container>
-</app-card>
+</student-mgmt-card>

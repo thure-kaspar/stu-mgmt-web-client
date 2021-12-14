@@ -13,7 +13,7 @@ import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignment/search-assignment.dialog";
 
 @Component({
-	selector: "app-assessment-allocation-overview",
+	selector: "student-mgmt-assessment-allocation-overview",
 	templateUrl: "./assessment-allocation-overview.component.html",
 	styleUrls: ["./assessment-allocation-overview.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

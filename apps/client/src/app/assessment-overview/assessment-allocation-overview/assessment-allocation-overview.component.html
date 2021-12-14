@@ -1,9 +1,9 @@
 <button mat-flat-button color="primary" (click)="openCopyFromPreviousDialog()">
-	<app-icon name="search"></app-icon>
+	<student-mgmt-icon name="search"></student-mgmt-icon>
 	{{ "Action.Custom.CopyFromPrevious" | translate }}
 </button>
 
-<app-assessment-target-picker
+<student-mgmt-assessment-target-picker
 	[courseId]="courseId"
 	[assignmentId]="assignmentId"
-></app-assessment-target-picker>
+></student-mgmt-assessment-target-picker>

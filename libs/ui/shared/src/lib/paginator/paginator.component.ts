@@ -4,7 +4,7 @@ import { HttpResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-	selector: "app-paginator",
+	selector: "student-mgmt-paginator",
 	templateUrl: "./paginator.component.html",
 	styleUrls: ["./paginator.component.scss"]
 })

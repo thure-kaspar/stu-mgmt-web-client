@@ -22,7 +22,7 @@ export class JoinGroupDialogData {
  * Returns a boolean, indicating, wether the user has joined the group.
  */
 @Component({
-	selector: "app-join-group",
+	selector: "student-mgmt-join-group",
 	templateUrl: "./join-group.dialog.html",
 	styleUrls: ["./join-group.dialog.scss"]
 })

@@ -86,15 +86,15 @@
 		</div>
 	</div>
 
-	<app-date-time-picker
+	<student-mgmt-date-time-picker
 		[label]="'Property.Assignment.StartDate' | translate"
 		[control]="$any(form.controls['startDate'])"
-	></app-date-time-picker>
+	></student-mgmt-date-time-picker>
 
-	<app-date-time-picker
+	<student-mgmt-date-time-picker
 		[label]="'Property.Assignment.EndDate' | translate"
 		[control]="$any(form.controls['endDate'])"
-	></app-date-time-picker>
+	></student-mgmt-date-time-picker>
 
 	<div class="links" formArrayName="links">
 		<h3>
@@ -120,7 +120,7 @@
 			</mat-form-field>
 
 			<button mat-icon-button class="remove-link-btn" (click)="removeLink(i)">
-				<app-icon name="clear"></app-icon>
+				<student-mgmt-icon name="clear"></student-mgmt-icon>
 			</button>
 		</div>
 	</div>
@@ -151,7 +151,7 @@
 				</mat-form-field>
 
 				<button mat-icon-button class="remove-config-btn" (click)="removeConfig(i)">
-					<app-icon name="clear"></app-icon>
+					<student-mgmt-icon name="clear"></student-mgmt-icon>
 				</button>
 			</div>
 		</div>

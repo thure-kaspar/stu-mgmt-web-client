@@ -4,7 +4,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { UnsubscribeOnDestroy } from "../unsubscribe-on-destroy.component";
 
 @Component({
-	selector: "app-date-time-picker",
+	selector: "student-mgmt-date-time-picker",
 	templateUrl: "./date-time-picker.component.html",
 	styleUrls: ["./date-time-picker.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

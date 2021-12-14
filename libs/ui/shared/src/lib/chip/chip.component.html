@@ -2,6 +2,10 @@
 	class="flex gap-2 px-2 py-1 leading-6 text-white rounded w-min whitespace-nowrap"
 	[ngStyle]="{ 'background-color': color }"
 >
-	<app-icon class="text-white fill-current" *ngIf="icon" [name]="icon"></app-icon>
+	<student-mgmt-icon
+		class="text-white fill-current"
+		*ngIf="icon"
+		[name]="icon"
+	></student-mgmt-icon>
 	<span class="text-white" *ngIf="text">{{ text }}</span>
 </span>

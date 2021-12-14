@@ -8,7 +8,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { MarkerDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-edit-marker",
+	selector: "student-mgmt-edit-marker",
 	templateUrl: "./edit-marker.dialog.html",
 	styleUrls: ["./edit-marker.dialog.scss"]
 })

@@ -16,7 +16,7 @@ import { UserApi, UserDto, UserUpdateDto } from "@student-mgmt/api-client";
  * Dialog that allows editing a user.
  */
 @Component({
-	selector: "app-change-role",
+	selector: "student-mgmt-change-role",
 	templateUrl: "./update-user.dialog.html",
 	styleUrls: ["./update-user.dialog.scss"]
 })

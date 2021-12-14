@@ -55,13 +55,13 @@
 				{{ "Common.AssignedTo" | translate }}
 			</th>
 			<td class="column-assigned-to" mat-cell *matCellDef="let row">
-				<app-assessment-allocation
+				<student-mgmt-assessment-allocation
 					[courseId]="courseId"
 					[assignmentId]="assignmentId"
 					[assignedTo]="row.assignedEvaluatorId"
 					[groupId]="row.group.id"
 				>
-				</app-assessment-allocation>
+				</student-mgmt-assessment-allocation>
 			</td>
 		</ng-container>
 
@@ -74,7 +74,7 @@
 	</table>
 </ng-container>
 
-<app-paginator (onPageChanged)="loadGroups()"></app-paginator>
+<student-mgmt-paginator (onPageChanged)="loadGroups()"></student-mgmt-paginator>
 
 <mat-progress-spinner
 	class="m-auto"

@@ -1,5 +1,5 @@
 <div class="participant-admission-status">
-	<app-card>
+	<student-mgmt-card>
 		<ng-container title>{{ "Title.AdmissionStatus" | translate }}</ng-container>
 		<ng-container subtitle>
 			<ng-container *ngIf="noCriteriaError$ | async; else subtitle">
@@ -16,14 +16,14 @@
 						class="overall-result-column"
 						*ngIf="admissionStatus.admissionStatus.hasAdmissionFromPreviousSemester"
 					>
-						<app-thumb-chip [condition]="true"></app-thumb-chip>
+						<student-mgmt-thumb-chip [condition]="true"></student-mgmt-thumb-chip>
 						<span>Altzulassung</span>
 					</span>
 
 					<span class="overall-result-column">
-						<app-thumb-chip
+						<student-mgmt-thumb-chip
 							[condition]="admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
-						></app-thumb-chip>
+						></student-mgmt-thumb-chip>
 						<span
 							class="font-bold"
 							*ngIf="admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
@@ -42,12 +42,14 @@
 						<mat-divider></mat-divider>
 						<div class="rule-title">
 							<span class="top">
-								<app-thumb-chip [condition]="rule.result.passed"></app-thumb-chip>
+								<student-mgmt-thumb-chip
+									[condition]="rule.result.passed"
+								></student-mgmt-thumb-chip>
 
-								<app-assignment-type-chip
+								<student-mgmt-assignment-type-chip
 									class="assignment-type-chip"
 									[type]="rule.assignmentType"
-								></app-assignment-type-chip>
+								></student-mgmt-assignment-type-chip>
 							</span>
 						</div>
 
@@ -107,5 +109,5 @@
 				</div>
 			</ng-container>
 		</ng-container>
-	</app-card>
+	</student-mgmt-card>
 </div>

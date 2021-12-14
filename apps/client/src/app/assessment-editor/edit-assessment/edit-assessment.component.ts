@@ -22,7 +22,7 @@ import {
 } from "../forms/assessment-form/assessment-form.component";
 
 @Component({
-	selector: "app-edit-assessment",
+	selector: "student-mgmt-edit-assessment",
 	templateUrl: "./edit-assessment.component.html",
 	styleUrls: ["./edit-assessment.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

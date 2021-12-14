@@ -9,7 +9,7 @@
 					*ngIf="user.role === roles.MGMT_ADMIN || user.role === roles.SYSTEM_ADMIN"
 				>
 					<button mat-flat-button class="btn-add" color="accent">
-						<app-icon name="add"></app-icon>
+						<student-mgmt-icon name="add"></student-mgmt-icon>
 						{{ "Action.Custom.CreateCourse" | translate }}
 					</button>
 				</a>
@@ -82,7 +82,7 @@
 				<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 			</table>
 
-			<app-paginator (onPageChanged)="searchCourses(true)"></app-paginator>
+			<student-mgmt-paginator (onPageChanged)="searchCourses(true)"></student-mgmt-paginator>
 		</div>
 	</div>
 </div>

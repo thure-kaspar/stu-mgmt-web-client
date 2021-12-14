@@ -2,7 +2,7 @@
 	"projectType": "library",
 	"root": "libs/feature/course-list",
 	"sourceRoot": "libs/feature/course-list/src",
-	"prefix": "student-mgmt-client",
+	"prefix": "student-mgmt",
 	"targets": {
 		"test": {
 			"executor": "@nrwl/jest:jest",

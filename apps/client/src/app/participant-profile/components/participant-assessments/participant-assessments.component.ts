@@ -23,7 +23,7 @@ import { combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
 
 @Component({
-	selector: "app-participant-assessments",
+	selector: "student-mgmt-participant-assessments",
 	templateUrl: "./participant-assessments.component.html",
 	styleUrls: ["./participant-assessments.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, Input, NgModule, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
-	selector: "app-icon",
+	selector: "student-mgmt-icon",
 	template: `<svg
 		[ngStyle]="{ color: 'white', height: size + 'px', width: size + 'px' }"
 		style="display: inline-block; margin-top: -2px; vertical-align: middle; position: relative;"

@@ -19,7 +19,7 @@ export type ConfirmDialogData = {
 };
 
 @Component({
-	selector: "app-confirm-dialog",
+	selector: "student-mgmt-confirm-dialog",
 	templateUrl: "./confirm-dialog.dialog.html",
 	styleUrls: ["./confirm-dialog.dialog.scss"]
 })

@@ -26,7 +26,7 @@ import { take } from "rxjs/operators";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
 
 @Component({
-	selector: "app-group-card",
+	selector: "student-mgmt-group-card",
 	templateUrl: "./group-card.component.html",
 	styleUrls: ["./group-card.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

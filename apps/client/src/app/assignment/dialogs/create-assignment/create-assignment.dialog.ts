@@ -18,7 +18,7 @@ import { AssignmentManagementFacade } from "../../services/assignment-management
  * Dialog that allows the creation of new assignments. Expects the courseId. Returns the created assignment.
  */
 @Component({
-	selector: "app-create-assignment",
+	selector: "student-mgmt-create-assignment",
 	templateUrl: "./create-assignment.dialog.html",
 	styleUrls: ["./create-assignment.dialog.scss"]
 })

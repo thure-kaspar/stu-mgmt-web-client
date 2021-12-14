@@ -32,25 +32,25 @@
 <mat-tab-group animationDuration="0ms">
 	<mat-tab [label]="'Domain.Groups' | translate">
 		<ng-template matTabContent>
-			<app-assessment-group-picker
+			<student-mgmt-assessment-group-picker
 				[filter$]="filter$"
 				(onGroupSelected)="onGroupSelected.emit($event)"
 				(onSwitchToEdit)="onSwitchToEdit.emit($event)"
 				[selectedId]="selectedId"
 			>
-			</app-assessment-group-picker>
+			</student-mgmt-assessment-group-picker>
 		</ng-template>
 	</mat-tab>
 
 	<mat-tab [label]="'Domain.Participants' | translate">
 		<ng-template matTabContent>
-			<app-assessment-user-picker
+			<student-mgmt-assessment-user-picker
 				[filter$]="filter$"
 				(onUserSelected)="onUserSelected.emit($event)"
 				(onSwitchToEdit)="onSwitchToEdit.emit($event)"
 				[selectedId]="selectedId"
 			>
-			</app-assessment-user-picker>
+			</student-mgmt-assessment-user-picker>
 		</ng-template>
 	</mat-tab>
 </mat-tab-group>

@@ -21,7 +21,7 @@ export class EditAssignmentTemplateDialogData {
  * If the update was successful, returns the updated template.
  */
 @Component({
-	selector: "app-edit-assignment-template",
+	selector: "student-mgmt-edit-assignment-template",
 	templateUrl: "./edit-assignment-template.dialog.html",
 	styleUrls: ["./edit-assignment-template.dialog.scss"]
 })

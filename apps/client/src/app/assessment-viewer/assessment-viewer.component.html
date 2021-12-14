@@ -1,12 +1,12 @@
 <ng-container *ngIf="participantFacade.participant$ | async as participant">
 	<div class="grid gap-4 tab" *ngIf="vm$ | async as vm">
-		<app-assessment-header
+		<student-mgmt-assessment-header
 			[assignment]="vm"
 			[assessment]="vm.assessment"
 			[courseId]="this.courseId"
-		></app-assessment-header>
+		></student-mgmt-assessment-header>
 
-		<app-card>
+		<student-mgmt-card>
 			<ng-container title>
 				<span class="overall-result">
 					<span class="achieved-points-number"
@@ -18,18 +18,18 @@
 						</span>
 					</span>
 					<ng-container *ngIf="vm.requiredPoints >= 0">
-						<app-chip
+						<student-mgmt-chip
 							*ngIf="vm.assessment.hasPassed"
 							icon="thumb_up"
 							[text]="'Property.Assessment.HasPassed' | translate"
 							color="#2fac6f"
-						></app-chip>
-						<app-chip
+						></student-mgmt-chip>
+						<student-mgmt-chip
 							*ngIf="!vm.assessment.hasPassed"
 							icon="thumb_down"
 							[text]="'Domain.Failed' | translate"
 							color="#ff0134"
-						></app-chip>
+						></student-mgmt-chip>
 					</ng-container>
 				</span>
 			</ng-container>
@@ -42,15 +42,15 @@
 			<ng-container content *ngIf="vm.assessment.comment">
 				<pre class="preformatted">{{ vm.assessment.comment }}</pre>
 			</ng-container>
-		</app-card>
+		</student-mgmt-card>
 
 		<ng-container *ngIf="vm.assessment.partialAssessments.length > 0">
 			<div class="grid partial-assessments gap-4">
 				<ng-container *ngFor="let partial of vm.assessment.partialAssessments">
-					<app-partial-assessment
+					<student-mgmt-partial-assessment
 						class="partial-assessment"
 						[partialAssessment]="partial"
-					></app-partial-assessment>
+					></student-mgmt-partial-assessment>
 				</ng-container>
 			</div>
 		</ng-container>

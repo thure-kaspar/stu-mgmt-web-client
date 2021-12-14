@@ -10,7 +10,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { StudentMgmtEvent, SubscriberDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-notification-subscriber",
+	selector: "student-mgmt-notification-subscriber",
 	templateUrl: "./notification-subscriber.dialog.html",
 	styleUrls: ["./notification-subscriber.dialog.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,5 +1,5 @@
 <ng-container *ngIf="group">
-	<app-card>
+	<student-mgmt-card>
 		<ng-container title>
 			<ng-container
 				*ngIf="participant.isStudent && participant.groupId !== group.id; else nameWithLink"
@@ -26,11 +26,11 @@
 				</a>
 			</div>
 		</ng-container>
-	</app-card>
+	</student-mgmt-card>
 </ng-container>
 
 <ng-container *ngIf="targetedParticipant || !group">
-	<app-card>
+	<student-mgmt-card>
 		<ng-container title>
 			<a
 				class="link-none"
@@ -39,5 +39,5 @@
 				{{ targetedParticipant.displayName }}
 			</a>
 		</ng-container>
-	</app-card>
+	</student-mgmt-card>
 </ng-container>

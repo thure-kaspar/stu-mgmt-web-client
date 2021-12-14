@@ -27,7 +27,7 @@ export class VerticalBarChartOptions {
 }
 
 @Component({
-	selector: "app-vertical-bar-chart",
+	selector: "student-mgmt-vertical-bar-chart",
 	templateUrl: "./vertical-bar-chart.component.html",
 	styleUrls: ["./vertical-bar-chart.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -23,7 +23,7 @@ import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
  * - ```groupId``` OR ```userId``` - The targeted group or user of this component
  */
 @Component({
-	selector: "app-assessment-allocation",
+	selector: "student-mgmt-assessment-allocation",
 	templateUrl: "./assessment-allocation.component.html",
 	styleUrls: ["./assessment-allocation.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

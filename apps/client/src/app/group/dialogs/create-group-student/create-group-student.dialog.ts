@@ -16,7 +16,7 @@ import { CourseConfigApi, GroupApi, GroupDto, GroupSettingsDto } from "@student-
  * @returns `GroupDto`
  */
 @Component({
-	selector: "app-create-group-student",
+	selector: "student-mgmt-create-group-student",
 	templateUrl: "./create-group-student.dialog.html",
 	styleUrls: ["./create-group-student.dialog.scss"]
 })

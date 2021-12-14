@@ -16,7 +16,7 @@ import { CanJoinCourseDto, CourseParticipantsApi } from "@student-mgmt/api-clien
  * Returns a boolean, indicating, wether the user has joined the course.
  */
 @Component({
-	selector: "app-join-course",
+	selector: "student-mgmt-join-course",
 	templateUrl: "./join-course.dialog.html",
 	styleUrls: ["./join-course.dialog.scss"]
 })

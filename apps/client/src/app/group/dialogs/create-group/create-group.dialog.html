@@ -29,11 +29,11 @@
 
 			<mat-tab label="{{ 'Common.Multiple' | translate }}">
 				<ng-template matTabContent>
-					<app-create-group-multiple
+					<student-mgmt-create-group-multiple
 						#createMultiple
 						[courseId]="courseId"
 						(onGroupsCreated)="onGroupsCreatedHandler($event)"
-					></app-create-group-multiple>
+					></student-mgmt-create-group-multiple>
 				</ng-template>
 			</mat-tab>
 		</mat-tab-group>

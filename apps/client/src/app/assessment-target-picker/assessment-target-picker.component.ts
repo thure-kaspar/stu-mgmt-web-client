@@ -31,7 +31,7 @@ export class AssessmentTargetFilter {
 }
 
 @Component({
-	selector: "app-assessment-target-picker",
+	selector: "student-mgmt-assessment-target-picker",
 	templateUrl: "./assessment-target-picker.component.html",
 	styleUrls: ["./assessment-target-picker.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

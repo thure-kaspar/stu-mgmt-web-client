@@ -1,7 +1,7 @@
 <div class="participants-list-comparison-container">
 	<div class="top">
 		<button mat-flat-button color="primary" (click)="openSearchCourseDialog()">
-			<app-icon name="add"></app-icon>
+			<student-mgmt-icon name="add"></student-mgmt-icon>
 			{{ "Action.Custom.AddCourse" | translate }}
 		</button>
 
@@ -11,7 +11,7 @@
 			(click)="loadComparison()"
 			[disabled]="selectedCourses.length == 0"
 		>
-			<app-icon name="play_arrow"></app-icon>
+			<student-mgmt-icon name="play_arrow"></student-mgmt-icon>
 			{{ "Action.Compare" | translate }}
 		</button>
 	</div>
@@ -21,7 +21,7 @@
 			<li *ngFor="let course of selectedCourses">
 				{{ course.title }} ({{ course.semester | semester }})
 				<button mat-icon-button (click)="removeSelectedCourse(course)">
-					<app-icon name="clear"></app-icon>
+					<student-mgmt-icon name="clear"></student-mgmt-icon>
 				</button>
 			</li>
 		</ul>

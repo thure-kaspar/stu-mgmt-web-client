@@ -18,7 +18,7 @@ import {
 import { SearchCourseDialog } from "../course/dialogs/search-course/search-course.dialog";
 
 @Component({
-	selector: "app-participants-list-comparison",
+	selector: "student-mgmt-participants-list-comparison",
 	templateUrl: "./participants-list-comparison.component.html",
 	styleUrls: ["./participants-list-comparison.component.scss"]
 })

@@ -6,7 +6,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 
 @Component({
-	selector: "app-participants-overview",
+	selector: "student-mgmt-participants-overview",
 	templateUrl: "./participants-overview.component.html",
 	styleUrls: ["./participants-overview.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

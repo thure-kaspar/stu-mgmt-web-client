@@ -2,7 +2,7 @@
 	<h2>{{ "Misc.Settings" | translate }}</h2>
 
 	<div class="grid gap-4">
-		<app-card>
+		<student-mgmt-card>
 			<ng-container title>{{ "Property.UserSettings.Language" | translate }}</ng-container>
 			<ng-container subtitle>{{ "Text.UserSettings.Language" | translate }}</ng-container>
 			<ng-container content>
@@ -23,9 +23,9 @@
 					</button>
 				</div>
 			</ng-container>
-		</app-card>
+		</student-mgmt-card>
 
-		<app-card>
+		<student-mgmt-card>
 			<ng-container title>Email-{{ "Misc.Notifications" | translate }}</ng-container>
 			<ng-container content>
 				<mat-slide-toggle
@@ -51,6 +51,6 @@
 					</mat-slide-toggle>
 				</div>
 			</ng-container>
-		</app-card>
+		</student-mgmt-card>
 	</div>
 </div>

@@ -3,7 +3,7 @@
 		<ng-container *ngIf="participant$ | async as participant">
 			<div class="profile">
 				<div class="left">
-					<app-card class="profile-card">
+					<student-mgmt-card class="profile-card">
 						<ng-container title>{{ participant.displayName }}</ng-container>
 						<ng-container content>
 							<div class="info">
@@ -60,7 +60,7 @@
 								</span>
 							</div>
 						</ng-container>
-					</app-card>
+					</student-mgmt-card>
 
 					<div
 						class="full-profile"
@@ -91,9 +91,9 @@
 					class="admission-status"
 					*ngIf="(showFullProfile$ | async) && participant.role === 'STUDENT'"
 				>
-					<app-participant-admission-status
+					<student-mgmt-participant-admission-status
 						[admissionStatus$]="admissionStatus$"
-					></app-participant-admission-status>
+					></student-mgmt-participant-admission-status>
 				</div>
 			</div>
 		</ng-container>

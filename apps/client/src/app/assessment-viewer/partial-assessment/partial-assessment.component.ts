@@ -6,7 +6,7 @@ import { MarkerDto, PartialAssessmentDto } from "@student-mgmt/api-client";
 import { MarkerComponentModule } from "../../assessment/components/marker/marker.component";
 
 @Component({
-	selector: "app-partial-assessment",
+	selector: "student-mgmt-partial-assessment",
 	templateUrl: "./partial-assessment.component.html",
 	styleUrls: ["./partial-assessment.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -8,20 +8,20 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
  * - content
  * - footer
  * @example 
- * <app-card>
+ * <student-mgmt-card>
 		<ng-container title>Assignment 01</ng-container>
 		<ng-container subtitle>Hello World</ng-container>
 		<ng-container menu>
-			<button mat-icon-button><app-icon name="more_vert"></app-icon></button>
+			<button mat-icon-button><student-mgmt-icon name="more_vert"></student-mgmt-icon></button>
 		</ng-container>
 		<ng-container content>Lorem ipsum...</ng-container>
 		<ng-container footer>
 			<button mat-stroked-button>Submit</button>
 		</ng-container>
-	</app-card>
+	</student-mgmt-card>
  */
 @Component({
-	selector: "app-card",
+	selector: "student-mgmt-card",
 	templateUrl: "./card.component.html",
 	styleUrls: ["./card.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

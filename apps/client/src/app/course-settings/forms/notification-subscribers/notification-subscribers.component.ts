@@ -19,7 +19,7 @@ import { switchMap } from "rxjs/operators";
 import { NotificationSubscriberDialog } from "../../dialogs/notification-subscriber/notification-subscriber.dialog";
 
 @Component({
-	selector: "app-notification-subscribers",
+	selector: "student-mgmt-notification-subscribers",
 	templateUrl: "./notification-subscribers.component.html",
 	styleUrls: ["./notification-subscribers.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

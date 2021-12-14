@@ -8,7 +8,7 @@ import { AuthModule, LoginDialog } from "@student-mgmt-client/auth";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 
 @Component({
-	selector: "app-home",
+	selector: "student-mgmt-home",
 	templateUrl: "./home.component.html",
 	styleUrls: ["./home.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -2,42 +2,44 @@
 	class="grid gap-4"
 	*ngIf="assignment && assessment && participantFacade.participant$ | async as participant"
 >
-	<app-card>
+	<student-mgmt-card>
 		<ng-container title>
 			<div class="flex gap-4">
 				<span>{{ "Domain.Assessment" | translate }}: {{ assignment.name }}</span>
-				<app-chip
+				<student-mgmt-chip
 					*ngIf="assessment.isDraft"
 					class="draft-chip"
 					icon="edit"
 					color="orange"
 					[text]="'Domain.Draft' | translate"
-				></app-chip>
+				></student-mgmt-chip>
 			</div>
 		</ng-container>
 		<ng-container subtitle>
 			<div class="flex mt-2 gap-2">
-				<app-assignment-type-chip [type]="assignment.type"></app-assignment-type-chip>
+				<student-mgmt-assignment-type-chip
+					[type]="assignment.type"
+				></student-mgmt-assignment-type-chip>
 				<ng-container [ngSwitch]="assignment.collaboration">
-					<app-chip
+					<student-mgmt-chip
 						*ngSwitchCase="collaborationEnum.GROUP"
 						icon="groups"
 						color="#009664"
 						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-					></app-chip>
-					<app-chip
+					></student-mgmt-chip>
+					<student-mgmt-chip
 						*ngSwitchCase="collaborationEnum.GROUP_OR_SINGLE"
 						icon="groups"
 						color="#00838f"
 						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-					></app-chip>
-					<app-chip
+					></student-mgmt-chip>
+					<student-mgmt-chip
 						*ngSwitchCase="collaborationEnum.SINGLE"
 						icon="person"
 						color="#7f23c5"
 						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-					></app-chip>
-					<app-chip *ngSwitchDefault></app-chip>
+					></student-mgmt-chip>
+					<student-mgmt-chip *ngSwitchDefault></student-mgmt-chip>
 				</ng-container>
 			</div>
 		</ng-container>
@@ -82,7 +84,7 @@
 						(click)="loadAssessmentEvents()"
 						*ngIf="participant.isTeachingStaffMember"
 					>
-						<app-icon class="icon-light" name="history"></app-icon>
+						<student-mgmt-icon class="icon-light" name="history"></student-mgmt-icon>
 					</button>
 
 					<div
@@ -103,13 +105,13 @@
 				</span>
 			</div>
 		</ng-container>
-	</app-card>
+	</student-mgmt-card>
 
-	<app-assessment-target
+	<student-mgmt-assessment-target
 		[group]="assessment.group"
 		[targetedParticipant]="assessment.participant"
 		[participant]="participant"
 		[courseId]="courseId"
 	>
-	</app-assessment-target>
+	</student-mgmt-assessment-target>
 </div>

@@ -32,7 +32,7 @@ const groupOrUserValidator: ValidatorFn = (control: AbstractControl): Validation
 };
 
 @Component({
-	selector: "app-assessment-form",
+	selector: "student-mgmt-assessment-form",
 	templateUrl: "./assessment-form.component.html",
 	styleUrls: ["./assessment-form.component.scss"]
 })

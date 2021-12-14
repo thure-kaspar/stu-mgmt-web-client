@@ -5,7 +5,7 @@ import { ParticipantAdmissionStatusComponentModule } from "@student-mgmt-client/
 import { ParticipantSelectors } from "@student-mgmt-client/state";
 
 @Component({
-	selector: "app-participant-admission-status-container",
+	selector: "student-mgmt-participant-admission-status-container",
 	templateUrl: "./participant-admission-status-container.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

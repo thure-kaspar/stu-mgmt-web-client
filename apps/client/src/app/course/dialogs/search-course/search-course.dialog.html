@@ -78,7 +78,10 @@
 					<td mat-cell *matCellDef="let row">
 						<a [routerLink]="[ '/courses', row.id ]">
 							<button mat-icon-button matTooltip="Open course" (click)="onCancel()">
-								<app-icon class="icon-light" name="open_in_new"></app-icon>
+								<student-mgmt-icon
+									class="icon-light"
+									name="open_in_new"
+								></student-mgmt-icon>
 							</button>
 						</a>
 					</td>
@@ -88,7 +91,7 @@
 				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 			</table>
 
-			<app-paginator (onPageChanged)="searchCourses(true)"></app-paginator>
+			<student-mgmt-paginator (onPageChanged)="searchCourses(true)"></student-mgmt-paginator>
 		</div>
 	</div>
 

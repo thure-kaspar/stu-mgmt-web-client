@@ -15,7 +15,7 @@ import { SnackbarService } from "@student-mgmt-client/services";
 import { GroupApi, GroupCreateBulkDto, GroupDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-create-group-multiple",
+	selector: "student-mgmt-create-group-multiple",
 	templateUrl: "./create-group-multiple.component.html",
 	styleUrls: ["./create-group-multiple.component.scss"]
 })

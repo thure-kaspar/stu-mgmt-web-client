@@ -7,7 +7,7 @@
 			(click)="openCreateGroupDialog()"
 			[disabled]="!course.groupSettings.allowGroups"
 		>
-			<app-icon name="add"></app-icon>
+			<student-mgmt-icon name="add"></student-mgmt-icon>
 			{{ "Action.Custom.AddGroup" | translate }}
 		</button>
 
@@ -40,14 +40,14 @@
 
 			<div class="groups-grid" *ngIf="groups$ | async as groups">
 				<ng-container *ngFor="let group of groups">
-					<app-group-card
+					<student-mgmt-group-card
 						[group]="group"
 						[participant]="participant"
 						[course]="course"
 						(onRemoveGroup)="onRemoveGroup($event)"
 						(onAddParticipant)="onAddParticipant($event)"
 					>
-					</app-group-card>
+					</student-mgmt-group-card>
 				</ng-container>
 			</div>
 		</div>

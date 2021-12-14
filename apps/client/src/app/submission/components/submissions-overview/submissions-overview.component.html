@@ -50,5 +50,7 @@
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
 
-	<app-paginator (onPageChanged)="loadSubmissions(courseId, assignmentId)"></app-paginator>
+	<student-mgmt-paginator
+		(onPageChanged)="loadSubmissions(courseId, assignmentId)"
+	></student-mgmt-paginator>
 </div>

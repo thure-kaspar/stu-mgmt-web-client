@@ -27,7 +27,7 @@ import { filter, take } from "rxjs/operators";
 import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 
 @Component({
-	selector: "app-group-detail",
+	selector: "student-mgmt-group-detail",
 	templateUrl: "./group-detail.component.html",
 	styleUrls: ["./group-detail.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

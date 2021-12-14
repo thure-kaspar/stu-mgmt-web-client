@@ -1,5 +1,5 @@
 <form class="grid gap-4" id="assessment-form" [formGroup]="form" autocomplete="off">
-	<app-card>
+	<student-mgmt-card>
 		<ng-container title>{{ "Common.Total" | translate }}</ng-container>
 
 		<ng-container content>
@@ -30,7 +30,7 @@
 				</mat-form-field>
 			</div>
 		</ng-container>
-	</app-card>
+	</student-mgmt-card>
 
 	<div
 		id="partial-assessments"
@@ -71,12 +71,12 @@
 
 					<div class="flex marker-buttons gap-2">
 						<button mat-flat-button class="btn-info" (click)="addMarker(i, 'INFO')">
-							<app-icon name="add"></app-icon>
+							<student-mgmt-icon name="add"></student-mgmt-icon>
 							INFO
 						</button>
 
 						<button mat-flat-button class="btn-hint" (click)="addMarker(i, 'HINT')">
-							<app-icon name="add"></app-icon>
+							<student-mgmt-icon name="add"></student-mgmt-icon>
 							HINT
 						</button>
 
@@ -85,12 +85,12 @@
 							class="btn-warning"
 							(click)="addMarker(i, 'WARNING')"
 						>
-							<app-icon name="add"></app-icon>
+							<student-mgmt-icon name="add"></student-mgmt-icon>
 							WARNING
 						</button>
 
 						<button mat-flat-button class="btn-error" (click)="addMarker(i, 'ERROR')">
-							<app-icon name="add"></app-icon>
+							<student-mgmt-icon name="add"></student-mgmt-icon>
 							ERROR
 						</button>
 					</div>
@@ -104,17 +104,23 @@
 								color="accent"
 								(click)="editMarker(marker.value, i, markerIndex)"
 							>
-								<app-icon class="icon-light" name="edit"></app-icon>
+								<student-mgmt-icon
+									class="icon-light"
+									name="edit"
+								></student-mgmt-icon>
 							</button>
 							<button
 								mat-icon-button
 								color="primary"
 								(click)="removeMarker(i, markerIndex)"
 							>
-								<app-icon class="text-red" name="clear"></app-icon>
+								<student-mgmt-icon
+									class="text-red"
+									name="clear"
+								></student-mgmt-icon>
 							</button>
 						</div>
-						<app-marker [marker]="marker.value"></app-marker>
+						<student-mgmt-marker [marker]="marker.value"></student-mgmt-marker>
 					</div>
 				</div>
 			</div>

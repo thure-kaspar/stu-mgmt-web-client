@@ -1,30 +1,35 @@
 <div [class]="'grid marker ' + marker.severity">
 	<ng-container [ngSwitch]="marker.severity">
-		<app-chip
+		<student-mgmt-chip
 			*ngSwitchCase="severityEnum.HINT"
 			icon="lightbulb"
 			color="#2ea569"
 			[text]="marker.severity"
-		></app-chip>
-		<app-chip
+		></student-mgmt-chip>
+		<student-mgmt-chip
 			*ngSwitchCase="severityEnum.INFO"
 			icon="info"
 			color="#0d9fcf"
 			[text]="marker.severity"
-		></app-chip>
-		<app-chip
+		></student-mgmt-chip>
+		<student-mgmt-chip
 			*ngSwitchCase="severityEnum.WARNING"
 			icon="warning"
 			color="#daa000"
 			[text]="marker.severity"
-		></app-chip>
-		<app-chip
+		></student-mgmt-chip>
+		<student-mgmt-chip
 			*ngSwitchCase="severityEnum.ERROR"
 			icon="error"
 			color="red"
 			[text]="marker.severity"
-		></app-chip>
-		<app-chip *ngSwitchDefault icon="help" color="primary" text="Unknown"></app-chip>
+		></student-mgmt-chip>
+		<student-mgmt-chip
+			*ngSwitchDefault
+			icon="help"
+			color="primary"
+			text="Unknown"
+		></student-mgmt-chip>
 	</ng-container>
 
 	<div class="mt-4 mb-2">

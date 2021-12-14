@@ -2,7 +2,7 @@
 	"projectType": "library",
 	"root": "libs/util/services",
 	"sourceRoot": "libs/util/services/src",
-	"prefix": "student-mgmt-client",
+	"prefix": "student-mgmt",
 	"targets": {
 		"test": {
 			"executor": "@nrwl/jest:jest",

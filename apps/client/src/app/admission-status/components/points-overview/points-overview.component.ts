@@ -15,7 +15,7 @@ import { AdmissionStatusApi, ParticipantDto, PointsOverviewDto } from "@student-
 import { Subject } from "rxjs";
 
 @Component({
-	selector: "app-points-overview",
+	selector: "student-mgmt-points-overview",
 	templateUrl: "./points-overview.component.html",
 	styleUrls: ["./points-overview.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

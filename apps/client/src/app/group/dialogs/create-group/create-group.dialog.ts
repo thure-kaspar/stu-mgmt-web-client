@@ -16,7 +16,7 @@ import {
 } from "./create-group-multiple/create-group-multiple.component";
 
 @Component({
-	selector: "app-create-group",
+	selector: "student-mgmt-create-group",
 	templateUrl: "./create-group.dialog.html",
 	styleUrls: ["./create-group.dialog.scss"]
 })

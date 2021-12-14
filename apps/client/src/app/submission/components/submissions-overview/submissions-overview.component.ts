@@ -13,7 +13,7 @@ import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 
 @Component({
-	selector: "app-submissions-overview",
+	selector: "student-mgmt-submissions-overview",
 	templateUrl: "./submissions-overview.component.html",
 	styleUrls: ["./submissions-overview.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

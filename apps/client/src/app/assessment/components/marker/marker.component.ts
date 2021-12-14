@@ -4,7 +4,7 @@ import { ChipComponentModule } from "@student-mgmt-client/shared-ui";
 import { MarkerDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-marker",
+	selector: "student-mgmt-marker",
 	templateUrl: "./marker.component.html",
 	styleUrls: ["./marker.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -8,7 +8,7 @@ import { ChipComponentModule } from "../chip/chip.component";
  * @input condition `boolean`
  */
 @Component({
-	selector: "app-thumb-chip",
+	selector: "student-mgmt-thumb-chip",
 	templateUrl: "./thumb-chip.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

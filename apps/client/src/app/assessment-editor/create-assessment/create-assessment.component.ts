@@ -31,7 +31,7 @@ import {
 } from "../forms/assessment-form/assessment-form.component";
 
 @Component({
-	selector: "app-create-assessment",
+	selector: "student-mgmt-create-assessment",
 	templateUrl: "./create-assessment.component.html",
 	styleUrls: ["./create-assessment.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

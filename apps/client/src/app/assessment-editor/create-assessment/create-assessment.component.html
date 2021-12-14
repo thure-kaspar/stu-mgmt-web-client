@@ -17,12 +17,12 @@
 
 	<div class="flex gap-2">
 		<button mat-flat-button color="primary" (click)="openSearchGroupDialog()">
-			<app-icon name="search"></app-icon>
+			<student-mgmt-icon name="search"></student-mgmt-icon>
 			{{ "Title.SearchGroup" | translate }}
 		</button>
 
 		<button mat-flat-button color="primary" (click)="openSearchParticipantDialog()">
-			<app-icon name="search"></app-icon>
+			<student-mgmt-icon name="search"></student-mgmt-icon>
 			{{ "Title.SearchParticipant" | translate }}
 		</button>
 	</div>
@@ -34,13 +34,13 @@
 			class="assessment-target mt-4"
 			*ngIf="obs.forGroup || obs.forParticipant; else selectGroupOrParticipantText"
 		>
-			<app-assessment-target
+			<student-mgmt-assessment-target
 				[group]="obs.forGroup"
 				[targetedParticipant]="obs.forParticipant"
 				[participant]="participantFacade.participant$ | async"
 				[courseId]="courseId"
 			>
-			</app-assessment-target>
+			</student-mgmt-assessment-target>
 		</div>
 
 		<ng-template #selectGroupOrParticipantText>
@@ -51,7 +51,9 @@
 	</ng-container>
 
 	<div class="mt-4">
-		<app-assessment-form [assignment]="assignment$ | async"></app-assessment-form>
+		<student-mgmt-assessment-form
+			[assignment]="assignment$ | async"
+		></student-mgmt-assessment-form>
 	</div>
 
 	<div class="mt-4">

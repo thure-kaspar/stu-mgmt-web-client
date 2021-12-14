@@ -8,7 +8,7 @@ import { CardComponentModule } from "@student-mgmt-client/shared-ui";
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-assessment-target",
+	selector: "student-mgmt-assessment-target",
 	templateUrl: "./assessment-target.component.html",
 	styleUrls: ["./assessment-target.component.scss"]
 	//changeDetection: ChangeDetectionStrategy.OnPush

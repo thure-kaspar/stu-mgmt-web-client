@@ -24,15 +24,15 @@
 		</div>
 	</div>
 
-	<app-assessment-header
+	<student-mgmt-assessment-header
 		[assignment]="assignment"
 		[assessment]="assessment$ | async"
 		[courseId]="this.courseId"
 		[isEditMode]="true"
-	></app-assessment-header>
+	></student-mgmt-assessment-header>
 
 	<div class="mt-4 mb-4">
-		<app-assessment-form [assignment]="assignment"></app-assessment-form>
+		<student-mgmt-assessment-form [assignment]="assignment"></student-mgmt-assessment-form>
 	</div>
 
 	<mat-hint>

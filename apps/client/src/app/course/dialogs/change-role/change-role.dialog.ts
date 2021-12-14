@@ -21,7 +21,7 @@ export class ChangeRoleDialogData {
  * to refetch its data.
  */
 @Component({
-	selector: "app-change-role",
+	selector: "student-mgmt-change-role",
 	templateUrl: "./change-role.dialog.html",
 	styleUrls: ["./change-role.dialog.scss"]
 })

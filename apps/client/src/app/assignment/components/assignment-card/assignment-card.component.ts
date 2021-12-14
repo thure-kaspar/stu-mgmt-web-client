@@ -42,7 +42,7 @@ type AssessmentDtoExtended = AssessmentDto & {
 type AssessmentState = "passed" | "failed" | "submitted" | null;
 
 @Component({
-	selector: "app-assignment-card",
+	selector: "student-mgmt-assignment-card",
 	templateUrl: "./assignment-card.component.html",
 	styleUrls: ["./assignment-card.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

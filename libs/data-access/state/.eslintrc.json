@@ -21,7 +21,7 @@
 					"error",
 					{
 						"type": "element",
-						"prefix": "student-mgmt-client",
+						"prefix": "student-mgmt",
 						"style": "kebab-case"
 					}
 				]

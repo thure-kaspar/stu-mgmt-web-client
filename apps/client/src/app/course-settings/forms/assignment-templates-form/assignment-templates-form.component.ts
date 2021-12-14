@@ -11,7 +11,7 @@ import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { AssignmentDto, AssignmentTemplateDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-assignment-templates-form",
+	selector: "student-mgmt-assignment-templates-form",
 	templateUrl: "./assignment-templates-form.component.html",
 	styleUrls: ["./assignment-templates-form.component.scss"]
 })

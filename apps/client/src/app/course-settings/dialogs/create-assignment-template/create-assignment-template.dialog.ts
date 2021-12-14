@@ -21,7 +21,7 @@ export class CreateAssignmentTemplateDialogData {
  * Expects the courseId and configId as inputs.
  */
 @Component({
-	selector: "app-create-assignment-template",
+	selector: "student-mgmt-create-assignment-template",
 	templateUrl: "./create-assignment-template.dialog.html",
 	styleUrls: ["./create-assignment-template.dialog.scss"]
 })

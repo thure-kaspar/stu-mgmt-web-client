@@ -32,7 +32,7 @@ class UserFilter {
 }
 
 @Component({
-	selector: "app-user-management",
+	selector: "student-mgmt-user-management",
 	templateUrl: "./user-management.component.html",
 	styleUrls: ["./user-management.component.scss"]
 })

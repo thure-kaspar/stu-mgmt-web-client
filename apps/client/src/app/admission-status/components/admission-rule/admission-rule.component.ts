@@ -11,7 +11,7 @@ import {
 } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "app-admission-rule",
+	selector: "student-mgmt-admission-rule",
 	templateUrl: "./admission-rule.component.html",
 	styleUrls: ["./admission-rule.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

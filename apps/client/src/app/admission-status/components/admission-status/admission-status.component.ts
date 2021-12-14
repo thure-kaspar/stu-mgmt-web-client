@@ -46,7 +46,7 @@ type ChartData = {
 type Statistic = { title: string; value: string | number };
 
 @Component({
-	selector: "app-admission-status",
+	selector: "student-mgmt-admission-status",
 	templateUrl: "./admission-status.component.html",
 	styleUrls: ["./admission-status.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

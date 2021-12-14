@@ -25,7 +25,7 @@ type BlacklistableEvents = {
 };
 
 @Component({
-	selector: "app-user-settings",
+	selector: "student-mgmt-user-settings",
 	templateUrl: "./user-settings.component.html",
 	styleUrls: ["./user-settings.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

@@ -27,7 +27,7 @@ class ParticipantsFilter {
  * @returns List of selected participants.
  */
 @Component({
-	selector: "app-search-participant",
+	selector: "student-mgmt-search-participant",
 	templateUrl: "./search-participant.dialog.html",
 	styleUrls: ["./search-participant.dialog.scss"]
 })

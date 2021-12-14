@@ -29,7 +29,7 @@ import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 
 @Component({
-	selector: "app-navigation",
+	selector: "student-mgmt-navigation",
 	templateUrl: "./navigation.component.html",
 	styleUrls: ["./navigation.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

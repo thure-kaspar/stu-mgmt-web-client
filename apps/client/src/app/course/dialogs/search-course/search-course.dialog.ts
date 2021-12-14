@@ -26,7 +26,7 @@ import { BehaviorSubject } from "rxjs";
  * @returns `CourseDto[]` - The selected courses.
  */
 @Component({
-	selector: "app-search-course",
+	selector: "student-mgmt-search-course",
 	templateUrl: "./search-course.dialog.html",
 	styleUrls: ["./search-course.dialog.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

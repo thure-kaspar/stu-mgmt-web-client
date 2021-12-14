@@ -2,7 +2,7 @@
 	"projectType": "library",
 	"root": "libs/storybook",
 	"sourceRoot": "libs/storybook/src",
-	"prefix": "student-mgmt-client",
+	"prefix": "student-mgmt",
 	"targets": {
 		"storybook": {
 			"executor": "@nrwl/storybook:storybook",

@@ -17,7 +17,8 @@
 				color="accent"
 				id="btn-create-assessment"
 			>
-				<app-icon name="add"></app-icon>{{ "Title.CreateAssessment" | translate }}
+				<student-mgmt-icon name="add"></student-mgmt-icon
+				>{{ "Title.CreateAssessment" | translate }}
 			</button>
 		</a>
 
@@ -27,12 +28,12 @@
 	<mat-spinner class="spinner" color="accent" *ngIf="loading$ | async"></mat-spinner>
 
 	<div class="chart" *ngIf="chartData">
-		<app-vertical-bar-chart
+		<student-mgmt-vertical-bar-chart
 			[data]="chartData"
 			[options]="chartOptions"
 			[xAxisLabel]="'Property.Assessment.AchievedPoints' | translate"
 			[yAxisLabel]="'Common.Count' | translate"
-		></app-vertical-bar-chart>
+		></student-mgmt-vertical-bar-chart>
 	</div>
 
 	<div class="stat-cards" *ngIf="statistics">
@@ -100,12 +101,12 @@
 				{{ "Property.Assessment.IsDraft" | translate }}
 			</th>
 			<td mat-cell class="column-is-draft" *matCellDef="let row">
-				<app-chip
+				<student-mgmt-chip
 					*ngIf="row.isDraft"
 					icon="edit"
 					color="orange"
 					[matTooltip]="'Common.Yes' | translate"
-				></app-chip>
+				></student-mgmt-chip>
 			</td>
 		</ng-container>
 
@@ -115,9 +116,21 @@
 			</th>
 			<td mat-cell class="column-has-passed" *matCellDef="let row">
 				<ng-container [ngSwitch]="row.hasPassed">
-					<app-chip *ngSwitchCase="true" icon="thumb_up" color="#2fac6f"></app-chip>
-					<app-chip *ngSwitchCase="false" icon="thumb_down" color="#ff0134"></app-chip>
-					<app-chip *ngSwitchDefault icon="help" color="primary"></app-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="true"
+						icon="thumb_up"
+						color="#2fac6f"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="false"
+						icon="thumb_down"
+						color="#ff0134"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchDefault
+						icon="help"
+						color="primary"
+					></student-mgmt-chip>
 				</ng-container>
 			</td>
 		</ng-container>

@@ -1,4 +1,4 @@
-<app-card class="assignment-card" data-test="assignment-card">
+<student-mgmt-card class="assignment-card" data-test="assignment-card">
 	<ng-container title>
 		<span class="font-bold name">
 			<a
@@ -13,30 +13,30 @@
 			</ng-template>
 		</span>
 		<span class="state" [ngSwitch]="assessmentState$ | async">
-			<app-chip
+			<student-mgmt-chip
 				*ngSwitchCase="'submitted'"
 				color="#14abb3"
 				icon="assignment_turned_in"
 				text="Abgegeben"
-			></app-chip>
-			<app-chip
+			></student-mgmt-chip>
+			<student-mgmt-chip
 				*ngSwitchCase="'passed'"
 				color="#2fac6f"
 				icon="thumb_up"
 				[text]="'Property.Assessment.HasPassed' | translate"
-			></app-chip>
-			<app-chip
+			></student-mgmt-chip>
+			<student-mgmt-chip
 				*ngSwitchCase="'failed'"
 				color="#ff0134"
 				icon="thumb_down"
 				[text]="'Domain.Failed' | translate"
-			></app-chip>
-			<app-chip
+			></student-mgmt-chip>
+			<student-mgmt-chip
 				*ngSwitchCase="'evaluated'"
 				color="#5335b0"
 				icon="assignment_turned_in"
 				text="Bewertet"
-			></app-chip>
+			></student-mgmt-chip>
 		</span>
 	</ng-container>
 
@@ -58,17 +58,17 @@
 
 	<ng-container menu *ngIf="participant.isTeachingStaffMember">
 		<button mat-icon-button [mat-menu-trigger-for]="assignmentMenu">
-			<app-icon name="more_vert" class="text"></app-icon>
+			<student-mgmt-icon name="more_vert" class="text"></student-mgmt-icon>
 		</button>
 
 		<mat-menu #assignmentMenu>
 			<ng-container *ngIf="participant.isTeachingStaffMember">
 				<button mat-menu-item (click)="openEditDialog()">
-					<app-icon class="mr-4 icon-light" name="edit"></app-icon>
+					<student-mgmt-icon class="mr-4 icon-light" name="edit"></student-mgmt-icon>
 					<span class="font-bold">{{ "Action.Edit" | translate }}</span>
 				</button>
 				<button mat-menu-item (click)="onDelete()">
-					<app-icon class="mr-4 icon-light" name="delete"></app-icon>
+					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
 					<span class="font-bold text-red">
 						{{ "Action.Delete" | translate }}
 					</span>
@@ -79,28 +79,30 @@
 
 	<ng-container content>
 		<div class="chips">
-			<app-assignment-type-chip [type]="assignment.type"></app-assignment-type-chip>
+			<student-mgmt-assignment-type-chip
+				[type]="assignment.type"
+			></student-mgmt-assignment-type-chip>
 
 			<ng-container [ngSwitch]="assignment.collaboration">
-				<app-chip
+				<student-mgmt-chip
 					*ngSwitchCase="collaborationEnum.GROUP"
 					icon="groups"
 					color="#009664"
 					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-				></app-chip>
-				<app-chip
+				></student-mgmt-chip>
+				<student-mgmt-chip
 					*ngSwitchCase="collaborationEnum.GROUP_OR_SINGLE"
 					icon="groups"
 					color="#00838f"
 					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-				></app-chip>
-				<app-chip
+				></student-mgmt-chip>
+				<student-mgmt-chip
 					*ngSwitchCase="collaborationEnum.SINGLE"
 					icon="person"
 					color="#7f23c5"
 					[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-				></app-chip>
-				<app-chip *ngSwitchDefault></app-chip>
+				></student-mgmt-chip>
+				<student-mgmt-chip *ngSwitchDefault></student-mgmt-chip>
 			</ng-container>
 		</div>
 
@@ -154,7 +156,7 @@
 		</div>
 
 		<span class="warning WARNING" *ngIf="warning">
-			<app-icon name="warning"></app-icon>
+			<student-mgmt-icon name="warning"></student-mgmt-icon>
 			<span class="warning-text">{{ warning }}</span>
 		</span>
 	</ng-container>
@@ -185,4 +187,4 @@
 			</a>
 		</ng-container>
 	</ng-container>
-</app-card>
+</student-mgmt-card>

@@ -44,7 +44,7 @@ import { CourseFormComponent } from "../course-settings/forms/course-form/course
 import { GroupSettingsFormComponent } from "../course-settings/forms/group-settings-form/group-settings-form.component";
 
 @Component({
-	selector: "app-course-edit",
+	selector: "student-mgmt-course-edit",
 	templateUrl: "./course-edit.component.html",
 	styleUrls: ["./course-edit.component.scss"]
 })

@@ -18,7 +18,7 @@ import { AssignmentTypeChipComponentModule } from "../assignment-type-chip/assig
 import { CardComponentModule } from "../card/card.component";
 
 @Component({
-	selector: "app-participant-admission-status",
+	selector: "student-mgmt-participant-admission-status",
 	templateUrl: "./participant-admission-status.component.html",
 	styleUrls: ["./participant-admission-status.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush

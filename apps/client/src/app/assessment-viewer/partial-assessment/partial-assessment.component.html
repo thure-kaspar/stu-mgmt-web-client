@@ -1,4 +1,4 @@
-<app-card>
+<student-mgmt-card>
 	<ng-container title>
 		<div class="grid gap-2">
 			<span>{{ partial.title }}</span>
@@ -19,7 +19,10 @@
 		</div>
 
 		<div class="grid mt-4 gap-4" *ngIf="partial.markers?.length > 0">
-			<app-marker *ngFor="let marker of partial.markers" [marker]="marker"></app-marker>
+			<student-mgmt-marker
+				*ngFor="let marker of partial.markers"
+				[marker]="marker"
+			></student-mgmt-marker>
 		</div>
 	</ng-container>
-</app-card>
+</student-mgmt-card>

@@ -36,7 +36,7 @@ import { SearchCourseDialog } from "../course/dialogs/search-course/search-cours
 import { SearchUserDialog } from "../course/dialogs/search-user/search-user.dialog";
 
 @Component({
-	selector: "app-create-course",
+	selector: "student-mgmt-create-course",
 	templateUrl: "./create-course.component.html",
 	styleUrls: ["./create-course.component.scss"]
 })
