@@ -1,10 +1,17 @@
-import { Component, OnInit, ViewChild, Inject } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import { AssignmentDto, AssignmentApi } from "@student-mgmt/api-client";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { SelectionModel } from "@angular/cdk/collections";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { AssignmentApi, AssignmentDto } from "@student-mgmt/api-client";
 
 /**
  * Dialogs that allows searching and selecting for assignments of a course.
@@ -70,3 +77,20 @@ export class SearchAssignmentDialog implements OnInit {
 			: this.dataSource.data.forEach(row => this.selection.select(row));
 	}
 }
+
+@NgModule({
+	declarations: [SearchAssignmentDialog],
+	exports: [SearchAssignmentDialog],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatCardModule,
+		MatTableModule,
+		MatButtonModule,
+		MatCheckboxModule,
+		MatPaginatorModule,
+		TranslateModule,
+		IconComponentModule
+	]
+})
+export class SearchAssignmentDialogModule {}

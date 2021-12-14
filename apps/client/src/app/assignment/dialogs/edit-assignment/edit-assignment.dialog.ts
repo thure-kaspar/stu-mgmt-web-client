@@ -1,9 +1,15 @@
-import { Component, Inject, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { SnackbarService } from "@student-mgmt-client/services";
-import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
-import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
+import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
+import {
+	AssignmentFormComponent,
+	AssignmentFormComponentModule
+} from "../../forms/assignment-form/assignment-form.component";
+import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 
 export class EditAssignmentDialogData {
 	courseId: string;
@@ -16,7 +22,7 @@ export class EditAssignmentDialogData {
 	styleUrls: ["./edit-assignment.dialog.scss"]
 })
 export class EditAssignmentDialog implements OnInit {
-	@ViewChild(AssignmentForm, { static: true }) form: AssignmentForm;
+	@ViewChild(AssignmentFormComponent, { static: true }) form: AssignmentFormComponent;
 	private assignmentId: string;
 	private courseId: string;
 
@@ -68,3 +74,16 @@ export class EditAssignmentDialog implements OnInit {
 		);
 	}
 }
+
+@NgModule({
+	declarations: [EditAssignmentDialog],
+	exports: [EditAssignmentDialog],
+	imports: [
+		CommonModule,
+		MatCardModule,
+		MatButtonModule,
+		TranslateModule,
+		AssignmentFormComponentModule
+	]
+})
+export class EditAssignmentDialogModule {}

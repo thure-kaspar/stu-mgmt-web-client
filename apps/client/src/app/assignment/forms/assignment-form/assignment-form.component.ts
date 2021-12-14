@@ -1,5 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, FormArray } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { Component, NgModule, OnInit } from "@angular/core";
+import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatSelectModule } from "@angular/material/select";
+import { TranslateModule } from "@ngx-translate/core";
+import { DateTimePickerComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { AssignmentDto } from "@student-mgmt/api-client";
 import { AbstractForm } from "../../../shared/abstract-form";
 
@@ -8,7 +16,7 @@ import { AbstractForm } from "../../../shared/abstract-form";
 	templateUrl: "./assignment-form.component.html",
 	styleUrls: ["./assignment-form.component.scss"]
 })
-export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnInit {
+export class AssignmentFormComponent extends AbstractForm<AssignmentDto> implements OnInit {
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
@@ -70,3 +78,21 @@ export class AssignmentForm extends AbstractForm<AssignmentDto> implements OnIni
 		return this.getConfigs().at(index).value;
 	}
 }
+
+@NgModule({
+	declarations: [AssignmentFormComponent],
+	exports: [AssignmentFormComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatRadioModule,
+		MatSelectModule,
+		TranslateModule,
+		IconComponentModule,
+		DateTimePickerComponentModule
+	]
+})
+export class AssignmentFormComponentModule {}

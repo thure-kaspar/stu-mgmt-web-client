@@ -1,13 +1,20 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute, Router } from "@angular/router";
+import { MatMenuModule } from "@angular/material/menu";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Course, Participant } from "@student-mgmt-client/domain-types";
 import { ToastService } from "@student-mgmt-client/services";
 import {
+	AssignmentTypeChipComponentModule,
+	CardComponentModule,
+	ChipComponentModule,
 	ConfirmDialog,
 	ConfirmDialogData,
+	IconComponentModule,
 	UnsubscribeOnDestroy
 } from "@student-mgmt-client/shared-ui";
 import { ParticipantGroupsState, ParticipantSelectors } from "@student-mgmt-client/state";
@@ -203,3 +210,20 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 			});
 	}
 }
+
+@NgModule({
+	declarations: [AssignmentCardComponent],
+	exports: [AssignmentCardComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatButtonModule,
+		MatMenuModule,
+		TranslateModule,
+		CardComponentModule,
+		ChipComponentModule,
+		IconComponentModule,
+		AssignmentTypeChipComponentModule
+	]
+})
+export class AssignmentCardComponentModule {}

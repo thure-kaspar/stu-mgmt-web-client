@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { ParticipantAdmissionStatusComponentModule } from "@student-mgmt-client/shared-ui";
 import { ParticipantSelectors } from "@student-mgmt-client/state";
 
 @Component({
@@ -14,3 +16,10 @@ export class ParticipantAdmissionStatusContainerComponent {
 
 	constructor(private store: Store) {}
 }
+
+@NgModule({
+	declarations: [ParticipantAdmissionStatusContainerComponent],
+	exports: [ParticipantAdmissionStatusContainerComponent],
+	imports: [CommonModule, ParticipantAdmissionStatusComponentModule]
+})
+export class ParticipantAdmissionStatusContainerComponentModule {}

@@ -1,10 +1,18 @@
-import { Component, Inject, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CourseConfigApi, AssignmentTemplateDto, AssignmentDto } from "@student-mgmt/api-client";
-import { AssignmentForm } from "../../forms/assignment-form/assignment-form.component";
-import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { MatMenuModule } from "@angular/material/menu";
+import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { AssignmentDto, AssignmentTemplateDto, CourseConfigApi } from "@student-mgmt/api-client";
+import {
+	AssignmentFormComponent,
+	AssignmentFormComponentModule
+} from "../../forms/assignment-form/assignment-form.component";
+import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 
 /**
  * Dialog that allows the creation of new assignments. Expects the courseId. Returns the created assignment.
@@ -15,7 +23,7 @@ import { ToastService } from "@student-mgmt-client/services";
 	styleUrls: ["./create-assignment.dialog.scss"]
 })
 export class CreateAssignmentDialog implements OnInit {
-	@ViewChild(AssignmentForm, { static: true }) form: AssignmentForm;
+	@ViewChild(AssignmentFormComponent, { static: true }) form: AssignmentFormComponent;
 	/** Assignment templates of the course. */
 	templates: AssignmentTemplateDto[];
 	/** The selected template. */
@@ -63,3 +71,18 @@ export class CreateAssignmentDialog implements OnInit {
 		);
 	}
 }
+
+@NgModule({
+	declarations: [CreateAssignmentDialog],
+	exports: [CreateAssignmentDialog],
+	imports: [
+		CommonModule,
+		MatCardModule,
+		MatMenuModule,
+		MatButtonModule,
+		TranslateModule,
+		IconComponentModule,
+		AssignmentFormComponentModule
+	]
+})
+export class CreateAssignmentDialogModule {}

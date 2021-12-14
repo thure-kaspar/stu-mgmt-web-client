@@ -1,14 +1,23 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
+import { MatDividerModule } from "@angular/material/divider";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { map } from "rxjs/operators";
-import { AssignmentDto } from "@student-mgmt/api-client";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { TranslateModule } from "@ngx-translate/core";
 import { CourseFacade } from "@student-mgmt-client/services";
-import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
-import { ParticipantSelectors } from "@student-mgmt-client/state";
+import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import {
+	AssignmentActions,
+	AssignmentSelectors,
+	ParticipantSelectors
+} from "@student-mgmt-client/state";
+import { AssignmentDto } from "@student-mgmt/api-client";
+import { map } from "rxjs/operators";
 import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-assignment.dialog";
+import { AssignmentCardComponentModule } from "../assignment-card/assignment-card.component";
+import { ParticipantAdmissionStatusContainerComponentModule } from "../participant-admission-status-container/participant-admission-status-container.component";
 
 class AssignmentsStateMap {
 	inProgress: AssignmentDto[] = [];
@@ -77,3 +86,18 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 		return map;
 	}
 }
+
+@NgModule({
+	declarations: [AssignmentListComponent],
+	exports: [AssignmentListComponent],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		MatDividerModule,
+		TranslateModule,
+		AssignmentCardComponentModule,
+		IconComponentModule,
+		ParticipantAdmissionStatusContainerComponentModule
+	]
+})
+export class AssignmentListComponentModule {}
