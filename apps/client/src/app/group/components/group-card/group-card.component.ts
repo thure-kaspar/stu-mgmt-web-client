@@ -1,22 +1,29 @@
+import { CommonModule } from "@angular/common";
 import {
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	Input,
+	NgModule,
 	OnInit,
 	Output
 } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
-import { Router } from "@angular/router";
+import { MatMenuModule } from "@angular/material/menu";
+import { Router, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { Course, Group, Participant } from "@student-mgmt-client/domain-types";
+import { DialogService, ParticipantFacade } from "@student-mgmt-client/services";
+import {
+	CardComponentModule,
+	ChipComponentModule,
+	IconComponentModule,
+	SearchParticipantDialog
+} from "@student-mgmt-client/shared-ui";
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
-import { Course } from "@student-mgmt-client/domain-types";
-import { Group } from "@student-mgmt-client/domain-types";
-import { Participant } from "@student-mgmt-client/domain-types";
-import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
-import { DialogService } from "@student-mgmt-client/services";
-import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
-import { ParticipantFacade } from "@student-mgmt-client/services";
 import { take } from "rxjs/operators";
+import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
 
 @Component({
 	selector: "app-group-card",
@@ -129,3 +136,19 @@ export class GroupCardComponent implements OnInit {
 			});
 	}
 }
+
+@NgModule({
+	declarations: [GroupCardComponent],
+	exports: [GroupCardComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatButtonModule,
+		MatMenuModule,
+		TranslateModule,
+		IconComponentModule,
+		ChipComponentModule,
+		CardComponentModule
+	]
+})
+export class GroupCardComponentModule {}

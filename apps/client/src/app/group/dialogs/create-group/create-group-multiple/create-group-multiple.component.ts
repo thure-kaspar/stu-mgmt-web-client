@@ -1,7 +1,18 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { GroupDto, GroupApi, GroupCreateBulkDto } from "@student-mgmt/api-client";
+import { CommonModule } from "@angular/common";
+import { Component, EventEmitter, Input, NgModule, OnInit, Output } from "@angular/core";
+import {
+	FormBuilder,
+	FormGroup,
+	FormsModule,
+	ReactiveFormsModule,
+	Validators
+} from "@angular/forms";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { TranslateModule } from "@ngx-translate/core";
 import { SnackbarService } from "@student-mgmt-client/services";
+import { GroupApi, GroupCreateBulkDto, GroupDto } from "@student-mgmt/api-client";
 
 @Component({
 	selector: "app-create-group-multiple",
@@ -52,3 +63,18 @@ export class CreateGroupMultipleComponent implements OnInit {
 		);
 	}
 }
+
+@NgModule({
+	declarations: [CreateGroupMultipleComponent],
+	exports: [CreateGroupMultipleComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		FormsModule,
+		MatDialogModule,
+		MatFormFieldModule,
+		MatInputModule,
+		TranslateModule
+	]
+})
+export class CreateGroupMultipleComponentModule {}

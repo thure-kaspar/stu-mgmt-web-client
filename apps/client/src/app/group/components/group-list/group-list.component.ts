@@ -1,18 +1,23 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialog } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { debounceTime, take, tap } from "rxjs/operators";
-import { GroupDto, GroupApi, ParticipantDto } from "@student-mgmt/api-client";
+import { TranslateModule } from "@ngx-translate/core";
+import { Group, Participant } from "@student-mgmt-client/domain-types";
+import { CourseFacade, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
+import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { Group } from "@student-mgmt-client/domain-types";
-import { Participant } from "@student-mgmt-client/domain-types";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { CourseFacade } from "@student-mgmt-client/services";
-import { ParticipantFacade } from "@student-mgmt-client/services";
-import { ToastService } from "@student-mgmt-client/services";
+import { GroupApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
+import { BehaviorSubject, Subject } from "rxjs";
+import { take, tap } from "rxjs/operators";
 import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
 import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
+import { GroupCardComponentModule } from "../group-card/group-card.component";
 
 class GroupFilter {
 	name?: string;
@@ -201,3 +206,20 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		});
 	}
 }
+
+@NgModule({
+	declarations: [GroupListComponent],
+	exports: [GroupListComponent],
+	imports: [
+		CommonModule,
+		FormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatCheckboxModule,
+		TranslateModule,
+		IconComponentModule,
+		GroupCardComponentModule
+	]
+})
+export class GroupListComponentModule {}

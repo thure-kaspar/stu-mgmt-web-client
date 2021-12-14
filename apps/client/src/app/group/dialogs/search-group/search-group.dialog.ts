@@ -1,13 +1,25 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { Component, Inject, OnInit, ViewChild } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatTableDataSource } from "@angular/material/table";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import {
+	IconComponentModule,
+	Paginator,
+	PaginatorModule,
+	SearchParticipantDialog,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import { GroupApi, GroupDto } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { GroupDto, GroupApi } from "@student-mgmt/api-client";
-import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { Paginator } from "@student-mgmt-client/shared-ui";
 
 class GroupFilter {
 	name: string;
@@ -87,3 +99,23 @@ export class SearchGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 		}
 	}
 }
+
+@NgModule({
+	declarations: [SearchGroupDialog],
+	exports: [SearchGroupDialog],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatDialogModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatCheckboxModule,
+		MatTableModule,
+		TranslateModule,
+		IconComponentModule,
+		PaginatorModule
+	]
+})
+export class SearchGroupDialogModule {}

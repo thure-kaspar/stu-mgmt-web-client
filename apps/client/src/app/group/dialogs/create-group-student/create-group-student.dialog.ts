@@ -1,9 +1,14 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CourseConfigApi, GroupDto, GroupSettingsDto, GroupApi } from "@student-mgmt/api-client";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { TranslateModule } from "@ngx-translate/core";
 import { AuthService } from "@student-mgmt-client/auth";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
 import { ToastService } from "@student-mgmt-client/services";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { CourseConfigApi, GroupApi, GroupDto, GroupSettingsDto } from "@student-mgmt/api-client";
 
 /**
  * Dialog that allows students to create groups.
@@ -88,3 +93,17 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 		);
 	}
 }
+
+@NgModule({
+	declarations: [CreateGroupStudentDialog],
+	exports: [CreateGroupStudentDialog],
+	imports: [
+		CommonModule,
+		FormsModule,
+		MatDialogModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		TranslateModule
+	]
+})
+export class CreateGroupStudentDialogModule {}

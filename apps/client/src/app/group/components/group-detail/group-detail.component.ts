@@ -1,19 +1,29 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatIconModule } from "@angular/material/icon";
+import { MatListModule } from "@angular/material/list";
+import { MatMenuModule } from "@angular/material/menu";
 import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute, Router } from "@angular/router";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { Group, Participant } from "@student-mgmt-client/domain-types";
+import { DialogService, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
+import {
+	CardComponentModule,
+	IconComponentModule,
+	SearchParticipantDialog,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/shared-ui";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { AssessmentDto, GroupApi, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { filter, take } from "rxjs/operators";
-import { AssessmentDto, GroupApi, ParticipantDto } from "@student-mgmt/api-client";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { Group } from "@student-mgmt-client/domain-types";
-import { Participant } from "@student-mgmt-client/domain-types";
-import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { DialogService } from "@student-mgmt-client/services";
-import { ParticipantFacade } from "@student-mgmt-client/services";
-import { ToastService } from "@student-mgmt-client/services";
 import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 
 @Component({
@@ -209,3 +219,24 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 		return !!this.group.members.find(m => m.userId === participant.userId);
 	}
 }
+
+@NgModule({
+	declarations: [GroupDetailComponent],
+	exports: [GroupDetailComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatButtonModule,
+		MatCardModule,
+		MatMenuModule,
+		MatDividerModule,
+		MatTableModule,
+		MatListModule,
+		MatIconModule,
+		MatTooltipModule,
+		TranslateModule,
+		IconComponentModule,
+		CardComponentModule
+	]
+})
+export class GroupDetailComponentModule {}
