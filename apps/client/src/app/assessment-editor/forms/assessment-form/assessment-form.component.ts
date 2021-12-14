@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectorRef, Component, Input, NgModule, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, NgModule } from "@angular/core";
 import {
 	AbstractControl,
 	FormArray,
@@ -18,14 +18,8 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
 import { CardComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
-import {
-	AssessmentCreateDto,
-	AssignmentDto,
-	MarkerDto,
-	PartialAssessmentDto
-} from "@student-mgmt/api-client";
+import { AssignmentDto, MarkerDto, PartialAssessmentDto } from "@student-mgmt/api-client";
 import { MarkerComponentModule } from "../../../assessment/components/marker/marker.component";
-import { AbstractForm } from "../../../shared/abstract-form";
 import { EditMarkerDialog } from "../../dialogs/edit-marker/edit-marker.dialog";
 
 /**
@@ -42,8 +36,10 @@ const groupOrUserValidator: ValidatorFn = (control: AbstractControl): Validation
 	templateUrl: "./assessment-form.component.html",
 	styleUrls: ["./assessment-form.component.scss"]
 })
-export class AssessmentFormComponent extends AbstractForm<AssessmentCreateDto> implements OnInit {
+export class AssessmentFormComponent {
 	@Input() assignment: AssignmentDto;
+
+	form: FormGroup;
 
 	severityEnum = MarkerDto.SeverityEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
@@ -53,7 +49,6 @@ export class AssessmentFormComponent extends AbstractForm<AssessmentCreateDto> i
 		private dialog: MatDialog,
 		private cdRef: ChangeDetectorRef
 	) {
-		super();
 		this.form = this.fb.group(
 			{
 				achievedPoints: [0, [this.achievedPointsMaxValueValidator()]],
@@ -66,8 +61,6 @@ export class AssessmentFormComponent extends AbstractForm<AssessmentCreateDto> i
 			{ validators: [groupOrUserValidator] }
 		);
 	}
-
-	ngOnInit(): void {}
 
 	/** Validates that the achieved points do not exceed the max. possible amount of points. */
 	private achievedPointsMaxValueValidator(): ValidatorFn {

@@ -1,4 +1,5 @@
 import { CommonModule } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -25,9 +26,8 @@ import {
 } from "@student-mgmt-client/shared-ui";
 import { CourseActions, CourseSelectors } from "@student-mgmt-client/state";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
-import { GroupApi } from "@student-mgmt/api-client";
+import { GroupApi, StudentMgmtException } from "@student-mgmt/api-client";
 import { take, tap } from "rxjs/operators";
-import { isNotACourseMember } from "../../../shared/api-exceptions";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 
 @Component({
@@ -70,7 +70,7 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 					const courseId = getRouteParam("courseId", this.route);
 					// If user is not a member of this course, open JoinCourseDialog
 					console.log(error);
-					if (isNotACourseMember(error)) {
+					if (this.isNotACourseMember(error)) {
 						this.dialog
 							.open<JoinCourseDialog, string, boolean>(JoinCourseDialog, {
 								data: courseId
@@ -89,6 +89,10 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 				})
 			)
 			.subscribe();
+	}
+
+	private isNotACourseMember(error: any): boolean {
+		return error.error?.error === StudentMgmtException.NameEnum.NotACourseMemberException;
 	}
 
 	private onUserJoinedCourse(courseId: string): void {

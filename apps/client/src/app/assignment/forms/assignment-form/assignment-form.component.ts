@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { Component, NgModule, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Component, NgModule } from "@angular/core";
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -9,20 +9,20 @@ import { MatSelectModule } from "@angular/material/select";
 import { TranslateModule } from "@ngx-translate/core";
 import { DateTimePickerComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { AssignmentDto } from "@student-mgmt/api-client";
-import { AbstractForm } from "../../../shared/abstract-form";
 
 @Component({
 	selector: "app-assignment-form",
 	templateUrl: "./assignment-form.component.html",
 	styleUrls: ["./assignment-form.component.scss"]
 })
-export class AssignmentFormComponent extends AbstractForm<AssignmentDto> implements OnInit {
+export class AssignmentFormComponent {
+	form: FormGroup;
+
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
 	constructor(private fb: FormBuilder) {
-		super();
 		this.form = this.fb.group({
 			name: [null, Validators.required],
 			state: [null, Validators.required],
@@ -37,8 +37,6 @@ export class AssignmentFormComponent extends AbstractForm<AssignmentDto> impleme
 			configs: this.fb.array([])
 		});
 	}
-
-	ngOnInit(): void {}
 
 	addLink(link?: { name: string; url: string }): void {
 		this.getLinks().push(
