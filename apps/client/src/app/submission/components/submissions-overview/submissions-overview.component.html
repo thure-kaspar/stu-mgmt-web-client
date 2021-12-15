@@ -1,23 +1,23 @@
 <div class="submission-overview">
 	<h2>{{ "Domain.Submissions" | translate }} ({{ paginator.totalCount }})</h2>
 
-	<div class="filter">
-		<mat-form-field>
+	<div class="flex gap-2">
+		<mat-form-field class="w-full">
 			<mat-label>{{ "Property.User.DisplayName" | translate }}</mat-label>
 			<input matInput [(ngModel)]="filter.displayName" (keyup)="filterChanged$.next()" />
 		</mat-form-field>
 
-		<mat-form-field>
+		<mat-form-field class="w-full">
 			<mat-label>{{ "Domain.Group" | translate }}</mat-label>
 			<input matInput [(ngModel)]="filter.groupName" (keyup)="filterChanged$.next()" />
 		</mat-form-field>
 	</div>
 
-	<table mat-table [dataSource]="dataSource">
+	<table mat-table class="w-full" [dataSource]="dataSource">
 		<!-- Date Column -->
 		<ng-container matColumnDef="date">
 			<th mat-header-cell *matHeaderCellDef>{{ "Common.Date" | translate }}</th>
-			<td class="column-date" mat-cell *matCellDef="let row">
+			<td class="w-48" mat-cell *matCellDef="let row">
 				{{ row.date | date: "dd.MM.YYYY (HH:mm:ss)" }}
 			</td>
 		</ng-container>
@@ -25,7 +25,7 @@
 		<!-- DisplayName Column -->
 		<ng-container matColumnDef="displayName">
 			<th mat-header-cell *matHeaderCellDef>{{ "Property.User.DisplayName" | translate }}</th>
-			<td class="column-display-name" mat-cell *matCellDef="let row">
+			<td class="w-48" mat-cell *matCellDef="let row">
 				<a
 					class="font-bold link-none"
 					[routerLink]="['/courses', courseId, 'users', row.userId]"

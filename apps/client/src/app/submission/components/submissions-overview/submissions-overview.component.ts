@@ -15,7 +15,6 @@ import { debounceTime } from "rxjs/operators";
 @Component({
 	selector: "student-mgmt-submissions-overview",
 	templateUrl: "./submissions-overview.component.html",
-	styleUrls: ["./submissions-overview.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubmissionsOverviewComponent implements OnInit {
