@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, Input, NgModule } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
@@ -46,6 +47,7 @@ export class CourseFormComponent {
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
+		MatButtonModule,
 		MatFormFieldModule,
 		MatInputModule,
 		MatSelectModule,
