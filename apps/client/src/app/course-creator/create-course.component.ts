@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectorRef, Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, NgModule, ViewChild } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatTabsModule } from "@angular/material/tabs";
@@ -40,7 +40,7 @@ import { SearchUserDialog } from "../course/dialogs/search-user/search-user.dial
 	templateUrl: "./create-course.component.html",
 	styleUrls: ["./create-course.component.scss"]
 })
-export class CreateCourseComponent implements OnInit {
+export class CreateCourseComponent {
 	/** Form with the structure of a CourseCreateDto. */
 	form: FormGroup;
 
@@ -92,8 +92,6 @@ export class CreateCourseComponent implements OnInit {
 			lecturers: this.fb.array([])
 		});
 	}
-
-	ngOnInit(): void {}
 
 	createCourse(): void {
 		const course: CourseCreateDto = this.form.value;
@@ -212,6 +210,7 @@ export class CreateCourseComponent implements OnInit {
 		CommonModule,
 		ReactiveFormsModule,
 		MatButtonModule,
+		MatDialogModule,
 		MatCardModule,
 		MatTabsModule,
 		MatFormFieldModule,

@@ -5,6 +5,7 @@ import localeDe from "@angular/common/locales/de";
 import localeDeExtra from "@angular/common/locales/extra/de";
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
@@ -50,6 +51,7 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 				deps: [HttpClient]
 			}
 		}),
+		MatSnackBarModule,
 		ToastrModule.forRoot({
 			positionClass: "toast-bottom-right",
 			progressBar: true

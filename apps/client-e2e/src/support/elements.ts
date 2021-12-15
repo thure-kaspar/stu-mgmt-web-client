@@ -38,6 +38,16 @@ export const Selector = {
 			assignmentTemplates: "assignmentTemplatesTab",
 			admissionFromPreviousSemester: "admissionFromPreviousSemesterTab",
 			lecturers: "lecturersTab"
+		},
+		basicData: {
+			component: "CourseFormComponent",
+			titleTextField: "titleTextField",
+			idTextField: "idTextField",
+			shortnameTextField: "shortnameTextField",
+			semesterSelectBox: "semesterSelectBox",
+			isClosedSelectBox: "isClosedSelectBox",
+			addLinkButton: "addLinkButton",
+			removeLinkButton: "removeLinkButton"
 		}
 	},
 

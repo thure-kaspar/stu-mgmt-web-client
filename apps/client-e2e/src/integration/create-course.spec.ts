@@ -5,6 +5,7 @@ import {
 	IndividualPercentWithAllowedFailuresRuleDto,
 	OverallPercentRuleDto
 } from "@student-mgmt/api-client";
+import { resetDemoDb } from "../support/api";
 import { account, useAccount } from "../support/auth";
 import { Selector } from "../support/elements";
 
@@ -74,20 +75,46 @@ export const NEW_COURSE: CourseDto = {
 	admissionCriteria: ADMISSION_CRITERIA_MOCK
 };
 
-function getTextInput(formControlName: string) {
-	return cy.get(`input[formcontrolname='${formControlName}']`);
-}
-
-function getSelectInput(formControlName: string) {
-	return cy.get(`mat-select[formcontrolname='${formControlName}']`);
-}
-
 const btnCreate = ".btn-create";
+
+const courseSettings = Selector.courseSettings;
+
+function fillOutBasicDataForm(): void {
+	cy.getBySelector(courseSettings.basicData.shortnameTextField).type(NEW_COURSE.shortname);
+	cy.getBySelector(courseSettings.basicData.semesterSelectBox)
+		.click()
+		.get(".mat-option")
+		.contains(getSemesterString(NEW_COURSE.semester))
+		.click();
+	cy.getBySelector(courseSettings.basicData.titleTextField).type(NEW_COURSE.title);
+
+	// Create button should no longer be disabled
+	cy.get(".btn-create").should("not.be.disabled");
+}
 
 describe("Create Course", () => {
 	beforeEach(() => {
 		useAccount(account.mgmtAdmin);
-		cy.visit("/courses/create");
+		cy.visit("/new-course");
+	});
+
+	describe("Basic Data", () => {
+		it("Should display CourseFormComponent", () => {
+			cy.getBySelector(courseSettings.basicData.component).should("be.visible");
+		});
+
+		it("Should fill out the form", () => {
+			cy.getBySelector(courseSettings.basicData.idTextField).type(NEW_COURSE.id);
+			cy.getBySelector(courseSettings.basicData.shortnameTextField).type(
+				NEW_COURSE.shortname
+			);
+			cy.getBySelector(courseSettings.basicData.semesterSelectBox)
+				.click()
+				.get(".mat-option")
+				.contains(getSemesterString(NEW_COURSE.semester))
+				.click();
+			cy.getBySelector(courseSettings.basicData.titleTextField).type(NEW_COURSE.title);
+		});
 	});
 
 	describe("Create Button", () => {
@@ -101,30 +128,29 @@ describe("Create Course", () => {
 		});
 	});
 
-	describe.only("Lecturer Settings", () => {
-		const searchUserDialog = "#search-user-dialog";
-		const btnAddLecturer = "#btn-add-lecturer";
-		const lecturerUsername = "mAdmin";
-
+	describe("Lecturer Settings", () => {
 		beforeEach(() => {
-			fillOutBasicDataForm();
 			cy.contains("Lehrende").click();
 		});
 
 		it("Adding a lecturer", () => {
-			// Opening "Add Lecturer" should open user search dialog
-			cy.get(btnAddLecturer).click();
-			cy.get(searchUserDialog).should("exist");
+			addLecturer();
+		});
+	});
 
-			// Dialog should contain user "mAdmin", which will be selected
-			cy.get(searchUserDialog).contains("tr", lecturerUsername).find(".mat-checkbox").click();
+	describe("Course creation", () => {
+		before(() => {
+			resetDemoDb();
+		});
 
-			// Clicking Ok should close dialog
-			cy.get(".btn-ok").click();
-			cy.get(searchUserDialog).should("not.exist");
+		after(() => {
+			resetDemoDb();
+		});
 
-			// Selected user should be listed as lecturer
-			cy.get("input").first().should("have.value", lecturerUsername);
+		it("Should create course", () => {
+			fillOutBasicDataForm();
+			cy.contains("Lehrende").click();
+			addLecturer();
 
 			// Clicking "Create" and "Confirm" should create course
 			cy.get(btnCreate).click();
@@ -137,18 +163,21 @@ describe("Create Course", () => {
 	});
 });
 
-function fillOutBasicDataForm(): void {
-	cy.get("#basic-data").should("be.visible");
+function addLecturer() {
+	const searchUserDialog = "#search-user-dialog";
+	const btnAddLecturer = "#btn-add-lecturer";
+	const lecturerUsername = "mAdmin";
 
-	// Enter shortname, semester and title
-	getTextInput("shortname").type(NEW_COURSE.shortname);
-	getSelectInput("semester")
-		.click()
-		.get(".mat-option")
-		.contains(getSemesterString(NEW_COURSE.semester))
-		.click();
-	getTextInput("title").type(NEW_COURSE.title);
+	cy.get(btnAddLecturer).click();
+	cy.get(searchUserDialog).should("exist");
 
-	// Create button should no longer be disabled
-	cy.get(".btn-create").should("not.be.disabled");
+	// Dialog should contain user "mAdmin", which will be selected
+	cy.get(searchUserDialog).contains("tr", lecturerUsername).find(".mat-checkbox").click();
+
+	// Clicking Ok should close dialog
+	cy.get(".btn-ok").click();
+	cy.get(searchUserDialog).should("not.exist");
+
+	// Selected user should be listed as lecturer
+	cy.get("input").first().should("have.value", lecturerUsername);
 }

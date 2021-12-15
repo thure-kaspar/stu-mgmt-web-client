@@ -1,18 +1,18 @@
-<div class="flex flex-col gap-4" [formGroup]="form">
+<div class="flex flex-col gap-4" [formGroup]="form" data-test="CourseFormComponent">
 	<mat-form-field *ngIf="!isEditMode">
 		<mat-label>Id</mat-label>
-		<input matInput formControlName="id" />
+		<input matInput formControlName="id" data-test="idTextField" />
 		<mat-hint>{{ "Text.Course.Id" | translate }}</mat-hint>
 	</mat-form-field>
 
 	<mat-form-field>
 		<mat-label>{{ "Property.Course.Shortname" | translate }}</mat-label>
-		<input matInput formControlName="shortname" required />
+		<input matInput formControlName="shortname" required data-test="shortnameTextField" />
 		<mat-hint>{{ "Text.Course.Shortname" | translate }}</mat-hint>
 		<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
 	</mat-form-field>
 
-	<mat-form-field>
+	<mat-form-field data-test="semesterSelectBox">
 		<mat-label>{{ "Domain.Semester" | translate }}</mat-label>
 		<mat-select formControlName="semester" required>
 			<mat-option *ngFor="let semester of semesters" [value]="semester">{{
@@ -24,11 +24,11 @@
 
 	<mat-form-field>
 		<mat-label>{{ "Property.Course.Title" | translate }}</mat-label>
-		<input matInput formControlName="title" required />
+		<input matInput formControlName="title" required data-test="titleTextField" />
 		<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
 	</mat-form-field>
 
-	<mat-form-field>
+	<mat-form-field data-test="isClosedSelectBox">
 		<mat-label>{{ "Property.Course.IsClosed" | translate }}</mat-label>
 		<mat-select formControlName="isClosed" required>
 			<mat-option [value]="false">{{ "Common.No" | translate }}</mat-option>
@@ -41,7 +41,13 @@
 	<div class="links" formArrayName="links">
 		<h3>
 			<span>Links</span>
-			<button type="button" mat-flat-button color="accent" (click)="addLink()">
+			<button
+				type="button"
+				mat-flat-button
+				color="accent"
+				(click)="addLink()"
+				data-test="addLinkButton"
+			>
 				{{ "Action.Add" | translate }}
 			</button>
 		</h3>
@@ -61,7 +67,12 @@
 				<input matInput formControlName="url" required />
 			</mat-form-field>
 
-			<button mat-icon-button class="remove-link-btn" (click)="removeLink(i)">
+			<button
+				mat-icon-button
+				class="remove-link-btn"
+				(click)="removeLink(i)"
+				data-test="removeLinkButton"
+			>
 				<student-mgmt-icon name="clear" class="text"></student-mgmt-icon>
 			</button>
 		</div>

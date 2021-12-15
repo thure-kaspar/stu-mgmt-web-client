@@ -2,6 +2,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { CommonModule } from "@angular/common";
 import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -75,14 +76,16 @@ export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 
 		this.subs.sink = this.userApi
 			.getUsers(skip, take, this.filter.username, this.filter.displayName, roles, "response")
-			.subscribe(
-				response => {
+			.subscribe({
+				next: response => {
 					if (!triggeredByPaginator) this.paginator.goToFirstPage();
 					this.paginator.setTotalCountFromHttp(response);
 					this.dataSource$.next(new MatTableDataSource(response.body));
 				},
-				error => console.log(error)
-			);
+				error: error => {
+					console.log(error);
+				}
+			});
 	}
 }
 
@@ -97,6 +100,7 @@ export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 		MatInputModule,
 		MatCheckboxModule,
 		MatTableModule,
+		MatButtonModule,
 		TranslateModule,
 		PaginatorModule
 	]
