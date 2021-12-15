@@ -1,21 +1,24 @@
 {
 	"projectType": "library",
-	"root": "libs/state",
-	"sourceRoot": "libs/state/src",
+	"root": "libs/data-access/state",
+	"sourceRoot": "libs/data-access/state/src",
 	"prefix": "student-mgmt",
 	"targets": {
 		"test": {
 			"executor": "@nrwl/jest:jest",
-			"outputs": ["coverage/libs/state"],
+			"outputs": ["coverage/libs/data-access/state"],
 			"options": {
-				"jestConfig": "libs/state/jest.config.js",
+				"jestConfig": "libs/data-access/state/jest.config.js",
 				"passWithNoTests": true
 			}
 		},
 		"lint": {
 			"executor": "@nrwl/linter:eslint",
 			"options": {
-				"lintFilePatterns": ["libs/state/src/**/*.ts", "libs/state/src/**/*.html"]
+				"lintFilePatterns": [
+					"libs/data-access/state/src/**/*.ts",
+					"libs/data-access/state/src/**/*.html"
+				]
 			}
 		}
 	},
