@@ -165,7 +165,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 		this.subs.sink = this.courseApi.updateCourse(update, this.courseId).subscribe({
 			next: result => {
 				this.form.patchValue(result);
-				this.toast.success("Misc.BasicDate", "Message.Saved");
+				this.toast.success("Misc.BasicData", "Message.Saved");
 			},
 			error: error => {
 				this.toast.apiError(error);

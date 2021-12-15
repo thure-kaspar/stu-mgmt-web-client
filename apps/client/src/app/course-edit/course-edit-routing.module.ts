@@ -8,4 +8,4 @@ const routes: Routes = [{ path: "", component: CourseEditComponent, pathMatch: "
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class CourseSettingsRoutingModule {}
+export class CourseEditRoutingModule {}

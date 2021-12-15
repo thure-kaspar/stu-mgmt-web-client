@@ -33,9 +33,7 @@ const routes: Routes = [
 			{
 				path: "settings",
 				loadChildren: () =>
-					import("../course-settings/course-settings.module").then(
-						m => m.CourseSettingsModule
-					),
+					import("../course-edit/course-edit.module").then(m => m.CourseEditModule),
 				pathMatch: "full"
 			},
 			{
