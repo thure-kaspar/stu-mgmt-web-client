@@ -6,9 +6,10 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
+import { SemesterPipeModule } from "@student-mgmt-client/pipes";
 import { SnackbarService } from "@student-mgmt-client/services";
 import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { getRouteParam, SemesterPipeModule } from "@student-mgmt-client/util-helper";
+import { getRouteParam } from "@student-mgmt-client/util-helper";
 import {
 	CourseDto,
 	CourseParticipantsApi,

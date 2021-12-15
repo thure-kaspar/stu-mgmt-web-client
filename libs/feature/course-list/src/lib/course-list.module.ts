@@ -9,7 +9,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { TranslateModule } from "@ngx-translate/core";
 import { IconComponentModule, PaginatorModule } from "@student-mgmt-client/shared-ui";
-import { SemesterPipeModule } from "@student-mgmt-client/util-helper";
+import { SemesterPipeModule } from "@student-mgmt-client/pipes";
 import { CourseListRoutingModule } from "./course-list-routing.module";
 import { CourseListComponent } from "./course-list.component";
 

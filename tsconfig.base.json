@@ -23,7 +23,7 @@
 			"@student-mgmt-client/state": ["libs/data-access/state/src/index.ts"],
 			"@student-mgmt-client/storybook": ["libs/storybook/src/index.ts"],
 			"@student-mgmt-client/util-helper": ["libs/util/helper/src/index.ts"],
-			"@student-mgmt-client/util/pipes": ["libs/util/pipes/src/index.ts"]
+			"@student-mgmt-client/pipes": ["libs/util/pipes/src/index.ts"]
 		}
 	},
 	"angularCompilerOptions": {

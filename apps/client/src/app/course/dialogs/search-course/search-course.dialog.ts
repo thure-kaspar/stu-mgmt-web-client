@@ -11,13 +11,14 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
+import { SemesterPipeModule } from "@student-mgmt-client/pipes";
 import {
 	IconComponentModule,
 	Paginator,
 	PaginatorModule,
 	UnsubscribeOnDestroy
 } from "@student-mgmt-client/shared-ui";
-import { getSemester, getSemesterList, SemesterPipeModule } from "@student-mgmt-client/util-helper";
+import { getSemester, getSemesterList } from "@student-mgmt-client/util-helper";
 import { CourseApi, CourseDto } from "@student-mgmt/api-client";
 import { BehaviorSubject } from "rxjs";
 
