@@ -11,6 +11,7 @@
 		"util-auth": "libs/util/auth",
 		"util-domain-types": "libs/util/domain-types",
 		"util-helper": "libs/util/helper",
+		"util-pipes": "libs/util/pipes",
 		"util-services": "libs/util/services"
 	}
 }

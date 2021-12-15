@@ -44,10 +44,5 @@ describe("SemesterPipe", () => {
 			const result = semesterPipe.transform("");
 			expect(result).toEqual("");
 		});
-
-		it("null -> null", () => {
-			const result = semesterPipe.transform(null);
-			expect(result).toEqual(null);
-		});
 	});
 });
