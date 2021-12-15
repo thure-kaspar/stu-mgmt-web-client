@@ -1,8 +1,10 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Inject, NgModule, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, NgModule } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { TranslateModule } from "@ngx-translate/core";
 
 export type ExtendedConfirmDialogData = {
@@ -23,18 +25,25 @@ export type ExtendedConfirmDialogData = {
 	styleUrls: ["./extended-confirm-dialog.dialog.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExtendedConfirmDialog implements OnInit {
+// eslint-disable-next-line @angular-eslint/component-class-suffix
+export class ExtendedConfirmDialog {
 	constructor(
 		public dialogRef: MatDialogRef<ExtendedConfirmDialog, boolean>,
 		@Inject(MAT_DIALOG_DATA) public data: ExtendedConfirmDialogData
 	) {}
-
-	ngOnInit(): void {}
 }
 
 @NgModule({
 	declarations: [ExtendedConfirmDialog],
 	exports: [ExtendedConfirmDialog],
-	imports: [CommonModule, MatCardModule, MatFormFieldModule, TranslateModule]
+	imports: [
+		CommonModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatDialogModule,
+		MatButtonModule,
+		TranslateModule
+	]
 })
 export class ExtendedConfirmDialogModule {}

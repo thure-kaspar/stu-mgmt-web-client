@@ -1,13 +1,13 @@
-<div class="confirm-dialog dialog-container">
-	<mat-card-title> {{ getTitle() | translate }} </mat-card-title>
+<div class="w-96">
+	<mat-card-title mat-dialog-title> {{ getTitle() | translate }} </mat-card-title>
 
-	<pre class="preformatted">{{ getMessage() | translate }}</pre>
+	<pre class="mb-4 preformatted">{{ getMessage() | translate }}</pre>
 
-	<p id="param-container">
-		<ng-container *ngFor="let param of data?.params"> {{ param }}<br /> </ng-container>
-	</p>
+	<div class="gap-1 py-2 mx-auto flex-flex-col" *ngIf="data.params">
+		<span *ngFor="let param of data.params">{{param}}</span>
+	</div>
 
-	<div class="button-container">
+	<div mat-dialog-actions>
 		<button mat-raised-button color="accent" (click)="onConfirm()" data-test="btn-confirm">
 			{{ 'Action.Confirm' | translate }}
 		</button>

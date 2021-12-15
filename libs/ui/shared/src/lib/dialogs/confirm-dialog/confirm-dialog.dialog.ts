@@ -1,7 +1,9 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { TranslateModule } from "@ngx-translate/core";
+import { CommonModule } from "@angular/common";
+import { Component, Inject, NgModule } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { TranslateModule } from "@ngx-translate/core";
 
 export type ConfirmDialogData = {
 	/**
@@ -20,16 +22,14 @@ export type ConfirmDialogData = {
 
 @Component({
 	selector: "student-mgmt-confirm-dialog",
-	templateUrl: "./confirm-dialog.dialog.html",
-	styleUrls: ["./confirm-dialog.dialog.scss"]
+	templateUrl: "./confirm-dialog.dialog.html"
 })
-export class ConfirmDialog implements OnInit {
+// eslint-disable-next-line @angular-eslint/component-class-suffix
+export class ConfirmDialog {
 	constructor(
 		public dialogRef: MatDialogRef<ConfirmDialog, boolean>,
 		@Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData
 	) {}
-
-	ngOnInit(): void {}
 
 	onCancel(): void {
 		this.dialogRef.close(false);
@@ -48,12 +48,9 @@ export class ConfirmDialog implements OnInit {
 	}
 }
 
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
 @NgModule({
 	declarations: [ConfirmDialog],
 	exports: [ConfirmDialog],
-	imports: [CommonModule, TranslateModule, MatCardModule]
+	imports: [CommonModule, TranslateModule, MatCardModule, MatButtonModule, MatDialogModule]
 })
 export class ConfirmDialogModule {}
