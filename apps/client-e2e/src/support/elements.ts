@@ -18,8 +18,15 @@ export const Selector = {
 	/** Course related selectors. */
 	course: {
 		sidebarCourseLink: "sidebar-course-link",
-		courseListLink: "course-list-link",
 		myGroupTab: "my-group-tab"
+	},
+
+	courseList: {
+		component: "CourseListComponent",
+		createCourseButton: "createCourseButton",
+		semesterSelectBox: "semesterSelectBox",
+		titleTextField: "titleTextField",
+		linkToCourse: "linkToCourse"
 	},
 
 	courseSettings: {
