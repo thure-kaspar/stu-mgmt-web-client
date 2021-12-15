@@ -1,5 +1,5 @@
-import { account, useAccount } from "../../../support/auth";
-import { Selector } from "../../../support/elements";
+import { account, useAccount } from "../../support/auth";
+import { Selector } from "../../support/elements";
 
 describe("Assignment list", () => {
 	const courseId = "java-wise1920";

@@ -1,7 +1,7 @@
 import { getSemester, getSemesterString } from "@student-mgmt-client/util-helper";
-import { resetDemoDb } from "../../support/api";
-import { account, useAccount } from "../../support/auth";
-import { Selector } from "../../support/elements";
+import { resetDemoDb } from "../support/api";
+import { account, useAccount } from "../support/auth";
+import { Selector } from "../support/elements";
 
 function clickOnCourseWithTitle(title: string): void {
 	cy.getBySelector(Selector.course.courseListLink).contains(title).click();

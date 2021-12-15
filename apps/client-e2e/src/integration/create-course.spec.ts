@@ -1,12 +1,12 @@
+import { getSemesterString } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	CourseDto,
 	IndividualPercentWithAllowedFailuresRuleDto,
 	OverallPercentRuleDto
-} from "../../../api";
-import { getSemester, getSemesterString } from "@student-mgmt-client/util-helper";
-import { account, useAccount } from "../../support/auth";
-import { Selector } from "../../support/elements";
+} from "@student-mgmt/api-client";
+import { account, useAccount } from "../support/auth";
+import { Selector } from "../support/elements";
 
 const ADMISSION_RULE_HOMEWORK_OVERALL_50_PERCENT_ROUNDING_NEXT_INTEGER: OverallPercentRuleDto = {
 	type: "REQUIRED_PERCENT_OVERALL",

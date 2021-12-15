@@ -1,7 +1,7 @@
-import { resetDemoDb } from "../../support/api";
-import { account, useAccount } from "../../support/auth";
-import { Selector } from "../../support/elements";
-import { navigateToCourse } from "../../support/navigation";
+import { resetDemoDb } from "../support/api";
+import { account, useAccount } from "../support/auth";
+import { Selector } from "../support/elements";
+import { navigateToCourse } from "../support/navigation";
 
 const courseThatRequiresPassword = {
 	title: "Programmierpraktikum I: Java",
