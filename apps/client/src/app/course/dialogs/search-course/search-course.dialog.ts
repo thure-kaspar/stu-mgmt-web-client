@@ -18,7 +18,7 @@ import {
 	PaginatorModule,
 	UnsubscribeOnDestroy
 } from "@student-mgmt-client/shared-ui";
-import { getSemester, getSemesterList } from "@student-mgmt-client/util-helper";
+import { getSemesterList } from "@student-mgmt-client/util-helper";
 import { CourseApi, CourseDto } from "@student-mgmt/api-client";
 import { BehaviorSubject } from "rxjs";
 
@@ -35,7 +35,7 @@ import { BehaviorSubject } from "rxjs";
 export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 	title = "";
 	shortname: string;
-	selectedSemester = getSemester(new Date());
+	selectedSemester = "";
 	semesters = getSemesterList();
 
 	displayedColumns: string[] = ["select", "title", "semester", "action"];
