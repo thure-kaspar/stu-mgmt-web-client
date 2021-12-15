@@ -90,32 +90,32 @@ export class AssessmentAllocationComponent extends UnsubscribeOnDestroy implemen
 
 		this.allocationService
 			.createAllocation(allocation, this.courseId, this.assignmentId)
-			.subscribe(
-				result => {
+			.subscribe({
+				next: () => {
 					this.evaluator = evaluator;
 					this.assignedTo = evaluator.userId;
 					this.toast.success();
 				},
-				error => {
+				error: error => {
 					this.toast.apiError(error);
 				}
-			);
+			});
 	}
 
 	/** Removes the assigned evaluator from the group or user. */
 	removeAllocation(): void {
 		this.allocationService
 			.removeAllocation(this.courseId, this.assignmentId, this.groupId, this.userId)
-			.subscribe(
-				result => {
+			.subscribe({
+				next: () => {
 					this.evaluator = undefined;
 					this.assignedTo = undefined;
 					this.toast.success();
 				},
-				error => {
+				error: error => {
 					this.toast.apiError(error);
 				}
-			);
+			});
 	}
 }
 
