@@ -6,6 +6,7 @@
 		"start": "nx serve",
 		"build": "nx build",
 		"test": "nx test",
+		"test:ci": "nx run-many --all --target=test",
 		"lint": "nx run-many --all --target=lint",
 		"lint:ci": "nx run-many --all --target=lint --format checkstyle --output-file output/eslint/eslint.xml || exit 0",
 		"cypress:client": "cypress open --project ./apps/client-e2e",
