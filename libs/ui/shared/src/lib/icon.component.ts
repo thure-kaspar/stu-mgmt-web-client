@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, NgModule, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Input, NgModule, ViewEncapsulation } from "@angular/core";
 
 @Component({
 	selector: "student-mgmt-icon",
@@ -11,13 +11,9 @@ import { Component, Input, NgModule, OnInit, ViewEncapsulation } from "@angular/
 	</svg>`,
 	encapsulation: ViewEncapsulation.None
 })
-export class IconComponent implements OnInit {
+export class IconComponent {
 	@Input() name!: string;
 	@Input() size = "24";
-
-	constructor() {}
-
-	ngOnInit(): void {}
 }
 
 @NgModule({

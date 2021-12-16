@@ -1,9 +1,7 @@
-import { CommonModule } from "@angular/common";
 import { Component, Inject, NgModule } from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { TranslateModule } from "@ngx-translate/core";
+import { ConfirmDialogUiComponentModule } from "./confirm-dialog-ui/confirm-dialog-ui.component";
 
 export type ConfirmDialogData = {
 	/**
@@ -30,27 +28,11 @@ export class ConfirmDialog {
 		public dialogRef: MatDialogRef<ConfirmDialog, boolean>,
 		@Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData
 	) {}
-
-	onCancel(): void {
-		this.dialogRef.close(false);
-	}
-
-	onConfirm(): void {
-		this.dialogRef.close(true);
-	}
-
-	getTitle(): string {
-		return this.data?.title ?? "Action.Confirm";
-	}
-
-	getMessage(): string {
-		return this.data?.message ?? "Prompt.Question.AreYouSure";
-	}
 }
 
 @NgModule({
 	declarations: [ConfirmDialog],
 	exports: [ConfirmDialog],
-	imports: [CommonModule, TranslateModule, MatCardModule, MatButtonModule, MatDialogModule]
+	imports: [ConfirmDialogUiComponentModule, TranslateModule]
 })
 export class ConfirmDialogModule {}

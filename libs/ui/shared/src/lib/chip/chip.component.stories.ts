@@ -22,3 +22,15 @@ Default.args = {
 	icon: "home",
 	color: "#7732a8"
 };
+
+export const TextOnly = Template.bind({});
+TextOnly.args = {
+	text: "Gruppenabgabe",
+	color: "#7732a8"
+};
+
+export const IconOnly = Template.bind({});
+IconOnly.args = {
+	icon: "home",
+	color: "#7732a8"
+};

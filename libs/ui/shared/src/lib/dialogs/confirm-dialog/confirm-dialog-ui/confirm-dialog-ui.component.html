@@ -1,0 +1,23 @@
+<div class="w-96">
+	<mat-card-title mat-dialog-title> {{ title ?? "Action.Confirm" | translate }} </mat-card-title>
+
+	<pre class="mb-4 preformatted">{{ message ?? "Prompt.Question.AreYouSure" | translate }}</pre>
+
+	<div class="flex flex-col items-start gap-1 py-2" *ngIf="params">
+		<span *ngFor="let param of params">{{ param }}</span>
+	</div>
+
+	<div mat-dialog-actions class="flex gap-1">
+		<button
+			mat-raised-button
+			color="accent"
+			(click)="confirmClicked.next()"
+			data-test="btn-confirm"
+		>
+			{{ "Action.Confirm" | translate }}
+		</button>
+		<button mat-button (click)="cancelClicked.next()" data-test="btn-cancel">
+			{{ "Action.Cancel" | translate }}
+		</button>
+	</div>
+</div>
