@@ -1,1 +1,1 @@
-export * from "./lib/storybook.module";
+export * from "./lib/storybook-translate.module";

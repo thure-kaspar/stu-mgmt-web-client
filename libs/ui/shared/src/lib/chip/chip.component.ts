@@ -11,8 +11,6 @@ export class ChipComponent {
 	@Input() icon?: string;
 	@Input() text!: string;
 	@Input() color?: "primary" | "accent" | "warn" | string;
-
-	constructor() {}
 }
 
 @NgModule({
