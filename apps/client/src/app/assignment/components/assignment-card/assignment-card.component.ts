@@ -9,13 +9,13 @@ import {
 } from "@student-mgmt-client/components";
 import { Course, Participant } from "@student-mgmt-client/domain-types";
 import { ToastService } from "@student-mgmt-client/services";
-import {
-	ConfirmDialog,
-	ConfirmDialogData,
-	UnsubscribeOnDestroy
-} from "@student-mgmt-client/shared-ui";
+import { ConfirmDialog, ConfirmDialogData } from "@student-mgmt-client/shared-ui";
 import { ParticipantGroupsState, ParticipantSelectors } from "@student-mgmt-client/state";
-import { getRouteParam, RoundingMethod } from "@student-mgmt-client/util-helper";
+import {
+	getRouteParam,
+	RoundingMethod,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	AssessmentDto,

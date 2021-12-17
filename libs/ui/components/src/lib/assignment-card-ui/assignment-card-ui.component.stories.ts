@@ -1,8 +1,9 @@
+import { RouterTestingModule } from "@angular/router/testing";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
 import { createParticipant } from "@student-mgmt-client/domain-types";
 import { StorybookTranslateModule } from "@student-mgmt-client/storybook";
+import { PARTICIPANT_STUDENT } from "@student-mgmt-client/testing";
 import { AssignmentDto } from "@student-mgmt/api-client";
-import { PARTICIPANT_STUDENT } from "libs/testing/src";
 import {
 	AssignmentCardUiComponent,
 	AssignmentCardUiComponentModule
@@ -13,7 +14,11 @@ export default {
 	title: "AssignmentCardUiComponent",
 	decorators: [
 		moduleMetadata({
-			imports: [AssignmentCardUiComponentModule, StorybookTranslateModule]
+			imports: [
+				AssignmentCardUiComponentModule,
+				StorybookTranslateModule,
+				RouterTestingModule
+			]
 		})
 	]
 } as Meta<AssignmentCardUiComponent>;

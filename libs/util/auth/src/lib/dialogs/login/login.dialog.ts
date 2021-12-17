@@ -10,8 +10,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
-import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { AuthActions } from "@student-mgmt-client/state";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AuthenticationApi } from "@student-mgmt/api-client";
 import { BehaviorSubject, firstValueFrom } from "rxjs";
 import { AuthService } from "../../services/auth.service";
@@ -27,6 +28,7 @@ type LoginState = { isLoading: boolean; error?: string | null };
 	templateUrl: "./login.dialog.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LoginDialog extends UnsubscribeOnDestroy {
 	username: string;
 	password: string;
