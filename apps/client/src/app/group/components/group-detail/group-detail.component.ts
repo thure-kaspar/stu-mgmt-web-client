@@ -17,10 +17,9 @@ import { DialogService, ParticipantFacade, ToastService } from "@student-mgmt-cl
 import {
 	CardComponentModule,
 	IconComponentModule,
-	SearchParticipantDialog,
-	UnsubscribeOnDestroy
+	SearchParticipantDialog
 } from "@student-mgmt-client/shared-ui";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AssessmentDto, GroupApi, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { filter, take } from "rxjs/operators";

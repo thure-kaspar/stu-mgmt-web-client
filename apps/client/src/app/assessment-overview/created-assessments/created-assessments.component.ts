@@ -13,13 +13,13 @@ import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { CourseFacade, DownloadService, ToastService } from "@student-mgmt-client/services";
-import {
-	ChipComponentModule,
-	IconComponentModule,
-	UnsubscribeOnDestroy
-} from "@student-mgmt-client/shared-ui";
+import { ChipComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { AssignmentSelectors } from "@student-mgmt-client/state";
-import { nestedPropertyAccessor, RoundingMethod } from "@student-mgmt-client/util-helper";
+import {
+	nestedPropertyAccessor,
+	RoundingMethod,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	AssessmentApi,

@@ -9,15 +9,14 @@ import {
 } from "@student-mgmt-client/domain-types";
 import {
 	AssignmentTypeChipComponentModule,
-	ThumbChipComponentModule,
-	UnsubscribeOnDestroy
+	ThumbChipComponentModule
 } from "@student-mgmt-client/shared-ui";
 import {
 	AssignmentActions,
 	AssignmentSelectors,
 	CourseSelectors
 } from "@student-mgmt-client/state";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi } from "@student-mgmt/api-client";
 import { combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";

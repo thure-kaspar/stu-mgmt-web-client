@@ -17,9 +17,9 @@ import {
 	ConfirmDialogData,
 	IconComponentModule,
 	Paginator,
-	PaginatorModule,
-	UnsubscribeOnDestroy
+	PaginatorModule
 } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { CourseApi, CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";

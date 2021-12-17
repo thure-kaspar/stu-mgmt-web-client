@@ -11,12 +11,8 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { TranslateModule } from "@ngx-translate/core";
 import { DialogService, ToastService } from "@student-mgmt-client/services";
-import {
-	IconComponentModule,
-	Paginator,
-	PaginatorModule,
-	UnsubscribeOnDestroy
-} from "@student-mgmt-client/shared-ui";
+import { IconComponentModule, Paginator, PaginatorModule } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";

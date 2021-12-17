@@ -6,12 +6,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { ParticipantFacade, ToastService } from "@student-mgmt-client/services";
-import {
-	IconComponentModule,
-	SearchParticipantDialog,
-	UnsubscribeOnDestroy
-} from "@student-mgmt-client/shared-ui";
+import { IconComponentModule, SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { AssignmentSelectors } from "@student-mgmt-client/state";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
 	AssessmentApi,
 	AssessmentCreateDto,

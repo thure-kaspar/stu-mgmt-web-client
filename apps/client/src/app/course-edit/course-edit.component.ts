@@ -13,10 +13,9 @@ import { ToastService } from "@student-mgmt-client/services";
 import {
 	ConfirmDialog,
 	ConfirmDialogData,
-	IconComponentModule,
-	UnsubscribeOnDestroy
+	IconComponentModule
 } from "@student-mgmt-client/shared-ui";
-import { getSemester } from "@student-mgmt-client/util-helper";
+import { getSemester, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	AssignmentDto,

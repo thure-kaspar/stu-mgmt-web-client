@@ -14,9 +14,9 @@ import {
 	IconComponentModule,
 	Paginator,
 	PaginatorModule,
-	SearchParticipantDialog,
-	UnsubscribeOnDestroy
+	SearchParticipantDialog
 } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { GroupApi, GroupDto } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";

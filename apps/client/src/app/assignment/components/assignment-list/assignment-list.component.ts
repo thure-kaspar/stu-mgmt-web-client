@@ -7,12 +7,13 @@ import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { CourseFacade } from "@student-mgmt-client/services";
-import { IconComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import {
 	AssignmentActions,
 	AssignmentSelectors,
 	ParticipantSelectors
 } from "@student-mgmt-client/state";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AssignmentDto } from "@student-mgmt/api-client";
 import { map } from "rxjs/operators";
 import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-assignment.dialog";

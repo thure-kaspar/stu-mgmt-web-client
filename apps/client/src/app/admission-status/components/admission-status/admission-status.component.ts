@@ -15,15 +15,18 @@ import { TranslateModule } from "@ngx-translate/core";
 import { DownloadService } from "@student-mgmt-client/services";
 import {
 	AssignmentTypeChipComponentModule,
-	ThumbChipComponentModule,
-	UnsubscribeOnDestroy
+	ThumbChipComponentModule
 } from "@student-mgmt-client/shared-ui";
 import {
 	AdmissionStatusActions,
 	AdmissionStatusSelectors,
 	CourseSelectors
 } from "@student-mgmt-client/state";
-import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
+import {
+	getRouteParam,
+	matchesParticipant,
+	UnsubscribeOnDestroy
+} from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	AdmissionRuleDto,

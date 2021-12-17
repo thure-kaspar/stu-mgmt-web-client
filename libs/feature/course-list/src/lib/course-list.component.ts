@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { AuthService } from "@student-mgmt-client/auth";
-import { Paginator, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
-import { getSemesterList } from "@student-mgmt-client/util-helper";
+import { Paginator } from "@student-mgmt-client/shared-ui";
+import { getSemesterList, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { CourseApi, CourseDto, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, debounceTime, Subject } from "rxjs";
 

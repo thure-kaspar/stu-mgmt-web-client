@@ -9,7 +9,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { TranslateModule } from "@ngx-translate/core";
-import { Paginator, PaginatorModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { Paginator, PaginatorModule } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
@@ -28,6 +29,7 @@ class UserFilter {
 	templateUrl: "./search-user.dialog.html",
 	styleUrls: ["./search-user.dialog.scss"]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {
 	filter = new UserFilter();
 

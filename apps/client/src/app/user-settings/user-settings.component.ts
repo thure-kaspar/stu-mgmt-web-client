@@ -12,7 +12,8 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TranslateModule } from "@ngx-translate/core";
 import { AuthService } from "@student-mgmt-client/auth";
 import { ToastService } from "@student-mgmt-client/services";
-import { CardComponentModule, UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { CardComponentModule } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserSettingsDto } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
 

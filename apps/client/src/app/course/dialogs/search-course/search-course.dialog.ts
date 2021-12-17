@@ -12,13 +12,8 @@ import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { SemesterPipeModule } from "@student-mgmt-client/pipes";
-import {
-	IconComponentModule,
-	Paginator,
-	PaginatorModule,
-	UnsubscribeOnDestroy
-} from "@student-mgmt-client/shared-ui";
-import { getSemesterList } from "@student-mgmt-client/util-helper";
+import { IconComponentModule, Paginator, PaginatorModule } from "@student-mgmt-client/shared-ui";
+import { getSemesterList, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { CourseApi, CourseDto } from "@student-mgmt/api-client";
 import { BehaviorSubject } from "rxjs";
 
@@ -32,6 +27,7 @@ import { BehaviorSubject } from "rxjs";
 	styleUrls: ["./search-course.dialog.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {
 	title = "";
 	shortname: string;

@@ -19,10 +19,9 @@ import {
 import {
 	ChipComponentModule,
 	IconComponentModule,
-	SearchParticipantDialog,
-	UnsubscribeOnDestroy
+	SearchParticipantDialog
 } from "@student-mgmt-client/shared-ui";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AssignmentRegistrationApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject } from "rxjs";
 import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";

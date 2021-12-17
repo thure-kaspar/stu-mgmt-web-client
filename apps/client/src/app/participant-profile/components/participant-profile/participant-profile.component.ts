@@ -7,10 +7,10 @@ import { Participant } from "@student-mgmt-client/domain-types";
 import { ParticipantFacade } from "@student-mgmt-client/services";
 import {
 	CardComponentModule,
-	ParticipantAdmissionStatusComponentModule,
-	UnsubscribeOnDestroy
+	ParticipantAdmissionStatusComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { ParticipantAdmissionStatusState } from "@student-mgmt-client/state";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionStatusApi,
 	AssignmentGroupTuple,

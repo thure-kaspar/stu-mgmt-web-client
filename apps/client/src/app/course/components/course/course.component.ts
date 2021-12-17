@@ -1,5 +1,4 @@
 import { CommonModule } from "@angular/common";
-import { HttpErrorResponse } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -21,11 +20,10 @@ import {
 	ConfirmDialogData,
 	ExtendedConfirmDialog,
 	ExtendedConfirmDialogData,
-	IconComponentModule,
-	UnsubscribeOnDestroy
+	IconComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { CourseActions, CourseSelectors } from "@student-mgmt-client/state";
-import { getRouteParam } from "@student-mgmt-client/util-helper";
+import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { GroupApi, StudentMgmtException } from "@student-mgmt/api-client";
 import { take, tap } from "rxjs/operators";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
