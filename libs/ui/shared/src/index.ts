@@ -9,4 +9,3 @@ export * from "./lib/icon.component";
 export * from "./lib/paginator/paginator.component";
 export * from "./lib/participant-admission-status/participant-admission-status.component";
 export * from "./lib/thumb-chip/thumb-chip.component";
-export * from "./lib/unsubscribe-on-destroy.component";

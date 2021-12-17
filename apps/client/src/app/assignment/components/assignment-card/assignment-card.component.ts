@@ -1,20 +1,17 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
-import { MatMenuModule } from "@angular/material/menu";
-import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import {
+	AssignmentCardUiComponentModule,
+	AssignmentCardUiComponentProps
+} from "@student-mgmt-client/components";
 import { Course, Participant } from "@student-mgmt-client/domain-types";
 import { ToastService } from "@student-mgmt-client/services";
 import {
-	AssignmentTypeChipComponentModule,
-	CardComponentModule,
-	ChipComponentModule,
 	ConfirmDialog,
 	ConfirmDialogData,
-	IconComponentModule,
 	UnsubscribeOnDestroy
 } from "@student-mgmt-client/shared-ui";
 import { ParticipantGroupsState, ParticipantSelectors } from "@student-mgmt-client/state";
@@ -26,7 +23,7 @@ import {
 	GroupDto,
 	UserApi
 } from "@student-mgmt/api-client";
-import { Observable } from "rxjs";
+import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
 import {
 	EditAssignmentDialog,
@@ -44,7 +41,6 @@ type AssessmentState = "passed" | "failed" | "submitted" | null;
 @Component({
 	selector: "student-mgmt-assignment-card",
 	templateUrl: "./assignment-card.component.html",
-	styleUrls: ["./assignment-card.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnInit {
@@ -55,20 +51,18 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	/** If the course has defined admission criteria for this type of assignment,
 	 * this will contain the required points for this assignment.
 	 */
-	requiredPoints: number | undefined;
+	requiredPoints$ = new BehaviorSubject<number | undefined>(undefined);
 	/**
 	 * Can be used to display a warning about this assignment, i.e. "You have no group for this assignment."
 	 * Will be translated in the template.
 	 */
-	warning?: string | undefined;
+	displayNoGroupWarning$ = new BehaviorSubject(false);
 	courseId: string;
 	group$: Observable<GroupDto>;
 	assessment$: Observable<AssessmentDtoExtended>;
-	assessmentState$: Observable<AssessmentState>;
+	passFailSubmittedState$: Observable<AssessmentState>;
 
-	typeEnum = AssignmentDto.TypeEnum;
-	stateEnum = AssignmentDto.StateEnum;
-	collaborationEnum = AssignmentDto.CollaborationEnum;
+	props$: Observable<AssignmentCardUiComponentProps>;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -76,7 +70,6 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		private dialog: MatDialog,
 		private assignmentManagement: AssignmentManagementFacade,
 		private userApi: UserApi,
-		private translate: TranslateService,
 		private toast: ToastService,
 		private store: Store
 	) {
@@ -91,6 +84,30 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		}
 
 		this.tryFindRequiredPoints(this.course.admissionCriteria);
+
+		this.props$ = combineLatest([
+			this.requiredPoints$,
+			this.displayNoGroupWarning$,
+			this.assessment$,
+			this.passFailSubmittedState$
+		]).pipe(
+			map(
+				([
+					requiredPoints,
+					displayNoGroupWarning,
+					assessment,
+					passFailSubmittedState
+				]): AssignmentCardUiComponentProps => ({
+					assignment: this.assignment,
+					courseId: this.course.id,
+					participant: this.participant,
+					requiredPoints,
+					displayNoGroupWarning,
+					assessment,
+					passFailSubmittedState
+				})
+			)
+		);
 	}
 
 	private tryFindGroupOfParticipant(): void {
@@ -101,7 +118,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 						this.assignment.state === "IN_PROGRESS" &&
 						this.studentShouldHaveAGroup(this.assignment, this.participant)
 					) {
-						this.warning = this.translate.instant("Text.Group.NoGroupForAssignment");
+						this.displayNoGroupWarning$.next(true);
 						this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
 					}
 				}
@@ -118,7 +135,8 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		);
 
 		if (rule) {
-			this.requiredPoints = (this.assignment.points * rule.requiredPercent) / 100;
+			const requiredPoints = (this.assignment.points * rule.requiredPercent) / 100;
+			this.requiredPoints$.next(requiredPoints);
 
 			if (this.participant.isStudent) {
 				const round = RoundingMethod(
@@ -135,7 +153,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 								return {
 									...assessment,
 									roundedPoints,
-									hasPassed: roundedPoints > this.requiredPoints
+									hasPassed: roundedPoints >= requiredPoints
 								};
 							}
 
@@ -143,7 +161,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 						})
 					);
 
-				this.assessmentState$ = this.assessment$.pipe(
+				this.passFailSubmittedState$ = this.assessment$.pipe(
 					filter(assessment => !!assessment),
 					map(assessment => (assessment.hasPassed ? "passed" : "failed"))
 				);
@@ -214,16 +232,6 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 @NgModule({
 	declarations: [AssignmentCardComponent],
 	exports: [AssignmentCardComponent],
-	imports: [
-		CommonModule,
-		RouterModule,
-		MatButtonModule,
-		MatMenuModule,
-		TranslateModule,
-		CardComponentModule,
-		ChipComponentModule,
-		IconComponentModule,
-		AssignmentTypeChipComponentModule
-	]
+	imports: [CommonModule, AssignmentCardUiComponentModule]
 })
 export class AssignmentCardComponentModule {}

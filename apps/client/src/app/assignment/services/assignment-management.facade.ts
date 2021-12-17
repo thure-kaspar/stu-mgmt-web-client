@@ -77,7 +77,7 @@ export class AssignmentManagementFacade {
 				},
 				error: error => console.log(error)
 			}),
-			switchMap(value => of(assignment))
+			switchMap(() => of(assignment))
 		);
 	}
 }

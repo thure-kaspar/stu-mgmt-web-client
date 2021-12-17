@@ -8,6 +8,7 @@ import { SubSink } from "subsink";
 @Component({
 	template: ""
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class UnsubscribeOnDestroy implements OnDestroy {
 	/**The subscription sink object that stores all subscriptions */
 	subs = new SubSink();

@@ -30,7 +30,7 @@ CustomTitleAndMessage.args = {
 };
 
 export const WithParams = Template.bind({});
-CustomTitleAndMessage.args = {
+WithParams.args = {
 	title: "Gruppe verlassen",
 	message: "Möchtest du diese Gruppe wirklich verlassen ?",
 	params: ["Programmierpraktikum I: Java", "JAVA-001", "Max Mustermann"]

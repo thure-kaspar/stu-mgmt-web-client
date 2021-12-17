@@ -7,6 +7,8 @@
 		"state": "libs/data-access/state",
 		"storybook": "libs/storybook",
 		"storybook-e2e": "apps/storybook-e2e",
+		"testing": "libs/testing",
+		"ui-components": "libs/ui/components",
 		"ui-shared": "libs/ui/shared",
 		"util-auth": "libs/util/auth",
 		"util-domain-types": "libs/util/domain-types",
