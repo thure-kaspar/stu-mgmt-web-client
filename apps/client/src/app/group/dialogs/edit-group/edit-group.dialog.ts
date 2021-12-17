@@ -10,7 +10,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { TranslateModule } from "@ngx-translate/core";
 import { Course, Group, Participant } from "@student-mgmt-client/domain-types";
 import { CourseFacade, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { GroupApi, GroupDto, GroupSettingsDto, GroupUpdateDto } from "@student-mgmt/api-client";
 
 /**

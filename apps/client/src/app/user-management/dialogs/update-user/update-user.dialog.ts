@@ -9,7 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatRadioModule } from "@angular/material/radio";
 import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserDto, UserUpdateDto } from "@student-mgmt/api-client";
 
 /**

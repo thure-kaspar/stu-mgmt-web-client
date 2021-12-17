@@ -7,7 +7,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { TranslateModule } from "@ngx-translate/core";
 import { AuthService } from "@student-mgmt-client/auth";
 import { ToastService } from "@student-mgmt-client/services";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { CourseConfigApi, GroupApi, GroupDto, GroupSettingsDto } from "@student-mgmt/api-client";
 
 /**

@@ -10,7 +10,7 @@ import { CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client"
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { Paginator, PaginatorModule } from "../../paginator/paginator.component";
-import { UnsubscribeOnDestroy } from "../../unsubscribe-on-destroy.component";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { FormsModule } from "@angular/forms";
 
 class ParticipantsFilter {

@@ -4,8 +4,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { RouterModule } from "@angular/router";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { AuthModule, LoginDialog } from "@student-mgmt-client/auth";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { LoginDialog } from "@student-mgmt-client/auth";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 
 @Component({
 	selector: "student-mgmt-home",

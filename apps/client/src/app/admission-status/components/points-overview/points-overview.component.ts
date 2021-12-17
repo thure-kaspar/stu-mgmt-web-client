@@ -9,7 +9,7 @@ import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { DownloadService, ToastService } from "@student-mgmt-client/services";
-import { UnsubscribeOnDestroy } from "@student-mgmt-client/shared-ui";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { getRouteParam, matchesParticipant } from "@student-mgmt-client/util-helper";
 import { AdmissionStatusApi, ParticipantDto, PointsOverviewDto } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
