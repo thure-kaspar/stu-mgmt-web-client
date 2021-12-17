@@ -33,20 +33,30 @@
 	},
 	"generators": {
 		"@nrwl/angular:application": {
-			"style": "scss",
+			"style": "none",
 			"linter": "eslint",
 			"unitTestRunner": "jest",
 			"e2eTestRunner": "cypress",
 			"strict": false
 		},
 		"@nrwl/angular:library": {
-			"style": "scss",
+			"style": "none",
 			"linter": "eslint",
 			"unitTestRunner": "jest",
 			"strict": false
 		},
-		"@nrwl/angular:component": {
-			"style": "scss"
+		"@schematics/angular:component": {
+			"style": "none",
+			"changeDetection": "OnPush",
+			"skipTests": true,
+			"skipImport": true
+		},
+		"@nrwl/angular:scam": {
+			"prefix": "student-mgmt",
+			"style": "none",
+			"changeDetection": "OnPush",
+			"inlineScam": true,
+			"skipTests": true
 		}
 	},
 	"defaultProject": "client"
