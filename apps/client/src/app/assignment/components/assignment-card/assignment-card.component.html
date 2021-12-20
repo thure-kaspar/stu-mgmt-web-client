@@ -1,16 +1,8 @@
 <student-mgmt-assignment-card-ui
-	[props]="props$ | async"
+	*ngIf="props$ | async as props"
+	[props]="props"
 	(editClicked)="openEditDialog()"
 	(deleteClicked)="onDelete()"
 	(assessmentClicked)="goToAssessment()"
 >
 </student-mgmt-assignment-card-ui>
-
-<!-- [assignment]="assignment"
-[requiredPoints]="requiredPoints"
-[courseId]="course.id"
-[participant]="participant"
-[group]="group$ | async"
-[assessment]="assessment$ | async"
-[displayNoGroupWarning]="displayNoGroupWarning"
-[passFailSubmittedState]="assessmentState$ | async" -->

@@ -37,15 +37,6 @@ export type AssignmentCardUiComponentProps = {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssignmentCardUiComponent {
-	// @Input() assignment!: AssignmentDto;
-	// @Input() assessment?: AssessmentDtoExtended;
-	// @Input() requiredPoints?: number;
-	// @Input() courseId!: string;
-	// @Input() group?: GroupDto | null;
-	// @Input() displayNoGroupWarning!: boolean;
-	// @Input() participant!: Participant;
-	// @Input() passFailSubmittedState?: "passed" | "failed" | "submitted" | null | undefined;
-
 	@Input() props!: AssignmentCardUiComponentProps;
 
 	@Output() editClicked = new EventEmitter<void>();
