@@ -33,6 +33,14 @@ export const PARTICIPANT_STUDENT: ParticipantDto = {
 				email: "hans.peter@test.com"
 			},
 			{
+				userId: "40f59aad-7473-4455-a3ea-1214f19b1234",
+				role: "STUDENT",
+				username: "jdoe",
+				displayName: "John Doe",
+				matrNr: 222222,
+				email: "jdoe@test.com"
+			},
+			{
 				userId: "a019ea22-5194-4b83-8d31-0de0dc9bca53",
 				role: "STUDENT",
 				username: "mmustermann",

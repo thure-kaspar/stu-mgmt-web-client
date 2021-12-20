@@ -1,5 +1,5 @@
 <student-mgmt-card class="assignment-card" data-test="assignment-card">
-	<ng-container title>
+	<div title class="flex gap-2">
 		<span class="font-bold name">
 			<a
 				class="link-none"
@@ -12,39 +12,42 @@
 				{{ props.assignment.name }}
 			</ng-template>
 		</span>
-		<span class="state" [ngSwitch]="props.passFailSubmittedState">
-			<student-mgmt-chip
-				*ngSwitchCase="'submitted'"
-				color="#14abb3"
-				icon="assignment_turned_in"
-				text="Abgegeben"
-			></student-mgmt-chip>
-			<student-mgmt-chip
-				*ngSwitchCase="'passed'"
-				color="#2fac6f"
-				icon="thumb_up"
-				[text]="'Property.Assessment.HasPassed' | translate"
-			></student-mgmt-chip>
-			<student-mgmt-chip
-				*ngSwitchCase="'failed'"
-				color="#ff0134"
-				icon="thumb_down"
-				[text]="'Domain.Failed' | translate"
-			></student-mgmt-chip>
-			<student-mgmt-chip
-				*ngSwitchCase="'evaluated'"
-				color="#5335b0"
-				icon="assignment_turned_in"
-				text="Bewertet"
-			></student-mgmt-chip>
-		</span>
-	</ng-container>
+		<div class="relative">
+			<span class="absolute -mt-2" [ngSwitch]="props.passFailSubmittedState">
+				<student-mgmt-chip
+					*ngSwitchCase="'submitted'"
+					color="#14abb3"
+					icon="assignment_turned_in"
+					text="Abgegeben"
+				></student-mgmt-chip>
+				<student-mgmt-chip
+					*ngSwitchCase="'passed'"
+					color="#2fac6f"
+					icon="thumb_up"
+					[text]="'Property.Assessment.HasPassed' | translate"
+				></student-mgmt-chip>
+				<student-mgmt-chip
+					*ngSwitchCase="'failed'"
+					color="#ff0134"
+					icon="thumb_down"
+					[text]="'Domain.Failed' | translate"
+				></student-mgmt-chip>
+				<student-mgmt-chip
+					*ngSwitchCase="'evaluated'"
+					color="#5335b0"
+					icon="assignment_turned_in"
+					text="Bewertet"
+				></student-mgmt-chip>
+			</span>
+		</div>
+	</div>
 
 	<ng-container subtitle>
 		<span>
 			<span>{{ props.assignment.points }} {{ "Domain.Points" | translate }}</span>
 			<span *ngIf="props.assignment.bonusPoints && props.assignment.bonusPoints > 0">
-				(+{{ props.assignment.points }} {{ "Property.Assignment.BonusPoints" | translate }})
+				(+{{ props.assignment.bonusPoints }}
+				{{ "Property.Assignment.BonusPoints" | translate }})
 			</span>
 			<span *ngIf="props.requiredPoints">
 				- {{ "Common.Required" | translate }}: {{ props.requiredPoints }}
@@ -78,8 +81,8 @@
 		</mat-menu>
 	</ng-container>
 
-	<ng-container content>
-		<div class="chips">
+	<div content class="flex flex-col gap-4">
+		<div class="flex gap-2">
 			<student-mgmt-assignment-type-chip
 				[type]="props.assignment.type"
 			></student-mgmt-assignment-type-chip>
@@ -124,52 +127,65 @@
 			<pre class="preformatted">{{ props.assignment.comment }}</pre>
 		</div>
 
-		<div class="links" *ngIf="props.assignment.links && props.assignment.links.length > 0">
-			<a class="link-none" *ngFor="let link of props.assignment.links" [href]="link.url"
+		<div
+			class="flex flex-col"
+			*ngIf="props.assignment.links && props.assignment.links.length > 0"
+		>
+			<a
+				class="font-bold text-red-500"
+				*ngFor="let link of props.assignment.links"
+				[href]="link.url"
 				>#{{ link.name }}</a
 			>
 		</div>
 
-		<div class="group" *ngIf="props.group">
+		<div class="flex flex-col gap-1" *ngIf="props.group">
 			<a
-				class="font-bold group-title link-none"
+				class="font-bold group-title"
 				[routerLink]="['/courses', props.courseId, 'groups', props.group.id]"
 				>{{ props.group.name }}
 			</a>
 
-			<div class="member-list">
-				<div class="member" *ngFor="let member of props.group.members">
-					<ng-container *ngIf="props.participant.userId !== member.userId">
-						<span class="member-name">
-							{{ member.displayName }}
-						</span>
+			<div class="flex flex-col gap-2">
+				<div class="flex" *ngFor="let member of props.group.members">
+					<div class="flex gap-2" *ngIf="props.participant.userId !== member.userId">
+						<student-mgmt-person-icon
+							class="pt-1"
+							[name]="member.displayName"
+						></student-mgmt-person-icon>
 
-						<a
-							class="text-light link-none"
-							[href]="'mailto:' + member.email"
-							*ngIf="member.email"
-						>
-							Email: {{ member.email }}
-						</a>
-					</ng-container>
+						<div class="flex flex-col">
+							<span class="member-name">
+								{{ member.displayName }}
+							</span>
+
+							<a
+								class="text-light link-none"
+								[href]="'mailto:' + member.email"
+								*ngIf="member.email"
+							>
+								Email: {{ member.email }}
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<span class="warning WARNING" *ngIf="props.displayNoGroupWarning">
-			<student-mgmt-icon name="warning"></student-mgmt-icon>
+		<span class="flex gap-2" *ngIf="props.displayNoGroupWarning">
+			<student-mgmt-icon class="text-yellow-500" name="warning"></student-mgmt-icon>
 			<span class="warning-text">{{ "Text.Group.NoGroupForAssignment" | translate }}</span>
 		</span>
-	</ng-container>
+	</div>
 
 	<ng-container footer>
-		<button
-			mat-stroked-button
-			*ngIf="props.participant.isStudent && props.assignment.state === 'EVALUATED'"
-			(click)="assessmentClicked.next()"
+		<a
+			*ngIf="props.assessment"
+			[routerLink]="['/courses', props.courseId, 'assessments', 'view', props.assessment.id]"
+			><button mat-stroked-button *ngIf="props.assessment">
+				{{ "Domain.Assessment" | translate }}
+			</button></a
 		>
-			{{ "Domain.Assessment" | translate }}
-		</button>
 
 		<ng-container *ngIf="props.participant.isTeachingStaffMember">
 			<a class="link-none" [routerLink]="[props.assignment.id, 'assessments']">

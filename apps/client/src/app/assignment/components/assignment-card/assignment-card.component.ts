@@ -203,30 +203,6 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 				}
 			});
 	}
-
-	/**
-	 * Navigates the user to his assessment for this assignment.
-	 */
-	goToAssessment(): void {
-		this.subs.sink = this.userApi
-			.getAssessmentOfUser(this.participant.userId, this.courseId, this.assignment.id)
-			.subscribe({
-				next: assessment => {
-					this.router.navigate([
-						"/courses",
-						this.courseId,
-						"assignments",
-						this.assignment.id,
-						"assessments",
-						"view",
-						assessment.id
-					]);
-				},
-				error: error => {
-					this.toast.apiError(error);
-				}
-			});
-	}
 }
 
 @NgModule({

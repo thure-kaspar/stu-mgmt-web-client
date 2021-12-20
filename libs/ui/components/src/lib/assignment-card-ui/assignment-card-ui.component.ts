@@ -16,7 +16,8 @@ import {
 	AssignmentTypeChipComponentModule,
 	CardComponentModule,
 	ChipComponentModule,
-	IconComponentModule
+	IconComponentModule,
+	PersonIconComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { AssignmentDto, GroupDto } from "@student-mgmt/api-client";
 
@@ -41,7 +42,6 @@ export class AssignmentCardUiComponent {
 
 	@Output() editClicked = new EventEmitter<void>();
 	@Output() deleteClicked = new EventEmitter<void>();
-	@Output() assessmentClicked = new EventEmitter<void>();
 
 	typeEnum = AssignmentDto.TypeEnum;
 	stateEnum = AssignmentDto.StateEnum;
@@ -58,7 +58,8 @@ export class AssignmentCardUiComponent {
 		CardComponentModule,
 		ChipComponentModule,
 		IconComponentModule,
-		AssignmentTypeChipComponentModule
+		AssignmentTypeChipComponentModule,
+		PersonIconComponentModule
 	],
 	declarations: [AssignmentCardUiComponent],
 	exports: [AssignmentCardUiComponent]
