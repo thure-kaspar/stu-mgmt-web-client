@@ -4,7 +4,8 @@ import { Component, Input, NgModule, ViewEncapsulation } from "@angular/core";
 @Component({
 	selector: "student-mgmt-icon",
 	template: `<svg
-		[ngStyle]="{ color: 'white', height: size + 'px', width: size + 'px' }"
+		class="fill-current"
+		[ngStyle]="{ height: size + 'px', width: size + 'px' }"
 		style="display: inline-block; margin-top: -2px; vertical-align: middle; position: relative;"
 	>
 		<use [attr.href]="'assets/icons/sprites.svg#' + name"></use>
