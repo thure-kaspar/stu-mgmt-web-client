@@ -1,9 +1,10 @@
-import { Meta, moduleMetadata, Story } from "@storybook/angular";
-import { StorybookTranslateModule } from "@student-mgmt-client/storybook";
-import { NavigationUiComponent, NavigationUiComponentModule } from "./navigation-ui.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
+import { Meta, moduleMetadata, Story } from "@storybook/angular";
+import { StorybookTranslateModule } from "@student-mgmt-client/storybook";
 import { USER } from "@student-mgmt-client/testing";
+import { of } from "rxjs";
+import { NavigationUiComponent, NavigationUiComponentModule } from "./navigation-ui.component";
 
 export default {
 	component: NavigationUiComponent,
@@ -22,7 +23,8 @@ export default {
 
 const defaultArgs: Partial<NavigationUiComponent> = {
 	user: USER,
-	isHandset: false
+	isHandset: false,
+	triggerClose$: of()
 };
 
 const Template: Story<NavigationUiComponent> = (args: NavigationUiComponent) => ({

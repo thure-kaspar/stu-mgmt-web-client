@@ -2,19 +2,19 @@
 	<student-mgmt-card>
 		<ng-container title>{{ "Title.AdmissionStatus" | translate }}</ng-container>
 		<ng-container subtitle>
-			<ng-container *ngIf="noCriteriaError$ | async; else subtitle">
+			<ng-container *ngIf="noAdmissionCriteria; else subtitle">
 				{{ "Error.NoAdmissionCriteria" | translate }}
 			</ng-container>
 			<ng-template #subtitle>{{ "Misc.CurrentStatus" | translate }}</ng-template>
 		</ng-container>
-		<ng-container content *ngIf="admissionStatus$ | async as admissionStatus">
-			<mat-spinner *ngIf="admissionStatus.isLoading" diameter="64"></mat-spinner>
+		<ng-container content *ngIf="!noAdmissionCriteria">
+			<mat-spinner *ngIf="isLoading" diameter="64"></mat-spinner>
 
-			<ng-container *ngIf="vm$ | async as vm">
+			<ng-container *ngIf="!isLoading && admissionStatus">
 				<div class="overall-result">
 					<span
 						class="overall-result-column"
-						*ngIf="admissionStatus.admissionStatus.hasAdmissionFromPreviousSemester"
+						*ngIf="admissionStatus.hasAdmissionFromPreviousSemester"
 					>
 						<student-mgmt-thumb-chip [condition]="true"></student-mgmt-thumb-chip>
 						<span>Altzulassung</span>
@@ -22,23 +22,19 @@
 
 					<span class="overall-result-column">
 						<student-mgmt-thumb-chip
-							[condition]="admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
+							[condition]="admissionStatus.fulfillsAdmissionCriteria"
 						></student-mgmt-thumb-chip>
-						<span
-							class="font-bold"
-							*ngIf="admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
+						<span class="font-bold" *ngIf="admissionStatus.fulfillsAdmissionCriteria"
 							>{{ "Text.AdmissionStatus.CriteriaFulfilled" | translate }}.</span
 						>
-						<span
-							class="font-bold"
-							*ngIf="!admissionStatus.admissionStatus.fulfillsAdmissionCriteria"
+						<span class="font-bold" *ngIf="!admissionStatus.fulfillsAdmissionCriteria"
 							>{{ "Text.AdmissionStatus.CriteriaNotFulfilled" | translate }}.</span
 						>
 					</span>
 				</div>
 
 				<div class="rules">
-					<div class="rule" *ngFor="let rule of vm; let index = index">
+					<div class="rule" *ngFor="let rule of criteriaWithResult; let index = index">
 						<mat-divider></mat-divider>
 						<div class="rule-title">
 							<span class="top">

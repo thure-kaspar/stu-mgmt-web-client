@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { ParticipantAdmissionStatusComponentModule } from "@student-mgmt-client/shared-ui";
+import { ParticipantAdmissionStatusComponentModule } from "../../../participant-admission-status/participant-admission-status.component";
 import { ParticipantSelectors } from "@student-mgmt-client/state";
 
 @Component({

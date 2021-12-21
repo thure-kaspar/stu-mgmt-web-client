@@ -5,10 +5,7 @@ import { ActivatedRoute, RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { Participant } from "@student-mgmt-client/domain-types";
 import { ParticipantFacade } from "@student-mgmt-client/services";
-import {
-	CardComponentModule,
-	ParticipantAdmissionStatusComponentModule
-} from "@student-mgmt-client/shared-ui";
+import { CardComponentModule } from "@student-mgmt-client/shared-ui";
 import { ParticipantAdmissionStatusState } from "@student-mgmt-client/state";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
@@ -20,6 +17,7 @@ import {
 } from "@student-mgmt/api-client";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap, tap } from "rxjs/operators";
+import { ParticipantAdmissionStatusComponentModule } from "../../../participant-admission-status/participant-admission-status.component";
 
 @Component({
 	selector: "student-mgmt-participant-profile",
