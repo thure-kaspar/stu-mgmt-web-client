@@ -12,7 +12,7 @@
 	border: transparent;
 	background-color: var(--color-sidenav);
 	student-mgmt-icon {
-		fill: rgba(0, 0, 0, 0.6);
+		color: rgba(0, 0, 0, 0.6);
 	}
 }
 
@@ -30,7 +30,7 @@
 .sidenav student-mgmt-icon {
 	margin-right: 24px;
 	padding-left: 8px;
-	fill: var(--text-light);
+	color: var(--text-light);
 }
 
 .sidenav a {
@@ -48,7 +48,7 @@
 	font-weight: 500 !important;
 
 	student-mgmt-icon {
-		fill: var(--link-active);
+		color: var(--link-active);
 	}
 }
 
