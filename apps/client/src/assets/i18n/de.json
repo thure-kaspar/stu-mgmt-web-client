@@ -83,7 +83,9 @@
     "Total": "Gesamt",
     "UpdateDate": "Änderungsdatum",
     "Welcome": "Willkommen",
-    "Yes": "Ja"
+    "Yes": "Ja",
+    "Dark": "Dunkel",
+    "Light": "Hell"
   },
   "Domain": {
     "Admission": "Zulassung",

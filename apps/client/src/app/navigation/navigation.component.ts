@@ -1,28 +1,14 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { CommonModule } from "@angular/common";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	EventEmitter,
-	NgModule,
-	OnInit,
-	Output,
-	ViewChild
-} from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatListModule } from "@angular/material/list";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { NavigationEnd, Router, RouterModule } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { TranslateModule } from "@ngx-translate/core";
-import { AuthService, LoginDialog } from "@student-mgmt-client/auth";
-import { CourseMembershipsFacade, ThemeService, ToastService } from "@student-mgmt-client/services";
-import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { TranslateService } from "@ngx-translate/core";
+import { LoginDialog } from "@student-mgmt-client/auth";
+import { NavigationUiComponentModule } from "@student-mgmt-client/components";
+import { ThemeService } from "@student-mgmt-client/services";
 import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
 import { Observable } from "rxjs";
 import { filter, map, shareReplay, withLatestFrom } from "rxjs/operators";
@@ -31,15 +17,11 @@ import { environment } from "../../environments/environment";
 @Component({
 	selector: "student-mgmt-navigation",
 	templateUrl: "./navigation.component.html",
-	styleUrls: ["./navigation.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent implements OnInit {
 	user$ = this.store.select(AuthSelectors.selectUser);
 
-	@Output() onLanguageChange = new EventEmitter<string>();
-
-	@ViewChild("drawer") drawer: MatSidenav;
 	isHandset$: Observable<boolean> = this.breakpointObserver
 		.observe([Breakpoints.Small, Breakpoints.Handset])
 		.pipe(
@@ -47,32 +29,28 @@ export class NavigationComponent implements OnInit {
 			shareReplay()
 		);
 
+	triggerClose$ = this.router.events.pipe(
+		withLatestFrom(this.isHandset$),
+		filter(([a, b]) => b && a instanceof NavigationEnd)
+	);
+
 	_isDevelopmentEnv = !environment.production;
 
 	constructor(
-		public authService: AuthService,
-		public courseMemberships: CourseMembershipsFacade,
-		public theme: ThemeService,
 		private breakpointObserver: BreakpointObserver,
 		private router: Router,
-		private overlayContainer: OverlayContainer,
 		private dialog: MatDialog,
-		private toast: ToastService,
-		private store: Store
-	) {
-		this.router.events
-			.pipe(
-				withLatestFrom(this.isHandset$),
-				filter(([a, b]) => b && a instanceof NavigationEnd)
-			)
-			.subscribe(x => this.drawer.close());
-	}
+		private store: Store,
+		private translate: TranslateService,
+		public themeService: ThemeService,
+		private overlayContainer: OverlayContainer
+	) {}
 
 	ngOnInit(): void {
-		this.theme.theme$.subscribe(theme => this.onThemeChange(theme));
+		this.themeService.theme$.subscribe(theme => this.onThemeChange(theme));
 	}
 
-	onThemeChange(theme: string): void {
+	private onThemeChange(theme: string): void {
 		const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
 
 		if (theme === "dark") {
@@ -87,7 +65,8 @@ export class NavigationComponent implements OnInit {
 	}
 
 	setLanguage(lang: string): void {
-		this.onLanguageChange.emit(lang);
+		this.translate.use(lang);
+		localStorage.setItem("language", lang);
 	}
 
 	openLoginDialog(): void {
@@ -97,27 +76,11 @@ export class NavigationComponent implements OnInit {
 	logout(): void {
 		this.store.dispatch(AuthActions.logout());
 	}
-
-	async copyJwtToClipboard(): Promise<void> {
-		await navigator.clipboard.writeText(AuthService.getAccessToken());
-		this.toast.success("Copied!");
-	}
 }
 
 @NgModule({
 	declarations: [NavigationComponent],
 	exports: [NavigationComponent],
-	imports: [
-		CommonModule,
-		MatToolbarModule,
-		MatMenuModule,
-		TranslateModule,
-		IconComponentModule,
-		MatSidenavModule,
-		RouterModule,
-		MatDividerModule,
-		MatListModule,
-		MatButtonModule
-	]
+	imports: [CommonModule, NavigationUiComponentModule]
 })
 export class NavigationComponentModule {}

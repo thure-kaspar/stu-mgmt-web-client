@@ -83,7 +83,9 @@
     "Total": "Total",
     "UpdateDate": "Update date",
     "Welcome": "Welcome",
-    "Yes": "Yes"
+    "Yes": "Yes",
+    "Dark": "Dark",
+    "Light": "Light"
   },
   "Domain": {
     "Admission": "Admission",

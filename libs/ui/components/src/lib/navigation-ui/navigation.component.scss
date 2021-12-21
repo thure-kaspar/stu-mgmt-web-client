@@ -33,6 +33,10 @@
 	color: var(--text-light);
 }
 
+mat-sidenav-content {
+	height: 100vh;
+}
+
 .sidenav a {
 	height: 40px;
 	font-size: 14px;
