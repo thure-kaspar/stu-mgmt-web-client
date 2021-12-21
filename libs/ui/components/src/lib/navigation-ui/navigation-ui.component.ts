@@ -28,7 +28,7 @@ import { Observable } from "rxjs";
 	styleUrls: ["./navigation.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationUiComponent implements OnInit {
+export class NavigationUiComponent {
 	@Input() user?: UserDto | null;
 	/** If `true`, the sidenav will be closed. */
 	@Input() isHandset = false;
@@ -43,10 +43,6 @@ export class NavigationUiComponent implements OnInit {
 	@ViewChild("drawer") drawer!: MatSidenav;
 
 	_isDevelopmentEnv = !environment.production;
-
-	ngOnInit(): void {
-		this.triggerClose$.subscribe(() => this.drawer.close());
-	}
 }
 
 @NgModule({

@@ -3,7 +3,6 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
 import { StorybookTranslateModule } from "@student-mgmt-client/storybook";
 import { USER } from "@student-mgmt-client/testing";
-import { of } from "rxjs";
 import { NavigationUiComponent, NavigationUiComponentModule } from "./navigation-ui.component";
 
 export default {
@@ -23,8 +22,7 @@ export default {
 
 const defaultArgs: Partial<NavigationUiComponent> = {
 	user: USER,
-	isHandset: false,
-	triggerClose$: of()
+	isHandset: false
 };
 
 const Template: Story<NavigationUiComponent> = (args: NavigationUiComponent) => ({
