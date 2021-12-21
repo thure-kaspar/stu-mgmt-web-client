@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import {
 	AssignmentCardUiComponentModule,
@@ -20,8 +20,7 @@ import {
 	AdmissionCriteriaDto,
 	AssessmentDto,
 	AssignmentDto,
-	GroupDto,
-	UserApi
+	GroupDto
 } from "@student-mgmt/api-client";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
@@ -36,7 +35,7 @@ type AssessmentDtoExtended = AssessmentDto & {
 	hasPassed?: boolean;
 };
 
-type AssessmentState = "passed" | "failed" | "submitted" | null;
+type PassFailState = "passed" | "failed" | "submitted" | null;
 
 @Component({
 	selector: "student-mgmt-assignment-card",
@@ -57,19 +56,18 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	 * Will be translated in the template.
 	 */
 	displayNoGroupWarning$ = new BehaviorSubject(false);
-	courseId: string;
-	group$: Observable<GroupDto>;
-	assessment$: Observable<AssessmentDtoExtended>;
-	passFailSubmittedState$: Observable<AssessmentState>;
+	group$ = new BehaviorSubject<GroupDto | null>(null);
+	assessment$ = new BehaviorSubject<AssessmentDtoExtended | null>(null);
+	passFailSubmittedState$ = new BehaviorSubject<PassFailState | null>(null);
 
 	props$: Observable<AssignmentCardUiComponentProps>;
 
+	courseId: string;
+
 	constructor(
 		private route: ActivatedRoute,
-		private router: Router,
 		private dialog: MatDialog,
 		private assignmentManagement: AssignmentManagementFacade,
-		private userApi: UserApi,
 		private toast: ToastService,
 		private store: Store
 	) {
@@ -86,6 +84,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		this.tryFindRequiredPoints(this.course.admissionCriteria);
 
 		this.props$ = combineLatest([
+			this.group$,
 			this.requiredPoints$,
 			this.displayNoGroupWarning$,
 			this.assessment$,
@@ -93,6 +92,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 		]).pipe(
 			map(
 				([
+					group,
 					requiredPoints,
 					displayNoGroupWarning,
 					assessment,
@@ -101,6 +101,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 					assignment: this.assignment,
 					courseId: this.course.id,
 					participant: this.participant,
+					group,
 					requiredPoints,
 					displayNoGroupWarning,
 					assessment,
@@ -111,20 +112,27 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 	}
 
 	private tryFindGroupOfParticipant(): void {
-		this.group$ = this.store.select(ParticipantSelectors.selectParticipantGroupsState).pipe(
-			tap(state => {
-				if (this.studentHasNoGroup(state)) {
-					if (
-						this.assignment.state === "IN_PROGRESS" &&
-						this.studentShouldHaveAGroup(this.assignment, this.participant)
-					) {
-						this.displayNoGroupWarning$.next(true);
-						this.toast.warning("Text.Group.NoGroupForAssignment", this.assignment.name);
+		this.subs.sink = this.store
+			.select(ParticipantSelectors.selectParticipantGroupsState)
+			.pipe(
+				tap(state => {
+					if (this.studentHasNoGroup(state)) {
+						if (
+							this.assignment.state === "IN_PROGRESS" &&
+							this.studentShouldHaveAGroup(this.assignment, this.participant)
+						) {
+							this.displayNoGroupWarning$.next(true);
+							this.toast.warning(
+								"Text.Group.NoGroupForAssignment",
+								this.assignment.name
+							);
+						}
 					}
-				}
-			}),
-			map(state => state.data?.[this.assignment.id])
-		);
+				}),
+				map(state => state.data?.[this.assignment.id]),
+				tap(group => this.group$.next(group))
+			)
+			.subscribe();
 	}
 
 	private tryFindRequiredPoints(admissionCriteria: AdmissionCriteriaDto): void {
@@ -144,7 +152,7 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 					rule.achievedPercentRounding.decimals
 				);
 
-				this.assessment$ = this.store
+				this.subs.sink = this.store
 					.select(ParticipantSelectors.selectAssessmentByAssignmentId(this.assignment.id))
 					.pipe(
 						map(assessment => {
@@ -159,12 +167,19 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 
 							return null;
 						})
-					);
+					)
+					.subscribe(assessment => {
+						this.assessment$.next(assessment);
+					});
 
-				this.passFailSubmittedState$ = this.assessment$.pipe(
-					filter(assessment => !!assessment),
-					map(assessment => (assessment.hasPassed ? "passed" : "failed"))
-				);
+				this.subs.sink = this.assessment$
+					.pipe(
+						filter(assessment => !!assessment),
+						map(assessment => (assessment.hasPassed ? "passed" : "failed"))
+					)
+					.subscribe(result => {
+						this.passFailSubmittedState$.next(result);
+					});
 			}
 		}
 	}
