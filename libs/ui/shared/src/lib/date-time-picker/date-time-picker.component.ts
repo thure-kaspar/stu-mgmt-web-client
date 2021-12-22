@@ -62,6 +62,7 @@ export class DateTimePickerComponent extends UnsubscribeOnDestroy implements OnI
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
 	declarations: [DateTimePickerComponent],
@@ -69,6 +70,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 	imports: [
 		CommonModule,
 		MatFormFieldModule,
+		MatInputModule,
 		MatDatepickerModule,
 		ReactiveFormsModule,
 		FormsModule

@@ -1,16 +1,15 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
 	<ng-container *ngIf="participant$ | async as participant">
 		<div class="tab" *ngIf="assignments$ | async as assignments">
-			<button
+			<a
+				[routerLink]="['/courses', courseId, 'new-assignment']"
 				*ngIf="participant?.isTeachingStaffMember"
-				(click)="openAddDialog()"
-				mat-flat-button
-				class="btn-add"
-				color="accent"
 			>
-				<student-mgmt-icon name="add"></student-mgmt-icon>
-				{{ "Action.Custom.AddAssignment" | translate }}
-			</button>
+				<button mat-flat-button class="btn-add" color="accent">
+					<student-mgmt-icon name="add"></student-mgmt-icon>
+					{{ "Action.Custom.AddAssignment" | translate }}
+				</button>
+			</a>
 
 			<div class="split">
 				<div class="assignment-states">

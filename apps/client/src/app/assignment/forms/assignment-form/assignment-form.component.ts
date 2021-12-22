@@ -2,18 +2,23 @@ import { CommonModule } from "@angular/common";
 import { Component, NgModule } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDividerModule } from "@angular/material/divider";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { TranslateModule } from "@ngx-translate/core";
-import { DateTimePickerComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
+import {
+	AssignmentTypeChipComponentModule,
+	CollaborationTypeChipComponentModule,
+	DateTimePickerComponentModule,
+	IconComponentModule
+} from "@student-mgmt-client/shared-ui";
 import { AssignmentDto } from "@student-mgmt/api-client";
 
 @Component({
 	selector: "student-mgmt-assignment-form",
-	templateUrl: "./assignment-form.component.html",
-	styleUrls: ["./assignment-form.component.scss"]
+	templateUrl: "./assignment-form.component.html"
 })
 export class AssignmentFormComponent {
 	form: FormGroup;
@@ -21,6 +26,8 @@ export class AssignmentFormComponent {
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
+
+	typeEnumValues = Object.values(AssignmentDto.TypeEnum);
 
 	constructor(private fb: FormBuilder) {
 		this.form = this.fb.group({
@@ -88,8 +95,11 @@ export class AssignmentFormComponent {
 		MatInputModule,
 		MatRadioModule,
 		MatSelectModule,
+		MatDividerModule,
 		TranslateModule,
 		IconComponentModule,
+		AssignmentTypeChipComponentModule,
+		CollaborationTypeChipComponentModule,
 		DateTimePickerComponentModule
 	]
 })

@@ -13,6 +13,13 @@ const routes: Routes = [
 					import("../assignment/assignment.module").then(m => m.AssignmentModule)
 			},
 			{
+				path: "new-assignment",
+				loadChildren: () =>
+					import("../assignment-create/create-assignment.dialog.module").then(
+						m => m.CreateAssignmentDialogModule
+					)
+			},
+			{
 				path: "groups",
 				loadChildren: () => import("../group/group.module").then(m => m.GroupModule)
 			},

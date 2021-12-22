@@ -16,6 +16,7 @@ import {
 	AssignmentTypeChipComponentModule,
 	CardComponentModule,
 	ChipComponentModule,
+	CollaborationTypeChipComponentModule,
 	IconComponentModule,
 	PersonIconComponentModule
 } from "@student-mgmt-client/shared-ui";
@@ -59,6 +60,7 @@ export class AssignmentCardUiComponent {
 		ChipComponentModule,
 		IconComponentModule,
 		AssignmentTypeChipComponentModule,
+		CollaborationTypeChipComponentModule,
 		PersonIconComponentModule
 	],
 	declarations: [AssignmentCardUiComponent],

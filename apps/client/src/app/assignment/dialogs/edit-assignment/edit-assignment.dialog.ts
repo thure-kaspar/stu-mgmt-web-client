@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
 import {
@@ -21,6 +21,7 @@ export class EditAssignmentDialogData {
 	templateUrl: "./edit-assignment.dialog.html",
 	styleUrls: ["./edit-assignment.dialog.scss"]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class EditAssignmentDialog implements OnInit {
 	@ViewChild(AssignmentFormComponent, { static: true }) form: AssignmentFormComponent;
 	private assignmentId: string;
@@ -80,6 +81,7 @@ export class EditAssignmentDialog implements OnInit {
 	exports: [EditAssignmentDialog],
 	imports: [
 		CommonModule,
+		MatDialogModule,
 		MatCardModule,
 		MatButtonModule,
 		TranslateModule,

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/c
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { CourseFacade } from "@student-mgmt-client/services";
@@ -16,7 +16,7 @@ import {
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AssignmentDto } from "@student-mgmt/api-client";
 import { map } from "rxjs/operators";
-import { CreateAssignmentDialog } from "../../dialogs/create-assignment/create-assignment.dialog";
+import { AssignmentCreateComponent } from "../../../assignment-create/assignment-create.component";
 import { AssignmentCardComponentModule } from "../assignment-card/assignment-card.component";
 import { ParticipantAdmissionStatusContainerComponentModule } from "../participant-admission-status-container/participant-admission-status-container.component";
 
@@ -58,7 +58,7 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	}
 
 	openAddDialog(): void {
-		this.dialog.open(CreateAssignmentDialog, { data: this.courseId });
+		this.dialog.open(AssignmentCreateComponent, { data: this.courseId });
 	}
 
 	private createAssignmentsStateMap(assignments: AssignmentDto[]): AssignmentsStateMap {
@@ -93,6 +93,7 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	exports: [AssignmentListComponent],
 	imports: [
 		CommonModule,
+		RouterModule,
 		MatButtonModule,
 		MatDividerModule,
 		TranslateModule,
