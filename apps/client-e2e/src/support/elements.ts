@@ -15,6 +15,27 @@ export const Selector = {
 		card: "assignment-card"
 	},
 
+	assignmentCreate: {
+		component: "assignmentCreateComponent",
+		createButton: "createButton"
+	},
+
+	assignmentForm: {
+		assignmentFormComponent: "assignmentFormComponent",
+		nameTextField: "nameTextField",
+		pointsTextField: "pointsTextField",
+		bonusPointsTextField: "bonusPointsTextField",
+		typeOption: "typeOption",
+		collaborationTypeOption: "collaborationTypeOption",
+		stateOption: "stateOption",
+		addLinkButton: "addLinkButton",
+		linkNameTextField: "linkNameTextField",
+		linkUrlTextField: "linkUrlTextField",
+		addConfigButton: "addConfigButton",
+		toolTextField: "toolTextField",
+		configTextField: "configTextField"
+	},
+
 	/** Course related selectors. */
 	course: {
 		sidebarCourseLink: "sidebar-course-link",

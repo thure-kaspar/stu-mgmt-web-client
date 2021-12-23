@@ -27,7 +27,13 @@ export class AssignmentFormComponent {
 	typeEnum = AssignmentDto.TypeEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
+	stateEnumValues = Object.values(AssignmentDto.StateEnum);
 	typeEnumValues = Object.values(AssignmentDto.TypeEnum);
+	collaborationEnumValues = [
+		AssignmentDto.CollaborationEnum.GROUP,
+		AssignmentDto.CollaborationEnum.SINGLE,
+		AssignmentDto.CollaborationEnum.GROUP_OR_SINGLE
+	];
 
 	constructor(private fb: FormBuilder) {
 		this.form = this.fb.group({

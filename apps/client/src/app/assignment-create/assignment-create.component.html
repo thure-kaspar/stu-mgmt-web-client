@@ -1,9 +1,15 @@
-<div class="flex flex-col py-8">
+<div class="flex flex-col py-8" data-test="assignmentCreateComponent">
 	<div class="inline-block mb-8">
 		<mat-card-title class="mr-4 align-middle">{{
 			"Title.CreateAssignment" | translate
 		}}</mat-card-title>
-		<button mat-flat-button color="accent" (click)="create()" [disabled]="form.form.invalid">
+		<button
+			mat-flat-button
+			color="accent"
+			(click)="create()"
+			[disabled]="form.form.invalid"
+			data-test="createButton"
+		>
 			{{ "Action.Create" | translate }}
 		</button>
 	</div>
