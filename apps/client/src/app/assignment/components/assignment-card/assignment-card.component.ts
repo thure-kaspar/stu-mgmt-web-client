@@ -24,10 +24,6 @@ import {
 } from "@student-mgmt/api-client";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
-import {
-	EditAssignmentDialog,
-	EditAssignmentDialogData
-} from "../../dialogs/edit-assignment/edit-assignment.dialog";
 import { AssignmentManagementFacade } from "../../services/assignment-management.facade";
 
 type AssessmentDtoExtended = AssessmentDto & {
@@ -193,14 +189,6 @@ export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnI
 			assignment.collaboration === AssignmentDto.CollaborationEnum.GROUP &&
 			participant.isStudent
 		);
-	}
-
-	openEditDialog(): void {
-		const data: EditAssignmentDialogData = {
-			courseId: this.courseId,
-			assignmentId: this.assignment.id
-		};
-		this.dialog.open(EditAssignmentDialog, { data });
 	}
 
 	onDelete(): void {

@@ -67,10 +67,21 @@
 
 		<mat-menu #assignmentMenu>
 			<ng-container *ngIf="props.participant.isTeachingStaffMember">
-				<button mat-menu-item (click)="editClicked.next()">
-					<student-mgmt-icon class="mr-4 icon-light" name="edit"></student-mgmt-icon>
-					<span class="font-bold">{{ "Action.Edit" | translate }}</span>
-				</button>
+				<a
+					mat-menu-item
+					[routerLink]="[
+						'/courses',
+						props.courseId,
+						'assignments',
+						props.assignment.id,
+						'edit'
+					]"
+					><button>
+						<student-mgmt-icon class="mr-4 icon-light" name="edit"></student-mgmt-icon>
+						<span class="font-bold">{{ "Action.Edit" | translate }}</span>
+					</button></a
+				>
+
 				<button mat-menu-item (click)="deleteClicked.next()">
 					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
 					<span class="font-bold text-red">

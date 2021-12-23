@@ -8,6 +8,11 @@ const routes: Routes = [
 		path: ":assignmentId/assessments",
 		loadChildren: () => import("../assessment/assessment.module").then(m => m.AssessmentModule)
 	},
+	{
+		path: ":assignmentId/edit",
+		loadChildren: () =>
+			import("../assignment-edit/assignment-edit.module").then(m => m.AssignmentEditModule)
+	},
 	{ path: "", component: AssignmentListComponent, pathMatch: "full" }
 ];
 

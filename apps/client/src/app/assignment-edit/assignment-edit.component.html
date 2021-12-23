@@ -1,0 +1,18 @@
+<div class="flex flex-col py-8" data-test="assignmentEditComponent">
+	<div class="inline-block mb-8">
+		<mat-card-title class="mr-4 align-middle">{{
+			"Title.EditAssignment" | translate
+		}}</mat-card-title>
+		<button
+			mat-flat-button
+			color="accent"
+			(click)="onSave()"
+			[disabled]="form.form.invalid"
+			data-test="createButton"
+		>
+			{{ "Action.Save" | translate }}
+		</button>
+	</div>
+
+	<student-mgmt-assignment-form></student-mgmt-assignment-form>
+</div>
