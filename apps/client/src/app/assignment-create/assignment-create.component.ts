@@ -27,10 +27,14 @@ export class AssignmentCreateComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.courseId = this.route.snapshot.params.courseId;
-		this.form.form.patchValue({
+
+		const initialFormValue: Partial<AssignmentDto> = {
 			type: AssignmentDto.TypeEnum.HOMEWORK,
-			collaboration: AssignmentDto.CollaborationEnum.GROUP
-		});
+			collaboration: AssignmentDto.CollaborationEnum.GROUP,
+			state: AssignmentDto.StateEnum.IN_PROGRESS
+		};
+
+		this.form.form.patchValue(initialFormValue);
 	}
 
 	create(): void {

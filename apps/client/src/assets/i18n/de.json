@@ -253,7 +253,8 @@
     "Notifications": "Benachrichtigungen",
     "CurrentStatus": "Aktueller Stand",
     "NoPasswordRequired": "\nKein Einschreibeschlüssel notwendig",
-    "Configs": "Konfigurationen"
+    "Configs": "Konfigurationen",
+    "Config": "Konfiguration"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "Wenn Sie fortfahren, werden ihre ungespeicherten Änderungen verworfen.",

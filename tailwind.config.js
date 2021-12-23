@@ -3,7 +3,11 @@ module.exports = {
 	content: ["./apps/client/src/app/**/*.html", "./libs/**/*.html"],
 	darkMode: "class",
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				"card-bg": "var(--card-bg)"
+			}
+		}
 	},
 	variants: {
 		extend: {}

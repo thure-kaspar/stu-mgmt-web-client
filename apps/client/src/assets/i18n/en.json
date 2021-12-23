@@ -253,7 +253,8 @@
     "Notifications": "Notifications",
     "CurrentStatus": "Current status",
     "NoPasswordRequired": "No password required",
-    "Configs": "Configurations"
+    "Configs": "Configurations",
+    "Config": "Config"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "If you continue, your unsaved changes will be discarded.",

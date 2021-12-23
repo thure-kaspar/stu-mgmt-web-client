@@ -7,7 +7,7 @@
 	</mat-form-field>
 
 	<mat-form-field>
-		<mat-label>Time</mat-label>
+		<mat-label>{{ "Common.Time" | translate }}</mat-label>
 		<input matInput type="time" [(ngModel)]="time" (ngModelChange)="onTimeChanged($event)" />
 	</mat-form-field>
 </div>
