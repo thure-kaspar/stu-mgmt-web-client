@@ -1,5 +1,10 @@
 <ng-container *ngIf="participantFacade.participant$ | async as participant">
-	<div class="tab" id="group-detail-container" *ngIf="group$ | async as group">
+	<div
+		class="tab"
+		id="group-detail-container"
+		*ngIf="group$ | async as group"
+		data-test="groupDetailComponent"
+	>
 		<mat-card-title class="title">
 			<span class="left">
 				{{ group.name }}

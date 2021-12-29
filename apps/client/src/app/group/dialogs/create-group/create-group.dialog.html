@@ -1,38 +1,46 @@
-<div class="dialog-container" id="create-group-dialog">
+<div class="dialog-container" id="create-group-dialog" data-test="createGroupDialog">
 	<mat-card-title matDialogTitle>{{ 'Title.CreateGroup' | translate }}</mat-card-title>
 
-	<div matDialogContent class="dialog-content">
+	<div matDialogContent>
 		<mat-tab-group #tabs color="accent" mat-align-tabs="m-auto" animationDuration="0ms">
 			<mat-tab label="{{ 'Common.Single' | translate }}">
 				<div class="single">
-					<form [formGroup]="form" autocomplete="off">
+					<form [formGroup]="form" autocomplete="off" class="flex flex-col gap-4 py-1">
 						<mat-form-field id="name-field">
 							<mat-label floatLabel="always" always
 								>{{ 'Common.Name' | translate }}</mat-label
 							>
-							<input matInput formControlName="name" cdkFocusInitial />
+							<input
+								matInput
+								formControlName="name"
+								data-test="nameTextField"
+								cdkFocusInitial
+							/>
 							<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 						</mat-form-field>
-						<br />
+
 						<mat-form-field id="password-field">
 							<mat-label floatLabel="always"
 								>{{ 'Common.Password' | translate }}</mat-label
 							>
-							<input matInput formControlName="password" />
+							<input
+								matInput
+								formControlName="password"
+								data-test="passwordTextField"
+							/>
 							<mat-hint></mat-hint>
 							<mat-error></mat-error>
 						</mat-form-field>
-						<br />
 					</form>
 				</div>
 			</mat-tab>
 
-			<mat-tab label="{{ 'Common.Multiple' | translate }}">
+			<mat-tab label="{{ 'Common.Multiple' | translate }}" data-test="multipleTab">
 				<ng-template matTabContent>
 					<student-mgmt-create-group-multiple
 						#createMultiple
 						[courseId]="courseId"
-						(onGroupsCreated)="onGroupsCreatedHandler($event)"
+						(groupsCreated)="onGroupsCreatedHandler($event)"
 					></student-mgmt-create-group-multiple>
 				</ng-template>
 			</mat-tab>
@@ -40,9 +48,17 @@
 	</div>
 
 	<div matDialogActions>
-		<button mat-flat-button (click)="onSave()" color="accent">
-			{{ 'Action.Save' | translate }}
+		<button
+			mat-flat-button
+			(click)="create()"
+			color="accent"
+			[disabled]="tabGroup?.selectedIndex === 0 ? form.invalid : createMultiple?.form.invalid"
+			data-test="createButton"
+		>
+			{{ 'Action.Create' | translate }}
 		</button>
-		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
+		<button mat-button (click)="onCancel()" data-test="cancelButton">
+			{{ 'Action.Cancel' | translate }}
+		</button>
 	</div>
 </div>

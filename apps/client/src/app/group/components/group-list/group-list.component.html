@@ -1,11 +1,12 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
-	<div class="tab" *ngIf="participant$ | async as participant">
+	<div class="tab" *ngIf="participant$ | async as participant" data-test="groupListComponent">
 		<button
 			mat-flat-button
 			id="btn-add"
 			color="accent"
 			(click)="openCreateGroupDialog()"
 			[disabled]="!course.groupSettings.allowGroups"
+			data-test="addGroupButton"
 		>
 			<student-mgmt-icon name="add"></student-mgmt-icon>
 			{{ "Action.Custom.AddGroup" | translate }}
@@ -22,7 +23,11 @@
 					<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
 						{{ "Common.Closed" | translate }}
 					</mat-checkbox>
-					<mat-checkbox [(ngModel)]="filter.excludeEmpty" (change)="filterSubject.next()">
+					<mat-checkbox
+						[(ngModel)]="filter.excludeEmpty"
+						(change)="filterSubject.next()"
+						data-test="excludeEmptyGroupsCheckbox"
+					>
 						{{ "Misc.ExcludeEmptyGroups" | translate }}
 					</mat-checkbox>
 				</div>

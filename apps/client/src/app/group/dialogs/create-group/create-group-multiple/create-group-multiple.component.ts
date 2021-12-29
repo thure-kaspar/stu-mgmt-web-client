@@ -1,5 +1,12 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, NgModule, OnInit, Output } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	Input,
+	NgModule,
+	Output
+} from "@angular/core";
 import {
 	FormBuilder,
 	FormGroup,
@@ -10,37 +17,32 @@ import {
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TranslateModule } from "@ngx-translate/core";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 import { GroupApi, GroupCreateBulkDto, GroupDto } from "@student-mgmt/api-client";
 
 @Component({
 	selector: "student-mgmt-create-group-multiple",
 	templateUrl: "./create-group-multiple.component.html",
-	styleUrls: ["./create-group-multiple.component.scss"]
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateGroupMultipleComponent implements OnInit {
+export class CreateGroupMultipleComponent {
 	@Input() courseId: string;
-	@Output() onGroupsCreated = new EventEmitter<GroupDto[]>();
+	@Output() groupsCreated = new EventEmitter<GroupDto[]>();
 
 	/** Form with the structure of a GroupCreateBulkDto. */
 	form: FormGroup;
 	/** Determines, wether the user wants to specify group names explicitly or use a naming schema. */
 	useNamingSchema: boolean;
 
-	constructor(
-		private fb: FormBuilder,
-		private groupApi: GroupApi,
-		private snackbar: SnackbarService
-	) {
+	constructor(private fb: FormBuilder, private groupApi: GroupApi, private toast: ToastService) {
 		this.form = this.fb.group({
 			names: [null],
 			nameSchema: [null],
 			count: [null, Validators.min(1)]
 		});
 	}
-
-	ngOnInit(): void {}
 
 	onChange(): void {
 		this.form.reset();
@@ -55,10 +57,9 @@ export class CreateGroupMultipleComponent implements OnInit {
 		}
 
 		this.groupApi.createMultipleGroups(groupCreateBulk, this.courseId).subscribe(
-			groups => this.onGroupsCreated.emit(groups),
+			groups => this.groupsCreated.emit(groups),
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		);
 	}
@@ -74,6 +75,7 @@ export class CreateGroupMultipleComponent implements OnInit {
 		MatDialogModule,
 		MatFormFieldModule,
 		MatInputModule,
+		MatSlideToggleModule,
 		TranslateModule
 	]
 })

@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common";
-import { Component, Inject, NgModule, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, NgModule, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { TranslateModule } from "@ngx-translate/core";
 import { AuthService } from "@student-mgmt-client/auth";
 import { ToastService } from "@student-mgmt-client/services";
@@ -18,8 +19,9 @@ import { CourseConfigApi, GroupApi, GroupDto, GroupSettingsDto } from "@student-
 @Component({
 	selector: "student-mgmt-create-group-student",
 	templateUrl: "./create-group-student.dialog.html",
-	styleUrls: ["./create-group-student.dialog.scss"]
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements OnInit {
 	name: string;
 	password: string;
@@ -103,6 +105,7 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 		MatDialogModule,
 		MatButtonModule,
 		MatFormFieldModule,
+		MatInputModule,
 		TranslateModule
 	]
 })

@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, NgModule, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -7,8 +7,9 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/materia
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatTabGroup, MatTabsModule } from "@angular/material/tabs";
+import { Router } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 import { GroupApi, GroupDto } from "@student-mgmt/api-client";
 import {
 	CreateGroupMultipleComponent,
@@ -18,9 +19,10 @@ import {
 @Component({
 	selector: "student-mgmt-create-group",
 	templateUrl: "./create-group.dialog.html",
-	styleUrls: ["./create-group.dialog.scss"]
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateGroupDialog implements OnInit {
+// eslint-disable-next-line @angular-eslint/component-class-suffix
+export class CreateGroupDialog {
 	@ViewChild("createMultiple") createMultiple: CreateGroupMultipleComponent;
 	@ViewChild("tabs") tabGroup: MatTabGroup;
 	form: FormGroup;
@@ -28,9 +30,10 @@ export class CreateGroupDialog implements OnInit {
 	constructor(
 		public dialogRef: MatDialogRef<CreateGroupDialog>,
 		@Inject(MAT_DIALOG_DATA) public courseId: string,
+		private router: Router,
 		private groupApi: GroupApi,
 		private fb: FormBuilder,
-		private snackbar: SnackbarService
+		private toast: ToastService
 	) {
 		this.form = this.fb.group({
 			courseId: [this.courseId, Validators.required],
@@ -40,19 +43,17 @@ export class CreateGroupDialog implements OnInit {
 		});
 	}
 
-	ngOnInit(): void {}
-
 	onCancel(): void {
 		this.dialogRef.close();
 	}
 
 	onGroupsCreatedHandler(groups: GroupDto[]): void {
-		this.snackbar.openSuccessMessage("Groups created!");
+		this.displaySuccessMessage();
 		this.dialogRef.close(groups);
 	}
 
 	/** Calls the onSave-Method of the selected tab. */
-	onSave(): void {
+	create(): void {
 		if (this.tabGroup.selectedIndex == 0) {
 			// Single-Tab
 			this.onSaveSingle();
@@ -67,14 +68,18 @@ export class CreateGroupDialog implements OnInit {
 
 		this.groupApi.createGroup(group, this.courseId).subscribe(
 			result => {
-				this.snackbar.openSuccessMessage("Group created!");
+				this.displaySuccessMessage();
 				this.dialogRef.close(result);
+				this.router.navigate(["/courses", this.courseId, "groups", result.id]);
 			},
 			error => {
-				console.log(error);
-				this.snackbar.openErrorMessage();
+				this.toast.apiError(error);
 			}
 		);
+	}
+
+	private displaySuccessMessage() {
+		this.toast.success("Message.CreatedGroup");
 	}
 }
 

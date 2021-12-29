@@ -75,5 +75,43 @@ export const Selector = {
 	joinCourseDialog: {
 		dialog: "join-course-dialog",
 		errorMessage: "join-course-error"
+	},
+
+	createGroupDialog: {
+		component: "createGroupDialog",
+		nameTextField: "nameTextField",
+		passwordTextField: "passwordTextField",
+		multipleTab: "multipleTab",
+		createButton: "createButton",
+		cancelButton: "cancelButton"
+	},
+
+	createGroupMultiple: {
+		component: "createGroupMultipleComponent",
+		groupNamesTextArea: "groupNamesTextArea",
+		prefixTextField: "prefixTextField",
+		countTextField: "countTextField"
+	},
+
+	createGroupStudent: {
+		component: "createGroupStudentDialog",
+		nameTextField: "nameTextField",
+		passwordTextField: "passwordTextField",
+		createButton: "createButton",
+		cancelButton: "cancelButton"
+	},
+
+	groupList: {
+		component: "groupListComponent",
+		addGroupButton: "addGroupButton",
+		excludeEmptyGroupsCheckbox: "excludeEmptyGroupsCheckbox"
+	},
+
+	groupDetail: {
+		component: "groupDetailComponent"
+	},
+
+	groupCard: {
+		component: "groupCardComponent"
 	}
 } as const;

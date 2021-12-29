@@ -13,10 +13,13 @@ import { CourseFacade, ParticipantFacade, ToastService } from "@student-mgmt-cli
 import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { GroupApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
-import { BehaviorSubject, Subject } from "rxjs";
-import { take, tap } from "rxjs/operators";
+import { BehaviorSubject, firstValueFrom, Subject } from "rxjs";
+import { tap } from "rxjs/operators";
 import { CreateGroupStudentDialog } from "../../dialogs/create-group-student/create-group-student.dialog";
-import { CreateGroupDialog } from "../../dialogs/create-group/create-group.dialog";
+import {
+	CreateGroupDialog,
+	CreateGroupDialogModule
+} from "../../dialogs/create-group/create-group.dialog";
 import { GroupCardComponentModule } from "../group-card/group-card.component";
 
 class GroupFilter {
@@ -119,22 +122,25 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	/**
 	 * Opens up a group creation dialog depending on the user's course role.
 	 */
-	openCreateGroupDialog(): void {
-		if (this.participant.isStudent) {
-			if (this.participant.groupId) {
-				this.participantFacade
-					.leaveGroup(this.participant.group, "Text.Group.LeaveToJoinOther")
-					.pipe(take(1))
-					.subscribe(leftGroup => {
-						if (leftGroup) {
-							this.openCreateGroupDialog_Student();
-						}
-					});
-			} else {
+	async openCreateGroupDialog(): Promise<void> {
+		if (!this.participant.isStudent) {
+			this.openCreateGroupDialog_LecturerOrTutor();
+			return;
+		}
+
+		if (!this.participant.groupId) {
+			this.openCreateGroupDialog_Student();
+		} else {
+			// Student must leave current group before creating a new one
+			const leftGroup = await firstValueFrom(
+				this.participantFacade.leaveGroup(
+					this.participant.group,
+					"Text.Group.LeaveToJoinOther"
+				)
+			);
+			if (leftGroup) {
 				this.openCreateGroupDialog_Student();
 			}
-		} else {
-			this.openCreateGroupDialog_LecturerOrTutor();
 		}
 	}
 
@@ -219,7 +225,8 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		MatCheckboxModule,
 		TranslateModule,
 		IconComponentModule,
-		GroupCardComponentModule
+		GroupCardComponentModule,
+		CreateGroupDialogModule
 	]
 })
 export class GroupListComponentModule {}

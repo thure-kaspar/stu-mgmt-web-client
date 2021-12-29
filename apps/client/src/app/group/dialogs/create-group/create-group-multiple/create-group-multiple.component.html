@@ -1,30 +1,33 @@
-<div id="create-group-multiple-container">
-	<mat-slide-toggle [(ngModel)]="useNamingSchema" (ngModelChange)="onChange()">
-		{{ "Action.Custom.UseNamingSchemaAndCount" | translate }}
-	</mat-slide-toggle>
+<div data-test="createGroupMultipleComponent">
+	<div class="py-4">
+		<mat-slide-toggle [(ngModel)]="useNamingSchema" (ngModelChange)="onChange()">
+			{{ "Action.Custom.UseNamingSchemaAndCount" | translate }}
+		</mat-slide-toggle>
+	</div>
 
-	<form [formGroup]="form" class="form-container" autocomplete="off">
+	<form [formGroup]="form" class="flex" autocomplete="off">
 		<ng-container *ngIf="!useNamingSchema">
-			<mat-form-field appearance="outline" floatLabel="always">
+			<mat-form-field class="w-full" appearance="outline" floatLabel="always">
 				<mat-label>{{ "Domain.GroupNames" | translate }}</mat-label>
 				<textarea
 					matInput
 					formControlName="names"
 					placeholder="Group-1&#10;Group-2&#10;Group-3"
 					rows="5"
+					data-test="groupNamesTextArea"
 				></textarea>
 			</mat-form-field>
 		</ng-container>
 
-		<div id="schema-and-count" *ngIf="useNamingSchema">
+		<div class="flex flex-col w-full gap-4" *ngIf="useNamingSchema">
 			<mat-form-field id="schema-field">
 				<mat-label>{{ "Property.GroupSettings.NameSchema" | translate }}</mat-label>
-				<input matInput formControlName="nameSchema" />
+				<input matInput formControlName="nameSchema" data-test="prefixTextField" />
 			</mat-form-field>
 
 			<mat-form-field id="count-field">
 				<mat-label>{{ "Common.Count" | translate }}</mat-label>
-				<input type="number" matInput formControlName="count" />
+				<input type="number" matInput formControlName="count" data-test="countTextField" />
 			</mat-form-field>
 		</div>
 	</form>
