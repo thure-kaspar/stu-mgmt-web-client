@@ -7,6 +7,12 @@ export class FirstCharacterPipe implements PipeTransform {
 			return "?";
 		}
 
+		const split = value.split(" ");
+
+		if (split.length == 2) {
+			return split[0][0] + split[1][0];
+		}
+
 		return value[0];
 	}
 }

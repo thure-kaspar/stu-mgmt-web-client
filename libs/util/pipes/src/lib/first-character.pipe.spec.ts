@@ -10,8 +10,16 @@ describe("FirstCharacterPipe", () => {
 		expect(firstCharacterPipe).toBeDefined();
 	});
 
-	it("String -> Returns first character", () => {
-		expect(firstCharacterPipe.transform("Max Mustermann")).toEqual("M");
+	it("John Doe -> Returns JD", () => {
+		expect(firstCharacterPipe.transform("John Doe")).toEqual("JD");
+	});
+
+	it("Mustermann -> Returns M", () => {
+		expect(firstCharacterPipe.transform("Mustermann")).toEqual("M");
+	});
+
+	it("A B C -> Returns A", () => {
+		expect(firstCharacterPipe.transform("A B C")).toEqual("A");
 	});
 
 	it("Empty string -> Returns ?", () => {
