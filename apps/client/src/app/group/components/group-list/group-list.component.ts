@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialog } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -36,7 +37,6 @@ class GroupFilter {
 @Component({
 	selector: "student-mgmt-group-list",
 	templateUrl: "./group-list.component.html",
-	styleUrls: ["./group-list.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
@@ -223,6 +223,7 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		MatFormFieldModule,
 		MatInputModule,
 		MatCheckboxModule,
+		MatCardModule,
 		TranslateModule,
 		IconComponentModule,
 		GroupCardComponentModule,

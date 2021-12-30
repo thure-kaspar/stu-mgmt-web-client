@@ -18,7 +18,7 @@ import {
 	ChipComponentModule,
 	CollaborationTypeChipComponentModule,
 	IconComponentModule,
-	PersonIconComponentModule
+	PersonListComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { AssignmentDto, GroupDto } from "@student-mgmt/api-client";
 
@@ -61,7 +61,7 @@ export class AssignmentCardUiComponent {
 		IconComponentModule,
 		AssignmentTypeChipComponentModule,
 		CollaborationTypeChipComponentModule,
-		PersonIconComponentModule
+		PersonListComponentModule
 	],
 	declarations: [AssignmentCardUiComponent],
 	exports: [AssignmentCardUiComponent]

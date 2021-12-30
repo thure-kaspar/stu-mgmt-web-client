@@ -10,3 +10,4 @@ export * from "./lib/icon.component";
 export * from "./lib/paginator/paginator.component";
 export * from "./lib/thumb-chip/thumb-chip.component";
 export * from "./lib/person-icon/person-icon.component";
+export * from "./lib/person-list/person-list.component";

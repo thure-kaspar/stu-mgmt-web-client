@@ -8,19 +8,15 @@ import {
 	OnInit,
 	Output
 } from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
-import { MatMenuModule } from "@angular/material/menu";
-import { Router, RouterModule } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
+import { Router } from "@angular/router";
+import {
+	GroupCardUiComponentModule,
+	GroupCardUiComponentProps
+} from "@student-mgmt-client/components";
 import { Course, Group, Participant } from "@student-mgmt-client/domain-types";
 import { DialogService, ParticipantFacade } from "@student-mgmt-client/services";
-import {
-	CardComponentModule,
-	ChipComponentModule,
-	IconComponentModule,
-	SearchParticipantDialog
-} from "@student-mgmt-client/shared-ui";
+import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 import { take } from "rxjs/operators";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
@@ -28,7 +24,6 @@ import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/j
 @Component({
 	selector: "student-mgmt-group-card",
 	templateUrl: "./group-card.component.html",
-	styleUrls: ["./group-card.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupCardComponent implements OnInit {
@@ -36,10 +31,12 @@ export class GroupCardComponent implements OnInit {
 	@Input() course: Course;
 	@Input() participant: Participant;
 
+	props: GroupCardUiComponentProps;
+
 	/** Emits a group that should be removed. */
-	@Output() onRemoveGroup = new EventEmitter<GroupDto>();
+	@Output() groupRemoved = new EventEmitter<GroupDto>();
 	/** Emits a `participant` and the group that the participant should be added to. */
-	@Output() onAddParticipant = new EventEmitter<{
+	@Output() participantAdded = new EventEmitter<{
 		group: GroupDto;
 		participant: ParticipantDto;
 	}>();
@@ -54,9 +51,12 @@ export class GroupCardComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		if (this.group.hasNotEnoughMembers(this.course)) {
-			this.cssClass = "WARNING";
-		}
+		this.props = {
+			course: this.course,
+			group: this.group,
+			participant: this.participant,
+			isJoinable: this.isJoinable()
+		};
 	}
 
 	/**
@@ -112,7 +112,7 @@ export class GroupCardComponent implements OnInit {
 			.subscribe(participants => {
 				// Emit the selected participant, if one was selected
 				if (participants?.length > 0) {
-					this.onAddParticipant.emit({
+					this.participantAdded.emit({
 						group: this.group,
 						participant: participants[0]
 					});
@@ -131,24 +131,23 @@ export class GroupCardComponent implements OnInit {
 			})
 			.subscribe(confirmed => {
 				if (confirmed) {
-					this.onRemoveGroup.emit(this.group);
+					this.groupRemoved.emit(this.group);
 				}
 			});
+	}
+
+	isJoinable(): boolean {
+		return (
+			this.group.isClosed ||
+			this.group.id === this.participant.groupId ||
+			this.group.isFull(this.course)
+		);
 	}
 }
 
 @NgModule({
 	declarations: [GroupCardComponent],
 	exports: [GroupCardComponent],
-	imports: [
-		CommonModule,
-		RouterModule,
-		MatButtonModule,
-		MatMenuModule,
-		TranslateModule,
-		IconComponentModule,
-		ChipComponentModule,
-		CardComponentModule
-	]
+	imports: [CommonModule, GroupCardUiComponentModule]
 })
 export class GroupCardComponentModule {}

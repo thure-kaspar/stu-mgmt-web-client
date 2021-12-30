@@ -132,37 +132,17 @@
 			>
 		</div>
 
-		<div class="flex flex-col gap-1" *ngIf="props.group">
+		<div class="flex flex-col gap-2" *ngIf="props.group">
 			<a
 				class="font-bold group-title"
 				[routerLink]="['/courses', props.courseId, 'groups', props.group.id]"
 				>{{ props.group.name }}
 			</a>
 
-			<div class="flex flex-col gap-2">
-				<div class="flex" *ngFor="let member of props.group.members">
-					<div class="flex gap-2" *ngIf="props.participant.userId !== member.userId">
-						<student-mgmt-person-icon
-							class="pt-1"
-							[name]="member.displayName"
-						></student-mgmt-person-icon>
-
-						<div class="flex flex-col">
-							<span class="member-name">
-								{{ member.displayName }}
-							</span>
-
-							<a
-								class="text-light link-none"
-								[href]="'mailto:' + member.email"
-								*ngIf="member.email"
-							>
-								Email: {{ member.email }}
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
+			<student-mgmt-person-list
+				*ngIf="props.group.members && props.group.members.length > 0"
+				[participants]="props.group.members"
+			></student-mgmt-person-list>
 		</div>
 
 		<span class="flex gap-2" *ngIf="props.displayNoGroupWarning">

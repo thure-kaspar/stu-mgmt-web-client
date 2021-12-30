@@ -1,60 +1,66 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
-	<div class="tab" *ngIf="participant$ | async as participant" data-test="groupListComponent">
-		<button
-			mat-flat-button
-			id="btn-add"
-			color="accent"
-			(click)="openCreateGroupDialog()"
-			[disabled]="!course.groupSettings.allowGroups"
-			data-test="addGroupButton"
-		>
-			<student-mgmt-icon name="add"></student-mgmt-icon>
-			{{ "Action.Custom.AddGroup" | translate }}
-		</button>
+	<div
+		class="flex flex-col py-8"
+		*ngIf="participant$ | async as participant"
+		data-test="groupListComponent"
+	>
+		<span class="flex justify-between gap-4 mb-8">
+			<mat-card-title class="my-auto"
+				>{{ "Domain.Groups" | translate }} ({{ totalCount }})</mat-card-title
+			>
 
-		<div class="groups">
-			<h2 class="heading-groups">{{ "Domain.Groups" | translate }}: ({{ totalCount }})</h2>
+			<button
+				mat-flat-button
+				id="btn-add"
+				color="accent"
+				(click)="openCreateGroupDialog()"
+				[disabled]="!course.groupSettings.allowGroups"
+				data-test="addGroupButton"
+			>
+				<student-mgmt-icon name="add"></student-mgmt-icon>
+				{{ "Action.Custom.AddGroup" | translate }}
+			</button>
+		</span>
 
-			<div class="group-filter">
-				<div class="checkboxes">
-					<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
-						{{ "Common.Open" | translate }}
-					</mat-checkbox>
-					<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
-						{{ "Common.Closed" | translate }}
-					</mat-checkbox>
-					<mat-checkbox
-						[(ngModel)]="filter.excludeEmpty"
-						(change)="filterSubject.next()"
-						data-test="excludeEmptyGroupsCheckbox"
-					>
-						{{ "Misc.ExcludeEmptyGroups" | translate }}
-					</mat-checkbox>
-				</div>
-
-				<mat-form-field class="name-filter">
-					<mat-label>Filter</mat-label>
-					<input
-						matInput
-						[(ngModel)]="filter.name"
-						(keyup)="filterSubject.next()"
-						autocomplete="off"
-					/>
-				</mat-form-field>
+		<div class="flex flex-col gap-4">
+			<div class="flex flex-col">
+				<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
+					{{ "Common.Open" | translate }}
+				</mat-checkbox>
+				<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
+					{{ "Common.Closed" | translate }}
+				</mat-checkbox>
+				<mat-checkbox
+					[(ngModel)]="filter.excludeEmpty"
+					(change)="filterSubject.next()"
+					data-test="excludeEmptyGroupsCheckbox"
+				>
+					{{ "Misc.ExcludeEmptyGroups" | translate }}
+				</mat-checkbox>
 			</div>
 
-			<div class="groups-grid" *ngIf="groups$ | async as groups">
-				<ng-container *ngFor="let group of groups">
-					<student-mgmt-group-card
-						[group]="group"
-						[participant]="participant"
-						[course]="course"
-						(onRemoveGroup)="onRemoveGroup($event)"
-						(onAddParticipant)="onAddParticipant($event)"
-					>
-					</student-mgmt-group-card>
-				</ng-container>
-			</div>
+			<mat-form-field class="name-filter">
+				<mat-label>Filter</mat-label>
+				<input
+					matInput
+					[(ngModel)]="filter.name"
+					(keyup)="filterSubject.next()"
+					autocomplete="off"
+				/>
+			</mat-form-field>
+		</div>
+
+		<div class="flex flex-col gap-4" *ngIf="groups$ | async as groups">
+			<ng-container *ngFor="let group of groups">
+				<student-mgmt-group-card
+					[group]="group"
+					[participant]="participant"
+					[course]="course"
+					(groupRemoved)="onRemoveGroup($event)"
+					(participantAdded)="onAddParticipant($event)"
+				>
+				</student-mgmt-group-card>
+			</ng-container>
 		</div>
 	</div>
 </ng-container>

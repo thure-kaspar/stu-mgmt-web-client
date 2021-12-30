@@ -16,7 +16,12 @@ const Template: Story<PersonIconComponent> = (args: PersonIconComponent) => ({
 	props: args
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const FirstAndLastname = Template.bind({});
+FirstAndLastname.args = {
 	name: "Max Mustermann"
+};
+
+export const OneWord = Template.bind({});
+OneWord.args = {
+	name: "User"
 };
