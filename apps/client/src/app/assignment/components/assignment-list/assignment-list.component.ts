@@ -19,6 +19,8 @@ import { map } from "rxjs/operators";
 import { AssignmentCreateComponent } from "../../../assignment-create/assignment-create.component";
 import { AssignmentCardComponentModule } from "../assignment-card/assignment-card.component";
 import { ParticipantAdmissionStatusContainerComponentModule } from "../participant-admission-status-container/participant-admission-status-container.component";
+import { AssignmentsByStateComponentModule } from "../assignments-by-state/assignments-by-state.component";
+import { MatCardModule } from "@angular/material/card";
 
 class AssignmentsStateMap {
 	inProgress: AssignmentDto[] = [];
@@ -31,7 +33,6 @@ class AssignmentsStateMap {
 @Component({
 	selector: "student-mgmt-assignment-list",
 	templateUrl: "./assignment-list.component.html",
-	styleUrls: ["./assignment-list.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnInit {
@@ -94,12 +95,13 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	imports: [
 		CommonModule,
 		RouterModule,
+		MatCardModule,
 		MatButtonModule,
 		MatDividerModule,
 		TranslateModule,
-		AssignmentCardComponentModule,
 		IconComponentModule,
-		ParticipantAdmissionStatusContainerComponentModule
+		ParticipantAdmissionStatusContainerComponentModule,
+		AssignmentsByStateComponentModule
 	]
 })
 export class AssignmentListComponentModule {}

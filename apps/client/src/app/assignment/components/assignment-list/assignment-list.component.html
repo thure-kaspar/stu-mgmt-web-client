@@ -1,107 +1,77 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
 	<ng-container *ngIf="participant$ | async as participant">
-		<div class="tab" *ngIf="assignments$ | async as assignments">
-			<a
-				[routerLink]="['/courses', courseId, 'new-assignment']"
-				*ngIf="participant?.isTeachingStaffMember"
-			>
-				<button mat-flat-button class="btn-add" color="accent">
-					<student-mgmt-icon name="add"></student-mgmt-icon>
-					{{ "Action.Custom.AddAssignment" | translate }}
-				</button>
-			</a>
+		<div class="flex flex-col py-8" *ngIf="assignments$ | async as assignments">
+			<div class="flex justify-between mb-8">
+				<mat-card-title class="my-auto">{{
+					"Domain.Assignments" | translate
+				}}</mat-card-title>
 
-			<div class="split">
-				<div class="assignment-states">
-					<div class="state in-progress">
-						<h3 class="assignment-state">
-							{{ "Enum.AssignmentState.IN_PROGRESS" | translate }}
-						</h3>
-						<div class="assignment-list">
-							<ng-container *ngFor="let assignment of assignments.inProgress">
-								<student-mgmt-assignment-card
-									[course]="course"
-									[assignment]="assignment"
-									[participant]="participant"
-								></student-mgmt-assignment-card>
-							</ng-container>
-						</div>
-					</div>
+				<a
+					*ngIf="participant?.isTeachingStaffMember"
+					[routerLink]="['/courses', courseId, 'new-assignment']"
+				>
+					<button mat-flat-button class="btn-add" color="accent">
+						<student-mgmt-icon name="add"></student-mgmt-icon>
+						{{ "Action.Custom.AddAssignment" | translate }}
+					</button>
+				</a>
+			</div>
 
-					<mat-divider inset></mat-divider>
+			<div class="flex gap-8">
+				<div class="flex flex-col gap-8">
+					<student-mgmt-assignments-by-state
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.inProgress"
+						[stateName]="'Enum.AssignmentState.IN_PROGRESS' | translate"
+					>
+					</student-mgmt-assignments-by-state>
 
-					<div class="state in-review">
-						<h3 class="assignment-state">
-							{{ "Enum.AssignmentState.IN_REVIEW" | translate }}
-						</h3>
-						<div class="assignment-list">
-							<ng-container *ngFor="let assignment of assignments.inReview">
-								<student-mgmt-assignment-card
-									[course]="course"
-									[assignment]="assignment"
-									[participant]="participant"
-								></student-mgmt-assignment-card>
-							</ng-container>
-						</div>
-					</div>
+					<mat-divider></mat-divider>
 
-					<mat-divider inset></mat-divider>
+					<student-mgmt-assignments-by-state
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.inReview"
+						[stateName]="'Enum.AssignmentState.IN_REVIEW' | translate"
+					>
+					</student-mgmt-assignments-by-state>
 
-					<div class="state evaluated">
-						<h3 class="assignment-state">
-							{{ "Enum.AssignmentState.EVALUATED" | translate }}
-						</h3>
-						<div class="assignment-list">
-							<ng-container *ngFor="let assignment of assignments.evaluated">
-								<student-mgmt-assignment-card
-									[course]="course"
-									[assignment]="assignment"
-									[participant]="participant"
-								></student-mgmt-assignment-card>
-							</ng-container>
-						</div>
-					</div>
+					<mat-divider></mat-divider>
 
-					<mat-divider inset></mat-divider>
+					<student-mgmt-assignments-by-state
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.evaluated"
+						[stateName]="'Enum.AssignmentState.EVALUATED' | translate"
+					>
+					</student-mgmt-assignments-by-state>
 
-					<div class="state closed">
-						<h3 class="assignment-state">
-							{{ "Enum.AssignmentState.CLOSED" | translate }}
-						</h3>
-						<div class="assignment-list">
-							<ng-container *ngFor="let assignment of assignments.closed">
-								<student-mgmt-assignment-card
-									[course]="course"
-									[assignment]="assignment"
-									[participant]="participant"
-								></student-mgmt-assignment-card>
-							</ng-container>
-						</div>
-					</div>
+					<mat-divider></mat-divider>
 
-					<ng-container *ngIf="participant?.isTeachingStaffMember">
-						<mat-divider inset></mat-divider>
+					<student-mgmt-assignments-by-state
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.closed"
+						[stateName]="'Enum.AssignmentState.CLOSED' | translate"
+					>
+					</student-mgmt-assignments-by-state>
+					<mat-divider></mat-divider>
 
-						<div class="invisible state">
-							<h3 class="assignment-state">
-								{{ "Enum.AssignmentState.INVISIBLE" | translate }}
-							</h3>
-							<div class="assignment-list">
-								<ng-container *ngFor="let assignment of assignments.invisible">
-									<student-mgmt-assignment-card
-										[course]="course"
-										[assignment]="assignment"
-										[participant]="participant"
-									></student-mgmt-assignment-card>
-								</ng-container>
-							</div>
-						</div>
-					</ng-container>
+					<student-mgmt-assignments-by-state
+						*ngIf="participant?.isTeachingStaffMember"
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.invisible"
+						[stateName]="'Enum.AssignmentState.INVISIBLE' | translate"
+					>
+					</student-mgmt-assignments-by-state>
 				</div>
 
-				<div class="admission-status" *ngIf="participant.isStudent">
-					<student-mgmt-participant-admission-status-container></student-mgmt-participant-admission-status-container>
-				</div>
+				<student-mgmt-participant-admission-status-container
+					class="mt-10"
+					*ngIf="participant.isStudent"
+				></student-mgmt-participant-admission-status-container>
 			</div>
 		</div>
 	</ng-container>
