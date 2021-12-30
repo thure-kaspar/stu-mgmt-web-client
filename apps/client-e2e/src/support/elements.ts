@@ -4,6 +4,12 @@
  * @example cy.get(Selector.assignments).should("have.length", 4) // Course should have 4 assignments
  */
 export const Selector = {
+	confirmDialog: {
+		component: "confirmDialogComponent",
+		confirmButton: "btn-confirm",
+		cancelButton: "btn-cancel"
+	},
+
 	/** Confirm button inside the `ConfirmDialog`. */
 	confirmBtn: "btn-confirm",
 	/** Cancel button inside the `ConfirmDialog`. */
@@ -112,6 +118,19 @@ export const Selector = {
 	},
 
 	groupCard: {
-		component: "groupCardComponent"
-	}
+		component: "groupCardComponent",
+		groupCardMenuButton: "groupCardMenuButton",
+		addParticipantButton: "addParticipantButton",
+		deleteGroupButton: "deleteGroupButton"
+	},
+
+	searchParticipantDialog: {
+		component: "searchParticipantDialog",
+		nameTextField: "nameTextField",
+		usernameButton: "usernameButton",
+		confirmButton: "confirmButton",
+		cancelButton: "cancelButton"
+	},
+
+	personListName: "personListName"
 } as const;

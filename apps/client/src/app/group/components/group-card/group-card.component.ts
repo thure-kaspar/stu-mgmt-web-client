@@ -16,7 +16,10 @@ import {
 } from "@student-mgmt-client/components";
 import { Course, Group, Participant } from "@student-mgmt-client/domain-types";
 import { DialogService, ParticipantFacade } from "@student-mgmt-client/services";
-import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
+import {
+	SearchParticipantDialog,
+	SearchParticipantDialogModule
+} from "@student-mgmt-client/shared-ui";
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 import { take } from "rxjs/operators";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
@@ -40,8 +43,6 @@ export class GroupCardComponent implements OnInit {
 		group: GroupDto;
 		participant: ParticipantDto;
 	}>();
-
-	cssClass = "text-light";
 
 	constructor(
 		private dialog: MatDialog,
@@ -148,6 +149,6 @@ export class GroupCardComponent implements OnInit {
 @NgModule({
 	declarations: [GroupCardComponent],
 	exports: [GroupCardComponent],
-	imports: [CommonModule, GroupCardUiComponentModule]
+	imports: [CommonModule, GroupCardUiComponentModule, SearchParticipantDialogModule]
 })
 export class GroupCardComponentModule {}

@@ -13,11 +13,19 @@
 	<ng-container menu *ngIf="props.participant.isTeachingStaffMember">
 		<mat-menu #groupMenu>
 			<ng-container>
-				<button mat-menu-item (click)="addParticipantClicked.next()">
+				<button
+					mat-menu-item
+					(click)="addParticipantClicked.next()"
+					data-test="addParticipantButton"
+				>
 					<student-mgmt-icon class="mr-4 icon-light" name="person_add"></student-mgmt-icon
 					>{{ "Action.Custom.AddParticipant" | translate }}
 				</button>
-				<button mat-menu-item (click)="removeGroupClicked.next()">
+				<button
+					mat-menu-item
+					(click)="removeGroupClicked.next()"
+					data-test="deleteGroupButton"
+				>
 					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
 					<span class="font-bold text-red">
 						{{ "Action.Delete" | translate }}
@@ -26,7 +34,7 @@
 			</ng-container>
 		</mat-menu>
 
-		<button mat-icon-button [matMenuTriggerFor]="groupMenu" class="menu-btn">
+		<button mat-icon-button [matMenuTriggerFor]="groupMenu" data-test="groupCardMenuButton">
 			<student-mgmt-icon class="icon-light" name="more_vert"></student-mgmt-icon>
 		</button>
 	</ng-container>

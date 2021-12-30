@@ -19,7 +19,7 @@ describe("Assignment list", () => {
 		// Asserts that new content is loaded when switching between courses
 
 		// First course should have 8 assignments
-		cy.getBySelector(Selector.assignment.card).should("have.length", 8);
+		cy.getBySelector(Selector.assignment.card).should("have.length", 9);
 
 		// Locate link to other course in sidebar and click
 		cy.get(".course-membership-list").contains(otherCourseId).click();

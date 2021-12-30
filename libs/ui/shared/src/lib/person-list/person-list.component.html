@@ -6,17 +6,14 @@
 		></student-mgmt-person-icon>
 
 		<div class="flex flex-col">
-			<span class="member-name">
-				{{ participant.displayName }}
-			</span>
+			<span class="font-bold">{{ participant.displayName }}</span>
 
 			<a
-				class="text-light link-none"
+				class="text-light"
 				[href]="'mailto:' + participant.email"
 				*ngIf="participant.email"
+				>{{ participant.email }}</a
 			>
-				Email: {{ participant.email }}
-			</a>
 		</div>
 	</div>
 </div>

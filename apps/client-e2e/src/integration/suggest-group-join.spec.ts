@@ -27,7 +27,7 @@ describe("Suggest Group Join", () => {
 			cy.getBySelector(Selector.course.myGroupTab).should("not.exist");
 
 			// User declines automatic group join
-			cy.get(".confirm-dialog").getBySelector(Selector.cancelBtn).click();
+			cy.getBySelector(Selector.confirmDialog.cancelButton).click();
 
 			// Dialog should be closed
 			cy.get(".confirm-dialog").should("not.exist");
@@ -41,7 +41,7 @@ describe("Suggest Group Join", () => {
 			cy.getBySelector(Selector.course.myGroupTab).should("not.exist");
 
 			// User accepts automatic group join
-			cy.get(".confirm-dialog").getBySelector(Selector.confirmBtn).click();
+			cy.getBySelector(Selector.confirmDialog.confirmButton).click();
 
 			// Dialog should be closed
 			cy.get(".confirm-dialog").should("not.exist");

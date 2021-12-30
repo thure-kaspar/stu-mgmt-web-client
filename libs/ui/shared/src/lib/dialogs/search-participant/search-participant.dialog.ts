@@ -1,7 +1,7 @@
 import { SelectionModel } from "@angular/cdk/collections";
 import { CommonModule } from "@angular/common";
 import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -12,6 +12,8 @@ import { debounceTime } from "rxjs/operators";
 import { Paginator, PaginatorModule } from "../../paginator/paginator.component";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { FormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
 
 class ParticipantsFilter {
 	includeStudents = false;
@@ -31,6 +33,7 @@ class ParticipantsFilter {
 	templateUrl: "./search-participant.dialog.html",
 	styleUrls: ["./search-participant.dialog.scss"]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnInit {
 	participants!: ParticipantDto[];
 	filter = new ParticipantsFilter();
@@ -131,6 +134,8 @@ export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnI
 		CommonModule,
 		TranslateModule,
 		MatFormFieldModule,
+		MatInputModule,
+		MatButtonModule,
 		MatCheckboxModule,
 		MatTableModule,
 		FormsModule,
