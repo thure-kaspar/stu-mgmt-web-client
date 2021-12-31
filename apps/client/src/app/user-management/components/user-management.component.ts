@@ -11,7 +11,12 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { TranslateModule } from "@ngx-translate/core";
 import { DialogService, ToastService } from "@student-mgmt-client/services";
-import { IconComponentModule, Paginator, PaginatorModule } from "@student-mgmt-client/shared-ui";
+import {
+	IconComponentModule,
+	Paginator,
+	PaginatorModule,
+	TitleComponentModule
+} from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
@@ -29,8 +34,7 @@ class UserFilter {
 
 @Component({
 	selector: "student-mgmt-user-management",
-	templateUrl: "./user-management.component.html",
-	styleUrls: ["./user-management.component.scss"]
+	templateUrl: "./user-management.component.html"
 })
 export class UserManagementComponent extends UnsubscribeOnDestroy implements OnInit {
 	filter = new UserFilter();
@@ -127,7 +131,7 @@ export class UserManagementComponent extends UnsubscribeOnDestroy implements OnI
 		CommonModule,
 		FormsModule,
 		MatButtonModule,
-		MatCardModule,
+		TitleComponentModule,
 		MatFormFieldModule,
 		MatInputModule,
 		MatCheckboxModule,

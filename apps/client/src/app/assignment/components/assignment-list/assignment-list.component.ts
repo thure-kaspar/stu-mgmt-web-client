@@ -1,13 +1,14 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { CourseFacade } from "@student-mgmt-client/services";
-import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { IconComponentModule, TitleComponentModule } from "@student-mgmt-client/shared-ui";
 import {
 	AssignmentActions,
 	AssignmentSelectors,
@@ -17,10 +18,8 @@ import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AssignmentDto } from "@student-mgmt/api-client";
 import { map } from "rxjs/operators";
 import { AssignmentCreateComponent } from "../../../assignment-create/assignment-create.component";
-import { AssignmentCardComponentModule } from "../assignment-card/assignment-card.component";
-import { ParticipantAdmissionStatusContainerComponentModule } from "../participant-admission-status-container/participant-admission-status-container.component";
 import { AssignmentsByStateComponentModule } from "../assignments-by-state/assignments-by-state.component";
-import { MatCardModule } from "@angular/material/card";
+import { ParticipantAdmissionStatusContainerComponentModule } from "../participant-admission-status-container/participant-admission-status-container.component";
 
 class AssignmentsStateMap {
 	inProgress: AssignmentDto[] = [];
@@ -95,10 +94,10 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 	imports: [
 		CommonModule,
 		RouterModule,
-		MatCardModule,
 		MatButtonModule,
 		MatDividerModule,
 		TranslateModule,
+		TitleComponentModule,
 		IconComponentModule,
 		ParticipantAdmissionStatusContainerComponentModule,
 		AssignmentsByStateComponentModule

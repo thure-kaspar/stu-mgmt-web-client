@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialog } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -11,7 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { Group, Participant } from "@student-mgmt-client/domain-types";
 import { CourseFacade, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
-import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { IconComponentModule, TitleComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { GroupApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, firstValueFrom, Subject } from "rxjs";
@@ -223,8 +222,8 @@ export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 		MatFormFieldModule,
 		MatInputModule,
 		MatCheckboxModule,
-		MatCardModule,
 		TranslateModule,
+		TitleComponentModule,
 		IconComponentModule,
 		GroupCardComponentModule,
 		CreateGroupDialogModule

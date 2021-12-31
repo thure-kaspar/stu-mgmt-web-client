@@ -1,11 +1,7 @@
 <ng-container *ngIf="courseFacade.course$ | async as course">
 	<ng-container *ngIf="participant$ | async as participant">
 		<div class="flex flex-col py-8" *ngIf="assignments$ | async as assignments">
-			<div class="flex justify-between mb-8">
-				<mat-card-title class="my-auto">{{
-					"Domain.Assignments" | translate
-				}}</mat-card-title>
-
+			<student-mgmt-title [title]="'Domain.Assignments' | translate">
 				<a
 					*ngIf="participant?.isTeachingStaffMember"
 					[routerLink]="['/courses', courseId, 'new-assignment']"
@@ -15,7 +11,7 @@
 						{{ "Action.Custom.AddAssignment" | translate }}
 					</button>
 				</a>
-			</div>
+			</student-mgmt-title>
 
 			<div class="flex gap-8">
 				<div class="flex flex-col gap-8">
