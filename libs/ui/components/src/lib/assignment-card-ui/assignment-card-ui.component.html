@@ -12,34 +12,6 @@
 				{{ props.assignment.name }}
 			</ng-template>
 		</span>
-		<div class="relative">
-			<span class="absolute -mt-2" [ngSwitch]="props.passFailSubmittedState">
-				<student-mgmt-chip
-					*ngSwitchCase="'submitted'"
-					color="#14abb3"
-					icon="assignment_turned_in"
-					text="Abgegeben"
-				></student-mgmt-chip>
-				<student-mgmt-chip
-					*ngSwitchCase="'passed'"
-					color="#2fac6f"
-					icon="thumb_up"
-					[text]="'Property.Assessment.HasPassed' | translate"
-				></student-mgmt-chip>
-				<student-mgmt-chip
-					*ngSwitchCase="'failed'"
-					color="#ff0134"
-					icon="thumb_down"
-					[text]="'Domain.Failed' | translate"
-				></student-mgmt-chip>
-				<student-mgmt-chip
-					*ngSwitchCase="'evaluated'"
-					color="#5335b0"
-					icon="assignment_turned_in"
-					text="Bewertet"
-				></student-mgmt-chip>
-			</span>
-		</div>
 	</div>
 
 	<ng-container subtitle>
@@ -53,10 +25,6 @@
 				- {{ "Common.Required" | translate }}: {{ props.requiredPoints }}
 				{{ "Domain.Points" | translate }}</span
 			>
-			<span *ngIf="props.assessment?.achievedPoints as achievedPoints">
-				- {{ "Common.Achieved" | translate }}: {{ achievedPoints }}
-				{{ "Domain.Points" | translate }}
-			</span>
 		</span>
 	</ng-container>
 
@@ -104,16 +72,16 @@
 		</div>
 
 		<div class="flex flex-col" *ngIf="props.assignment.startDate || props.assignment.endDate">
-			<span class="startdate" *ngIf="props.assignment.startDate">
-				<span class="font-bold uppercase x text-green"
-					>{{ "Common.Start" | translate }}:</span
-				>
-				{{ props.assignment.startDate | date: "dd.MM.YYYY (HH:mm)" }}
-			</span>
-			<span class="enddate" *ngIf="props.assignment.endDate">
-				<span class="font-bold uppercase x text-red">{{ "Common.End" | translate }}:</span>
-				{{ props.assignment.endDate | date: "dd.MM.YYYY (HH:mm)" }}
-			</span>
+			<div class="flex" *ngIf="props.assignment.startDate">
+				<div class="font-bold uppercase w-14 text-green">
+					{{ "Common.Start" | translate }}:
+				</div>
+				<span>{{ props.assignment.startDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
+			</div>
+			<div class="flex" *ngIf="props.assignment.endDate">
+				<div class="font-bold uppercase w-14 text-red">{{ "Common.End" | translate }}:</div>
+				<span>{{ props.assignment.endDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
+			</div>
 		</div>
 
 		<div class="comment" *ngIf="props.assignment.comment">
@@ -132,49 +100,106 @@
 			>
 		</div>
 
-		<div class="flex flex-col gap-2" *ngIf="props.group">
-			<a
-				class="font-bold group-title"
-				[routerLink]="['/courses', props.courseId, 'groups', props.group.id]"
-				>{{ props.group.name }}
-			</a>
+		<ng-container *ngIf="props.group">
+			<mat-divider></mat-divider>
 
-			<student-mgmt-person-list
-				*ngIf="props.group.members && props.group.members.length > 0"
-				[participants]="props.group.members"
-			></student-mgmt-person-list>
-		</div>
+			<div class="flex flex-col gap-4">
+				<a
+					class="text-base font-bold"
+					[routerLink]="['/courses', props.courseId, 'groups', props.group.id]"
+					>{{ props.group.name }}
+				</a>
 
-		<span class="flex gap-2" *ngIf="props.displayNoGroupWarning">
-			<student-mgmt-icon class="text-yellow-500" name="warning"></student-mgmt-icon>
-			<span class="font-bold">{{ "Text.Group.NoGroupForAssignment" | translate }}</span>
-		</span>
-	</div>
+				<student-mgmt-person-list
+					*ngIf="props.group.members && props.group.members.length > 0"
+					[participants]="props.group.members"
+				></student-mgmt-person-list>
+			</div>
+		</ng-container>
 
-	<ng-container footer>
-		<a
-			*ngIf="props.assessment"
-			[routerLink]="['/courses', props.courseId, 'assessments', 'view', props.assessment.id]"
-			><button mat-stroked-button *ngIf="props.assessment">
-				{{ "Domain.Assessment" | translate }}
-			</button></a
-		>
+		<ng-container *ngIf="props.displayNoGroupWarning">
+			<mat-divider></mat-divider>
+
+			<span class="flex gap-2">
+				<student-mgmt-icon class="text-yellow-500" name="warning"></student-mgmt-icon>
+				<span class="font-bold">{{ "Text.Group.NoGroupForAssignment" | translate }}</span>
+			</span>
+		</ng-container>
+
+		<ng-container *ngIf="props.assessment">
+			<mat-divider></mat-divider>
+
+			<div>
+				<div class="text-base font-bold">{{ "Domain.Assessment" | translate }}</div>
+
+				<a
+					class="my-auto text-sky-500"
+					[routerLink]="[
+						'/courses',
+						props.courseId,
+						'assessments',
+						'view',
+						props.assessment.id
+					]"
+					>Bewertung ansehen</a
+				>
+			</div>
+
+			<div class="flex gap-2">
+				<div class="my-auto" *ngIf="props.assessment?.achievedPoints as achievedPoints">
+					{{ achievedPoints }} {{ "Domain.Points" | translate }}
+				</div>
+
+				<span
+					*ngIf="props.passFailSubmittedState"
+					[ngSwitch]="props.passFailSubmittedState"
+				>
+					<student-mgmt-chip
+						*ngSwitchCase="'submitted'"
+						color="#14abb3"
+						icon="assignment_turned_in"
+						text="Abgegeben"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="'passed'"
+						color="#2fac6f"
+						icon="thumb_up"
+						[text]="'Property.Assessment.HasPassed' | translate"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="'failed'"
+						color="#ff0134"
+						icon="thumb_down"
+						[text]="'Domain.Failed' | translate"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="'evaluated'"
+						color="#5335b0"
+						icon="assignment_turned_in"
+						text="Bewertet"
+					></student-mgmt-chip>
+				</span>
+			</div>
+		</ng-container>
 
 		<ng-container *ngIf="props.participant.isTeachingStaffMember">
-			<a class="link-none" [routerLink]="[props.assignment.id, 'assessments']">
-				<button mat-stroked-button>
+			<mat-divider></mat-divider>
+
+			<div class="flex gap-8">
+				<a
+					class="text-sky-500 hover:underline"
+					[routerLink]="[props.assignment.id, 'assessments']"
+				>
 					{{ "Domain.Assessments" | translate }}
-				</button>
-			</a>
-			<a
-				class="link-none"
-				[routerLink]="[props.assignment.id, 'assessments', 'registrations']"
-				*ngIf="props.assignment.collaboration !== collaborationEnum.SINGLE"
-			>
-				<button mat-stroked-button>
+				</a>
+				<a
+					class="text-sky-500 hover:underline"
+					[routerLink]="[props.assignment.id, 'assessments', 'registrations']"
+					*ngIf="props.assignment.collaboration !== collaborationEnum.SINGLE"
+				>
 					{{ "Domain.Registrations" | translate }}
-				</button>
-			</a>
+				</a>
+			</div>
 		</ng-container>
-	</ng-container>
+	</div>
 </student-mgmt-card>

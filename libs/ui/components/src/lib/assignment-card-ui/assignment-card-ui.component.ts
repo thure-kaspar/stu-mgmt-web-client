@@ -8,6 +8,7 @@ import {
 	Output
 } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDividerModule } from "@angular/material/divider";
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
@@ -53,6 +54,7 @@ export class AssignmentCardUiComponent {
 	imports: [
 		CommonModule,
 		RouterModule,
+		MatDividerModule,
 		MatButtonModule,
 		MatMenuModule,
 		TranslateModule,

@@ -97,6 +97,7 @@ export const WithAssessmentAndFailState = Template.bind({});
 WithAssessmentAndFailState.args = {
 	props: {
 		...defaultProps,
+		requiredPoints: 10,
 		assessment: ASSESSMENTS[0],
 		passFailSubmittedState: "passed"
 	}
@@ -155,5 +156,14 @@ NoGroupAndWarning.args = {
 		...defaultProps,
 		group: null,
 		displayNoGroupWarning: true
+	}
+};
+
+export const AsLecturer = Template.bind({});
+AsLecturer.args = {
+	props: {
+		...defaultProps,
+		group: null,
+		participant: createParticipant(PARTICIPANT_LECTURER)
 	}
 };
