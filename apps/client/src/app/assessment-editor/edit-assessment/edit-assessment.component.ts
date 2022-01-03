@@ -5,6 +5,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { DialogService, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
+import { TitleComponentModule } from "@student-mgmt-client/shared-ui";
 import {
 	AssessmentApi,
 	AssessmentDto,
@@ -24,7 +25,6 @@ import {
 @Component({
 	selector: "student-mgmt-edit-assessment",
 	templateUrl: "./edit-assessment.component.html",
-	styleUrls: ["./edit-assessment.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAssessmentComponent implements OnInit {
@@ -150,7 +150,8 @@ export class EditAssessmentComponent implements OnInit {
 		MatButtonModule,
 		MatFormFieldModule,
 		AssessmentFormComponentModule,
-		AssessmentHeaderComponentModule
+		AssessmentHeaderComponentModule,
+		TitleComponentModule
 	]
 })
 export class EditAssessmentComponentModule {}

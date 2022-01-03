@@ -1,8 +1,6 @@
-<div id="edit-assessment-container" class="tab">
-	<div class="title-container flex justify-between">
-		<h2 id="title">{{ "Title.EditAssessment" | translate }}</h2>
-
-		<div class="save-actions flex gap-2">
+<div data-test="editAssessmentComponent">
+	<student-mgmt-title [title]="'Title.EditAssessment' | translate">
+		<div class="flex gap-2">
 			<button
 				mat-flat-button
 				color="accent"
@@ -16,13 +14,14 @@
 			<button
 				class="btn-save-as-draft fit-content"
 				mat-flat-button
+				color="primary"
 				[disabled]="form.form.invalid"
 				(click)="onSave(true)"
 			>
 				{{ "Action.Custom.SaveAsDraft" | translate }}
 			</button>
 		</div>
-	</div>
+	</student-mgmt-title>
 
 	<student-mgmt-assessment-header
 		[assignment]="assignment"
@@ -39,7 +38,7 @@
 		{{ "Text.Assessment.Visibility" | translate }}
 	</mat-hint>
 
-	<div class="mt-4 flex gap-2">
+	<div class="flex gap-2 mt-4">
 		<button
 			mat-flat-button
 			color="accent"
@@ -53,6 +52,7 @@
 		<button
 			class="btn-save-as-draft"
 			mat-flat-button
+			color="primary"
 			[disabled]="form.form.invalid"
 			(click)="onSave(true)"
 		>

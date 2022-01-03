@@ -12,7 +12,12 @@
 				{{ "Action.Create" | translate }}
 			</button>
 
-			<button mat-flat-button [disabled]="form.form.invalid" (click)="onSave(true)">
+			<button
+				mat-flat-button
+				color="primary"
+				[disabled]="form.form.invalid"
+				(click)="onSave(true)"
+			>
 				{{ "Action.Custom.SaveAsDraft" | translate }}
 			</button>
 		</div>
@@ -89,6 +94,7 @@
 		<button
 			class="bg-yellow-500"
 			mat-flat-button
+			color="primary"
 			[disabled]="form.form.invalid"
 			(click)="onSave(true)"
 		>
