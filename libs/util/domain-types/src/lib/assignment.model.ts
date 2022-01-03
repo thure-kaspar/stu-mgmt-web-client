@@ -32,7 +32,7 @@ export function mapToExtendedAssessmentDto(
 		if (extendedAssessment.achievedPoints) {
 			const roundedPoints = round(assessment.achievedPoints);
 			extendedAssessment.roundedPoints = roundedPoints;
-			extendedAssessment.hasPassed = roundedPoints > requiredPoints;
+			extendedAssessment.hasPassed = roundedPoints >= requiredPoints;
 		}
 	}
 
