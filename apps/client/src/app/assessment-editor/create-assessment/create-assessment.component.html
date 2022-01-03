@@ -1,8 +1,8 @@
-<div id="create-assessment-container" class="tab">
-	<div class="title-container flex justify-between">
+<div id="create-assessment-container" class="tab" data-test="createAssessmentComponent">
+	<div class="flex justify-between title-container">
 		<h2>{{ "Title.CreateAssessment" | translate }}</h2>
 
-		<div class="save-actions flex gap-2">
+		<div class="flex gap-2 save-actions">
 			<button
 				mat-flat-button
 				color="accent"
@@ -31,7 +31,7 @@
 		*ngIf="{ forGroup: forGroup$ | async, forParticipant: forParticipant$ | async } as obs"
 	>
 		<div
-			class="assessment-target mt-4"
+			class="mt-4 assessment-target"
 			*ngIf="obs.forGroup || obs.forParticipant; else selectGroupOrParticipantText"
 		>
 			<student-mgmt-assessment-target

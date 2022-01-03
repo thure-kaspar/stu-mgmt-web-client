@@ -1,5 +1,5 @@
 <ng-container *ngIf="participantFacade.participant$ | async as participant">
-	<div class="grid gap-4 tab" *ngIf="vm$ | async as vm">
+	<div class="grid gap-4 tab" *ngIf="vm$ | async as vm" data-test="assessmentViewerComponent">
 		<student-mgmt-assessment-header
 			[assignment]="vm"
 			[assessment]="vm.assessment"
@@ -45,7 +45,7 @@
 		</student-mgmt-card>
 
 		<ng-container *ngIf="vm.assessment.partialAssessments.length > 0">
-			<div class="grid partial-assessments gap-4">
+			<div class="grid gap-4 partial-assessments">
 				<ng-container *ngFor="let partial of vm.assessment.partialAssessments">
 					<student-mgmt-partial-assessment
 						class="partial-assessment"

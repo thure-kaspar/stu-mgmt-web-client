@@ -1,71 +1,78 @@
-<div id="created-assessments-container">
-	<div class="flex justify-between">
-		<a
-			[routerLink]="[
-				'/courses',
-				courseId,
-				'assignments',
-				assignmentId,
-				'assessments',
-				'edit',
-				'new'
-			]"
-		>
-			<button
-				#createAssessmentButton
-				mat-flat-button
-				color="accent"
-				id="btn-create-assessment"
-			>
-				<student-mgmt-icon name="add"></student-mgmt-icon
-				>{{ "Title.CreateAssessment" | translate }}
-			</button>
-		</a>
-
-		<button mat-stroked-button (click)="exportToExcel()">Export</button>
-	</div>
-
+<div id="created-assessments-container" data-test="createdAssessmentsComponent">
 	<mat-spinner class="spinner" color="accent" *ngIf="loading$ | async"></mat-spinner>
 
-	<div class="chart" *ngIf="chartData">
-		<student-mgmt-vertical-bar-chart
-			[data]="chartData"
-			[options]="chartOptions"
-			[xAxisLabel]="'Property.Assessment.AchievedPoints' | translate"
-			[yAxisLabel]="'Common.Count' | translate"
-		></student-mgmt-vertical-bar-chart>
+	<div class="mb-8">
+		<div class="chart" *ngIf="chartData">
+			<student-mgmt-vertical-bar-chart
+				[data]="chartData"
+				[options]="chartOptions"
+				[xAxisLabel]="'Property.Assessment.AchievedPoints' | translate"
+				[yAxisLabel]="'Common.Count' | translate"
+			></student-mgmt-vertical-bar-chart>
+		</div>
+
+		<div class="stat-cards" *ngIf="statistics">
+			<div class="stat-card">
+				<span class="category">{{ "Common.Lowest" | translate }}</span>
+				<span class="value"
+					>{{ statistics?.lowestScore }} {{ "Domain.Points" | translate }}</span
+				>
+			</div>
+
+			<div class="stat-card">
+				<span class="category">{{ "Common.Average" | translate }}</span>
+				<span class="value"
+					>{{ statistics?.averageScore | number: "1.0-2" }}
+					{{ "Domain.Points" | translate }}</span
+				>
+			</div>
+
+			<div class="stat-card">
+				<span class="category">{{ "Common.Highest" | translate }}</span>
+				<span class="value"
+					>{{ statistics?.highestScore }} {{ "Domain.Points" | translate }}</span
+				>
+			</div>
+
+			<div class="stat-card">
+				<span class="category">{{ "Property.Assessment.HasPassed" | translate }}</span>
+				<span class="value">{{ statistics?.countPassed }}</span>
+			</div>
+		</div>
 	</div>
 
-	<div class="stat-cards" *ngIf="statistics">
-		<div class="stat-card">
-			<span class="category">{{ "Common.Lowest" | translate }}</span>
-			<span class="value"
-				>{{ statistics?.lowestScore }} {{ "Domain.Points" | translate }}</span
+	<student-mgmt-title
+		[title]="
+			('Domain.Assessments' | translate) + ' (' + (dataSource?.filteredData.length || 0) + ')'
+		"
+	>
+		<div class="flex justify-between gap-2">
+			<a
+				[routerLink]="[
+					'/courses',
+					courseId,
+					'assignments',
+					assignmentId,
+					'assessments',
+					'edit',
+					'new'
+				]"
+				data-test="createAssessmentButton"
 			>
-		</div>
+				<button
+					#createAssessmentButton
+					mat-flat-button
+					color="accent"
+					id="btn-create-assessment"
+				>
+					<student-mgmt-icon name="add"></student-mgmt-icon
+					>{{ "Title.CreateAssessment" | translate }}
+				</button>
+			</a>
 
-		<div class="stat-card">
-			<span class="category">{{ "Common.Average" | translate }}</span>
-			<span class="value"
-				>{{ statistics?.averageScore | number: "1.0-2" }}
-				{{ "Domain.Points" | translate }}</span
-			>
-		</div>
-
-		<div class="stat-card">
-			<span class="category">{{ "Common.Highest" | translate }}</span>
-			<span class="value"
-				>{{ statistics?.highestScore }} {{ "Domain.Points" | translate }}</span
-			>
-		</div>
-
-		<div class="stat-card">
-			<span class="category">{{ "Property.Assessment.HasPassed" | translate }}</span>
-			<span class="value">{{ statistics?.countPassed }}</span>
-		</div>
-	</div>
-
-	<h2>{{ "Domain.Assessments" | translate }} ({{ dataSource?.filteredData.length || 0 }})</h2>
+			<button mat-stroked-button (click)="exportToExcel()">Export</button>
+		</div></student-mgmt-title
+	>
 
 	<div class="flex filter">
 		<mat-form-field class="w-full">
@@ -90,6 +97,7 @@
 						'view',
 						row.id
 					]"
+					data-test="viewAssessmentButton"
 				>
 					<button mat-stroked-button>{{ "Action.View" | translate }}</button>
 				</a>

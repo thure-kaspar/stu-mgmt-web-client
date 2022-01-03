@@ -42,6 +42,20 @@ export const Selector = {
 		configTextField: "configTextField"
 	},
 
+	createdAssessments: {
+		component: "createdAssessmentsComponent",
+		createAssessmentButton: "createAssessmentButton",
+		viewAssessmentButton: "viewAssessmentButton"
+	},
+
+	createAssessment: {
+		component: "createAssessmentComponent"
+	},
+
+	assessmentViewer: {
+		component: "assessmentViewerComponent"
+	},
+
 	/** Course related selectors. */
 	course: {
 		sidebarCourseLink: "sidebar-course-link",
