@@ -33,7 +33,7 @@
 		"@ngx-translate/core": "^14.0.0",
 		"@ngx-translate/http-loader": "^7.0.0",
 		"@student-mgmt/api-client": "^2.2.1",
-		"@swimlane/ngx-charts": "^19.1.0",
+		"@swimlane/ngx-charts": "^19.2.0",
 		"ngx-toastr": "^14.2.1",
 		"rxjs": "~7.4.0",
 		"subsink": "^1.0.2",
