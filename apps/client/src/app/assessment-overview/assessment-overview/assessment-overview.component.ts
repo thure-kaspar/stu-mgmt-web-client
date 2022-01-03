@@ -4,6 +4,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
+import { TitleComponentModule } from "@student-mgmt-client/shared-ui";
 import { AssignmentActions, AssignmentSelectors } from "@student-mgmt-client/state";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { AssignmentDto } from "@student-mgmt/api-client";
@@ -12,7 +13,6 @@ import { Observable } from "rxjs";
 @Component({
 	selector: "student-mgmt-assessment-overview",
 	templateUrl: "./assessment-overview.component.html",
-	styleUrls: ["./assessment-overview.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentOverviewComponent implements OnInit {
@@ -34,6 +34,6 @@ export class AssessmentOverviewComponent implements OnInit {
 @NgModule({
 	declarations: [AssessmentOverviewComponent],
 	exports: [AssessmentOverviewComponent],
-	imports: [CommonModule, RouterModule, MatTabsModule, TranslateModule]
+	imports: [CommonModule, RouterModule, MatTabsModule, TranslateModule, TitleComponentModule]
 })
 export class AssessmentOverviewComponentModule {}

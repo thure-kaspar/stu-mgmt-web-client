@@ -40,8 +40,8 @@
 		</a>
 	</nav>
 
-	<div class="tab">
-		<h2 class="assignment-name">{{ assignment.name }}</h2>
+	<div class="py-8">
+		<student-mgmt-title [title]="assignment.name"></student-mgmt-title>
 		<router-outlet></router-outlet>
 	</div>
 </div>
