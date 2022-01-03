@@ -9,6 +9,4 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 export class StatCardComponent {
 	@Input() title: string;
 	@Input() value: string | number;
-
-	constructor() {}
 }

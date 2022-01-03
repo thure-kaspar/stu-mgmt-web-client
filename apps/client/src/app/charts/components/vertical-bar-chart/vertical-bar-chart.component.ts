@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 
 export type VerticalBarChartData = {
 	name: string;
@@ -32,13 +32,9 @@ export class VerticalBarChartOptions {
 	styleUrls: ["./vertical-bar-chart.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalBarChartComponent implements OnInit {
+export class VerticalBarChartComponent {
 	@Input() xAxisLabel: string;
 	@Input() yAxisLabel: string;
 	@Input() data: VerticalBarChartData;
 	@Input() options = new VerticalBarChartOptions();
-
-	constructor() {}
-
-	ngOnInit(): void {}
 }
