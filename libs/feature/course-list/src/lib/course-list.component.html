@@ -25,10 +25,10 @@
 					id="semester"
 					name="semester"
 				>
+					<mat-option value="">{{ "Common.All" | translate }}</mat-option>
 					<mat-option *ngFor="let semester of semesters" [value]="semester">{{
 						semester | semester
 					}}</mat-option>
-					<mat-option value="">{{ "Common.All" | translate }}</mat-option>
 				</mat-select>
 			</mat-form-field>
 
