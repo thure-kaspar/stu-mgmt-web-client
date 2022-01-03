@@ -29,7 +29,8 @@
       "UnregisterAllGroups": "Alle Gruppen abmelden",
       "UseNamingSchemaAndCount": "Präfix und Anzahl verwenden",
       "UseNamingSchemeAndCount": "Prefix und Anzahl verwenden",
-      "SaveAsDraft": "Als Entwurf speichern"
+      "SaveAsDraft": "Als Entwurf speichern",
+      "RemovePartialAssessment": "Teilbewertung entfernen"
     },
     "Delete": "Löschen",
     "Edit": "Ändern",
@@ -254,7 +255,8 @@
     "CurrentStatus": "Aktueller Stand",
     "NoPasswordRequired": "\nKein Einschreibeschlüssel notwendig",
     "Configs": "Konfigurationen",
-    "Config": "Konfiguration"
+    "Config": "Konfiguration",
+    "Markers": "Markierungen"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "Wenn Sie fortfahren, werden ihre ungespeicherten Änderungen verworfen.",

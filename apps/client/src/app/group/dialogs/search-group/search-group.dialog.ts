@@ -1,5 +1,6 @@
 import { SelectionModel } from "@angular/cdk/collections";
 import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy } from "@angular/compiler";
 import { Component, Inject, NgModule, OnInit, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -31,6 +32,7 @@ class GroupFilter {
 	styleUrls: ["./search-group.dialog.scss"]
 	//changeDetection: ChangeDetectionStrategy.OnPush
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	dataSource: MatTableDataSource<GroupDto>; //new BehaviorSubject(new ([]));
 	displayedColumns = ["select", "name", "open"];

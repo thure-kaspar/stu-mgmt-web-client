@@ -1,12 +1,17 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { ParticipantFacade, ToastService } from "@student-mgmt-client/services";
-import { IconComponentModule, SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
+import {
+	IconComponentModule,
+	SearchParticipantDialog,
+	SearchParticipantDialogModule,
+	TitleComponentModule
+} from "@student-mgmt-client/shared-ui";
 import { AssignmentSelectors } from "@student-mgmt-client/state";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
@@ -21,7 +26,10 @@ import {
 } from "@student-mgmt/api-client";
 import { Observable, Subject } from "rxjs";
 import { AssessmentTargetComponentModule } from "../../assessment/components/assessment-target/assessment-target.component";
-import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
+import {
+	SearchGroupDialog,
+	SearchGroupDialogModule
+} from "../../group/dialogs/search-group/search-group.dialog";
 import {
 	AssessmentFormComponent,
 	AssessmentFormComponentModule
@@ -30,7 +38,6 @@ import {
 @Component({
 	selector: "student-mgmt-create-assessment",
 	templateUrl: "./create-assessment.component.html",
-	styleUrls: ["./create-assessment.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements OnInit {
@@ -121,7 +128,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 
 	/**
 	 * If the URL-fragment contains `#group` or `#user` followed by the corresponding ID,
-	 * i.e. `#groupb4f24e81-dfa4-4641-af80-8e34e02d9c4a`, then this will select the specified group or user.
+	 * i.e. `#groupb-4f24e81-dfa4-4641-af80-8e34e02d9c4a`, then this will select the specified group or user.
 	 */
 	private setPreselectedGroupOrUser(): void {
 		const fragment = this.route.snapshot.fragment;
@@ -129,8 +136,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		const userMatch = fragment?.match(/^user-(.+)/);
 
 		if (groupMatch) {
-			// Only pass id to handler, because it will query for group data itself
-			this.groupSelectedHandler({ id: groupMatch[1] } as any);
+			this.groupSelectedHandler({ id: groupMatch[1] });
 		} else if (userMatch) {
 			this.participantsApi.getParticipant(this.courseId, userMatch[1]).subscribe(
 				user => this.userSelectedHandler(user),
@@ -142,7 +148,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 	}
 
 	/** Sets the selected group and loads its members. Removes the selected user, if it exists. */
-	groupSelectedHandler(group: GroupDto): void {
+	groupSelectedHandler(group: { id: string }): void {
 		this.forParticipant$.next(undefined);
 
 		// Set route fragment
@@ -182,7 +188,10 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		TranslateModule,
 		AssessmentFormComponentModule,
 		AssessmentTargetComponentModule,
-		IconComponentModule
+		IconComponentModule,
+		TitleComponentModule,
+		SearchGroupDialogModule,
+		SearchParticipantDialogModule
 	]
 })
 export class CreateAssessmentComponentModule {}

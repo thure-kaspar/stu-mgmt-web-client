@@ -1,5 +1,5 @@
 <ng-container *ngIf="group">
-	<student-mgmt-card>
+	<student-mgmt-card data-test="assessmentTargetGroupName">
 		<ng-container title>
 			<ng-container
 				*ngIf="participant.isStudent && participant.groupId !== group.id; else nameWithLink"
@@ -16,15 +16,7 @@
 		<ng-container subtitle>{{ "Domain.Members" | translate }}: {{ group.size }}</ng-container>
 
 		<ng-container content>
-			<div class="flex gap-2">
-				<a
-					class="font-bold member link-none"
-					[routerLink]="['/courses', courseId, 'users', member.userId]"
-					*ngFor="let member of group.members"
-				>
-					<button mat-flat-button color="primary">{{ member.displayName }}</button>
-				</a>
-			</div>
+			<student-mgmt-person-list [participants]="group.members"></student-mgmt-person-list>
 		</ng-container>
 	</student-mgmt-card>
 </ng-container>
@@ -35,6 +27,7 @@
 			<a
 				class="link-none"
 				[routerLink]="['/courses', courseId, 'users', targetedParticipant.userId]"
+				data-test="assessmentTargetDisplayName"
 			>
 				{{ targetedParticipant.displayName }}
 			</a>

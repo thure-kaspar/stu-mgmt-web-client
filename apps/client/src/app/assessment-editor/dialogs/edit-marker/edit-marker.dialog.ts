@@ -1,8 +1,10 @@
 import { CommonModule } from "@angular/common";
-import { Component, Inject, NgModule, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, NgModule, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { TranslateModule } from "@ngx-translate/core";
 import { MarkerDto } from "@student-mgmt/api-client";
@@ -10,8 +12,9 @@ import { MarkerDto } from "@student-mgmt/api-client";
 @Component({
 	selector: "student-mgmt-edit-marker",
 	templateUrl: "./edit-marker.dialog.html",
-	styleUrls: ["./edit-marker.dialog.scss"]
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class EditMarkerDialog implements OnInit {
 	formGroup: FormGroup;
 
@@ -37,8 +40,10 @@ export class EditMarkerDialog implements OnInit {
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
+		MatButtonModule,
 		MatDialogModule,
 		MatFormFieldModule,
+		MatInputModule,
 		MatSelectModule,
 		TranslateModule
 	]

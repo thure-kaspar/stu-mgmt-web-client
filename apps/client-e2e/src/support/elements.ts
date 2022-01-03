@@ -49,11 +49,48 @@ export const Selector = {
 	},
 
 	createAssessment: {
-		component: "createAssessmentComponent"
+		component: "createAssessmentComponent",
+		createButton: "createButton",
+		searchGroupButton: "searchGroupButton",
+		searchParticipantButton: "searchParticipantButton",
+		noAssessmentTargetWarning: "noAssessmentTargetWarning"
+	},
+
+	assessmentForm: {
+		component: "assessmentFormComponent",
+		achievedPointsTextField: "achievedPointsTextField",
+		draftOnlyToggle: "draftOnlyToggle",
+		partialAssessmentTitleTextField: "partialAssessmentTitleTextField",
+		partialAssessmentKeyTextField: "partialAssessmentKeyTextField",
+		partialAssessmentPointsTextField: "partialAssessmentPointsTextField",
+		partialAssessmentCommentTextField: "partialAssessmentCommentTextField",
+		addWarningMarkerButton: "addWarningMarkerButton",
+		editMarkerButton: "editMarkerButton",
+		removeMarkerButton: "removeMarkerButton",
+		removePartialAssessmentButton: "removePartialAssessmentButton",
+		addPartialAssessmentButton: "addPartialAssessmentButton"
 	},
 
 	assessmentViewer: {
 		component: "assessmentViewerComponent"
+	},
+
+	assessmentTarget: {
+		groupName: "assessmentTargetGroupName",
+		participantName: "assessmentTargetDisplayName"
+	},
+
+	editMarkerDialog: {
+		component: "editMarkerDialog",
+		pathTextField: "pathTextField",
+		startLineNumberTextField: "startLineNumberTextField",
+		endLineNumberTextField: "endLineNumberTextField",
+		startColumnNumberTextField: "startColumnNumberTextField",
+		endColumnNumberTextField: "endColumnNumberTextField",
+		pointsTextField: "pointsTextField",
+		commentTextField: "commentTextField",
+		saveButton: "saveButton",
+		cancelButton: "cancelButton"
 	},
 
 	/** Course related selectors. */
@@ -142,6 +179,14 @@ export const Selector = {
 		component: "searchParticipantDialog",
 		nameTextField: "nameTextField",
 		usernameButton: "usernameButton",
+		confirmButton: "confirmButton",
+		cancelButton: "cancelButton"
+	},
+
+	searchGroupDialog: {
+		component: "searchGroupDialog",
+		nameInputField: "nameInputField",
+		nameButton: "nameButton",
 		confirmButton: "confirmButton",
 		cancelButton: "cancelButton"
 	},

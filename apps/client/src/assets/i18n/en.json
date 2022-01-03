@@ -29,7 +29,8 @@
       "UnregisterAllGroups": "Unregister all group",
       "UseNamingSchemaAndCount": "Use prefix and count",
       "UseNamingSchemeAndCount": "Use prefix and count",
-      "SaveAsDraft": "Save as draft"
+      "SaveAsDraft": "Save as draft",
+      "RemovePartialAssessment": "Remove partial assessment"
     },
     "Delete": "Delete",
     "Edit": "Edit",

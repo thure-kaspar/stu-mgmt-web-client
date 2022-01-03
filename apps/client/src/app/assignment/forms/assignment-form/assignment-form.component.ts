@@ -9,6 +9,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { TranslateModule } from "@ngx-translate/core";
 import {
+	AddableListHeaderComponentModule,
 	AssignmentTypeChipComponentModule,
 	CollaborationTypeChipComponentModule,
 	DateTimePickerComponentModule,
@@ -106,7 +107,8 @@ export class AssignmentFormComponent {
 		IconComponentModule,
 		AssignmentTypeChipComponentModule,
 		CollaborationTypeChipComponentModule,
-		DateTimePickerComponentModule
+		DateTimePickerComponentModule,
+		AddableListHeaderComponentModule
 	]
 })
 export class AssignmentFormComponentModule {}

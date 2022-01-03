@@ -1,3 +1,4 @@
+export * from "./lib/addable-list-header/addable-list-header.component";
 export * from "./lib/assignment-type-chip/assignment-type-chip.component";
 export * from "./lib/card/card.component";
 export * from "./lib/chip/chip.component";

@@ -91,17 +91,10 @@
 	</mat-form-field>
 
 	<div class="pt-2" formArrayName="links">
-		<span class="inline-block mb-2">
-			<span class="mr-4 text-xl font-bold">Links</span>
-			<button
-				type="button"
-				class="text-sky-500 hover:underline"
-				(click)="addLink()"
-				data-test="addLinkButton"
-			>
-				{{ "Action.Add" | translate }}
-			</button>
-		</span>
+		<student-mgmt-addable-list-header
+			name="Links"
+			(addClicked)="addLink()"
+		></student-mgmt-addable-list-header>
 
 		<div
 			class="flex gap-2"
@@ -127,17 +120,10 @@
 	</div>
 
 	<div class="pt-2" formArrayName="configs">
-		<span class="inline-block mb-2">
-			<span class="mr-4 text-xl font-bold">{{ "Misc.Configs" | translate }}</span>
-			<button
-				type="button"
-				class="text-sky-500 hover:underline"
-				(click)="addConfig()"
-				data-test="addConfigButton"
-			>
-				{{ "Action.Add" | translate }}
-			</button>
-		</span>
+		<student-mgmt-addable-list-header
+			[name]="'Misc.Configs' | translate"
+			(addClicked)="addConfig()"
+		></student-mgmt-addable-list-header>
 
 		<div
 			class="flex gap-2"

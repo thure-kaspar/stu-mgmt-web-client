@@ -14,16 +14,17 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { MatSliderModule } from "@angular/material/slider";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
-import { CardComponentModule, IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { DialogService } from "@student-mgmt-client/services";
 import {
-	AssessmentDto,
-	AssignmentDto,
-	MarkerDto,
-	PartialAssessmentDto
-} from "@student-mgmt/api-client";
+	AddableListHeaderComponentModule,
+	CardComponentModule,
+	IconComponentModule
+} from "@student-mgmt-client/shared-ui";
+import { AssignmentDto, MarkerDto, PartialAssessmentDto } from "@student-mgmt/api-client";
+import { firstValueFrom } from "rxjs";
 import { MarkerComponentModule } from "../../../assessment/components/marker/marker.component";
 import { EditMarkerDialog } from "../../dialogs/edit-marker/edit-marker.dialog";
 
@@ -38,8 +39,7 @@ const groupOrUserValidator: ValidatorFn = (control: AbstractControl): Validation
 
 @Component({
 	selector: "student-mgmt-assessment-form",
-	templateUrl: "./assessment-form.component.html",
-	styleUrls: ["./assessment-form.component.scss"]
+	templateUrl: "./assessment-form.component.html"
 })
 export class AssessmentFormComponent {
 	@Input() assignment: AssignmentDto;
@@ -52,6 +52,7 @@ export class AssessmentFormComponent {
 	constructor(
 		private fb: FormBuilder,
 		private dialog: MatDialog,
+		private dialogService: DialogService,
 		private cdRef: ChangeDetectorRef
 	) {
 		this.form = this.fb.group(
@@ -123,8 +124,17 @@ export class AssessmentFormComponent {
 	}
 
 	/** Removes a partial assessment from the form. */
-	removePartialAssessment(index: number): void {
-		this.getPartialAssessments().removeAt(index);
+	async removePartialAssessment(index: number): Promise<void> {
+		const confirmed = await firstValueFrom(
+			this.dialogService.openConfirmDialog({
+				title: "Action.Remove"
+			})
+		);
+
+		if (confirmed) {
+			this.getPartialAssessments().removeAt(index);
+			this.cdRef.detectChanges();
+		}
 	}
 
 	getPartialAssessments(): FormArray {
@@ -162,8 +172,17 @@ export class AssessmentFormComponent {
 			});
 	}
 
-	removeMarker(partialIndex: number, markerIndex: number): void {
-		this.getMarkers(partialIndex).removeAt(markerIndex);
+	async removeMarker(partialIndex: number, markerIndex: number): Promise<void> {
+		const confirmed = await firstValueFrom(
+			this.dialogService.openConfirmDialog({
+				title: "Action.Remove"
+			})
+		);
+
+		if (confirmed) {
+			this.getMarkers(partialIndex).removeAt(markerIndex);
+			this.cdRef.detectChanges();
+		}
 	}
 
 	editMarker(marker: MarkerDto, partialIndex: number, markerIndex: number): void {
@@ -186,14 +205,15 @@ export class AssessmentFormComponent {
 		CommonModule,
 		ReactiveFormsModule,
 		MatButtonModule,
-		MatSliderModule,
+		MatSlideToggleModule,
 		MatFormFieldModule,
 		MatInputModule,
 		MatTooltipModule,
 		TranslateModule,
 		CardComponentModule,
 		IconComponentModule,
-		MarkerComponentModule
+		MarkerComponentModule,
+		AddableListHeaderComponentModule
 	]
 })
 export class AssessmentFormComponentModule {}

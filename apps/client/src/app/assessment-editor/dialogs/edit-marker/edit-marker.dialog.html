@@ -1,76 +1,105 @@
-<h2 mat-dialog-title>Marker</h2>
+<div data-test="editMarkerDialog">
+	<h2 mat-dialog-title>Marker</h2>
 
-<div
-	class="grid"
-	[class.HINT]="formGroup.get('severity').value === 'HINT'"
-	[class.INFO]="formGroup.get('severity').value === 'INFO'"
-	[class.WARNING]="formGroup.get('severity').value === 'WARNING'"
-	[class.ERROR]="formGroup.get('severity').value === 'ERROR'"
-	[formGroup]="formGroup"
->
-	<div class="grid split gap-4">
+	<div
+		class="grid"
+		[class.HINT]="formGroup.get('severity').value === 'HINT'"
+		[class.INFO]="formGroup.get('severity').value === 'INFO'"
+		[class.WARNING]="formGroup.get('severity').value === 'WARNING'"
+		[class.ERROR]="formGroup.get('severity').value === 'ERROR'"
+		[formGroup]="formGroup"
+	>
+		<div class="grid gap-4 split">
+			<mat-form-field>
+				<mat-label>Severity</mat-label>
+				<mat-select
+					class="severity-select"
+					formControlName="severity"
+					placeholder="Severity"
+				>
+					<mat-select-trigger class="selected-severity">
+						{{ formGroup.get('severity').value }}
+					</mat-select-trigger>
+
+					<mat-option [value]="null">-</mat-option>
+					<mat-option value="INFO">INFO</mat-option>
+					<mat-option value="HINT">HINT</mat-option>
+					<mat-option value="WARNING">WARNING</mat-option>
+					<mat-option value="ERROR">ERROR</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>Path</mat-label>
+				<input matInput formControlName="path" required data-test="pathTextField" />
+				<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>startLineNumber</mat-label>
+				<input
+					matInput
+					formControlName="startLineNumber"
+					required
+					data-test="startLineNumberTextField"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>endLineNumber</mat-label>
+				<input
+					matInput
+					formControlName="endLineNumber"
+					required
+					data-test="endLineNumberTextField"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>startColumn</mat-label>
+				<input
+					matInput
+					formControlName="startColumn"
+					data-test="startColumnNumberTextField"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>endColumn</mat-label>
+				<input matInput formControlName="endColumn" data-test="endColumnTextField" />
+			</mat-form-field>
+		</div>
+
 		<mat-form-field>
-			<mat-label>Severity</mat-label>
-			<mat-select class="severity-select" formControlName="severity" placeholder="Severity">
-				<mat-select-trigger class="selected-severity">
-					{{ formGroup.get('severity').value }}
-				</mat-select-trigger>
-
-				<mat-option [value]="null">-</mat-option>
-				<mat-option value="INFO">INFO</mat-option>
-				<mat-option value="HINT">HINT</mat-option>
-				<mat-option value="WARNING">WARNING</mat-option>
-				<mat-option value="ERROR">ERROR</mat-option>
-			</mat-select>
+			<mat-label>points</mat-label>
+			<input matInput formControlName="points" data-test="pointsTextField" />
 		</mat-form-field>
 
 		<mat-form-field>
-			<mat-label>Path</mat-label>
-			<input matInput formControlName="path" required />
+			<mat-label>comment</mat-label>
+			<textarea
+				matInput
+				formControlName="comment"
+				rows="5"
+				required
+				data-test="commentTextField"
+			></textarea>
 			<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
-		</mat-form-field>
-
-		<mat-form-field>
-			<mat-label>startLineNumber</mat-label>
-			<input matInput formControlName="startLineNumber" required />
-		</mat-form-field>
-
-		<mat-form-field>
-			<mat-label>endLineNumber</mat-label>
-			<input matInput formControlName="endLineNumber" required />
-		</mat-form-field>
-
-		<mat-form-field>
-			<mat-label>startColumn</mat-label>
-			<input matInput formControlName="startColumn" />
-		</mat-form-field>
-
-		<mat-form-field>
-			<mat-label>endColumn</mat-label>
-			<input matInput formControlName="endColumn" />
 		</mat-form-field>
 	</div>
 
-	<mat-form-field>
-		<mat-label>points</mat-label>
-		<input matInput formControlName="points" />
-	</mat-form-field>
-
-	<mat-form-field>
-		<mat-label>comment</mat-label>
-		<textarea matInput formControlName="comment" rows="5" required></textarea>
-		<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
-	</mat-form-field>
-</div>
-
-<div class="actions" mat-dialog-actions>
-	<button
-		mat-flat-button
-		color="accent"
-		[matDialogClose]="formGroup.value"
-		[disabled]="formGroup.invalid"
-	>
-		{{ 'Action.Save' | translate }}
-	</button>
-	<button mat-flat-button matDialogClose>{{ 'Action.Cancel' | translate }}</button>
+	<div class="actions" mat-dialog-actions>
+		<button
+			mat-flat-button
+			color="accent"
+			[matDialogClose]="formGroup.value"
+			[disabled]="formGroup.invalid"
+			data-test="saveButton"
+		>
+			{{ 'Action.Save' | translate }}
+		</button>
+		<button mat-flat-button matDialogClose data-test="cancelButton">
+			{{ 'Action.Cancel' | translate }}
+		</button>
+	</div>
 </div>
