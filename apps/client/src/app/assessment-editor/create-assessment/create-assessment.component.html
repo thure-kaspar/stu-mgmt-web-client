@@ -1,15 +1,21 @@
 <div class="flex flex-col" data-test="createAssessmentComponent">
 	<student-mgmt-title [title]="'Title.CreateAssessment' | translate">
-		<button
-			mat-flat-button
-			color="accent"
-			class="fit-content"
-			[disabled]="form.form.invalid"
-			(click)="onSave()"
-			data-test="createButton"
-		>
-			{{ "Action.Create" | translate }}
-		</button>
+		<div class="flex gap-2">
+			<button
+				mat-flat-button
+				color="accent"
+				class="fit-content"
+				[disabled]="form.form.invalid"
+				(click)="onSave()"
+				data-test="createButton"
+			>
+				{{ "Action.Create" | translate }}
+			</button>
+
+			<button mat-flat-button [disabled]="form.form.invalid" (click)="onSave(true)">
+				{{ "Action.Custom.SaveAsDraft" | translate }}
+			</button>
+		</div>
 	</student-mgmt-title>
 
 	<div class="flex gap-2">
@@ -69,7 +75,7 @@
 		></student-mgmt-assessment-form>
 	</div>
 
-	<div class="mt-4">
+	<div class="flex gap-2 mt-4">
 		<button
 			mat-raised-button
 			color="accent"
@@ -78,6 +84,15 @@
 			(click)="onSave()"
 		>
 			{{ "Action.Create" | translate }}
+		</button>
+
+		<button
+			class="bg-yellow-500"
+			mat-flat-button
+			[disabled]="form.form.invalid"
+			(click)="onSave(true)"
+		>
+			{{ "Action.Custom.SaveAsDraft" | translate }}
 		</button>
 	</div>
 </div>

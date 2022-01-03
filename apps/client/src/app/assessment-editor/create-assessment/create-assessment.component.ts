@@ -81,9 +81,10 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		// TODO: Search Group dialog should use registered groups?
 	}
 
-	onSave(): void {
+	onSave(saveAsDraft = false): void {
 		const assessment: AssessmentCreateDto = this.form.form.value;
 		assessment.assignmentId = this.assignmentId;
+		assessment.isDraft = saveAsDraft;
 
 		this.assessmentApi.createAssessment(assessment, this.courseId, this.assignmentId).subscribe(
 			created => {
