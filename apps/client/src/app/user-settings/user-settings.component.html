@@ -1,7 +1,7 @@
-<div class="user-settings tab" *ngIf="userSettings">
-	<h2>{{ "Misc.Settings" | translate }}</h2>
+<div class="max-w-xl px-2 py-8 mx-auto user-settings" *ngIf="userSettings">
+	<student-mgmt-title [title]="'Misc.Settings' | translate"></student-mgmt-title>
 
-	<div class="grid gap-4">
+	<div class="flex flex-col gap-8">
 		<student-mgmt-card>
 			<ng-container title>{{ "Property.UserSettings.Language" | translate }}</ng-container>
 			<ng-container subtitle>{{ "Text.UserSettings.Language" | translate }}</ng-container>

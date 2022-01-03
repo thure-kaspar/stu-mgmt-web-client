@@ -12,7 +12,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TranslateModule } from "@ngx-translate/core";
 import { AuthService } from "@student-mgmt-client/auth";
 import { ToastService } from "@student-mgmt-client/services";
-import { CardComponentModule } from "@student-mgmt-client/shared-ui";
+import { CardComponentModule, TitleComponentModule } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserSettingsDto } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
@@ -28,7 +28,6 @@ type BlacklistableEvents = {
 @Component({
 	selector: "student-mgmt-user-settings",
 	templateUrl: "./user-settings.component.html",
-	styleUrls: ["./user-settings.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnInit {
@@ -150,7 +149,8 @@ export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnIni
 		MatSlideToggleModule,
 		MatDividerModule,
 		TranslateModule,
-		CardComponentModule
+		CardComponentModule,
+		TitleComponentModule
 	]
 })
 export class UserSettingsComponentModule {}
