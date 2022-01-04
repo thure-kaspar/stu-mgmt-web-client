@@ -172,7 +172,11 @@ export const Selector = {
 	},
 
 	groupDetail: {
-		component: "groupDetailComponent"
+		component: "groupDetailComponent",
+		editGroupButton: "editGroupButton",
+		leaveGroupButton: "leaveGroupButton",
+		removeGroupButton: "removeGroupButton",
+		addMemberButton: "addMemberButton"
 	},
 
 	groupCard: {
@@ -195,6 +199,14 @@ export const Selector = {
 		registerCurrentGroupsButton: "registerCurrentGroupsButton",
 		UnregisterAllGroupsButton: "UnregisterAllGroupsButton",
 		filterTextField: "filterTextField"
+	},
+
+	editGroupDialog: {
+		component: "editGroupDialog",
+		nameTextField: "nameTextField",
+		passwordTextField: "passwordTextField",
+		saveButton: "saveButton",
+		cancelButton: "cancelButton"
 	},
 
 	searchParticipantDialog: {

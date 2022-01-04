@@ -1,24 +1,13 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatIconModule } from "@angular/material/icon";
-import { MatListModule } from "@angular/material/list";
-import { MatMenuModule } from "@angular/material/menu";
 import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource, MatTableModule } from "@angular/material/table";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { ActivatedRoute, Router, RouterModule } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
+import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute, Router } from "@angular/router";
+import { GroupDetailUiComponentModule } from "@student-mgmt-client/components";
 import { Group, Participant } from "@student-mgmt-client/domain-types";
 import { DialogService, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
-import {
-	CardComponentModule,
-	IconComponentModule,
-	SearchParticipantDialog
-} from "@student-mgmt-client/shared-ui";
+import { SearchParticipantDialog } from "@student-mgmt-client/shared-ui";
 import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AssessmentDto, GroupApi, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
@@ -28,13 +17,13 @@ import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 @Component({
 	selector: "student-mgmt-group-detail",
 	templateUrl: "./group-detail.component.html",
-	styleUrls: ["./group-detail.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;
 	groupId: string;
 	group$ = new BehaviorSubject<Group>(null);
+	assessments$ = new BehaviorSubject<AssessmentDto[]>([]);
 	private group: Group;
 	private participant: Participant;
 	displayedColumns: string[] = ["name", "type", "score"];
@@ -82,9 +71,7 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 	loadAssessmentsOfGroup(): void {
 		this.groupApi.getAssessmentsOfGroup(this.courseId, this.groupId).subscribe({
 			next: assessments => {
-				this.assessmentsDataSource = new MatTableDataSource(assessments);
-				this.assessmentsDataSource.sort = this.sort;
-				this.assessmentsDataSource$.next(this.assessmentsDataSource);
+				this.assessments$.next(assessments);
 			},
 			error: error => this.toast.apiError(error)
 		});
@@ -222,20 +209,6 @@ export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit
 @NgModule({
 	declarations: [GroupDetailComponent],
 	exports: [GroupDetailComponent],
-	imports: [
-		CommonModule,
-		RouterModule,
-		MatButtonModule,
-		MatCardModule,
-		MatMenuModule,
-		MatDividerModule,
-		MatTableModule,
-		MatListModule,
-		MatIconModule,
-		MatTooltipModule,
-		TranslateModule,
-		IconComponentModule,
-		CardComponentModule
-	]
+	imports: [CommonModule, GroupDetailUiComponentModule]
 })
 export class GroupDetailComponentModule {}

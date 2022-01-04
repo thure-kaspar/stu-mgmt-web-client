@@ -373,7 +373,9 @@
       "LeaveToJoinOther": "Current group must be left to join another group.",
       "NoGroupForAssignment": "You currently have no group for this assignment.",
       "NotEnoughMembers": "Group must have at least {{minSize}} members.",
-      "ParticipantHasNoGroup": "Participant currently has no group."
+      "ParticipantHasNoGroup": "Participant currently has no group.",
+      "NoAssessments": "There are no assessments for this group.",
+      "NoMembers": "This group has no members."
     },
     "GroupCreation": {
       "NameSchema": "This course is using a predefined prefix for group names.\nGroup name will be chosen automatically.",
@@ -405,7 +407,8 @@
     },
     "RegisteredGroups": {
       "Comment": "Adding or removing a participant or group only affects this assignment. The global group list will remain unchanged."
-    }
+    },
+    "NoAssessments": "There are "
   },
   "Title": {
     "AdmissionStatus": "Admission status",

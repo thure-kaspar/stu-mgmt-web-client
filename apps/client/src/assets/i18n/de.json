@@ -374,7 +374,9 @@
       "LeaveToJoinOther": "Aktuelle Gruppe muss verlassen werden, um einer anderen Gruppe beizutreten.",
       "NoGroupForAssignment": "Du hast noch keine Gruppe für diese Aufgabe.",
       "NotEnoughMembers": "Gruppe muss mindestens {{minSize}} Mitglieder haben.",
-      "ParticipantHasNoGroup": "Student ist in keiner Gruppe angemeldet."
+      "ParticipantHasNoGroup": "Student ist in keiner Gruppe angemeldet.",
+      "NoAssessments": "Für diese Gruppe existieren keine Bewertungen.",
+      "NoMembers": "Diese Gruppe hat keine Mitglieder."
     },
     "GroupCreation": {
       "NameSchema": "Dieser Kurs verwendet vordefinierte Gruppennamen.\nDer Name der Gruppe wird automatisch generiert.",
