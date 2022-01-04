@@ -25,7 +25,7 @@ describe("Assessments Overview", () => {
 	});
 
 	it("View Assessment navigates to AssessmentViewerComponent", () => {
-		cy.getBySelector(assessmentsOverview.viewAssessmentButton).click();
+		cy.getBySelector(assessmentsOverview.viewAssessmentButton).first().click();
 		cy.getBySelector(Selector.assessmentViewer.component).should("be.visible");
 		cy.url().should(
 			"contain",

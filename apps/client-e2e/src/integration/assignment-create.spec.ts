@@ -60,11 +60,11 @@ function fillOutForm() {
 
 	cy.getBySelector(Selector.assignmentCreate.createButton).should("not.be.disabled");
 
-	cy.getBySelector(form.addLinkButton).click();
+	cy.getBySelector(form.addLinkButton).find("[data-test=addButton]").click();
 	cy.getBySelector(form.linkNameTextField).type("My Link");
 	cy.getBySelector(form.linkUrlTextField).type("http://example.url");
 
-	cy.getBySelector(form.addConfigButton).click();
+	cy.getBySelector(form.addConfigButton).find("[data-test=addButton]").click();
 	cy.getBySelector(form.toolTextField).type("My Tool");
 	cy.getBySelector(form.configTextField).type("My Config");
 }
