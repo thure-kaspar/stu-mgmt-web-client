@@ -138,7 +138,7 @@ export class GroupCardComponent implements OnInit {
 	}
 
 	isJoinable(): boolean {
-		return (
+		return !(
 			this.group.isClosed ||
 			this.group.id === this.participant.groupId ||
 			this.group.isFull(this.course)
