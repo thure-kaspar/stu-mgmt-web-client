@@ -56,8 +56,15 @@ export const Selector = {
 		noAssessmentTargetWarning: "noAssessmentTargetWarning"
 	},
 
+	editAssessment: {
+		component: "editAssessmentComponent",
+		saveButton: "saveButton",
+		saveAsDraftButton: "saveAsDraftButton"
+	},
+
 	assessmentForm: {
 		component: "assessmentFormComponent",
+		partialAssessmentForm: "partialAssessmentForm",
 		achievedPointsTextField: "achievedPointsTextField",
 		draftOnlyToggle: "draftOnlyToggle",
 		partialAssessmentTitleTextField: "partialAssessmentTitleTextField",

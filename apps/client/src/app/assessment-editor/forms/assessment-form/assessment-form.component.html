@@ -52,6 +52,7 @@
 		<div
 			class="flex flex-col p-4 rounded shadow bg-card-bg"
 			[formGroup]="getPartialAssessment(i)"
+			data-test="partialAssessmentForm"
 		>
 			<div class="mb-2">
 				<mat-slide-toggle formControlName="draftOnly" data-test="draftOnlyToggle">

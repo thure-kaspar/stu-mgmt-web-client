@@ -12,11 +12,12 @@
 					icon="edit"
 					color="orange"
 					[text]="'Domain.Draft' | translate"
+					data-test="isDraftChip"
 				></student-mgmt-chip>
 			</div>
 		</ng-container>
 		<ng-container subtitle>
-			<div class="flex mt-2 gap-2">
+			<div class="flex gap-2 mt-2">
 				<student-mgmt-assignment-type-chip
 					[type]="assignment.type"
 				></student-mgmt-assignment-type-chip>

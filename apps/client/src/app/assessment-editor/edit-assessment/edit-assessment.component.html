@@ -45,6 +45,7 @@
 			id="btn-save"
 			[disabled]="form.form.invalid"
 			(click)="onSave()"
+			data-test="saveButton"
 		>
 			{{ "Action.Save" | translate }}
 		</button>
@@ -55,6 +56,7 @@
 			color="primary"
 			[disabled]="form.form.invalid"
 			(click)="onSave(true)"
+			data-test="saveAsDraftButton"
 		>
 			{{ "Action.Custom.SaveAsDraft" | translate }}
 		</button>
