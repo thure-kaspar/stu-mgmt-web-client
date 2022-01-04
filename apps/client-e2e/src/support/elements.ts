@@ -182,6 +182,21 @@ export const Selector = {
 		deleteGroupButton: "deleteGroupButton"
 	},
 
+	registeredGroupCard: {
+		component: "registeredGroupCardComponent",
+		groupCardMenuButton: "groupCardMenuButton",
+		addParticipantButton: "addParticipantButton",
+		removeRegistrationButton: "removeRegistrationButton"
+	},
+
+	registeredGroups: {
+		component: "registeredGroupsComponent",
+		registerGroupButton: "registerGroupButton",
+		registerCurrentGroupsButton: "registerCurrentGroupsButton",
+		UnregisterAllGroupsButton: "UnregisterAllGroupsButton",
+		filterTextField: "filterTextField"
+	},
+
 	searchParticipantDialog: {
 		component: "searchParticipantDialog",
 		nameTextField: "nameTextField",
@@ -198,5 +213,9 @@ export const Selector = {
 		cancelButton: "cancelButton"
 	},
 
-	personListName: "personListName"
+	personList: {
+		component: "personListComponent",
+		name: "personListName",
+		removeParticipantButton: "removeParticipantButton"
+	}
 } as const;

@@ -1,5 +1,13 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	Input,
+	NgModule,
+	Output
+} from "@angular/core";
+import { TranslateModule } from "@ngx-translate/core";
 import { ParticipantDto } from "@student-mgmt/api-client";
 import { PersonIconComponentModule } from "../person-icon/person-icon.component";
 
@@ -10,10 +18,12 @@ import { PersonIconComponentModule } from "../person-icon/person-icon.component"
 })
 export class PersonListComponent {
 	@Input() participants!: ParticipantDto[];
+	@Input() displayRemoveButton = false;
+	@Output() removeClicked = new EventEmitter<ParticipantDto>();
 }
 
 @NgModule({
-	imports: [CommonModule, PersonIconComponentModule],
+	imports: [CommonModule, TranslateModule, PersonIconComponentModule],
 	declarations: [PersonListComponent],
 	exports: [PersonListComponent]
 })

@@ -30,7 +30,8 @@
       "UseNamingSchemaAndCount": "Use prefix and count",
       "UseNamingSchemeAndCount": "Use prefix and count",
       "SaveAsDraft": "Save as draft",
-      "RemovePartialAssessment": "Remove partial assessment"
+      "RemovePartialAssessment": "Remove partial assessment",
+      "RemoveRegistration": "Remove registration"
     },
     "Delete": "Delete",
     "Edit": "Edit",
@@ -401,6 +402,9 @@
         "PARTICIPANT_LEFT_GROUP": "Participant left my group"
       },
       "EmailNotifications": "Notify me about ..."
+    },
+    "RegisteredGroups": {
+      "Comment": "Adding or removing a participant or group only affects this assignment. The global group list will remain unchanged."
     }
   },
   "Title": {

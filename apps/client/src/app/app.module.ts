@@ -5,6 +5,7 @@ import localeDe from "@angular/common/locales/de";
 import localeDeExtra from "@angular/common/locales/extra/de";
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { MatNativeDateModule } from "@angular/material/core";
+import { MatDialogModule } from "@angular/material/dialog";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserModule } from "@angular/platform-browser";

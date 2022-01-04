@@ -3,13 +3,15 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/c
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatChipsModule } from "@angular/material/chips";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatTableDataSource, MatTableModule } from "@angular/material/table";
-import { ActivatedRoute, RouterModule } from "@angular/router";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { ActivatedRoute } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
+import { RegisteredGroupCardUiComponentModule } from "@student-mgmt-client/components";
 import {
 	DialogService,
 	DownloadService,
@@ -17,29 +19,36 @@ import {
 	ToastService
 } from "@student-mgmt-client/services";
 import {
-	ChipComponentModule,
 	IconComponentModule,
-	SearchParticipantDialog
+	SearchParticipantDialog,
+	SearchParticipantDialogModule,
+	TitleComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { AssignmentRegistrationApi, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
-import { BehaviorSubject } from "rxjs";
-import { SearchGroupDialog } from "../../group/dialogs/search-group/search-group.dialog";
+import { BehaviorSubject, firstValueFrom } from "rxjs";
+import {
+	SearchGroupDialog,
+	SearchGroupDialogModule
+} from "../../group/dialogs/search-group/search-group.dialog";
+
+type RegisteredGroupsState = {
+	data: GroupDto[];
+	isLoading: boolean;
+};
 
 @Component({
 	selector: "student-mgmt-registered-groups",
 	templateUrl: "./registered-groups.component.html",
-	styleUrls: ["./registered-groups.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements OnInit {
-	dataSource$ = new BehaviorSubject(new MatTableDataSource<GroupDto>([]));
-	hasRegisteredGroups = false;
+	_groups: GroupDto[] = [];
+	registeredGroups$ = new BehaviorSubject<RegisteredGroupsState>({ data: [], isLoading: true });
+
 	courseId: string;
 	assignmentId: string;
-	displayedColumns = ["action", "name", "members"];
 	filter: string;
-	private groups: GroupDto[] = [];
 
 	constructor(
 		public participantFacade: ParticipantFacade,
@@ -53,56 +62,62 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 		super();
 	}
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<void> {
 		this.courseId = getRouteParam("courseId", this.route);
 		this.assignmentId = getRouteParam("assignmentId", this.route);
 
-		this.loadRegistrations();
+		await this.loadRegistrations();
 	}
 
 	/**
-	 * Loads all registered groups for this assignment and emits them via `groups$`.
+	 * Loads all registered groups for this assignment and emits them via {@link registeredGroups$}.
 	 */
-	private loadRegistrations(): void {
-		this.subs.sink = this.registrations
-			.getRegisteredGroups(this.courseId, this.assignmentId)
-			.subscribe({
-				next: result => {
-					this.hasRegisteredGroups = result.length > 0;
-					this.groups = result;
-					this.dataSource$.next(new MatTableDataSource(result));
-				},
-				error: error => {
-					this.toast.apiError(error);
-				}
-			});
+	async loadRegistrations(): Promise<void> {
+		this.registeredGroups$.next({ data: [], isLoading: true });
+
+		this._groups = await firstValueFrom(
+			this.registrations.getRegisteredGroups(this.courseId, this.assignmentId)
+		);
+
+		this.filterUpdated();
 	}
 
 	filterUpdated(): void {
-		if (this.filter?.length > 0) {
-			const filteredGroups = this.groups.filter(group => {
-				const _filter = this.filter.trim().toLowerCase();
-				const groupName = group.name.toLowerCase();
+		const filteredGroups = this.applyFilter(this._groups, this.filter);
+		this.registeredGroups$.next({
+			data: filteredGroups,
+			isLoading: false
+		});
+	}
 
-				if (groupName.includes(_filter)) {
+	/**
+	 * Matches groups by ...
+	 * - `group.name`
+	 * - `member.displayName`
+	 * @param groups
+	 * @param [filter]
+	 * @return {*}
+	 */
+	applyFilter(groups: GroupDto[], filter?: string): GroupDto[] {
+		if (!filter || filter.trim() === "") {
+			return groups;
+		}
+
+		const filterInLowerCase = this.filter.toLowerCase();
+
+		return groups.filter(group => {
+			if (group.name.toLowerCase().includes(filterInLowerCase)) {
+				return true;
+			}
+
+			for (const member of group.members) {
+				if (member.displayName.toLowerCase().includes(filterInLowerCase)) {
 					return true;
 				}
+			}
 
-				for (const member of group.members) {
-					if (
-						member.displayName.toLowerCase().includes(_filter) ||
-						member.username.toLowerCase().includes(_filter)
-					) {
-						return true;
-					}
-				}
-
-				return false;
-			});
-			this.dataSource$.next(new MatTableDataSource(filteredGroups));
-		} else {
-			this.dataSource$.next(new MatTableDataSource(this.groups));
-		}
+			return false;
+		});
 	}
 
 	/**
@@ -110,23 +125,21 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 	 */
 	registerGroup(): void {
 		this.subs.sink = this.dialog
-			.open<SearchGroupDialog, any, GroupDto[]>(SearchGroupDialog, { data: this.courseId })
+			.open<SearchGroupDialog, string, GroupDto>(SearchGroupDialog, { data: this.courseId })
 			.afterClosed()
-			.subscribe(groups => {
-				if (groups?.length > 0) {
-					groups.forEach(group => {
-						this.registrations
-							.registerGroup(this.courseId, this.assignmentId, group.id)
-							.subscribe({
-								next: () => {
-									this.toast.success();
-									this.loadRegistrations();
-								},
-								error: error => {
-									this.toast.apiError(error, group.name);
-								}
-							});
-					});
+			.subscribe(group => {
+				if (group) {
+					this.registrations
+						.registerGroup(this.courseId, this.assignmentId, group.id)
+						.subscribe({
+							next: async () => {
+								this.toast.success();
+								await this.loadRegistrations();
+							},
+							error: error => {
+								this.toast.apiError(error, group.name);
+							}
+						});
 				}
 			});
 	}
@@ -145,9 +158,9 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 					this.registrations
 						.registerAllGroups(this.courseId, this.assignmentId)
 						.subscribe({
-							next: () => {
+							next: async () => {
 								this.toast.success();
-								this.loadRegistrations();
+								await this.loadRegistrations();
 							},
 							error: error => {
 								this.toast.apiError(error);
@@ -168,9 +181,9 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 			.subscribe(confirmed => {
 				if (confirmed) {
 					this.registrations.unregisterAll(this.courseId, this.assignmentId).subscribe({
-						next: () => {
+						next: async () => {
 							this.toast.success();
-							this.loadRegistrations();
+							await this.loadRegistrations();
 						},
 						error: error => {
 							this.toast.apiError(error);
@@ -185,7 +198,7 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 	 */
 	registerParticipant(group: GroupDto): void {
 		this.dialog
-			.open<SearchParticipantDialog, any, ParticipantDto[]>(SearchParticipantDialog, {
+			.open<SearchParticipantDialog, string, ParticipantDto[]>(SearchParticipantDialog, {
 				data: this.courseId
 			})
 			.afterClosed()
@@ -200,9 +213,9 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 							participants[0].userId
 						)
 						.subscribe({
-							next: () => {
+							next: async () => {
 								this.toast.success();
-								this.loadRegistrations();
+								await this.loadRegistrations();
 							},
 							error: error => {
 								this.toast.apiError(error);
@@ -226,9 +239,9 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 					this.registrations
 						.unregisterUser(this.courseId, this.assignmentId, participant.userId)
 						.subscribe({
-							next: () => {
+							next: async () => {
 								this.toast.success();
-								this.loadRegistrations();
+								await this.loadRegistrations();
 							},
 							error: error => {
 								this.toast.apiError(error);
@@ -252,9 +265,9 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 					this.registrations
 						.unregisterGroup(this.courseId, this.assignmentId, group.id)
 						.subscribe({
-							next: () => {
+							next: async () => {
 								this.toast.success();
-								this.loadRegistrations();
+								await this.loadRegistrations();
 							},
 							error: error => {
 								this.toast.apiError(error);
@@ -277,17 +290,19 @@ export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements O
 	exports: [RegisteredGroupsComponent],
 	imports: [
 		CommonModule,
-		RouterModule,
 		FormsModule,
+		MatDialogModule,
+		MatProgressSpinnerModule,
 		MatButtonModule,
 		MatFormFieldModule,
 		MatInputModule,
-		MatTableModule,
 		MatChipsModule,
-		MatMenuModule,
 		TranslateModule,
 		IconComponentModule,
-		ChipComponentModule
+		TitleComponentModule,
+		RegisteredGroupCardUiComponentModule,
+		SearchGroupDialogModule,
+		SearchParticipantDialogModule
 	]
 })
 export class RegisteredGroupsComponentModule {}

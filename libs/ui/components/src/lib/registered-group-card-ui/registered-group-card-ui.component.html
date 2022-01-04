@@ -1,0 +1,53 @@
+<student-mgmt-card data-test="registeredGroupCardComponent">
+	<ng-container title>
+		<a [routerLink]="['/courses', courseId, 'groups', group.id]">
+			{{ group.name }}
+		</a>
+	</ng-container>
+
+	<ng-container menu>
+		<mat-menu #groupMenu>
+			<ng-container>
+				<button
+					mat-menu-item
+					(click)="addMemberClicked.next(group)"
+					data-test="addParticipantButton"
+				>
+					<student-mgmt-icon class="mr-4 icon-light" name="person_add"></student-mgmt-icon
+					>{{ "Action.Custom.AddParticipant" | translate }}
+				</button>
+				<button
+					mat-menu-item
+					(click)="removeRegistrationClicked.next(group)"
+					data-test="removeRegistrationButton"
+				>
+					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
+					<span class="font-bold text-red">
+						{{ "Action.Custom.RemoveRegistration" | translate }}
+					</span>
+				</button>
+			</ng-container>
+		</mat-menu>
+
+		<button mat-icon-button [matMenuTriggerFor]="groupMenu" data-test="groupCardMenuButton">
+			<student-mgmt-icon class="icon-light" name="more_vert"></student-mgmt-icon>
+		</button>
+	</ng-container>
+
+	<ng-container content>
+		<div class="flex flex-col gap-4">
+			<span>{{ "Domain.Members" | translate }}: {{ group.size }}</span>
+
+			<student-mgmt-person-list
+				*ngIf="group.members && group.members.length > 0"
+				[participants]="group.members"
+				[displayRemoveButton]="true"
+				(removeClicked)="removeMemberClicked.next($event)"
+			></student-mgmt-person-list>
+		</div>
+	</ng-container>
+
+	<!-- <ng-container footer>
+		
+	</ng-container> -->
+</student-mgmt-card>
