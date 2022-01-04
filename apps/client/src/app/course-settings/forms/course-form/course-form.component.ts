@@ -7,7 +7,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { TranslateModule } from "@ngx-translate/core";
 import { SemesterPipeModule } from "@student-mgmt-client/pipes";
-import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import {
+	AddableListHeaderComponentModule,
+	IconComponentModule
+} from "@student-mgmt-client/shared-ui";
 import { getSemesterList } from "@student-mgmt-client/util-helper";
 
 @Component({
@@ -53,7 +56,8 @@ export class CourseFormComponent {
 		MatSelectModule,
 		TranslateModule,
 		IconComponentModule,
-		SemesterPipeModule
+		SemesterPipeModule,
+		AddableListHeaderComponentModule
 	]
 })
 export class CourseFormComponentModule {}

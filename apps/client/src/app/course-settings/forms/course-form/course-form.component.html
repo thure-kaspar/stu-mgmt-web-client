@@ -39,18 +39,11 @@
 	</mat-form-field>
 
 	<div class="links" formArrayName="links">
-		<h3>
-			<span>Links</span>
-			<button
-				type="button"
-				mat-flat-button
-				color="accent"
-				(click)="addLink()"
-				data-test="addLinkButton"
-			>
-				{{ "Action.Add" | translate }}
-			</button>
-		</h3>
+		<student-mgmt-addable-list-header
+			name="Links"
+			(addClicked)="addLink()"
+			data-test="addLinkButton"
+		></student-mgmt-addable-list-header>
 
 		<div
 			class="link-form"
