@@ -1,4 +1,4 @@
-import { account, useAccount } from "../../support/auth";
+import { account, useAccount } from "../support/auth";
 
 describe("Registered Groups", () => {
 	const courseId = "java-wise1920";
