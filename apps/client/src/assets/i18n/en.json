@@ -1,0 +1,443 @@
+{
+  "Action": {
+    "Add": "Add",
+    "Cancel": "Cancel",
+    "Close": "Close",
+    "Compare": "Compare",
+    "Confirm": "Confirm",
+    "Create": "Create",
+    "Custom": {
+      "AddAssignment": "Add assignment",
+      "AddAssignmentTemplate": "Add assignment template",
+      "AddCourse": "Add course",
+      "AddCriteria": "Add criteria",
+      "AddGroup": "Add group",
+      "AddLecturer": "Add lecturer",
+      "AddPartialAssessment": "Add partial assessment",
+      "AddParticipant": "Add participant",
+      "ChangeRole": "Change role",
+      "CopyFromPrevious": "Copy from a previous assignment",
+      "CreateCourse": "Create course",
+      "LeaveCourse": "Leave course",
+      "LeaveGroup": "Leave group",
+      "RegisterAllGroups": "Register current groups",
+      "RegisterGroup": "Register group",
+      "RemoveGroup": "Remove group",
+      "RemoveParticipant": "Remove participant",
+      "RemoveUserFromGroup": "Remove user from group",
+      "SelectCourseTemplate": "Select course template",
+      "UnregisterAllGroups": "Unregister all group",
+      "UseNamingSchemaAndCount": "Use prefix and count",
+      "UseNamingSchemeAndCount": "Use prefix and count",
+      "SaveAsDraft": "Save as draft",
+      "RemovePartialAssessment": "Remove partial assessment",
+      "RemoveRegistration": "Remove registration"
+    },
+    "Delete": "Delete",
+    "Edit": "Edit",
+    "Join": "Join",
+    "Leave": "Leave",
+    "No": "No",
+    "Ok": "Ok",
+    "Open": "Open",
+    "Remove": "Remove",
+    "Save": "Save",
+    "Search": "Search",
+    "Select": "Select",
+    "Send": "Send",
+    "View": "View",
+    "Yes": "Yes"
+  },
+  "Common": {
+    "Achieved": "Achieved",
+    "All": "All",
+    "AssignedTo": "Assigned to",
+    "Average": "Average",
+    "Closed": "Closed",
+    "Count": "Count",
+    "CreatedBy": "Created by",
+    "CreationDate": "Creation date",
+    "Criteria": "Criteria",
+    "Date": "Date",
+    "Empty": "Empty",
+    "End": "End",
+    "For": "For",
+    "Help": "Help",
+    "Highest": "Highest",
+    "Joinable": "Joinable",
+    "LastUpdatedBy": "Last updated by",
+    "Lowest": "Lowest",
+    "Multiple": "Multiple",
+    "My": "My",
+    "Name": "Name",
+    "Names": "Names",
+    "No": "No",
+    "None": "None",
+    "Of": "of",
+    "Open": "Open",
+    "Other": "Other",
+    "Password": "Password",
+    "Required": "Required",
+    "Single": "Single",
+    "Start": "Start",
+    "Time": "Time",
+    "Title": "Title",
+    "Total": "Total",
+    "UpdateDate": "Update date",
+    "Welcome": "Welcome",
+    "Yes": "Yes",
+    "Dark": "Dark",
+    "Light": "Light"
+  },
+  "Domain": {
+    "Admission": "Admission",
+    "AdmissionCriteria": "Admission criteria",
+    "AdmissionFromPreviousSemester": "Admission from previous semester",
+    "Assessment": "Assessment",
+    "AssessmentAllocations": "Allocations",
+    "Assessments": "Assessments",
+    "Assignment": "Assignment",
+    "AssignmentTemplate": "Assignment template",
+    "AssignmentTemplates": "Assignment templates",
+    "Assignments": "Assignments",
+    "Course": "Course",
+    "CourseConfig": "Course config",
+    "Courses": "Courses",
+    "Expression": {
+      "EmptyGroup": "This group has no members."
+    },
+    "Failed": "Failed",
+    "Group": "Group",
+    "GroupNames": "Group names",
+    "GroupSettings": "Group settings",
+    "Groups": "Groups",
+    "Lecturer": "Lecturer",
+    "Lecturers": "Lecturers",
+    "Member": "Member",
+    "Members": "Members",
+    "PartialAssessment": "Partial assessment",
+    "PartialAssessments": "Partial assessments",
+    "Participant": "Participant",
+    "Participants": "Participants",
+    "Points": "Points",
+    "Problem": "Problem",
+    "Problems": "Problems",
+    "RegisteredGroups": "Registered groups",
+    "Registrations": "Registrations",
+    "Semester": "Semester",
+    "Submission": "Submission",
+    "Submissions": "Submissions",
+    "User": "User",
+    "Users": "Users",
+    "Draft": "Draft"
+  },
+  "Enum": {
+    "AssignmentState": {
+      "CLOSED": "Closed",
+      "EVALUATED": "Evaluated",
+      "INVISIBLE": "Invisible",
+      "IN_PROGRESS": "In progress",
+      "IN_REVIEW": "In review"
+    },
+    "AssignmentType": {
+      "HOMEWORK": "Homework",
+      "OTHER": "Other",
+      "PROJECT": "Project",
+      "SEMINAR": "Seminar",
+      "TESTAT": "Testat"
+    },
+    "CollaborationType": {
+      "GROUP": "Group",
+      "GROUP_OR_SINGLE": "Group or single",
+      "SINGLE": "Single"
+    },
+    "CourseRole": {
+      "LECTURER": "Lecturer",
+      "STUDENT": "Student",
+      "TUTOR": "Tutor"
+    },
+    "RoundingType": {
+      "DECIMALS": "Rounded to decimal place",
+      "DOWN_NEAREST_INTEGER": "Rounded down to nearest integer",
+      "NONE": "Not rounded",
+      "UP_NEAREST_INTEGER": "Rounded up to nearest integer"
+    },
+    "RuleType": {
+      "INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES": "Min. {{requiredPercent}}% of achievable points for each assignment with {{allowedFailures}} allowed failures",
+      "REQUIRED_PERCENT_OVERALL": "Min. {{requiredPercent}}% of achievable points over all assignments"
+    },
+    "Severity": {
+      "CRITICAL": "Critical",
+      "ERROR": "Error",
+      "INFORMATIONAL": "Informational",
+      "WARNING": "Warning"
+    },
+    "UserRole": {
+      "ADMIN_TOOL": "ADMIN_TOOL",
+      "MGMT_ADMIN": "MGMT_ADMIN",
+      "SYSTEM_ADMIN": "SYSTEM_ADMIN",
+      "USER": "USER"
+    }
+  },
+  "Error": {
+    "AlreadyInGroupException": "Participant is already in a group.",
+    "Assessment": {
+      "AchievedPointsMaxValueExceeded": "Achieved point exceeds the maximum amount of possible points."
+    },
+    "AssignmentNotInReview": "Assignment creation requires the \"In Review\"-state.",
+    "ConnectionRefused": "Failed to connect to the server.",
+    "CourseClosedException": "Course is closed and therefore can't be changed.",
+    "EntityAlreadyExistsError": "Already exists.",
+    "FailedToLoadRequiredData": "Failed to load the required data.",
+    "Forbidden": "You do not have the required permission to perform this action.",
+    "GroupClosedException": "Group is closed.",
+    "GroupsForbiddenException": "This course does not allow groups.",
+    "InvalidCredentials": "Invalid credentials.",
+    "InvalidPasswordException": "The given password was incorrect.",
+    "NotACourseMemberException": "You're not a member of this course.",
+    "NotAGroupMemberException": "You're not a member of this group.",
+    "NotATeachingStaffMember": "You're not part of the teaching staff for this course.",
+    "NotFound": "Failed to find the requested information.",
+    "SomethingWentWrong": "Oops, something went wrong!",
+    "Unauthorized": "You're not logged in.",
+    "Unknown": "Unknown error",
+    "ValueMissing": "Value is missing.",
+    "NoAdmissionCriteria": "This course did not define any admission criteria.",
+    "Conflict": "Conflict"
+  },
+  "Event": {
+    "UserJoinedCourseEvent": "joined the course.",
+    "UserJoinedGroupEvent": "joined the group.",
+    "UserLeftCourseEvent": "left the course.",
+    "UserLeftGroupEvent": "left the group."
+  },
+  "Message": {
+    "Created": "Created",
+    "Custom": {
+      "AutoJoinedGroup": "You were automatically added to group \"{{groupName}}\".",
+      "CreatedGroup": "Created group",
+      "JoinedGroup": "Joined group",
+      "ParticipantAddedToGroup": "{{name}} was added to group \"{{groupName}}\"."
+    },
+    "Deleted": "Deleted",
+    "Error": "Error",
+    "Removed": "Removed",
+    "Saved": "Saved",
+    "Success": "Success"
+  },
+  "Misc": {
+    "About": "About",
+    "AdmissionStatusDisclaimer": "This only reflects the current status and not the final admission approval. Future assignments have not been taken into consideration.",
+    "BasicData": "Basic Data",
+    "Decimals": "Decimals",
+    "ExcludeAlreadyReviewed": "Exclude already reviewed groups/users",
+    "ExcludeEmptyGroups": "Exclude empty groups",
+    "ExtendedOptions": "Extended options",
+    "Home": "Home",
+    "Imprint": "Imprint",
+    "Language": "Language",
+    "Link": "Link",
+    "MyProfile": "My profile",
+    "Paginator": {
+      "FirstPageLabel": "First page",
+      "ItemsPerPageLabel": "Items per page:",
+      "LastPageLabel": "Last page",
+      "NextPageLabel": "Next",
+      "PreviousPageLabel": "Previous",
+      "RangeLabel": "Page {{currentPage}} of {{numberOfPages}}"
+    },
+    "PasswordProtected": "Password protected",
+    "Privacy": "Privacy",
+    "Rounding": "Rounding",
+    "Secrets": "Secrets",
+    "Settings": "Settings",
+    "UnsavedChanges": "Unsaved changes",
+    "Notifications": "Notifications",
+    "CurrentStatus": "Current status",
+    "NoPasswordRequired": "No password required",
+    "Configs": "Configurations",
+    "Config": "Config"
+  },
+  "Prompt": {
+    "ContinueWithUnsavedChanges": "If you continue, your unsaved changes will be discarded.",
+    "PleaseChoose": "Please choose",
+    "Question": {
+      "AreYouSure": "Do you confirm this action ?",
+      "RemoveUserFromGroup": "Do you really want to remove this user from the group ?"
+    }
+  },
+  "Property": {
+    "AdmissionRule": {
+      "AchievedPercentRounding": "Rounding of Achieved points-%",
+      "AllowedFailures": "Allow failures",
+      "AssignmentType": "Assignment type",
+      "FailedAssignments": "Failed assignments",
+      "Passed": "Passed",
+      "PassedAssignmentsPercent": "Required passed Assignments in %",
+      "PassedAssignmentsRounding": "Rounding of required passed assignments",
+      "RequiredPercent": "Required points in %",
+      "Type": "Rule"
+    },
+    "Assessment": {
+      "AchievedPoints": "Points",
+      "Comment": "Comment",
+      "Creator": "Created by",
+      "HasPassed": "Passed",
+      "IsDraft": "Is draft",
+      "PartialAssessments": "Partial assessments"
+    },
+    "Assignment": {
+      "BonusPoints": "Bonus points",
+      "Collaboration": "Collaboration",
+      "Comment": "Comment",
+      "EndDate": "End date",
+      "Name": "Name",
+      "Points": "Points",
+      "StartDate": "Start date",
+      "State": "State",
+      "Type": "Type"
+    },
+    "AssignmentTemplate": {
+      "State": "Initial state",
+      "TemplateName": "Template name",
+      "Timespan": "Timespan",
+      "TitleSchema": "Titel"
+    },
+    "Course": {
+      "IsClosed": "Closed",
+      "Link": "Link",
+      "Shortname": "Shortname",
+      "Title": "Title"
+    },
+    "CourseConfig": {
+      "SubscriptionUrl": "SubscriptionUrlTODO"
+    },
+    "Group": {
+      "History": "History",
+      "IsClosed": "Closed",
+      "Name": "Name"
+    },
+    "GroupSettings": {
+      "AllowGroups": "Allow groups",
+      "AutoJoinGroupOnCourseJoined": "Automatically assign group to participant after joining the course",
+      "MergeGroupsOnAssignmentStarted": "Merge insufficiently big groups when assignment starts",
+      "NameSchema": "Prefix",
+      "Selfmanaged": "Selfmanaged",
+      "SizeMax": "Max. size",
+      "SizeMin": "Min. size"
+    },
+    "PartialAssessment": {
+      "Comment": "Comment",
+      "Points": "Points",
+      "Severity": "Severity",
+      "Title": "Title",
+      "Type": "Type",
+      "DraftOnly": "Only visible when assessment is a draft"
+    },
+    "User": {
+      "CourseRole": "Role in course",
+      "DisplayName": "Name",
+      "Email": "Email",
+      "Role": "Role",
+      "Username": "Username"
+    },
+    "UserSettings": {
+      "Language": "Preferred language",
+      "AllowEmails": "Allow email-notifications"
+    }
+  },
+  "Text": {
+    "AdmissionStatus": {
+      "CriteriaFulfilled": "Criteria fulfilled",
+      "CriteriaNotFulfilled": "Criteria not fulfilled"
+    },
+    "Common": {
+      "EnterToConfirm": "Please enter the following text to confirm"
+    },
+    "Course": {
+      "Closed": "If the course is closed, joining, creation of new assignments, groups, etc. is not possible.",
+      "Id": "Id will default to shortname-semeste, if not specified. Will be used in the URL.",
+      "Shortname": "Shortname of this course. Should be reused every semester (i.e \"java\")."
+    },
+    "CourseConfig": {
+      "AdmissionFromPreviousSemester": "Admissions from previous semesters can be entered in the textfield on the left. Every row should contain a single matriculation number. After saving, the selected matriculation numbers will be displayed in the table along with the corresponding student. If the  student is not yet registered in this system, their name won't be displayed.",
+      "Password": "Participants must enter the password to join the course."
+    },
+    "Dialog": {
+      "SuggestGroupJoin": "Participation in group assignments requires membership in a group.\n\nIf you confirm this action, the system will try to add you into an open group. Should there be no available groups, a new group will be created for you."
+    },
+    "Group": {
+      "CanNotBeClosed": "The group cannot be closed by students.",
+      "CanNotBeRenamed": "This group cannot be renamed by students.",
+      "EmptyGroup": "This group is empty.",
+      "LeaveToJoinOther": "Current group must be left to join another group.",
+      "NoGroupForAssignment": "You currently have no group for this assignment.",
+      "NotEnoughMembers": "Group must have at least {{minSize}} members.",
+      "ParticipantHasNoGroup": "Participant currently has no group.",
+      "NoAssessments": "There are no assessments for this group.",
+      "NoMembers": "This group has no members."
+    },
+    "GroupCreation": {
+      "NameSchema": "This course is using a predefined prefix for group names.\nGroup name will be chosen automatically.",
+      "Password": "When using a password, other participants are required enter the password to join your group."
+    },
+    "GroupSettings": {
+      "AllowGroups": "Allows the creation of groups.",
+      "AutoJoinGroupOnCourseJoined": "If no open group exists, a new group will be created.\nIf name schema is not defined, a random group name will be chosen.",
+      "Prefix": "All group names will use the prefix followed by a number.",
+      "Selfmanaged": "TBD",
+      "SizeMax": "Max. amount of allowed group members.",
+      "SizeMin": "Group must have this size to participate in assignments."
+    },
+    "NotificationDescription": "The Student Management System can notify other systems about certain events (i.e., start of an assignment).\nIn order to receive these notifications, it must provide an endpoint that listens to HTTP-POST requests.\n\nConfiguring subscriptions requires one of the following roles: \nSYSTEM_ADMIN, MGMT_ADMIN or ADMIN_TOOL.",
+    "Assessment": {
+      "Visibility": "Students will only be able to view the assessment once the assignment is set to EVALUATED. ",
+      "SelectGroupOrParticipant": "Please select a group or participant."
+    },
+    "UserSettings": {
+      "Language": "Determines the language of received emails.",
+      "BlacklistedEvents": {
+        "ASSIGNMENT_STARTED": "Assignment has started",
+        "ASSIGNMENT_EVALUATED": "Assessment received",
+        "ASSESSMENT_SCORE_CHANGED": "Score of an assessment was changed",
+        "PARTICIPANT_JOINED_GROUP": "Participant joined my group",
+        "PARTICIPANT_LEFT_GROUP": "Participant left my group"
+      },
+      "EmailNotifications": "Notify me about ..."
+    },
+    "RegisteredGroups": {
+      "Comment": "Adding or removing a participant or group only affects this assignment. The global group list will remain unchanged."
+    },
+    "NoAssessments": "There are ",
+    "AssignmentList": {
+      "NoAssignments": "There are no assignments for this course."
+    },
+    "GroupList": {
+      "NoGroups": "No groups found."
+    }
+  },
+  "Title": {
+    "AdmissionStatus": "Admission status",
+    "AppName": "Student-Management",
+    "CompareParticipantsList": "Compare participants list",
+    "ConfigureSubscriber": "Configure subscriber",
+    "CreateAssessment": "Create assessment",
+    "CreateAssignment": "Create assignment",
+    "CreateGroup": "Create group",
+    "EditAssessment": "Edit assessment",
+    "EditAssignment": "Edit assignment",
+    "EditGroup": "Edit group",
+    "JoinCourse": "Join course",
+    "JoinGroup": "Join group",
+    "ParticipantsList": "Participants list",
+    "PointsOverview": "Points overview",
+    "SearchCourse": "Search course",
+    "SearchGroup": "Search group",
+    "SearchParticipant": "Search participant",
+    "SearchUser": "Search user",
+    "UserManagement": "User-Management"
+  },
+  "Tooltip": {
+    "SelectAssessmentTarget": "Select a target for this assessment by pressing the \"Select\"-button in the Group/User-Table."
+  }
+}

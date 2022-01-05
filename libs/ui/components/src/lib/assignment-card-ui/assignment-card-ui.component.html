@@ -1,0 +1,205 @@
+<student-mgmt-card class="assignment-card" data-test="assignment-card">
+	<div title class="flex gap-2">
+		<span class="font-bold name">
+			<a
+				class="link-none"
+				[routerLink]="[props.assignment.id, 'assessments']"
+				*ngIf="props.participant.isTeachingStaffMember; else noLink"
+			>
+				{{ props.assignment.name }}
+			</a>
+			<ng-template #noLink>
+				{{ props.assignment.name }}
+			</ng-template>
+		</span>
+	</div>
+
+	<ng-container subtitle>
+		<span>
+			<span>{{ props.assignment.points }} {{ "Domain.Points" | translate }}</span>
+			<span *ngIf="props.assignment.bonusPoints && props.assignment.bonusPoints > 0">
+				(+{{ props.assignment.bonusPoints }}
+				{{ "Property.Assignment.BonusPoints" | translate }})
+			</span>
+			<span *ngIf="props.requiredPoints">
+				- {{ "Common.Required" | translate }}: {{ props.requiredPoints }}
+				{{ "Domain.Points" | translate }}</span
+			>
+		</span>
+	</ng-container>
+
+	<ng-container menu *ngIf="props.participant.isTeachingStaffMember">
+		<button mat-icon-button [mat-menu-trigger-for]="assignmentMenu">
+			<student-mgmt-icon name="more_vert" class="text"></student-mgmt-icon>
+		</button>
+
+		<mat-menu #assignmentMenu>
+			<ng-container *ngIf="props.participant.isTeachingStaffMember">
+				<a
+					mat-menu-item
+					[routerLink]="[
+						'/courses',
+						props.courseId,
+						'assignments',
+						props.assignment.id,
+						'edit'
+					]"
+					><button>
+						<student-mgmt-icon class="mr-4 icon-light" name="edit"></student-mgmt-icon>
+						<span class="font-bold">{{ "Action.Edit" | translate }}</span>
+					</button></a
+				>
+
+				<button mat-menu-item (click)="deleteClicked.next()">
+					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
+					<span class="font-bold text-red">
+						{{ "Action.Delete" | translate }}
+					</span>
+				</button>
+			</ng-container>
+		</mat-menu>
+	</ng-container>
+
+	<div content class="flex flex-col gap-4">
+		<div class="flex gap-2">
+			<student-mgmt-assignment-type-chip
+				[type]="props.assignment.type"
+			></student-mgmt-assignment-type-chip>
+
+			<student-mgmt-collaboration-type-chip
+				[collaborationType]="props.assignment.collaboration"
+			></student-mgmt-collaboration-type-chip>
+		</div>
+
+		<div class="flex flex-col" *ngIf="props.assignment.startDate || props.assignment.endDate">
+			<div class="flex" *ngIf="props.assignment.startDate">
+				<div class="font-bold uppercase w-14 text-green">
+					{{ "Common.Start" | translate }}:
+				</div>
+				<span>{{ props.assignment.startDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
+			</div>
+			<div class="flex" *ngIf="props.assignment.endDate">
+				<div class="font-bold uppercase w-14 text-red">{{ "Common.End" | translate }}:</div>
+				<span>{{ props.assignment.endDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
+			</div>
+		</div>
+
+		<div class="comment" *ngIf="props.assignment.comment">
+			<pre class="preformatted">{{ props.assignment.comment }}</pre>
+		</div>
+
+		<div
+			class="flex flex-col"
+			*ngIf="props.assignment.links && props.assignment.links.length > 0"
+		>
+			<a
+				class="font-bold text-red-500"
+				*ngFor="let link of props.assignment.links"
+				[href]="link.url"
+				>#{{ link.name }}</a
+			>
+		</div>
+
+		<ng-container *ngIf="props.group">
+			<mat-divider></mat-divider>
+
+			<div class="flex flex-col gap-4">
+				<a
+					class="text-base font-bold"
+					[routerLink]="['/courses', props.courseId, 'groups', props.group.id]"
+					>{{ props.group.name }}
+				</a>
+
+				<student-mgmt-person-list
+					*ngIf="props.group.members && props.group.members.length > 0"
+					[participants]="props.group.members"
+				></student-mgmt-person-list>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="props.displayNoGroupWarning">
+			<mat-divider></mat-divider>
+
+			<span class="flex gap-2">
+				<student-mgmt-icon class="text-yellow-500" name="warning"></student-mgmt-icon>
+				<span class="font-bold">{{ "Text.Group.NoGroupForAssignment" | translate }}</span>
+			</span>
+		</ng-container>
+
+		<ng-container *ngIf="props.assessment">
+			<mat-divider></mat-divider>
+
+			<div>
+				<div class="text-base font-bold">{{ "Domain.Assessment" | translate }}</div>
+
+				<a
+					class="my-auto text-sky-500"
+					[routerLink]="[
+						'/courses',
+						props.courseId,
+						'assessments',
+						'view',
+						props.assessment.id
+					]"
+					>Bewertung ansehen</a
+				>
+			</div>
+
+			<div class="flex gap-2">
+				<div class="my-auto" *ngIf="props.assessment?.achievedPoints as achievedPoints">
+					{{ achievedPoints }} {{ "Domain.Points" | translate }}
+				</div>
+
+				<span
+					*ngIf="props.passFailSubmittedState"
+					[ngSwitch]="props.passFailSubmittedState"
+				>
+					<student-mgmt-chip
+						*ngSwitchCase="'submitted'"
+						color="#14abb3"
+						icon="assignment_turned_in"
+						text="Abgegeben"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="'passed'"
+						color="#2fac6f"
+						icon="thumb_up"
+						[text]="'Property.Assessment.HasPassed' | translate"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="'failed'"
+						color="#ff0134"
+						icon="thumb_down"
+						[text]="'Domain.Failed' | translate"
+					></student-mgmt-chip>
+					<student-mgmt-chip
+						*ngSwitchCase="'evaluated'"
+						color="#5335b0"
+						icon="assignment_turned_in"
+						text="Bewertet"
+					></student-mgmt-chip>
+				</span>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="props.participant.isTeachingStaffMember">
+			<mat-divider></mat-divider>
+
+			<div class="flex gap-8">
+				<a
+					class="text-sky-500 hover:underline"
+					[routerLink]="[props.assignment.id, 'assessments']"
+				>
+					{{ "Domain.Assessments" | translate }}
+				</a>
+				<a
+					class="text-sky-500 hover:underline"
+					[routerLink]="[props.assignment.id, 'assessments', 'registrations']"
+					*ngIf="props.assignment.collaboration !== collaborationEnum.SINGLE"
+				>
+					{{ "Domain.Registrations" | translate }}
+				</a>
+			</div>
+		</ng-container>
+	</div>
+</student-mgmt-card>

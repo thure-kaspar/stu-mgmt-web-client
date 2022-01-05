@@ -1,0 +1,119 @@
+<form id="course-creation-form" class="form-container mt-2" [formGroup]="form" autocomplete="off">
+	<mat-tab-group
+		color="accent"
+		animationDuration="0ms"
+		[selectedIndex]="selectedIndex"
+		(selectedIndexChange)="tabChanged($event)"
+	>
+		<mat-tab [label]="'Misc.BasicData' | translate">
+			<button
+				class="btn-top"
+				mat-flat-button
+				color="accent"
+				[disabled]="form.invalid"
+				(click)="saveBasicData()"
+			>
+				{{ "Action.Save" | translate }}
+			</button>
+			<student-mgmt-course-form [form]="form" [isEditMode]="true"></student-mgmt-course-form>
+		</mat-tab>
+
+		<ng-container formGroupName="config">
+			<mat-tab [label]="'Domain.GroupSettings' | translate">
+				<button
+					class="btn-top"
+					mat-flat-button
+					color="accent"
+					[disabled]="form.get('config.groupSettings').invalid"
+					(click)="saveGroupsSettings()"
+				>
+					{{ "Action.Save" | translate }}
+				</button>
+				<student-mgmt-group-settings-form [form]="form"></student-mgmt-group-settings-form>
+			</mat-tab>
+
+			<mat-tab label="{{ 'Misc.Secrets' | translate }}">
+				<ng-template matTabContent>
+					<button class="btn-top" mat-flat-button color="accent" (click)="saveSecrets()">
+						{{ "Action.Save" | translate }}
+					</button>
+					<div id="secrets">
+						<mat-form-field>
+							<mat-label>{{ "Common.Password" | translate }}</mat-label>
+							<input matInput formControlName="password" />
+							<mat-hint>{{ "Text.CourseConfig.Password" | translate }}</mat-hint>
+						</mat-form-field>
+					</div>
+				</ng-template>
+			</mat-tab>
+
+			<mat-tab [label]="'Domain.AdmissionCriteria' | translate">
+				<button
+					class="btn-top"
+					mat-flat-button
+					color="accent"
+					[disabled]="form.get('config.admissionCriteria').invalid"
+					(click)="saveAdmissionCriteria()"
+				>
+					{{ "Action.Save" | translate }}
+				</button>
+				<student-mgmt-admission-criteria-form
+					[form]="form"
+				></student-mgmt-admission-criteria-form>
+			</mat-tab>
+
+			<mat-tab [label]="'Domain.AdmissionFromPreviousSemester' | translate">
+				<ng-template matTabContent>
+					<student-mgmt-admission-from-previous-semester-form></student-mgmt-admission-from-previous-semester-form>
+				</ng-template>
+			</mat-tab>
+
+			<mat-tab [label]="'Domain.AssignmentTemplates' | translate">
+				<div id="assignment-templates-tab">
+					<button
+						class="btn-top"
+						type="button"
+						id="btn-add-assignment-template"
+						mat-flat-button
+						color="accent"
+						(click)="openCreateAssignmentTemplateDialog()"
+					>
+						<student-mgmt-icon name="add"></student-mgmt-icon
+						>{{ "Action.Custom.AddAssignmentTemplate" | translate }}
+					</button>
+
+					<div class="assignment-template-list">
+						<mat-card *ngFor="let template of assignmentTemplates$ | async">
+							<mat-card-title class="assignment-template">
+								<span class="left">
+									{{ template.templateName }}
+								</span>
+								<span class="right">
+									<button
+										mat-stroked-button
+										(click)="openEditAssignmentTemplateDialog(template)"
+									>
+										{{ "Action.Edit" | translate }}
+									</button>
+									<button
+										mat-stroked-button
+										color="warn"
+										(click)="deleteAssignmentTemplate(template)"
+									>
+										{{ "Action.Delete" | translate }}
+									</button>
+								</span>
+							</mat-card-title>
+						</mat-card>
+					</div>
+				</div>
+			</mat-tab>
+
+			<mat-tab [label]="'Misc.Notifications' | translate">
+				<ng-template matTabContent>
+					<student-mgmt-notification-subscribers></student-mgmt-notification-subscribers>
+				</ng-template>
+			</mat-tab>
+		</ng-container>
+	</mat-tab-group>
+</form>

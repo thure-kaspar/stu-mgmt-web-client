@@ -1,0 +1,64 @@
+<div data-test="editAssessmentComponent">
+	<student-mgmt-title [title]="'Title.EditAssessment' | translate">
+		<div class="flex gap-2">
+			<button
+				mat-flat-button
+				color="accent"
+				class="fit-content"
+				[disabled]="form.form.invalid"
+				(click)="onSave()"
+			>
+				{{ "Action.Save" | translate }}
+			</button>
+
+			<button
+				class="btn-save-as-draft fit-content"
+				mat-flat-button
+				color="primary"
+				[disabled]="form.form.invalid"
+				(click)="onSave(true)"
+			>
+				{{ "Action.Custom.SaveAsDraft" | translate }}
+			</button>
+		</div>
+	</student-mgmt-title>
+
+	<student-mgmt-assessment-header
+		[assignment]="assignment"
+		[assessment]="assessment$ | async"
+		[courseId]="this.courseId"
+		[isEditMode]="true"
+	></student-mgmt-assessment-header>
+
+	<div class="mt-4 mb-4">
+		<student-mgmt-assessment-form [assignment]="assignment"></student-mgmt-assessment-form>
+	</div>
+
+	<mat-hint>
+		{{ "Text.Assessment.Visibility" | translate }}
+	</mat-hint>
+
+	<div class="flex gap-2 mt-4">
+		<button
+			mat-flat-button
+			color="accent"
+			id="btn-save"
+			[disabled]="form.form.invalid"
+			(click)="onSave()"
+			data-test="saveButton"
+		>
+			{{ "Action.Save" | translate }}
+		</button>
+
+		<button
+			class="btn-save-as-draft"
+			mat-flat-button
+			color="primary"
+			[disabled]="form.form.invalid"
+			(click)="onSave(true)"
+			data-test="saveAsDraftButton"
+		>
+			{{ "Action.Custom.SaveAsDraft" | translate }}
+		</button>
+	</div>
+</div>

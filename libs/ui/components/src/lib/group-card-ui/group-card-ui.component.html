@@ -1,0 +1,85 @@
+<student-mgmt-card class="props.group-card" data-test="groupCardComponent">
+	<ng-container title>
+		<span *ngIf="props.participant.isStudent; else nameWithLink">
+			{{ props.group.name }}
+		</span>
+		<ng-template #nameWithLink>
+			<a [routerLink]="[props.group.id]" class="link-none">
+				{{ props.group.name }}
+			</a>
+		</ng-template>
+	</ng-container>
+
+	<ng-container menu *ngIf="props.participant.isTeachingStaffMember">
+		<mat-menu #groupMenu>
+			<ng-container>
+				<button
+					mat-menu-item
+					(click)="addParticipantClicked.next()"
+					data-test="addParticipantButton"
+				>
+					<student-mgmt-icon class="mr-4 icon-light" name="person_add"></student-mgmt-icon
+					>{{ "Action.Custom.AddParticipant" | translate }}
+				</button>
+				<button
+					mat-menu-item
+					(click)="removeGroupClicked.next()"
+					data-test="deleteGroupButton"
+				>
+					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
+					<span class="font-bold text-red">
+						{{ "Action.Delete" | translate }}
+					</span>
+				</button>
+			</ng-container>
+		</mat-menu>
+
+		<button mat-icon-button [matMenuTriggerFor]="groupMenu" data-test="groupCardMenuButton">
+			<student-mgmt-icon class="icon-light" name="more_vert"></student-mgmt-icon>
+		</button>
+	</ng-container>
+
+	<ng-container subtitle *ngIf="props.group.isClosed || props.group.hasPassword">
+		<div class="flex gap-2">
+			<student-mgmt-chip
+				*ngIf="props.group.isClosed"
+				color="#ff0134"
+				icon="lock"
+				[text]="'Property.Group.IsClosed' | translate"
+			></student-mgmt-chip>
+			<student-mgmt-chip
+				*ngIf="props.group.hasPassword"
+				color="var(--primary)"
+				icon="vpn_key"
+				[text]="'Misc.PasswordProtected' | translate"
+			></student-mgmt-chip>
+		</div>
+	</ng-container>
+
+	<ng-container content>
+		<div class="flex flex-col gap-4">
+			<span>{{ "Domain.Members" | translate }}: {{ props.group.size }}</span>
+
+			<student-mgmt-person-list
+				*ngIf="
+					props.participant.isTeachingStaffMember &&
+					props.group.members &&
+					props.group.members.length > 0
+				"
+				[participants]="props.group.members"
+			></student-mgmt-person-list>
+		</div>
+	</ng-container>
+
+	<ng-container footer>
+		<button
+			*ngIf="props.participant.isStudent"
+			mat-flat-button
+			color="accent"
+			[disabled]="!props.isJoinable"
+			(click)="joinClicked.next()"
+		>
+			{{ "Action.Join" | translate }}
+		</button>
+	</ng-container>
+</student-mgmt-card>

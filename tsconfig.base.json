@@ -1,0 +1,37 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2017",
+		"module": "es2020",
+		"lib": ["es2018", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@student-mgmt-client/auth": ["libs/util/auth/src/index.ts"],
+			"@student-mgmt-client/components": ["libs/ui/components/src/index.ts"],
+			"@student-mgmt-client/course-list": ["libs/feature/course-list/src/index.ts"],
+			"@student-mgmt-client/domain-types": ["libs/util/domain-types/src/index.ts"],
+			"@student-mgmt-client/pipes": ["libs/util/pipes/src/index.ts"],
+			"@student-mgmt-client/services": ["libs/util/services/src/index.ts"],
+			"@student-mgmt-client/shared-ui": ["libs/ui/shared/src/index.ts"],
+			"@student-mgmt-client/state": ["libs/data-access/state/src/index.ts"],
+			"@student-mgmt-client/storybook": ["libs/storybook/src/index.ts"],
+			"@student-mgmt-client/testing": ["libs/testing/src/index.ts"],
+			"@student-mgmt-client/util-helper": ["libs/util/helper/src/index.ts"]
+		}
+	},
+	"angularCompilerOptions": {
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	},
+	"exclude": ["node_modules", "tmp"]
+}

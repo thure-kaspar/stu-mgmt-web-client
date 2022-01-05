@@ -1,0 +1,150 @@
+<form
+	[formGroup]="form"
+	autocomplete="off"
+	class="flex flex-col"
+	data-test="assignmentFormComponent"
+>
+	<mat-form-field class="w-full">
+		<mat-label>{{ "Common.Name" | translate }}</mat-label>
+		<input matInput formControlName="name" required data-test="nameTextField" />
+		<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+	</mat-form-field>
+
+	<div class="flex gap-2">
+		<mat-form-field class="w-full">
+			<mat-label>{{ "Property.Assignment.Points" | translate }}</mat-label>
+			<input
+				matInput
+				type="number"
+				formControlName="points"
+				required
+				data-test="pointsTextField"
+			/>
+			<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="w-full">
+			<mat-label>{{ "Property.Assignment.BonusPoints" | translate }}</mat-label>
+			<input
+				matInput
+				type="number"
+				formControlName="bonusPoints"
+				data-test="bonusPointsTextField"
+			/>
+		</mat-form-field>
+	</div>
+
+	<div class="flex gap-4 py-2">
+		<div class="w-full p-4 rounded bg-card-bg">
+			<span class="font-medium">{{ "Property.Assignment.Type" | translate }}*</span>
+			<mat-radio-group class="pt-2 radio-group" formControlName="type">
+				<mat-radio-button
+					[value]="type"
+					*ngFor="let type of typeEnumValues"
+					data-test="typeOption"
+					>{{ "Enum.AssignmentType." + type | translate }}</mat-radio-button
+				>
+			</mat-radio-group>
+		</div>
+
+		<div class="w-full p-4 rounded bg-card-bg">
+			<span class="font-medium">{{ "Property.Assignment.Collaboration" | translate }}*</span>
+			<mat-radio-group class="pt-2 radio-group" formControlName="collaboration">
+				<mat-radio-button
+					*ngFor="let collaborationType of collaborationEnumValues"
+					[value]="collaborationType"
+					data-test="collaborationTypeOption"
+				>
+					{{ "Enum.CollaborationType." + collaborationType | translate }}
+				</mat-radio-button>
+			</mat-radio-group>
+		</div>
+
+		<div class="w-full p-4 rounded bg-card-bg">
+			<span class="font-medium">{{ "Property.Assignment.State" | translate }}*</span>
+			<mat-radio-group class="pt-2 radio-group" formControlName="state">
+				<mat-radio-button
+					*ngFor="let state of stateEnumValues"
+					[value]="state"
+					data-test="stateOption"
+					>{{ "Enum.AssignmentState." + state | translate }}</mat-radio-button
+				>
+			</mat-radio-group>
+		</div>
+	</div>
+
+	<div class="mt-4">
+		<student-mgmt-date-time-picker
+			[label]="'Property.Assignment.StartDate' | translate"
+			[control]="$any(form.controls['startDate'])"
+		></student-mgmt-date-time-picker>
+
+		<student-mgmt-date-time-picker
+			[label]="'Property.Assignment.EndDate' | translate"
+			[control]="$any(form.controls['endDate'])"
+		></student-mgmt-date-time-picker>
+	</div>
+
+	<mat-form-field id="comment-field">
+		<mat-label>{{ "Property.Assignment.Comment" | translate }}</mat-label>
+		<textarea width matInput formControlName="comment" rows="5"></textarea>
+	</mat-form-field>
+
+	<div class="pt-2" formArrayName="links">
+		<student-mgmt-addable-list-header
+			data-test="addLinkButton"
+			name="Links"
+			(addClicked)="addLink()"
+		></student-mgmt-addable-list-header>
+
+		<div
+			class="flex gap-2"
+			*ngFor="let link of getLinks().controls; let i = index"
+			[formGroupName]="i"
+		>
+			<mat-form-field class="w-full">
+				<mat-label>Name</mat-label>
+				<input matInput formControlName="name" required data-test="linkNameTextField" />
+				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="w-full">
+				<mat-label>URL</mat-label>
+				<input matInput formControlName="url" required data-test="linkUrlTextField" />
+				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+			</mat-form-field>
+
+			<button mat-icon-button class="remove-link-btn" (click)="removeLink(i)">
+				<student-mgmt-icon name="clear"></student-mgmt-icon>
+			</button>
+		</div>
+	</div>
+
+	<div class="pt-2" formArrayName="configs">
+		<student-mgmt-addable-list-header
+			data-test="addConfigButton"
+			[name]="'Misc.Configs' | translate"
+			(addClicked)="addConfig()"
+		></student-mgmt-addable-list-header>
+
+		<div
+			class="flex gap-2"
+			*ngFor="let link of getConfigs().controls; let i = index"
+			[formGroupName]="i"
+		>
+			<mat-form-field class="w-full">
+				<mat-label>Tool</mat-label>
+				<input matInput formControlName="tool" required data-test="toolTextField" />
+			</mat-form-field>
+
+			<mat-form-field class="w-full">
+				<mat-label>{{ "Misc.Config" | translate }}</mat-label>
+				<input matInput formControlName="config" required data-test="configTextField" />
+			</mat-form-field>
+
+			<button mat-icon-button class="remove-config-btn" (click)="removeConfig(i)">
+				<student-mgmt-icon name="clear"></student-mgmt-icon>
+			</button>
+		</div>
+	</div>
+</form>

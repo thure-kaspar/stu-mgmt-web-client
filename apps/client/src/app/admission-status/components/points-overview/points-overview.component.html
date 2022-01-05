@@ -1,0 +1,11 @@
+<div class="flex flex-col">
+	<student-mgmt-title [title]="'Title.PointsOverview' | translate"
+		><button mat-stroked-button (click)="exportToExcel()">Export</button></student-mgmt-title
+	>
+
+	<ng-container *ngIf="props$ | async as props">
+		<student-mgmt-points-overview-table-ui
+			[props]="props"
+		></student-mgmt-points-overview-table-ui>
+	</ng-container>
+</div>

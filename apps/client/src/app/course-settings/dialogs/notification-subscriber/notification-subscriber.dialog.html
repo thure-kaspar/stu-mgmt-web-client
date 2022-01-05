@@ -1,0 +1,59 @@
+<div class="notifications-subscriber">
+	<span mat-dialog-title>{{ 'Title.ConfigureSubscriber' | translate }}</span>
+
+	<mat-dialog-content>
+		<form [formGroup]="form">
+			<mat-form-field>
+				<mat-label>Name</mat-label>
+				<input matInput required formControlName="name" />
+				<mat-hint>Name of your application.</mat-hint>
+				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>URL</mat-label>
+				<input matInput required formControlName="url" />
+				<mat-hint
+					>URL to the endpoint in your application that should receive notifications via
+					HTTP-POST messages.</mat-hint
+				>
+				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+			</mat-form-field>
+
+			<div class="events">
+				<div class="events-header">
+					<span class="font-bold">Events</span>
+					<div class="flex gap-2 align-items-center">
+						<mat-slide-toggle
+							mat-flat-button
+							color="accent"
+							[checked]="allSelected"
+							(toggleChange)="toggleAll()"
+						>
+							Select all
+						</mat-slide-toggle>
+						<button mat-flat-button color="primary" (click)="reset()">Reset</button>
+					</div>
+				</div>
+				<mat-hint
+					>Use the "Select all"-toggle to automatically subscribe to new events.</mat-hint
+				>
+				<div class="event-list" formGroupName="events">
+					<mat-checkbox
+						class="event"
+						*ngFor="let event of events"
+						[formControlName]="event"
+						>{{event}}</mat-checkbox
+					>
+				</div>
+			</div>
+		</form>
+	</mat-dialog-content>
+
+	<mat-dialog-actions>
+		<button mat-flat-button color="accent" (click)="onSave()" [disabled]="form.invalid">
+			{{ 'Action.Save' | translate }}
+		</button>
+		<button mat-button mat-dialog-close>{{ 'Action.Cancel' | translate }}</button>
+	</mat-dialog-actions>
+</div>

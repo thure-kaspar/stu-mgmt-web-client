@@ -1,0 +1,21 @@
+<ng-container
+	*ngIf="{
+		participant: participantFacade.participant$ | async,
+		group: group$ | async,
+		assessments: assessments$ | async
+	} as obs"
+>
+	<ng-container *ngIf="obs.group">
+		<student-mgmt-group-detail-ui
+			[group]="obs.group"
+			[assessments]="obs.assessments"
+			[participant]="obs.participant"
+			[courseId]="courseId"
+			(addParticipantClicked)="onAddParticipant()"
+			(removeGroupClicked)="onRemoveGroup()"
+			(leaveGroupClicked)="onLeaveGroup()"
+			(removeParticipantClicked)="onRemoveUser($event)"
+			(editGroupClicked)="onEditGroup()"
+		></student-mgmt-group-detail-ui>
+	</ng-container>
+</ng-container>

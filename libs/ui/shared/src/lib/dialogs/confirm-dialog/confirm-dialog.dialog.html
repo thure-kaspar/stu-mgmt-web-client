@@ -1,0 +1,7 @@
+<student-mgmt-confirm-dialog-ui
+	[title]="data?.title"
+	[message]="data?.message"
+	[params]="data?.params"
+	(confirmClicked)="dialogRef.close(true)"
+	(cancelClicked)="dialogRef.close(false)"
+></student-mgmt-confirm-dialog-ui>

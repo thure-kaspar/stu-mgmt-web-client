@@ -1,0 +1,69 @@
+<div class="participant-assessments">
+	<div
+		class="assignment"
+		[class.evaluated]="assignment.state === 'EVALUATED'"
+		*ngFor="let assignment of assignmentsWithAssessments$ | async"
+	>
+		<student-mgmt-assignment-type-chip
+			[type]="assignment.type"
+		></student-mgmt-assignment-type-chip>
+
+		<div class="assignment-and-group-name">
+			<ng-container *ngIf="assignment.assessment?.id; else noAssessment">
+				<a
+					class="font-bold link-none"
+					[routerLink]="[
+						'/courses',
+						courseId,
+						'assignments',
+						assignment.id,
+						'assessments',
+						'view',
+						assignment.assessment.id
+					]"
+				>
+					{{ assignment.name }}
+				</a>
+			</ng-container>
+			<ng-template #noAssessment>
+				<div class="text-light">{{ assignment.name }}</div>
+			</ng-template>
+
+			<span class="group text-light" *ngIf="assignment.assessment?.group">
+				{{ "Domain.Group" | translate }}: {{ assignment.assessment.group.name }}
+			</span>
+		</div>
+
+		<div class="points">
+			<span class="font-bold achieved">
+				{{
+					assignment.assessment?.achievedPoints !== undefined &&
+					assignment.assessment?.achievedPoints !== null
+						? assignment.assessment.achievedPoints
+						: "-"
+				}}</span
+			>
+			<span class="max-points text-light"> / {{ assignment.points }}</span>
+			<span class="percent text-light" *ngIf="assignment.assessment?.achievedPoints >= 0">
+				({{
+					((assignment.assessment?.roundedPoints >= 0
+						? assignment.assessment?.roundedPoints
+						: assignment.assessment.achievedPoints) /
+						assignment.points) *
+						100 | number: "1.0-2"
+				}}%)</span
+			>
+		</div>
+
+		<div>
+			<student-mgmt-thumb-chip
+				*ngIf="
+					assignment.state === 'EVALUATED' &&
+					(assignment.assessment?.hasPassed === true ||
+						assignment.assessment?.hasPassed === false)
+				"
+				[condition]="assignment.assessment?.hasPassed"
+			></student-mgmt-thumb-chip>
+		</div>
+	</div>
+</div>

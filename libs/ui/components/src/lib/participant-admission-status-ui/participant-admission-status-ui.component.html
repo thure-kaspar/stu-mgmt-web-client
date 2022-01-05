@@ -1,0 +1,109 @@
+<div class="participant-admission-status">
+	<student-mgmt-card>
+		<ng-container title>{{ "Title.AdmissionStatus" | translate }}</ng-container>
+		<ng-container subtitle>
+			<ng-container *ngIf="noAdmissionCriteria; else subtitle">
+				{{ "Error.NoAdmissionCriteria" | translate }}
+			</ng-container>
+			<ng-template #subtitle>{{ "Misc.CurrentStatus" | translate }}</ng-template>
+		</ng-container>
+		<ng-container content *ngIf="!noAdmissionCriteria">
+			<mat-spinner *ngIf="isLoading" diameter="64"></mat-spinner>
+
+			<ng-container *ngIf="!isLoading && admissionStatus">
+				<div class="overall-result">
+					<span
+						class="overall-result-column"
+						*ngIf="admissionStatus.hasAdmissionFromPreviousSemester"
+					>
+						<student-mgmt-thumb-chip [condition]="true"></student-mgmt-thumb-chip>
+						<span>Altzulassung</span>
+					</span>
+
+					<span class="overall-result-column">
+						<student-mgmt-thumb-chip
+							[condition]="admissionStatus.fulfillsAdmissionCriteria"
+						></student-mgmt-thumb-chip>
+						<span class="font-bold" *ngIf="admissionStatus.fulfillsAdmissionCriteria"
+							>{{ "Text.AdmissionStatus.CriteriaFulfilled" | translate }}.</span
+						>
+						<span class="font-bold" *ngIf="!admissionStatus.fulfillsAdmissionCriteria"
+							>{{ "Text.AdmissionStatus.CriteriaNotFulfilled" | translate }}.</span
+						>
+					</span>
+				</div>
+
+				<div class="rules">
+					<div class="rule" *ngFor="let rule of criteriaWithResult; let index = index">
+						<mat-divider></mat-divider>
+						<div class="rule-title">
+							<span class="top">
+								<student-mgmt-thumb-chip
+									[condition]="rule.result.passed"
+								></student-mgmt-thumb-chip>
+
+								<student-mgmt-assignment-type-chip
+									class="assignment-type-chip"
+									[type]="rule.assignmentType"
+								></student-mgmt-assignment-type-chip>
+							</span>
+						</div>
+
+						<div class="type">
+							<ng-container [ngSwitch]="rule.type">
+								<span
+									class="text-light"
+									*ngSwitchCase="ruleTypes.REQUIRED_PERCENT_OVERALL"
+									>{{
+										"Enum.RuleType." + rule.type
+											| translate: { requiredPercent: rule.requiredPercent }
+									}}.</span
+								>
+								<ng-container
+									*ngSwitchCase="
+										ruleTypes.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES
+									"
+								>
+									<span class="text-light"
+										>{{
+											"Enum.RuleType." + rule.type
+												| translate
+													: {
+															requiredPercent:
+																rule["requiredPercent"],
+															allowedFailures: rule["allowedFailures"]
+													  }
+										}}.
+									</span>
+								</ng-container>
+								<p *ngSwitchDefault>Unknown rule type</p>
+							</ng-container>
+						</div>
+
+						<div class="result">
+							<ng-container *ngIf="rule.type === ruleTypes.REQUIRED_PERCENT_OVERALL">
+								<span class="text-light"
+									>{{ "Common.Achieved" | translate }}:
+								</span>
+								<span class="font-bold">
+									{{ rule.result.achievedPercent || 0 | number: "1.0-2" }}%
+								</span>
+							</ng-container>
+
+							<ng-container
+								*ngIf="
+									rule.type === ruleTypes.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES
+								"
+							>
+								<span class="text-light">{{ "Domain.Failed" | translate }}: </span>
+								<span class="font-bold">
+									{{ rule.result.achievedPoints || 0 }}
+								</span>
+							</ng-container>
+						</div>
+					</div>
+				</div>
+			</ng-container>
+		</ng-container>
+	</student-mgmt-card>
+</div>

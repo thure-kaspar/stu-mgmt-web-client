@@ -1,0 +1,69 @@
+<ng-container *ngIf="courseFacade.course$ | async as course">
+	<div
+		class="flex flex-col py-8"
+		*ngIf="participant$ | async as participant"
+		data-test="groupListComponent"
+	>
+		<student-mgmt-title [title]="('Domain.Groups' | translate) + ' (' + totalCount + ')'">
+			<button
+				mat-flat-button
+				id="btn-add"
+				color="accent"
+				(click)="openCreateGroupDialog()"
+				[disabled]="!course.groupSettings.allowGroups"
+				data-test="addGroupButton"
+			>
+				<student-mgmt-icon name="add"></student-mgmt-icon>
+				{{ "Action.Custom.AddGroup" | translate }}
+			</button>
+		</student-mgmt-title>
+
+		<div class="flex flex-col gap-4">
+			<div class="flex flex-col">
+				<mat-checkbox [(ngModel)]="filter.onlyOpen" (change)="filterSubject.next()">
+					{{ "Common.Open" | translate }}
+				</mat-checkbox>
+				<mat-checkbox [(ngModel)]="filter.onlyClosed" (change)="filterSubject.next()">
+					{{ "Common.Closed" | translate }}
+				</mat-checkbox>
+				<mat-checkbox
+					[(ngModel)]="filter.excludeEmpty"
+					(change)="filterSubject.next()"
+					data-test="excludeEmptyGroupsCheckbox"
+				>
+					{{ "Misc.ExcludeEmptyGroups" | translate }}
+				</mat-checkbox>
+			</div>
+
+			<mat-form-field class="name-filter">
+				<mat-label>Filter</mat-label>
+				<input
+					matInput
+					[(ngModel)]="filter.name"
+					(keyup)="filterSubject.next()"
+					autocomplete="off"
+				/>
+			</mat-form-field>
+		</div>
+
+		<ng-container *ngIf="groups$ | async as groups">
+			<div class="text-light" *ngIf="groups.length === 0; else groupList">
+				{{ "Text.GroupList.NoGroups" | translate }}
+			</div>
+
+			<ng-template #groupList>
+				<div class="flex flex-col gap-4">
+					<student-mgmt-group-card
+						*ngFor="let group of groups"
+						[group]="group"
+						[participant]="participant"
+						[course]="course"
+						(groupRemoved)="onRemoveGroup($event)"
+						(participantAdded)="onAddParticipant($event)"
+					>
+					</student-mgmt-group-card>
+				</div>
+			</ng-template>
+		</ng-container>
+	</div>
+</ng-container>

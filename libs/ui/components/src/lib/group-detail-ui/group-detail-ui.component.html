@@ -1,0 +1,123 @@
+<div class="flex flex-col py-8" data-test="groupDetailComponent">
+	<student-mgmt-title [title]="group.name">
+		<div class="flex gap-2">
+			<button
+				mat-flat-button
+				color="accent"
+				(click)="editGroupClicked.next()"
+				data-test="editGroupButton"
+			>
+				{{ "Action.Edit" | translate }}
+			</button>
+			<button
+				*ngIf="participant.isStudent"
+				mat-stroked-button
+				color="accent"
+				(click)="leaveGroupClicked.next()"
+				data-test="leaveGroupButton"
+			>
+				{{ "Action.Custom.LeaveGroup" | translate }}
+			</button>
+			<button
+				*ngIf="participant.isTeachingStaffMember"
+				mat-stroked-button
+				color="accent"
+				(click)="removeGroupClicked.next()"
+				data-test="removeGroupButton"
+			>
+				{{ "Action.Custom.RemoveGroup" | translate }}
+			</button>
+		</div>
+	</student-mgmt-title>
+
+	<div class="flex gap-2">
+		<student-mgmt-chip
+			*ngIf="group.isClosed"
+			color="#ff0134"
+			icon="lock"
+			[text]="'Property.Group.IsClosed' | translate"
+		></student-mgmt-chip>
+		<student-mgmt-chip
+			*ngIf="group.hasPassword"
+			color="var(--primary)"
+			icon="vpn_key"
+			[text]="'Misc.PasswordProtected' | translate"
+		></student-mgmt-chip>
+	</div>
+
+	<div class="py-8">
+		<mat-divider></mat-divider>
+	</div>
+
+	<div class="flex flex-col">
+		<div class="flex justify-between mb-4">
+			<span class="text-base font-bold">{{ "Domain.Members" | translate }}</span>
+			<button
+				mat-flat-button
+				color="accent"
+				*ngIf="participant.isTeachingStaffMember"
+				(click)="addParticipantClicked.next()"
+				data-test="addMemberButton"
+			>
+				<student-mgmt-icon name="add"></student-mgmt-icon>
+				{{ "Action.Add" | translate }}
+			</button>
+		</div>
+
+		<div
+			*ngIf="!group.members || group.members.length === 0; else memberList"
+			class="text-light"
+		>
+			{{ "Text.Group.NoMembers" | translate }}
+		</div>
+
+		<ng-template #memberList>
+			<student-mgmt-person-list
+				[participants]="group.members!"
+				[displayRemoveButton]="participant.isTeachingStaffMember"
+				(removeClicked)="removeParticipantClicked.next($event)"
+			></student-mgmt-person-list>
+		</ng-template>
+	</div>
+
+	<div class="py-8">
+		<mat-divider></mat-divider>
+	</div>
+
+	<div class="flex flex-col">
+		<span class="mb-4 text-base font-bold">{{ "Domain.Assessments" | translate }}</span>
+
+		<div
+			*ngIf="!assessments || assessments.length === 0; else assessmentList"
+			class="text-light"
+		>
+			{{ "Text.Group.NoAssessments" | translate }}
+		</div>
+
+		<ng-template #assessmentList>
+			<div class="flex flex-col gap-4">
+				<div
+					*ngFor="let assessment of assessments"
+					class="flex justify-between p-4 rounded shadow bg-card-bg"
+				>
+					<a
+						class="font-bold hover:underline hover:text-sky-500"
+						[routerLink]="[
+							'/courses',
+							courseId,
+							'assignments',
+							assessment.assignmentId,
+							'view',
+							assessment.id
+						]"
+						>{{ assessment.assignment?.name }}</a
+					>
+					<span
+						>{{ assessment.achievedPoints ?? "?" }}
+						{{ "Domain.Points" | translate }}</span
+					>
+				</div>
+			</div>
+		</ng-template>
+	</div>
+</div>

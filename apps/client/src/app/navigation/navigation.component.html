@@ -1,0 +1,10 @@
+<student-mgmt-navigation-ui
+	[class]="themeService.theme$ | async"
+	[isHandset]="isHandset$ | async"
+	[user]="user$ | async"
+	(themeChanged)="themeService.setTheme($event)"
+	(languageChanged)="setLanguage($event)"
+	(loginClicked)="openLoginDialog()"
+	(logoutClicked)="logout()"
+>
+</student-mgmt-navigation-ui>

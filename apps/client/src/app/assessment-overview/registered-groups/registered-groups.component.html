@@ -1,0 +1,76 @@
+<div
+	class="flex flex-col"
+	*ngIf="{
+		participant: participantFacade.participant$ | async,
+		registeredGroups: registeredGroups$ | async
+	} as obs"
+	data-test="registeredGroupsComponent"
+>
+	<student-mgmt-title [title]="'Domain.RegisteredGroups' | translate">
+		<div class="flex gap-2">
+			<button
+				mat-flat-button
+				color="accent"
+				(click)="registerGroup()"
+				data-test="registerGroupButton"
+			>
+				<student-mgmt-icon name="add"></student-mgmt-icon>
+				{{ "Action.Custom.RegisterGroup" | translate }}
+			</button>
+			<button
+				mat-flat-button
+				color="primary"
+				(click)="registerCurrentGroups()"
+				[disabled]="obs.registeredGroups.data.length > 0"
+				data-test="registerCurrentGroupsButton"
+			>
+				{{ "Action.Custom.RegisterAllGroups" | translate }}
+			</button>
+			<button
+				mat-flat-button
+				color="primary"
+				(click)="unregisterAllGroups()"
+				data-test="UnregisterAllGroupsButton"
+			>
+				{{ "Action.Custom.UnregisterAllGroups" | translate }}
+			</button>
+			<button mat-stroked-button (click)="exportToExcel()">Export</button>
+		</div>
+	</student-mgmt-title>
+
+	<div class="mb-4 text-light">
+		{{ "Text.RegisteredGroups.Comment" | translate }}
+	</div>
+
+	<mat-form-field class="w-full">
+		<mat-label>Filter</mat-label>
+		<input
+			matInput
+			cdkFocusInitial
+			[(ngModel)]="filter"
+			(keyup)="filterUpdated()"
+			data-test="filterTextField"
+		/>
+	</mat-form-field>
+
+	<div>
+		<div class="p-8" *ngIf="obs.registeredGroups.isLoading">
+			<mat-progress-spinner
+				class="mx-auto"
+				mode="indeterminate"
+				diameter="64"
+			></mat-progress-spinner>
+		</div>
+
+		<div class="flex flex-col gap-4" *ngIf="obs.registeredGroups.data.length > 0">
+			<student-mgmt-registered-group-card-ui
+				*ngFor="let group of obs.registeredGroups.data"
+				[group]="group"
+				[courseId]="courseId"
+				(addMemberClicked)="registerParticipant($event)"
+				(removeMemberClicked)="unregisterParticipant($event)"
+				(removeRegistrationClicked)="unregisterGroup($event)"
+			></student-mgmt-registered-group-card-ui>
+		</div>
+	</div>
+</div>

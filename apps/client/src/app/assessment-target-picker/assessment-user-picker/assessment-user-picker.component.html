@@ -1,0 +1,77 @@
+<ng-container *ngIf="(isLoading$ | async) == false">
+	<table
+		#tableUsers
+		class="w-full"
+		mat-table
+		[dataSource]="dataSource$ | async"
+		matSort
+		#sortUsers="matSort"
+	>
+		<!-- Action Column -->
+		<ng-container matColumnDef="action">
+			<th id="column-view" mat-header-cell *matHeaderCellDef></th>
+			<td mat-cell *matCellDef="let row">
+				<button
+					*ngIf="!row.assessmentId"
+					mat-stroked-button
+					(click)="selectedParticipant(row.participant)"
+				>
+					{{ "Action.Select" | translate }}
+				</button>
+				<button
+					*ngIf="row.assessmentId"
+					mat-stroked-button
+					(click)="onSwitchToEdit.emit(row.assessmentId)"
+				>
+					{{ "Action.Edit" | translate }}
+				</button>
+			</td>
+		</ng-container>
+
+		<!-- Name Column -->
+		<ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ "Domain.Participant" | translate }}
+			</th>
+			<td mat-cell *matCellDef="let row">
+				<a
+					class="link-none font-bold"
+					[routerLink]="['/courses', courseId, 'users', row.userId]"
+					>{{ row.participant.displayName }}</a
+				>
+			</td>
+		</ng-container>
+
+		<!-- Assigned evaluator Column -->
+		<ng-container matColumnDef="assignedTo">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ "Common.AssignedTo" | translate }}
+			</th>
+			<td mat-cell *matCellDef="let row">
+				<student-mgmt-assessment-allocation
+					[courseId]="courseId"
+					[assignmentId]="assignmentId"
+					[assignedTo]="row.assignedEvaluatorId"
+					[userId]="row.participant.userId"
+				>
+				</student-mgmt-assessment-allocation>
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr
+			mat-row
+			[ngClass]="{ selected: row.participant.userId === selectedId }"
+			*matRowDef="let row; columns: displayedColumns"
+		></tr>
+	</table>
+</ng-container>
+
+<student-mgmt-paginator (onPageChanged)="loadParticipants()"></student-mgmt-paginator>
+
+<mat-progress-spinner
+	class="m-auto"
+	mode="indeterminate"
+	color="primary"
+	*ngIf="isLoading$ | async"
+></mat-progress-spinner>

@@ -1,0 +1,58 @@
+<ng-container *ngIf="participantFacade.participant$ | async as participant">
+	<div class="grid gap-4 tab" *ngIf="vm$ | async as vm" data-test="assessmentViewerComponent">
+		<student-mgmt-assessment-header
+			[assignment]="vm"
+			[assessment]="vm.assessment"
+			[courseId]="this.courseId"
+		></student-mgmt-assessment-header>
+
+		<student-mgmt-card>
+			<ng-container title>
+				<span class="overall-result">
+					<span class="achieved-points-number"
+						>{{ vm.assessment.achievedPoints }}
+						<span class="text-light">
+							/ {{ vm.points }}
+							<span *ngIf="vm.bonusPoints">(+{{ vm.bonusPoints }})</span>
+							{{ "Domain.Points" | translate }}
+						</span>
+					</span>
+					<ng-container *ngIf="vm.requiredPoints >= 0">
+						<student-mgmt-chip
+							*ngIf="vm.assessment.hasPassed"
+							icon="thumb_up"
+							[text]="'Property.Assessment.HasPassed' | translate"
+							color="#2fac6f"
+						></student-mgmt-chip>
+						<student-mgmt-chip
+							*ngIf="!vm.assessment.hasPassed"
+							icon="thumb_down"
+							[text]="'Domain.Failed' | translate"
+							color="#ff0134"
+						></student-mgmt-chip>
+					</ng-container>
+				</span>
+			</ng-container>
+
+			<ng-container subtitle *ngIf="vm.requiredPoints"
+				>{{ "Common.Required" | translate }}: {{ vm.requiredPoints || "?" }}
+				{{ "Domain.Points" | translate }}</ng-container
+			>
+
+			<ng-container content *ngIf="vm.assessment.comment">
+				<pre class="preformatted">{{ vm.assessment.comment }}</pre>
+			</ng-container>
+		</student-mgmt-card>
+
+		<ng-container *ngIf="vm.assessment.partialAssessments.length > 0">
+			<div class="grid gap-4 partial-assessments">
+				<ng-container *ngFor="let partial of vm.assessment.partialAssessments">
+					<student-mgmt-partial-assessment
+						class="partial-assessment"
+						[partialAssessment]="partial"
+					></student-mgmt-partial-assessment>
+				</ng-container>
+			</div>
+		</ng-container>
+	</div>
+</ng-container>

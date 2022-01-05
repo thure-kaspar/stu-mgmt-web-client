@@ -1,0 +1,44 @@
+<div class="mx-auto mt-4 w-96">
+	<mat-card class="flex flex-col gap-4">
+		<mat-card-title>Login</mat-card-title>
+		<div class="flex flex-col gap-2 pt-2">
+			<mat-form-field class="form-field" appearance="outline">
+				<mat-label>Username</mat-label>
+				<input
+					#username
+					matInput
+					value="mmustermann"
+					type="text"
+					name="email"
+					id="email"
+					(keydown.enter)="login(username.value)"
+				/>
+			</mat-form-field>
+
+			<div class="m-auto mb-2">
+				<mat-hint>Use the username of any test account to login.</mat-hint>
+			</div>
+
+			<div class="flex flex-col gap-2">
+				<button
+					mat-raised-button
+					color="accent"
+					type="submit"
+					class="w-full"
+					id="login-button"
+					(click)="login(username.value)"
+				>
+					Login
+				</button>
+				<button mat-flat-button color="primary" (click)="login('jdoe')">
+					Login as: Tutor
+				</button>
+				<button mat-flat-button color="primary" (click)="login('mAdmin')">
+					Login as: Lecturer
+				</button>
+			</div>
+
+			<p *ngIf="errorMessage != null" id="error-message">{{ errorMessage }}</p>
+		</div>
+	</mat-card>
+</div>

@@ -1,0 +1,9 @@
+<student-mgmt-chip
+	*ngIf="condition; else thumb_down"
+	icon="thumb_up"
+	color="#2fac6f"
+></student-mgmt-chip>
+
+<ng-template #thumb_down>
+	<student-mgmt-chip icon="thumb_down" color="#ff0134"></student-mgmt-chip>
+</ng-template>

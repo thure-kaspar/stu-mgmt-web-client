@@ -1,0 +1,36 @@
+<ng-container *ngIf="group">
+	<student-mgmt-card data-test="assessmentTargetGroupName">
+		<ng-container title>
+			<ng-container
+				*ngIf="participant.isStudent && participant.groupId !== group.id; else nameWithLink"
+			>
+				{{ group.name }}
+			</ng-container>
+			<ng-template #nameWithLink>
+				<a [routerLink]="['/courses', courseId, 'groups', group.id]" class="name link-none">
+					{{ group.name }}
+				</a>
+			</ng-template>
+		</ng-container>
+
+		<ng-container subtitle>{{ "Domain.Members" | translate }}: {{ group.size }}</ng-container>
+
+		<ng-container content>
+			<student-mgmt-person-list [participants]="group.members"></student-mgmt-person-list>
+		</ng-container>
+	</student-mgmt-card>
+</ng-container>
+
+<ng-container *ngIf="targetedParticipant || !group">
+	<student-mgmt-card>
+		<ng-container title>
+			<a
+				class="link-none"
+				[routerLink]="['/courses', courseId, 'users', targetedParticipant.userId]"
+				data-test="assessmentTargetDisplayName"
+			>
+				{{ targetedParticipant.displayName }}
+			</a>
+		</ng-container>
+	</student-mgmt-card>
+</ng-container>

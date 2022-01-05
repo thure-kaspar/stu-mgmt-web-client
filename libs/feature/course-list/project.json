@@ -1,0 +1,26 @@
+{
+	"projectType": "library",
+	"root": "libs/feature/course-list",
+	"sourceRoot": "libs/feature/course-list/src",
+	"prefix": "student-mgmt",
+	"targets": {
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["coverage/libs/feature/course-list"],
+			"options": {
+				"jestConfig": "libs/feature/course-list/jest.config.js",
+				"passWithNoTests": true
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"options": {
+				"lintFilePatterns": [
+					"libs/feature/course-list/src/**/*.ts",
+					"libs/feature/course-list/src/**/*.html"
+				]
+			}
+		}
+	},
+	"tags": []
+}

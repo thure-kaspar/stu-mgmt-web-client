@@ -1,0 +1,185 @@
+<form
+	class="flex flex-col gap-4"
+	id="assessment-form"
+	[formGroup]="form"
+	autocomplete="off"
+	data-test="assessmentFormComponent"
+>
+	<student-mgmt-card>
+		<ng-container title>{{ "Common.Total" | translate }}</ng-container>
+
+		<ng-container content>
+			<div class="flex flex-col">
+				<span id="points-container">
+					<mat-form-field class="w-20">
+						<mat-label>{{ "Domain.Points" | translate }}</mat-label>
+						<input
+							matInput
+							mat-form
+							type="number"
+							formControlName="achievedPoints"
+							data-test="achievedPointsTextField"
+						/>
+					</mat-form-field>
+					<span>
+						/ {{ assignment?.points }}
+						<ng-container *ngIf="assignment?.bonusPoints"
+							>({{ assignment.bonusPoints }}
+							{{ "Property.Assignment.BonusPoints" | translate }})</ng-container
+						>
+					</span>
+				</span>
+
+				<ng-container *ngIf="getErrors()">
+					<mat-error *ngFor="let error of getErrors()" class="mb-4">
+						{{ error | translate }}
+					</mat-error>
+				</ng-container>
+
+				<mat-form-field appearance="outline" class="comment-field">
+					<mat-label>{{ "Property.Assessment.Comment" | translate }}</mat-label>
+					<textarea rows="5" matInput class="w-full" formControlName="comment"></textarea>
+				</mat-form-field>
+			</div>
+		</ng-container>
+	</student-mgmt-card>
+
+	<div
+		id="partial-assessments"
+		formArrayName="partialAssessments"
+		*ngFor="let partial of getPartialAssessments()?.controls; let i = index"
+	>
+		<div
+			class="flex flex-col p-4 rounded shadow bg-card-bg"
+			[formGroup]="getPartialAssessment(i)"
+			data-test="partialAssessmentForm"
+		>
+			<div class="mb-2">
+				<mat-slide-toggle formControlName="draftOnly" data-test="draftOnlyToggle">
+					{{ "Property.PartialAssessment.DraftOnly" | translate }}
+				</mat-slide-toggle>
+			</div>
+
+			<mat-form-field>
+				<mat-label>{{ "Property.PartialAssessment.Title" | translate }}</mat-label>
+				<input
+					matInput
+					formControlName="title"
+					required
+					data-test="partialAssessmentTitleTextField"
+				/>
+				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>Key</mat-label>
+				<input matInput formControlName="key" data-test="partialAssessmentKeyTextField" />
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>{{ "Property.PartialAssessment.Points" | translate }}</mat-label>
+				<input
+					class="points-input"
+					matInput
+					type="number"
+					formControlName="points"
+					data-test="partialAssessmentPointsTextField"
+				/>
+			</mat-form-field>
+
+			<mat-form-field appearance="outline" class="comment-field">
+				<mat-label>{{ "Property.PartialAssessment.Comment" | translate }}</mat-label>
+				<textarea
+					rows="5"
+					matInput
+					class="w-full"
+					formControlName="comment"
+					data-test="partialAssessmentCommentTextField"
+				></textarea>
+			</mat-form-field>
+
+			<div class="mt-2 markers-outer">
+				<div class="flex justify-between">
+					<h2>{{ "Misc.Markers" | translate }}</h2>
+
+					<div class="flex gap-2 marker-buttons">
+						<button mat-flat-button class="btn-info" (click)="addMarker(i, 'INFO')">
+							<student-mgmt-icon name="add"></student-mgmt-icon>
+							INFO
+						</button>
+
+						<button mat-flat-button class="btn-hint" (click)="addMarker(i, 'HINT')">
+							<student-mgmt-icon name="add"></student-mgmt-icon>
+							HINT
+						</button>
+
+						<button
+							mat-flat-button
+							class="btn-warning"
+							(click)="addMarker(i, 'WARNING')"
+							data-test="addWarningMarkerButton"
+						>
+							<student-mgmt-icon name="add"></student-mgmt-icon>
+							WARNING
+						</button>
+
+						<button mat-flat-button class="btn-error" (click)="addMarker(i, 'ERROR')">
+							<student-mgmt-icon name="add"></student-mgmt-icon>
+							ERROR
+						</button>
+					</div>
+				</div>
+
+				<div class="flex flex-col gap-2">
+					<div *ngFor="let marker of getMarkers(i).controls; let markerIndex = index">
+						<div class="flex justify-end -mb-10">
+							<button
+								mat-icon-button
+								color="accent"
+								(click)="editMarker(marker.value, i, markerIndex)"
+								[matTooltip]="'Action.Edit' | translate"
+								data-test="editMarkerButton"
+							>
+								<student-mgmt-icon
+									class="icon-light"
+									name="edit"
+								></student-mgmt-icon>
+							</button>
+							<button
+								mat-icon-button
+								color="primary"
+								(click)="removeMarker(i, markerIndex)"
+								[matTooltip]="'Action.Remove' | translate"
+								data-test="removeMarkerButton"
+							>
+								<student-mgmt-icon
+									class="text-red"
+									name="clear"
+								></student-mgmt-icon>
+							</button>
+						</div>
+						<student-mgmt-marker [marker]="marker.value"></student-mgmt-marker>
+					</div>
+				</div>
+			</div>
+
+			<div class="flex justify-end mt-4">
+				<button
+					class="font-bold text-red-500 hover:underline"
+					type="button"
+					(click)="removePartialAssessment(i)"
+					data-test="removePartialAssessmentButton"
+				>
+					{{ "Action.Custom.RemovePartialAssessment" | translate }}
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<student-mgmt-addable-list-header
+		class="mt-4"
+		[name]="'Domain.PartialAssessments' | translate"
+		(addClicked)="addPartialAssessment()"
+		data-test="addPartialAssessmentButton"
+	></student-mgmt-addable-list-header>
+</form>

@@ -1,0 +1,52 @@
+<div [class]="'grid marker ' + marker.severity">
+	<ng-container [ngSwitch]="marker.severity">
+		<student-mgmt-chip
+			*ngSwitchCase="severityEnum.HINT"
+			icon="lightbulb"
+			color="#2ea569"
+			[text]="marker.severity"
+		></student-mgmt-chip>
+		<student-mgmt-chip
+			*ngSwitchCase="severityEnum.INFO"
+			icon="info"
+			color="#0d9fcf"
+			[text]="marker.severity"
+		></student-mgmt-chip>
+		<student-mgmt-chip
+			*ngSwitchCase="severityEnum.WARNING"
+			icon="warning"
+			color="#daa000"
+			[text]="marker.severity"
+		></student-mgmt-chip>
+		<student-mgmt-chip
+			*ngSwitchCase="severityEnum.ERROR"
+			icon="error"
+			color="red"
+			[text]="marker.severity"
+		></student-mgmt-chip>
+		<student-mgmt-chip
+			*ngSwitchDefault
+			icon="help"
+			color="primary"
+			text="Unknown"
+		></student-mgmt-chip>
+	</ng-container>
+
+	<div class="mt-4 mb-2">
+		<pre class="font-bold preformatted">{{ marker.comment }}</pre>
+	</div>
+	<span>
+		<span>Path: </span>
+		<span class="text-light">{{ marker.path }}</span>
+	</span>
+	<span>
+		<span>Line: </span>
+		<span class="text-light">{{ marker.startLineNumber }} - {{ marker.endLineNumber }}</span>
+	</span>
+	<span *ngIf="marker.startColumn || marker.endColumn">
+		<span>Column: </span>
+		<span class="text-light"
+			>{{ marker.startColumn || "?" }} - {{ marker.endColumn || "?" }}</span
+		>
+	</span>
+</div>

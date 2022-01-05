@@ -1,0 +1,11 @@
+<span class="inline-block mb-2">
+	<span class="mr-4 text-xl font-bold">{{ name }}</span>
+	<button
+		type="button"
+		class="text-sky-500 hover:underline"
+		(click)="addClicked.next()"
+		data-test="addButton"
+	>
+		{{ "Action.Add" | translate }}
+	</button>
+</span>

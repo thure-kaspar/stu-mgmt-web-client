@@ -1,0 +1,32 @@
+<div class="flex flex-col gap-4" data-test="personListComponent">
+	<div class="flex justify-between" *ngFor="let participant of participants">
+		<div class="flex gap-4">
+			<student-mgmt-person-icon
+				class="pt-1"
+				[name]="participant.displayName"
+			></student-mgmt-person-icon>
+
+			<div class="flex flex-col">
+				<span class="font-bold" data-test="personListName">{{
+					participant.displayName
+				}}</span>
+
+				<a
+					class="text-light"
+					[href]="'mailto:' + participant.email"
+					*ngIf="participant.email"
+					>{{ participant.email }}</a
+				>
+			</div>
+		</div>
+
+		<button
+			*ngIf="displayRemoveButton"
+			class="justify-end my-auto font-bold text-red-500"
+			(click)="removeClicked.next(participant)"
+			data-test="removeParticipantButton"
+		>
+			{{ "Action.Remove" | translate }}
+		</button>
+	</div>
+</div>

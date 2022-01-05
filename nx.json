@@ -1,0 +1,67 @@
+{
+	"npmScope": "student-mgmt-client",
+	"affected": {
+		"defaultBase": "master"
+	},
+	"cli": {
+		"defaultCollection": "@nrwl/angular"
+	},
+	"implicitDependencies": {
+		"package.json": {
+			"dependencies": "*",
+			"devDependencies": "*"
+		},
+		".eslintrc.json": "*"
+	},
+	"tasksRunnerOptions": {
+		"default": {
+			"runner": "@nrwl/nx-cloud",
+			"options": {
+				"cacheableOperations": ["build", "lint", "test", "e2e"],
+				"accessToken": "MjQxODQ5ZjgtNjZiNi00NDVjLTgzYTktMWI4MGZjMGJiMTJifHJlYWQtd3JpdGU=",
+				"useDaemonProcess": true
+			}
+		}
+	},
+	"targetDependencies": {
+		"build": [
+			{
+				"target": "build",
+				"projects": "dependencies"
+			}
+		]
+	},
+	"generators": {
+		"@nrwl/angular:application": {
+			"style": "none",
+			"linter": "eslint",
+			"unitTestRunner": "jest",
+			"e2eTestRunner": "cypress",
+			"strict": false
+		},
+		"@nrwl/angular:library": {
+			"prefix": "student-mgmt",
+			"style": "none",
+			"linter": "eslint",
+			"unitTestRunner": "jest",
+			"strict": false
+		},
+		"@schematics/angular:component": {
+			"style": "none",
+			"changeDetection": "OnPush",
+			"skipTests": true,
+			"skipImport": true
+		},
+		"@nrwl/angular:scam": {
+			"prefix": "student-mgmt",
+			"style": "none",
+			"changeDetection": "OnPush",
+			"inlineScam": true,
+			"skipTests": true
+		},
+		"@nrwl/angular:component": {
+			"style": "none"
+		}
+	},
+	"defaultProject": "client"
+}

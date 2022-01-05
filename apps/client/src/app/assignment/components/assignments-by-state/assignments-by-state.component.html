@@ -1,0 +1,10 @@
+<div class="mb-4 text-base font-bold">{{ stateName }}</div>
+
+<div class="flex flex-col gap-4">
+	<student-mgmt-assignment-card
+		*ngFor="let assignment of assignments"
+		[course]="course"
+		[assignment]="assignment"
+		[participant]="participant"
+	></student-mgmt-assignment-card>
+</div>

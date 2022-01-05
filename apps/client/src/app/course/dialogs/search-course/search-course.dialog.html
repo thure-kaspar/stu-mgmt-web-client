@@ -1,0 +1,104 @@
+<div class="dialog-container" id="search-course-dialog">
+	<h2 mat-dialog-title>{{ 'Title.SearchCourse' | translate }}</h2>
+	<div mat-dialog-content class="dialog-content">
+		<div class="course-filter">
+			<mat-form-field class="courseFilter-field">
+				<mat-label for="title">{{ 'Property.Course.Title' | translate }}</mat-label>
+				<input
+					#titleRef
+					[(ngModel)]="title"
+					matInput
+					type="text"
+					name="title"
+					id="title"
+					placeholder="Enter course title..."
+					(keydown.enter)="searchCourses()"
+					autocomplete="off"
+				/>
+			</mat-form-field>
+
+			<mat-form-field class="courseFilter-field">
+				<mat-label for="">{{ 'Domain.Semester' | translate }}</mat-label>
+				<mat-select
+					[(value)]="selectedSemester"
+					id="semester"
+					name="semester"
+					placeholder="Enter semester..."
+				>
+					<mat-option *ngFor="let semester of semesters" [value]="semester"
+						>{{ semester | semester }}</mat-option
+					>
+					<mat-option value="">{{ 'Common.All' | translate }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<button mat-flat-button (click)="searchCourses()" id="btn-search" color="accent">
+				{{ 'Action.Search' | translate }}
+			</button>
+		</div>
+
+		<div class="table-courses">
+			<table mat-table [dataSource]="dataSource$ | async" matSort>
+				<!-- Checkbox Column -->
+				<ng-container matColumnDef="select">
+					<th class="column-select" mat-header-cell *matHeaderCellDef></th>
+					<td class="column-select" mat-cell *matCellDef="let row">
+						<mat-checkbox
+							(click)="$event.stopPropagation()"
+							(change)="$event ? selection.toggle(row) : null"
+							[checked]="selection.isSelected(row)"
+						>
+						</mat-checkbox>
+					</td>
+				</ng-container>
+
+				<!-- Title Column -->
+				<ng-container matColumnDef="title">
+					<th class="column-title" mat-header-cell *matHeaderCellDef>
+						{{ 'Property.Course.Title' | translate }}
+					</th>
+					<td mat-cell *matCellDef="let row">
+						<button mat-button disableRipple="true" (click)="select(row)">
+							{{row.title}}
+						</button>
+					</td>
+				</ng-container>
+
+				<!-- Semester Column -->
+				<ng-container matColumnDef="semester">
+					<th class="column-semester" mat-header-cell *matHeaderCellDef>
+						{{ 'Domain.Semester' | translate }}
+					</th>
+					<td mat-cell *matCellDef="let row">{{row.semester | semester}}</td>
+				</ng-container>
+
+				<!-- Action Column -->
+				<ng-container matColumnDef="action">
+					<th class="column-action" mat-header-cell *matHeaderCellDef></th>
+					<td mat-cell *matCellDef="let row">
+						<a [routerLink]="[ '/courses', row.id ]">
+							<button mat-icon-button matTooltip="Open course" (click)="onCancel()">
+								<student-mgmt-icon
+									class="icon-light"
+									name="open_in_new"
+								></student-mgmt-icon>
+							</button>
+						</a>
+					</td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+
+			<student-mgmt-paginator (onPageChanged)="searchCourses(true)"></student-mgmt-paginator>
+		</div>
+	</div>
+
+	<div mat-dialog-actions class="dialog-actions">
+		<button mat-raised-button color="accent" (click)="onConfirm()">
+			{{ 'Action.Ok' | translate }}
+		</button>
+		<button mat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
+	</div>
+</div>

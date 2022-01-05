@@ -1,0 +1,26 @@
+{
+	"projectType": "library",
+	"root": "libs/util/domain-types",
+	"sourceRoot": "libs/util/domain-types/src",
+	"prefix": "student-mgmt",
+	"targets": {
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["coverage/libs/util/domain-types"],
+			"options": {
+				"jestConfig": "libs/util/domain-types/jest.config.js",
+				"passWithNoTests": true
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"options": {
+				"lintFilePatterns": [
+					"libs/util/domain-types/src/**/*.ts",
+					"libs/util/domain-types/src/**/*.html"
+				]
+			}
+		}
+	},
+	"tags": []
+}

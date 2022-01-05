@@ -1,0 +1,81 @@
+<ng-container *ngIf="courseFacade.course$ | async as course">
+	<ng-container *ngIf="participant$ | async as participant">
+		<div class="flex flex-col py-8" *ngIf="assignments$ | async as assignments">
+			<student-mgmt-title [title]="'Domain.Assignments' | translate">
+				<a
+					*ngIf="participant?.isTeachingStaffMember"
+					[routerLink]="['/courses', courseId, 'new-assignment']"
+				>
+					<button mat-flat-button class="btn-add" color="accent">
+						<student-mgmt-icon name="add"></student-mgmt-icon>
+						{{ "Action.Custom.AddAssignment" | translate }}
+					</button>
+				</a>
+			</student-mgmt-title>
+
+			<div
+				class="text-light"
+				*ngIf="
+					assignments.isEmpty || (assignments.isEmptyForStudents && participant.isStudent)
+				"
+			>
+				{{ "Text.AssignmentList.NoAssignments" | translate }}
+			</div>
+
+			<div class="flex gap-8">
+				<div class="flex flex-col w-full gap-16">
+					<student-mgmt-assignments-by-state
+						*ngIf="assignments.inProgress.length > 0"
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.inProgress"
+						[stateName]="'Enum.AssignmentState.IN_PROGRESS' | translate"
+					>
+					</student-mgmt-assignments-by-state>
+
+					<student-mgmt-assignments-by-state
+						*ngIf="assignments.inReview.length > 0"
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.inReview"
+						[stateName]="'Enum.AssignmentState.IN_REVIEW' | translate"
+					>
+					</student-mgmt-assignments-by-state>
+
+					<student-mgmt-assignments-by-state
+						*ngIf="assignments.evaluated.length > 0"
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.evaluated"
+						[stateName]="'Enum.AssignmentState.EVALUATED' | translate"
+					>
+					</student-mgmt-assignments-by-state>
+					<student-mgmt-assignments-by-state
+						*ngIf="assignments.closed.length > 0"
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.closed"
+						[stateName]="'Enum.AssignmentState.CLOSED' | translate"
+					>
+					</student-mgmt-assignments-by-state>
+
+					<student-mgmt-assignments-by-state
+						*ngIf="
+							participant?.isTeachingStaffMember && assignments.invisible.length > 0
+						"
+						[course]="course"
+						[participant]="participant"
+						[assignments]="assignments.invisible"
+						[stateName]="'Enum.AssignmentState.INVISIBLE' | translate"
+					>
+					</student-mgmt-assignments-by-state>
+				</div>
+
+				<student-mgmt-participant-admission-status-container
+					class="mt-10"
+					*ngIf="participant.isStudent"
+				></student-mgmt-participant-admission-status-container>
+			</div>
+		</div>
+	</ng-container>
+</ng-container>

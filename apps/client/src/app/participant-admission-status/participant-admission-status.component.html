@@ -1,0 +1,7 @@
+<student-mgmt-participant-admission-status-ui
+	*ngIf="admissionStatus$ | async as state"
+	[isLoading]="state.isLoading"
+	[admissionStatus]="state.admissionStatus"
+	[criteriaWithResult]="criteriaWithResult$ | async"
+	[noAdmissionCriteria]="noCriteriaError$ | async"
+></student-mgmt-participant-admission-status-ui>

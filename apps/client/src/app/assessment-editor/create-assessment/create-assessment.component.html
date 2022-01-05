@@ -1,0 +1,104 @@
+<div class="flex flex-col" data-test="createAssessmentComponent">
+	<student-mgmt-title [title]="'Title.CreateAssessment' | translate">
+		<div class="flex gap-2">
+			<button
+				mat-flat-button
+				color="accent"
+				class="fit-content"
+				[disabled]="form.form.invalid"
+				(click)="onSave()"
+				data-test="createButton"
+			>
+				{{ "Action.Create" | translate }}
+			</button>
+
+			<button
+				mat-flat-button
+				color="primary"
+				[disabled]="form.form.invalid"
+				(click)="onSave(true)"
+			>
+				{{ "Action.Custom.SaveAsDraft" | translate }}
+			</button>
+		</div>
+	</student-mgmt-title>
+
+	<div class="flex gap-2">
+		<button
+			mat-flat-button
+			color="accent"
+			(click)="openSearchGroupDialog()"
+			data-test="searchGroupButton"
+		>
+			<student-mgmt-icon name="search"></student-mgmt-icon>
+			{{ "Title.SearchGroup" | translate }}
+		</button>
+
+		<button
+			mat-flat-button
+			color="accent"
+			(click)="openSearchParticipantDialog()"
+			data-test="searchParticipantButton"
+		>
+			<student-mgmt-icon name="search"></student-mgmt-icon>
+			{{ "Title.SearchParticipant" | translate }}
+		</button>
+	</div>
+
+	<ng-container
+		*ngIf="{ forGroup: forGroup$ | async, forParticipant: forParticipant$ | async } as obs"
+	>
+		<div
+			class="mt-4"
+			*ngIf="obs.forGroup || obs.forParticipant; else selectGroupOrParticipantText"
+		>
+			<student-mgmt-assessment-target
+				[group]="obs.forGroup"
+				[targetedParticipant]="obs.forParticipant"
+				[participant]="participantFacade.participant$ | async"
+				[courseId]="courseId"
+			>
+			</student-mgmt-assessment-target>
+		</div>
+
+		<ng-template #selectGroupOrParticipantText>
+			<div
+				class="flex gap-2 p-4 mt-4 text-red-500 rounded bg-card-bg"
+				data-test="noAssessmentTargetWarning"
+			>
+				<student-mgmt-icon name="error"></student-mgmt-icon>
+				<span class="font-bold">{{
+					"Text.Assessment.SelectGroupOrParticipant" | translate
+				}}</span>
+			</div>
+		</ng-template>
+	</ng-container>
+
+	<div class="mt-4">
+		<student-mgmt-assessment-form
+			[assignment]="assignment$ | async"
+		></student-mgmt-assessment-form>
+	</div>
+
+	<div class="flex gap-2 mt-4">
+		<button
+			mat-raised-button
+			color="accent"
+			id="btn-create"
+			[disabled]="form.form.invalid"
+			(click)="onSave()"
+		>
+			{{ "Action.Create" | translate }}
+		</button>
+
+		<button
+			class="bg-yellow-500"
+			mat-flat-button
+			color="primary"
+			[disabled]="form.form.invalid"
+			(click)="onSave(true)"
+		>
+			{{ "Action.Custom.SaveAsDraft" | translate }}
+		</button>
+	</div>
+</div>
