@@ -29,7 +29,7 @@ export class PointsOverviewTableUiComponent {
 	dataSource = new MatTableDataSource<StudentResult>([]);
 	displayedColumns: string[] = [];
 
-	@ViewChild(MatSort) sort!: MatSort;
+	@ViewChild(MatSort, { static: true }) sort!: MatSort;
 
 	@Input() set props(p: PointsOverviewTableProps) {
 		this._props = p;
