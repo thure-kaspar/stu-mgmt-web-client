@@ -5,7 +5,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { SnackbarService } from "@student-mgmt-client/services";
-import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { IconComponentModule, TitleComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { AssessmentAllocationApi, AssignmentDto } from "@student-mgmt/api-client";
 import { AssessmentTargetPickerComponentModule } from "../../assessment-target-picker/assessment-target-picker.component";
@@ -15,7 +15,6 @@ import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignme
 @Component({
 	selector: "student-mgmt-assessment-allocation-overview",
 	templateUrl: "./assessment-allocation-overview.component.html",
-	styleUrls: ["./assessment-allocation-overview.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentAllocationOverviewComponent implements OnInit {
@@ -72,7 +71,8 @@ export class AssessmentAllocationOverviewComponent implements OnInit {
 		MatButtonModule,
 		TranslateModule,
 		IconComponentModule,
-		AssessmentTargetPickerComponentModule
+		AssessmentTargetPickerComponentModule,
+		TitleComponentModule
 	]
 })
 export class AssessmentAllocationOverviewComponentModule {}

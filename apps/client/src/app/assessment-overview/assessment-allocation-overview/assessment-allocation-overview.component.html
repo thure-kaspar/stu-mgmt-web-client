@@ -1,9 +1,15 @@
-<button mat-flat-button color="primary" (click)="openCopyFromPreviousDialog()">
-	<student-mgmt-icon name="search"></student-mgmt-icon>
-	{{ "Action.Custom.CopyFromPrevious" | translate }}
-</button>
+<div class="flex flex-col">
+	<student-mgmt-title [title]="'Domain.AssessmentAllocations' | translate">
+		<button mat-flat-button color="accent" (click)="openCopyFromPreviousDialog()">
+			<student-mgmt-icon name="search"></student-mgmt-icon>
+			{{ "Action.Custom.CopyFromPrevious" | translate }}
+		</button>
+	</student-mgmt-title>
 
-<student-mgmt-assessment-target-picker
-	[courseId]="courseId"
-	[assignmentId]="assignmentId"
-></student-mgmt-assessment-target-picker>
+	<div class="p-4 mb-8 font-bold bg-yellow-500 rounded">OUT OF ORDER</div>
+
+	<student-mgmt-assessment-target-picker
+		[courseId]="courseId"
+		[assignmentId]="assignmentId"
+	></student-mgmt-assessment-target-picker>
+</div>
