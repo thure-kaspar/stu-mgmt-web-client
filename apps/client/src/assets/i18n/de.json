@@ -411,6 +411,9 @@
     },
     "AssignmentList": {
       "NoAssignments": "Für diese Veranstaltung wurden noch keine Aufgaben angelegt."
+    },
+    "GroupList": {
+      "NoGroups": "Keine Gruppen gefunden."
     }
   },
   "Title": {

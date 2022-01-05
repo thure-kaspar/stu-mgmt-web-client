@@ -46,17 +46,24 @@
 			</mat-form-field>
 		</div>
 
-		<div class="flex flex-col gap-4" *ngIf="groups$ | async as groups">
-			<ng-container *ngFor="let group of groups">
-				<student-mgmt-group-card
-					[group]="group"
-					[participant]="participant"
-					[course]="course"
-					(groupRemoved)="onRemoveGroup($event)"
-					(participantAdded)="onAddParticipant($event)"
-				>
-				</student-mgmt-group-card>
-			</ng-container>
-		</div>
+		<ng-container *ngIf="groups$ | async as groups">
+			<div class="text-light" *ngIf="groups.length === 0; else groupList">
+				{{ "Text.GroupList.NoGroups" | translate }}
+			</div>
+
+			<ng-template #groupList>
+				<div class="flex flex-col gap-4">
+					<student-mgmt-group-card
+						*ngFor="let group of groups"
+						[group]="group"
+						[participant]="participant"
+						[course]="course"
+						(groupRemoved)="onRemoveGroup($event)"
+						(participantAdded)="onAddParticipant($event)"
+					>
+					</student-mgmt-group-card>
+				</div>
+			</ng-template>
+		</ng-container>
 	</div>
 </ng-container>

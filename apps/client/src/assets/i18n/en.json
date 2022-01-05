@@ -411,6 +411,9 @@
     "NoAssessments": "There are ",
     "AssignmentList": {
       "NoAssignments": "There are no assignments for this course."
+    },
+    "GroupList": {
+      "NoGroups": "No groups found."
     }
   },
   "Title": {
