@@ -27,13 +27,13 @@ pipeline {
                 // Build with base = WEB-APP
                 sh 'npm run build -- --base-href=/WEB-APP/ --deploy-url=/WEB-APP/'
                 sh 'rm -f Client.tar.gz'
-                sh 'tar czf Client.tar.gz dist/student-mgmt-client/'
+                sh 'tar czf Client.tar.gz dist/apps/student-mgmt-client/'
                 
                 // Build with base = /
                 sh 'rm -f -r dist/'
                 sh 'rm -f Client-Root.tar.gz'
                 sh 'npm run build'
-                sh 'tar czf Client-Root.tar.gz dist/student-mgmt-client/'
+                sh 'tar czf Client-Root.tar.gz dist/apps/student-mgmt-client/'
             }
         }
         
