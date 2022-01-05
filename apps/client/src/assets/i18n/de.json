@@ -408,6 +408,9 @@
     },
     "RegisteredGroups": {
       "Comment": "Das Hinzufügen und Entfernen von Teilnehmern oder Gruppen beeinflusst nur die Anmeldungen für diese Aufgabe. Die globale Gruppenliste wird nicht verändert."
+    },
+    "AssignmentList": {
+      "NoAssignments": "Für diese Veranstaltung wurden noch keine Aufgaben angelegt."
     }
   },
   "Title": {

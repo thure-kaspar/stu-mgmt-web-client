@@ -27,6 +27,11 @@ class AssignmentsStateMap {
 	evaluated: AssignmentDto[] = [];
 	closed: AssignmentDto[] = [];
 	invisible: AssignmentDto[] = [];
+
+	/** Indicates, that there are no assignments at all. */
+	isEmpty: boolean;
+	/** Indicates, that there are no visible assignments. */
+	isEmptyForStudents: boolean;
 }
 
 @Component({
@@ -84,6 +89,11 @@ export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnI
 					break;
 			}
 		}
+
+		map.isEmpty = assignments.length == 0;
+		map.isEmptyForStudents =
+			assignments.filter(a => a.state !== AssignmentDto.StateEnum.INVISIBLE).length == 0;
+
 		return map;
 	}
 }

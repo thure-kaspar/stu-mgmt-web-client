@@ -13,9 +13,19 @@
 				</a>
 			</student-mgmt-title>
 
+			<div
+				class="text-light"
+				*ngIf="
+					assignments.isEmpty || (assignments.isEmptyForStudents && participant.isStudent)
+				"
+			>
+				{{ "Text.AssignmentList.NoAssignments" | translate }}
+			</div>
+
 			<div class="flex gap-8">
-				<div class="flex flex-col w-full gap-8">
+				<div class="flex flex-col w-full gap-16">
 					<student-mgmt-assignments-by-state
+						*ngIf="assignments.inProgress.length > 0"
 						[course]="course"
 						[participant]="participant"
 						[assignments]="assignments.inProgress"
@@ -23,9 +33,8 @@
 					>
 					</student-mgmt-assignments-by-state>
 
-					<mat-divider></mat-divider>
-
 					<student-mgmt-assignments-by-state
+						*ngIf="assignments.inReview.length > 0"
 						[course]="course"
 						[participant]="participant"
 						[assignments]="assignments.inReview"
@@ -33,29 +42,27 @@
 					>
 					</student-mgmt-assignments-by-state>
 
-					<mat-divider></mat-divider>
-
 					<student-mgmt-assignments-by-state
+						*ngIf="assignments.evaluated.length > 0"
 						[course]="course"
 						[participant]="participant"
 						[assignments]="assignments.evaluated"
 						[stateName]="'Enum.AssignmentState.EVALUATED' | translate"
 					>
 					</student-mgmt-assignments-by-state>
-
-					<mat-divider></mat-divider>
-
 					<student-mgmt-assignments-by-state
+						*ngIf="assignments.closed.length > 0"
 						[course]="course"
 						[participant]="participant"
 						[assignments]="assignments.closed"
 						[stateName]="'Enum.AssignmentState.CLOSED' | translate"
 					>
 					</student-mgmt-assignments-by-state>
-					<mat-divider></mat-divider>
 
 					<student-mgmt-assignments-by-state
-						*ngIf="participant?.isTeachingStaffMember"
+						*ngIf="
+							participant?.isTeachingStaffMember && assignments.invisible.length > 0
+						"
 						[course]="course"
 						[participant]="participant"
 						[assignments]="assignments.invisible"

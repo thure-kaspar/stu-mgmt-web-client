@@ -408,7 +408,10 @@
     "RegisteredGroups": {
       "Comment": "Adding or removing a participant or group only affects this assignment. The global group list will remain unchanged."
     },
-    "NoAssessments": "There are "
+    "NoAssessments": "There are ",
+    "AssignmentList": {
+      "NoAssignments": "There are no assignments for this course."
+    }
   },
   "Title": {
     "AdmissionStatus": "Admission status",
