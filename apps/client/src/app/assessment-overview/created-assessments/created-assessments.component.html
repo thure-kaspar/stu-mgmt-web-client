@@ -120,7 +120,7 @@
 
 		<ng-container matColumnDef="hasPassed">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header>
-				{{ "Property.Assessment.HasPassed" | translate }}
+				<span class="mr-4">{{ "Property.Assessment.HasPassed" | translate }}</span>
 			</th>
 			<td mat-cell class="column-has-passed" *matCellDef="let row">
 				<ng-container [ngSwitch]="row.hasPassed">
