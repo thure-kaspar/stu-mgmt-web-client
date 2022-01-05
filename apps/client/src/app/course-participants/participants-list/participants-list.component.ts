@@ -17,7 +17,8 @@ import {
 	ConfirmDialogData,
 	IconComponentModule,
 	Paginator,
-	PaginatorModule
+	PaginatorModule,
+	TitleComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { CourseApi, CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
@@ -203,7 +204,8 @@ export class ParticipantsListComponent extends UnsubscribeOnDestroy implements O
 		TranslateModule,
 		ChipComponentModule,
 		IconComponentModule,
-		PaginatorModule
+		PaginatorModule,
+		TitleComponentModule
 	]
 })
 export class ParticipantsListComponentModule {}

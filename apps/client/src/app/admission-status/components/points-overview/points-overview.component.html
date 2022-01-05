@@ -1,104 +1,11 @@
-<div class="tab">
-	<h2 class="title">
-		<span>{{ "Title.PointsOverview" | translate }}</span>
-		<span>
-			<button mat-stroked-button (click)="exportToExcel()">Export</button>
-		</span>
-	</h2>
+<div class="flex flex-col">
+	<student-mgmt-title [title]="'Title.PointsOverview' | translate"
+		><button mat-stroked-button (click)="exportToExcel()">Export</button></student-mgmt-title
+	>
 
-	<div class="filter">
-		<mat-form-field class="w-full">
-			<mat-label>Filter</mat-label>
-			<input matInput [(ngModel)]="dataSource.filter" />
-		</mat-form-field>
-	</div>
-
-	<table class="w-full table-bg" mat-table matSort [dataSource]="dataSource">
-		<ng-container matColumnDef="displayName">
-			<th class="name-column" mat-header-cell *matHeaderCellDef>Name</th>
-			<td mat-cell *matCellDef="let row">
-				<a
-					class="font-bold link-none"
-					[routerLink]="['/courses', courseId, 'users', row.student.userId]"
-				>
-					{{ row.student.displayName }}
-				</a>
-			</td>
-		</ng-container>
-
-		<ng-container matColumnDef="matrNr">
-			<th class="matrnr-column" mat-header-cell *matHeaderCellDef>MatrNr</th>
-			<td mat-cell *matCellDef="let row">
-				<a
-					class="font-bold text-light link-none"
-					[routerLink]="['/courses', courseId, 'users', row.student.userId]"
-				>
-					{{ row.student.matrNr || "??????" }}
-				</a>
-			</td>
-		</ng-container>
-
-		<ng-container matColumnDef="total">
-			<th class="total-column" mat-header-cell mat-sort-header *matHeaderCellDef>
-				{{ "Common.Total" | translate }}
-			</th>
-			<td mat-cell *matCellDef="let row">
-				<div class="font-bold total">{{ row.total }}</div>
-			</td>
-		</ng-container>
-
-		<ng-container *ngFor="let assignment of (overview$ | async)?.assignments">
-			<ng-container [matColumnDef]="assignment.id">
-				<th class="assignment-column" mat-header-cell *matHeaderCellDef>
-					<a
-						class="assignment-info link-none"
-						[routerLink]="[
-							'/courses',
-							courseId,
-							'assignments',
-							assignment.id,
-							'assessments'
-						]"
-					>
-						<span>{{ assignment.name }}</span>
-						<span>(Max: {{ assignment.points }})</span>
-					</a>
-				</th>
-				<td class="points" mat-cell *matCellDef="let row">
-					<a
-						*ngIf="row[assignment.id].assessmentId; else noAssessment"
-						class="font-bold link-none"
-						[routerLink]="[
-							'/courses',
-							courseId,
-							'assignments',
-							assignment.id,
-							'assessments',
-							'view',
-							row[assignment.id].assessmentId
-						]"
-					>
-						{{ row[assignment.id].achievedPoints }}
-						<span class="achieved-percent text-light"
-							>({{
-								row[assignment.id].achievedPointsPercent | number: "1.0-2"
-							}}%)</span
-						>
-					</a>
-					<ng-template #noAssessment>
-						<span class="text-light">-</span>
-					</ng-template>
-				</td>
-			</ng-container>
-		</ng-container>
-
-		<!-- Prevents columns from using full table width -->
-		<ng-container matColumnDef="spacer">
-			<th mat-header-cell *matHeaderCellDef></th>
-			<td mat-cell *matCellDef="let row"></td>
-		</ng-container>
-
-		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-	</table>
+	<ng-container *ngIf="props$ | async as props">
+		<student-mgmt-points-overview-table-ui
+			[props]="props"
+		></student-mgmt-points-overview-table-ui>
+	</ng-container>
 </div>

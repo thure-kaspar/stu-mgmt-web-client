@@ -1,4 +1,8 @@
-<div class="tab">
+<div class="flex flex-col">
+	<student-mgmt-title [title]="'Domain.Participants' | translate">
+		<button mat-stroked-button (click)="exportToExcel()">Export</button>
+	</student-mgmt-title>
+
 	<div>
 		<div class="filter">
 			<div class="flex justify-between">
@@ -21,10 +25,6 @@
 						(change)="searchParticipants()"
 						>{{ "Enum.CourseRole.LECTURER" | translate }}</mat-checkbox
 					>
-				</div>
-
-				<div class="right">
-					<button mat-stroked-button (click)="exportToExcel()">Export</button>
 				</div>
 			</div>
 
