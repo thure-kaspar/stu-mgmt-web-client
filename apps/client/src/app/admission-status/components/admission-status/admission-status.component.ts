@@ -15,7 +15,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { DownloadService } from "@student-mgmt-client/services";
 import {
 	AssignmentTypeChipComponentModule,
-	ThumbChipComponentModule
+	ThumbChipComponentModule,
+	TitleComponentModule
 } from "@student-mgmt-client/shared-ui";
 import {
 	AdmissionStatusActions,
@@ -301,7 +302,8 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 		ChartsModule,
 		AdmissionRuleComponentModule,
 		AssignmentTypeChipComponentModule,
-		ThumbChipComponentModule
+		ThumbChipComponentModule,
+		TitleComponentModule
 	]
 })
 export class AdmissionStatusComponentModule {}

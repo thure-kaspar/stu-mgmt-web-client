@@ -1,10 +1,7 @@
-<div class="tab" *ngIf="criteria$ | async as criteria">
-	<h2 class="title">
-		<span>{{ "Title.AdmissionStatus" | translate }}</span>
-		<span>
-			<button mat-stroked-button (click)="exportToExcel()">Export</button>
-		</span>
-	</h2>
+<div class="flex flex-col" *ngIf="criteria$ | async as criteria">
+	<student-mgmt-title [title]="'Title.AdmissionStatus' | translate">
+		<button mat-stroked-button (click)="exportToExcel()">Export</button>
+	</student-mgmt-title>
 
 	<div class="admission-criteria">
 		<mat-expansion-panel>

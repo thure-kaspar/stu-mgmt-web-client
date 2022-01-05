@@ -1,8 +1,3 @@
-.title {
-	display: flex;
-	justify-content: space-between;
-}
-
 .rules {
 	display: grid;
 	row-gap: 8px;
@@ -14,7 +9,7 @@
 
 .chart-grid {
 	display: grid;
-	row-gap: 16px;
+	row-gap: 64px;
 }
 
 .chart {
