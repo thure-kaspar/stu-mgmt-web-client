@@ -49,7 +49,7 @@ pipeline {
                             exit
                         EOF
                         """
-                        sh "scp -i ~/.ssh/id_rsa_student_mgmt_backend -r dist/student-mgmt-client/* elscha@${env.DEMO_SERVER}:/var/www/html2/WEB-APP"
+                        sh "scp -i ~/.ssh/id_rsa_student_mgmt_backend -r dist/apps/client/* elscha@${env.DEMO_SERVER}:/var/www/html2/WEB-APP"
                 }
             }
         }
