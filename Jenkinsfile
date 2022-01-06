@@ -24,16 +24,16 @@ pipeline {
         
         stage('Build') {
             steps {
-                // Build with base = WEB-APP
-                sh 'npm run build -- --base-href=/WEB-APP/ --deploy-url=/WEB-APP/'
-                sh 'rm -f Client.tar.gz'
-                sh 'tar czf Client.tar.gz dist/apps/client/'
+                sh 'rm -f Client*.tar.gz'
                 
                 // Build with base = /
-                sh 'rm -f -r dist/'
-                sh 'rm -f Client-Root.tar.gz'
                 sh 'npm run build'
                 sh 'tar czf Client-Root.tar.gz dist/apps/client/'
+                
+                // Build with base = WEB-APP (must be last for deployment)
+                sh 'rm -f -r dist/'
+                sh 'npm run build -- --base-href=/WEB-APP/ --deploy-url=/WEB-APP/'
+                sh 'tar czf Client.tar.gz dist/apps/client/'
             }
         }
         
