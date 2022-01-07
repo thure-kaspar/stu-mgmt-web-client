@@ -5,6 +5,8 @@ pipeline {
     
     environment {
         DEMO_SERVER = '147.172.178.30'
+        DEMO_SERVER_BACKEND_PORT = '3000'
+        DEMO_SERVER_BACKEND_URL = "http://${env.DEMO_SERVER}:${env.DEMO_SERVER_BACKEND_PORT}"
     }
     
     stages {
@@ -41,15 +43,19 @@ pipeline {
             steps {
                 sshagent(credentials: ['Stu-Mgmt_Demo-System']) {
                     sh """
-                        [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                        ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/known_hosts
                         ssh -i ~/.ssh/id_rsa_student_mgmt_backend elscha@${env.DEMO_SERVER} <<EOF
                             cd /var/www/html2/WEB-APP || exit 1
                             rm -f -r *
                             exit
                         EOF
-                        """
-                        sh "scp -i ~/.ssh/id_rsa_student_mgmt_backend -r dist/apps/client/* elscha@${env.DEMO_SERVER}:/var/www/html2/WEB-APP"
+                    """
+                    sh "scp -i ~/.ssh/id_rsa_student_mgmt_backend -r dist/apps/client/* elscha@${env.DEMO_SERVER}:/var/www/html2/WEB-APP"
+                    sh """
+                        ssh -i ~/.ssh/id_rsa_student_mgmt_backend elscha@${env.DEMO_SERVER} <<EOF
+                            sed -i sed -i "s|window\.__env\.API_BASE_PATH = .*|window\.__env\.API_BASE_PATH = \"${env.DEMO_SERVER_BACKEND_URL}\";|g" /var/www/html2/WEB-APP/env.js
+                            exit
+                        EOF
+                    """
                 }
             }
         }
