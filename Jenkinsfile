@@ -52,7 +52,7 @@ pipeline {
                     sh "scp -i ~/.ssh/id_rsa_student_mgmt_backend -r dist/apps/client/* elscha@${env.DEMO_SERVER}:/var/www/html2/WEB-APP"
                     sh """
                         ssh -i ~/.ssh/id_rsa_student_mgmt_backend elscha@${env.DEMO_SERVER} <<EOF
-                            sed -i sed -i "s|window\.__env\.API_BASE_PATH = .*|window\.__env\.API_BASE_PATH = \"${env.DEMO_SERVER_BACKEND_URL}\";|g" /var/www/html2/WEB-APP/env.js
+                            sed -i "s|window\.__env\.API_BASE_PATH = .*|window\.__env\.API_BASE_PATH = \"${env.DEMO_SERVER_BACKEND_URL}\";|g" /var/www/html2/WEB-APP/env.js
                             exit
                         EOF
                     """
