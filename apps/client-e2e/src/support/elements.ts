@@ -15,6 +15,17 @@ export const Selector = {
 	/** Cancel button inside the `ConfirmDialog`. */
 	cancelBtn: "btn-cancel",
 
+	openLoginDialogButton: "openLoginDialogButton",
+	logoutButton: "logoutButton",
+
+	loginDialog: {
+		component: "loginDialog",
+		usernameTextField: "usernameTextField",
+		passwordTextField: "passwordTextField",
+		loginButton: "loginButton",
+		cancelButton: "cancelButton"
+	},
+
 	/** Assignment related selectors. */
 	assignment: {
 		/** Matches all assignment cards on the `/courses/{courseId}/assignments` page. */

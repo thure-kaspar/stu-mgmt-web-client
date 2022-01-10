@@ -20,13 +20,25 @@
 		<div id="nav-right">
 			<ng-container *ngIf="user; else loginBtn">
 				<button class="btn-link" mat-button>{{ user.displayName }}</button>
-				<button class="btn-link btn-logout" mat-button (click)="logoutClicked.next()">
+				<button
+					class="btn-link btn-logout"
+					mat-button
+					(click)="logoutClicked.next()"
+					data-test="logoutButton"
+				>
 					Logout
 				</button>
 			</ng-container>
 
 			<ng-template #loginBtn>
-				<button class="btn-link" mat-button (click)="loginClicked.next()">Login</button>
+				<button
+					class="btn-link"
+					mat-button
+					(click)="loginClicked.next()"
+					data-test="openLoginDialogButton"
+				>
+					Login
+				</button>
 			</ng-template>
 
 			<mat-menu #appMenu="matMenu">
