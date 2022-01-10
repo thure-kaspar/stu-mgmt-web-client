@@ -414,6 +414,9 @@
     },
     "GroupList": {
       "NoGroups": "No groups found."
+    },
+    "Assessments": {
+      "NoAssessments": "There are no assessments."
     }
   },
   "Title": {

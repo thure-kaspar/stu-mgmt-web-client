@@ -1,8 +1,15 @@
-<div class="participant-assessments">
+<div
+	class="participant-assessments"
+	*ngIf="assignmentsWithAssessments$ | async as assignmentsWithAssessments"
+>
+	<span class="text-light" *ngIf="assignmentsWithAssessments.length === 0">{{
+		"Text.Assessments.NoAssessments" | translate
+	}}</span>
+
 	<div
 		class="assignment"
 		[class.evaluated]="assignment.state === 'EVALUATED'"
-		*ngFor="let assignment of assignmentsWithAssessments$ | async"
+		*ngFor="let assignment of assignmentsWithAssessments"
 	>
 		<student-mgmt-assignment-type-chip
 			[type]="assignment.type"
