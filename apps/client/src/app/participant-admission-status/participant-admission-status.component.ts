@@ -23,7 +23,7 @@ export class ParticipantAdmissionStatusComponent implements OnInit {
 
 	criteria$ = this.store
 		.select(CourseSelectors.selectCourse)
-		.pipe(map(course => course!.admissionCriteria));
+		.pipe(map(course => course?.admissionCriteria));
 
 	noCriteriaError$ = this.criteria$.pipe(map(criteria => !(criteria?.rules?.length > 0)));
 
