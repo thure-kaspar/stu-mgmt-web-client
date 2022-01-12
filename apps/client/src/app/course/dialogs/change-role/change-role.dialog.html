@@ -1,26 +1,29 @@
-<div class="dialog-container" cdkFocusRegionstart>
-	<mat-card-title
+<div cdkFocusRegionstart data-test="changeRoleDialog">
+	<mat-card-title mat-dialog-title
 		>{{ 'Action.Custom.ChangeRole' | translate }}:
 		{{data.participant.displayName}}</mat-card-title
 	>
 
-	<!-- <label>{{ 'Property.User.CourseRole' | translate }}</label> -->
-	<mat-radio-group id="roles-group" [(ngModel)]="selectedRole">
-		<mat-radio-button [value]="roles.STUDENT"
-			>{{ 'Enum.CourseRole.' + roles.STUDENT | translate }}</mat-radio-button
-		>
-		<mat-radio-button [value]="roles.TUTOR"
-			>{{ 'Enum.CourseRole.' + roles.TUTOR | translate }}</mat-radio-button
-		>
-		<mat-radio-button [value]="roles.LECTURER"
-			>{{ 'Enum.CourseRole.' + roles.LECTURER | translate }}</mat-radio-button
-		>
-	</mat-radio-group>
+	<div mat-dialog-content>
+		<mat-radio-group class="flex flex-col gap-4 py-4" [(ngModel)]="selectedRole">
+			<mat-radio-button [value]="roles.STUDENT"
+				>{{ 'Enum.CourseRole.' + roles.STUDENT | translate }}</mat-radio-button
+			>
+			<mat-radio-button [value]="roles.TUTOR"
+				>{{ 'Enum.CourseRole.' + roles.TUTOR | translate }}</mat-radio-button
+			>
+			<mat-radio-button [value]="roles.LECTURER"
+				>{{ 'Enum.CourseRole.' + roles.LECTURER | translate }}</mat-radio-button
+			>
+		</mat-radio-group>
+	</div>
 
-	<div class="button-container">
-		<button mat-flat-button color="accent" (click)="onSave()">
+	<div class="flex gap-2" mat-dialog-actions>
+		<button mat-flat-button color="accent" (click)="onSave()" data-test="saveButton">
 			{{ 'Action.Save' | translate }}
 		</button>
-		<button mat-flat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
+		<button mat-flat-button (click)="onCancel()" data-test="cancelButton">
+			{{ 'Action.Cancel' | translate }}
+		</button>
 	</div>
 </div>

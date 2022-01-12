@@ -21,7 +21,7 @@ import {
 	TitleComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
-import { CourseApi, CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
+import { CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import {
@@ -64,11 +64,10 @@ export class ParticipantsListComponent extends UnsubscribeOnDestroy implements O
 	courseRole = ParticipantDto.RoleEnum;
 
 	constructor(
-		private courseApi: CourseApi,
 		private courseParticipantsApi: CourseParticipantsApi,
 		private downloadService: DownloadService,
 		private route: ActivatedRoute,
-		public dialog: MatDialog,
+		private dialog: MatDialog,
 		private toast: ToastService
 	) {
 		super();
@@ -120,23 +119,23 @@ export class ParticipantsListComponent extends UnsubscribeOnDestroy implements O
 
 	openChangeRoleDialog(participant: ParticipantDto): void {
 		this.dialog
-			.open<ChangeRoleDialog, ChangeRoleDialogData, ParticipantDto.RoleEnum>(
-				ChangeRoleDialog,
-				{
-					data: {
-						courseId: this.courseId,
-						participant: participant
-					}
+			.open<ChangeRoleDialog, ChangeRoleDialogData, boolean>(ChangeRoleDialog, {
+				data: {
+					courseId: this.courseId,
+					participant: participant
 				}
-			)
+			})
 			.afterClosed()
-			.subscribe(
-				result => {
-					// Update the user's role locally to avoid refetching data from server
-					if (result) participant.role = result;
+			.subscribe({
+				next: success => {
+					if (success) {
+						this.searchParticipants();
+					}
 				},
-				error => console.log(error)
-			);
+				error: error => {
+					this.toast.apiError(error);
+				}
+			});
 	}
 
 	/**

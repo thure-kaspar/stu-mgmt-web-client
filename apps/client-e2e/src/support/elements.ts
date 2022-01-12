@@ -152,6 +152,24 @@ export const Selector = {
 		errorMessage: "join-course-error"
 	},
 
+	participantsList: {
+		component: "participantsListComponent",
+		usernameTextField: "usernameTextField",
+		groupNameTextField: "groupNameTextField",
+		userMenuButton: "userMenuButton",
+		changeRoleButton: "changeRoleButton",
+		removeParticipantButton: "removeParticipantButton",
+		lecturerChip: "lecturerChip",
+		tutorChip: "tutorChip",
+		studentChip: "studentChip"
+	},
+
+	changeRoleDialog: {
+		component: "changeRoleDialog",
+		saveButton: "saveButton",
+		cancelButton: "cancelButton"
+	},
+
 	createGroupDialog: {
 		component: "createGroupDialog",
 		nameTextField: "nameTextField",
