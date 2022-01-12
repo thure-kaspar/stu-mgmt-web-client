@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { StatCardComponentModule } from "./components/stat-card/stat-card.component";
 import { VerticalBarChartComponent } from "./components/vertical-bar-chart/vertical-bar-chart.component";
-import { StatCardComponent } from "./components/stat-card/stat-card.component";
 
 @NgModule({
-	declarations: [VerticalBarChartComponent, StatCardComponent],
-	imports: [CommonModule, NgxChartsModule],
-	exports: [VerticalBarChartComponent, StatCardComponent]
+	declarations: [VerticalBarChartComponent],
+	imports: [CommonModule, NgxChartsModule, StatCardComponentModule],
+	exports: [VerticalBarChartComponent, StatCardComponentModule]
 })
 export class ChartsModule {}
