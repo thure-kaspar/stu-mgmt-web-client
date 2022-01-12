@@ -6,7 +6,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatSort } from "@angular/material/sort";
+import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, RouterModule } from "@angular/router";
@@ -55,7 +55,6 @@ type AssessmentStatistics = {
 @Component({
 	selector: "student-mgmt-created-assessments",
 	templateUrl: "./created-assessments.component.html",
-	styleUrls: ["./created-assessments.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {
@@ -115,8 +114,8 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 				),
 				take(1)
 			)
-			.subscribe(
-				([assessments, assignment, course]) => {
+			.subscribe({
+				next: ([assessments, assignment, course]) => {
 					const rule = course.admissionCriteria?.rules.find(
 						r =>
 							r.assignmentType === assignment.type &&
@@ -160,8 +159,10 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 
 					this.loading$.next(false);
 				},
-				error => this.toast.apiError(error)
-			);
+				error: error => {
+					this.toast.apiError(error);
+				}
+			});
 	}
 
 	private setDataSource(assessments: AssessmentDto[]): void {
@@ -292,6 +293,7 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		FormsModule,
 		MatButtonModule,
 		MatTableModule,
+		MatSortModule,
 		MatFormFieldModule,
 		MatInputModule,
 		MatProgressSpinnerModule,
