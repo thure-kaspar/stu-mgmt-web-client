@@ -131,7 +131,6 @@ export const Selector = {
 			groupSettings: "groupSettingsTab",
 			secrets: "secretsTab",
 			admissionCriteria: "admissionCriteriaTab",
-			assignmentTemplates: "assignmentTemplatesTab",
 			admissionFromPreviousSemester: "admissionFromPreviousSemesterTab",
 			lecturers: "lecturersTab"
 		},

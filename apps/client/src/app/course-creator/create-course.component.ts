@@ -29,7 +29,6 @@ import {
 } from "@student-mgmt/api-client";
 import { CourseSettingsModule } from "../course-settings/course-settings.module";
 import { AdmissionCriteriaFormComponent } from "../course-settings/forms/admission-criteria-form/admission-criteria-form.component";
-import { AssignmentTemplatesFormComponent } from "../course-settings/forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseFormComponent } from "../course-settings/forms/course-form/course-form.component";
 import { GroupSettingsFormComponent } from "../course-settings/forms/group-settings-form/group-settings-form.component";
 import { SearchCourseDialog } from "../course/dialogs/search-course/search-course.dialog";
@@ -49,12 +48,14 @@ export class CreateCourseComponent {
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
 	@ViewChild(CourseFormComponent, { static: true }) courseForm: CourseFormComponent;
+
 	@ViewChild(GroupSettingsFormComponent, { static: true })
+	// eslint-disable-next-line indent
 	groupSettingsForm: GroupSettingsFormComponent;
+
 	@ViewChild(AdmissionCriteriaFormComponent, { static: true })
+	// eslint-disable-next-line indent
 	admissionCriteriaForm: AdmissionCriteriaFormComponent;
-	@ViewChild(AssignmentTemplatesFormComponent, { static: true })
-	assignmentTemplatesForm: AssignmentTemplatesFormComponent;
 
 	constructor(
 		private courseApi: CourseApi,
@@ -86,8 +87,7 @@ export class CreateCourseComponent {
 				}),
 				admissionCriteria: this.fb.group({
 					rules: this.fb.array([])
-				}),
-				assignmentTemplates: this.fb.array([])
+				})
 			}),
 			lecturers: this.fb.array([])
 		});
@@ -146,13 +146,9 @@ export class CreateCourseComponent {
 		this.courseConfigApi.getCourseConfig(courseId).subscribe(config => {
 			this.form.get("config").patchValue(config);
 
+			// TODO
 			// Insert admission criteria
 			//config.admissionCriteria?.criteria.forEach(c=> this.admissionCriteriaForm.addCriteria(c));
-
-			// Insert assignment templates
-			config.assignmentTemplates?.forEach(t =>
-				this.assignmentTemplatesForm.addAssignmentTemplate(t)
-			);
 		});
 
 		// Load lecturers

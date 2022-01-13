@@ -57,25 +57,6 @@
 						[form]="form"
 					></student-mgmt-admission-criteria-form>
 				</mat-tab>
-
-				<mat-tab
-					label="{{ 'Domain.AssignmentTemplates' | translate }}"
-					data-test="assignmentTemplatesTab"
-				>
-					<button
-						type="button"
-						id="btn-add-assignment-template"
-						mat-flat-button
-						color="accent"
-						(click)="assignmentTemplatesForm.addAssignmentTemplate()"
-					>
-						<student-mgmt-icon name="add"></student-mgmt-icon
-						>{{ "Action.Custom.AddAssignmentTemplate" | translate }}
-					</button>
-					<student-mgmt-assignment-templates-form
-						[form]="form"
-					></student-mgmt-assignment-templates-form>
-				</mat-tab>
 			</ng-container>
 
 			<mat-tab

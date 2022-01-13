@@ -25,37 +25,6 @@ mat-card-title {
 	vertical-align: middle;
 }
 
-#assignment-templates-tab {
-	.assignment-template-list {
-		display: grid;
-		width: 500px;
-		row-gap: 8px;
-		margin-top: 16px;
-
-		.mat-list-item {
-			background-color: var(--card-bg);
-		}
-	}
-
-	.assignment-template {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
-		.left {
-			font-weight: 500;
-			font-size: 18px;
-		}
-
-		.right {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			column-gap: 8px;
-		}
-	}
-}
-
 ::ng-deep .form-container {
 	.mat-tab-group {
 		flex-direction: row !important;

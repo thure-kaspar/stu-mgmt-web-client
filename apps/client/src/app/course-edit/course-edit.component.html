@@ -1,4 +1,4 @@
-<form id="course-creation-form" class="form-container mt-2" [formGroup]="form" autocomplete="off">
+<form id="course-creation-form" class="mt-2 form-container" [formGroup]="form" autocomplete="off">
 	<mat-tab-group
 		color="accent"
 		animationDuration="0ms"
@@ -66,47 +66,6 @@
 				<ng-template matTabContent>
 					<student-mgmt-admission-from-previous-semester-form></student-mgmt-admission-from-previous-semester-form>
 				</ng-template>
-			</mat-tab>
-
-			<mat-tab [label]="'Domain.AssignmentTemplates' | translate">
-				<div id="assignment-templates-tab">
-					<button
-						class="btn-top"
-						type="button"
-						id="btn-add-assignment-template"
-						mat-flat-button
-						color="accent"
-						(click)="openCreateAssignmentTemplateDialog()"
-					>
-						<student-mgmt-icon name="add"></student-mgmt-icon
-						>{{ "Action.Custom.AddAssignmentTemplate" | translate }}
-					</button>
-
-					<div class="assignment-template-list">
-						<mat-card *ngFor="let template of assignmentTemplates$ | async">
-							<mat-card-title class="assignment-template">
-								<span class="left">
-									{{ template.templateName }}
-								</span>
-								<span class="right">
-									<button
-										mat-stroked-button
-										(click)="openEditAssignmentTemplateDialog(template)"
-									>
-										{{ "Action.Edit" | translate }}
-									</button>
-									<button
-										mat-stroked-button
-										color="warn"
-										(click)="deleteAssignmentTemplate(template)"
-									>
-										{{ "Action.Delete" | translate }}
-									</button>
-								</span>
-							</mat-card-title>
-						</mat-card>
-					</div>
-				</div>
 			</mat-tab>
 
 			<mat-tab [label]="'Misc.Notifications' | translate">

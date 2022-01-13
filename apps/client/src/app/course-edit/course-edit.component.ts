@@ -3,23 +3,17 @@ import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
-import { MatDialog } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatTabsModule } from "@angular/material/tabs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
-import {
-	ConfirmDialog,
-	ConfirmDialogData,
-	IconComponentModule
-} from "@student-mgmt-client/shared-ui";
+import { IconComponentModule } from "@student-mgmt-client/shared-ui";
 import { getSemester, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
 	AssignmentDto,
-	AssignmentTemplateDto,
 	CourseApi,
 	CourseConfigApi,
 	CourseConfigDto,
@@ -27,18 +21,8 @@ import {
 	CourseDto,
 	GroupSettingsUpdateDto
 } from "@student-mgmt/api-client";
-import { Subject } from "rxjs";
 import { CourseSettingsModule } from "../course-settings/course-settings.module";
-import {
-	CreateAssignmentTemplateDialog,
-	CreateAssignmentTemplateDialogData
-} from "../course-settings/dialogs/create-assignment-template/create-assignment-template.dialog";
-import {
-	EditAssignmentTemplateDialog,
-	EditAssignmentTemplateDialogData
-} from "../course-settings/dialogs/edit-assignment-template/edit-assignment-template.dialog";
 import { AdmissionCriteriaFormComponent } from "../course-settings/forms/admission-criteria-form/admission-criteria-form.component";
-import { AssignmentTemplatesFormComponent } from "../course-settings/forms/assignment-templates-form/assignment-templates-form.component";
 import { CourseFormComponent } from "../course-settings/forms/course-form/course-form.component";
 import { GroupSettingsFormComponent } from "../course-settings/forms/group-settings-form/group-settings-form.component";
 
@@ -59,7 +43,6 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 		"secrets",
 		"admission-criteria",
 		"admission-from-previous-semester",
-		"assignment-templates",
 		"notifications"
 	];
 
@@ -68,18 +51,18 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
 	@ViewChild(CourseFormComponent, { static: true }) courseForm: CourseFormComponent;
+
 	@ViewChild(GroupSettingsFormComponent, { static: true })
+	// eslint-disable-next-line indent
 	groupSettingsForm: GroupSettingsFormComponent;
+
 	@ViewChild(AdmissionCriteriaFormComponent, { static: true })
+	// eslint-disable-next-line indent
 	admissionCriteriaForm: AdmissionCriteriaFormComponent;
-	@ViewChild(AssignmentTemplatesFormComponent, { static: true })
-	assignmentTemplatesForm: AssignmentTemplatesFormComponent;
 
 	courseId: string;
 	course: CourseDto;
 	courseConfig: CourseConfigDto;
-
-	assignmentTemplates$ = new Subject<AssignmentTemplateDto[]>();
 
 	constructor(
 		private fb: FormBuilder,
@@ -87,7 +70,6 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 		private router: Router,
 		private courseConfigApi: CourseConfigApi,
 		private courseApi: CourseApi,
-		private dialog: MatDialog,
 		private toast: ToastService
 	) {
 		super();
@@ -112,8 +94,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 				}),
 				admissionCriteria: this.fb.group({
 					rules: this.fb.array([])
-				}),
-				assignmentTemplates: this.fb.array([])
+				})
 			})
 		});
 	}
@@ -129,8 +110,6 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 				result.admissionCriteria?.rules?.forEach(rule =>
 					this.admissionCriteriaForm.addRule(rule)
 				);
-
-				this.assignmentTemplates$.next(this.courseConfig.assignmentTemplates);
 			}
 		});
 
@@ -216,86 +195,6 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 				},
 				error: error => {
 					this.toast.apiError(error);
-				}
-			});
-	}
-
-	openCreateAssignmentTemplateDialog(): void {
-		const data: CreateAssignmentTemplateDialogData = {
-			courseId: this.courseId,
-			configId: this.courseConfig.id
-		};
-		this.subs.sink = this.dialog
-			.open<
-				CreateAssignmentTemplateDialog,
-				CreateAssignmentTemplateDialogData,
-				AssignmentTemplateDto
-			>(CreateAssignmentTemplateDialog, { data })
-			.afterClosed()
-			.subscribe(template => {
-				if (template) {
-					this.courseConfig.assignmentTemplates.push(template);
-					this.assignmentTemplates$.next(this.courseConfig.assignmentTemplates);
-				}
-			});
-	}
-
-	openEditAssignmentTemplateDialog(template: AssignmentTemplateDto): void {
-		const data: EditAssignmentTemplateDialogData = {
-			template: template,
-			courseId: this.courseId
-		};
-		this.subs.sink = this.dialog
-			.open<
-				EditAssignmentTemplateDialog,
-				EditAssignmentTemplateDialogData,
-				AssignmentTemplateDto
-			>(EditAssignmentTemplateDialog, { data })
-			.afterClosed()
-			.subscribe(update => {
-				if (update) {
-					// Update local list by replacing the updated assignment
-					const updatedList = this.courseConfig.assignmentTemplates.map(t => {
-						if (t.id !== update.id) {
-							return t;
-						} else {
-							return update;
-						}
-					});
-					this.courseConfig.assignmentTemplates = updatedList;
-					this.assignmentTemplates$.next(this.courseConfig.assignmentTemplates);
-				}
-			});
-	}
-
-	/**
-	 * Calls the API to delete the given template.
-	 * If removal was successful, the template will be removed from the courseConfig.assignmentTemplates.
-	 */
-	deleteAssignmentTemplate(template: AssignmentTemplateDto): void {
-		const data: ConfirmDialogData = { params: [template.templateName] };
-		this.subs.sink = this.dialog
-			.open<ConfirmDialog, ConfirmDialogData, boolean>(ConfirmDialog, { data })
-			.afterClosed()
-			.subscribe(confirmed => {
-				if (confirmed) {
-					this.courseConfigApi
-						.deleteAssignmentTemplate(this.courseId, template.id)
-						.subscribe(
-							deleted => {
-								this.courseConfig.assignmentTemplates =
-									this.courseConfig.assignmentTemplates.filter(
-										t => t.id !== template.id
-									);
-								this.assignmentTemplates$.next(
-									this.courseConfig.assignmentTemplates
-								);
-								this.toast.success("Domain.AssignmentTemplate", "Message.Deleted");
-							},
-							error => {
-								this.toast.apiError(error);
-							}
-						);
 				}
 			});
 	}
