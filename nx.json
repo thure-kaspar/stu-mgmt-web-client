@@ -40,11 +40,12 @@
 			"strict": false
 		},
 		"@nrwl/angular:library": {
-			"prefix": "student-mgmt",
-			"style": "none",
 			"linter": "eslint",
 			"unitTestRunner": "jest",
-			"strict": false
+			"importPath": "@student-mgmt-client/LIBRARY_NAME",
+			"strict": true,
+			"simpleModuleName": true,
+			"standaloneConfig": true
 		},
 		"@schematics/angular:component": {
 			"style": "none",
