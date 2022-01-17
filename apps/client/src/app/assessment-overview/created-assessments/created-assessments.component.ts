@@ -137,7 +137,7 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 							if (assessment.achievedPoints) {
 								assessment.roundedPoints = round(assessment.achievedPoints);
 								assessment.hasPassed =
-									assessment.roundedPoints > this.requiredPoints;
+									assessment.roundedPoints >= this.requiredPoints;
 							}
 						});
 					}
