@@ -10,7 +10,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 import {
 	ConfirmDialog,
 	ConfirmDialogData,
@@ -63,7 +63,7 @@ export class CreateCourseComponent {
 		private courseParticipantsApi: CourseParticipantsApi,
 		private fb: FormBuilder,
 		private dialog: MatDialog,
-		private snackbar: SnackbarService,
+		private toast: ToastService,
 		private router: Router,
 		private cdRef: ChangeDetectorRef
 	) {
@@ -106,12 +106,11 @@ export class CreateCourseComponent {
 				if (isConfirmed) {
 					this.courseApi.createCourse(course).subscribe(
 						result => {
-							this.snackbar.openSuccessMessage("Course has been created!");
+							this.toast.success(course.title, "Message.Created");
 							this.router.navigateByUrl(`/courses/${result.id}`);
 						},
 						error => {
-							console.log(error);
-							this.snackbar.openErrorMessage();
+							this.toast.apiError(error);
 						}
 					);
 				}
