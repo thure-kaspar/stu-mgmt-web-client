@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialog } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -21,7 +20,10 @@ import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { UpdateUserDialog } from "../dialogs/update-user/update-user.dialog";
+import {
+	UpdateUserDialog,
+	UpdateUserDialogModule
+} from "../dialogs/update-user/update-user.dialog";
 
 class UserFilter {
 	includeUsers = false;
@@ -139,7 +141,8 @@ export class UserManagementComponent extends UnsubscribeOnDestroy implements OnI
 		MatTableModule,
 		IconComponentModule,
 		TranslateModule,
-		PaginatorModule
+		PaginatorModule,
+		UpdateUserDialogModule
 	]
 })
 export class UserManagementComponentModule {}

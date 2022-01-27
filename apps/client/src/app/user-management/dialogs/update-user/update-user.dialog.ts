@@ -17,9 +17,9 @@ import { UserApi, UserDto, UserUpdateDto } from "@student-mgmt/api-client";
  */
 @Component({
 	selector: "student-mgmt-change-role",
-	templateUrl: "./update-user.dialog.html",
-	styleUrls: ["./update-user.dialog.scss"]
+	templateUrl: "./update-user.dialog.html"
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class UpdateUserDialog extends UnsubscribeOnDestroy implements OnInit {
 	form: FormGroup;
 	roles = UserDto.RoleEnum;

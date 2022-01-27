@@ -1,4 +1,4 @@
-<div class="flex flex-col page-container">
+<div class="flex flex-col page-container" data-test="userManagementComponent">
 	<student-mgmt-title [title]="'Title.UserManagement' | translate"></student-mgmt-title>
 
 	<div>
@@ -11,6 +11,7 @@
 						[(ngModel)]="filter.displayName"
 						(keyup)="nameFilterChanged.next()"
 						autocomplete="off"
+						data-test="nameTextField"
 					/>
 				</mat-form-field>
 
@@ -46,18 +47,22 @@
 			<ng-container matColumnDef="actions">
 				<th class="w-24" mat-header-cell *matHeaderCellDef></th>
 				<td mat-cell *matCellDef="let row">
-					<button mat-icon-button [matMenuTriggerFor]="userOptionsMenu">
+					<button
+						mat-icon-button
+						[matMenuTriggerFor]="userOptionsMenu"
+						data-test="userOptionsMenu"
+					>
 						<student-mgmt-icon class="icon-light" name="settings"></student-mgmt-icon>
 					</button>
 					<mat-menu #userOptionsMenu="matMenu" yPosition="above">
-						<button mat-menu-item (click)="editUser(row)">
+						<button mat-menu-item (click)="editUser(row)" data-test="editButton">
 							<student-mgmt-icon
 								name="edit"
 								class="mr-4 icon-light"
 							></student-mgmt-icon>
 							<span>{{ "Action.Edit" | translate }}</span>
 						</button>
-						<button mat-menu-item (click)="removeUser(row)">
+						<button mat-menu-item (click)="removeUser(row)" data-test="removeButton">
 							<student-mgmt-icon
 								name="delete"
 								class="mr-4 icon-light"

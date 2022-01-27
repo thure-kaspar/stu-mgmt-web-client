@@ -257,5 +257,18 @@ export const Selector = {
 		component: "personListComponent",
 		name: "personListName",
 		removeParticipantButton: "removeParticipantButton"
+	},
+
+	userManagement: {
+		component: "userManagementComponent",
+		nameTextField: "nameTextField",
+		userOptionsMenu: "userOptionsMenu",
+		editButton: "editButton",
+		removeButton: "removeButton"
+	},
+
+	updateUserDialog: {
+		component: "updateUserDialog",
+		saveButton: "saveButton"
 	}
 } as const;

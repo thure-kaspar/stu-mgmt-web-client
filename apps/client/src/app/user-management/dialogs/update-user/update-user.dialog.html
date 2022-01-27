@@ -1,4 +1,4 @@
-<div class="dialog-container">
+<div class="w-96" data-test="updateUserDialog">
 	<mat-card-title mat-dialog-title
 		>{{ 'Action.Edit' | translate }}: {{user.username}}</mat-card-title
 	>
@@ -16,7 +16,9 @@
 			<mat-error>{{ 'Error.ValueMissing' | translate }}</mat-error>
 		</mat-form-field>
 
-		<mat-radio-group class="roles" formControlName="role">
+		<mat-radio-group class="grid gap-4 py-4" formControlName="role">
+			<mat-label class="font-bold">{{ 'Property.User.Role' | translate }}:</mat-label>
+
 			<mat-radio-button [value]="roles.USER"
 				>{{ 'Enum.UserRole.' + roles.USER | translate }}</mat-radio-button
 			>
@@ -32,8 +34,8 @@
 		</mat-radio-group>
 	</form>
 
-	<div class="button-container">
-		<button mat-flat-button color="accent" (click)="onSave()">
+	<div mat-dialog-actions class="flex gap-2">
+		<button mat-flat-button color="accent" (click)="onSave()" data-test="saveButton">
 			{{ 'Action.Save' | translate }}
 		</button>
 		<button mat-flat-button (click)="onCancel()">{{ 'Action.Cancel' | translate }}</button>
