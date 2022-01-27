@@ -10,7 +10,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { DownloadService, ToastService } from "@student-mgmt-client/services";
+import { DownloadService, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
 import {
 	ChipComponentModule,
 	ConfirmDialog,
@@ -21,13 +21,17 @@ import {
 	TitleComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
-import { CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
-import { BehaviorSubject, Subject } from "rxjs";
+import { CourseParticipantsApi, ParticipantDto, UserDto } from "@student-mgmt/api-client";
+import { BehaviorSubject, firstValueFrom, Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import {
 	ChangeRoleDialog,
 	ChangeRoleDialogData
 } from "../../course/dialogs/change-role/change-role.dialog";
+import {
+	SearchUserDialog,
+	SearchUserDialogModule
+} from "../../course/dialogs/search-user/search-user.dialog";
 
 class ParticipantsFilter {
 	includeStudents = false;
@@ -64,6 +68,7 @@ export class ParticipantsListComponent extends UnsubscribeOnDestroy implements O
 	courseRole = ParticipantDto.RoleEnum;
 
 	constructor(
+		readonly participant: ParticipantFacade,
 		private courseParticipantsApi: CourseParticipantsApi,
 		private downloadService: DownloadService,
 		private route: ActivatedRoute,
@@ -115,6 +120,35 @@ export class ParticipantsListComponent extends UnsubscribeOnDestroy implements O
 				},
 				error => console.log(error)
 			);
+	}
+
+	/**
+	 * Opens the {@link SearchUserDialog} and adds the selected user to this course.
+	 */
+	async openAddParticipantDialog(): Promise<void> {
+		const [selectedUser] =
+			(await firstValueFrom(
+				this.dialog.open<SearchUserDialog, never, UserDto[]>(SearchUserDialog).afterClosed()
+			)) ?? [];
+
+		if (selectedUser) {
+			try {
+				await firstValueFrom(
+					this.courseParticipantsApi.addUser(
+						{
+							password: null
+						},
+						this.courseId,
+						selectedUser.id
+					)
+				);
+
+				this.searchParticipants();
+				this.toast.success(selectedUser.displayName, "Message.Added");
+			} catch (error) {
+				this.toast.apiError(error);
+			}
+		}
 	}
 
 	openChangeRoleDialog(participant: ParticipantDto): void {
@@ -204,7 +238,8 @@ export class ParticipantsListComponent extends UnsubscribeOnDestroy implements O
 		ChipComponentModule,
 		IconComponentModule,
 		PaginatorModule,
-		TitleComponentModule
+		TitleComponentModule,
+		SearchUserDialogModule
 	]
 })
 export class ParticipantsListComponentModule {}

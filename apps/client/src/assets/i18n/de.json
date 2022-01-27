@@ -220,7 +220,8 @@
 		"Error": "Fehler",
 		"Removed": "Entfernt",
 		"Saved": "Gespeichert",
-		"Success": "Aktion erfolgreich"
+		"Success": "Aktion erfolgreich",
+		"Added": "Hinzugefügt"
 	},
 	"Misc": {
 		"About": "Info",

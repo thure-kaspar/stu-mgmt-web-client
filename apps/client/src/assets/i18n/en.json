@@ -220,7 +220,8 @@
 		"Error": "Error",
 		"Removed": "Removed",
 		"Saved": "Saved",
-		"Success": "Success"
+		"Success": "Success",
+		"Added": "Added"
 	},
 	"Misc": {
 		"About": "About",

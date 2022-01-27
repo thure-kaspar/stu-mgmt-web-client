@@ -1,6 +1,18 @@
 <div class="flex flex-col" data-test="participantsListComponent">
 	<student-mgmt-title [title]="'Domain.Participants' | translate">
-		<button mat-stroked-button (click)="exportToExcel()">Export</button>
+		<div class="flex gap-2">
+			<button
+				*ngIf="(participant.participant$ | async)?.role === 'LECTURER'"
+				mat-flat-button
+				color="accent"
+				(click)="openAddParticipantDialog()"
+				data-test="addParticipantButton"
+			>
+				<student-mgmt-icon name="add"></student-mgmt-icon>
+				{{ "Action.Custom.AddParticipant" | translate }}
+			</button>
+			<button mat-stroked-button (click)="exportToExcel()">Export</button>
+		</div>
 	</student-mgmt-title>
 
 	<div>
