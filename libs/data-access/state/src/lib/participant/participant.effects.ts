@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { of } from "rxjs";
-import { catchError, map, switchMap, withLatestFrom } from "rxjs/operators";
-import { CourseParticipantsApi } from "@student-mgmt/api-client";
+import { firstValueFrom, of } from "rxjs";
+import { catchError, map, switchMap, tap, withLatestFrom } from "rxjs";
+import { CourseParticipantsApi, UserDto } from "@student-mgmt/api-client";
 import { createParticipant } from "@student-mgmt-client/domain-types";
 import { AuthSelectors } from "../auth";
 import { CourseActions, CourseSelectors } from "../course";
@@ -11,6 +11,14 @@ import { loadAdmissionsStatus } from "./admission-status/admission-status.action
 import { loadAssessments } from "./assessments/assessments.actions";
 import { loadGroups } from "./groups/groups.actions";
 import * as ParticipantActions from "./participant.actions";
+
+function isAdmin(role: UserDto.RoleEnum): boolean {
+	return (
+		role == UserDto.RoleEnum.SYSTEM_ADMIN ||
+		role == UserDto.RoleEnum.MGMT_ADMIN ||
+		role == UserDto.RoleEnum.ADMIN_TOOL
+	);
+}
 
 @Injectable()
 export class ParticipantEffects {
@@ -21,24 +29,50 @@ export class ParticipantEffects {
 		)
 	);
 
-	LoadParticipant$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(ParticipantActions.loadParticipant),
-			withLatestFrom(this.store.select(AuthSelectors.selectUser)),
-			switchMap(([action, user]) =>
-				this.courseParticipants.getParticipant(action.courseId, user.id).pipe(
-					map(participant =>
-						ParticipantActions.loadParticipantSuccess({
-							courseId: action.courseId,
-							data: createParticipant(participant)
-						})
-					),
-					catchError(error =>
-						of(ParticipantActions.loadParticipantFailure({ error: error.error }))
-					)
-				)
-			)
-		)
+	LoadParticipant$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(ParticipantActions.loadParticipant),
+				withLatestFrom(this.store.select(AuthSelectors.selectUser)),
+				tap(async ([action, user]) => {
+					if (!user) {
+						return;
+					}
+					// Admin Accounts will always be considered as LECTURER
+					// This prevents
+					if (isAdmin(user.role)) {
+						this.store.dispatch(
+							ParticipantActions.loadParticipantSuccess({
+								courseId: action.courseId,
+								data: createParticipant({
+									username: user.username,
+									displayName: user.displayName,
+									userId: user.id,
+									role: "LECTURER"
+								})
+							})
+						);
+					} else {
+						try {
+							const participant = await firstValueFrom(
+								this.courseParticipants.getParticipant(action.courseId, user.id)
+							);
+
+							this.store.dispatch(
+								ParticipantActions.loadParticipantSuccess({
+									courseId: action.courseId,
+									data: createParticipant(participant)
+								})
+							);
+						} catch (error) {
+							this.store.dispatch(
+								ParticipantActions.loadParticipantFailure({ error: error.error })
+							);
+						}
+					}
+				})
+			),
+		{ dispatch: false }
 	);
 
 	loadParticipantSuccess$ = createEffect(() =>
