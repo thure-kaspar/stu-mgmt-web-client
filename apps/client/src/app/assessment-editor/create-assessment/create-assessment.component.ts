@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
-import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
@@ -24,12 +24,13 @@ import {
 	GroupDto,
 	ParticipantDto
 } from "@student-mgmt/api-client";
-import { Observable, Subject } from "rxjs";
+import { firstValueFrom, Observable, Subject } from "rxjs";
 import { AssessmentTargetComponentModule } from "../../assessment/components/assessment-target/assessment-target.component";
 import {
-	SearchGroupDialog,
-	SearchGroupDialogModule
-} from "../../group/dialogs/search-group/search-group.dialog";
+	RegisteredGroupsDialog,
+	RegisteredGroupsDialogData,
+	RegisteredGroupsDialogModule
+} from "../dialogs/registered-groups/registered-groups.dialog";
 import {
 	AssessmentFormComponent,
 	AssessmentFormComponentModule
@@ -77,8 +78,6 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		);
 
 		this.setPreselectedGroupOrUser();
-
-		// TODO: Search Group dialog should use registered groups?
 	}
 
 	onSave(saveAsDraft = false): void {
@@ -105,15 +104,27 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		);
 	}
 
-	openSearchGroupDialog(): void {
-		this.dialog
-			.open(SearchGroupDialog, { data: this.courseId })
-			.afterClosed()
-			.subscribe(group => {
-				if (group) {
-					this.groupSelectedHandler(group);
-				}
-			});
+	async openSearchGroupDialog(): Promise<void> {
+		const assignment = await firstValueFrom(this.assignment$);
+
+		const selectedGroups = await firstValueFrom(
+			this.dialog
+				.open<RegisteredGroupsDialog, RegisteredGroupsDialogData, GroupDto[] | undefined>(
+					RegisteredGroupsDialog,
+					{
+						data: {
+							courseId: this.courseId,
+							assignment
+						}
+					}
+				)
+				.afterClosed()
+		);
+
+		if (selectedGroups?.length > 0) {
+			const [selectedGroup] = selectedGroups;
+			this.groupSelectedHandler({ id: selectedGroup.id });
+		}
 	}
 
 	openSearchParticipantDialog(): void {
@@ -191,7 +202,7 @@ export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements O
 		AssessmentTargetComponentModule,
 		IconComponentModule,
 		TitleComponentModule,
-		SearchGroupDialogModule,
+		RegisteredGroupsDialogModule,
 		SearchParticipantDialogModule
 	]
 })

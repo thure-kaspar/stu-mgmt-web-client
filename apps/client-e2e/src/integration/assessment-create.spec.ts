@@ -86,13 +86,13 @@ function selectGroup() {
 	const groupName = "Testgroup 2";
 
 	cy.getBySelector(Selector.createAssessment.searchGroupButton).click();
-	cy.getBySelector(Selector.searchGroupDialog.component).should("be.visible");
+	cy.getBySelector(Selector.registeredGroupsDialog.component).should("be.visible");
 
-	cy.getBySelector(Selector.searchGroupDialog.nameInputField).type(groupName);
-	cy.getBySelector(Selector.searchGroupDialog.nameButton).should("have.length", 1);
+	cy.getBySelector(Selector.registeredGroupsDialog.groupNameTextField).type(groupName);
+	cy.getBySelector(Selector.registeredGroupsDialog.nameButton).should("have.length", 1);
 
-	cy.getBySelector(Selector.searchGroupDialog.nameButton).contains(groupName).click();
-	cy.getBySelector(Selector.searchGroupDialog.confirmButton).click();
+	cy.getBySelector(Selector.registeredGroupsDialog.nameButton).contains(groupName).click();
+	cy.getBySelector(Selector.registeredGroupsDialog.confirmButton).click();
 
 	cy.getBySelector(Selector.assessmentTarget.groupName).contains(groupName);
 }

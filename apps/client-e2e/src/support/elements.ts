@@ -253,6 +253,13 @@ export const Selector = {
 		cancelButton: "cancelButton"
 	},
 
+	registeredGroupsDialog: {
+		component: "registeredGroupsDialog",
+		groupNameTextField: "groupNameTextField",
+		nameButton: "nameButton",
+		confirmButton: "confirmButton"
+	},
+
 	personList: {
 		component: "personListComponent",
 		name: "personListName",
