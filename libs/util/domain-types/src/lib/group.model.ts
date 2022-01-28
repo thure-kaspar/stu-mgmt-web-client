@@ -3,7 +3,7 @@ import { Course } from "./course.model";
 import { Participant } from "./participant.model";
 
 export class Group implements GroupDto {
-	readonly id?: string;
+	readonly id: string;
 	readonly name: string;
 	readonly password?: string;
 	readonly isClosed?: boolean;

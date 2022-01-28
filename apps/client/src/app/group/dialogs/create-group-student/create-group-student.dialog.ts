@@ -80,6 +80,7 @@ export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements On
 	 */
 	onSave(): void {
 		const group: GroupDto = {
+			id: null,
 			name: this.name,
 			password: this.password?.length > 0 ? this.password : undefined
 		};
