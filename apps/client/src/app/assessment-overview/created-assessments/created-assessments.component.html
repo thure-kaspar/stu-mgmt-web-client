@@ -144,7 +144,7 @@
 					{{ "Property.Assessment.AchievedPoints" | translate }}
 				</th>
 				<td mat-cell *matCellDef="let row" class="text-center">
-					{{ row.achievedPoints || "-" }}
+					{{ (row.achievedPoints | number) ?? "-" }}
 					<span
 						*ngIf="
 							requiredPoints &&
