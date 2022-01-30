@@ -65,6 +65,23 @@
 					</button>
 				</a>
 
+				<a
+					[routerLink]="[
+						'/courses',
+						courseId,
+						'assignments',
+						assignmentId,
+						'assessments',
+						'create-multiple'
+					]"
+					data-test="createMultipleButton"
+				>
+					<button #createAssessmentButton mat-flat-button color="primary">
+						<student-mgmt-icon name="add"></student-mgmt-icon>
+						<span>{{ "Action.Custom.CreateMultipleAssessments" | translate }}</span>
+					</button>
+				</a>
+
 				<button mat-stroked-button (click)="exportToExcel()">Export</button>
 			</div></student-mgmt-title
 		>

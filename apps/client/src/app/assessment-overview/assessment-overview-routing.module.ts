@@ -26,6 +26,13 @@ const routes: Routes = [
 					)
 			},
 			{
+				path: "create-multiple",
+				loadChildren: () =>
+					import("@student-mgmt-client/assessment").then(
+						m => m.CreateMultipleAssessmentsComponentModule
+					)
+			},
+			{
 				path: "submissions",
 				loadChildren: () =>
 					import("../submission/submission.module").then(m => m.SubmissionModule)

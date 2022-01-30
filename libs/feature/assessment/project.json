@@ -1,0 +1,26 @@
+{
+	"projectType": "library",
+	"root": "libs/feature/assessment",
+	"sourceRoot": "libs/feature/assessment/src",
+	"prefix": "student-mgmt",
+	"targets": {
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["coverage/libs/feature/assessment"],
+			"options": {
+				"jestConfig": "libs/feature/assessment/jest.config.js",
+				"passWithNoTests": true
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"options": {
+				"lintFilePatterns": [
+					"libs/feature/assessment/src/**/*.ts",
+					"libs/feature/assessment/src/**/*.html"
+				]
+			}
+		}
+	},
+	"tags": []
+}

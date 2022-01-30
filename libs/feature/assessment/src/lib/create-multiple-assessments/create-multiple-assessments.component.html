@@ -1,0 +1,90 @@
+<div class="flex flex-col gap-4" *ngIf="assignment$ | async as assignment">
+	<div class="grid mb-4">
+		<div>
+			<span class="text-light">Max. {{ "Property.Assignment.Points" | translate }}: </span>
+			<span class="font-bold">{{ assignment.points }}</span>
+		</div>
+		<div *ngIf="assignment.bonusPoints | number">
+			<span class="text-light">{{ "Property.Assignment.BonusPoints" | translate }}: </span>
+			<span class="font-bold">{{ assignment.bonusPoints }}</span>
+		</div>
+	</div>
+
+	<button mat-flat-button color="accent" class="w-fit" [disabled]="form.invalid">
+		{{ "Action.Create" | translate }} (not implemented)
+	</button>
+
+	<mat-tab-group
+		color="accent"
+		animationDuration="0"
+		(selectedIndexChange)="selectedTabChanged($event)"
+	>
+		<mat-tab [label]="'Domain.RegisteredGroups' | translate">
+			<ng-container
+				*ngTemplateOutlet="
+					formTemplate;
+					context: { controls: form.controls, display: groupDisplay }
+				"
+			></ng-container>
+		</mat-tab>
+		<mat-tab [label]="'Domain.Participants' | translate">
+			<ng-container
+				*ngTemplateOutlet="
+					formTemplate;
+					context: { controls: form.controls, display: studentDisplay }
+				"
+			></ng-container>
+		</mat-tab>
+	</mat-tab-group>
+</div>
+
+<ng-template #formTemplate let-controls="controls" let-display="display">
+	<div
+		class="py-4 gap-8 grid sm:grid-cols-2 lg:grid-cols-3"
+		*ngIf="(isLoading$ | async) === false; else loadingSpinner"
+	>
+		<form
+			class="flex flex-col justify-between gap-8 bg-card-bg p-4 rounded shadow"
+			*ngFor="let control of controls"
+			[formGroup]="$any(control)"
+		>
+			<!-- This container renders either the group or student -->
+			<ng-container
+				*ngTemplateOutlet="display; context: { $implicit: control }"
+			></ng-container>
+
+			<mat-form-field class="w-full">
+				<mat-label>{{ "Property.Assessment.AchievedPoints" | translate }}</mat-label>
+				<input matInput type="number" required formControlName="achievedPoints" />
+				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
+			</mat-form-field>
+		</form>
+	</div>
+</ng-template>
+
+<ng-template #groupDisplay let-control>
+	<div>
+		<div class="text-lg mb-4 font-bold">
+			{{ control.get("entity")?.value.name }}
+		</div>
+		<student-mgmt-person-list
+			[participants]="control.get('entity')?.value.members"
+		></student-mgmt-person-list>
+	</div>
+</ng-template>
+
+<ng-template #studentDisplay let-control>
+	<student-mgmt-person-list
+		[participants]="[control.get('entity')?.value]"
+	></student-mgmt-person-list>
+</ng-template>
+
+<ng-template #loadingSpinner>
+	<div class="w-full p-8">
+		<mat-progress-spinner
+			class="mx-auto"
+			diameter="64"
+			mode="indeterminate"
+		></mat-progress-spinner>
+	</div>
+</ng-template>
