@@ -29,8 +29,10 @@ export function mapToExtendedAssessmentDto(
 			rule.achievedPercentRounding.decimals
 		);
 
+		extendedAssessment.hasPassed = false;
+
 		if (extendedAssessment.achievedPoints) {
-			const roundedPoints = round(assessment.achievedPoints);
+			const roundedPoints = round(extendedAssessment.achievedPoints);
 			extendedAssessment.roundedPoints = roundedPoints;
 			extendedAssessment.hasPassed = roundedPoints >= requiredPoints;
 		}

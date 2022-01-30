@@ -134,6 +134,8 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 						);
 
 						(assessments as AssessmentDtoExtended[]).forEach(assessment => {
+							assessment.hasPassed = false;
+
 							if (assessment.achievedPoints) {
 								assessment.roundedPoints = round(assessment.achievedPoints);
 								assessment.hasPassed =
