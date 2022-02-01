@@ -31,7 +31,9 @@
       "SaveAsDraft": "Als Entwurf speichern",
       "RemovePartialAssessment": "Teilbewertung entfernen",
       "RemoveRegistration": "Anmeldung entfernen",
-      "CreateMultipleAssessments": "Mehrere Bewertungen erstellen"
+      "CreateMultipleAssessments": "Mehrere Bewertungen erstellen",
+      "ConvertToIndividualAssessment": "In Einzelbewertungen umwandeln",
+      "ViewAssessment": "Bewertung ansehen"
     },
     "Delete": "Löschen",
     "Edit": "Ändern",
@@ -386,7 +388,8 @@
     "NotificationDescription": "Das Studenten Management System kann Benachrichtigungen an andere Systeme versenden, um diese über gewisse Ereignisse zu benachrichtigen (z. B. Start einer neuen Hausaufgabe).\nDamit ein System diese Benachrichtigungen erhalten kann, muss es eine Schnittstelle zur Verfügung stellen, die HTTP-POST Anfragen bearbeitet.\n\nDiese Konfiguration kann nur von folgenden Nutzerrollen durchgeführt werden:\nSYSTEM_ADMIN, MGMT_ADMIN oder ADMIN_TOOL. ",
     "Assessment": {
       "Visibility": "Studenten können die Bewertung erst einsehen, wenn die zugehörige Aufgabe auf BEWERTET gesetzt wurde.",
-      "SelectGroupOrParticipant": "Bitte Gruppe oder Teilnehmer auswählen."
+      "SelectGroupOrParticipant": "Bitte Gruppe oder Teilnehmer auswählen.",
+      "ConvertToIndividualAssessment": "Durch diese Aktion wird diese Gruppenbewertung gegen individuelle Bewertungen für jedes Mitglied ersetzt. Fortfahren ?"
     },
     "UserSettings": {
       "Language": "Beeinflusst die Sprache von versendeten Emails.",

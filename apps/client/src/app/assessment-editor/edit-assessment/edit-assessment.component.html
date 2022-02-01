@@ -4,7 +4,6 @@
 			<button
 				mat-flat-button
 				color="accent"
-				class="fit-content"
 				[disabled]="form.form.invalid"
 				(click)="onSave()"
 			>
@@ -20,12 +19,23 @@
 			>
 				{{ "Action.Custom.SaveAsDraft" | translate }}
 			</button>
+
+			<button
+				mat-stroked-button
+				color="accent"
+				(click)="convertToIndividualAssessment()"
+				*ngIf="(assessment$ | async)?.groupId"
+				data-test="convertToIndividualAssessmentButton"
+			>
+				{{ "Action.Custom.ConvertToIndividualAssessment" | translate }}
+			</button>
 		</div>
 	</student-mgmt-title>
 
 	<student-mgmt-assessment-header
+		*ngIf="assessment$ | async as assessment"
 		[assignment]="assignment"
-		[assessment]="assessment$ | async"
+		[assessment]="assessment"
 		[courseId]="this.courseId"
 		[isEditMode]="true"
 	></student-mgmt-assessment-header>

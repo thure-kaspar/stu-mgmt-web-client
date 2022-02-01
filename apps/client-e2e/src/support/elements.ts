@@ -70,7 +70,8 @@ export const Selector = {
 	editAssessment: {
 		component: "editAssessmentComponent",
 		saveButton: "saveButton",
-		saveAsDraftButton: "saveAsDraftButton"
+		saveAsDraftButton: "saveAsDraftButton",
+		convertToIndividualAssessmentButton: "convertToIndividualAssessmentButton"
 	},
 
 	assessmentForm: {

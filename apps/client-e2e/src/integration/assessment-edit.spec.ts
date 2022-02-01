@@ -34,6 +34,27 @@ describe("Edit Assessment", () => {
 	});
 });
 
+describe("Convert Group Assessment to individual assessment", () => {
+	before(() => {
+		resetDemoDb();
+	});
+
+	beforeEach(() => {
+		useAccount(account.mgmtAdmin);
+		cy.visit(
+			"/courses/java-wise1920/assignments/f50b8474-1fb9-4d69-85a2-76648d0fd3f9/assessments/edit/0d365334-6cb3-4ac5-b0fe-0b1a5aa1fbf4"
+		);
+	});
+
+	it("Creates assessment for each member and navigates to assessment overview", () => {
+		cy.getBySelector(Selector.editAssessment.convertToIndividualAssessmentButton).click();
+		cy.getBySelector(Selector.confirmDialog.component).should("be.visible");
+		cy.getBySelector(Selector.confirmDialog.confirmButton).click();
+		cy.getBySelector(Selector.createdAssessments.component).should("be.visible");
+		cy.getBySelector(Selector.createdAssessments.viewAssessmentButton).should("have.length", 2);
+	});
+});
+
 /**
  * Performs changes to the assessment:
  * - Changes achieved points

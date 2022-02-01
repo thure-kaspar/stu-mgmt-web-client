@@ -1,7 +1,7 @@
 <div class="w-96" data-test="confirmDialogComponent">
 	<mat-card-title mat-dialog-title> {{ title ?? "Action.Confirm" | translate }} </mat-card-title>
 
-	<pre class="mb-4 preformatted">{{ message ?? "Prompt.Question.AreYouSure" | translate }}</pre>
+	<p class="mb-4">{{ message ?? "Prompt.Question.AreYouSure" | translate }}</p>
 
 	<div class="flex flex-col items-start gap-1 py-2" *ngIf="params">
 		<span *ngFor="let param of params">{{ param }}</span>
@@ -9,7 +9,7 @@
 
 	<div mat-dialog-actions class="flex gap-1">
 		<button
-			mat-raised-button
+			mat-flat-button
 			color="accent"
 			(click)="confirmClicked.next()"
 			data-test="btn-confirm"

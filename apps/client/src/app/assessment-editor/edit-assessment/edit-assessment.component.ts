@@ -1,4 +1,4 @@
-import { CommonModule, Location } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -15,7 +15,7 @@ import {
 	GroupDto,
 	ParticipantDto
 } from "@student-mgmt/api-client";
-import { Subject } from "rxjs";
+import { firstValueFrom, Subject } from "rxjs";
 import { AssessmentHeaderComponentModule } from "../../assessment/components/assessment-header/assessment-header.component";
 import {
 	AssessmentFormComponent,
@@ -50,7 +50,6 @@ export class EditAssessmentComponent implements OnInit {
 		private assessmentApi: AssessmentApi,
 		private route: ActivatedRoute,
 		private router: Router,
-		private location: Location,
 		private dialog: DialogService,
 		private toast: ToastService
 	) {}
@@ -66,14 +65,14 @@ export class EditAssessmentComponent implements OnInit {
 	loadAssessment(): void {
 		this.assessmentApi
 			.getAssessmentById(this.courseId, this.assignmentId, this.assessmentId)
-			.subscribe(
-				result => {
+			.subscribe({
+				next: result => {
 					this.assignLoadAssessmentResult(result);
 				},
-				error => {
+				error: error => {
 					this.toast.apiError(error);
 				}
-			);
+			});
 	}
 
 	private assignLoadAssessmentResult(assessment: AssessmentDto): void {
@@ -98,15 +97,15 @@ export class EditAssessmentComponent implements OnInit {
 		if (!this.showEvents) {
 			this.assessmentApi
 				.getEventsOfAssessment(this.courseId, this.assessmentId, this.assessmentId)
-				.subscribe(
-					result => {
+				.subscribe({
+					next: result => {
 						this.events = result;
 						this.showEvents = true;
 					},
-					error => {
+					error: error => {
 						this.toast.apiError(error);
 					}
-				);
+				});
 		}
 	}
 
@@ -121,8 +120,8 @@ export class EditAssessmentComponent implements OnInit {
 
 		this.assessmentApi
 			.updateAssessment(update, this.courseId, this.assignmentId, this.assessmentId)
-			.subscribe(
-				result => {
+			.subscribe({
+				next: result => {
 					this.router.navigate([
 						"/courses",
 						this.courseId,
@@ -134,10 +133,44 @@ export class EditAssessmentComponent implements OnInit {
 					]);
 					this.toast.success("Message.Saved");
 				},
-				error => {
+				error: error => {
 					this.toast.apiError(error);
 				}
-			);
+			});
+	}
+
+	async convertToIndividualAssessment(): Promise<void> {
+		const confirmed = await firstValueFrom(
+			this.dialog.openConfirmDialog({
+				title: "Action.Custom.ConvertToIndividualAssessment",
+				message: "Text.Assessment.ConvertToIndividualAssessment"
+			})
+		);
+
+		if (confirmed) {
+			this.assessmentApi
+				.convertGroupToIndividualAssessment(
+					this.courseId,
+					this.assignmentId,
+					this.assessmentId
+				)
+				.subscribe({
+					next: () => {
+						this.toast.success("", "Message.Created");
+
+						this.router.navigate([
+							"/courses",
+							this.courseId,
+							"assignments",
+							this.assignmentId,
+							"assessments"
+						]);
+					},
+					error: error => {
+						this.toast.apiError(error);
+					}
+				});
+		}
 	}
 }
 
