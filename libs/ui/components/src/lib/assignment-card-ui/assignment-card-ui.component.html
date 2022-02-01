@@ -137,11 +137,13 @@
 					[routerLink]="[
 						'/courses',
 						props.courseId,
+						'assignments',
+						props.assignment.id,
 						'assessments',
 						'view',
 						props.assessment.id
 					]"
-					>Bewertung ansehen</a
+					>{{ "Action.Custom.ViewAssessment" | translate }}</a
 				>
 			</div>
 
