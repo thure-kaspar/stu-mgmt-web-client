@@ -5,7 +5,8 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"card-bg": "var(--card-bg)"
+				"card-bg": "var(--card-bg)",
+				"color-bg": "var(--color-bg)"
 			}
 		}
 	},
