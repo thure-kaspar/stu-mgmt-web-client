@@ -50,7 +50,7 @@
 	</div>
 
 	<div class="flex flex-col">
-		<div class="flex justify-between mb-4">
+		<div class="mb-4 flex justify-between">
 			<span class="text-base font-bold">{{ "Domain.Members" | translate }}</span>
 			<button
 				mat-flat-button
@@ -98,10 +98,10 @@
 			<div class="flex flex-col gap-4">
 				<div
 					*ngFor="let assessment of assessments"
-					class="flex justify-between p-4 rounded shadow bg-card-bg"
+					class="flex justify-between rounded bg-card-bg p-4 shadow"
 				>
 					<a
-						class="font-bold hover:underline hover:text-sky-500"
+						class="font-bold hover:text-sky-500 hover:underline"
 						[routerLink]="[
 							'/courses',
 							courseId,

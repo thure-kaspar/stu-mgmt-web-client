@@ -50,7 +50,7 @@
 		*ngFor="let partial of getPartialAssessments()?.controls; let i = index"
 	>
 		<div
-			class="flex flex-col p-4 rounded shadow bg-card-bg"
+			class="flex flex-col rounded bg-card-bg p-4 shadow"
 			[formGroup]="getPartialAssessment(i)"
 			data-test="partialAssessmentForm"
 		>
@@ -98,11 +98,11 @@
 				></textarea>
 			</mat-form-field>
 
-			<div class="mt-2 markers-outer">
+			<div class="markers-outer mt-2">
 				<div class="flex justify-between">
 					<h2>{{ "Misc.Markers" | translate }}</h2>
 
-					<div class="flex gap-2 marker-buttons">
+					<div class="marker-buttons flex gap-2">
 						<button mat-flat-button class="btn-info" (click)="addMarker(i, 'INFO')">
 							<student-mgmt-icon name="add"></student-mgmt-icon>
 							INFO
@@ -132,7 +132,7 @@
 
 				<div class="flex flex-col gap-2">
 					<div *ngFor="let marker of getMarkers(i).controls; let markerIndex = index">
-						<div class="flex justify-end -mb-10">
+						<div class="-mb-10 flex justify-end">
 							<button
 								mat-icon-button
 								color="accent"
@@ -163,7 +163,7 @@
 				</div>
 			</div>
 
-			<div class="flex justify-end mt-4">
+			<div class="mt-4 flex justify-end">
 				<button
 					class="font-bold text-red-500 hover:underline"
 					type="button"

@@ -10,6 +10,8 @@
 		"test:ci": "nx run-many --all --target=test",
 		"lint": "nx run-many --all --target=lint",
 		"lint:ci": "nx run-many --all --target=lint --format checkstyle --output-file output/eslint/eslint.xml || exit 0",
+		"prettier:check": "prettier --check **/*",
+		"prettier:write": "prettier --write **/*",
 		"cypress:client": "cypress open --project ./apps/client-e2e",
 		"postinstall": "ngcc --properties es2015 browser module main"
 	},

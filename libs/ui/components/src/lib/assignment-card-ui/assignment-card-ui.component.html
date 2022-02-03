@@ -1,6 +1,6 @@
 <student-mgmt-card class="assignment-card" data-test="assignment-card">
 	<div title class="flex gap-2">
-		<span class="font-bold name">
+		<span class="name font-bold">
 			<a
 				class="link-none"
 				[routerLink]="[props.assignment.id, 'assessments']"
@@ -45,14 +45,14 @@
 						'edit'
 					]"
 					><button>
-						<student-mgmt-icon class="mr-4 icon-light" name="edit"></student-mgmt-icon>
+						<student-mgmt-icon class="icon-light mr-4" name="edit"></student-mgmt-icon>
 						<span class="font-bold">{{ "Action.Edit" | translate }}</span>
 					</button></a
 				>
 
 				<button mat-menu-item (click)="deleteClicked.next()">
-					<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon>
-					<span class="font-bold text-red">
+					<student-mgmt-icon class="icon-light mr-4" name="delete"></student-mgmt-icon>
+					<span class="text-red font-bold">
 						{{ "Action.Delete" | translate }}
 					</span>
 				</button>
@@ -73,13 +73,13 @@
 
 		<div class="flex flex-col" *ngIf="props.assignment.startDate || props.assignment.endDate">
 			<div class="flex" *ngIf="props.assignment.startDate">
-				<div class="font-bold uppercase w-14 text-green">
+				<div class="text-green w-14 font-bold uppercase">
 					{{ "Common.Start" | translate }}:
 				</div>
 				<span>{{ props.assignment.startDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
 			</div>
 			<div class="flex" *ngIf="props.assignment.endDate">
-				<div class="font-bold uppercase w-14 text-red">{{ "Common.End" | translate }}:</div>
+				<div class="text-red w-14 font-bold uppercase">{{ "Common.End" | translate }}:</div>
 				<span>{{ props.assignment.endDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
 			</div>
 		</div>

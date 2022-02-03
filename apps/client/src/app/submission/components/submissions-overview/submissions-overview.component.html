@@ -27,7 +27,7 @@
 			<th mat-header-cell *matHeaderCellDef>{{ "Property.User.DisplayName" | translate }}</th>
 			<td class="w-48" mat-cell *matCellDef="let row">
 				<a
-					class="font-bold link-none"
+					class="link-none font-bold"
 					[routerLink]="['/courses', courseId, 'users', row.userId]"
 					>{{ row.displayName }}</a
 				>
@@ -39,7 +39,7 @@
 			<th mat-header-cell *matHeaderCellDef>{{ "Domain.Group" | translate }}</th>
 			<td class="column-group-name" mat-cell *matCellDef="let row">
 				<a
-					class="font-bold link-none"
+					class="link-none font-bold"
 					[routerLink]="['/courses', courseId, 'groups', row.groupId]"
 					>{{ row.groupName }}</a
 				>

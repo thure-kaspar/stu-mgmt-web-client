@@ -1,5 +1,5 @@
 <mat-card class="rule">
-	<mat-card-title class="flex rule-title">
+	<mat-card-title class="rule-title flex">
 		<span class="left">
 			<span class="text-light">{{ "Common.Criteria" | translate }} #{{ index }}</span>
 			<span>
@@ -14,12 +14,14 @@
 			</span>
 		</span>
 
-		<student-mgmt-assignment-type-chip [type]="rule.assignmentType"></student-mgmt-assignment-type-chip>
+		<student-mgmt-assignment-type-chip
+			[type]="rule.assignmentType"
+		></student-mgmt-assignment-type-chip>
 	</mat-card-title>
 
-	<div class="flex flex-col rounding-info">
+	<div class="rounding-info flex flex-col">
 		<div>
-			<span class="font-bold text-light"
+			<span class="text-light font-bold"
 				>{{ "Property.Assessment.AchievedPoints" | translate }}-%:</span
 			>
 			{{ "Enum.RoundingType." + rule.achievedPercentRounding.type | translate }}
@@ -38,7 +40,7 @@
 		<ng-container [ngSwitch]="rule.type">
 			<ng-container *ngSwitchCase="ruleTypes.REQUIRED_PERCENT_OVERALL">
 				<span
-					><span class="font-bold text-light"
+					><span class="text-light font-bold"
 						>{{ "Property.Assessment.AchievedPoints" | translate }} ({{
 							"Common.Total" | translate
 						}}):</span
@@ -46,7 +48,7 @@
 					{{ result.achievedPoints }}</span
 				>
 				<span>
-					<span class="font-bold text-light"
+					<span class="text-light font-bold"
 						>{{ "Property.Assessment.AchievedPoints" | translate }}-%:</span
 					>
 					{{
@@ -59,7 +61,7 @@
 
 			<ng-container *ngSwitchCase="ruleTypes.INDIVIDUAL_PERCENT_WITH_ALLOWED_FAILURES">
 				<span
-					><span class="font-bold text-light"
+					><span class="text-light font-bold"
 						>{{ "Property.AdmissionRule.FailedAssignments" | translate }}:</span
 					>
 					{{ result.achievedPoints }} {{ "Common.Of" | translate }}
@@ -70,10 +72,10 @@
 		</ng-container>
 
 		<span
-			><span class="font-bold text-light"
+			><span class="text-light font-bold"
 				>{{ "Property.AdmissionRule.Passed" | translate }}:
 			</span>
-			<span *ngIf="result.passed; else no" class="font-bold text-green passed">{{
+			<span *ngIf="result.passed; else no" class="text-green passed font-bold">{{
 				"Common.Yes" | translate
 			}}</span>
 			<ng-template #no>

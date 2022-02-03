@@ -1,4 +1,4 @@
-<div class="flex flex-col page-container" data-test="userManagementComponent">
+<div class="page-container flex flex-col" data-test="userManagementComponent">
 	<student-mgmt-title [title]="'Title.UserManagement' | translate"></student-mgmt-title>
 
 	<div>
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 
-		<table class="w-full mt-4" mat-table [dataSource]="dataSource$ | async">
+		<table class="mt-4 w-full" mat-table [dataSource]="dataSource$ | async">
 			<!-- Action Column -->
 			<ng-container matColumnDef="actions">
 				<th class="w-24" mat-header-cell *matHeaderCellDef></th>
@@ -58,14 +58,14 @@
 						<button mat-menu-item (click)="editUser(row)" data-test="editButton">
 							<student-mgmt-icon
 								name="edit"
-								class="mr-4 icon-light"
+								class="icon-light mr-4"
 							></student-mgmt-icon>
 							<span>{{ "Action.Edit" | translate }}</span>
 						</button>
 						<button mat-menu-item (click)="removeUser(row)" data-test="removeButton">
 							<student-mgmt-icon
 								name="delete"
-								class="mr-4 icon-light"
+								class="icon-light mr-4"
 							></student-mgmt-icon>
 							<span class="text-red">{{ "Action.Remove" | translate }}</span>
 						</button>

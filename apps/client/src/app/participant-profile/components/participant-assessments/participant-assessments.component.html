@@ -18,7 +18,7 @@
 		<div class="assignment-and-group-name">
 			<ng-container *ngIf="assignment.assessment?.id; else noAssessment">
 				<a
-					class="font-bold link-none"
+					class="link-none font-bold"
 					[routerLink]="[
 						'/courses',
 						courseId,
@@ -42,7 +42,7 @@
 		</div>
 
 		<div class="points">
-			<span class="font-bold achieved">
+			<span class="achieved font-bold">
 				{{
 					assignment.assessment?.achievedPoints !== undefined &&
 					assignment.assessment?.achievedPoints !== null

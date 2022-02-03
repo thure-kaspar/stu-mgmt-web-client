@@ -17,7 +17,7 @@
 			</div>
 		</ng-container>
 		<ng-container subtitle>
-			<div class="flex gap-2 mt-2">
+			<div class="mt-2 flex gap-2">
 				<student-mgmt-assignment-type-chip
 					[type]="assignment.type"
 				></student-mgmt-assignment-type-chip>
@@ -71,13 +71,13 @@
 			<div class="grid">
 				<span class="created-by text-light">
 					{{ "Common.CreatedBy" | translate }}
-					<span class="font-bold text">{{ assessment.creator.displayName }}</span>
+					<span class="text font-bold">{{ assessment.creator.displayName }}</span>
 					({{ assessment.creationDate | date: "medium" }})
 				</span>
 
 				<span class="last-updated-by text-light" *ngIf="assessment.lastUpdatedBy">
 					{{ "Common.LastUpdatedBy" | translate }}
-					<span class="font-bold text">{{ assessment.lastUpdatedBy.displayName }}</span>
+					<span class="text font-bold">{{ assessment.lastUpdatedBy.displayName }}</span>
 					({{ assessment.updateDate | date: "medium" }})
 					<button
 						mat-icon-button
@@ -90,7 +90,7 @@
 
 					<div
 						*ngIf="showEvents && participant.isTeachingStaffMember"
-						class="grid events"
+						class="events grid"
 					>
 						<ng-container *ngIf="assessmentEvents$ | async as events">
 							<span *ngFor="let event of events">

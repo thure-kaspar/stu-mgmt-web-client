@@ -35,9 +35,9 @@
 	</div>
 
 	<div class="flex gap-4 py-2">
-		<div class="w-full p-4 rounded bg-card-bg">
+		<div class="w-full rounded bg-card-bg p-4">
 			<span class="font-medium">{{ "Property.Assignment.Type" | translate }}*</span>
-			<mat-radio-group class="pt-2 radio-group" formControlName="type">
+			<mat-radio-group class="radio-group pt-2" formControlName="type">
 				<mat-radio-button
 					[value]="type"
 					*ngFor="let type of typeEnumValues"
@@ -47,9 +47,9 @@
 			</mat-radio-group>
 		</div>
 
-		<div class="w-full p-4 rounded bg-card-bg">
+		<div class="w-full rounded bg-card-bg p-4">
 			<span class="font-medium">{{ "Property.Assignment.Collaboration" | translate }}*</span>
-			<mat-radio-group class="pt-2 radio-group" formControlName="collaboration">
+			<mat-radio-group class="radio-group pt-2" formControlName="collaboration">
 				<mat-radio-button
 					*ngFor="let collaborationType of collaborationEnumValues"
 					[value]="collaborationType"
@@ -60,9 +60,9 @@
 			</mat-radio-group>
 		</div>
 
-		<div class="w-full p-4 rounded bg-card-bg">
+		<div class="w-full rounded bg-card-bg p-4">
 			<span class="font-medium">{{ "Property.Assignment.State" | translate }}*</span>
-			<mat-radio-group class="pt-2 radio-group" formControlName="state">
+			<mat-radio-group class="radio-group pt-2" formControlName="state">
 				<mat-radio-button
 					*ngFor="let state of stateEnumValues"
 					[value]="state"

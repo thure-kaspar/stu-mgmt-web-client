@@ -19,7 +19,7 @@
 			</mat-form-field>
 		</ng-container>
 
-		<div class="flex flex-col w-full gap-4" *ngIf="useNamingSchema">
+		<div class="flex w-full flex-col gap-4" *ngIf="useNamingSchema">
 			<mat-form-field id="schema-field">
 				<mat-label>{{ "Property.GroupSettings.NameSchema" | translate }}</mat-label>
 				<input matInput formControlName="nameSchema" data-test="prefixTextField" />

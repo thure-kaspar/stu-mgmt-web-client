@@ -10,7 +10,7 @@
 	</ng-container>
 
 	<ng-container content>
-		<div *ngIf="partial.draftOnly" class="mb-4 text-red">
+		<div *ngIf="partial.draftOnly" class="text-red mb-4">
 			{{ "Property.PartialAssessment.DraftOnly" | translate }}.
 		</div>
 
@@ -18,7 +18,7 @@
 			<pre class="preformatted">{{ partial.comment }}</pre>
 		</div>
 
-		<div class="grid mt-4 gap-4" *ngIf="partial.markers?.length > 0">
+		<div class="mt-4 grid gap-4" *ngIf="partial.markers?.length > 0">
 			<student-mgmt-marker
 				*ngFor="let marker of partial.markers"
 				[marker]="marker"

@@ -13,11 +13,11 @@
 			<ng-container menu>
 				<mat-menu #menu>
 					<button mat-menu-item (click)="addOrUpdate(subscriber)">
-						<student-mgmt-icon class="mr-4 icon-light" name="edit"></student-mgmt-icon
+						<student-mgmt-icon class="icon-light mr-4" name="edit"></student-mgmt-icon
 						>{{ "Action.Edit" | translate }}
 					</button>
 					<button mat-menu-item (click)="remove(subscriber)">
-						<student-mgmt-icon class="mr-4 icon-light" name="delete"></student-mgmt-icon
+						<student-mgmt-icon class="icon-light mr-4" name="delete"></student-mgmt-icon
 						><span class="text-red">{{ "Action.Remove" | translate }}</span>
 					</button>
 				</mat-menu>
