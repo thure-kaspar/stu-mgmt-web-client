@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-4" *ngIf="assignment$ | async as assignment">
-	<div class="grid mb-4">
+	<div class="mb-4 grid">
 		<div>
 			<span class="text-light">Max. {{ "Property.Assignment.Points" | translate }}: </span>
 			<span class="font-bold">{{ assignment.points }}</span>
@@ -39,44 +39,54 @@
 </div>
 
 <ng-template #formTemplate let-controls="controls" let-display="display">
-	<div
-		class="py-4 gap-8 grid sm:grid-cols-2 lg:grid-cols-3"
-		*ngIf="(isLoading$ | async) === false; else loadingSpinner"
-	>
-		<form
-			class="flex flex-col justify-between gap-8 bg-card-bg p-4 rounded shadow"
-			*ngFor="let control of controls"
-			[formGroup]="$any(control)"
-		>
-			<!-- This container renders either the group or student -->
-			<ng-container
-				*ngTemplateOutlet="display; context: { $implicit: control }"
-			></ng-container>
-
-			<mat-form-field class="w-full">
-				<mat-label>{{ "Property.Assessment.AchievedPoints" | translate }}</mat-label>
-				<input matInput type="number" required formControlName="achievedPoints" />
-				<mat-error>{{ "Error.ValueMissing" | translate }}</mat-error>
-			</mat-form-field>
+	<div class="gap-8 py-4" *ngIf="(isLoading$ | async) === false; else loadingSpinner">
+		<form class="flex flex-col justify-between divide-y rounded bg-card-bg shadow">
+			<div class="text-light grid grid-cols-6 text-xs font-bold">
+				<div class="py-4 pl-4">
+					{{ "Domain.Group" | translate }}
+				</div>
+				<div class="py-4">{{ "Domain.Points" | translate }}</div>
+			</div>
+			<div
+				class="grid grid-cols-6"
+				*ngFor="let control of controls"
+				[formGroup]="$any(control)"
+			>
+				<div class="col-span-1 min-w-fit pl-4">
+					<div class="py-2">
+						<!-- This container renders either the group or student -->
+						<ng-container
+							*ngTemplateOutlet="display; context: { $implicit: control }"
+						></ng-container>
+					</div>
+				</div>
+				<input
+					class="col-span-5 my-auto h-fit w-24 rounded bg-color-bg p-1"
+					type="number"
+					formControlName="achievedPoints"
+				/>
+			</div>
 		</form>
 	</div>
 </ng-template>
 
 <ng-template #groupDisplay let-control>
-	<div>
-		<div class="text-lg mb-4 font-bold">
-			{{ control.get("entity")?.value.name }}
-		</div>
-		<student-mgmt-person-list
-			[participants]="control.get('entity')?.value.members"
-		></student-mgmt-person-list>
+	<div class="font-bold">
+		{{ control.get("entity")?.value.name }}
+	</div>
+	<div class="grid py-1">
+		<span
+			class="text-light text-xs"
+			*ngFor="let member of control.get('entity')?.value.members"
+			>{{ member.displayName }}</span
+		>
 	</div>
 </ng-template>
 
 <ng-template #studentDisplay let-control>
-	<student-mgmt-person-list
-		[participants]="[control.get('entity')?.value]"
-	></student-mgmt-person-list>
+	<div class="font-bold">
+		{{ control.get("entity")?.value.displayName }}
+	</div>
 </ng-template>
 
 <ng-template #loadingSpinner>
