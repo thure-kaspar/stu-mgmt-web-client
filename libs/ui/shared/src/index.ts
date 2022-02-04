@@ -9,6 +9,7 @@ export * from "./lib/dialogs/extended-confirm-dialog/extended-confirm-dialog.dia
 export * from "./lib/dialogs/search-participant/search-participant.dialog";
 export * from "./lib/icon.component";
 export * from "./lib/paginator/paginator.component";
+export * from "./lib/simple-chip/simple-chip.component";
 export * from "./lib/thumb-chip/thumb-chip.component";
 export * from "./lib/title/title.component";
 export * from "./lib/person-icon/person-icon.component";

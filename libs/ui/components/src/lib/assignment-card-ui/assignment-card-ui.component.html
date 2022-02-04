@@ -1,5 +1,14 @@
 <student-mgmt-card class="assignment-card" data-test="assignment-card">
-	<div title class="flex gap-2">
+	<div title class="flex flex-col gap-4">
+		<div class="flex gap-2">
+			<student-mgmt-assignment-type-chip
+				[type]="props.assignment.type"
+			></student-mgmt-assignment-type-chip>
+
+			<student-mgmt-collaboration-type-chip
+				[collaborationType]="props.assignment.collaboration"
+			></student-mgmt-collaboration-type-chip>
+		</div>
 		<span class="name font-bold">
 			<a
 				class="link-none"
@@ -52,7 +61,7 @@
 
 				<button mat-menu-item (click)="deleteClicked.next()">
 					<student-mgmt-icon class="icon-light mr-4" name="delete"></student-mgmt-icon>
-					<span class="text-red font-bold">
+					<span class="font-bold text-red-500">
 						{{ "Action.Delete" | translate }}
 					</span>
 				</button>
@@ -61,25 +70,17 @@
 	</ng-container>
 
 	<div content class="flex flex-col gap-4">
-		<div class="flex gap-2">
-			<student-mgmt-assignment-type-chip
-				[type]="props.assignment.type"
-			></student-mgmt-assignment-type-chip>
-
-			<student-mgmt-collaboration-type-chip
-				[collaborationType]="props.assignment.collaboration"
-			></student-mgmt-collaboration-type-chip>
-		</div>
-
 		<div class="flex flex-col" *ngIf="props.assignment.startDate || props.assignment.endDate">
 			<div class="flex" *ngIf="props.assignment.startDate">
-				<div class="text-green w-14 font-bold uppercase">
+				<div class="w-14 font-bold uppercase text-green-600">
 					{{ "Common.Start" | translate }}:
 				</div>
 				<span>{{ props.assignment.startDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
 			</div>
 			<div class="flex" *ngIf="props.assignment.endDate">
-				<div class="text-red w-14 font-bold uppercase">{{ "Common.End" | translate }}:</div>
+				<div class="w-14 font-bold uppercase text-red-500">
+					{{ "Common.End" | translate }}:
+				</div>
 				<span>{{ props.assignment.endDate | date: "dd.MM.YYYY (HH:mm)" }}</span>
 			</div>
 		</div>

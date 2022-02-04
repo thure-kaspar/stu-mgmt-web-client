@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { AssignmentDto } from "@student-mgmt/api-client";
-import { ChipComponentModule } from "../chip/chip.component";
+import { SimpleChipComponentModule } from "../simple-chip/simple-chip.component";
 
 @Component({
 	selector: "student-mgmt-collaboration-type-chip",
@@ -15,7 +15,7 @@ export class CollaborationTypeChipComponent {
 }
 
 @NgModule({
-	imports: [CommonModule, TranslateModule, ChipComponentModule],
+	imports: [CommonModule, TranslateModule, SimpleChipComponentModule],
 	declarations: [CollaborationTypeChipComponent],
 	exports: [CollaborationTypeChipComponent]
 })

@@ -1,21 +1,19 @@
 <ng-container [ngSwitch]="collaborationType">
-	<student-mgmt-chip
+	<student-mgmt-simple-chip
+		class="bg-emerald-100 text-emerald-900"
 		*ngSwitchCase="collaborationEnum.GROUP"
-		icon="groups"
-		color="#009664"
-		[text]="'Enum.CollaborationType.' + collaborationType | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip
-		*ngSwitchCase="collaborationEnum.GROUP_OR_SINGLE"
-		icon="groups"
-		color="#00838f"
-		[text]="'Enum.CollaborationType.' + collaborationType | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip
+		>{{ "Enum.CollaborationType.GROUP" | translate }}</student-mgmt-simple-chip
+	>
+
+	<student-mgmt-simple-chip
+		class="bg-fuchsia-200 text-fuchsia-800"
 		*ngSwitchCase="collaborationEnum.SINGLE"
-		icon="person"
-		color="#7f23c5"
-		[text]="'Enum.CollaborationType.' + collaborationType | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip *ngSwitchDefault></student-mgmt-chip>
+		>{{ "Enum.CollaborationType.SINGLE" | translate }}</student-mgmt-simple-chip
+	>
+
+	<student-mgmt-simple-chip
+		class="bg-indigo-200 text-indigo-800"
+		*ngSwitchCase="collaborationEnum.GROUP_OR_SINGLE"
+		>{{ "Enum.CollaborationType.GROUP_OR_SINGLE" | translate }}</student-mgmt-simple-chip
+	>
 </ng-container>

@@ -1,33 +1,29 @@
 <ng-container [ngSwitch]="type">
-	<student-mgmt-chip
+	<student-mgmt-simple-chip
 		*ngSwitchCase="typeEnum.HOMEWORK"
-		icon="assignment"
-		color="#2B5592"
-		[text]="'Enum.AssignmentType.' + type | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip
+		class="bg-blue-200 bg-clip-text text-blue-800"
+		>{{ "Enum.AssignmentType.HOMEWORK" | translate }}</student-mgmt-simple-chip
+	>
+
+	<student-mgmt-simple-chip
 		*ngSwitchCase="typeEnum.TESTAT"
-		icon="grade"
-		color="#ff8000"
-		[text]="'Enum.AssignmentType.' + type | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip
+		class="bg-orange-200 text-orange-800"
+		>{{ "Enum.AssignmentType.TESTAT" | translate }}</student-mgmt-simple-chip
+	>
+
+	<student-mgmt-simple-chip
 		*ngSwitchCase="typeEnum.PROJECT"
-		icon="build"
-		color="#96003a"
-		[text]="'Enum.AssignmentType.' + type | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip
+		class="bg-violet-200 text-violet-800"
+		>{{ "Enum.AssignmentType.PROJECT" | translate }}</student-mgmt-simple-chip
+	>
+
+	<student-mgmt-simple-chip
 		*ngSwitchCase="typeEnum.SEMINAR"
-		icon="description"
-		color="#5442f5"
-		[text]="'Enum.AssignmentType.' + type | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip
-		*ngSwitchCase="typeEnum.OTHER"
-		icon="help"
-		color="#7a7a7a"
-		[text]="'Enum.AssignmentType.' + type | translate"
-	></student-mgmt-chip>
-	<student-mgmt-chip *ngSwitchDefault></student-mgmt-chip>
+		class="bg-purple-200 text-purple-800"
+		>{{ "Enum.AssignmentType.SEMINAR" | translate }}</student-mgmt-simple-chip
+	>
+
+	<student-mgmt-simple-chip *ngSwitchCase="typeEnum.OTHER" class="bg-slate-300 text-slate-700">{{
+		"Enum.AssignmentType.OTHER" | translate
+	}}</student-mgmt-simple-chip>
 </ng-container>
