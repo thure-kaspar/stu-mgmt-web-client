@@ -10,7 +10,7 @@ import {
 
 export default {
 	component: RegisteredGroupCardUiComponent,
-	title: "RegisteredGroupCardUiComponent",
+	title: "RegisteredGroupCardUi",
 	decorators: [
 		moduleMetadata({
 			imports: [

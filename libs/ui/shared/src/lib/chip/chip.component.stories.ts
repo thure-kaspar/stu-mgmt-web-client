@@ -3,7 +3,7 @@ import { ChipComponent, ChipComponentModule } from "./chip.component";
 
 export default {
 	component: ChipComponent,
-	title: "ChipComponent",
+	title: "Chips/Chip",
 	decorators: [
 		moduleMetadata({
 			imports: [ChipComponentModule]

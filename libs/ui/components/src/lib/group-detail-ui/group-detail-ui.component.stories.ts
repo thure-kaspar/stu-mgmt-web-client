@@ -12,7 +12,7 @@ import { GroupDetailUiComponent, GroupDetailUiComponentModule } from "./group-de
 
 export default {
 	component: GroupDetailUiComponent,
-	title: "GroupDetailUiComponent",
+	title: "GroupDetailUi",
 	decorators: [
 		moduleMetadata({
 			imports: [GroupDetailUiComponentModule, StorybookTranslateModule, RouterTestingModule]

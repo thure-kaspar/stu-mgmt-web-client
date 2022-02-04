@@ -2,7 +2,7 @@ import { Meta, moduleMetadata, Story } from "@storybook/angular";
 import { PersonIconComponent, PersonIconComponentModule } from "./person-icon.component";
 
 export default {
-	title: "PersonIconComponent",
+	title: "PersonIcon",
 	component: PersonIconComponent,
 	decorators: [
 		moduleMetadata({

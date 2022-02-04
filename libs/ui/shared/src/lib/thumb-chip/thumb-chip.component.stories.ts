@@ -3,7 +3,7 @@ import { ThumbChipComponent, ThumbChipComponentModule } from "./thumb-chip.compo
 
 export default {
 	component: ThumbChipComponent,
-	title: "ThumbChipComponent",
+	title: "Chips/ThumbChip",
 	decorators: [
 		moduleMetadata({
 			imports: [ThumbChipComponentModule]

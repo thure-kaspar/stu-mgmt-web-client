@@ -7,7 +7,7 @@ import {
 
 export default {
 	component: AssignmentTypeChipComponent,
-	title: "AssignmentTypeChipComponent",
+	title: "AssignmentTypeChip",
 	decorators: [
 		moduleMetadata({
 			imports: [AssignmentTypeChipComponentModule, StorybookTranslateModule]

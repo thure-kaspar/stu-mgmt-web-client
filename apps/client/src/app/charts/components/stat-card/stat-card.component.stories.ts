@@ -3,7 +3,7 @@ import { StatCardComponent, StatCardComponentModule } from "./stat-card.componen
 
 export default {
 	component: StatCardComponent,
-	title: "StatCardComponent",
+	title: "StatCard",
 	decorators: [
 		moduleMetadata({
 			imports: [StatCardComponentModule]

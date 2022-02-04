@@ -16,7 +16,7 @@ import {
 
 export default {
 	component: ParticipantAdmissionStatusUiComponent,
-	title: "ParticipantAdmissionStatusUiComponent",
+	title: "ParticipantAdmissionStatusUi",
 	decorators: [
 		moduleMetadata({
 			imports: [ParticipantAdmissionStatusUiComponentModule, StorybookTranslateModule]

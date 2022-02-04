@@ -10,7 +10,7 @@ import {
 
 export default {
 	component: PointsOverviewTableUiComponent,
-	title: "PointsOverviewTableUiComponent",
+	title: "PointsOverviewTableUi",
 	decorators: [
 		moduleMetadata({
 			imports: [

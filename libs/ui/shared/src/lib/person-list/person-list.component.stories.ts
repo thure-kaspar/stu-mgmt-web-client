@@ -5,7 +5,7 @@ import { StorybookTranslateModule } from "@student-mgmt-client/storybook";
 
 export default {
 	component: PersonListComponent,
-	title: "PersonListComponent",
+	title: "PersonList",
 	decorators: [
 		moduleMetadata({
 			imports: [PersonListComponentModule, StorybookTranslateModule]

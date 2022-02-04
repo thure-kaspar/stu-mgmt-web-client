@@ -16,7 +16,7 @@ import {
 
 export default {
 	component: AssignmentCardUiComponent,
-	title: "AssignmentCardUiComponent",
+	title: "AssignmentCardUi",
 	decorators: [
 		moduleMetadata({
 			imports: [

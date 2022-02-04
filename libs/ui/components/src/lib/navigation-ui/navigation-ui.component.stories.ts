@@ -7,7 +7,7 @@ import { NavigationUiComponent, NavigationUiComponentModule } from "./navigation
 
 export default {
 	component: NavigationUiComponent,
-	title: "NavigationUiComponent",
+	title: "NavigationUi",
 	decorators: [
 		moduleMetadata({
 			imports: [
