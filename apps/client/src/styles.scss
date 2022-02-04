@@ -310,14 +310,9 @@ mat-paginator {
 	fill: var(--text);
 }
 
-.text-red {
-	color: red;
-	fill: red;
-}
-
-.text-green {
-	color: green;
-	fill: green;
+.bg-clip-text {
+	-webkit-background-clip: text;
+	background-clip: text;
 }
 
 .snackbar-success {

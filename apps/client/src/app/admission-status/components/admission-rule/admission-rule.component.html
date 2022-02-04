@@ -75,11 +75,11 @@
 			><span class="text-light font-bold"
 				>{{ "Property.AdmissionRule.Passed" | translate }}:
 			</span>
-			<span *ngIf="result.passed; else no" class="text-green passed font-bold">{{
+			<span *ngIf="result.passed; else no" class="passed font-bold text-green-600">{{
 				"Common.Yes" | translate
 			}}</span>
 			<ng-template #no>
-				<span class="text-red passed">{{ "Common.No" | translate }}</span>
+				<span class="passed text-red-500">{{ "Common.No" | translate }}</span>
 			</ng-template>
 		</span>
 	</div>
