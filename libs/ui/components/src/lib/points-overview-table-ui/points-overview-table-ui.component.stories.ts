@@ -10,7 +10,7 @@ import {
 
 export default {
 	component: PointsOverviewTableUiComponent,
-	title: "PointsOverviewTableUi",
+	title: "Admission Status/PointsOverviewTable",
 	decorators: [
 		moduleMetadata({
 			imports: [

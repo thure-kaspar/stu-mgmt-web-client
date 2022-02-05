@@ -7,7 +7,7 @@ import {
 
 export default {
 	component: ConfirmDialogUiComponent,
-	title: "ConfirmDialogUi",
+	title: "Component/ConfirmDialog",
 	decorators: [
 		moduleMetadata({
 			imports: [ConfirmDialogUiComponentModule, StorybookTranslateModule]

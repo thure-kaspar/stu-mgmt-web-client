@@ -4,7 +4,7 @@ import { TitleComponent, TitleComponentModule } from "./title.component";
 
 export default {
 	component: TitleComponent,
-	title: "Title",
+	title: "Layout/Title",
 	decorators: [
 		moduleMetadata({
 			imports: [TitleComponentModule, MatButtonModule]

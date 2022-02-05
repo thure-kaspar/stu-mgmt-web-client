@@ -7,7 +7,7 @@ export * from "./lib/date-time-picker/date-time-picker.component";
 export * from "./lib/dialogs/confirm-dialog/confirm-dialog.dialog";
 export * from "./lib/dialogs/extended-confirm-dialog/extended-confirm-dialog.dialog";
 export * from "./lib/dialogs/search-participant/search-participant.dialog";
-export * from "./lib/icon.component";
+export * from "./lib/icon/icon.component";
 export * from "./lib/paginator/paginator.component";
 export * from "./lib/simple-chip/simple-chip.component";
 export * from "./lib/thumb-chip/thumb-chip.component";

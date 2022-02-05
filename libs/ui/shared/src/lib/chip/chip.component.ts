@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
-import { IconComponentModule } from "../icon.component";
+import { IconComponentModule } from "../icon/icon.component";
 
 @Component({
 	selector: "student-mgmt-chip",

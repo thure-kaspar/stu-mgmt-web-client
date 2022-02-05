@@ -1,12 +1,9 @@
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
 import { StorybookTranslateModule } from "@student-mgmt-client/storybook";
 import { PARTICIPANT_STUDENT } from "@student-mgmt-client/testing";
-import { RoundingMethod } from "@student-mgmt-client/util-helper";
 import {
-	AdmissionRuleDto,
 	IndividualPercentWithAllowedFailuresRuleDto,
 	OverallPercentRuleDto,
-	RoundingBehavior,
 	RuleCheckResult
 } from "@student-mgmt/api-client";
 import {
@@ -16,7 +13,7 @@ import {
 
 export default {
 	component: ParticipantAdmissionStatusUiComponent,
-	title: "ParticipantAdmissionStatusUi",
+	title: "Admission Status/ParticipantAdmissionStatus",
 	decorators: [
 		moduleMetadata({
 			imports: [ParticipantAdmissionStatusUiComponentModule, StorybookTranslateModule]

@@ -10,7 +10,7 @@ import {
 
 export default {
 	component: RegisteredGroupCardUiComponent,
-	title: "RegisteredGroupCardUi",
+	title: "Group/RegisteredGroupCard",
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -37,6 +37,7 @@ Default.args = {
 export const EmptyGroup = Template.bind({});
 EmptyGroup.args = {
 	group: {
+		id: "groupId",
 		name: "Empty Group",
 		size: 0,
 		members: []

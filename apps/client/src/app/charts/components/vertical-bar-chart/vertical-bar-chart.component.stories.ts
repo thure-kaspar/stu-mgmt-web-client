@@ -5,7 +5,7 @@ import { VerticalBarChartComponent, VerticalBarChartOptions } from "./vertical-b
 
 export default {
 	component: VerticalBarChartComponent,
-	title: "VerticalBarChart",
+	title: "Component/VerticalBarChart",
 	decorators: [
 		moduleMetadata({
 			imports: [ChartsModule, BrowserAnimationsModule]

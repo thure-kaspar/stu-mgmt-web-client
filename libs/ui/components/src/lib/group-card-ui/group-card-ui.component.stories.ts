@@ -17,7 +17,7 @@ import {
 
 export default {
 	component: GroupCardUiComponent,
-	title: "GroupCardUi",
+	title: "Group/GroupCard",
 	decorators: [
 		moduleMetadata({
 			imports: [

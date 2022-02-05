@@ -3,7 +3,7 @@ import { IconComponent, IconComponentModule } from "./icon.component";
 
 export default {
 	component: IconComponent,
-	title: "Icon",
+	title: "Icon/Icon",
 	decorators: [
 		moduleMetadata({
 			imports: [IconComponentModule]

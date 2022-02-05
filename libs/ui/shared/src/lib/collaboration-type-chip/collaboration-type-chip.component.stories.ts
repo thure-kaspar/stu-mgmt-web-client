@@ -8,7 +8,7 @@ import {
 
 export default {
 	component: CollaborationTypeChipComponent,
-	title: "Chips/CollaborationTypeChip",
+	title: "Assignment/CollaborationTypeChip",
 	decorators: [
 		moduleMetadata({
 			imports: [CollaborationTypeChipComponentModule, StorybookTranslateModule]

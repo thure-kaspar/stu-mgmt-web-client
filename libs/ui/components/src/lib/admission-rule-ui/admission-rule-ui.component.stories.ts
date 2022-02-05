@@ -12,7 +12,7 @@ import {
 
 export default {
 	component: AdmissionRuleUiComponent,
-	title: "AdmissionRule",
+	title: "Admission Status/AdmissionRule",
 	decorators: [
 		moduleMetadata({
 			imports: [AdmissionRuleUiComponentModule, StorybookTranslateModule]
