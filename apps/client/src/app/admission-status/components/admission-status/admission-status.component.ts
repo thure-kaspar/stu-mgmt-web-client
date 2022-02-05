@@ -2,13 +2,12 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatExpansionModule } from "@angular/material/expansion";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatSort } from "@angular/material/sort";
+import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatTabsModule } from "@angular/material/tabs";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
@@ -38,7 +37,7 @@ import { filter, map, tap } from "rxjs/operators";
 import { ChartsModule } from "../../../charts/charts.module";
 import { VerticalBarChartData } from "../../../charts/components/vertical-bar-chart/vertical-bar-chart.component";
 import { mapToRangeLabel, Range } from "../../../charts/range";
-import { AdmissionRuleComponentModule } from "../admission-rule/admission-rule.component";
+import { AdmissionRuleUiComponentModule } from "@student-mgmt-client/components";
 
 type ChartData = {
 	data: VerticalBarChartData;
@@ -52,7 +51,6 @@ type Statistic = { title: string; value: string | number };
 @Component({
 	selector: "student-mgmt-admission-status",
 	templateUrl: "./admission-status.component.html",
-	styleUrls: ["./admission-status.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements OnInit {
@@ -86,7 +84,7 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 				this.dataSource = new MatTableDataSource(state.data);
 				this.dataSource.sort = this.sort;
 				this.dataSource.filterPredicate = (data, filter): boolean =>
-					matchesParticipant(filter, data.participant);
+					matchesParticipant(filter.toLowerCase(), data.participant);
 			})
 		);
 
@@ -293,14 +291,14 @@ export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements On
 		FormsModule,
 		MatButtonModule,
 		MatTableModule,
-		MatExpansionModule,
+		MatSortModule,
+		MatTabsModule,
 		MatProgressSpinnerModule,
-		MatDividerModule,
 		MatFormFieldModule,
 		MatInputModule,
 		TranslateModule,
 		ChartsModule,
-		AdmissionRuleComponentModule,
+		AdmissionRuleUiComponentModule,
 		AssignmentTypeChipComponentModule,
 		ThumbChipComponentModule,
 		TitleComponentModule

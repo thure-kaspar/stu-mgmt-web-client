@@ -259,7 +259,9 @@
     "NoPasswordRequired": "\nKein Einschreibeschlüssel notwendig",
     "Configs": "Konfigurationen",
     "Config": "Konfiguration",
-    "Markers": "Markierungen"
+    "Markers": "Markierungen",
+    "Table": "Tabelle",
+    "Diagrams": "Diagramme"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "Wenn Sie fortfahren, werden ihre ungespeicherten Änderungen verworfen.",

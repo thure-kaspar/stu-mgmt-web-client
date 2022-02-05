@@ -1,3 +1,4 @@
+export * from "./lib/admission-rule-ui/admission-rule-ui.component";
 export * from "./lib/assignment-card-ui/assignment-card-ui.component";
 export * from "./lib/group-card-ui/group-card-ui.component";
 export * from "./lib/group-detail-ui/group-detail-ui.component";

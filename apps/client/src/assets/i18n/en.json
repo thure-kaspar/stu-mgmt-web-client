@@ -258,7 +258,9 @@
     "CurrentStatus": "Current status",
     "NoPasswordRequired": "No password required",
     "Configs": "Configurations",
-    "Config": "Config"
+    "Config": "Config",
+    "Table": "Table",
+    "Diagrams": "Diagrams"
   },
   "Prompt": {
     "ContinueWithUnsavedChanges": "If you continue, your unsaved changes will be discarded.",

@@ -1,4 +1,4 @@
-<div class="flex flex-col" *ngIf="criteria$ | async as criteria">
+<div class="flex flex-col pb-8">
 	<student-mgmt-title [title]="'Title.AdmissionStatus' | translate">
 		<div class="flex gap-2">
 			<a [routerLink]="['/courses', courseId, 'settings']" fragment="admission-criteria"
@@ -10,86 +10,42 @@
 		</div>
 	</student-mgmt-title>
 
-	<div class="admission-criteria">
-		<mat-expansion-panel>
-			<mat-expansion-panel-header>
-				{{ "Domain.AdmissionCriteria" | translate }}
-			</mat-expansion-panel-header>
-			<div class="rules" *ngIf="criteria; else noAdmissionCriteria">
-				<ng-container *ngFor="let rule of criteria.rules; let i = index">
-					<student-mgmt-admission-rule
-						[rule]="rule"
-						[index]="i"
-					></student-mgmt-admission-rule>
-				</ng-container>
-			</div>
-
-			<ng-template #noAdmissionCriteria>
-				{{ "Common.None" | translate }}
-			</ng-template>
-		</mat-expansion-panel>
-	</div>
-
 	<mat-spinner *ngIf="(admissionStatusState$ | async).isLoading" diameter="32"></mat-spinner>
 
-	<div class="charts">
-		<mat-expansion-panel>
-			<mat-expansion-panel-header> Charts </mat-expansion-panel-header>
-			<div class="chart-grid">
-				<div
-					class="chart"
-					*ngFor="let chart of charts$ | async as charts; let index = index"
-				>
-					<student-mgmt-vertical-bar-chart
-						[data]="chart.data"
-						[xAxisLabel]="chart.xAxisLabel | translate"
-						[yAxisLabel]="chart.yAxisLabel | translate"
-					></student-mgmt-vertical-bar-chart>
+	<student-mgmt-title
+		[title]="('Domain.Participants' | translate) + ' (' + (dataSource.data?.length ?? 0) + ')'"
+	></student-mgmt-title>
 
-					<span class="chart-description">
-						<span class="font-bold">
-							{{
-								"Enum.RuleType." + chart.rule.type
-									| translate
-										: {
-												requiredPercent: chart.rule.requiredPercent,
-												allowedFailures: chart.rule["allowedFailures"]
-										  }
-							}}
-						</span>
-
-						<student-mgmt-assignment-type-chip
-							[type]="chart.rule.assignmentType"
-						></student-mgmt-assignment-type-chip>
-					</span>
-
-					<div class="statistics">
-						<ng-container *ngFor="let stat of ruleStatistics[index]">
-							<student-mgmt-stat-card
-								[title]="stat.title | translate"
-								[value]="stat.value"
-							></student-mgmt-stat-card>
-						</ng-container>
-					</div>
-
-					<mat-divider *ngIf="index !== charts.length - 1"></mat-divider>
-				</div>
-			</div>
-		</mat-expansion-panel>
+	<div class="flex gap-2">
+		<ng-container *ngFor="let stat of overallStatistics">
+			<student-mgmt-stat-card
+				[title]="stat.title | translate"
+				[value]="stat.value"
+			></student-mgmt-stat-card>
+		</ng-container>
 	</div>
 
-	<div class="participants">
-		<h3>{{ "Domain.Participants" | translate }} ({{ dataSource.data?.length || 0 }})</h3>
+	<mat-tab-group animationDuration="0" color="accent" class="mt-8">
+		<mat-tab [label]="'Misc.Table' | translate">
+			<ng-container *ngTemplateOutlet="table"></ng-container>
+		</mat-tab>
+		<mat-tab [label]="'Misc.Diagrams' | translate">
+			<ng-container *ngTemplateOutlet="charts"></ng-container>
+		</mat-tab>
+	</mat-tab-group>
+</div>
 
-		<div class="statistics mb-4">
-			<ng-container *ngFor="let stat of overallStatistics">
-				<student-mgmt-stat-card
-					[title]="stat.title | translate"
-					[value]="stat.value"
-				></student-mgmt-stat-card>
-			</ng-container>
-		</div>
+<ng-template #yesNoText let-passed>
+	<span *ngIf="passed; else no" class="px-4 font-bold text-green-600">{{
+		"Common.Yes" | translate
+	}}</span>
+	<ng-template #no>
+		<span class="px-4 font-bold text-red-500">{{ "Common.No" | translate }}</span>
+	</ng-template>
+</ng-template>
 
+<ng-template #table>
+	<div class="pt-4" *ngIf="criteria$ | async as criteria">
 		<mat-form-field class="w-full">
 			<mat-label>Filter</mat-label>
 			<input matInput #filter [(ngModel)]="dataSource.filter" />
@@ -97,10 +53,10 @@
 
 		<table class="w-full" mat-table matSort [dataSource]="dataSource">
 			<ng-container matColumnDef="displayName">
-				<th class="name-column" mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+				<th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
 				<td mat-cell *matCellDef="let row">
 					<a
-						class="link-none font-bold"
+						class="link-none mr-4 font-bold"
 						[routerLink]="['/courses', courseId, 'users', row.participant.userId]"
 					>
 						{{ row.participant.displayName }}
@@ -111,12 +67,7 @@
 			<ng-container matColumnDef="matrNr">
 				<th mat-header-cell *matHeaderCellDef>MatrNr</th>
 				<td mat-cell *matCellDef="let row">
-					<a
-						class="link-none font-bold"
-						[routerLink]="['/courses', courseId, 'users', row.participant.userId]"
-					>
-						{{ row.participant.matrNr || "??????" }}
-					</a>
+					<span class="mr-4">{{ row.participant.matrNr || "??????" }}</span>
 				</td>
 			</ng-container>
 
@@ -128,10 +79,6 @@
 					<ng-container
 						*ngTemplateOutlet="yesNoText; context: { $implicit: row.hasAdmission }"
 					></ng-container>
-
-					<!-- <student-mgmt-thumb-chip
-						[condition]="row.hasAdmission"
-					></student-mgmt-thumb-chip> -->
 				</td>
 			</ng-container>
 
@@ -161,9 +108,10 @@
 
 			<ng-container *ngFor="let rule of criteria?.rules; let i = index">
 				<ng-container [matColumnDef]="'rule' + i">
-					<th class="rule-column" mat-header-cell *matHeaderCellDef>
-						<div class="rule-info">
-							<span>{{ "Common.Criteria" | translate }} #{{ i }}</span>
+					<th class="align-top" mat-header-cell *matHeaderCellDef>
+						<div class="py-2">
+							<student-mgmt-admission-rule-ui [rule]="rule" [index]="i + 1">
+							</student-mgmt-admission-rule-ui>
 						</div>
 					</th>
 					<td class="result" mat-cell *matCellDef="let row">
@@ -190,13 +138,46 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 		</table>
 	</div>
-</div>
+</ng-template>
 
-<ng-template #yesNoText let-passed>
-	<span *ngIf="passed; else no" class="font-bold text-green-600">{{
-		"Common.Yes" | translate
-	}}</span>
-	<ng-template #no>
-		<span class="font-bold text-red-500">{{ "Common.No" | translate }}</span>
-	</ng-template>
+<ng-template #charts>
+	<div class="pt-4">
+		<div class="grid gap-16">
+			<div
+				class="flex flex-col gap-4 rounded bg-card-bg p-4 shadow"
+				*ngFor="let chart of charts$ | async as charts; let index = index"
+			>
+				<div class="mx-auto">
+					<span class="font-bold">
+						{{
+							"Enum.RuleType." + chart.rule.type
+								| translate
+									: {
+											requiredPercent: chart.rule.requiredPercent,
+											allowedFailures: chart.rule["allowedFailures"]
+									  }
+						}}
+					</span>
+
+					<student-mgmt-assignment-type-chip
+						[type]="chart.rule.assignmentType"
+					></student-mgmt-assignment-type-chip>
+				</div>
+
+				<div class="flex gap-2">
+					<student-mgmt-stat-card
+						*ngFor="let stat of ruleStatistics[index]"
+						[title]="stat.title | translate"
+						[value]="stat.value"
+					></student-mgmt-stat-card>
+				</div>
+
+				<student-mgmt-vertical-bar-chart
+					[data]="chart.data"
+					[xAxisLabel]="chart.xAxisLabel | translate"
+					[yAxisLabel]="chart.yAxisLabel | translate"
+				></student-mgmt-vertical-bar-chart>
+			</div>
+		</div>
+	</div>
 </ng-template>

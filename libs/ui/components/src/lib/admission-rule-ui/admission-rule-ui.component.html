@@ -1,0 +1,40 @@
+<div class="flex flex-col gap-2">
+	<student-mgmt-assignment-type-chip
+		[type]="rule.assignmentType"
+	></student-mgmt-assignment-type-chip>
+
+	<div class="flex gap-2">
+		<span>
+			<span class="text-light font-bold"
+				>{{ "Common.Criteria" | translate }} #{{ index }}:</span
+			>
+			<span>
+				{{
+					"Enum.RuleType." + rule.type
+						| translate
+							: {
+									requiredPercent: rule.requiredPercent,
+									allowedFailures: rule["allowedFailures"]
+							  }
+				}}
+			</span>
+		</span>
+	</div>
+
+	<div class="rounding-info flex flex-col">
+		<div>
+			<span class="text-light font-bold"
+				>{{ "Property.Assessment.AchievedPoints" | translate }}-%:</span
+			>
+			{{ "Enum.RoundingType." + rule.achievedPercentRounding.type | translate }}
+			<span
+				*ngIf="
+					rule.achievedPercentRounding.decimals !== null &&
+					rule.achievedPercentRounding.decimals !== undefined
+				"
+			>
+				({{ rule.achievedPercentRounding.decimals }} {{ "Misc.Decimals" | translate }})
+			</span>
+		</div>
+	</div>
+</div>
