@@ -16,10 +16,10 @@ import { AssessmentDtoExtended, Participant } from "@student-mgmt-client/domain-
 import {
 	AssignmentTypeChipComponentModule,
 	CardComponentModule,
-	ChipComponentModule,
 	CollaborationTypeChipComponentModule,
 	IconComponentModule,
-	PersonListComponentModule
+	PersonListComponentModule,
+	SimpleChipComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { AssignmentDto, GroupDto } from "@student-mgmt/api-client";
 
@@ -59,8 +59,8 @@ export class AssignmentCardUiComponent {
 		MatMenuModule,
 		TranslateModule,
 		CardComponentModule,
-		ChipComponentModule,
 		IconComponentModule,
+		SimpleChipComponentModule,
 		AssignmentTypeChipComponentModule,
 		CollaborationTypeChipComponentModule,
 		PersonListComponentModule

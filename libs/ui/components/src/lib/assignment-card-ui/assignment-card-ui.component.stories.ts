@@ -16,7 +16,7 @@ import {
 
 export default {
 	component: AssignmentCardUiComponent,
-	title: "AssignmentCardUi",
+	title: "Assignment/AssignmentCard",
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -93,13 +93,23 @@ WithAssessment.args = {
 	}
 };
 
-export const WithAssessmentAndFailState = Template.bind({});
-WithAssessmentAndFailState.args = {
+export const WithAssessmentPassed = Template.bind({});
+WithAssessmentPassed.args = {
 	props: {
 		...defaultProps,
 		requiredPoints: 10,
 		assessment: ASSESSMENTS[0],
 		passFailSubmittedState: "passed"
+	}
+};
+
+export const WithAssessmentFailed = Template.bind({});
+WithAssessmentFailed.args = {
+	props: {
+		...defaultProps,
+		requiredPoints: 10,
+		assessment: ASSESSMENTS[0],
+		passFailSubmittedState: "failed"
 	}
 };
 

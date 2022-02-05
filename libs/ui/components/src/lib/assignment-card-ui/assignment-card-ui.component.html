@@ -94,7 +94,7 @@
 			*ngIf="props.assignment.links && props.assignment.links.length > 0"
 		>
 			<a
-				class="font-bold text-red-500"
+				class="font-bold text-sky-500"
 				*ngFor="let link of props.assignment.links"
 				[href]="link.url"
 				>#{{ link.name }}</a
@@ -157,30 +157,16 @@
 					*ngIf="props.passFailSubmittedState"
 					[ngSwitch]="props.passFailSubmittedState"
 				>
-					<student-mgmt-chip
-						*ngSwitchCase="'submitted'"
-						color="#14abb3"
-						icon="assignment_turned_in"
-						text="Abgegeben"
-					></student-mgmt-chip>
-					<student-mgmt-chip
+					<student-mgmt-simple-chip
 						*ngSwitchCase="'passed'"
-						color="#2fac6f"
-						icon="thumb_up"
-						[text]="'Property.Assessment.HasPassed' | translate"
-					></student-mgmt-chip>
-					<student-mgmt-chip
+						class="bg-green-100 text-green-700"
+						>{{ "Property.Assessment.HasPassed" | translate }}</student-mgmt-simple-chip
+					>
+					<student-mgmt-simple-chip
 						*ngSwitchCase="'failed'"
-						color="#ff0134"
-						icon="thumb_down"
-						[text]="'Domain.Failed' | translate"
-					></student-mgmt-chip>
-					<student-mgmt-chip
-						*ngSwitchCase="'evaluated'"
-						color="#5335b0"
-						icon="assignment_turned_in"
-						text="Bewertet"
-					></student-mgmt-chip>
+						class="bg-red-200 text-red-800"
+						>{{ "Domain.Failed" | translate }}</student-mgmt-simple-chip
+					>
 				</span>
 			</div>
 		</ng-container>
