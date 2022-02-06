@@ -12,9 +12,9 @@ import { ActivatedRoute, RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { DownloadService, ParticipantFacade, ToastService } from "@student-mgmt-client/services";
 import {
-	ChipComponentModule,
 	ConfirmDialog,
 	ConfirmDialogData,
+	CourseRoleChipComponentModule,
 	IconComponentModule,
 	Paginator,
 	PaginatorModule,
@@ -235,7 +235,7 @@ export class ParticipantsListComponent extends UnsubscribeOnDestroy implements O
 		MatMenuModule,
 		MatTableModule,
 		TranslateModule,
-		ChipComponentModule,
+		CourseRoleChipComponentModule,
 		IconComponentModule,
 		PaginatorModule,
 		TitleComponentModule,

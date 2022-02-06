@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="role">
+	<student-mgmt-simple-chip *ngSwitchCase="_enum.LECTURER" class="bg-pink-100 text-pink-800">{{
+		"Enum.CourseRole.LECTURER" | translate
+	}}</student-mgmt-simple-chip>
+	<student-mgmt-simple-chip *ngSwitchCase="_enum.TUTOR" class="bg-violet-200 text-violet-700">{{
+		"Enum.CourseRole.TUTOR" | translate
+	}}</student-mgmt-simple-chip>
+	<student-mgmt-simple-chip *ngSwitchCase="_enum.STUDENT" class="bg-green-100 text-green-800">{{
+		"Enum.CourseRole.STUDENT" | translate
+	}}</student-mgmt-simple-chip>
+</ng-container>

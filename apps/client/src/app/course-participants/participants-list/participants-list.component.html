@@ -115,29 +115,9 @@
 					{{ "Property.User.Role" | translate }}
 				</th>
 				<td mat-cell *matCellDef="let row">
-					<ng-container [ngSwitch]="row.role">
-						<student-mgmt-chip
-							*ngSwitchCase="courseRole.LECTURER"
-							icon="record_voice_over"
-							[text]="'Enum.CourseRole.' + row.role | translate"
-							color="#e72a67"
-							data-test="lecturerChip"
-						></student-mgmt-chip>
-						<student-mgmt-chip
-							*ngSwitchCase="courseRole.TUTOR"
-							icon="supervisor_account"
-							[text]="'Enum.CourseRole.' + row.role | translate"
-							color="#5b00af"
-							data-test="tutorChip"
-						></student-mgmt-chip>
-						<student-mgmt-chip
-							*ngSwitchDefault
-							icon="person"
-							[text]="'Enum.CourseRole.' + row.role | translate"
-							color="#009966"
-							data-test="studentChip"
-						></student-mgmt-chip>
-					</ng-container>
+					<student-mgmt-course-role-chip
+						[role]="row.role"
+					></student-mgmt-course-role-chip>
 				</td>
 			</ng-container>
 

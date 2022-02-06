@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
@@ -7,8 +7,9 @@ import { ParticipantFacade } from "@student-mgmt-client/services";
 import {
 	AssignmentTypeChipComponentModule,
 	CardComponentModule,
-	ChipComponentModule,
-	IconComponentModule
+	CollaborationTypeChipComponentModule,
+	IconComponentModule,
+	SimpleChipComponentModule
 } from "@student-mgmt-client/shared-ui";
 import {
 	AssessmentApi,
@@ -17,18 +18,14 @@ import {
 	AssignmentDto
 } from "@student-mgmt/api-client";
 import { BehaviorSubject } from "rxjs";
-import {
-	AssessmentTargetComponent,
-	AssessmentTargetComponentModule
-} from "../assessment-target/assessment-target.component";
+import { AssessmentTargetComponentModule } from "../assessment-target/assessment-target.component";
 
 @Component({
 	selector: "student-mgmt-assessment-header",
 	templateUrl: "./assessment-header.component.html",
-	styleUrls: ["./assessment-header.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AssessmentHeaderComponent implements OnInit {
+export class AssessmentHeaderComponent {
 	@Input() assignment: AssignmentDto;
 	@Input() assessment: AssessmentDto;
 	@Input() courseId: string;
@@ -41,8 +38,6 @@ export class AssessmentHeaderComponent implements OnInit {
 		public participantFacade: ParticipantFacade,
 		private assessmentApi: AssessmentApi
 	) {}
-
-	ngOnInit(): void {}
 
 	/**
 	 * Loads the assessment events, if `showEvents` is false.
@@ -76,7 +71,8 @@ export class AssessmentHeaderComponent implements OnInit {
 		IconComponentModule,
 		CardComponentModule,
 		AssignmentTypeChipComponentModule,
-		ChipComponentModule,
+		CollaborationTypeChipComponentModule,
+		SimpleChipComponentModule,
 		AssessmentTargetComponentModule
 	]
 })

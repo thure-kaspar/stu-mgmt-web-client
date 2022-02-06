@@ -1,5 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectorRef, Component, Input, NgModule } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	Input,
+	NgModule
+} from "@angular/core";
 import {
 	AbstractControl,
 	FormArray,
@@ -39,7 +45,8 @@ const groupOrUserValidator: ValidatorFn = (control: AbstractControl): Validation
 
 @Component({
 	selector: "student-mgmt-assessment-form",
-	templateUrl: "./assessment-form.component.html"
+	templateUrl: "./assessment-form.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentFormComponent {
 	@Input() assignment: AssignmentDto;

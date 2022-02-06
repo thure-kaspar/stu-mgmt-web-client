@@ -5,15 +5,12 @@
 	<student-mgmt-card>
 		<ng-container title>
 			<div class="flex gap-4">
-				<span>{{ "Domain.Assessment" | translate }}: {{ assignment.name }}</span>
-				<student-mgmt-chip
-					*ngIf="assessment.isDraft"
-					class="draft-chip"
-					icon="edit"
-					color="orange"
-					[text]="'Domain.Draft' | translate"
-					data-test="isDraftChip"
-				></student-mgmt-chip>
+				<div class="self-end">
+					{{ "Domain.Assessment" | translate }}: {{ assignment.name }}
+				</div>
+				<student-mgmt-simple-chip class="bg-orange-200 text-orange-700">{{
+					"Domain.Draft" | translate
+				}}</student-mgmt-simple-chip>
 			</div>
 		</ng-container>
 		<ng-container subtitle>
@@ -21,27 +18,10 @@
 				<student-mgmt-assignment-type-chip
 					[type]="assignment.type"
 				></student-mgmt-assignment-type-chip>
-				<ng-container [ngSwitch]="assignment.collaboration">
-					<student-mgmt-chip
-						*ngSwitchCase="collaborationEnum.GROUP"
-						icon="groups"
-						color="#009664"
-						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-					></student-mgmt-chip>
-					<student-mgmt-chip
-						*ngSwitchCase="collaborationEnum.GROUP_OR_SINGLE"
-						icon="groups"
-						color="#00838f"
-						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-					></student-mgmt-chip>
-					<student-mgmt-chip
-						*ngSwitchCase="collaborationEnum.SINGLE"
-						icon="person"
-						color="#7f23c5"
-						[text]="'Enum.CollaborationType.' + assignment.collaboration | translate"
-					></student-mgmt-chip>
-					<student-mgmt-chip *ngSwitchDefault></student-mgmt-chip>
-				</ng-container>
+
+				<student-mgmt-collaboration-type-chip
+					[collaborationType]="assignment.collaboration"
+				></student-mgmt-collaboration-type-chip>
 			</div>
 		</ng-container>
 
@@ -68,7 +48,7 @@
 		</ng-container>
 
 		<ng-container content>
-			<div class="grid">
+			<div class="flex flex-col">
 				<span class="created-by text-light">
 					{{ "Common.CreatedBy" | translate }}
 					<span class="text font-bold">{{ assessment.creator.displayName }}</span>
@@ -100,7 +80,7 @@
 								{{ $any(event.payload).newScore }}
 							</span>
 
-							<p *ngIf="events?.length == 0">{{ "Common.None" | translate }}.</p>
+							<p *ngIf="events?.length === 0">{{ "Common.None" | translate }}.</p>
 						</ng-container>
 					</div>
 				</span>

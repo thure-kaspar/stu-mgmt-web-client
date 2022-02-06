@@ -130,7 +130,8 @@
     "Submissions": "Submissions",
     "User": "User",
     "Users": "Users",
-    "Draft": "Draft"
+    "Draft": "Draft",
+    "TeachingStaff": "Teaching staff"
   },
   "Enum": {
     "AssignmentState": {

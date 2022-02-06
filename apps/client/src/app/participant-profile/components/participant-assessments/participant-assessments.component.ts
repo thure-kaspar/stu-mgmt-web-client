@@ -24,7 +24,6 @@ import { filter, map, switchMap } from "rxjs/operators";
 @Component({
 	selector: "student-mgmt-participant-assessments",
 	templateUrl: "./participant-assessments.component.html",
-	styleUrls: ["./participant-assessments.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {

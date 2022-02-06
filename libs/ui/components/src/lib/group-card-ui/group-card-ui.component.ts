@@ -15,9 +15,9 @@ import { TranslateModule } from "@ngx-translate/core";
 import { Participant } from "@student-mgmt-client/domain-types";
 import {
 	CardComponentModule,
-	ChipComponentModule,
 	IconComponentModule,
-	PersonListComponentModule
+	PersonListComponentModule,
+	SimpleChipComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { CourseDto, GroupDto } from "@student-mgmt/api-client";
 
@@ -52,7 +52,7 @@ export class GroupCardUiComponent {
 		MatMenuModule,
 		TranslateModule,
 		CardComponentModule,
-		ChipComponentModule,
+		SimpleChipComponentModule,
 		IconComponentModule,
 		PersonListComponentModule
 	]

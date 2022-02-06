@@ -121,12 +121,11 @@
 					{{ "Property.Assessment.IsDraft" | translate }}
 				</th>
 				<td mat-cell class="column-is-draft" *matCellDef="let row">
-					<student-mgmt-chip
+					<student-mgmt-simple-chip
 						*ngIf="row.isDraft"
-						icon="edit"
-						color="orange"
-						[matTooltip]="'Common.Yes' | translate"
-					></student-mgmt-chip>
+						class="bg-orange-200 text-orange-700"
+						>{{ "Domain.Draft" | translate }}</student-mgmt-simple-chip
+					>
 				</td>
 			</ng-container>
 
@@ -135,23 +134,19 @@
 					<span class="mr-4">{{ "Property.Assessment.HasPassed" | translate }}</span>
 				</th>
 				<td mat-cell *matCellDef="let row">
-					<ng-container [ngSwitch]="row.hasPassed">
-						<student-mgmt-chip
-							*ngSwitchCase="true"
-							icon="thumb_up"
-							color="#2fac6f"
-						></student-mgmt-chip>
-						<student-mgmt-chip
-							*ngSwitchCase="false"
-							icon="thumb_down"
-							color="#ff0134"
-						></student-mgmt-chip>
-						<student-mgmt-chip
-							*ngSwitchDefault
-							icon="help"
-							color="primary"
-						></student-mgmt-chip>
+					<ng-container
+						*ngIf="row.hasPassed === true || row.hasPassed === false; else unknownChip"
+					>
+						<student-mgmt-thumb-chip
+							[condition]="row.hasPassed"
+						></student-mgmt-thumb-chip>
 					</ng-container>
+
+					<ng-template #unknownChip>
+						<student-mgmt-simple-chip class="bg-neutral-200 px-4 text-neutral-700"
+							>?</student-mgmt-simple-chip
+						>
+					</ng-template>
 				</td>
 			</ng-container>
 

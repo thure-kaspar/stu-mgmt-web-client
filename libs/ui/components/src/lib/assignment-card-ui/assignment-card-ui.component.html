@@ -94,7 +94,7 @@
 			*ngIf="props.assignment.links && props.assignment.links.length > 0"
 		>
 			<a
-				class="font-bold text-sky-500"
+				class="font-bold text-red-500"
 				*ngFor="let link of props.assignment.links"
 				[href]="link.url"
 				>#{{ link.name }}</a

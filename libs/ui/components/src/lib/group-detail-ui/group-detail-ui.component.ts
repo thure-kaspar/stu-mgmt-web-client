@@ -13,9 +13,9 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { Participant } from "@student-mgmt-client/domain-types";
 import {
-	ChipComponentModule,
 	IconComponentModule,
 	PersonListComponentModule,
+	SimpleChipComponentModule,
 	TitleComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { AssessmentDto, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
@@ -47,7 +47,7 @@ export class GroupDetailUiComponent {
 		TranslateModule,
 		TitleComponentModule,
 		PersonListComponentModule,
-		ChipComponentModule,
+		SimpleChipComponentModule,
 		IconComponentModule
 	],
 	declarations: [GroupDetailUiComponent],

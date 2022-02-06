@@ -8,8 +8,8 @@
 
 		<student-mgmt-card>
 			<ng-container title>
-				<span class="overall-result">
-					<span class="achieved-points-number"
+				<span class="flex gap-4">
+					<span class="self-end"
 						>{{ vm.assessment.achievedPoints }}
 						<span class="text-light">
 							/ {{ vm.points }}
@@ -17,19 +17,20 @@
 							{{ "Domain.Points" | translate }}
 						</span>
 					</span>
+
 					<ng-container *ngIf="vm.requiredPoints >= 0">
-						<student-mgmt-chip
+						<student-mgmt-simple-chip
 							*ngIf="vm.assessment.hasPassed"
-							icon="thumb_up"
-							[text]="'Property.Assessment.HasPassed' | translate"
-							color="#2fac6f"
-						></student-mgmt-chip>
-						<student-mgmt-chip
+							class="bg-green-100 text-green-700"
+							>{{
+								"Property.Assessment.HasPassed" | translate
+							}}</student-mgmt-simple-chip
+						>
+						<student-mgmt-simple-chip
 							*ngIf="!vm.assessment.hasPassed"
-							icon="thumb_down"
-							[text]="'Domain.Failed' | translate"
-							color="#ff0134"
-						></student-mgmt-chip>
+							class="bg-red-200 text-red-800"
+							>{{ "Domain.Failed" | translate }}</student-mgmt-simple-chip
+						>
 					</ng-container>
 				</span>
 			</ng-container>

@@ -130,7 +130,8 @@
     "Submissions": "Abgaben",
     "User": "Nutzer",
     "Users": "Nutzer",
-    "Draft": "Entwurf"
+    "Draft": "Entwurf",
+    "TeachingStaff": "Lehrende"
   },
   "Enum": {
     "AssignmentState": {

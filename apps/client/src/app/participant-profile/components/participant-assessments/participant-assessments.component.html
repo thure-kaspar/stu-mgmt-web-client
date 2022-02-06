@@ -1,5 +1,5 @@
 <div
-	class="participant-assessments"
+	class="participant-assessments mt-4 grid gap-4"
 	*ngIf="assignmentsWithAssessments$ | async as assignmentsWithAssessments"
 >
 	<span class="text-light" *ngIf="assignmentsWithAssessments.length === 0">{{
@@ -7,18 +7,18 @@
 	}}</span>
 
 	<div
-		class="assignment"
-		[class.evaluated]="assignment.state === 'EVALUATED'"
+		class="grid items-center gap-4 rounded bg-card-bg px-4 py-2 shadow xl:grid-cols-5"
+		[ngStyle]="{ opacity: assignment.state === 'EVALUATED' ? '100%' : '30%' }"
 		*ngFor="let assignment of assignmentsWithAssessments"
 	>
 		<student-mgmt-assignment-type-chip
 			[type]="assignment.type"
 		></student-mgmt-assignment-type-chip>
 
-		<div class="assignment-and-group-name">
+		<div class="col-span-2 grid">
 			<ng-container *ngIf="assignment.assessment?.id; else noAssessment">
 				<a
-					class="link-none font-bold"
+					class="font-bold"
 					[routerLink]="[
 						'/courses',
 						courseId,
@@ -50,8 +50,8 @@
 						: "-"
 				}}</span
 			>
-			<span class="max-points text-light"> / {{ assignment.points }}</span>
-			<span class="percent text-light" *ngIf="assignment.assessment?.achievedPoints >= 0">
+			<span class="text-light"> / {{ assignment.points }}</span>
+			<span class="text-light" *ngIf="assignment.assessment?.achievedPoints >= 0">
 				({{
 					((assignment.assessment?.roundedPoints >= 0
 						? assignment.assessment?.roundedPoints
@@ -62,15 +62,14 @@
 			>
 		</div>
 
-		<div>
-			<student-mgmt-thumb-chip
-				*ngIf="
-					assignment.state === 'EVALUATED' &&
-					(assignment.assessment?.hasPassed === true ||
-						assignment.assessment?.hasPassed === false)
-				"
-				[condition]="assignment.assessment?.hasPassed"
-			></student-mgmt-thumb-chip>
-		</div>
+		<student-mgmt-thumb-chip
+			class="place-self-center"
+			*ngIf="
+				assignment.state === 'EVALUATED' &&
+				(assignment.assessment?.hasPassed === true ||
+					assignment.assessment?.hasPassed === false)
+			"
+			[condition]="assignment.assessment?.hasPassed"
+		></student-mgmt-thumb-chip>
 	</div>
 </div>

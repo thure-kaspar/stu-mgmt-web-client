@@ -16,6 +16,8 @@ import { CourseFacade, DownloadService, ToastService } from "@student-mgmt-clien
 import {
 	ChipComponentModule,
 	IconComponentModule,
+	SimpleChipComponentModule,
+	ThumbChipComponentModule,
 	TitleComponentModule
 } from "@student-mgmt-client/shared-ui";
 import { AssignmentSelectors } from "@student-mgmt-client/state";
@@ -304,6 +306,8 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		ChartsModule,
 		IconComponentModule,
 		ChipComponentModule,
+		SimpleChipComponentModule,
+		ThumbChipComponentModule,
 		TitleComponentModule
 	]
 })

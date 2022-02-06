@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
-import { ChipComponentModule } from "../chip/chip.component";
+import { TranslateModule } from "@ngx-translate/core";
+import { SimpleChipComponentModule } from "../simple-chip/simple-chip.component";
 
 /**
  * Component that uses the `app-chip` component to display a chip with a `thumb_up` or `thumb_down`
@@ -19,6 +20,6 @@ export class ThumbChipComponent {
 @NgModule({
 	declarations: [ThumbChipComponent],
 	exports: [ThumbChipComponent],
-	imports: [CommonModule, ChipComponentModule]
+	imports: [CommonModule, SimpleChipComponentModule, TranslateModule]
 })
 export class ThumbChipComponentModule {}

@@ -1,46 +1,31 @@
-<div class="about mt-4" *ngIf="about$ | async as about">
+<div class="mt-4" *ngIf="about$ | async as about">
 	<student-mgmt-card>
 		<ng-container title>{{ about.course.title }}</ng-container>
 		<ng-container subtitle>{{ about.course.id }}</ng-container>
 		<ng-container content>
-			<div class="content">
-				<span>
-					<span class="font-bold">{{ "Domain.Participants" | translate }}: </span>
-					<span class="text-light">{{ about.participantsCount }}</span>
-				</span>
-
+			<div class="flex flex-col gap-4">
 				<div class="links" *ngIf="about.course.links?.length > 0">
 					<a
-						class="link-none link font-bold"
+						class="font-bold text-red-500"
 						*ngFor="let link of about.course.links"
 						[href]="link.url"
 						>#{{ link.name }}</a
 					>
 				</div>
 
-				<div class="teaching-staff">
-					<span class="member" *ngFor="let member of about.teachingStaff">
-						<ng-container [ngSwitch]="member.role" class="chips">
-							<student-mgmt-chip
-								*ngSwitchCase="'LECTURER'"
-								icon="record_voice_over"
-								[text]="'Enum.CourseRole.' + member.role | translate"
-								color="#e72a67"
-							></student-mgmt-chip>
-							<student-mgmt-chip
-								*ngSwitchCase="'TUTOR'"
-								icon="supervisor_account"
-								[text]="'Enum.CourseRole.' + member.role | translate"
-								color="#5b00af"
-							></student-mgmt-chip>
-							<student-mgmt-chip
-								*ngSwitchDefault
-								icon="person"
-								[text]="'Enum.CourseRole.' + member.role | translate"
-								color="#009966"
-							></student-mgmt-chip>
-						</ng-container>
+				<span>
+					<span class="font-bold">{{ "Domain.Participants" | translate }}: </span>
+					<span class="text-light">{{ about.participantsCount }}</span>
+				</span>
+
+				<div class="grid gap-2">
+					<span class="font-bold">{{ "Domain.TeachingStaff" | translate }}:</span>
+
+					<span class="flex gap-2" *ngFor="let member of about.teachingStaff">
 						<span>{{ member.displayName }}</span>
+						<student-mgmt-course-role-chip
+							[role]="member.role"
+						></student-mgmt-course-role-chip>
 					</span>
 				</div>
 			</div>

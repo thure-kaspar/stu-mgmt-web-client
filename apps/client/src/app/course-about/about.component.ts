@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { CardComponentModule, ChipComponentModule } from "@student-mgmt-client/shared-ui";
+import { CardComponentModule, CourseRoleChipComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { CourseAboutDto, CourseApi } from "@student-mgmt/api-client";
 import { Observable } from "rxjs";
@@ -10,7 +10,6 @@ import { Observable } from "rxjs";
 @Component({
 	selector: "student-mgmt-about",
 	templateUrl: "./about.component.html",
-	styleUrls: ["./about.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent implements OnInit {
@@ -29,6 +28,6 @@ export class AboutComponent implements OnInit {
 @NgModule({
 	declarations: [AboutComponent],
 	exports: [AboutComponent],
-	imports: [CommonModule, TranslateModule, CardComponentModule, ChipComponentModule]
+	imports: [CommonModule, TranslateModule, CardComponentModule, CourseRoleChipComponentModule]
 })
 export class AboutComponentModule {}

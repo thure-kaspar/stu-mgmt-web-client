@@ -40,19 +40,18 @@
 	</ng-container>
 
 	<ng-container subtitle *ngIf="props.group.isClosed || props.group.hasPassword">
-		<div class="flex gap-2">
-			<student-mgmt-chip
+		<div class="mt-2 flex gap-2">
+			<student-mgmt-simple-chip
 				*ngIf="props.group.isClosed"
-				color="#ff0134"
-				icon="lock"
-				[text]="'Property.Group.IsClosed' | translate"
-			></student-mgmt-chip>
-			<student-mgmt-chip
+				class="bg-red-100 text-red-700"
+				>{{ "Property.Group.IsClosed" | translate }}</student-mgmt-simple-chip
+			>
+			<student-mgmt-simple-chip
 				*ngIf="props.group.hasPassword"
-				color="var(--primary)"
-				icon="vpn_key"
-				[text]="'Misc.PasswordProtected' | translate"
-			></student-mgmt-chip>
+				class="bg-neutral-300 text-neutral-800"
+			>
+				{{ "Misc.PasswordProtected" | translate }}</student-mgmt-simple-chip
+			>
 		</div>
 	</ng-container>
 

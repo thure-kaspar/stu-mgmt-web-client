@@ -1,9 +1,9 @@
-<student-mgmt-chip
-	*ngIf="condition; else thumb_down"
-	icon="thumb_up"
-	color="#2fac6f"
-></student-mgmt-chip>
+<student-mgmt-simple-chip *ngIf="condition; else thumb_down" class="bg-green-100 text-green-700">{{
+	"Property.Assessment.HasPassed" | translate
+}}</student-mgmt-simple-chip>
 
 <ng-template #thumb_down>
-	<student-mgmt-chip icon="thumb_down" color="#ff0134"></student-mgmt-chip>
+	<student-mgmt-simple-chip class="bg-red-200 text-red-800">{{
+		"Domain.Failed" | translate
+	}}</student-mgmt-simple-chip>
 </ng-template>

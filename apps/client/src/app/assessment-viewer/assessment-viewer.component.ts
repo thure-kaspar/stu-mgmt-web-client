@@ -7,7 +7,7 @@ import {
 	mapToExtendedAssessmentDto
 } from "@student-mgmt-client/domain-types";
 import { CourseFacade, ParticipantFacade } from "@student-mgmt-client/services";
-import { CardComponentModule, ChipComponentModule } from "@student-mgmt-client/shared-ui";
+import { CardComponentModule, SimpleChipComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { AssessmentApi, AssessmentEventDto, AssignmentDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
@@ -18,7 +18,6 @@ import { PartialAssessmentComponentModule } from "./partial-assessment/partial-a
 @Component({
 	selector: "student-mgmt-assessment-viewer",
 	templateUrl: "./assessment-viewer.component.html",
-	styleUrls: ["./assessment-viewer.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssessmentViewerComponent implements OnInit {
@@ -78,7 +77,7 @@ export class AssessmentViewerComponent implements OnInit {
 		CommonModule,
 		TranslateModule,
 		AssessmentHeaderComponentModule,
-		ChipComponentModule,
+		SimpleChipComponentModule,
 		CardComponentModule,
 		PartialAssessmentComponentModule
 	]
