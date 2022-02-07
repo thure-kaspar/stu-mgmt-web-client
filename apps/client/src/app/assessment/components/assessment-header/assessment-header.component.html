@@ -8,9 +8,11 @@
 				<div class="self-end">
 					{{ "Domain.Assessment" | translate }}: {{ assignment.name }}
 				</div>
-				<student-mgmt-simple-chip class="bg-orange-200 text-orange-700">{{
-					"Domain.Draft" | translate
-				}}</student-mgmt-simple-chip>
+				<student-mgmt-simple-chip
+					class="bg-orange-200 text-orange-700"
+					*ngIf="assessment.isDraft"
+					>{{ "Domain.Draft" | translate }}</student-mgmt-simple-chip
+				>
 			</div>
 		</ng-container>
 		<ng-container subtitle>
