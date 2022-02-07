@@ -39,20 +39,19 @@
 </div>
 
 <ng-template #formTemplate let-controls="controls" let-display="display">
-	<div class="gap-8 py-4" *ngIf="(isLoading$ | async) === false; else loadingSpinner">
+	<div class="py-4" *ngIf="(isLoading$ | async) === false; else loadingSpinner">
 		<form class="flex flex-col justify-between divide-y rounded bg-card-bg shadow">
-			<div class="text-light grid grid-cols-6 text-xs font-bold">
-				<div class="py-4 pl-4">
-					{{ "Domain.Group" | translate }}
-				</div>
-				<div class="py-4">{{ "Domain.Points" | translate }}</div>
+			<div class="text-light grid grid-cols-6 py-4 text-xs font-bold">
+				<div class="pl-4">{{ "Domain.Group" | translate }}</div>
+				<div class="">{{ "Domain.Points" | translate }}</div>
+				<div class="">{{ "Property.Assignment.Comment" | translate }}</div>
 			</div>
 			<div
 				class="grid grid-cols-6"
 				*ngFor="let control of controls"
 				[formGroup]="$any(control)"
 			>
-				<div class="col-span-1 min-w-fit pl-4">
+				<div class="col-span-1 min-w-fit self-center pl-4">
 					<div class="py-2">
 						<!-- This container renders either the group or student -->
 						<ng-container
@@ -61,10 +60,16 @@
 					</div>
 				</div>
 				<input
-					class="col-span-5 my-auto h-fit w-24 rounded bg-color-bg p-1"
+					class="col-span-1 my-auto h-fit w-24 rounded bg-color-bg p-1"
 					type="number"
 					formControlName="achievedPoints"
 				/>
+				<div class="col-span-4 py-2 pr-2">
+					<textarea
+						class="h-full w-full rounded bg-color-bg p-1"
+						formControlName="comment"
+					></textarea>
+				</div>
 			</div>
 		</form>
 	</div>

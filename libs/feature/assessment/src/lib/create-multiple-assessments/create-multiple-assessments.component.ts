@@ -68,7 +68,8 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 			this.form.push(
 				this.fb.group({
 					entity: [entity],
-					achievedPoints: []
+					achievedPoints: [],
+					comment: []
 				})
 			);
 		}
