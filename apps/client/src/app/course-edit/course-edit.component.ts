@@ -7,9 +7,11 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatTabsModule } from "@angular/material/tabs";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { ToastService } from "@student-mgmt-client/services";
 import { IconComponentModule } from "@student-mgmt-client/shared-ui";
+import { CourseActions } from "@student-mgmt-client/state";
 import { getSemester, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
 	AdmissionCriteriaDto,
@@ -70,6 +72,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 		private router: Router,
 		private courseConfigApi: CourseConfigApi,
 		private courseApi: CourseApi,
+		private store: Store,
 		private toast: ToastService
 	) {
 		super();
@@ -144,6 +147,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 			next: result => {
 				this.form.patchValue(result);
 				this.toast.success("Misc.BasicData", "Message.Saved");
+				this.store.dispatch(CourseActions.loadCourse({ courseId: this.courseId }));
 			},
 			error: error => {
 				this.toast.apiError(error);
@@ -160,6 +164,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 				next: result => {
 					this.form.get("config.groupSettings").patchValue(result);
 					this.toast.success("Domain.GroupSettings", "Message.Saved");
+					this.store.dispatch(CourseActions.loadCourse({ courseId: this.courseId }));
 				},
 				error: error => {
 					this.toast.apiError(error);
@@ -176,6 +181,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 			next: result => {
 				this.form.get("config").patchValue(result);
 				this.toast.success("Misc.Secrets", "Message.Saved");
+				this.store.dispatch(CourseActions.loadCourse({ courseId: this.courseId }));
 			},
 			error: error => {
 				this.toast.apiError(error);
@@ -192,6 +198,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 				next: result => {
 					this.form.get("config.admissionCriteria").patchValue(result);
 					this.toast.success("Domain.AdmissionCriteria", "Message.Saved");
+					this.store.dispatch(CourseActions.loadCourse({ courseId: this.courseId }));
 				},
 				error: error => {
 					this.toast.apiError(error);
