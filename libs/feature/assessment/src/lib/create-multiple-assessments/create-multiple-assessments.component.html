@@ -49,16 +49,32 @@
 	<div class="py-4" *ngIf="(isLoading$ | async) === false; else loadingSpinner">
 		<form class="flex flex-col justify-between divide-y rounded bg-card-bg shadow">
 			<div class="text-light grid grid-cols-6 py-4 text-xs font-bold">
-				<div class="pl-4">{{ "Domain.Group" | translate }}</div>
-				<div class="">{{ "Domain.Points" | translate }}</div>
-				<div class="">{{ "Property.Assignment.Comment" | translate }}</div>
+				<div class="pl-4">{{ "Domain.Assessment" | translate }}</div>
+				<div>{{ "Domain.Group" | translate }}</div>
+				<div>{{ "Domain.Points" | translate }}</div>
+				<div>{{ "Property.Assignment.Comment" | translate }}</div>
 			</div>
 			<div
 				class="grid grid-cols-6"
 				*ngFor="let control of controls"
 				[formGroup]="$any(control)"
 			>
-				<div class="col-span-1 min-w-fit self-center pl-4">
+				<div class="col-span-1 my-auto flex pl-4">
+					<student-mgmt-simple-chip
+						*ngIf="!control.value.assessment; else assessmentAlreadyExists"
+						class="bg-green-100 text-green-700"
+						>Nicht vorhanden</student-mgmt-simple-chip
+					>
+
+					<ng-template #assessmentAlreadyExists>
+						<div class="flex flex-col gap-2">
+							<student-mgmt-simple-chip class="bg-red-200 text-red-800"
+								>Existiert bereits</student-mgmt-simple-chip
+							>
+						</div>
+					</ng-template>
+				</div>
+				<div class="col-span-1 min-w-fit self-center">
 					<div class="py-2">
 						<!-- This container renders either the group or student -->
 						<ng-container
@@ -71,7 +87,7 @@
 					type="number"
 					formControlName="achievedPoints"
 				/>
-				<div class="col-span-4 py-2 pr-2">
+				<div class="col-span-3 py-2 pr-2">
 					<textarea
 						class="h-full w-full rounded border border-neutral-300 bg-color-bg p-1"
 						formControlName="comment"

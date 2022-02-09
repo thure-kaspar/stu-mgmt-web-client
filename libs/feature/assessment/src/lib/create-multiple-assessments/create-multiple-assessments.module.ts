@@ -3,11 +3,16 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatTabsModule } from "@angular/material/tabs";
 import { TranslateModule } from "@ngx-translate/core";
-import { PersonListComponentModule, TitleComponentModule } from "@student-mgmt-client/shared-ui";
+import {
+	PersonListComponentModule,
+	SimpleChipComponentModule,
+	TitleComponentModule
+} from "@student-mgmt-client/shared-ui";
 import { CreateMultipleAssessmentRoutingModule } from "./create-multiple-assessments-routing.module";
 import { CreateMultipleAssessmentsComponent } from "./create-multiple-assessments.component";
 
@@ -20,10 +25,12 @@ import { CreateMultipleAssessmentsComponent } from "./create-multiple-assessment
 		MatCardModule,
 		MatButtonModule,
 		MatTabsModule,
+		MatCheckboxModule,
 		TranslateModule,
 		MatProgressSpinnerModule,
 		TitleComponentModule,
-		PersonListComponentModule
+		PersonListComponentModule,
+		SimpleChipComponentModule
 	],
 	declarations: [CreateMultipleAssessmentsComponent],
 	exports: [CreateMultipleAssessmentsComponent]
