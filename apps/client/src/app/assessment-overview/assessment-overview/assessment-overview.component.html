@@ -5,8 +5,8 @@
 			[routerLink]="['/courses', courseId, 'assignments', assignment.id, 'assessments']"
 			routerLinkActive
 			#rla1="routerLinkActive"
-			[active]="rla1.isActive"
-			[routerLinkActiveOptions]="{ exact: true }"
+			[active]="rla1.isActive && !(rla2.isActive || rla3.isActive || rla4.isActive)"
+			[routerLinkActiveOptions]="{ exact: false }"
 		>
 			{{ "Domain.Assessments" | translate }}
 		</a>
@@ -16,7 +16,7 @@
 			routerLinkActive
 			#rla2="routerLinkActive"
 			[active]="rla2.isActive"
-			*ngIf="assignment.collaboration !== 'SINGLE'"
+			[ngStyle]="{ display: assignment.collaboration === 'SINGLE' ? 'none' : undefined }"
 		>
 			{{ "Domain.RegisteredGroups" | translate }}
 		</a>
