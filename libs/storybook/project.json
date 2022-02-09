@@ -11,7 +11,8 @@
 				"port": 4400,
 				"config": {
 					"configFolder": "libs/storybook/.storybook"
-				}
+				},
+				"projectBuildConfig": "client"
 			},
 			"configurations": {
 				"ci": {
@@ -27,7 +28,8 @@
 				"outputPath": "dist/storybook/storybook",
 				"config": {
 					"configFolder": "libs/storybook/.storybook"
-				}
+				},
+				"projectBuildConfig": "client"
 			},
 			"configurations": {
 				"ci": {
