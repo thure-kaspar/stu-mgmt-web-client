@@ -205,7 +205,8 @@
     "Unknown": "Unknown error",
     "ValueMissing": "Value is missing.",
     "NoAdmissionCriteria": "This course did not define any admission criteria.",
-    "Conflict": "Conflict"
+    "Conflict": "Conflict",
+    "ParticipantAlreadyHasAssessment": "One of the selected participants has already received an assessment."
   },
   "Event": {
     "UserJoinedCourseEvent": "joined the course.",

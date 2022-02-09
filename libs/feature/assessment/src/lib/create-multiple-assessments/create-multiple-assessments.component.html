@@ -10,12 +10,19 @@
 		</div>
 	</div>
 
-	<button mat-flat-button color="accent" class="w-fit" [disabled]="form.invalid">
-		{{ "Action.Create" | translate }} (not implemented)
+	<button
+		mat-flat-button
+		color="accent"
+		class="w-fit"
+		[disabled]="form.invalid"
+		(click)="onCreate(tabGroup.selectedIndex === 0 ? 'groups' : 'students')"
+	>
+		{{ "Action.Create" | translate }}
 	</button>
 
 	<mat-tab-group
 		color="accent"
+		#tabGroup
 		animationDuration="0"
 		(selectedIndexChange)="selectedTabChanged($event)"
 	>
@@ -60,13 +67,13 @@
 					</div>
 				</div>
 				<input
-					class="col-span-1 my-auto h-fit w-24 rounded bg-color-bg p-1"
+					class="col-span-1 my-auto h-fit w-24 rounded border border-neutral-300 bg-color-bg p-1"
 					type="number"
 					formControlName="achievedPoints"
 				/>
 				<div class="col-span-4 py-2 pr-2">
 					<textarea
-						class="h-full w-full rounded bg-color-bg p-1"
+						class="h-full w-full rounded border border-neutral-300 bg-color-bg p-1"
 						formControlName="comment"
 					></textarea>
 				</div>
@@ -79,7 +86,7 @@
 	<div class="font-bold">
 		{{ control.get("entity")?.value.name }}
 	</div>
-	<div class="grid py-1">
+	<div class="grid">
 		<span
 			class="text-light text-xs"
 			*ngFor="let member of control.get('entity')?.value.members"
@@ -101,5 +108,21 @@
 			diameter="64"
 			mode="indeterminate"
 		></mat-progress-spinner>
+	</div>
+</ng-template>
+
+<ng-template #confirmDialogContent let-data>
+	<mat-card-title mat-dialog-title>{{ "Action.Confirm" | translate }}</mat-card-title>
+	<div mat-dialog-content>
+		<div class="pb-4">
+			Es werden <span class="font-bold">{{ data.length }}</span> Bewertungen erstellt.
+			Fortfahren ?
+		</div>
+	</div>
+	<div class="flex gap-2" mat-dialog-actions>
+		<button mat-flat-button color="accent" [mat-dialog-close]="true">
+			{{ "Action.Confirm" | translate }}
+		</button>
+		<button mat-button [mat-dialog-close]="false">{{ "Action.Cancel" | translate }}</button>
 	</div>
 </ng-template>

@@ -205,7 +205,8 @@
     "Unknown": "Unbekannter Fehler",
     "ValueMissing": "Fehlender Wert.",
     "NoAdmissionCriteria": "Für diesen Kurs sind keine Zulassungskriterien festgelegt.",
-    "Conflict": "Konflikt"
+    "Conflict": "Konflikt",
+    "ParticipantAlreadyHasAssessment": "Einer der ausgewählten Teilnehmer hat bereits eine Bewertung für diese Aufgabe erhalten."
   },
   "Event": {
     "UserJoinedCourseEvent": "ist dem Kurs beigreten.",
@@ -295,7 +296,7 @@
     "Assignment": {
       "BonusPoints": "Bonuspunkte",
       "Collaboration": "Zusammenarbeit",
-      "Comment": "Beschreibung",
+      "Comment": "Kommentar",
       "EndDate": "Enddatum",
       "Name": "Name",
       "Points": "Punktzahl",
