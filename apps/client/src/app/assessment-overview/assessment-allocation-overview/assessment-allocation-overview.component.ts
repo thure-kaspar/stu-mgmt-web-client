@@ -4,7 +4,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { SnackbarService } from "@student-mgmt-client/services";
+import { ToastService } from "@student-mgmt-client/services";
 import { IconComponentModule, TitleComponentModule } from "@student-mgmt-client/shared-ui";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 import { AssessmentAllocationApi, AssignmentDto } from "@student-mgmt/api-client";
@@ -26,7 +26,7 @@ export class AssessmentAllocationOverviewComponent implements OnInit {
 		private allocationApi: AssessmentAllocationApi,
 		private evaluatorsFacade: EvaluatorsFacade,
 		private dialog: MatDialog,
-		private snackbar: SnackbarService
+		private toast: ToastService
 	) {}
 
 	ngOnInit(): void {
@@ -48,16 +48,15 @@ export class AssessmentAllocationOverviewComponent implements OnInit {
 							this.assignmentId,
 							selected.id
 						)
-						.subscribe(
-							result => {
-								this.snackbar.openSuccessMessage();
+						.subscribe({
+							next: () => {
+								this.toast.success();
 								this.evaluatorsFacade.loadEvaluators(this.courseId).subscribe();
 							},
-							error => {
-								console.log(error);
-								this.snackbar.openErrorMessage();
+							error: error => {
+								this.toast.apiError(error);
 							}
-						);
+						});
 				}
 			});
 	}

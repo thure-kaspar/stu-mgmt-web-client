@@ -11,7 +11,7 @@
 			mat-raised-button
 			color="accent"
 			(click)="loadComparison()"
-			[disabled]="selectedCourses.length == 0"
+			[disabled]="selectedCourses.length === 0"
 		>
 			<student-mgmt-icon name="play_arrow"></student-mgmt-icon>
 			{{ "Action.Compare" | translate }}
@@ -27,7 +27,7 @@
 				</button>
 			</li>
 		</ul>
-		<p *ngIf="selectedCourses.length == 0">{{ "Prompt.PleaseChoose" | translate }}.</p>
+		<p *ngIf="selectedCourses.length === 0">{{ "Prompt.PleaseChoose" | translate }}.</p>
 	</div>
 
 	<div class="bottom">

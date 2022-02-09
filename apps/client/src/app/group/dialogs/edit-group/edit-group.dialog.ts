@@ -23,6 +23,7 @@ import { GroupApi, GroupDto, GroupSettingsDto, GroupUpdateDto } from "@student-m
 	templateUrl: "./edit-group.dialog.html",
 	styleUrls: ["./edit-group.dialog.scss"]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {
 	update: GroupUpdateDto;
 

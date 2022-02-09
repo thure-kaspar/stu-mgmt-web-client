@@ -20,6 +20,7 @@ import { CanJoinCourseDto, CourseParticipantsApi } from "@student-mgmt/api-clien
 	templateUrl: "./join-course.dialog.html",
 	styleUrls: ["./join-course.dialog.scss"]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class JoinCourseDialog implements OnInit {
 	password: string;
 	error: string;
@@ -46,12 +47,14 @@ export class JoinCourseDialog implements OnInit {
 	}
 
 	onJoin(): void {
-		this.courseMemberships.joinCourse(this.courseId, this.password).subscribe(
-			success => this.dialogRef.close(true),
-			error => {
+		this.courseMemberships.joinCourse(this.courseId, this.password).subscribe({
+			next: () => {
+				this.dialogRef.close(true);
+			},
+			error: error => {
 				this.error = `Error.${error.error?.error ?? "SomethingWentWrong"}`;
 			}
-		);
+		});
 	}
 }
 

@@ -60,7 +60,7 @@ export class NotificationSubscribersComponent implements OnInit {
 					this.notificationApi
 						.subscribe(changedSubscriber, this.courseId, changedSubscriber.name)
 						.subscribe({
-							next: result => {
+							next: () => {
 								this.toast.success();
 								this.reload$.next(true);
 							},
@@ -86,7 +86,7 @@ export class NotificationSubscribersComponent implements OnInit {
 			.subscribe(confirmed => {
 				if (confirmed) {
 					this.notificationApi.unsubscribe(this.courseId, subscriber.name).subscribe({
-						next: result => {
+						next: () => {
 							this.toast.success();
 							this.reload$.next(null);
 						},

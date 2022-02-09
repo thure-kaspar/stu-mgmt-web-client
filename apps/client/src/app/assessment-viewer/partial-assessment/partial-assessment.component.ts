@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { CardComponentModule } from "@student-mgmt-client/shared-ui";
 import { MarkerDto, PartialAssessmentDto } from "@student-mgmt/api-client";
@@ -11,14 +11,10 @@ import { MarkerComponentModule } from "../../assessment/components/marker/marker
 	styleUrls: ["./partial-assessment.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PartialAssessmentComponent implements OnInit {
+export class PartialAssessmentComponent {
 	@Input("partialAssessment") partial: PartialAssessmentDto;
 
 	severityEnum = MarkerDto.SeverityEnum;
-
-	constructor() {}
-
-	ngOnInit(): void {}
 }
 
 @NgModule({

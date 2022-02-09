@@ -15,6 +15,7 @@ import { StudentMgmtEvent, SubscriberDto } from "@student-mgmt/api-client";
 	styleUrls: ["./notification-subscriber.dialog.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NotificationSubscriberDialog implements OnInit {
 	form: FormGroup;
 	events = Object.values(StudentMgmtEvent.EventEnum);

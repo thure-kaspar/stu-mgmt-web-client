@@ -1,4 +1,4 @@
-<ng-container *ngIf="(isLoading$ | async) == false">
+<ng-container *ngIf="(isLoading$ | async) === false">
 	<table
 		#tableGroups
 		class="w-full"
@@ -68,7 +68,7 @@
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr
 			mat-row
-			[ngClass]="{ selected: row.group.id == selectedId }"
+			[ngClass]="{ selected: row.group.id === selectedId }"
 			*matRowDef="let row; columns: displayedColumns"
 		></tr>
 	</table>

@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, NgModule, OnInit } from "@angular/core";
+import { Component, Input, NgModule } from "@angular/core";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -11,12 +11,8 @@ import { TranslateModule } from "@ngx-translate/core";
 	templateUrl: "./group-settings-form.component.html",
 	styleUrls: ["./group-settings-form.component.scss"]
 })
-export class GroupSettingsFormComponent implements OnInit {
+export class GroupSettingsFormComponent {
 	@Input() form: FormGroup;
-
-	constructor() {}
-
-	ngOnInit(): void {}
 }
 
 @NgModule({

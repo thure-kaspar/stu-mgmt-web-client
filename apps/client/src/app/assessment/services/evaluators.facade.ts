@@ -1,12 +1,7 @@
 import { Injectable } from "@angular/core";
+import { CourseParticipantsApi, ParticipantDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { catchError, take, tap } from "rxjs/operators";
-import {
-	AssessmentAllocationApi,
-	CourseParticipantsApi,
-	ParticipantDto,
-	UserDto
-} from "@student-mgmt/api-client";
 
 @Injectable()
 export class EvaluatorsFacade {
@@ -19,10 +14,7 @@ export class EvaluatorsFacade {
 	 */
 	evaluators$ = this.evaluatorsSubject.asObservable();
 
-	constructor(
-		private allocationService: AssessmentAllocationApi,
-		private courseParticipantsApi: CourseParticipantsApi
-	) {}
+	constructor(private courseParticipantsApi: CourseParticipantsApi) {}
 
 	/**
 	 * Removes all data that is stored by this service.

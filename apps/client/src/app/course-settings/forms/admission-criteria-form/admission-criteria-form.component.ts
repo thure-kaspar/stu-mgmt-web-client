@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, NgModule, OnInit } from "@angular/core";
+import { Component, Input, NgModule } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -21,7 +21,7 @@ import {
 	templateUrl: "./admission-criteria-form.component.html",
 	styleUrls: ["./admission-criteria-form.component.scss"]
 })
-export class AdmissionCriteriaFormComponent implements OnInit {
+export class AdmissionCriteriaFormComponent {
 	@Input() form: FormGroup;
 
 	ruleTypeEnum = AdmissionRuleDto.TypeEnum;
@@ -47,8 +47,6 @@ export class AdmissionCriteriaFormComponent implements OnInit {
 	});
 
 	constructor(private fb: FormBuilder) {}
-
-	ngOnInit(): void {}
 
 	addRule(rule: AdmissionRuleDto): void {
 		if (rule?.type === this.ruleTypeEnum.REQUIRED_PERCENT_OVERALL) {

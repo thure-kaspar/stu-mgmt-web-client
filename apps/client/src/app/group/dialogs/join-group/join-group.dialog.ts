@@ -26,6 +26,7 @@ export class JoinGroupDialogData {
 	templateUrl: "./join-group.dialog.html",
 	styleUrls: ["./join-group.dialog.scss"]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class JoinGroupDialog implements OnInit {
 	participant: Participant;
 	group: GroupDto;
@@ -57,16 +58,16 @@ export class JoinGroupDialog implements OnInit {
 				this.group.id,
 				this.participant.userId
 			)
-			.subscribe(
-				joined => {
+			.subscribe({
+				next: () => {
 					this.toast.success(this.data.group.name, "Message.Custom.JoinedGroup");
 					this.dialogRef.close(true);
 				},
-				error => {
+				error: error => {
 					this.error = error.error.error;
 					this.toast.apiError(error);
 				}
-			);
+			});
 	}
 }
 
