@@ -10,12 +10,15 @@ import {
 	AssessmentApi,
 	AssessmentCreateDto,
 	AssessmentDto,
+	AssessmentUpdateDto,
 	AssignmentRegistrationApi,
 	CourseParticipantsApi,
 	GroupDto,
 	ParticipantDto
 } from "@student-mgmt/api-client";
 import { BehaviorSubject, firstValueFrom } from "rxjs";
+
+type AssessmentState = "updated" | "new" | "unchanged" | null;
 
 @Component({
 	selector: "student-mgmt-create-multiple-assessments",
@@ -30,6 +33,8 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 	isLoading$ = new BehaviorSubject<boolean>(true);
 
 	form = this.fb.array([]);
+
+	private currentTab: "groups" | "students" = "groups";
 
 	@ViewChild("confirmDialogContent") confirmTemplate!: TemplateRef<unknown>;
 
@@ -97,7 +102,8 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 					entity: [entity],
 					achievedPoints: [assessment?.achievedPoints],
 					comment: [assessment?.comment],
-					assessment: [assessment]
+					assessment: [assessment],
+					state: [assessment ? "unchanged" : null]
 				})
 			);
 		}
@@ -127,26 +133,58 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 
 	async selectedTabChanged(tabIndex: number): Promise<void> {
 		if (tabIndex === 0) {
+			this.currentTab = "groups";
 			await this.loadEntities("groups");
 		}
 
 		if (tabIndex === 1) {
+			this.currentTab = "students";
 			await this.loadEntities("students");
 		}
 	}
 
-	async onCreate(tab: "groups" | "students"): Promise<void> {
+	markAsChanged(index: number): void {
+		let state: AssessmentState;
+		const control = this.form.at(index);
+		const { achievedPoints, comment } = control.value;
+		const assessment = control.value.assessment;
+
+		const hasPoints = typeof achievedPoints === "number";
+		const hasPointsBefore = typeof assessment?.achievedPoints === "number";
+		const hasComment = typeof comment === "string";
+		const hasCommentBefore = typeof assessment?.comment === "string";
+
+		// no assessment: has points or comment -> new , else undefined
+		// assessment: points before and changed -> updated, comment changed -> updated; unchanged
+
+		state = assessment ? "unchanged" : null;
+
+		if (!hasPointsBefore && hasPoints) {
+			state = assessment ? "updated" : "new";
+		} else if (hasPointsBefore && assessment.achievedPoints !== achievedPoints) {
+			state = assessment ? "updated" : "new";
+		} else if (!hasCommentBefore && hasComment && comment.length > 0) {
+			state = assessment ? "updated" : "new";
+		} else if (hasCommentBefore && assessment.comment !== comment) {
+			state = assessment ? "updated" : "new";
+		}
+
+		control.patchValue({ state });
+	}
+
+	async onSave(tab: "groups" | "students"): Promise<void> {
 		const formValue = this.form.value as {
 			entity: { id: string } & { userId: string };
 			achievedPoints?: number;
 			comment?: string;
+			state: AssessmentState;
+			assessment: AssessmentDto;
 		}[];
 
-		const assessmentWithPoints = formValue.filter(
-			value => typeof value.achievedPoints === "number"
-		);
+		const newAssessments = formValue.filter(value => value.state === "new");
+		const updatedAssessments = formValue.filter(value => value.state === "updated");
 
-		const assessments: AssessmentCreateDto[] = assessmentWithPoints.map(value => ({
+		const assessmentsToCreate: AssessmentCreateDto[] = newAssessments.map(value => ({
 			assignmentId: this.assignmentId,
 			isDraft: false,
 			achievedPoints: value.achievedPoints,
@@ -155,34 +193,77 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 			userId: tab === "students" ? value.entity.userId : undefined
 		}));
 
+		const assessmentsToUpdate: (AssessmentUpdateDto & { assessmentId: string })[] =
+			updatedAssessments.map(value => ({
+				assessmentId: value.assessment.id,
+				achievedPoints: value.achievedPoints,
+				comment: value.comment,
+				isDraft: false,
+				partialAssessments: []
+			}));
+
 		const confirmed = await firstValueFrom(
-			this.dialog.open(this.confirmTemplate, { data: assessments }).afterClosed()
+			this.dialog
+				.open(this.confirmTemplate, {
+					data: {
+						newCount: assessmentsToCreate.length,
+						updatedCount: assessmentsToUpdate.length
+					}
+				})
+				.afterClosed()
 		);
 
 		if (confirmed) {
+			if (assessmentsToCreate.length > 0) {
+				await this.createAssessments(assessmentsToCreate);
+			}
+			if (assessmentsToUpdate.length > 0) {
+				await this.updateAssessments(assessmentsToUpdate);
+			}
+
+			this.loadEntities(this.currentTab);
+		}
+	}
+
+	private async updateAssessments(
+		assessmentsToUpdate: (AssessmentUpdateDto & { assessmentId: string })[]
+	) {
+		for (const updatedAssessment of assessmentsToUpdate) {
 			try {
 				await firstValueFrom(
-					this.assessmentApi.createAssessments(
-						assessments,
+					this.assessmentApi.updateAssessment(
+						updatedAssessment,
 						this.courseId,
-						this.assignmentId
+						this.assignmentId,
+						updatedAssessment.assessmentId
 					)
 				);
-				this.toast.success();
-				this.router.navigate([
-					"/courses",
-					this.courseId,
-					"assignments",
-					this.assignmentId,
-					"assessments"
-				]);
 			} catch (error) {
 				if (error instanceof HttpErrorResponse) {
-					if (error.status === 409) {
-						this.toast.error("Error.ParticipantAlreadyHasAssessment");
-					} else {
-						this.toast.apiError(error);
-					}
+					this.toast.apiError(error);
+				}
+			}
+		}
+
+		this.toast.success(assessmentsToUpdate.length + " Bewertungen aktualisiert.");
+	}
+
+	private async createAssessments(assessmentsToCreate: AssessmentCreateDto[]) {
+		try {
+			await firstValueFrom(
+				this.assessmentApi.createAssessments(
+					assessmentsToCreate,
+					this.courseId,
+					this.assignmentId
+				)
+			);
+			this.toast.success(assessmentsToCreate.length + " neue Bewertungen erstellt.");
+		} catch (error) {
+			if (error instanceof HttpErrorResponse) {
+				if (error.status === 409) {
+					this.toast.error("Error.ParticipantAlreadyHasAssessment");
+				} else {
+					this.toast.apiError(error);
 				}
 			}
 		}

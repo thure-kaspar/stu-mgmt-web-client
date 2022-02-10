@@ -15,12 +15,13 @@
 		color="accent"
 		class="w-fit"
 		[disabled]="form.invalid"
-		(click)="onCreate(tabGroup.selectedIndex === 0 ? 'groups' : 'students')"
+		(click)="onSave(tabGroup.selectedIndex === 0 ? 'groups' : 'students')"
 	>
-		{{ "Action.Create" | translate }}
+		{{ "Action.Save" | translate }}
 	</button>
 
 	<mat-tab-group
+		class="mt-4"
 		color="accent"
 		#tabGroup
 		animationDuration="0"
@@ -49,18 +50,18 @@
 	<div class="py-4" *ngIf="(isLoading$ | async) === false; else loadingSpinner">
 		<form class="flex flex-col justify-between divide-y rounded bg-card-bg shadow">
 			<div class="text-light grid grid-cols-6 py-4 text-xs font-bold">
-				<div class="pl-4">{{ "Domain.Assessment" | translate }}</div>
-				<div>{{ "Domain.Group" | translate }}</div>
+				<div class="pl-4">{{ "Common.State" | translate }}</div>
+				<div>Name</div>
 				<div>{{ "Domain.Points" | translate }}</div>
 				<div>{{ "Property.Assignment.Comment" | translate }}</div>
 			</div>
 			<div
 				class="grid grid-cols-6"
-				*ngFor="let control of controls"
+				*ngFor="let control of controls; let index = index"
 				[formGroup]="$any(control)"
 			>
 				<div class="col-span-1 my-auto flex pl-4">
-					<student-mgmt-simple-chip
+					<!-- <student-mgmt-simple-chip
 						*ngIf="!control.value.assessment; else assessmentAlreadyExists"
 						class="bg-green-100 text-green-700"
 						>Nicht vorhanden</student-mgmt-simple-chip
@@ -72,7 +73,29 @@
 								>Existiert bereits</student-mgmt-simple-chip
 							>
 						</div>
-					</ng-template>
+					</ng-template> -->
+					<ng-container [ngSwitch]="control.value.state">
+						<student-mgmt-simple-chip
+							*ngSwitchCase="'unchanged'"
+							class="bg-blue-200 text-blue-700"
+							>Unverändert</student-mgmt-simple-chip
+						>
+						<student-mgmt-simple-chip
+							*ngSwitchCase="'updated'"
+							class="bg-orange-200 text-orange-800"
+							>Geändert</student-mgmt-simple-chip
+						>
+						<student-mgmt-simple-chip
+							*ngSwitchCase="'new'"
+							class="bg-green-100 text-green-700"
+							>Neu</student-mgmt-simple-chip
+						>
+						<student-mgmt-simple-chip
+							*ngSwitchDefault
+							class="bg-neutral-200 text-neutral-700"
+							>Existiert nicht</student-mgmt-simple-chip
+						>
+					</ng-container>
 				</div>
 				<div class="col-span-1 min-w-fit self-center">
 					<div class="py-2">
@@ -86,11 +109,13 @@
 					class="col-span-1 my-auto h-fit w-24 rounded border border-neutral-300 bg-color-bg p-1"
 					type="number"
 					formControlName="achievedPoints"
+					(keyup)="markAsChanged(index)"
 				/>
 				<div class="col-span-3 py-2 pr-2">
 					<textarea
 						class="h-full w-full rounded border border-neutral-300 bg-color-bg p-1"
 						formControlName="comment"
+						(keyup)="markAsChanged(index)"
 					></textarea>
 				</div>
 			</div>
@@ -131,8 +156,8 @@
 	<mat-card-title mat-dialog-title>{{ "Action.Confirm" | translate }}</mat-card-title>
 	<div mat-dialog-content>
 		<div class="pb-4">
-			Es werden <span class="font-bold">{{ data.length }}</span> Bewertungen erstellt.
-			Fortfahren ?
+			Es werden neue <span class="font-bold">{{ data.newCount }}</span> Bewertungen erstellt
+			und <span class="font-bold">{{ data.updatedCount }}</span> verändert. Fortfahren ?
 		</div>
 	</div>
 	<div class="flex gap-2" mat-dialog-actions>
