@@ -26,7 +26,6 @@ export type AdmissionCriteriaWithResult = {
 @Component({
 	selector: "student-mgmt-participant-admission-status-ui",
 	templateUrl: "./participant-admission-status-ui.component.html",
-	styleUrls: ["./participant-admission-status.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantAdmissionStatusUiComponent {

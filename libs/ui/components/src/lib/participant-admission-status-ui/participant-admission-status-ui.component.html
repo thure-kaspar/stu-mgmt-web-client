@@ -8,19 +8,21 @@
 			<ng-template #subtitle>{{ "Misc.CurrentStatus" | translate }}</ng-template>
 		</ng-container>
 		<ng-container content *ngIf="!noAdmissionCriteria">
-			<mat-spinner *ngIf="isLoading" diameter="64"></mat-spinner>
+			<mat-spinner *ngIf="isLoading" class="mx-auto py-16" diameter="64"></mat-spinner>
 
 			<ng-container *ngIf="!isLoading && admissionStatus">
-				<div class="overall-result">
+				<div class="flex flex-col gap-4 pb-4">
 					<span
-						class="overall-result-column"
+						class="flex gap-2"
 						*ngIf="admissionStatus.hasAdmissionFromPreviousSemester"
 					>
 						<student-mgmt-thumb-chip [condition]="true"></student-mgmt-thumb-chip>
-						<span>Altzulassung</span>
+						<span class="font-bold">{{
+							"Domain.AdmissionFromPreviousSemester" | translate
+						}}</span>
 					</span>
 
-					<span class="overall-result-column">
+					<span class="flex gap-2">
 						<student-mgmt-thumb-chip
 							[condition]="admissionStatus.fulfillsAdmissionCriteria"
 						></student-mgmt-thumb-chip>
@@ -33,23 +35,25 @@
 					</span>
 				</div>
 
-				<div class="rules">
-					<div class="rule" *ngFor="let rule of criteriaWithResult; let index = index">
+				<div class="flex flex-col gap-4">
+					<div
+						class="grid gap-1"
+						*ngFor="let rule of criteriaWithResult; let index = index"
+					>
 						<mat-divider></mat-divider>
-						<div class="rule-title">
-							<span class="top">
+						<div class="grid">
+							<span class="mt-4 flex justify-between">
 								<student-mgmt-thumb-chip
 									[condition]="rule.result.passed"
 								></student-mgmt-thumb-chip>
 
 								<student-mgmt-assignment-type-chip
-									class="assignment-type-chip"
 									[type]="rule.assignmentType"
 								></student-mgmt-assignment-type-chip>
 							</span>
 						</div>
 
-						<div class="type">
+						<div class="mt-2">
 							<ng-container [ngSwitch]="rule.type">
 								<span
 									class="text-light"
@@ -80,7 +84,7 @@
 							</ng-container>
 						</div>
 
-						<div class="result">
+						<div>
 							<ng-container *ngIf="rule.type === ruleTypes.REQUIRED_PERCENT_OVERALL">
 								<span class="text-light"
 									>{{ "Common.Achieved" | translate }}:
