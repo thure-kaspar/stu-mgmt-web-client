@@ -7,6 +7,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
 import {
 	PersonListComponentModule,
@@ -30,7 +31,8 @@ import { CreateMultipleAssessmentsComponent } from "./create-multiple-assessment
 		MatProgressSpinnerModule,
 		TitleComponentModule,
 		PersonListComponentModule,
-		SimpleChipComponentModule
+		SimpleChipComponentModule,
+		MatTooltipModule
 	],
 	declarations: [CreateMultipleAssessmentsComponent],
 	exports: [CreateMultipleAssessmentsComponent]

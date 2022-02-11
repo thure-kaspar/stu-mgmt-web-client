@@ -78,6 +78,7 @@
 							>Neu</student-mgmt-simple-chip
 						>
 						<student-mgmt-simple-chip
+							matTooltip="Teilnehmer ist bereits Teil einer anderen Bewertung"
 							*ngSwitchCase="'isIncludedInOtherAssessment'"
 							class="bg-red-200 text-red-800"
 							>{{ "Error.Conflict" | translate }}</student-mgmt-simple-chip
