@@ -254,6 +254,7 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 	private async updateAssessments(
 		assessmentsToUpdate: (AssessmentUpdateDto & { assessmentId: string })[]
 	) {
+		let successCount = 0;
 		for (const updatedAssessment of assessmentsToUpdate) {
 			try {
 				await firstValueFrom(
@@ -264,6 +265,7 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 						updatedAssessment.assessmentId
 					)
 				);
+				successCount++;
 			} catch (error) {
 				if (error instanceof HttpErrorResponse) {
 					this.toast.apiError(error);
@@ -271,7 +273,7 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 			}
 		}
 
-		this.toast.success(assessmentsToUpdate.length + " Bewertungen aktualisiert.");
+		this.toast.success(successCount + " Bewertungen aktualisiert.");
 	}
 
 	private async createAssessments(assessmentsToCreate: AssessmentCreateDto[]) {
