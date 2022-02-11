@@ -18,7 +18,7 @@ import {
 } from "@student-mgmt/api-client";
 import { BehaviorSubject, firstValueFrom } from "rxjs";
 
-type AssessmentState = "updated" | "new" | "unchanged" | null;
+type AssessmentState = "updated" | "new" | "unchanged" | "isIncludedInOtherAssessment" | null;
 
 @Component({
 	selector: "student-mgmt-create-multiple-assessments",
@@ -90,11 +90,31 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 
 		for (const entity of entities) {
 			let assessment: AssessmentDto | undefined = undefined;
+			let state: AssessmentState = null;
+			let isIncludedInOtherAssessment = false;
 
 			if ((entity as ParticipantDto).userId) {
 				assessment = byUserId.get((entity as ParticipantDto).userId);
+
+				if (assessment?.groupId) {
+					isIncludedInOtherAssessment = true;
+				}
 			} else {
 				assessment = byGroupId.get((entity as GroupDto).id);
+
+				for (const member of (entity as GroupDto).members ?? []) {
+					const otherAssessment = byUserId.get(member.userId);
+
+					if (otherAssessment && otherAssessment.id !== assessment?.id) {
+						isIncludedInOtherAssessment = true;
+					}
+				}
+			}
+
+			if (assessment && !isIncludedInOtherAssessment) {
+				state = "unchanged";
+			} else if (isIncludedInOtherAssessment) {
+				state = "isIncludedInOtherAssessment";
 			}
 
 			this.form.push(
@@ -103,7 +123,7 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 					achievedPoints: [assessment?.achievedPoints],
 					comment: [assessment?.comment],
 					assessment: [assessment],
-					state: [assessment ? "unchanged" : null]
+					state: [state]
 				})
 			);
 		}
@@ -146,6 +166,12 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 	markAsChanged(index: number): void {
 		let state: AssessmentState;
 		const control = this.form.at(index);
+
+		// Do no change state, if creation would fail due to conflict
+		if ((control.value.state as AssessmentState) === "isIncludedInOtherAssessment") {
+			return;
+		}
+
 		const { achievedPoints, comment } = control.value;
 		const assessment = control.value.assessment;
 
