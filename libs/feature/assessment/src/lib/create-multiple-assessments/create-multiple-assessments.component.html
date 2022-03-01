@@ -25,6 +25,7 @@
 		color="accent"
 		#tabGroup
 		animationDuration="0"
+		[selectedIndex]="currentTab === 'students' ? 1 : 0"
 		(selectedIndexChange)="selectedTabChanged($event)"
 	>
 		<mat-tab [label]="'Domain.RegisteredGroups' | translate">
@@ -65,20 +66,20 @@
 						<student-mgmt-simple-chip
 							*ngSwitchCase="'unchanged'"
 							class="bg-blue-200 text-blue-700"
-							>Unverändert</student-mgmt-simple-chip
+							>{{ "Common.Unchanged" | translate }}</student-mgmt-simple-chip
 						>
 						<student-mgmt-simple-chip
 							*ngSwitchCase="'updated'"
 							class="bg-orange-200 text-orange-800"
-							>Geändert</student-mgmt-simple-chip
+							>{{ "Common.Changed" | translate }}</student-mgmt-simple-chip
 						>
 						<student-mgmt-simple-chip
 							*ngSwitchCase="'new'"
 							class="bg-green-100 text-green-700"
-							>Neu</student-mgmt-simple-chip
+							>{{ "Common.New" | translate }}</student-mgmt-simple-chip
 						>
 						<student-mgmt-simple-chip
-							matTooltip="Teilnehmer ist bereits Teil einer anderen Bewertung"
+							[matTooltip]="'Error.ParticipantIsPartOfAnotherAssessment' | translate"
 							*ngSwitchCase="'isIncludedInOtherAssessment'"
 							class="bg-red-200 text-red-800"
 							>{{ "Error.Conflict" | translate }}</student-mgmt-simple-chip
@@ -86,7 +87,7 @@
 						<student-mgmt-simple-chip
 							*ngSwitchDefault
 							class="bg-neutral-200 text-neutral-700"
-							>Existiert nicht</student-mgmt-simple-chip
+							>{{ "Common.DoesNotExist" | translate }}</student-mgmt-simple-chip
 						>
 					</ng-container>
 				</div>

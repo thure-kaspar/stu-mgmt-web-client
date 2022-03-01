@@ -34,7 +34,8 @@
       "CreateMultipleAssessments": "Create multiple assessments",
       "ConvertToIndividualAssessment": "Convert to individual assessments",
       "ViewAssessment": "View Assessment",
-      "EditAdmissionCriteria": "Edit admission criteria"
+      "EditAdmissionCriteria": "Edit admission criteria",
+      "SwitchToAssessmentEditor": "Switch to Assessment Editor"
     },
     "Delete": "Delete",
     "Edit": "Edit",
@@ -91,7 +92,11 @@
     "Yes": "Yes",
     "Dark": "Dark",
     "Light": "Light",
-    "State": "State"
+    "State": "State",
+    "Unchanged": "Unchanged",
+    "Changed": "Changed",
+    "New": "New",
+    "DoesNotExist": "Does not exist"
   },
   "Domain": {
     "Admission": "Admission",
@@ -207,7 +212,8 @@
     "ValueMissing": "Value is missing.",
     "NoAdmissionCriteria": "This course did not define any admission criteria.",
     "Conflict": "Conflict",
-    "ParticipantAlreadyHasAssessment": "One of the selected participants has already received an assessment."
+    "ParticipantAlreadyHasAssessment": "One of the selected participants has already received an assessment.",
+    "ParticipantIsPartOfAnotherAssessment": "This participant is already part of another assessment"
   },
   "Event": {
     "UserJoinedCourseEvent": "joined the course.",

@@ -198,7 +198,7 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 		for (const assessment of assessments) {
 			if (assessment.hasPassed == true) countPassed++;
 			if (assessment.hasPassed == false) countFailed++;
-			if (assessment.achievedPoints == undefined) {
+			if (!Number.isFinite(assessment.achievedPoints)) {
 				countNoPoints++;
 			} else {
 				countHasPoints++;
@@ -208,7 +208,14 @@ export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements
 			}
 		}
 
-		const averageScore = totalPoints / countHasPoints;
+		let averageScore = totalPoints / countHasPoints;
+
+		// Avoid displaying Number.MIN_VALUE etc. in UI
+		if (assessments.length == countNoPoints) {
+			highestScore = 0;
+			lowestScore = 0;
+			averageScore = 0;
+		}
 
 		return {
 			countPassed,

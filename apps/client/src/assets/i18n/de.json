@@ -34,7 +34,8 @@
       "CreateMultipleAssessments": "Mehrere Bewertungen erstellen",
       "ConvertToIndividualAssessment": "In Einzelbewertungen umwandeln",
       "ViewAssessment": "Bewertung ansehen",
-      "EditAdmissionCriteria": "Zulassungskritierien anpassen"
+      "EditAdmissionCriteria": "Zulassungskritierien anpassen",
+      "SwitchToAssessmentEditor": "Zur Bewertungsansicht wechseln"
     },
     "Delete": "Löschen",
     "Edit": "Ändern",
@@ -91,7 +92,11 @@
     "Yes": "Ja",
     "Dark": "Dunkel",
     "Light": "Hell",
-    "State": "Status"
+    "State": "Status",
+    "Unchanged": "Unverändert",
+    "Changed": "Geändert",
+    "New": "Neu",
+    "DoesNotExist": "Existiert nicht"
   },
   "Domain": {
     "Admission": "Zulassung",
@@ -207,7 +212,8 @@
     "ValueMissing": "Fehlender Wert.",
     "NoAdmissionCriteria": "Für diesen Kurs sind keine Zulassungskriterien festgelegt.",
     "Conflict": "Konflikt",
-    "ParticipantAlreadyHasAssessment": "Einer der ausgewählten Teilnehmer hat bereits eine Bewertung für diese Aufgabe erhalten."
+    "ParticipantAlreadyHasAssessment": "Einer der ausgewählten Teilnehmer hat bereits eine Bewertung für diese Aufgabe erhalten.",
+    "ParticipantIsPartOfAnotherAssessment": "Teilnehmer ist bereits Teil einer anderen Bewertung"
   },
   "Event": {
     "UserJoinedCourseEvent": "ist dem Kurs beigreten.",

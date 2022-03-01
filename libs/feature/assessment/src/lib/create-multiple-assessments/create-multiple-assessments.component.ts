@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { ToastService } from "@student-mgmt-client/services";
 import { AssignmentSelectors } from "@student-mgmt-client/state";
+import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import {
 	AssessmentApi,
 	AssessmentCreateDto,
@@ -25,7 +26,7 @@ type AssessmentState = "updated" | "new" | "unchanged" | "isIncludedInOtherAsses
 	templateUrl: "./create-multiple-assessments.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateMultipleAssessmentsComponent implements OnInit {
+export class CreateMultipleAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId = this.route.snapshot.params["courseId"];
 	assignmentId = this.route.snapshot.params["assignmentId"];
 	assignment$ = this.store.select(AssignmentSelectors.selectAssignment(this.assignmentId));
@@ -34,7 +35,7 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 
 	form = this.fb.array([]);
 
-	private currentTab: "groups" | "students" = "groups";
+	currentTab: "groups" | "students" = "groups";
 
 	@ViewChild("confirmDialogContent") confirmTemplate!: TemplateRef<unknown>;
 
@@ -48,10 +49,20 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 		private readonly toast: ToastService,
 		private readonly store: Store,
 		private readonly dialog: MatDialog
-	) {}
+	) {
+		super();
+	}
 
 	async ngOnInit(): Promise<void> {
-		await this.loadEntities("groups");
+		this.subs.sink = this.route.fragment.subscribe(async fragment => {
+			if (fragment === "students") {
+				this.currentTab = "students";
+				await this.loadEntities("students");
+			} else {
+				this.currentTab = "groups";
+				await this.loadEntities("groups");
+			}
+		});
 	}
 
 	async loadEntities(kind: "groups" | "students"): Promise<void> {
@@ -115,6 +126,7 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 				state = "unchanged";
 			} else if (isIncludedInOtherAssessment) {
 				state = "isIncludedInOtherAssessment";
+				assessment = undefined;
 			}
 
 			this.form.push(
@@ -153,13 +165,11 @@ export class CreateMultipleAssessmentsComponent implements OnInit {
 
 	async selectedTabChanged(tabIndex: number): Promise<void> {
 		if (tabIndex === 0) {
-			this.currentTab = "groups";
-			await this.loadEntities("groups");
+			this.router.navigate([], { fragment: "groups" });
 		}
 
 		if (tabIndex === 1) {
-			this.currentTab = "students";
-			await this.loadEntities("students");
+			this.router.navigate([], { fragment: "students" });
 		}
 	}
 
