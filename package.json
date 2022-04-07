@@ -34,7 +34,7 @@
 		"@ngrx/store-devtools": "^13.0.1",
 		"@ngx-translate/core": "^14.0.0",
 		"@ngx-translate/http-loader": "^7.0.0",
-		"@student-mgmt/api-client": "^2.5.2",
+		"@student-mgmt/api-client": "^2.7.2",
 		"@swimlane/ngx-charts": "^20.0.1",
 		"ngx-toastr": "^14.2.1",
 		"rxjs": "~7.4.0",

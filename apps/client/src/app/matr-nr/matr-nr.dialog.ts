@@ -1,21 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgModule, Inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatCardModule } from "@angular/material/card";
-import { TranslateModule } from "@ngx-translate/core";
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
-import { AuthenticationApi, UserApi, UserDto } from "@student-mgmt/api-client";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { firstValueFrom } from "rxjs";
-import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
-import { ToastService } from "@student-mgmt-client/services";
-import { HttpClient } from "@angular/common/http";
+import { TranslateModule } from "@ngx-translate/core";
 import { AuthService } from "@student-mgmt-client/auth";
+import { ToastService } from "@student-mgmt-client/services";
+import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
+import { UserApi, UserDto } from "@student-mgmt/api-client";
+import { firstValueFrom } from "rxjs";
 
 @Component({
 	selector: "student-mgmt-matr-nr",
@@ -33,7 +31,7 @@ export class MatrNrDialog implements OnInit {
 		private store: Store,
 		private dialogRef: MatDialogRef<MatrNrDialog>,
 		private toast: ToastService,
-		private http: HttpClient
+		private userApi: UserApi
 	) {}
 
 	async ngOnInit(): Promise<void> {
@@ -63,26 +61,25 @@ export class MatrNrDialog implements OnInit {
 		const matrNr = this.matrNr ?? null;
 
 		try {
-			const updatedUser = (await firstValueFrom(
-				this.http.put(
-					`${window["__env"]["API_BASE_PATH"]}/users/${this.user.id}/matrNr`,
-					{ matrNr },
-					{ headers: { Authorization: `Bearer ${AuthService.getAccessToken()}` } }
-				)
-			)) as UserDto;
+			const updatedUser = await firstValueFrom(
+				this.userApi.setMatrNr({ matrNr }, this.user.id)
+			);
 
 			const { authResult } = await firstValueFrom(
 				this.store.select(AuthSelectors.selectAuthState)
 			);
 
+			const updatedAuthResult = {
+				...authResult,
+				user: updatedUser
+			};
+
 			this.store.dispatch(
 				AuthActions.login({
-					authResult: {
-						...authResult,
-						user: updatedUser
-					}
+					authResult: updatedAuthResult
 				})
 			);
+			AuthService.setAuthState(updatedAuthResult);
 
 			this.toast.success();
 			this.dialogRef.close(true);
