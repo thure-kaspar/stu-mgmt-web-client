@@ -14,6 +14,20 @@
 								"Action.Custom.LeaveCourse" | translate
 							}}</span>
 						</button>
+						<ng-container *ngIf="user$ | async as user">
+							<button
+								mat-menu-item
+								(click)="deleteCourse()"
+								*ngIf="
+									user.role === userRoles.SYSTEM_ADMIN ||
+									user.role === userRoles.MGMT_ADMIN
+								"
+							>
+								<span class="text-red">{{
+									"Action.Custom.DeleteCourse" | translate
+								}}</span>
+							</button>
+						</ng-container>
 					</div>
 				</mat-menu>
 			</mat-card-title>

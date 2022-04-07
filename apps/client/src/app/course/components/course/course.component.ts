@@ -22,10 +22,10 @@ import {
 	ExtendedConfirmDialogData,
 	IconComponentModule
 } from "@student-mgmt-client/shared-ui";
-import { CourseActions, CourseSelectors } from "@student-mgmt-client/state";
+import { AuthSelectors, CourseActions, CourseSelectors } from "@student-mgmt-client/state";
 import { getRouteParam, UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
-import { GroupApi, StudentMgmtException } from "@student-mgmt/api-client";
-import { take, tap } from "rxjs/operators";
+import { CourseApi, GroupApi, StudentMgmtException, UserDto } from "@student-mgmt/api-client";
+import { firstValueFrom, take, tap } from "rxjs";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 
 @Component({
@@ -35,12 +35,17 @@ import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
+	courseId: string;
+	user$ = this.store.select(AuthSelectors.selectUser);
+	userRoles = UserDto.RoleEnum;
+
 	constructor(
 		public participantFacade: ParticipantFacade,
 		public courseFacade: CourseFacade,
 		private route: ActivatedRoute,
 		private router: Router,
 		private courseMemberships: CourseMembershipsFacade,
+		private courseApi: CourseApi,
 		private groupApi: GroupApi,
 		private dialog: MatDialog,
 		private toast: ToastService,
@@ -54,6 +59,7 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 		this.handleNotACourseMember();
 
 		this.subs.sink = this.route.params.subscribe(({ courseId }) => {
+			this.courseId = courseId;
 			this.store.dispatch({ type: "[Meta] Clear Course" });
 			this.store.dispatch(CourseActions.loadCourse({ courseId }));
 		});
@@ -155,18 +161,49 @@ export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 					.afterClosed()
 					.subscribe(confirmed => {
 						if (confirmed) {
-							this.courseMemberships.leaveCourse(course.id).subscribe(
-								success => {
+							this.courseMemberships.leaveCourse(course.id).subscribe({
+								next: result => {
 									this.router.navigateByUrl("courses");
 									this.toast.success("Action.Custom.LeaveCourse");
 								},
-								error => {
+								error: error => {
 									this.toast.apiError(error);
 								}
-							);
+							});
 						}
 					});
 			});
+	}
+
+	async deleteCourse(): Promise<void> {
+		const course = await firstValueFrom(this.store.select(CourseSelectors.selectCourse));
+		const user = await firstValueFrom(this.user$);
+
+		const data: ExtendedConfirmDialogData = {
+			title: "Action.Custom.DeleteCourse",
+			params: [course.title, course.semester],
+			stringToConfirm: course.id
+		};
+
+		const confirmed = await firstValueFrom(
+			this.dialog
+				.open<ExtendedConfirmDialog, ExtendedConfirmDialogData, boolean>(
+					ExtendedConfirmDialog,
+					{ data }
+				)
+				.afterClosed()
+		);
+
+		if (confirmed) {
+			try {
+				await firstValueFrom(this.courseApi.deleteCourse(this.courseId));
+				this.toast.success();
+				this.router.navigateByUrl("/courses");
+				this.courseMemberships.loadCoursesOfUser(user.id);
+			} catch (error) {
+				this.toast.apiError(error);
+			}
+		}
 	}
 }
 

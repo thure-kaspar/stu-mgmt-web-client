@@ -35,7 +35,8 @@
       "ConvertToIndividualAssessment": "In Einzelbewertungen umwandeln",
       "ViewAssessment": "Bewertung ansehen",
       "EditAdmissionCriteria": "Zulassungskritierien anpassen",
-      "SwitchToAssessmentEditor": "Zur Bewertungsansicht wechseln"
+      "SwitchToAssessmentEditor": "Zur Bewertungsansicht wechseln",
+      "DeleteCourse": "Kurs löschen"
     },
     "Delete": "Löschen",
     "Edit": "Ändern",

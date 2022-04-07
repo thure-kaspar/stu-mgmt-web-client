@@ -35,7 +35,8 @@
       "ConvertToIndividualAssessment": "Convert to individual assessments",
       "ViewAssessment": "View Assessment",
       "EditAdmissionCriteria": "Edit admission criteria",
-      "SwitchToAssessmentEditor": "Switch to Assessment Editor"
+      "SwitchToAssessmentEditor": "Switch to Assessment Editor",
+      "DeleteCourse": "Delete Course"
     },
     "Delete": "Delete",
     "Edit": "Edit",
