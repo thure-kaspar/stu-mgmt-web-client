@@ -1,0 +1,49 @@
+<div class="dialog-container max-w-sm" data-test="matrNrDialog">
+	<h2 mat-dialog-title>Matrikelnummer</h2>
+	<div mat-dialog-content>
+		<div class="flex flex-col gap-4 py-2">
+			<div class="text-light" *ngIf="displayNoMatrNrMessage">
+				Dein Account ist noch nicht mit deiner Matrikelnummer verknüpft. Bitte trage deine
+				Matrikelnummer hier ein und drücke auf "Bestätigen".
+			</div>
+
+			<mat-form-field class="w-full">
+				<mat-label>MatrNr</mat-label>
+				<input matInput type="number" [(ngModel)]="matrNr" />
+			</mat-form-field>
+
+			<div class="flex gap-2">
+				<button mat-flat-button color="accent" (click)="onConfirm()">
+					{{ 'Action.Confirm' | translate }}
+				</button>
+				<button mat-button [mat-dialog-close]="false">
+					{{ 'Action.Cancel' | translate }}
+				</button>
+			</div>
+
+			<hr />
+
+			<div class="flex flex-col gap-4 py-2">
+				<button class="w-fit font-bold" (click)="setDialogIgnoreOptionVisibility(true)">
+					Ich besitze keine Matrikelnummer...
+				</button>
+
+				<ng-container *ngIf="showDialogIgnoreOption">
+					<div class="text-light">
+						Dieser Dialog wird automatisch nach jedem Login angezeigt, wenn deine
+						Matrikelnummer unbekannt ist. Alternativ kann der Dialog in den
+						<a routerLink="/user/settings" class="text font-bold"
+							>{{ 'Misc.Settings' | translate }}</a
+						>
+						geöffnet werden.
+					</div>
+					<mat-checkbox
+						(change)="setDoNotShowDialogAgain($event)"
+						[checked]="showDialogIgnoreOption"
+						>Dialog nicht mehr anzeigen.</mat-checkbox
+					>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</div>

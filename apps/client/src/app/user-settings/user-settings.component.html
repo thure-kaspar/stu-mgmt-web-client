@@ -3,6 +3,15 @@
 
 	<div class="flex flex-col gap-8">
 		<student-mgmt-card>
+			<ng-container title>MatrNr</ng-container>
+			<ng-container content>
+				<button mat-stroked-button (click)="openMatrNrDialog()">
+					{{ "Action.Edit" | translate }}
+				</button>
+			</ng-container>
+		</student-mgmt-card>
+
+		<student-mgmt-card>
 			<ng-container title>{{ "Property.UserSettings.Language" | translate }}</ng-container>
 			<ng-container subtitle>{{ "Text.UserSettings.Language" | translate }}</ng-container>
 			<ng-container content>

@@ -4,9 +4,31 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { tap } from "rxjs/operators";
 import { AuthService } from "@student-mgmt-client/auth";
 import * as AuthActions from "./auth.actions";
+import { MatDialog } from "@angular/material/dialog";
+import { MatrNrDialog } from "../../../../../../apps/client/src/app/matr-nr/matr-nr.dialog";
 
 @Injectable()
 export class AuthEffects {
+	login$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(AuthActions.login),
+				tap(({ authResult }) => {
+					const user = authResult.user;
+					if (user.role === "USER" && !Number.isFinite(user.matrNr)) {
+						const ignoreMatrNrDialog =
+							localStorage.getItem("ignoreMatrNrDialog") === "true";
+
+						if (!ignoreMatrNrDialog) {
+							// Request user to enter their matrNr
+							this.dialog.open(MatrNrDialog);
+						}
+					}
+				})
+			),
+		{ dispatch: false }
+	);
+
 	logout$ = createEffect(
 		() =>
 			this.actions$.pipe(
@@ -43,5 +65,5 @@ export class AuthEffects {
 
 	private authKey = "auth";
 
-	constructor(private actions$: Actions, private router: Router) {}
+	constructor(private actions$: Actions, private router: Router, private dialog: MatDialog) {}
 }

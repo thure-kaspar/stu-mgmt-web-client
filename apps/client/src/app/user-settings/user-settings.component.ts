@@ -7,6 +7,7 @@ import {
 	OnInit
 } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDialog } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TranslateModule } from "@ngx-translate/core";
@@ -16,6 +17,7 @@ import { CardComponentModule, TitleComponentModule } from "@student-mgmt-client/
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { UserApi, UserSettingsDto } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
+import { MatrNrDialog } from "../matr-nr/matr-nr.dialog";
 
 type BlacklistableEvents = {
 	ASSIGNMENT_STARTED: boolean;
@@ -45,6 +47,7 @@ export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnIni
 
 	constructor(
 		private userApi: UserApi,
+		private dialog: MatDialog,
 		private toast: ToastService,
 		private cdRef: ChangeDetectorRef
 	) {
@@ -137,6 +140,10 @@ export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnIni
 	toggleAllowEmails(): void {
 		this.userSettings.allowEmails = !this.userSettings.allowEmails;
 		this.triggerUpdate$.next(this.userSettings);
+	}
+
+	openMatrNrDialog(): void {
+		this.dialog.open(MatrNrDialog);
 	}
 }
 

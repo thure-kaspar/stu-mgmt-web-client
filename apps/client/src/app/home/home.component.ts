@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { LoginDialog } from "@student-mgmt-client/auth";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
+import { MatrNrDialog } from "../matr-nr/matr-nr.dialog";
 
 @Component({
 	selector: "student-mgmt-home",
