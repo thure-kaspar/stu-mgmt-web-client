@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Inject, NgModule, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -107,6 +108,7 @@ export class NotificationSubscriberDialog implements OnInit {
 		MatDialogModule,
 		MatButtonModule,
 		MatSlideToggleModule,
+		MatCheckboxModule,
 		MatFormFieldModule,
 		MatInputModule,
 		TranslateModule

@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
@@ -16,12 +16,14 @@ import {
 import { NotificationApi, SubscriberDto } from "@student-mgmt/api-client";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { NotificationSubscriberDialog } from "../../dialogs/notification-subscriber/notification-subscriber.dialog";
+import {
+	NotificationSubscriberDialog,
+	NotificationSubscriberDialogModule
+} from "../../dialogs/notification-subscriber/notification-subscriber.dialog";
 
 @Component({
 	selector: "student-mgmt-notification-subscribers",
 	templateUrl: "./notification-subscribers.component.html",
-	styleUrls: ["./notification-subscribers.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationSubscribersComponent implements OnInit {
@@ -112,7 +114,8 @@ export class NotificationSubscribersComponent implements OnInit {
 		MatMenuModule,
 		TranslateModule,
 		IconComponentModule,
-		CardComponentModule
+		CardComponentModule,
+		NotificationSubscriberDialogModule
 	]
 })
 export class NotificationSubscribersComponentModule {}

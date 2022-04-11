@@ -1,12 +1,12 @@
-<div class="notification-subscribers">
-	<button class="btn-add" mat-flat-button color="accent" (click)="addOrUpdate()">
+<div class="notification-subscribers py-2">
+	<button mat-flat-button color="accent" (click)="addOrUpdate()">
 		<student-mgmt-icon name="add"></student-mgmt-icon>
 		<span>{{ "Action.Add" | translate }}</span>
 	</button>
 
-	<pre class="preformatted text-light">{{ "Text.NotificationDescription" | translate }}</pre>
+	<pre class="preformatted text-light py-4">{{ "Text.NotificationDescription" | translate }}</pre>
 
-	<div class="subscribers">
+	<div class="grid max-w-lg gap-4">
 		<student-mgmt-card *ngFor="let subscriber of subscribers$ | async">
 			<ng-container title>{{ subscriber.name }}</ng-container>
 			<ng-container subtitle>{{ subscriber.url }}</ng-container>
