@@ -411,7 +411,8 @@
         "ASSIGNMENT_EVALUATED": "Bewertung für Aufgabe erhalten",
         "ASSIGNMENT_STARTED": "Start einer Hausaufgabe",
         "PARTICIPANT_JOINED_GROUP": "Teilnehmer ist meiner Gruppe beigetreten",
-        "PARTICIPANT_LEFT_GROUP": "Teilnehmer hat meine Gruppe verlassen"
+        "PARTICIPANT_LEFT_GROUP": "Teilnehmer hat meine Gruppe verlassen",
+        "SUBMISSION_CREATED": "Abgabe für eine Aufgabe wurde eingereicht"
       },
       "EmailNotifications": "Informiere mich über ..."
     },

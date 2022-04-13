@@ -25,6 +25,7 @@ type BlacklistableEvents = {
 	ASSESSMENT_SCORE_CHANGED: boolean;
 	PARTICIPANT_JOINED_GROUP: boolean;
 	PARTICIPANT_LEFT_GROUP: boolean;
+	SUBMISSION_CREATED: boolean;
 };
 
 @Component({
@@ -42,7 +43,8 @@ export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnIni
 		"ASSIGNMENT_EVALUATED",
 		"ASSESSMENT_SCORE_CHANGED",
 		"PARTICIPANT_JOINED_GROUP",
-		"PARTICIPANT_LEFT_GROUP"
+		"PARTICIPANT_LEFT_GROUP",
+		"SUBMISSION_CREATED"
 	];
 
 	constructor(
@@ -113,7 +115,8 @@ export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnIni
 			ASSIGNMENT_EVALUATED: true,
 			ASSESSMENT_SCORE_CHANGED: true,
 			PARTICIPANT_JOINED_GROUP: true,
-			PARTICIPANT_LEFT_GROUP: true
+			PARTICIPANT_LEFT_GROUP: true,
+			SUBMISSION_CREATED: true
 		};
 
 		if (eventsFromDto) {

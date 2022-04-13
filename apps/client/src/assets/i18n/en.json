@@ -410,7 +410,8 @@
         "ASSIGNMENT_EVALUATED": "Assessment received",
         "ASSESSMENT_SCORE_CHANGED": "Score of an assessment was changed",
         "PARTICIPANT_JOINED_GROUP": "Participant joined my group",
-        "PARTICIPANT_LEFT_GROUP": "Participant left my group"
+        "PARTICIPANT_LEFT_GROUP": "Participant left my group",
+        "SUBMISSION_CREATED": "Solution for an assignment was submitted"
       },
       "EmailNotifications": "Notify me about ..."
     },
