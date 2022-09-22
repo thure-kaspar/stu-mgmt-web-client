@@ -1,5 +1,6 @@
-module.exports = {
-	displayName: "util-domain-types",
+/* eslint-disable */
+export default {
+	displayName: "ui-components",
 	preset: "../../../jest.preset.js",
 	setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
 	globals: {
@@ -8,7 +9,7 @@ module.exports = {
 			stringifyContentPathRegex: "\\.(html|svg)$"
 		}
 	},
-	coverageDirectory: "../../../coverage/libs/util/domain-types",
+	coverageDirectory: "../../../coverage/libs/ui/components",
 	transform: {
 		"^.+\\.(ts|mjs|js|html)$": "jest-preset-angular"
 	},

@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, Input, NgModule } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -22,7 +22,7 @@ import {
 	styleUrls: ["./admission-criteria-form.component.scss"]
 })
 export class AdmissionCriteriaFormComponent {
-	@Input() form: FormGroup;
+	@Input() form: UntypedFormGroup;
 
 	ruleTypeEnum = AdmissionRuleDto.TypeEnum;
 	typeEnum = AdmissionRuleDto.AssignmentTypeEnum;
@@ -46,7 +46,7 @@ export class AdmissionCriteriaFormComponent {
 		)
 	});
 
-	constructor(private fb: FormBuilder) {}
+	constructor(private fb: UntypedFormBuilder) {}
 
 	addRule(rule: AdmissionRuleDto): void {
 		if (rule?.type === this.ruleTypeEnum.REQUIRED_PERCENT_OVERALL) {
@@ -95,8 +95,8 @@ export class AdmissionCriteriaFormComponent {
 	}
 
 	/** Helper methods to retrieve the assignmentCriteria-formArray of the form. */
-	getRules(): FormArray {
-		return this.form.get("config.admissionCriteria.rules") as FormArray;
+	getRules(): UntypedFormArray {
+		return this.form.get("config.admissionCriteria.rules") as UntypedFormArray;
 	}
 
 	_getRuleAsIndividualPercent(

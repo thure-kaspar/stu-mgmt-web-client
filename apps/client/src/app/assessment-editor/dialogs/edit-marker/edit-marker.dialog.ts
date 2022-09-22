@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Inject, NgModule, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -16,9 +16,9 @@ import { MarkerDto } from "@student-mgmt/api-client";
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class EditMarkerDialog implements OnInit {
-	formGroup: FormGroup;
+	formGroup: UntypedFormGroup;
 
-	constructor(@Inject(MAT_DIALOG_DATA) private data: MarkerDto, private fb: FormBuilder) {}
+	constructor(@Inject(MAT_DIALOG_DATA) private data: MarkerDto, private fb: UntypedFormBuilder) {}
 
 	ngOnInit(): void {
 		this.formGroup = this.fb.group({

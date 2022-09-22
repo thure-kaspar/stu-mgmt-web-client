@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -43,7 +43,7 @@ export class CreateMultipleAssessmentsComponent extends UnsubscribeOnDestroy imp
 		private registrations: AssignmentRegistrationApi,
 		private readonly assessmentApi: AssessmentApi,
 		private participants: CourseParticipantsApi,
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private readonly route: ActivatedRoute,
 		private readonly router: Router,
 		private readonly toast: ToastService,

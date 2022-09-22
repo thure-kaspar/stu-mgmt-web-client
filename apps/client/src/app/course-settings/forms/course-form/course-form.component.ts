@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, Input, NgModule } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -19,12 +19,12 @@ import { getSemesterList } from "@student-mgmt-client/util-helper";
 	styleUrls: ["./course-form.component.scss"]
 })
 export class CourseFormComponent {
-	@Input() form: FormGroup;
+	@Input() form: UntypedFormGroup;
 	@Input() isEditMode = false;
 
 	semesters = getSemesterList();
 
-	constructor(private fb: FormBuilder) {}
+	constructor(private fb: UntypedFormBuilder) {}
 
 	addLink(link?: { name: string; url: string }): void {
 		this.getLinks().push(
@@ -39,8 +39,8 @@ export class CourseFormComponent {
 		this.getLinks().removeAt(index);
 	}
 
-	getLinks(): FormArray {
-		return this.form.get("links") as FormArray;
+	getLinks(): UntypedFormArray {
+		return this.form.get("links") as UntypedFormArray;
 	}
 }
 

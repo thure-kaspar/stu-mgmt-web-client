@@ -1,5 +1,6 @@
-module.exports = {
-	displayName: "ui-shared",
+/* eslint-disable */
+export default {
+	displayName: "feature-course-list",
 	preset: "../../../jest.preset.js",
 	setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
 	globals: {
@@ -8,7 +9,7 @@ module.exports = {
 			stringifyContentPathRegex: "\\.(html|svg)$"
 		}
 	},
-	coverageDirectory: "../../../coverage/libs/ui/shared",
+	coverageDirectory: "../../../coverage/libs/feature/course-list",
 	transform: {
 		"^.+\\.(ts|mjs|js|html)$": "jest-preset-angular"
 	},

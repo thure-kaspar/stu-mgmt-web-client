@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectorRef, Component, NgModule, ViewChild } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
@@ -41,7 +41,7 @@ import { SearchUserDialog } from "../course/dialogs/search-user/search-user.dial
 })
 export class CreateCourseComponent {
 	/** Form with the structure of a CourseCreateDto. */
-	form: FormGroup;
+	form: UntypedFormGroup;
 
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
@@ -61,7 +61,7 @@ export class CreateCourseComponent {
 		private courseApi: CourseApi,
 		private courseConfigApi: CourseConfigApi,
 		private courseParticipantsApi: CourseParticipantsApi,
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private dialog: MatDialog,
 		private toast: ToastService,
 		private router: Router,
@@ -193,8 +193,8 @@ export class CreateCourseComponent {
 	/**
 	 * Helper method to retrieve the lecturer-FormArray of the form.
 	 */
-	getLecturers(): FormArray {
-		return this.form.get("lecturers") as FormArray;
+	getLecturers(): UntypedFormArray {
+		return this.form.get("lecturers") as UntypedFormArray;
 	}
 }
 

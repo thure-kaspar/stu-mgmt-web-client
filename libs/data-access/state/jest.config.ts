@@ -1,5 +1,6 @@
-module.exports = {
-	displayName: "util-auth",
+/* eslint-disable */
+export default {
+	displayName: "state",
 	preset: "../../../jest.preset.js",
 	setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
 	globals: {
@@ -8,7 +9,7 @@ module.exports = {
 			stringifyContentPathRegex: "\\.(html|svg)$"
 		}
 	},
-	coverageDirectory: "../../../coverage/libs/util/auth",
+	coverageDirectory: "../../coverage/libs/data-access/state",
 	transform: {
 		"^.+\\.(ts|mjs|js|html)$": "jest-preset-angular"
 	},

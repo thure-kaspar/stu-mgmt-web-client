@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 
@@ -10,7 +10,7 @@ import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateTimePickerComponent extends UnsubscribeOnDestroy implements OnInit {
-	@Input() control!: FormControl;
+	@Input() control!: UntypedFormControl;
 	@Input() label!: string;
 	time?: string | null;
 

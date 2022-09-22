@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
@@ -29,7 +29,7 @@ import {
 export class NotificationSubscribersComponent implements OnInit {
 	subscribers$: Observable<SubscriberDto[]>;
 	private reload$ = new BehaviorSubject(null);
-	form: FormGroup;
+	form: UntypedFormGroup;
 	courseId: string;
 
 	constructor(

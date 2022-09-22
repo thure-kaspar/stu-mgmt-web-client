@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Inject, NgModule, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -18,12 +18,12 @@ import { StudentMgmtEvent, SubscriberDto } from "@student-mgmt/api-client";
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NotificationSubscriberDialog implements OnInit {
-	form: FormGroup;
+	form: UntypedFormGroup;
 	events = Object.values(StudentMgmtEvent.EventEnum);
 	allSelected = false;
 
 	constructor(
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private dialogRef: MatDialogRef<NotificationSubscriberDialog>,
 		@Inject(MAT_DIALOG_DATA) private data?: SubscriberDto
 	) {}
@@ -65,8 +65,8 @@ export class NotificationSubscriberDialog implements OnInit {
 		}
 	}
 
-	getEventsFromGroup(): FormGroup {
-		return this.form.get("events") as FormGroup;
+	getEventsFromGroup(): UntypedFormGroup {
+		return this.form.get("events") as UntypedFormGroup;
 	}
 
 	reset(): void {

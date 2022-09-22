@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, Input, NgModule } from "@angular/core";
-import { FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
@@ -12,7 +12,7 @@ import { TranslateModule } from "@ngx-translate/core";
 	styleUrls: ["./group-settings-form.component.scss"]
 })
 export class GroupSettingsFormComponent {
-	@Input() form: FormGroup;
+	@Input() form: UntypedFormGroup;
 }
 
 @NgModule({

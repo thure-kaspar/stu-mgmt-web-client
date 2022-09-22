@@ -1,20 +1,21 @@
 {
-  "version": 2,
-  "projects": {
-    "client": "apps/client",
-    "client-e2e": "apps/client-e2e",
-    "feature-assessment": "libs/feature/assessment",
-    "feature-course-list": "libs/feature/course-list",
-    "state": "libs/data-access/state",
-    "storybook": "libs/storybook",
-    "storybook-e2e": "apps/storybook-e2e",
-    "testing": "libs/testing",
-    "ui-components": "libs/ui/components",
-    "ui-shared": "libs/ui/shared",
-    "util-auth": "libs/util/auth",
-    "util-domain-types": "libs/util/domain-types",
-    "util-helper": "libs/util/helper",
-    "util-pipes": "libs/util/pipes",
-    "util-services": "libs/util/services"
-  }
+	"version": 2,
+	"projects": {
+		"client": "apps/client",
+		"client-e2e": "apps/client-e2e",
+		"feature-assessment": "libs/feature/assessment",
+		"feature-course-list": "libs/feature/course-list",
+		"state": "libs/data-access/state",
+		"storybook": "libs/storybook",
+		"storybook-e2e": "apps/storybook-e2e",
+		"testing": "libs/testing",
+		"ui-components": "libs/ui/components",
+		"ui-shared": "libs/ui/shared",
+		"util-auth": "libs/util/auth",
+		"util-domain-types": "libs/util/domain-types",
+		"util-helper": "libs/util/helper",
+		"util-pipes": "libs/util/pipes",
+		"util-services": "libs/util/services"
+	},
+	"$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

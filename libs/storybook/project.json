@@ -1,18 +1,16 @@
 {
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "library",
-	"root": "libs/storybook",
 	"sourceRoot": "libs/storybook/src",
 	"prefix": "student-mgmt",
 	"targets": {
 		"storybook": {
-			"executor": "@nrwl/storybook:storybook",
+			"executor": "@storybook/angular:start-storybook",
 			"options": {
-				"uiFramework": "@storybook/angular",
 				"port": 4400,
-				"config": {
-					"configFolder": "libs/storybook/.storybook"
-				},
-				"projectBuildConfig": "client"
+				"configDir": "libs/storybook/.storybook",
+				"browserTarget": "storybook:build-storybook",
+				"compodoc": false
 			},
 			"configurations": {
 				"ci": {
@@ -21,15 +19,13 @@
 			}
 		},
 		"build-storybook": {
-			"executor": "@nrwl/storybook:build",
+			"executor": "@storybook/angular:build-storybook",
 			"outputs": ["{options.outputPath}"],
 			"options": {
-				"uiFramework": "@storybook/angular",
-				"outputPath": "dist/storybook/storybook",
-				"config": {
-					"configFolder": "libs/storybook/.storybook"
-				},
-				"projectBuildConfig": "client"
+				"outputDir": "dist/storybook/storybook",
+				"configDir": "libs/storybook/.storybook",
+				"browserTarget": "storybook:build-storybook",
+				"compodoc": false
 			},
 			"configurations": {
 				"ci": {

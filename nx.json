@@ -3,9 +3,6 @@
 	"affected": {
 		"defaultBase": "master"
 	},
-	"cli": {
-		"defaultCollection": "@nrwl/angular"
-	},
 	"implicitDependencies": {
 		"package.json": {
 			"dependencies": "*",
@@ -22,14 +19,6 @@
 				"useDaemonProcess": true
 			}
 		}
-	},
-	"targetDependencies": {
-		"build": [
-			{
-				"target": "build",
-				"projects": "dependencies"
-			}
-		]
 	},
 	"generators": {
 		"@nrwl/angular:application": {
@@ -64,5 +53,11 @@
 			"style": "none"
 		}
 	},
-	"defaultProject": "client"
+	"defaultProject": "client",
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"targetDefaults": {
+		"build": {
+			"dependsOn": ["^build"]
+		}
+	}
 }

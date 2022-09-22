@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Inject, NgModule, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -25,14 +25,14 @@ import {
 export class CreateGroupDialog {
 	@ViewChild("createMultiple") createMultiple: CreateGroupMultipleComponent;
 	@ViewChild("tabs") tabGroup: MatTabGroup;
-	form: FormGroup;
+	form: UntypedFormGroup;
 
 	constructor(
 		public dialogRef: MatDialogRef<CreateGroupDialog>,
 		@Inject(MAT_DIALOG_DATA) public courseId: string,
 		private router: Router,
 		private groupApi: GroupApi,
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private toast: ToastService
 	) {
 		this.form = this.fb.group({

@@ -1,5 +1,5 @@
 {
-	"root": "libs/util/helper",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/util/helper/src",
 	"projectType": "library",
 	"targets": {
@@ -14,7 +14,7 @@
 			"executor": "@nrwl/jest:jest",
 			"outputs": ["coverage/libs/util/helper"],
 			"options": {
-				"jestConfig": "libs/util/helper/jest.config.js",
+				"jestConfig": "libs/util/helper/jest.config.ts",
 				"passWithNoTests": true
 			}
 		}

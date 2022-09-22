@@ -1,6 +1,6 @@
 {
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "library",
-	"root": "libs/feature/course-list",
 	"sourceRoot": "libs/feature/course-list/src",
 	"prefix": "student-mgmt",
 	"targets": {
@@ -8,7 +8,7 @@
 			"executor": "@nrwl/jest:jest",
 			"outputs": ["coverage/libs/feature/course-list"],
 			"options": {
-				"jestConfig": "libs/feature/course-list/jest.config.js",
+				"jestConfig": "libs/feature/course-list/jest.config.ts",
 				"passWithNoTests": true
 			}
 		},

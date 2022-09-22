@@ -8,8 +8,8 @@ import {
 	Output
 } from "@angular/core";
 import {
-	FormBuilder,
-	FormGroup,
+	UntypedFormBuilder,
+	UntypedFormGroup,
 	FormsModule,
 	ReactiveFormsModule,
 	Validators
@@ -32,11 +32,11 @@ export class CreateGroupMultipleComponent {
 	@Output() groupsCreated = new EventEmitter<GroupDto[]>();
 
 	/** Form with the structure of a GroupCreateBulkDto. */
-	form: FormGroup;
+	form: UntypedFormGroup;
 	/** Determines, wether the user wants to specify group names explicitly or use a naming schema. */
 	useNamingSchema: boolean;
 
-	constructor(private fb: FormBuilder, private groupApi: GroupApi, private toast: ToastService) {
+	constructor(private fb: UntypedFormBuilder, private groupApi: GroupApi, private toast: ToastService) {
 		this.form = this.fb.group({
 			names: [null],
 			nameSchema: [null],

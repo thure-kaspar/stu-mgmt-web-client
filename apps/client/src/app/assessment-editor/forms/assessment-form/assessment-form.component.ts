@@ -8,9 +8,9 @@ import {
 } from "@angular/core";
 import {
 	AbstractControl,
-	FormArray,
-	FormBuilder,
-	FormGroup,
+	UntypedFormArray,
+	UntypedFormBuilder,
+	UntypedFormGroup,
 	ReactiveFormsModule,
 	ValidationErrors,
 	ValidatorFn,
@@ -51,13 +51,13 @@ const groupOrUserValidator: ValidatorFn = (control: AbstractControl): Validation
 export class AssessmentFormComponent {
 	@Input() assignment: AssignmentDto;
 
-	form: FormGroup;
+	form: UntypedFormGroup;
 
 	severityEnum = MarkerDto.SeverityEnum;
 	collaborationEnum = AssignmentDto.CollaborationEnum;
 
 	constructor(
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private dialog: MatDialog,
 		private dialogService: DialogService,
 		private cdRef: ChangeDetectorRef
@@ -144,16 +144,16 @@ export class AssessmentFormComponent {
 		}
 	}
 
-	getPartialAssessments(): FormArray {
-		return this.form.get("partialAssessments") as FormArray;
+	getPartialAssessments(): UntypedFormArray {
+		return this.form.get("partialAssessments") as UntypedFormArray;
 	}
 
-	getPartialAssessment(index: number): FormGroup {
-		return this.getPartialAssessments().at(index) as FormGroup;
+	getPartialAssessment(index: number): UntypedFormGroup {
+		return this.getPartialAssessments().at(index) as UntypedFormGroup;
 	}
 
-	getMarkers(partialIndex: number): FormArray {
-		return this.getPartialAssessments().at(partialIndex).get("markers") as FormArray;
+	getMarkers(partialIndex: number): UntypedFormArray {
+		return this.getPartialAssessments().at(partialIndex).get("markers") as UntypedFormArray;
 	}
 
 	addMarker(partialIndex: number, severity: MarkerDto.SeverityEnum): void {

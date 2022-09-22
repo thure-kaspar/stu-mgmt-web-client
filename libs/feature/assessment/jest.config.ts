@@ -1,5 +1,6 @@
-module.exports = {
-	displayName: "state",
+/* eslint-disable */
+export default {
+	displayName: "feature-assessment",
 	preset: "../../../jest.preset.js",
 	setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
 	globals: {
@@ -8,7 +9,7 @@ module.exports = {
 			stringifyContentPathRegex: "\\.(html|svg)$"
 		}
 	},
-	coverageDirectory: "../../coverage/libs/data-access/state",
+	coverageDirectory: "../../../coverage/libs/feature/assessment",
 	transform: {
 		"^.+\\.(ts|mjs|js|html)$": "jest-preset-angular"
 	},

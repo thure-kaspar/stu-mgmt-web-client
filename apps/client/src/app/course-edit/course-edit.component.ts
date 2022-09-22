@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -35,7 +35,7 @@ import { GroupSettingsFormComponent } from "../course-settings/forms/group-setti
 })
 export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit {
 	/** Form with the structure of a CourseCreateDto. */
-	form: FormGroup;
+	form: UntypedFormGroup;
 
 	/** Index of the selected tab. */
 	selectedIndex = 0;
@@ -67,7 +67,7 @@ export class CourseEditComponent extends UnsubscribeOnDestroy implements OnInit 
 	courseConfig: CourseConfigDto;
 
 	constructor(
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private route: ActivatedRoute,
 		private router: Router,
 		private courseConfigApi: CourseConfigApi,

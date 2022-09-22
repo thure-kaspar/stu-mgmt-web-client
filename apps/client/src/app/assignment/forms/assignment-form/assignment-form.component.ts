@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, NgModule } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -22,7 +22,7 @@ import { AssignmentDto } from "@student-mgmt/api-client";
 	templateUrl: "./assignment-form.component.html"
 })
 export class AssignmentFormComponent {
-	form: FormGroup;
+	form: UntypedFormGroup;
 
 	stateEnum = AssignmentDto.StateEnum;
 	typeEnum = AssignmentDto.TypeEnum;
@@ -36,7 +36,7 @@ export class AssignmentFormComponent {
 		AssignmentDto.CollaborationEnum.GROUP_OR_SINGLE
 	];
 
-	constructor(private fb: FormBuilder) {
+	constructor(private fb: UntypedFormBuilder) {
 		this.form = this.fb.group({
 			name: [null, Validators.required],
 			state: [null, Validators.required],
@@ -65,8 +65,8 @@ export class AssignmentFormComponent {
 		this.getLinks().removeAt(index);
 	}
 
-	getLinks(): FormArray {
-		return this.form.get("links") as FormArray;
+	getLinks(): UntypedFormArray {
+		return this.form.get("links") as UntypedFormArray;
 	}
 
 	addConfig(config?: { tool: string; config: string }): void {
@@ -82,8 +82,8 @@ export class AssignmentFormComponent {
 		this.getConfigs().removeAt(index);
 	}
 
-	getConfigs(): FormArray {
-		return this.form.get("configs") as FormArray;
+	getConfigs(): UntypedFormArray {
+		return this.form.get("configs") as UntypedFormArray;
 	}
 
 	getConfigValue(index: number): string {
