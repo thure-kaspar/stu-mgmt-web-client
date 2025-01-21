@@ -1,12 +1,13 @@
 {
+	"name": "feature-course-list",
 	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "library",
 	"sourceRoot": "libs/feature/course-list/src",
 	"prefix": "student-mgmt",
 	"targets": {
 		"test": {
-			"executor": "@nrwl/jest:jest",
-			"outputs": ["coverage/libs/feature/course-list"],
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/feature/course-list"],
 			"options": {
 				"jestConfig": "libs/feature/course-list/jest.config.ts",
 				"passWithNoTests": true

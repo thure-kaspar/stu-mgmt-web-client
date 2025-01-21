@@ -1,10 +1,11 @@
 {
+	"name": "storybook-e2e",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "apps/storybook-e2e/src",
 	"projectType": "application",
 	"targets": {
 		"e2e": {
-			"executor": "@nrwl/cypress:cypress",
+			"executor": "@nx/cypress:cypress",
 			"options": {
 				"cypressConfig": "apps/storybook-e2e/cypress.json",
 				"devServerTarget": "storybook:storybook"

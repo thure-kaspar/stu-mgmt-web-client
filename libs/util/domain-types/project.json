@@ -1,12 +1,13 @@
 {
+	"name": "util-domain-types",
 	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "library",
 	"sourceRoot": "libs/util/domain-types/src",
 	"prefix": "student-mgmt",
 	"targets": {
 		"test": {
-			"executor": "@nrwl/jest:jest",
-			"outputs": ["coverage/libs/util/domain-types"],
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/util/domain-types"],
 			"options": {
 				"jestConfig": "libs/util/domain-types/jest.config.ts",
 				"passWithNoTests": true

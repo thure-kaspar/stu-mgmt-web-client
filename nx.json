@@ -3,16 +3,9 @@
 	"affected": {
 		"defaultBase": "master"
 	},
-	"implicitDependencies": {
-		"package.json": {
-			"dependencies": "*",
-			"devDependencies": "*"
-		},
-		".eslintrc.json": "*"
-	},
 	"tasksRunnerOptions": {
 		"default": {
-			"runner": "@nrwl/nx-cloud",
+			"runner": "nx-cloud",
 			"options": {
 				"cacheableOperations": ["build", "lint", "test", "e2e"],
 				"accessToken": "MjQxODQ5ZjgtNjZiNi00NDVjLTgzYTktMWI4MGZjMGJiMTJifHJlYWQtd3JpdGU=",
@@ -21,20 +14,20 @@
 		}
 	},
 	"generators": {
-		"@nrwl/angular:application": {
+		"@nx/angular:application": {
 			"style": "none",
 			"linter": "eslint",
 			"unitTestRunner": "jest",
 			"e2eTestRunner": "cypress",
 			"strict": false
 		},
-		"@nrwl/angular:library": {
+		"@nx/angular:library": {
 			"linter": "eslint",
 			"unitTestRunner": "jest",
 			"importPath": "@student-mgmt-client/LIBRARY_NAME",
 			"strict": true,
-			"simpleModuleName": true,
-			"standaloneConfig": true
+			"standaloneConfig": true,
+			"simpleName": true
 		},
 		"@schematics/angular:component": {
 			"style": "none",
@@ -42,14 +35,14 @@
 			"skipTests": true,
 			"skipImport": true
 		},
-		"@nrwl/angular:scam": {
+		"@nx/angular:scam": {
 			"prefix": "student-mgmt",
 			"style": "none",
 			"changeDetection": "OnPush",
 			"inlineScam": true,
 			"skipTests": true
 		},
-		"@nrwl/angular:component": {
+		"@nx/angular:component": {
 			"style": "none"
 		}
 	},
@@ -57,7 +50,37 @@
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
 	"targetDefaults": {
 		"build": {
-			"dependsOn": ["^build"]
+			"dependsOn": ["^build"],
+			"inputs": ["production", "^production"]
+		},
+		"e2e": {
+			"inputs": ["default", "^production"]
+		},
+		"test": {
+			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+		},
+		"build-storybook": {
+			"inputs": [
+				"default",
+				"^production",
+				"{workspaceRoot}/.storybook/**/*",
+				"{projectRoot}/.storybook/**/*",
+				"{projectRoot}/tsconfig.storybook.json"
+			]
 		}
+	},
+	"namedInputs": {
+		"default": ["{projectRoot}/**/*", "sharedGlobals"],
+		"sharedGlobals": [],
+		"production": [
+			"default",
+			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+			"!{projectRoot}/tsconfig.spec.json",
+			"!{projectRoot}/jest.config.[jt]s",
+			"!{projectRoot}/.storybook/**/*",
+			"!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+			"!{projectRoot}/tsconfig.storybook.json",
+			"!{projectRoot}/src/test-setup.[jt]s"
+		]
 	}
 }

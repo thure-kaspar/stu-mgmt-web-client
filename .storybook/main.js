@@ -1,6 +1,5 @@
 module.exports = {
-	stories: [],
-	addons: ["@storybook/addon-essentials", "storybook-dark-mode", "storybook-tailwind-dark-mode"],
+	addons: ["storybook-dark-mode", "storybook-tailwind-dark-mode"],
 	typescript: {
 		check: false,
 		reactDocgen: false

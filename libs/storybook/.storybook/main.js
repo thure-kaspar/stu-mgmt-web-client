@@ -8,7 +8,7 @@ module.exports = {
 		"../../../apps/client/src/app/**/*.stories.ts",
 		"../../../libs/**/*.stories.ts"
 	],
-	addons: [...rootMain.addons],
+	addons: ["@storybook/addon-essentials", ...rootMain.addons],
 	webpackFinal: async (config, { configType }) => {
 		// apply any global webpack configs that might have been specified in .storybook/main.js
 		if (rootMain.webpackFinal) {

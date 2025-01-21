@@ -1,12 +1,13 @@
 {
+	"name": "feature-assessment",
 	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "library",
 	"sourceRoot": "libs/feature/assessment/src",
 	"prefix": "student-mgmt",
 	"targets": {
 		"test": {
-			"executor": "@nrwl/jest:jest",
-			"outputs": ["coverage/libs/feature/assessment"],
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/feature/assessment"],
 			"options": {
 				"jestConfig": "libs/feature/assessment/jest.config.ts",
 				"passWithNoTests": true

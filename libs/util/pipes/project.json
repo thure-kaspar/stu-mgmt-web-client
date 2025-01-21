@@ -1,12 +1,13 @@
 {
+	"name": "util-pipes",
 	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "library",
 	"sourceRoot": "libs/util/pipes/src",
 	"prefix": "student-mgmt-client",
 	"targets": {
 		"test": {
-			"executor": "@nrwl/jest:jest",
-			"outputs": ["coverage/libs/util/pipes"],
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/util/pipes"],
 			"options": {
 				"jestConfig": "libs/util/pipes/jest.config.ts",
 				"passWithNoTests": true

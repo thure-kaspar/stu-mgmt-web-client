@@ -1,4 +1,5 @@
 {
+	"name": "util-helper",
 	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/util/helper/src",
 	"projectType": "library",
@@ -11,8 +12,8 @@
 			}
 		},
 		"test": {
-			"executor": "@nrwl/jest:jest",
-			"outputs": ["coverage/libs/util/helper"],
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/util/helper"],
 			"options": {
 				"jestConfig": "libs/util/helper/jest.config.ts",
 				"passWithNoTests": true
