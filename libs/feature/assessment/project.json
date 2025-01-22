@@ -9,8 +9,7 @@
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/libs/feature/assessment"],
 			"options": {
-				"jestConfig": "libs/feature/assessment/jest.config.ts",
-				"passWithNoTests": true
+				"jestConfig": "libs/feature/assessment/jest.config.ts"
 			}
 		},
 		"lint": {

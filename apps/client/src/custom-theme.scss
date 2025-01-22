@@ -1,7 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
-@import "@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -19,11 +18,15 @@ $student-mgmt-client-accent: mat.define-palette(mat.$red-palette, 900);
 $student-mgmt-client-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$student-mgmt-client-theme: mat.define-light-theme(
-	$student-mgmt-client-primary,
-	$student-mgmt-client-accent,
-	$student-mgmt-client-warn
-);
+$student-mgmt-client-theme: mat.define-light-theme((
+        color: (
+          primary: $student-mgmt-client-primary,
+          accent: $student-mgmt-client-accent,
+		      warn: $student-mgmt-client-warn
+        ),
+        typography: mat.define-typography-config(),
+        density: 0,
+       ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -33,11 +36,19 @@ $student-mgmt-client-theme: mat.define-light-theme(
 // https://stackoverflow.com/questions/43919927/angular-material2-theming-how-to-set-app-background
 
 .dark {
-	color: $light-primary-text;
+	color: white;
 	$dark-primary: mat.define-palette(mat.$grey-palette, 600, 800, 900);
 	$dark-accent: mat.define-palette(mat.$red-palette, 900);
 	$dark-warn: mat.define-palette(mat.$red-palette);
-	$dark-theme: mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);
+  $dark-theme: mat.define-dark-theme((
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+      warn: $dark-warn
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+   ));
 
-	@include mat.all-component-themes($dark-theme);
+	@include mat.all-component-colors($dark-theme);
 }

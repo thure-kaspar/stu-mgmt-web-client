@@ -1,17 +1,6 @@
 {
-	"npmScope": "student-mgmt-client",
 	"affected": {
 		"defaultBase": "master"
-	},
-	"tasksRunnerOptions": {
-		"default": {
-			"runner": "nx-cloud",
-			"options": {
-				"cacheableOperations": ["build", "lint", "test", "e2e"],
-				"accessToken": "MjQxODQ5ZjgtNjZiNi00NDVjLTgzYTktMWI4MGZjMGJiMTJifHJlYWQtd3JpdGU=",
-				"useDaemonProcess": true
-			}
-		}
 	},
 	"generators": {
 		"@nx/angular:application": {
@@ -51,13 +40,12 @@
 	"targetDefaults": {
 		"build": {
 			"dependsOn": ["^build"],
-			"inputs": ["production", "^production"]
+			"inputs": ["production", "^production"],
+			"cache": true
 		},
 		"e2e": {
-			"inputs": ["default", "^production"]
-		},
-		"test": {
-			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+			"inputs": ["default", "^production"],
+			"cache": true
 		},
 		"build-storybook": {
 			"inputs": [
@@ -67,6 +55,22 @@
 				"{projectRoot}/.storybook/**/*",
 				"{projectRoot}/tsconfig.storybook.json"
 			]
+		},
+		"lint": {
+			"cache": true
+		},
+		"@nx/jest:jest": {
+			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+			"cache": true,
+			"options": {
+				"passWithNoTests": true
+			},
+			"configurations": {
+				"ci": {
+					"ci": true,
+					"codeCoverage": true
+				}
+			}
 		}
 	},
 	"namedInputs": {
@@ -82,5 +86,7 @@
 			"!{projectRoot}/tsconfig.storybook.json",
 			"!{projectRoot}/src/test-setup.[jt]s"
 		]
-	}
+	},
+	"useDaemonProcess": true,
+	"nxCloudAccessToken": "MjQxODQ5ZjgtNjZiNi00NDVjLTgzYTktMWI4MGZjMGJiMTJifHJlYWQtd3JpdGU="
 }
