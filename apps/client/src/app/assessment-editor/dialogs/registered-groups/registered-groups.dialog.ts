@@ -29,9 +29,10 @@ export type RegisteredGroupsDialogData = {
 };
 
 @Component({
-	selector: "student-mgmt-registered-groups",
-	templateUrl: "./registered-groups.dialog.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-registered-groups",
+    templateUrl: "./registered-groups.dialog.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class RegisteredGroupsDialog extends UnsubscribeOnDestroy implements OnInit {

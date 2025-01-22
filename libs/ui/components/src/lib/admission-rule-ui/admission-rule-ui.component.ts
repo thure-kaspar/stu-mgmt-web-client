@@ -5,9 +5,10 @@ import { AssignmentTypeChipComponentModule } from "@student-mgmt-client/shared-u
 import { AdmissionRuleDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-admission-rule-ui",
-	templateUrl: "./admission-rule-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-admission-rule-ui",
+    templateUrl: "./admission-rule-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AdmissionRuleUiComponent {
 	@Input() rule!: AdmissionRuleDto;

@@ -17,9 +17,10 @@ import {
 } from "./create-group-multiple/create-group-multiple.component";
 
 @Component({
-	selector: "student-mgmt-create-group",
-	templateUrl: "./create-group.dialog.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-create-group",
+    templateUrl: "./create-group.dialog.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class CreateGroupDialog {

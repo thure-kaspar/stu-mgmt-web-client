@@ -18,8 +18,9 @@ import {
 import { AssignmentDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-assignment-form",
-	templateUrl: "./assignment-form.component.html"
+    selector: "student-mgmt-assignment-form",
+    templateUrl: "./assignment-form.component.html",
+    standalone: false
 })
 export class AssignmentFormComponent {
 	form: UntypedFormGroup;

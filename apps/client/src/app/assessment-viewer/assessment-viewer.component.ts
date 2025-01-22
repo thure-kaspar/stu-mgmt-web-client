@@ -16,9 +16,10 @@ import { AssessmentHeaderComponentModule } from "../assessment/components/assess
 import { PartialAssessmentComponentModule } from "./partial-assessment/partial-assessment.component";
 
 @Component({
-	selector: "student-mgmt-assessment-viewer",
-	templateUrl: "./assessment-viewer.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-viewer",
+    templateUrl: "./assessment-viewer.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssessmentViewerComponent implements OnInit {
 	vm$: Observable<AssignmentWithAssessment>;

@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/co
 import { FirstCharacterPipeModule } from "@student-mgmt-client/pipes";
 
 @Component({
-	selector: "student-mgmt-person-icon",
-	templateUrl: "./person-icon.component.html",
-	styleUrls: ["./person-icon.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-person-icon",
+    templateUrl: "./person-icon.component.html",
+    styleUrls: ["./person-icon.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PersonIconComponent {
 	@Input() name!: string;

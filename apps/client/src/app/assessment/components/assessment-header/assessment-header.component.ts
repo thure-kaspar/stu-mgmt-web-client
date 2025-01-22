@@ -21,9 +21,10 @@ import { BehaviorSubject } from "rxjs";
 import { AssessmentTargetComponentModule } from "../assessment-target/assessment-target.component";
 
 @Component({
-	selector: "student-mgmt-assessment-header",
-	templateUrl: "./assessment-header.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-header",
+    templateUrl: "./assessment-header.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssessmentHeaderComponent {
 	@Input() assignment: AssignmentDto;

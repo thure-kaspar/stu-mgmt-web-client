@@ -34,9 +34,10 @@ class GroupFilter {
 }
 
 @Component({
-	selector: "student-mgmt-group-list",
-	templateUrl: "./group-list.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-group-list",
+    templateUrl: "./group-list.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GroupListComponent extends UnsubscribeOnDestroy implements OnInit {
 	private participant: Participant;

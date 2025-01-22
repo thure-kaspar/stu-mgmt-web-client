@@ -29,10 +29,11 @@ import { firstValueFrom, take, tap } from "rxjs";
 import { JoinCourseDialog } from "../../dialogs/join-course/join-course.dialog";
 
 @Component({
-	selector: "student-mgmt-course",
-	templateUrl: "./course.component.html",
-	styleUrls: ["./course.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-course",
+    templateUrl: "./course.component.html",
+    styleUrls: ["./course.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CourseComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;

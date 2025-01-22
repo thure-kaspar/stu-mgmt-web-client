@@ -55,9 +55,10 @@ type AssessmentStatistics = {
 };
 
 @Component({
-	selector: "student-mgmt-created-assessments",
-	templateUrl: "./created-assessments.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-created-assessments",
+    templateUrl: "./created-assessments.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CreatedAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;

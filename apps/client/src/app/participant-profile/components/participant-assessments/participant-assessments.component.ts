@@ -22,9 +22,10 @@ import { combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
 
 @Component({
-	selector: "student-mgmt-participant-assessments",
-	templateUrl: "./participant-assessments.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-participant-assessments",
+    templateUrl: "./participant-assessments.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ParticipantAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {
 	assignmentsWithAssessments$: Observable<AssignmentWithAssessment[]>;

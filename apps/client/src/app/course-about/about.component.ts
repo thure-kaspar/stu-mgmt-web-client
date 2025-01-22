@@ -8,9 +8,10 @@ import { CourseAboutDto, CourseApi } from "@student-mgmt/api-client";
 import { Observable } from "rxjs";
 
 @Component({
-	selector: "student-mgmt-about",
-	templateUrl: "./about.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-about",
+    templateUrl: "./about.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AboutComponent implements OnInit {
 	about$: Observable<CourseAboutDto>;

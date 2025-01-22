@@ -34,9 +34,10 @@ type AssessmentDtoExtended = AssessmentDto & {
 type PassFailState = "passed" | "failed" | "submitted" | null;
 
 @Component({
-	selector: "student-mgmt-assignment-card",
-	templateUrl: "./assignment-card.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assignment-card",
+    templateUrl: "./assignment-card.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssignmentCardComponent extends UnsubscribeOnDestroy implements OnInit {
 	@Input() assignment: AssignmentDto;

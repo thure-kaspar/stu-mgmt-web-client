@@ -8,8 +8,9 @@ import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
-	selector: "student-mgmt-login",
-	templateUrl: "./login.component.html"
+    selector: "student-mgmt-login",
+    templateUrl: "./login.component.html",
+    standalone: false
 })
 export class LoginComponent {
 	errorMessage: string;

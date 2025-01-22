@@ -1,6 +1,9 @@
 import { NgModule, Pipe, PipeTransform } from "@angular/core";
 
-@Pipe({ name: "firstChar" })
+@Pipe({
+    name: "firstChar",
+    standalone: false
+})
 export class FirstCharacterPipe implements PipeTransform {
 	transform(value?: string | null): string {
 		if (!value || value.length == 0) {

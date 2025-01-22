@@ -19,9 +19,10 @@ import { GroupApi, GroupDto, GroupSettingsDto, GroupUpdateDto } from "@student-m
  * @returns `GroupDto`
  */
 @Component({
-	selector: "student-mgmt-edit-group",
-	templateUrl: "./edit-group.dialog.html",
-	styleUrls: ["./edit-group.dialog.scss"]
+    selector: "student-mgmt-edit-group",
+    templateUrl: "./edit-group.dialog.html",
+    styleUrls: ["./edit-group.dialog.scss"],
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class EditGroupDialog extends UnsubscribeOnDestroy implements OnInit {

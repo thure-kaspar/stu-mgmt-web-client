@@ -14,9 +14,10 @@ import { AdmissionStatusApi } from "@student-mgmt/api-client";
 import { Subject } from "rxjs";
 
 @Component({
-	selector: "student-mgmt-points-overview",
-	templateUrl: "./points-overview.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-points-overview",
+    templateUrl: "./points-overview.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PointsOverviewComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;

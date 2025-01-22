@@ -3,9 +3,10 @@ import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/co
 import { MatCardModule } from "@angular/material/card";
 
 @Component({
-	selector: "student-mgmt-title",
-	templateUrl: "./title.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-title",
+    templateUrl: "./title.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TitleComponent {
 	@Input() title!: string;

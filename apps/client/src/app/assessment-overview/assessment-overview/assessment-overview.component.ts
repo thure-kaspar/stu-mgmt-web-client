@@ -11,9 +11,10 @@ import { AssignmentDto } from "@student-mgmt/api-client";
 import { Observable } from "rxjs";
 
 @Component({
-	selector: "student-mgmt-assessment-overview",
-	templateUrl: "./assessment-overview.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-overview",
+    templateUrl: "./assessment-overview.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssessmentOverviewComponent implements OnInit {
 	assignment$: Observable<AssignmentDto>;

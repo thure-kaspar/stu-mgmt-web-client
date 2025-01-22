@@ -26,10 +26,12 @@ class GroupFilter {
 }
 
 @Component({
-	selector: "student-mgmt-search-group",
-	templateUrl: "./search-group.dialog.html",
-	styleUrls: ["./search-group.dialog.scss"]
-	//changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-search-group",
+    templateUrl: "./search-group.dialog.html",
+    styleUrls: ["./search-group.dialog.scss"]
+    //changeDetection: ChangeDetectionStrategy.OnPush
+    ,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchGroupDialog extends UnsubscribeOnDestroy implements OnInit {

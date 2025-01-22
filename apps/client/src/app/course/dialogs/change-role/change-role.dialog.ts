@@ -21,9 +21,10 @@ export type ChangeRoleDialogData = {
  * to refetch its data.
  */
 @Component({
-	selector: "student-mgmt-change-role",
-	templateUrl: "./change-role.dialog.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-change-role",
+    templateUrl: "./change-role.dialog.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ChangeRoleDialog implements OnInit {

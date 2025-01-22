@@ -5,9 +5,10 @@ import { AssignmentFormComponent } from "../assignment/forms/assignment-form/ass
 import { AssignmentManagementFacade } from "../assignment/services/assignment-management.facade";
 
 @Component({
-	selector: "student-mgmt-assignment-edit",
-	templateUrl: "./assignment-edit.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assignment-edit",
+    templateUrl: "./assignment-edit.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssignmentEditComponent implements OnInit {
 	@ViewChild(AssignmentFormComponent, { static: true }) form: AssignmentFormComponent;

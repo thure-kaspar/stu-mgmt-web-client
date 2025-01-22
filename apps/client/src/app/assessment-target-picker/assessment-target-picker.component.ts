@@ -31,10 +31,11 @@ export class AssessmentTargetFilter {
 }
 
 @Component({
-	selector: "student-mgmt-assessment-target-picker",
-	templateUrl: "./assessment-target-picker.component.html",
-	styleUrls: ["./assessment-target-picker.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-target-picker",
+    templateUrl: "./assessment-target-picker.component.html",
+    styleUrls: ["./assessment-target-picker.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssessmentTargetPickerComponent implements OnInit, OnDestroy {
 	@Input() selectedId: string;

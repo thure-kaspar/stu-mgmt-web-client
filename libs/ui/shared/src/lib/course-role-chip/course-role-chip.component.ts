@@ -5,9 +5,10 @@ import { ParticipantDto } from "@student-mgmt/api-client";
 import { SimpleChipComponentModule } from "../simple-chip/simple-chip.component";
 
 @Component({
-	selector: "student-mgmt-course-role-chip",
-	templateUrl: "./course-role-chip.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-course-role-chip",
+    templateUrl: "./course-role-chip.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CourseRoleChipComponent {
 	@Input() role!: ParticipantDto.RoleEnum;

@@ -19,9 +19,10 @@ import {
 import { SearchCourseDialog } from "../course/dialogs/search-course/search-course.dialog";
 
 @Component({
-	selector: "student-mgmt-participants-list-comparison",
-	templateUrl: "./participants-list-comparison.component.html",
-	styleUrls: ["./participants-list-comparison.component.scss"]
+    selector: "student-mgmt-participants-list-comparison",
+    templateUrl: "./participants-list-comparison.component.html",
+    styleUrls: ["./participants-list-comparison.component.scss"],
+    standalone: false
 })
 export class ParticipantsListComparisonComponent extends UnsubscribeOnDestroy implements OnInit {
 	/** Selected courses that should be compared to the currently opened course. */

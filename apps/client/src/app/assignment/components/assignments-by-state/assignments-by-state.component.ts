@@ -5,9 +5,10 @@ import { AssignmentDto } from "@student-mgmt/api-client";
 import { AssignmentCardComponentModule } from "../assignment-card/assignment-card.component";
 
 @Component({
-	selector: "student-mgmt-assignments-by-state",
-	templateUrl: "./assignments-by-state.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assignments-by-state",
+    templateUrl: "./assignments-by-state.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssignmentsByStateComponent {
 	@Input() course!: Course;

@@ -29,9 +29,10 @@ type BlacklistableEvents = {
 };
 
 @Component({
-	selector: "student-mgmt-user-settings",
-	templateUrl: "./user-settings.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-user-settings",
+    templateUrl: "./user-settings.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UserSettingsComponent extends UnsubscribeOnDestroy implements OnInit {
 	userSettings: UserSettingsDto;

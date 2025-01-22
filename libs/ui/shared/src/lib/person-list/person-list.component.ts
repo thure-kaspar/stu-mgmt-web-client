@@ -12,9 +12,10 @@ import { ParticipantDto } from "@student-mgmt/api-client";
 import { PersonIconComponentModule } from "../person-icon/person-icon.component";
 
 @Component({
-	selector: "student-mgmt-person-list",
-	templateUrl: "./person-list.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-person-list",
+    templateUrl: "./person-list.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PersonListComponent {
 	@Input() participants!: ParticipantDto[];

@@ -3,9 +3,10 @@ import { ChangeDetectionStrategy, Component, Input, NgModule } from "@angular/co
 import { IconComponentModule } from "../icon/icon.component";
 
 @Component({
-	selector: "student-mgmt-chip",
-	templateUrl: "./chip.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-chip",
+    templateUrl: "./chip.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ChipComponent {
 	@Input() icon?: string;

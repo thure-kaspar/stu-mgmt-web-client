@@ -4,10 +4,11 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 
 @Component({
-	selector: "student-mgmt-date-time-picker",
-	templateUrl: "./date-time-picker.component.html",
-	styleUrls: ["./date-time-picker.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-date-time-picker",
+    templateUrl: "./date-time-picker.component.html",
+    styleUrls: ["./date-time-picker.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DateTimePickerComponent extends UnsubscribeOnDestroy implements OnInit {
 	@Input() control!: UntypedFormControl;

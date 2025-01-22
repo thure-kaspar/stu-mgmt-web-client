@@ -9,10 +9,11 @@ import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { MatrNrDialog } from "../matr-nr/matr-nr.dialog";
 
 @Component({
-	selector: "student-mgmt-home",
-	templateUrl: "./home.component.html",
-	styleUrls: ["./home.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-home",
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	currentLanguage: string;

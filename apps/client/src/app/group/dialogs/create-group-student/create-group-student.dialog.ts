@@ -17,9 +17,10 @@ import { CourseConfigApi, GroupApi, GroupDto, GroupSettingsDto } from "@student-
  * @returns `GroupDto`
  */
 @Component({
-	selector: "student-mgmt-create-group-student",
-	templateUrl: "./create-group-student.dialog.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-create-group-student",
+    templateUrl: "./create-group-student.dialog.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class CreateGroupStudentDialog extends UnsubscribeOnDestroy implements OnInit {

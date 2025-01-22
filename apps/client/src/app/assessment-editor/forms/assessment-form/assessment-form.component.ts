@@ -44,9 +44,10 @@ const groupOrUserValidator: ValidatorFn = (control: AbstractControl): Validation
 };
 
 @Component({
-	selector: "student-mgmt-assessment-form",
-	templateUrl: "./assessment-form.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-form",
+    templateUrl: "./assessment-form.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssessmentFormComponent {
 	@Input() assignment: AssignmentDto;

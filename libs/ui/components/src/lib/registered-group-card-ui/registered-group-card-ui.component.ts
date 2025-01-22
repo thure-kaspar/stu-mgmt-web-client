@@ -19,9 +19,10 @@ import {
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-registered-group-card-ui",
-	templateUrl: "./registered-group-card-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-registered-group-card-ui",
+    templateUrl: "./registered-group-card-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class RegisteredGroupCardUiComponent {
 	@Input() group!: GroupDto;

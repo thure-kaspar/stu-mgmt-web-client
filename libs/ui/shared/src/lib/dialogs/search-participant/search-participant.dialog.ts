@@ -29,9 +29,10 @@ class ParticipantsFilter {
  * @returns List of selected participants.
  */
 @Component({
-	selector: "student-mgmt-search-participant",
-	templateUrl: "./search-participant.dialog.html",
-	styleUrls: ["./search-participant.dialog.scss"]
+    selector: "student-mgmt-search-participant",
+    templateUrl: "./search-participant.dialog.html",
+    styleUrls: ["./search-participant.dialog.scss"],
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchParticipantDialog extends UnsubscribeOnDestroy implements OnInit {

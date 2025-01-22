@@ -23,10 +23,11 @@ import { environment } from "apps/client/src/environments/environment";
 import { Observable } from "rxjs";
 
 @Component({
-	selector: "student-mgmt-navigation-ui",
-	templateUrl: "./navigation-ui.component.html",
-	styleUrls: ["./navigation.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-navigation-ui",
+    templateUrl: "./navigation-ui.component.html",
+    styleUrls: ["./navigation.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NavigationUiComponent {
 	@Input() user?: UserDto | null;

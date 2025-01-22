@@ -22,9 +22,10 @@ import {
 } from "../../dialogs/notification-subscriber/notification-subscriber.dialog";
 
 @Component({
-	selector: "student-mgmt-notification-subscribers",
-	templateUrl: "./notification-subscribers.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-notification-subscribers",
+    templateUrl: "./notification-subscribers.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NotificationSubscribersComponent implements OnInit {
 	subscribers$: Observable<SubscriberDto[]>;

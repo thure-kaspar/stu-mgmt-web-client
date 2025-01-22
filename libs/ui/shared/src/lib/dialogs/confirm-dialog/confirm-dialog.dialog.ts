@@ -19,8 +19,9 @@ export type ConfirmDialogData = {
 };
 
 @Component({
-	selector: "student-mgmt-confirm-dialog",
-	templateUrl: "./confirm-dialog.dialog.html"
+    selector: "student-mgmt-confirm-dialog",
+    templateUrl: "./confirm-dialog.dialog.html",
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ConfirmDialog {

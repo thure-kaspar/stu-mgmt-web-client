@@ -22,10 +22,11 @@ import { BehaviorSubject } from "rxjs";
  * @returns `CourseDto[]` - The selected courses.
  */
 @Component({
-	selector: "student-mgmt-search-course",
-	templateUrl: "./search-course.dialog.html",
-	styleUrls: ["./search-course.dialog.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-search-course",
+    templateUrl: "./search-course.dialog.html",
+    styleUrls: ["./search-course.dialog.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchCourseDialog extends UnsubscribeOnDestroy implements OnInit {

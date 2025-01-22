@@ -10,9 +10,10 @@ import {
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
-	selector: "student-mgmt-addable-list-header",
-	templateUrl: "./addable-list-header.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-addable-list-header",
+    templateUrl: "./addable-list-header.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AddableListHeaderComponent {
 	@Input() name!: string;

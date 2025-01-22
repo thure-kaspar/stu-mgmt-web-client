@@ -20,10 +20,11 @@ import { filter, map, switchMap, tap } from "rxjs/operators";
 import { ParticipantAdmissionStatusComponentModule } from "../../../participant-admission-status/participant-admission-status.component";
 
 @Component({
-	selector: "student-mgmt-participant-profile",
-	templateUrl: "./participant-profile.component.html",
-	styleUrls: ["./participant-profile.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-participant-profile",
+    templateUrl: "./participant-profile.component.html",
+    styleUrls: ["./participant-profile.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ParticipantProfileComponent extends UnsubscribeOnDestroy implements OnInit {
 	/** Participant, whose profile is being viewed. */

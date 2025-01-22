@@ -18,9 +18,10 @@ export type PointsOverviewTableProps = {
 };
 
 @Component({
-	selector: "student-mgmt-points-overview-table-ui",
-	templateUrl: "./points-overview-table-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-points-overview-table-ui",
+    templateUrl: "./points-overview-table-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PointsOverviewTableUiComponent {
 	_assignments$ = new BehaviorSubject<AssignmentDto[]>([]);

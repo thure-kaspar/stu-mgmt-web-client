@@ -13,9 +13,10 @@ import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 
 @Component({
-	selector: "student-mgmt-submissions-overview",
-	templateUrl: "./submissions-overview.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-submissions-overview",
+    templateUrl: "./submissions-overview.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SubmissionsOverviewComponent implements OnInit {
 	courseId: string;

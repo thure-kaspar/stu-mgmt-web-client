@@ -13,9 +13,10 @@ type CourseFilter = {
 };
 
 @Component({
-	selector: "student-mgmt-course-list",
-	templateUrl: "./course-list.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-course-list",
+    templateUrl: "./course-list.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CourseListComponent extends UnsubscribeOnDestroy implements OnInit {
 	displayedColumns: string[] = ["semester", "title"];

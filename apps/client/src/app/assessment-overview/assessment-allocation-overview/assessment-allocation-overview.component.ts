@@ -13,9 +13,10 @@ import { EvaluatorsFacade } from "../../assessment/services/evaluators.facade";
 import { SearchAssignmentDialog } from "../../assignment/dialogs/search-assignment/search-assignment.dialog";
 
 @Component({
-	selector: "student-mgmt-assessment-allocation-overview",
-	templateUrl: "./assessment-allocation-overview.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-allocation-overview",
+    templateUrl: "./assessment-allocation-overview.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssessmentAllocationOverviewComponent implements OnInit {
 	courseId: string;

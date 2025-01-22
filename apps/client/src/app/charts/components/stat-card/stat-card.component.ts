@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 
 @Component({
-	selector: "student-mgmt-stat-card",
-	templateUrl: "./stat-card.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-stat-card",
+    templateUrl: "./stat-card.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class StatCardComponent {
 	@Input() title: string;

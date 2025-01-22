@@ -23,10 +23,11 @@ import { AssessmentAllocationComponentModule } from "../assessment-allocation/as
 import { AssessmentTargetFilter } from "../assessment-target-picker.component";
 
 @Component({
-	selector: "student-mgmt-assessment-group-picker",
-	templateUrl: "./assessment-group-picker.component.html",
-	styleUrls: ["./assessment-group-picker.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-group-picker",
+    templateUrl: "./assessment-group-picker.component.html",
+    styleUrls: ["./assessment-group-picker.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssessmentGroupPickerComponent implements OnInit, OnDestroy {
 	@Input() selectedId: string;

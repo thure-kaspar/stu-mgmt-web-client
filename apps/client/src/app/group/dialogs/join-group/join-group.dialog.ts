@@ -22,9 +22,10 @@ export class JoinGroupDialogData {
  * Returns a boolean, indicating, wether the user has joined the group.
  */
 @Component({
-	selector: "student-mgmt-join-group",
-	templateUrl: "./join-group.dialog.html",
-	styleUrls: ["./join-group.dialog.scss"]
+    selector: "student-mgmt-join-group",
+    templateUrl: "./join-group.dialog.html",
+    styleUrls: ["./join-group.dialog.scss"],
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class JoinGroupDialog implements OnInit {

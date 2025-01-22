@@ -27,10 +27,11 @@ export class VerticalBarChartOptions {
 }
 
 @Component({
-	selector: "student-mgmt-vertical-bar-chart",
-	templateUrl: "./vertical-bar-chart.component.html",
-	styleUrls: ["./vertical-bar-chart.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-vertical-bar-chart",
+    templateUrl: "./vertical-bar-chart.component.html",
+    styleUrls: ["./vertical-bar-chart.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class VerticalBarChartComponent {
 	@Input() xAxisLabel: string;

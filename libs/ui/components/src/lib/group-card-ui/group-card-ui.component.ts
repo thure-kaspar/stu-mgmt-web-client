@@ -29,9 +29,10 @@ export type GroupCardUiComponentProps = {
 };
 
 @Component({
-	selector: "student-mgmt-group-card-ui",
-	templateUrl: "./group-card-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-group-card-ui",
+    templateUrl: "./group-card-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GroupCardUiComponent {
 	@Input() props!: GroupCardUiComponentProps;

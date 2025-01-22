@@ -24,9 +24,10 @@ export type AdmissionCriteriaWithResult = {
 };
 
 @Component({
-	selector: "student-mgmt-participant-admission-status-ui",
-	templateUrl: "./participant-admission-status-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-participant-admission-status-ui",
+    templateUrl: "./participant-admission-status-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ParticipantAdmissionStatusUiComponent {
 	@Input() isLoading!: boolean;

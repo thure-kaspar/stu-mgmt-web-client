@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
 
 @Component({
-	selector: "student-mgmt-navigation",
-	templateUrl: "./navigation.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-navigation",
+    templateUrl: "./navigation.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NavigationComponent implements OnInit {
 	user$ = this.store.select(AuthSelectors.selectUser);

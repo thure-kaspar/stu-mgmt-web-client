@@ -9,8 +9,9 @@ import { AssignmentManagementFacade } from "../assignment/services/assignment-ma
  * Dialog that allows the creation of new assignments. Expects the courseId. Returns the created assignment.
  */
 @Component({
-	selector: "student-mgmt-create-assignment",
-	templateUrl: "./assignment-create.component.html"
+    selector: "student-mgmt-create-assignment",
+    templateUrl: "./assignment-create.component.html",
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class AssignmentCreateComponent implements OnInit {

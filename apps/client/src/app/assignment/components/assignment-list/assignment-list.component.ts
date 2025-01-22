@@ -34,9 +34,10 @@ class AssignmentsStateMap {
 }
 
 @Component({
-	selector: "student-mgmt-assignment-list",
-	templateUrl: "./assignment-list.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assignment-list",
+    templateUrl: "./assignment-list.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssignmentListComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;

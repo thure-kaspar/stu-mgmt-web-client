@@ -35,9 +35,10 @@ export type AssignmentCardUiComponentProps = {
 };
 
 @Component({
-	selector: "student-mgmt-assignment-card-ui",
-	templateUrl: "./assignment-card-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assignment-card-ui",
+    templateUrl: "./assignment-card-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AssignmentCardUiComponent {
 	@Input() props!: AssignmentCardUiComponentProps;

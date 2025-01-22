@@ -25,9 +25,10 @@ class UserFilter {
 }
 
 @Component({
-	selector: "student-mgmt-search-user",
-	templateUrl: "./search-user.dialog.html",
-	styleUrls: ["./search-user.dialog.scss"]
+    selector: "student-mgmt-search-user",
+    templateUrl: "./search-user.dialog.html",
+    styleUrls: ["./search-user.dialog.scss"],
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SearchUserDialog extends UnsubscribeOnDestroy implements OnInit {

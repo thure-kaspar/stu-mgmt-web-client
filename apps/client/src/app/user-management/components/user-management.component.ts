@@ -35,8 +35,9 @@ class UserFilter {
 }
 
 @Component({
-	selector: "student-mgmt-user-management",
-	templateUrl: "./user-management.component.html"
+    selector: "student-mgmt-user-management",
+    templateUrl: "./user-management.component.html",
+    standalone: false
 })
 export class UserManagementComponent extends UnsubscribeOnDestroy implements OnInit {
 	filter = new UserFilter();

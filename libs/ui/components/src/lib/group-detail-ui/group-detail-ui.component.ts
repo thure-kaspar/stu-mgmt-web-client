@@ -21,9 +21,10 @@ import {
 import { AssessmentDto, GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-group-detail-ui",
-	templateUrl: "./group-detail-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-group-detail-ui",
+    templateUrl: "./group-detail-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GroupDetailUiComponent {
 	@Input() group!: GroupDto;

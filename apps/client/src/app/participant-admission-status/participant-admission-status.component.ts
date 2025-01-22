@@ -11,9 +11,10 @@ import { combineLatest, Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
 
 @Component({
-	selector: "student-mgmt-participant-admission-status",
-	templateUrl: "./participant-admission-status.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-participant-admission-status",
+    templateUrl: "./participant-admission-status.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ParticipantAdmissionStatusComponent implements OnInit {
 	@Input() admissionStatus$!: Observable<{

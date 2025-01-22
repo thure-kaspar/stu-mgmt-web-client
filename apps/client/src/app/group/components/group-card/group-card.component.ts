@@ -25,9 +25,10 @@ import { take } from "rxjs/operators";
 import { JoinGroupDialog, JoinGroupDialogData } from "../../dialogs/join-group/join-group.dialog";
 
 @Component({
-	selector: "student-mgmt-group-card",
-	templateUrl: "./group-card.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-group-card",
+    templateUrl: "./group-card.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GroupCardComponent implements OnInit {
 	@Input() group: Group;

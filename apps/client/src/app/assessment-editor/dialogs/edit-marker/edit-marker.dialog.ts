@@ -10,9 +10,10 @@ import { TranslateModule } from "@ngx-translate/core";
 import { MarkerDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-edit-marker",
-	templateUrl: "./edit-marker.dialog.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-edit-marker",
+    templateUrl: "./edit-marker.dialog.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class EditMarkerDialog implements OnInit {

@@ -11,10 +11,11 @@ import { TranslateModule } from "@ngx-translate/core";
 import { StudentMgmtEvent, SubscriberDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-notification-subscriber",
-	templateUrl: "./notification-subscriber.dialog.html",
-	styleUrls: ["./notification-subscriber.dialog.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-notification-subscriber",
+    templateUrl: "./notification-subscriber.dialog.html",
+    styleUrls: ["./notification-subscriber.dialog.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NotificationSubscriberDialog implements OnInit {

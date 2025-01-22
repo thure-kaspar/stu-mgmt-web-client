@@ -4,9 +4,10 @@ import { HttpResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-	selector: "student-mgmt-paginator",
-	templateUrl: "./paginator.component.html",
-	styleUrls: ["./paginator.component.scss"]
+    selector: "student-mgmt-paginator",
+    templateUrl: "./paginator.component.html",
+    styleUrls: ["./paginator.component.scss"],
+    standalone: false
 })
 export class Paginator implements OnInit {
 	/** The total number of items. (Default: 0) */

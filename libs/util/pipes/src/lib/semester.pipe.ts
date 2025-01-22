@@ -1,7 +1,8 @@
 import { NgModule, Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-	name: "semester"
+    name: "semester",
+    standalone: false
 })
 export class SemesterPipe implements PipeTransform {
 	private readonly regex: RegExp = /^(wise|sose)\d{4}$/g;

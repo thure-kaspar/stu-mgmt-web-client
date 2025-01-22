@@ -23,9 +23,10 @@ import {
 } from "../forms/assessment-form/assessment-form.component";
 
 @Component({
-	selector: "student-mgmt-edit-assessment",
-	templateUrl: "./edit-assessment.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-edit-assessment",
+    templateUrl: "./edit-assessment.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class EditAssessmentComponent implements OnInit {
 	@ViewChild(AssessmentFormComponent, { static: true }) form: AssessmentFormComponent;

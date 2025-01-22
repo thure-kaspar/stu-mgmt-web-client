@@ -9,9 +9,10 @@ import { SimpleChipComponentModule } from "../simple-chip/simple-chip.component"
  * @input condition `boolean`
  */
 @Component({
-	selector: "student-mgmt-thumb-chip",
-	templateUrl: "./thumb-chip.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-thumb-chip",
+    templateUrl: "./thumb-chip.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ThumbChipComponent {
 	@Input() condition!: boolean;

@@ -16,8 +16,9 @@ import { UserApi, UserDto, UserUpdateDto } from "@student-mgmt/api-client";
  * Dialog that allows editing a user.
  */
 @Component({
-	selector: "student-mgmt-change-role",
-	templateUrl: "./update-user.dialog.html"
+    selector: "student-mgmt-change-role",
+    templateUrl: "./update-user.dialog.html",
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class UpdateUserDialog extends UnsubscribeOnDestroy implements OnInit {

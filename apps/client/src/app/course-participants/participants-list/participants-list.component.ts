@@ -42,9 +42,10 @@ class ParticipantsFilter {
 }
 
 @Component({
-	selector: "student-mgmt-participants-list",
-	templateUrl: "./participants-list.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-participants-list",
+    templateUrl: "./participants-list.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ParticipantsListComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;

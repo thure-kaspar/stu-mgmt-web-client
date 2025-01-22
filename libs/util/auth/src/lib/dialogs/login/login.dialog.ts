@@ -24,9 +24,10 @@ type LoginState = { isLoading: boolean; error?: string | null };
  * @returns `True`, if user logged in successfully.
  */
 @Component({
-	selector: "student-mgmt-login",
-	templateUrl: "./login.dialog.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-login",
+    templateUrl: "./login.dialog.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LoginDialog extends UnsubscribeOnDestroy {

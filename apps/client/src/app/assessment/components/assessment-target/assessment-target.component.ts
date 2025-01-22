@@ -8,10 +8,12 @@ import { CardComponentModule, PersonListComponentModule } from "@student-mgmt-cl
 import { GroupDto, ParticipantDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-assessment-target",
-	templateUrl: "./assessment-target.component.html",
-	styleUrls: ["./assessment-target.component.scss"]
-	//changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-assessment-target",
+    templateUrl: "./assessment-target.component.html",
+    styleUrls: ["./assessment-target.component.scss"]
+    //changeDetection: ChangeDetectionStrategy.OnPush
+    ,
+    standalone: false
 })
 export class AssessmentTargetComponent {
 	/** The group that was targeted by this assessment. */

@@ -16,9 +16,10 @@ import { CanJoinCourseDto, CourseParticipantsApi } from "@student-mgmt/api-clien
  * Returns a boolean, indicating, wether the user has joined the course.
  */
 @Component({
-	selector: "student-mgmt-join-course",
-	templateUrl: "./join-course.dialog.html",
-	styleUrls: ["./join-course.dialog.scss"]
+    selector: "student-mgmt-join-course",
+    templateUrl: "./join-course.dialog.html",
+    styleUrls: ["./join-course.dialog.scss"],
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class JoinCourseDialog implements OnInit {

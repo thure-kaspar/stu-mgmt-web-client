@@ -5,9 +5,10 @@ import { ParticipantAdmissionStatusComponentModule } from "../../../participant-
 import { ParticipantSelectors } from "@student-mgmt-client/state";
 
 @Component({
-	selector: "student-mgmt-participant-admission-status-container",
-	templateUrl: "./participant-admission-status-container.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-participant-admission-status-container",
+    templateUrl: "./participant-admission-status-container.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ParticipantAdmissionStatusContainerComponent {
 	admissionStatus$ = this.store.select(

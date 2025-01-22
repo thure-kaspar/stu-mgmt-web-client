@@ -6,10 +6,11 @@ import { TranslateModule } from "@ngx-translate/core";
 import { getRouteParam } from "@student-mgmt-client/util-helper";
 
 @Component({
-	selector: "student-mgmt-participants-overview",
-	templateUrl: "./participants-overview.component.html",
-	styleUrls: ["./participants-overview.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-participants-overview",
+    templateUrl: "./participants-overview.component.html",
+    styleUrls: ["./participants-overview.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ParticipantsOverviewComponent implements OnInit {
 	courseId: string;

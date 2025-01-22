@@ -19,9 +19,10 @@ import { AssignmentApi, AssignmentDto } from "@student-mgmt/api-client";
  * @returns The selected assignment(s).
  */
 @Component({
-	selector: "student-mgmt-search-assignment",
-	templateUrl: "./search-assignment.dialog.html",
-	styleUrls: ["./search-assignment.dialog.scss"]
+    selector: "student-mgmt-search-assignment",
+    templateUrl: "./search-assignment.dialog.html",
+    styleUrls: ["./search-assignment.dialog.scss"],
+    standalone: false
 })
 export class SearchAssignmentDialog implements OnInit {
 	dataSource: MatTableDataSource<AssignmentDto>;

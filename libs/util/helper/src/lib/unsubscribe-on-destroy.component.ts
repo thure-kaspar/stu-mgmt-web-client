@@ -6,7 +6,8 @@ import { SubSink } from "subsink";
  * the object gets destroyed
  */
 @Component({
-	template: ""
+    template: "",
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class UnsubscribeOnDestroy implements OnDestroy {

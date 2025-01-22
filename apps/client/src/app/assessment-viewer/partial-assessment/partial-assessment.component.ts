@@ -6,10 +6,11 @@ import { MarkerDto, PartialAssessmentDto } from "@student-mgmt/api-client";
 import { MarkerComponentModule } from "../../assessment/components/marker/marker.component";
 
 @Component({
-	selector: "student-mgmt-partial-assessment",
-	templateUrl: "./partial-assessment.component.html",
-	styleUrls: ["./partial-assessment.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-partial-assessment",
+    templateUrl: "./partial-assessment.component.html",
+    styleUrls: ["./partial-assessment.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PartialAssessmentComponent {
 	@Input("partialAssessment") partial: PartialAssessmentDto;

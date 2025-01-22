@@ -17,9 +17,10 @@ import {
 } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-admission-criteria-form",
-	templateUrl: "./admission-criteria-form.component.html",
-	styleUrls: ["./admission-criteria-form.component.scss"]
+    selector: "student-mgmt-admission-criteria-form",
+    templateUrl: "./admission-criteria-form.component.html",
+    styleUrls: ["./admission-criteria-form.component.scss"],
+    standalone: false
 })
 export class AdmissionCriteriaFormComponent {
 	@Input() form: UntypedFormGroup;

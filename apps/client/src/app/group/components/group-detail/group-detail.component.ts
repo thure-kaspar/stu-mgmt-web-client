@@ -15,9 +15,10 @@ import { filter, take } from "rxjs/operators";
 import { EditGroupDialog } from "../../dialogs/edit-group/edit-group.dialog";
 
 @Component({
-	selector: "student-mgmt-group-detail",
-	templateUrl: "./group-detail.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-group-detail",
+    templateUrl: "./group-detail.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GroupDetailComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;

@@ -20,10 +20,11 @@ export type ExtendedConfirmDialogData = {
  * @returns boolean - `true` if user confirmed the action.
  */
 @Component({
-	selector: "student-mgmt-extended-confirm-dialog",
-	templateUrl: "./extended-confirm-dialog.dialog.html",
-	styleUrls: ["./extended-confirm-dialog.dialog.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-extended-confirm-dialog",
+    templateUrl: "./extended-confirm-dialog.dialog.html",
+    styleUrls: ["./extended-confirm-dialog.dialog.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ExtendedConfirmDialog {

@@ -36,9 +36,10 @@ type RegisteredGroupsState = {
 };
 
 @Component({
-	selector: "student-mgmt-registered-groups",
-	templateUrl: "./registered-groups.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-registered-groups",
+    templateUrl: "./registered-groups.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class RegisteredGroupsComponent extends UnsubscribeOnDestroy implements OnInit {
 	_groups: GroupDto[] = [];

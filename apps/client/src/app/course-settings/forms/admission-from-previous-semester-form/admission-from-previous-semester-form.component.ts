@@ -20,10 +20,11 @@ import { CourseConfigApi, ParticipantDto } from "@student-mgmt/api-client";
 type AdmissionFromPreviousResponse = { matrNrs: number[]; participants: ParticipantDto[] };
 
 @Component({
-	selector: "student-mgmt-admission-from-previous-semester-form",
-	templateUrl: "./admission-from-previous-semester-form.component.html",
-	styleUrls: ["./admission-from-previous-semester-form.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-admission-from-previous-semester-form",
+    templateUrl: "./admission-from-previous-semester-form.component.html",
+    styleUrls: ["./admission-from-previous-semester-form.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AdmissionFromPreviousSemesterFormComponent implements OnInit {
 	courseId: string;

@@ -37,9 +37,10 @@ import {
 } from "../forms/assessment-form/assessment-form.component";
 
 @Component({
-	selector: "student-mgmt-create-assessment",
-	templateUrl: "./create-assessment.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-create-assessment",
+    templateUrl: "./create-assessment.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CreateAssessmentComponent extends UnsubscribeOnDestroy implements OnInit {
 	@ViewChild(AssessmentFormComponent, { static: true }) form: AssessmentFormComponent;

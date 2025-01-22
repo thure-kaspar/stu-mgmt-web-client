@@ -22,9 +22,10 @@ import { BehaviorSubject, firstValueFrom } from "rxjs";
 type AssessmentState = "updated" | "new" | "unchanged" | "isIncludedInOtherAssessment" | null;
 
 @Component({
-	selector: "student-mgmt-create-multiple-assessments",
-	templateUrl: "./create-multiple-assessments.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-create-multiple-assessments",
+    templateUrl: "./create-multiple-assessments.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CreateMultipleAssessmentsComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId = this.route.snapshot.params["courseId"];

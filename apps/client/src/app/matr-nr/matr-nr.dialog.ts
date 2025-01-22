@@ -16,9 +16,10 @@ import { UserApi, UserDto } from "@student-mgmt/api-client";
 import { firstValueFrom } from "rxjs";
 
 @Component({
-	selector: "student-mgmt-matr-nr",
-	templateUrl: "./matr-nr.dialog.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-matr-nr",
+    templateUrl: "./matr-nr.dialog.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MatrNrDialog implements OnInit {
 	private storageKey = "ignoreMatrNrDialog";

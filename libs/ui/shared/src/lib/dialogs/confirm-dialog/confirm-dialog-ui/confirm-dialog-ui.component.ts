@@ -13,9 +13,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
-	selector: "student-mgmt-confirm-dialog-ui",
-	templateUrl: "./confirm-dialog-ui.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-confirm-dialog-ui",
+    templateUrl: "./confirm-dialog-ui.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ConfirmDialogUiComponent {
 	/**

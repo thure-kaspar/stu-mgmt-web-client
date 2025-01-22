@@ -49,9 +49,10 @@ type ChartData = {
 type Statistic = { title: string; value: string | number };
 
 @Component({
-	selector: "student-mgmt-admission-status",
-	templateUrl: "./admission-status.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-admission-status",
+    templateUrl: "./admission-status.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AdmissionStatusComponent extends UnsubscribeOnDestroy implements OnInit {
 	courseId: string;

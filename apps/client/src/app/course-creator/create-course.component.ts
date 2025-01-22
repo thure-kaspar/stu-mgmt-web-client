@@ -35,9 +35,10 @@ import { SearchCourseDialog } from "../course/dialogs/search-course/search-cours
 import { SearchUserDialog } from "../course/dialogs/search-user/search-user.dialog";
 
 @Component({
-	selector: "student-mgmt-create-course",
-	templateUrl: "./create-course.component.html",
-	styleUrls: ["./create-course.component.scss"]
+    selector: "student-mgmt-create-course",
+    templateUrl: "./create-course.component.html",
+    styleUrls: ["./create-course.component.scss"],
+    standalone: false
 })
 export class CreateCourseComponent {
 	/** Form with the structure of a CourseCreateDto. */

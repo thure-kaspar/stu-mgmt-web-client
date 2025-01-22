@@ -4,10 +4,11 @@ import { ChipComponentModule } from "@student-mgmt-client/shared-ui";
 import { MarkerDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-marker",
-	templateUrl: "./marker.component.html",
-	styleUrls: ["./marker.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-marker",
+    templateUrl: "./marker.component.html",
+    styleUrls: ["./marker.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MarkerComponent {
 	@Input() marker: MarkerDto;

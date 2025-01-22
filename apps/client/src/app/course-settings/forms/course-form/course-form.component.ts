@@ -14,9 +14,10 @@ import {
 import { getSemesterList } from "@student-mgmt-client/util-helper";
 
 @Component({
-	selector: "student-mgmt-course-form",
-	templateUrl: "./course-form.component.html",
-	styleUrls: ["./course-form.component.scss"]
+    selector: "student-mgmt-course-form",
+    templateUrl: "./course-form.component.html",
+    styleUrls: ["./course-form.component.scss"],
+    standalone: false
 })
 export class CourseFormComponent {
 	@Input() form: UntypedFormGroup;

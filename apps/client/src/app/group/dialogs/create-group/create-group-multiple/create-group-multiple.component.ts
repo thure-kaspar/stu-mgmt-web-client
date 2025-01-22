@@ -23,9 +23,10 @@ import { ToastService } from "@student-mgmt-client/services";
 import { GroupApi, GroupCreateBulkDto, GroupDto } from "@student-mgmt/api-client";
 
 @Component({
-	selector: "student-mgmt-create-group-multiple",
-	templateUrl: "./create-group-multiple.component.html",
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "student-mgmt-create-group-multiple",
+    templateUrl: "./create-group-multiple.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CreateGroupMultipleComponent {
 	@Input() courseId: string;
