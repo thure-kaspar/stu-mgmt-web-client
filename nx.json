@@ -1,7 +1,4 @@
 {
-	"affected": {
-		"defaultBase": "master"
-	},
 	"generators": {
 		"@nx/angular:application": {
 			"style": "none",
@@ -88,5 +85,7 @@
 		]
 	},
 	"useDaemonProcess": true,
-	"nxCloudAccessToken": "MjQxODQ5ZjgtNjZiNi00NDVjLTgzYTktMWI4MGZjMGJiMTJifHJlYWQtd3JpdGU="
+	"nxCloudAccessToken": "MjQxODQ5ZjgtNjZiNi00NDVjLTgzYTktMWI4MGZjMGJiMTJifHJlYWQtd3JpdGU=",
+	"useInferencePlugins": false,
+	"defaultBase": "master"
 }

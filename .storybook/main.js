@@ -1,14 +1,27 @@
 module.exports = {
-	addons: ["storybook-dark-mode", "storybook-tailwind-dark-mode"],
-	typescript: {
+    addons: [
+        "storybook-dark-mode",
+        "storybook-tailwind-dark-mode",
+        "@chromatic-com/storybook"
+    ],
+
+    // uncomment the property below if you want to apply some webpack config globally
+    // webpackFinal: async (config, { configType }) => {
+    //   // Make whatever fine-grained changes you need that should apply to all storybook configs
+    //   // Return the altered config
+    //   return config;
+    // },
+    typescript: {
 		check: false,
 		reactDocgen: false
-	}
-	// uncomment the property below if you want to apply some webpack config globally
-	// webpackFinal: async (config, { configType }) => {
-	//   // Make whatever fine-grained changes you need that should apply to all storybook configs
+	},
 
-	//   // Return the altered config
-	//   return config;
-	// },
+    framework: {
+        name: "@storybook/angular",
+        options: {}
+    },
+
+    docs: {
+        autodocs: true
+    }
 };
