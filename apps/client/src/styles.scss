@@ -346,6 +346,13 @@ mat-form-field .mat-hint {
 	margin-bottom: 16px;
 }
 
+// Fixes a conflict between Angular Material and TailwindCSS 
+// (see: https://stackoverflow.com/questions/75535246/angular-mat-form-field-not-working-properly-a-border-line-appears-inside-the-f)
+.mdc-notched-outline__notch
+{
+  border-right: none;
+}
+
 .mat-button-focus-overlay {
 	background-color: transparent !important;
 }
