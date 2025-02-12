@@ -4,6 +4,7 @@ import { AuthenticationApi, AuthResultDto, UserDto } from "@student-mgmt/api-cli
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -11,7 +12,10 @@ export class AuthService {
 
 	static readonly authKey = "auth";
 
-	constructor(private authenticationApi: AuthenticationApi, private store: Store) {}
+	constructor(private authenticationApi: AuthenticationApi, 
+		private store: Store,
+		private readonly router: Router
+	) {}
 
 	/**
 	 * Returns the stored AccessToken (JWT), which can be assigned to the Authorization-header
@@ -32,7 +36,7 @@ export class AuthService {
 	}
 
 	/**
-	 * **Only available when API is running in dev environment.**
+	 * **Only available when API is running in dev environment. The username has to be a valid JWT in production.**
 	 *
 	 * Sets the `accessToken` to the given `username` and queries the API to check whether
 	 * the given username is a valid test account. If successful, the user is logged in as the
@@ -55,6 +59,14 @@ export class AuthService {
 				);
 			})
 		);
+	}
+
+	addUserDataToStore(accessToken: string) {
+		this.devLogin(accessToken).subscribe({
+			error: error => {
+				console.error(error);
+			}
+		});
 	}
 
 	logout(): void {

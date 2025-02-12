@@ -4,9 +4,10 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { RouterModule } from "@angular/router";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { LoginDialog } from "@student-mgmt-client/auth";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
-import { MatrNrDialog } from "../matr-nr/matr-nr.dialog";
+import { OAuthService } from "angular-oauth2-oidc";
+import { authCodeFlowConfig } from "../../../../../libs/util/auth/src/lib/auth-config"
+import { AuthService } from "@student-mgmt-client/auth";
 
 @Component({
     selector: "student-mgmt-home",
@@ -17,8 +18,11 @@ import { MatrNrDialog } from "../matr-nr/matr-nr.dialog";
 })
 export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	currentLanguage: string;
-
-	constructor(readonly dialog: MatDialog, readonly translate: TranslateService) {
+	
+	constructor(readonly dialog: MatDialog, 
+		readonly translate: TranslateService,
+		private readonly oauthService: OAuthService,
+		private readonly authService: AuthService) {
 		super();
 	}
 
@@ -30,7 +34,8 @@ export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	openLoginDialog(): void {
-		this.dialog.open(LoginDialog);
+		this.oauthService.initLoginFlow();
+		this.authService.addUserDataToStore(this.oauthService.getAccessToken());
 	}
 
 	setLanguage(lang: string): void {

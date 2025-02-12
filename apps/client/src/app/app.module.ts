@@ -19,6 +19,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomeComponentModule } from "./home/home.component";
 import { NavigationComponentModule } from "./navigation/navigation.component";
+import { OAuthModule } from "angular-oauth2-oidc";
 
 registerLocaleData(localeDe, "de", localeDeExtra);
 
@@ -52,7 +53,9 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
         ToastrModule.forRoot({
             positionClass: "toast-bottom-right",
             progressBar: true
-        })], providers: [
+        }),
+        OAuthModule.forRoot()
+    ], providers: [
         { provide: LOCALE_ID, useValue: "de" },
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" } },
         provideHttpClient(withInterceptorsFromDi())
