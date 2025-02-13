@@ -5,10 +5,11 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/c
 import { MatDialog } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
-import { LoginDialog } from "@student-mgmt-client/auth";
+import { AuthService, LoginDialog } from "@student-mgmt-client/auth";
 import { NavigationUiComponentModule } from "@student-mgmt-client/components";
 import { ThemeService } from "@student-mgmt-client/services";
 import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
+import { OAuthService } from "angular-oauth2-oidc";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
 
@@ -31,10 +32,11 @@ export class NavigationComponent implements OnInit {
 	constructor(
 		readonly themeService: ThemeService,
 		private breakpointObserver: BreakpointObserver,
-		private dialog: MatDialog,
 		private store: Store,
 		private translate: TranslateService,
-		private overlayContainer: OverlayContainer
+		private overlayContainer: OverlayContainer,
+		private readonly oauthService: OAuthService,
+		private readonly authService: AuthService
 	) {}
 
 	ngOnInit(): void {
@@ -60,12 +62,22 @@ export class NavigationComponent implements OnInit {
 		localStorage.setItem("language", lang);
 	}
 
-	openLoginDialog(): void {
-		this.dialog.open<LoginDialog, undefined, unknown>(LoginDialog);
+	login(): void {
+		this.oauthService.initLoginFlow();
+		// Timeout is needed for oauthService to get accessToken()
+		// TOFIX: Timeout is not good enough. If you need to type out your pw on keycloak 3 ms are not enough time
+		// you would need to wait until accessToken is available
+		setTimeout(() => {
+			this.authService.login(this.oauthService.getAccessToken()).subscribe({
+				error: error => {
+				console.error(error);
+			}
+		});
+		}, 3)
 	}
 
 	logout(): void {
-		this.store.dispatch(AuthActions.logout());
+		this.authService.logout();
 	}
 }
 

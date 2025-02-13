@@ -60,4 +60,5 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" } },
         provideHttpClient(withInterceptorsFromDi())
     ] })
-export class AppModule {}
+export class AppModule {
+}

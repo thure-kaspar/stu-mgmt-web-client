@@ -33,9 +33,18 @@ export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 		});
 	}
 
-	openLoginDialog(): void {
+	login(): void {
 		this.oauthService.initLoginFlow();
-		this.authService.addUserDataToStore(this.oauthService.getAccessToken());
+		// Timeout is needed for oauthService to get accessToken()
+		// TOFIX: Timeout is not good enough. If you need to type out your pw on keycloak 3 ms are not enough time
+		// you would need to wait until accessToken is available
+		setTimeout(() => {
+			this.authService.login(this.oauthService.getAccessToken()).subscribe({
+				error: error => {
+				console.error(error);
+			}
+		});
+		}, 3)
 	}
 
 	setLanguage(lang: string): void {

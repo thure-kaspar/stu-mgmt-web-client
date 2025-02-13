@@ -6,6 +6,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
+import { OAuthService } from "angular-oauth2-oidc";
 
 @Component({
     selector: "student-mgmt-login",
@@ -15,15 +16,19 @@ import { AuthService } from "../../services/auth.service";
 export class LoginComponent {
 	errorMessage: string;
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(private authService: AuthService, private router: Router,
+		private readonly oauthService: OAuthService
+	) {}
 
 	login(username: string): void {
-		this.authService.devLogin(username).subscribe({
+		// Invalidates JWT if you happen to be logged in with valid JWT
+		this.authService.logout()
+		this.authService.login(username).subscribe({
 			next: user => {
 				this.router.navigateByUrl("");
 			},
 			error: error => {
-				console.log(error);
+				console.error(error);
 				this.errorMessage = error.error.message;
 			}
 		});
