@@ -23,7 +23,7 @@ export class LoginComponent {
 	login(username: string): void {
 		// Invalidates JWT if you happen to be logged in with valid JWT
 		this.authService.logout()
-		this.authService.login(username).subscribe({
+		this.authService.updateUserData(username).subscribe({
 			next: user => {
 				this.router.navigateByUrl("");
 			},

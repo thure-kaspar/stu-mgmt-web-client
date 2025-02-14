@@ -25,8 +25,13 @@ export class AuthService {
 	 * to authenticate the user for requests to the server.
 	 */
 	static getAccessToken(): string {
+		if((AuthService.oauthServiceStatic.getAccessTokenExpiration() - 30000) <= Date.now()) {
+			console.log("Refreshing token!")
+			AuthService.oauthServiceStatic.refreshToken();
+		}
 		const accessToken = AuthService.oauthServiceStatic.getAccessToken()
-		if (accessToken === null || AuthService.oauthServiceStatic.getAccessTokenExpiration() <= Date.now()) {
+		console.log("Access token in OAuth is: " + accessToken)
+		if (AuthService.oauthServiceStatic.hasValidAccessToken()) {
 			const authState = JSON.parse(localStorage.getItem(AuthService.authKey)) as AuthResultDto;
 			return authState?.accessToken;
 		} else {
@@ -57,7 +62,7 @@ export class AuthService {
 	 * Login via username will not be possible. The backend verifies the JWT for /auth/whoAmI. Therefore, accessToken has 
 	 * to be a valid JWT. 
 	 */
-	login(accessToken: string): Observable<UserDto> {
+	updateUserData(accessToken: string): Observable<UserDto> {
 		AuthService.setAuthState({ accessToken: accessToken, user: null });
 
 		return this.authenticationApi.whoAmI().pipe(
@@ -76,9 +81,24 @@ export class AuthService {
 		);
 	}
 
+	login() {
+		this.oauthService.initLoginFlow();
+		// Timeout is needed for oauthService to get accessToken()
+		// Allthough waiting too long also results in login failure
+		// TOFIX: Timeout is not good enough. If you need to type out your pw on keycloak 3 ms are not enough time
+		// you would need to wait until accessToken is available
+		setTimeout(() => {
+			this.updateUserData(this.oauthService.getAccessToken()).subscribe({
+				error: error => {
+					console.error(error);
+				}
+			});
+		}, 3);
+	}
+
 	logout(): void {
 		this.store.dispatch(AuthActions.logout());
-		if (!(this.oauthService.getAccessToken() === null || this.oauthService.getAccessTokenExpiration() <= Date.now())) {
+		if (this.oauthService.hasValidAccessToken()) {
 			this.oauthService.logOut();
 		}
 	}
