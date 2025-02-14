@@ -63,7 +63,7 @@ export class NavigationComponent implements OnInit {
 	}
 
 	login(): void {
-		this.authService.login();
+		this.oauthService.initLoginFlow();
 	}
 
 	logout(): void {

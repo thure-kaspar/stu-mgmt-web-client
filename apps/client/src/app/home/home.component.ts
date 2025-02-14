@@ -6,7 +6,6 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { UnsubscribeOnDestroy } from "@student-mgmt-client/util-helper";
 import { OAuthService } from "angular-oauth2-oidc";
-import { authCodeFlowConfig } from "../../../../../libs/util/auth/src/lib/auth-config"
 import { AuthService } from "@student-mgmt-client/auth";
 
 @Component({
@@ -21,8 +20,7 @@ export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	
 	constructor(readonly dialog: MatDialog, 
 		readonly translate: TranslateService,
-		private readonly oauthService: OAuthService,
-		private readonly authService: AuthService) {
+		private readonly oauthService: OAuthService) {
 		super();
 	}
 
@@ -34,7 +32,7 @@ export class HomeComponent extends UnsubscribeOnDestroy implements OnInit {
 	}
 
 	login(): void {
-		this.authService.login();
+		this.oauthService.initLoginFlow()
 	}
 
 	setLanguage(lang: string): void {

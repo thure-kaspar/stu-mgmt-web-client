@@ -19,5 +19,5 @@ export const authCodeFlowConfig: AuthConfig = {
   // The api scope is a usecase specific one
   scope: 'openid profile email',
 
-  showDebugInformation: true,
+  showDebugInformation: false,
 };

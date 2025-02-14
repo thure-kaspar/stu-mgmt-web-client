@@ -2,10 +2,12 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AuthenticationApi, AuthResultDto, UserDto } from "@student-mgmt/api-client";
 import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { filter, tap } from "rxjs/operators";
 import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
-import { OAuthService } from "angular-oauth2-oidc";
+import { OAuthEvent, OAuthService } from "angular-oauth2-oidc";
 import { ToastService } from "@student-mgmt-client/services";
+import { toObservable } from '@angular/core/rxjs-interop';
+import { EventType } from 'angular-oauth2-oidc';
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -28,7 +30,6 @@ export class AuthService {
 	 */
 	static getAccessToken(): string {
 		const accessToken = AuthService.oauthServiceStatic.getAccessToken()
-		console.log("Access token in OAuth is: " + accessToken)
 		if (!AuthService.oauthServiceStatic.hasValidAccessToken()) {
 			const authState = JSON.parse(localStorage.getItem(AuthService.authKey)) as AuthResultDto;
 			return authState?.accessToken;
@@ -77,23 +78,6 @@ export class AuthService {
 				);
 			})
 		);
-	}
-
-	login() {
-		this.oauthService.initLoginFlow();
-		// Timeout is needed for oauthService to get accessToken()
-		// Allthough waiting too long also results in login failure
-		// TOFIX: Timeout is not good enough. If you need to type out your pw on keycloak 3 ms are not enough time
-		// you would need to wait until accessToken is available
-		setTimeout(() => {
-			this.updateUserData(this.oauthService.getAccessToken()).subscribe({
-				next: user => this.toast.success(user.displayName, "Common.Welcome"),
-				error: error => {
-					console.error(error);
-				}
-			});
-		}, 3);
-		
 	}
 
 	logout(): void {
