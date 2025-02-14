@@ -12,6 +12,7 @@ export const initialState: State = {
 	authResult: null
 };
 
+// TODO: Find out if this file is important for authentication with API backend
 function createInitialState(): State {
 	let initial = initialState;
 	const authState = JSON.parse(localStorage.getItem("auth")) as AuthResultDto;

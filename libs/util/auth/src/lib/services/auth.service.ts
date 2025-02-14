@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
 import { OAuthService } from "angular-oauth2-oidc";
+import { ToastService } from "@student-mgmt-client/services";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -15,7 +16,8 @@ export class AuthService {
 
 	constructor(private authenticationApi: AuthenticationApi, 
 		private store: Store,
-		private readonly oauthService: OAuthService
+		private readonly oauthService: OAuthService,
+		private readonly toast: ToastService
 	) {
 		AuthService.oauthServiceStatic = oauthService;
 	}
@@ -25,13 +27,9 @@ export class AuthService {
 	 * to authenticate the user for requests to the server.
 	 */
 	static getAccessToken(): string {
-		if((AuthService.oauthServiceStatic.getAccessTokenExpiration() - 30000) <= Date.now()) {
-			console.log("Refreshing token!")
-			AuthService.oauthServiceStatic.refreshToken();
-		}
 		const accessToken = AuthService.oauthServiceStatic.getAccessToken()
 		console.log("Access token in OAuth is: " + accessToken)
-		if (AuthService.oauthServiceStatic.hasValidAccessToken()) {
+		if (!AuthService.oauthServiceStatic.hasValidAccessToken()) {
 			const authState = JSON.parse(localStorage.getItem(AuthService.authKey)) as AuthResultDto;
 			return authState?.accessToken;
 		} else {
@@ -89,11 +87,13 @@ export class AuthService {
 		// you would need to wait until accessToken is available
 		setTimeout(() => {
 			this.updateUserData(this.oauthService.getAccessToken()).subscribe({
+				next: user => this.toast.success(user.displayName, "Common.Welcome"),
 				error: error => {
 					console.error(error);
 				}
 			});
 		}, 3);
+		
 	}
 
 	logout(): void {

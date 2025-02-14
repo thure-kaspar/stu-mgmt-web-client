@@ -5,10 +5,10 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from "@angular/c
 import { MatDialog } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
-import { AuthService, LoginDialog } from "@student-mgmt-client/auth";
+import { AuthService } from "@student-mgmt-client/auth";
 import { NavigationUiComponentModule } from "@student-mgmt-client/components";
 import { ThemeService } from "@student-mgmt-client/services";
-import { AuthActions, AuthSelectors } from "@student-mgmt-client/state";
+import { AuthSelectors } from "@student-mgmt-client/state";
 import { OAuthService } from "angular-oauth2-oidc";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
